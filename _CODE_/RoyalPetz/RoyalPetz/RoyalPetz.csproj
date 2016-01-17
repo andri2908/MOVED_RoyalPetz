@@ -50,6 +50,8 @@
     <Compile Include="cashierForm.Designer.cs">
       <DependentUpon>cashierForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Constants.cs" />
+    <Compile Include="GlobalHotkey.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="cashierForm.resx">
