@@ -147,6 +147,7 @@ namespace RoyalPetz
             ghk_F11 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F11, this);
             ghk_F11.Register();
 
+            // ## F12 doesn't work yet ##
             //ghk_F12 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F12, this);
             //ghk_F12.Register();
 
@@ -185,23 +186,15 @@ namespace RoyalPetz
             ghk_ALT_F4.Unregister();
         }
 
+        private void fillInDummyData()
+        {
+            for (int i = 1; i <= 150;i++ )
+                cashierDataGridView.Rows.Add(i, "", "", "","", "", "");
+        }
 
         public cashierForm()
         {
             InitializeComponent();
-
-           
-          
-        }
-
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
 
         }
 
@@ -210,18 +203,11 @@ namespace RoyalPetz
 
         }
 
-        private void label9_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void cashierForm_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            
-        }
-
         private void cashierForm_Shown(object sender, EventArgs e)
         {
             registerGlobalHotkey();
+
+            fillInDummyData();
 
         }
 
