@@ -35,12 +35,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(cashierForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.titleLabel = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.totalLabel = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.bottomLabel = new System.Windows.Forms.Label();
-            this.dateTimeLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -81,8 +78,10 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.totalLabel = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cashierDataGridView)).BeginInit();
             this.panel5.SuspendLayout();
@@ -91,7 +90,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Firebrick;
+            this.panel1.BackColor = System.Drawing.Color.SteelBlue;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.titleLabel);
@@ -106,37 +105,13 @@
             this.titleLabel.AutoSize = true;
             this.titleLabel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.titleLabel.Font = new System.Drawing.Font("Verdana", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.ForeColor = System.Drawing.Color.NavajoWhite;
+            this.titleLabel.ForeColor = System.Drawing.Color.FloralWhite;
             this.titleLabel.Location = new System.Drawing.Point(64, 5);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(975, 46);
             this.titleLabel.TabIndex = 1;
             this.titleLabel.Text = "\"ROYALE PETZ\" A Royale Shop For Your Pets";
             this.titleLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // panel2
-            // 
-            this.panel2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.panel2.BackColor = System.Drawing.Color.Black;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.totalLabel);
-            this.panel2.Location = new System.Drawing.Point(1, 130);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1100, 75);
-            this.panel2.TabIndex = 2;
-            // 
-            // totalLabel
-            // 
-            this.totalLabel.AutoSize = true;
-            this.totalLabel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.totalLabel.Font = new System.Drawing.Font("Verdana", 40F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalLabel.ForeColor = System.Drawing.Color.NavajoWhite;
-            this.totalLabel.Location = new System.Drawing.Point(915, 0);
-            this.totalLabel.Name = "totalLabel";
-            this.totalLabel.Size = new System.Drawing.Size(184, 65);
-            this.totalLabel.TabIndex = 2;
-            this.totalLabel.Text = "Rp. 0";
-            this.totalLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // panel3
             // 
@@ -155,12 +130,12 @@
             this.label6.AutoSize = true;
             this.label6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.NavajoWhite;
-            this.label6.Location = new System.Drawing.Point(821, 7);
+            this.label6.ForeColor = System.Drawing.Color.FloralWhite;
+            this.label6.Location = new System.Drawing.Point(764, 7);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(274, 18);
+            this.label6.Size = new System.Drawing.Size(331, 18);
             this.label6.TabIndex = 4;
-            this.label6.Text = "Login : 16-01-2016 / 21:00:00";
+            this.label6.Text = "SABTU, 16 JANUARI 2016 - 21:00:00";
             this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // bottomLabel
@@ -168,7 +143,7 @@
             this.bottomLabel.AutoSize = true;
             this.bottomLabel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.bottomLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bottomLabel.ForeColor = System.Drawing.Color.NavajoWhite;
+            this.bottomLabel.ForeColor = System.Drawing.Color.FloralWhite;
             this.bottomLabel.Location = new System.Drawing.Point(4, 7);
             this.bottomLabel.Name = "bottomLabel";
             this.bottomLabel.Size = new System.Drawing.Size(147, 18);
@@ -176,25 +151,12 @@
             this.bottomLabel.Text = "Welcome Admin";
             this.bottomLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // dateTimeLabel
-            // 
-            this.dateTimeLabel.AutoSize = true;
-            this.dateTimeLabel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.dateTimeLabel.Font = new System.Drawing.Font("Verdana", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimeLabel.ForeColor = System.Drawing.Color.Maroon;
-            this.dateTimeLabel.Location = new System.Drawing.Point(529, 85);
-            this.dateTimeLabel.Name = "dateTimeLabel";
-            this.dateTimeLabel.Size = new System.Drawing.Size(572, 32);
-            this.dateTimeLabel.TabIndex = 4;
-            this.dateTimeLabel.Text = "SABTU, 16 JANUARI 2016 - 21:00:00";
-            this.dateTimeLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.label1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Maroon;
+            this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(3, 73);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(128, 23);
@@ -207,7 +169,7 @@
             this.label2.AutoSize = true;
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.label2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Maroon;
+            this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Location = new System.Drawing.Point(3, 99);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(178, 23);
@@ -222,7 +184,7 @@
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Location = new System.Drawing.Point(0, 57);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1101, 13);
+            this.panel4.Size = new System.Drawing.Size(1101, 5);
             this.panel4.TabIndex = 7;
             // 
             // cashierDataGridView
@@ -230,13 +192,14 @@
             this.cashierDataGridView.AllowUserToAddRows = false;
             this.cashierDataGridView.AllowUserToDeleteRows = false;
             this.cashierDataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.PaleTurquoise;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightCyan;
             this.cashierDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.cashierDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
             this.cashierDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.SteelBlue;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FloralWhite;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -252,7 +215,7 @@
             this.qty2Column});
             this.cashierDataGridView.Cursor = System.Windows.Forms.Cursors.Default;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FloralWhite;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -260,8 +223,8 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.cashierDataGridView.DefaultCellStyle = dataGridViewCellStyle3;
             this.cashierDataGridView.EnableHeadersVisualStyles = false;
-            this.cashierDataGridView.GridColor = System.Drawing.Color.Salmon;
-            this.cashierDataGridView.Location = new System.Drawing.Point(2, 204);
+            this.cashierDataGridView.GridColor = System.Drawing.Color.Black;
+            this.cashierDataGridView.Location = new System.Drawing.Point(2, 135);
             this.cashierDataGridView.MultiSelect = false;
             this.cashierDataGridView.Name = "cashierDataGridView";
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
@@ -275,7 +238,7 @@
             this.cashierDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.cashierDataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.cashierDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.cashierDataGridView.Size = new System.Drawing.Size(1097, 379);
+            this.cashierDataGridView.Size = new System.Drawing.Size(1097, 447);
             this.cashierDataGridView.TabIndex = 8;
             // 
             // F8
@@ -324,7 +287,7 @@
             // 
             // panel5
             // 
-            this.panel5.BackColor = System.Drawing.Color.Firebrick;
+            this.panel5.BackColor = System.Drawing.Color.SteelBlue;
             this.panel5.Controls.Add(this.button4);
             this.panel5.Controls.Add(this.button2);
             this.panel5.Controls.Add(this.button3);
@@ -382,7 +345,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.AntiqueWhite;
+            this.label8.ForeColor = System.Drawing.Color.FloralWhite;
             this.label8.Location = new System.Drawing.Point(341, 14);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(176, 17);
@@ -407,7 +370,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.AntiqueWhite;
+            this.label7.ForeColor = System.Drawing.Color.FloralWhite;
             this.label7.Location = new System.Drawing.Point(988, 15);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(100, 18);
@@ -430,8 +393,8 @@
             this.printoutCheckBox.Checked = true;
             this.printoutCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.printoutCheckBox.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.printoutCheckBox.ForeColor = System.Drawing.Color.Gold;
-            this.printoutCheckBox.Location = new System.Drawing.Point(11, 103);
+            this.printoutCheckBox.ForeColor = System.Drawing.Color.FloralWhite;
+            this.printoutCheckBox.Location = new System.Drawing.Point(11, 119);
             this.printoutCheckBox.Name = "printoutCheckBox";
             this.printoutCheckBox.Size = new System.Drawing.Size(234, 22);
             this.printoutCheckBox.TabIndex = 8;
@@ -455,7 +418,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.AntiqueWhite;
+            this.label5.ForeColor = System.Drawing.Color.FloralWhite;
             this.label5.Location = new System.Drawing.Point(8, 71);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(146, 18);
@@ -465,6 +428,7 @@
             // creditRadioButton
             // 
             this.creditRadioButton.AutoSize = true;
+            this.creditRadioButton.ForeColor = System.Drawing.Color.FloralWhite;
             this.creditRadioButton.Location = new System.Drawing.Point(229, 41);
             this.creditRadioButton.Name = "creditRadioButton";
             this.creditRadioButton.Size = new System.Drawing.Size(75, 22);
@@ -476,6 +440,7 @@
             // 
             this.cashRadioButton.AutoSize = true;
             this.cashRadioButton.Checked = true;
+            this.cashRadioButton.ForeColor = System.Drawing.Color.FloralWhite;
             this.cashRadioButton.Location = new System.Drawing.Point(154, 41);
             this.cashRadioButton.Name = "cashRadioButton";
             this.cashRadioButton.Size = new System.Drawing.Size(69, 22);
@@ -488,7 +453,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.AntiqueWhite;
+            this.label4.ForeColor = System.Drawing.Color.FloralWhite;
             this.label4.Location = new System.Drawing.Point(9, 42);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(145, 18);
@@ -508,7 +473,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.AntiqueWhite;
+            this.label3.ForeColor = System.Drawing.Color.FloralWhite;
             this.label3.Location = new System.Drawing.Point(9, 13);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(151, 18);
@@ -517,7 +482,7 @@
             // 
             // panel6
             // 
-            this.panel6.BackColor = System.Drawing.Color.PeachPuff;
+            this.panel6.BackColor = System.Drawing.Color.FloralWhite;
             this.panel6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Controls.Add(this.textBox5);
@@ -610,7 +575,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.Color.PeachPuff;
+            this.label13.BackColor = System.Drawing.Color.FloralWhite;
             this.label13.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.Black;
             this.label13.Location = new System.Drawing.Point(7, 145);
@@ -623,7 +588,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.BackColor = System.Drawing.Color.PeachPuff;
+            this.label12.BackColor = System.Drawing.Color.FloralWhite;
             this.label12.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Black;
             this.label12.Location = new System.Drawing.Point(5, 115);
@@ -636,7 +601,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.BackColor = System.Drawing.Color.PeachPuff;
+            this.label11.BackColor = System.Drawing.Color.FloralWhite;
             this.label11.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.Black;
             this.label11.Location = new System.Drawing.Point(2, 78);
@@ -649,7 +614,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.PeachPuff;
+            this.label10.BackColor = System.Drawing.Color.FloralWhite;
             this.label10.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Black;
             this.label10.Location = new System.Drawing.Point(4, 38);
@@ -662,7 +627,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.PeachPuff;
+            this.label9.BackColor = System.Drawing.Color.FloralWhite;
             this.label9.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Black;
             this.label9.Location = new System.Drawing.Point(3, 9);
@@ -672,22 +637,57 @@
             this.label9.Text = "Total Penjualan      : ";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // panel9
+            // 
+            this.panel9.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panel9.BackColor = System.Drawing.Color.Black;
+            this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel9.Location = new System.Drawing.Point(0, 582);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(1101, 5);
+            this.panel9.TabIndex = 10;
+            // 
+            // totalLabel
+            // 
+            this.totalLabel.AutoSize = true;
+            this.totalLabel.BackColor = System.Drawing.Color.Transparent;
+            this.totalLabel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.totalLabel.Font = new System.Drawing.Font("Verdana", 40F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalLabel.ForeColor = System.Drawing.Color.Black;
+            this.totalLabel.Location = new System.Drawing.Point(907, 62);
+            this.totalLabel.Name = "totalLabel";
+            this.totalLabel.Size = new System.Drawing.Size(184, 65);
+            this.totalLabel.TabIndex = 11;
+            this.totalLabel.Text = "Rp. 0";
+            this.totalLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panel2.BackColor = System.Drawing.Color.Black;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Location = new System.Drawing.Point(1, 131);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1101, 5);
+            this.panel2.TabIndex = 11;
+            // 
             // cashierForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightGray;
+            this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(1101, 787);
             this.ControlBox = false;
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.totalLabel);
+            this.Controls.Add(this.panel9);
             this.Controls.Add(this.panel5);
-            this.Controls.Add(this.cashierDataGridView);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dateTimeLabel);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.cashierDataGridView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "cashierForm";
             this.ShowInTaskbar = false;
@@ -696,8 +696,6 @@
             this.Shown += new System.EventHandler(this.cashierForm_Shown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cashierDataGridView)).EndInit();
@@ -713,11 +711,8 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label titleLabel;
-        private System.Windows.Forms.Label totalLabel;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label dateTimeLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel4;
@@ -760,6 +755,9 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Label totalLabel;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 

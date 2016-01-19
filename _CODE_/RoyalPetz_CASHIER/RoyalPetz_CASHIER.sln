@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2013 for Windows Desktop
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoyalPetz", "RoyalPetz\RoyalPetz.csproj", "{DE4B3002-2036-4010-8034-8F057D6C56A1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoyalPetz_CASHIER", "RoyalPetz\RoyalPetz_CASHIER.csproj", "{DE4B3002-2036-4010-8034-8F057D6C56A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
