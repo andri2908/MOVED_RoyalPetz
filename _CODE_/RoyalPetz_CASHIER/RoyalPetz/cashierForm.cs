@@ -215,5 +215,19 @@ namespace RoyalPetz
         {
             unregisterGlobalHotkey();
         }
+
+        private void creditRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (creditRadioButton.Checked == true)
+            {
+                paymentComboBox.Items.Clear();
+                paymentComboBox.Items.Add("KREDIT");
+            }
+        }
+
+        private void paymentComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
