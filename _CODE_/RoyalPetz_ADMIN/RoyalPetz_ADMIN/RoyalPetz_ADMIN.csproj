@@ -52,6 +52,30 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="dataProdukDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataProdukDetailForm.Designer.cs">
+      <DependentUpon>dataProdukDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tagProdukDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="tagProdukDetailForm.Designer.cs">
+      <DependentUpon>tagProdukDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dataProdukForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataProdukForm.Designer.cs">
+      <DependentUpon>dataProdukForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tagProdukForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="tagProdukForm.Designer.cs">
+      <DependentUpon>tagProdukForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="adminForm.resx">
       <DependentUpon>adminForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -64,6 +88,18 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="dataProdukDetailForm.resx">
+      <DependentUpon>dataProdukDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tagProdukDetailForm.resx">
+      <DependentUpon>tagProdukDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataProdukForm.resx">
+      <DependentUpon>dataProdukForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tagProdukForm.resx">
+      <DependentUpon>tagProdukForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

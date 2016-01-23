@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(adminForm));
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pilihPrinterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,52 +42,24 @@
             this.setingHitungToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adminMenuStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.jenisProdukToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.dataProdukToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.dataPelangganToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.dataSupplierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataSalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.catatAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pembelianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.catatPembelianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editPembelianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hapusPembelianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.reprintBuktiPembelianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.pesaanBarangBarcodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.catatLabelRakToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.penjualanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.catatPenjualanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editPenjualanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hapusPenjualanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.reprintNotaPenjualanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.catatMutasiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editMutasiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hapusMutasiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administrasiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.catatDeviasiNegativeStokToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.catatDeviasiPositiveStokToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-            this.pembayaranHutangKeSupplierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pembayaranPiutangPelangganToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
-            this.catatReturPembelianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.catatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hapusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.catatReturPenjualanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.catatToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.hapusToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.catatJURNALToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rekapStokHarianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.laporanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pembelianBarangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
@@ -142,54 +114,62 @@
             this.temaDesktopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
             this.lihatDataBarangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bukuPanduanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator27 = new System.Windows.Forms.ToolStripSeparator();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator28 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator29 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator30 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
-            this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timeStampStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.dataUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stokToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.catatDeviasiNegativeStokToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.catatDeviasiPositiveStokToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pembayaranHutangKeSupplierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pembayaranPiutangPelangganToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.catatReturPembelianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.catatReturPenjualanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.taxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.rekapStokHarianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cetakBarcodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cetakLabelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.accountJurnalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stokTaggingToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.pecahBarangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
+            this.updateHrgJualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.menuStrip1.BackColor = System.Drawing.Color.SteelBlue;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
             this.adminMenuStrip,
+            this.stokToolStripMenuItem,
             this.pembelianToolStripMenuItem,
             this.penjualanToolStripMenuItem,
             this.administrasiToolStripMenuItem,
             this.laporanToolStripMenuItem,
             this.viewToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1445, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
-            this.fileToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.fileToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pilihPrinterToolStripMenuItem,
             this.infoFolderDatabaseToolStripMenuItem,
@@ -197,438 +177,284 @@
             this.passwordMaintenanceToolStripMenuItem,
             this.penentuanLevelAksesToolStripMenuItem,
             this.toolStripSeparator3,
-            this.exitToolStripMenuItem,
+            this.setingHitungToolStripMenuItem,
             this.toolStripSeparator4,
-            this.setingHitungToolStripMenuItem});
-            this.fileToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fileToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.toolStripMenuItem3,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fileToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
-            this.fileToolStripMenuItem.Text = "File";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(111, 20);
+            this.fileToolStripMenuItem.Text = "Administrasi";
             // 
             // pilihPrinterToolStripMenuItem
             // 
-            this.pilihPrinterToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.pilihPrinterToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
+            this.pilihPrinterToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.pilihPrinterToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.pilihPrinterToolStripMenuItem.Name = "pilihPrinterToolStripMenuItem";
-            this.pilihPrinterToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.pilihPrinterToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.pilihPrinterToolStripMenuItem.Text = "Pilih Printer";
             // 
             // infoFolderDatabaseToolStripMenuItem
             // 
-            this.infoFolderDatabaseToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.infoFolderDatabaseToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.infoFolderDatabaseToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.infoFolderDatabaseToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.infoFolderDatabaseToolStripMenuItem.Name = "infoFolderDatabaseToolStripMenuItem";
-            this.infoFolderDatabaseToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.infoFolderDatabaseToolStripMenuItem.Text = "Info Folder Database";
+            this.infoFolderDatabaseToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.infoFolderDatabaseToolStripMenuItem.Text = "Info Database Aktif";
             // 
             // toolStripSeparator2
             // 
+            this.toolStripSeparator2.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator2.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(225, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(241, 6);
             // 
             // passwordMaintenanceToolStripMenuItem
             // 
-            this.passwordMaintenanceToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.passwordMaintenanceToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.passwordMaintenanceToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.passwordMaintenanceToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.passwordMaintenanceToolStripMenuItem.Name = "passwordMaintenanceToolStripMenuItem";
-            this.passwordMaintenanceToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.passwordMaintenanceToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.passwordMaintenanceToolStripMenuItem.Text = "Password Maintenance";
             // 
             // penentuanLevelAksesToolStripMenuItem
             // 
-            this.penentuanLevelAksesToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.penentuanLevelAksesToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.penentuanLevelAksesToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.penentuanLevelAksesToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.penentuanLevelAksesToolStripMenuItem.Name = "penentuanLevelAksesToolStripMenuItem";
-            this.penentuanLevelAksesToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.penentuanLevelAksesToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.penentuanLevelAksesToolStripMenuItem.Text = "Penentuan Level Akses";
             // 
             // toolStripSeparator3
             // 
+            this.toolStripSeparator3.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator3.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(225, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(241, 6);
             // 
             // exitToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.exitToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.exitToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.exitToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // toolStripSeparator4
             // 
+            this.toolStripSeparator4.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator4.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(225, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(241, 6);
             // 
             // setingHitungToolStripMenuItem
             // 
-            this.setingHitungToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.setingHitungToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.setingHitungToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.setingHitungToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.setingHitungToolStripMenuItem.Name = "setingHitungToolStripMenuItem";
-            this.setingHitungToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.setingHitungToolStripMenuItem.Text = "Seting Hitung";
+            this.setingHitungToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.setingHitungToolStripMenuItem.Text = "Set Nomor Nota";
             // 
             // adminMenuStrip
             // 
-            this.adminMenuStrip.BackColor = System.Drawing.SystemColors.Control;
+            this.adminMenuStrip.BackColor = System.Drawing.Color.SteelBlue;
             this.adminMenuStrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.jenisProdukToolStripMenuItem,
-            this.toolStripSeparator5,
             this.dataProdukToolStripMenuItem,
-            this.toolStripSeparator6,
+            this.toolStripSeparator1,
             this.dataPelangganToolStripMenuItem,
-            this.toolStripSeparator7,
+            this.toolStripSeparator6,
             this.dataSupplierToolStripMenuItem,
             this.dataSalesToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.catatAccountToolStripMenuItem});
-            this.adminMenuStrip.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.adminMenuStrip.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.toolStripSeparator7,
+            this.dataUserToolStripMenuItem});
+            this.adminMenuStrip.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.adminMenuStrip.ForeColor = System.Drawing.Color.FloralWhite;
             this.adminMenuStrip.Name = "adminMenuStrip";
-            this.adminMenuStrip.Size = new System.Drawing.Size(65, 20);
+            this.adminMenuStrip.Size = new System.Drawing.Size(70, 20);
             this.adminMenuStrip.Text = "Master";
             // 
             // jenisProdukToolStripMenuItem
             // 
-            this.jenisProdukToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.jenisProdukToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.jenisProdukToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.jenisProdukToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.jenisProdukToolStripMenuItem.Name = "jenisProdukToolStripMenuItem";
-            this.jenisProdukToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.jenisProdukToolStripMenuItem.Text = "Jenis Produk";
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripSeparator5.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(176, 6);
+            this.jenisProdukToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.jenisProdukToolStripMenuItem.Text = "Tag Produk";
+            this.jenisProdukToolStripMenuItem.Click += new System.EventHandler(this.jenisProdukToolStripMenuItem_Click);
             // 
             // dataProdukToolStripMenuItem
             // 
-            this.dataProdukToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.dataProdukToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dataProdukToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.dataProdukToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.dataProdukToolStripMenuItem.Name = "dataProdukToolStripMenuItem";
-            this.dataProdukToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.dataProdukToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.dataProdukToolStripMenuItem.Text = "Data Produk";
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(176, 6);
+            this.dataProdukToolStripMenuItem.Click += new System.EventHandler(this.dataProdukToolStripMenuItem_Click);
             // 
             // dataPelangganToolStripMenuItem
             // 
-            this.dataPelangganToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.dataPelangganToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dataPelangganToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.dataPelangganToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.dataPelangganToolStripMenuItem.Name = "dataPelangganToolStripMenuItem";
-            this.dataPelangganToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.dataPelangganToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.dataPelangganToolStripMenuItem.Text = "Data Pelanggan";
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(176, 6);
             // 
             // dataSupplierToolStripMenuItem
             // 
-            this.dataSupplierToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.dataSupplierToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dataSupplierToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.dataSupplierToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.dataSupplierToolStripMenuItem.Name = "dataSupplierToolStripMenuItem";
-            this.dataSupplierToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.dataSupplierToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.dataSupplierToolStripMenuItem.Text = "Data Supplier";
             // 
             // dataSalesToolStripMenuItem
             // 
-            this.dataSalesToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.dataSalesToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dataSalesToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.dataSalesToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.dataSalesToolStripMenuItem.Name = "dataSalesToolStripMenuItem";
-            this.dataSalesToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.dataSalesToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.dataSalesToolStripMenuItem.Text = "Data Sales";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(176, 6);
-            // 
-            // catatAccountToolStripMenuItem
-            // 
-            this.catatAccountToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.catatAccountToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.catatAccountToolStripMenuItem.Name = "catatAccountToolStripMenuItem";
-            this.catatAccountToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.catatAccountToolStripMenuItem.Text = "Catat Account";
             // 
             // pembelianToolStripMenuItem
             // 
-            this.pembelianToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.pembelianToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
             this.pembelianToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.catatPembelianToolStripMenuItem,
-            this.editPembelianToolStripMenuItem,
-            this.hapusPembelianToolStripMenuItem,
-            this.toolStripSeparator9,
             this.reprintBuktiPembelianToolStripMenuItem,
             this.toolStripSeparator10,
+            this.pembayaranHutangKeSupplierToolStripMenuItem,
+            this.toolStripSeparator5,
             this.pesaanBarangBarcodeToolStripMenuItem,
-            this.catatLabelRakToolStripMenuItem});
-            this.pembelianToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pembelianToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.catatLabelRakToolStripMenuItem,
+            this.catatReturPembelianToolStripMenuItem});
+            this.pembelianToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pembelianToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.pembelianToolStripMenuItem.Name = "pembelianToolStripMenuItem";
-            this.pembelianToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
+            this.pembelianToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
             this.pembelianToolStripMenuItem.Text = "Pembelian";
             // 
             // catatPembelianToolStripMenuItem
             // 
+            this.catatPembelianToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.catatPembelianToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.catatPembelianToolStripMenuItem.Name = "catatPembelianToolStripMenuItem";
             this.catatPembelianToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F6;
-            this.catatPembelianToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
-            this.catatPembelianToolStripMenuItem.Text = "Catat Pembelian";
-            // 
-            // editPembelianToolStripMenuItem
-            // 
-            this.editPembelianToolStripMenuItem.Name = "editPembelianToolStripMenuItem";
-            this.editPembelianToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
-            this.editPembelianToolStripMenuItem.Text = "Edit Pembelian";
-            // 
-            // hapusPembelianToolStripMenuItem
-            // 
-            this.hapusPembelianToolStripMenuItem.Name = "hapusPembelianToolStripMenuItem";
-            this.hapusPembelianToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
-            this.hapusPembelianToolStripMenuItem.Text = "Hapus Pembelian";
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(248, 6);
+            this.catatPembelianToolStripMenuItem.Size = new System.Drawing.Size(335, 22);
+            this.catatPembelianToolStripMenuItem.Text = "Transaksi Pembelian";
             // 
             // reprintBuktiPembelianToolStripMenuItem
             // 
+            this.reprintBuktiPembelianToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.reprintBuktiPembelianToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.reprintBuktiPembelianToolStripMenuItem.Name = "reprintBuktiPembelianToolStripMenuItem";
-            this.reprintBuktiPembelianToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
+            this.reprintBuktiPembelianToolStripMenuItem.Size = new System.Drawing.Size(335, 22);
             this.reprintBuktiPembelianToolStripMenuItem.Text = "Re-print Bukti Pembelian";
             // 
             // toolStripSeparator10
             // 
+            this.toolStripSeparator10.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator10.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(248, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(332, 6);
             // 
             // pesaanBarangBarcodeToolStripMenuItem
             // 
+            this.pesaanBarangBarcodeToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.pesaanBarangBarcodeToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.pesaanBarangBarcodeToolStripMenuItem.Name = "pesaanBarangBarcodeToolStripMenuItem";
-            this.pesaanBarangBarcodeToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
+            this.pesaanBarangBarcodeToolStripMenuItem.Size = new System.Drawing.Size(335, 22);
             this.pesaanBarangBarcodeToolStripMenuItem.Text = "Pesanan Barang - Barcode";
             // 
             // catatLabelRakToolStripMenuItem
             // 
+            this.catatLabelRakToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.catatLabelRakToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.catatLabelRakToolStripMenuItem.Name = "catatLabelRakToolStripMenuItem";
-            this.catatLabelRakToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
-            this.catatLabelRakToolStripMenuItem.Text = "Catat Label Rak";
+            this.catatLabelRakToolStripMenuItem.Size = new System.Drawing.Size(335, 22);
+            this.catatLabelRakToolStripMenuItem.Text = "Cetak Label Rak";
             // 
             // penjualanToolStripMenuItem
             // 
-            this.penjualanToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.penjualanToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
             this.penjualanToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.catatPenjualanToolStripMenuItem,
-            this.editPenjualanToolStripMenuItem,
-            this.hapusPenjualanToolStripMenuItem,
-            this.toolStripSeparator11,
             this.reprintNotaPenjualanToolStripMenuItem,
             this.toolStripSeparator12,
             this.catatMutasiToolStripMenuItem,
-            this.editMutasiToolStripMenuItem,
-            this.hapusMutasiToolStripMenuItem});
-            this.penjualanToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.penjualanToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.toolStripSeparator8,
+            this.pembayaranPiutangPelangganToolStripMenuItem,
+            this.catatReturPenjualanToolStripMenuItem});
+            this.penjualanToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.penjualanToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.penjualanToolStripMenuItem.Name = "penjualanToolStripMenuItem";
-            this.penjualanToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
+            this.penjualanToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
             this.penjualanToolStripMenuItem.Text = "Penjualan";
             // 
             // catatPenjualanToolStripMenuItem
             // 
+            this.catatPenjualanToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.catatPenjualanToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.catatPenjualanToolStripMenuItem.Name = "catatPenjualanToolStripMenuItem";
             this.catatPenjualanToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
-            this.catatPenjualanToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.catatPenjualanToolStripMenuItem.Text = "Catat Penjualan";
-            // 
-            // editPenjualanToolStripMenuItem
-            // 
-            this.editPenjualanToolStripMenuItem.Name = "editPenjualanToolStripMenuItem";
-            this.editPenjualanToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.editPenjualanToolStripMenuItem.Text = "Edit Penjualan";
-            // 
-            // hapusPenjualanToolStripMenuItem
-            // 
-            this.hapusPenjualanToolStripMenuItem.Name = "hapusPenjualanToolStripMenuItem";
-            this.hapusPenjualanToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.hapusPenjualanToolStripMenuItem.Text = "Hapus Penjualan";
-            // 
-            // toolStripSeparator11
-            // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(230, 6);
+            this.catatPenjualanToolStripMenuItem.Size = new System.Drawing.Size(307, 22);
+            this.catatPenjualanToolStripMenuItem.Text = "Transaksi Penjualan";
             // 
             // reprintNotaPenjualanToolStripMenuItem
             // 
+            this.reprintNotaPenjualanToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.reprintNotaPenjualanToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.reprintNotaPenjualanToolStripMenuItem.Name = "reprintNotaPenjualanToolStripMenuItem";
-            this.reprintNotaPenjualanToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.reprintNotaPenjualanToolStripMenuItem.Size = new System.Drawing.Size(307, 22);
             this.reprintNotaPenjualanToolStripMenuItem.Text = "Re-print Nota Penjualan";
             // 
             // toolStripSeparator12
             // 
+            this.toolStripSeparator12.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator12.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(230, 6);
+            this.toolStripSeparator12.Size = new System.Drawing.Size(304, 6);
             // 
             // catatMutasiToolStripMenuItem
             // 
+            this.catatMutasiToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.catatMutasiToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.catatMutasiToolStripMenuItem.Name = "catatMutasiToolStripMenuItem";
-            this.catatMutasiToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.catatMutasiToolStripMenuItem.Text = "Catat Mutasi";
-            // 
-            // editMutasiToolStripMenuItem
-            // 
-            this.editMutasiToolStripMenuItem.Name = "editMutasiToolStripMenuItem";
-            this.editMutasiToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.editMutasiToolStripMenuItem.Text = "Edit Mutasi";
-            // 
-            // hapusMutasiToolStripMenuItem
-            // 
-            this.hapusMutasiToolStripMenuItem.Name = "hapusMutasiToolStripMenuItem";
-            this.hapusMutasiToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.hapusMutasiToolStripMenuItem.Text = "Hapus Mutasi";
+            this.catatMutasiToolStripMenuItem.Size = new System.Drawing.Size(307, 22);
+            this.catatMutasiToolStripMenuItem.Text = "Mutasi";
             // 
             // administrasiToolStripMenuItem
             // 
-            this.administrasiToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.administrasiToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
             this.administrasiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.catatDeviasiNegativeStokToolStripMenuItem,
-            this.catatDeviasiPositiveStokToolStripMenuItem,
-            this.toolStripSeparator13,
-            this.pembayaranHutangKeSupplierToolStripMenuItem,
-            this.pembayaranPiutangPelangganToolStripMenuItem,
-            this.toolStripSeparator14,
-            this.catatReturPembelianToolStripMenuItem,
-            this.catatReturPenjualanToolStripMenuItem,
-            this.toolStripSeparator15,
             this.catatJURNALToolStripMenuItem,
-            this.rekapStokHarianToolStripMenuItem});
-            this.administrasiToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.administrasiToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.toolStripSeparator9,
+            this.taxToolStripMenuItem,
+            this.toolStripSeparator15,
+            this.accountJurnalToolStripMenuItem});
+            this.administrasiToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.administrasiToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.administrasiToolStripMenuItem.Name = "administrasiToolStripMenuItem";
-            this.administrasiToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
-            this.administrasiToolStripMenuItem.Text = "Administrasi";
-            // 
-            // catatDeviasiNegativeStokToolStripMenuItem
-            // 
-            this.catatDeviasiNegativeStokToolStripMenuItem.Name = "catatDeviasiNegativeStokToolStripMenuItem";
-            this.catatDeviasiNegativeStokToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F8;
-            this.catatDeviasiNegativeStokToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
-            this.catatDeviasiNegativeStokToolStripMenuItem.Text = "Catat Deviasi Negative Stok";
-            // 
-            // catatDeviasiPositiveStokToolStripMenuItem
-            // 
-            this.catatDeviasiPositiveStokToolStripMenuItem.Name = "catatDeviasiPositiveStokToolStripMenuItem";
-            this.catatDeviasiPositiveStokToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
-            this.catatDeviasiPositiveStokToolStripMenuItem.Text = "Catat Deviasi Positive Stok";
-            // 
-            // toolStripSeparator13
-            // 
-            this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(306, 6);
-            // 
-            // pembayaranHutangKeSupplierToolStripMenuItem
-            // 
-            this.pembayaranHutangKeSupplierToolStripMenuItem.Name = "pembayaranHutangKeSupplierToolStripMenuItem";
-            this.pembayaranHutangKeSupplierToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F9;
-            this.pembayaranHutangKeSupplierToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
-            this.pembayaranHutangKeSupplierToolStripMenuItem.Text = "Pembayaran Hutang ke Supplier";
-            // 
-            // pembayaranPiutangPelangganToolStripMenuItem
-            // 
-            this.pembayaranPiutangPelangganToolStripMenuItem.Name = "pembayaranPiutangPelangganToolStripMenuItem";
-            this.pembayaranPiutangPelangganToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
-            this.pembayaranPiutangPelangganToolStripMenuItem.Text = "Pembayaran Piutang Pelanggan";
-            // 
-            // toolStripSeparator14
-            // 
-            this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(306, 6);
-            // 
-            // catatReturPembelianToolStripMenuItem
-            // 
-            this.catatReturPembelianToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.catatToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.hapusToolStripMenuItem});
-            this.catatReturPembelianToolStripMenuItem.Name = "catatReturPembelianToolStripMenuItem";
-            this.catatReturPembelianToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
-            this.catatReturPembelianToolStripMenuItem.Text = "Catat Retur Pembelian";
-            // 
-            // catatToolStripMenuItem
-            // 
-            this.catatToolStripMenuItem.Name = "catatToolStripMenuItem";
-            this.catatToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.catatToolStripMenuItem.Text = "Catat";
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // hapusToolStripMenuItem
-            // 
-            this.hapusToolStripMenuItem.Name = "hapusToolStripMenuItem";
-            this.hapusToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.hapusToolStripMenuItem.Text = "Hapus";
-            // 
-            // catatReturPenjualanToolStripMenuItem
-            // 
-            this.catatReturPenjualanToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.catatToolStripMenuItem1,
-            this.editToolStripMenuItem1,
-            this.hapusToolStripMenuItem1});
-            this.catatReturPenjualanToolStripMenuItem.Name = "catatReturPenjualanToolStripMenuItem";
-            this.catatReturPenjualanToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
-            this.catatReturPenjualanToolStripMenuItem.Text = "Catat retur Penjualan";
-            // 
-            // catatToolStripMenuItem1
-            // 
-            this.catatToolStripMenuItem1.Name = "catatToolStripMenuItem1";
-            this.catatToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
-            this.catatToolStripMenuItem1.Text = "Catat";
-            // 
-            // editToolStripMenuItem1
-            // 
-            this.editToolStripMenuItem1.Name = "editToolStripMenuItem1";
-            this.editToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
-            this.editToolStripMenuItem1.Text = "Edit";
-            // 
-            // hapusToolStripMenuItem1
-            // 
-            this.hapusToolStripMenuItem1.Name = "hapusToolStripMenuItem1";
-            this.hapusToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
-            this.hapusToolStripMenuItem1.Text = "Hapus";
+            this.administrasiToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+            this.administrasiToolStripMenuItem.Text = "Journal";
             // 
             // toolStripSeparator15
             // 
             this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(306, 6);
+            this.toolStripSeparator15.Size = new System.Drawing.Size(180, 6);
             // 
             // catatJURNALToolStripMenuItem
             // 
+            this.catatJURNALToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.catatJURNALToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.catatJURNALToolStripMenuItem.Name = "catatJURNALToolStripMenuItem";
-            this.catatJURNALToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
-            this.catatJURNALToolStripMenuItem.Text = "Catat JURNAL";
-            // 
-            // rekapStokHarianToolStripMenuItem
-            // 
-            this.rekapStokHarianToolStripMenuItem.Name = "rekapStokHarianToolStripMenuItem";
-            this.rekapStokHarianToolStripMenuItem.Size = new System.Drawing.Size(309, 22);
-            this.rekapStokHarianToolStripMenuItem.Text = "Rekap Stok Harian";
+            this.catatJURNALToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.catatJURNALToolStripMenuItem.Text = "Journal";
             // 
             // laporanToolStripMenuItem
             // 
-            this.laporanToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.laporanToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
             this.laporanToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pembelianBarangToolStripMenuItem,
             this.toolStripSeparator16,
@@ -658,307 +484,363 @@
             this.historiPenjualanToolStripMenuItem,
             this.toolStripSeparator24,
             this.mutasiBarangToolStripMenuItem});
-            this.laporanToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.laporanToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.laporanToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.laporanToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.laporanToolStripMenuItem.Name = "laporanToolStripMenuItem";
-            this.laporanToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
+            this.laporanToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
             this.laporanToolStripMenuItem.Text = "Laporan";
             // 
             // pembelianBarangToolStripMenuItem
             // 
+            this.pembelianBarangToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.pembelianBarangToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.pembelianBarangToolStripMenuItem.Name = "pembelianBarangToolStripMenuItem";
-            this.pembelianBarangToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.pembelianBarangToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.pembelianBarangToolStripMenuItem.Text = "Pembelian Barang";
             // 
             // toolStripSeparator16
             // 
+            this.toolStripSeparator16.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator16.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(256, 6);
+            this.toolStripSeparator16.Size = new System.Drawing.Size(273, 6);
             // 
             // analisaUmurHutangToolStripMenuItem
             // 
+            this.analisaUmurHutangToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.analisaUmurHutangToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.analisaUmurHutangToolStripMenuItem.Name = "analisaUmurHutangToolStripMenuItem";
-            this.analisaUmurHutangToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.analisaUmurHutangToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.analisaUmurHutangToolStripMenuItem.Text = "Analisa Umur Hutang";
             // 
             // hutangLewatJatuhTempoToolStripMenuItem
             // 
+            this.hutangLewatJatuhTempoToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.hutangLewatJatuhTempoToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.hutangLewatJatuhTempoToolStripMenuItem.Name = "hutangLewatJatuhTempoToolStripMenuItem";
-            this.hutangLewatJatuhTempoToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.hutangLewatJatuhTempoToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.hutangLewatJatuhTempoToolStripMenuItem.Text = "Hutang Lewat Jatuh Tempo";
             // 
             // pembayaranHutangToolStripMenuItem
             // 
+            this.pembayaranHutangToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.pembayaranHutangToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.pembayaranHutangToolStripMenuItem.Name = "pembayaranHutangToolStripMenuItem";
-            this.pembayaranHutangToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.pembayaranHutangToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.pembayaranHutangToolStripMenuItem.Text = "Pembayaran Hutang";
             // 
             // toolStripSeparator17
             // 
+            this.toolStripSeparator17.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator17.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(256, 6);
+            this.toolStripSeparator17.Size = new System.Drawing.Size(273, 6);
             // 
             // penjualanProdukToolStripMenuItem
             // 
+            this.penjualanProdukToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
             this.penjualanProdukToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.detailedToolStripMenuItem,
             this.summaryToolStripMenuItem,
             this.perProdukBarangToolStripMenuItem});
+            this.penjualanProdukToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.penjualanProdukToolStripMenuItem.Name = "penjualanProdukToolStripMenuItem";
-            this.penjualanProdukToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.penjualanProdukToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.penjualanProdukToolStripMenuItem.Text = "Penjualan Produk";
             // 
             // detailedToolStripMenuItem
             // 
             this.detailedToolStripMenuItem.Name = "detailedToolStripMenuItem";
-            this.detailedToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.detailedToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.detailedToolStripMenuItem.Text = "Detailed";
             // 
             // summaryToolStripMenuItem
             // 
             this.summaryToolStripMenuItem.Name = "summaryToolStripMenuItem";
-            this.summaryToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.summaryToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.summaryToolStripMenuItem.Text = "Summary ";
             // 
             // perProdukBarangToolStripMenuItem
             // 
             this.perProdukBarangToolStripMenuItem.Name = "perProdukBarangToolStripMenuItem";
-            this.perProdukBarangToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.perProdukBarangToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.perProdukBarangToolStripMenuItem.Text = "Per Produk-Barang";
             // 
             // omzetPenjualanToolStripMenuItem
             // 
+            this.omzetPenjualanToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.omzetPenjualanToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.omzetPenjualanToolStripMenuItem.Name = "omzetPenjualanToolStripMenuItem";
-            this.omzetPenjualanToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.omzetPenjualanToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.omzetPenjualanToolStripMenuItem.Text = "Omzet Penjualan";
             // 
             // topSaleToolStripMenuItem
             // 
+            this.topSaleToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
             this.topSaleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.globalToolStripMenuItem,
             this.perJenisToolStripMenuItem,
             this.penjualanPertanggalToolStripMenuItem,
             this.penjualanLabaPertanggalToolStripMenuItem});
+            this.topSaleToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.topSaleToolStripMenuItem.Name = "topSaleToolStripMenuItem";
-            this.topSaleToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.topSaleToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.topSaleToolStripMenuItem.Text = "Top Sale";
             // 
             // globalToolStripMenuItem
             // 
             this.globalToolStripMenuItem.Name = "globalToolStripMenuItem";
-            this.globalToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+            this.globalToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
             this.globalToolStripMenuItem.Text = "Global";
             // 
             // perJenisToolStripMenuItem
             // 
             this.perJenisToolStripMenuItem.Name = "perJenisToolStripMenuItem";
-            this.perJenisToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+            this.perJenisToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
             this.perJenisToolStripMenuItem.Text = "per Jenis";
             // 
             // penjualanPertanggalToolStripMenuItem
             // 
             this.penjualanPertanggalToolStripMenuItem.Name = "penjualanPertanggalToolStripMenuItem";
-            this.penjualanPertanggalToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+            this.penjualanPertanggalToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
             this.penjualanPertanggalToolStripMenuItem.Text = "Penjualan Pertanggal";
             // 
             // penjualanLabaPertanggalToolStripMenuItem
             // 
             this.penjualanLabaPertanggalToolStripMenuItem.Name = "penjualanLabaPertanggalToolStripMenuItem";
-            this.penjualanLabaPertanggalToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+            this.penjualanLabaPertanggalToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
             this.penjualanLabaPertanggalToolStripMenuItem.Text = "Penjualan Laba Pertanggal";
             // 
             // penjualanKasirPerShiftToolStripMenuItem
             // 
+            this.penjualanKasirPerShiftToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.penjualanKasirPerShiftToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.penjualanKasirPerShiftToolStripMenuItem.Name = "penjualanKasirPerShiftToolStripMenuItem";
-            this.penjualanKasirPerShiftToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.penjualanKasirPerShiftToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.penjualanKasirPerShiftToolStripMenuItem.Text = "Penjualan Kasir Per Shift";
             // 
             // toolStripSeparator18
             // 
+            this.toolStripSeparator18.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator18.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripSeparator18.Name = "toolStripSeparator18";
-            this.toolStripSeparator18.Size = new System.Drawing.Size(256, 6);
+            this.toolStripSeparator18.Size = new System.Drawing.Size(273, 6);
             // 
             // rugiLabaPenjualanToolStripMenuItem
             // 
+            this.rugiLabaPenjualanToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
             this.rugiLabaPenjualanToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.rLToolStripMenuItem,
             this.rlLengkapToolStripMenuItem,
             this.perAccountPOSToolStripMenuItem});
+            this.rugiLabaPenjualanToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.rugiLabaPenjualanToolStripMenuItem.Name = "rugiLabaPenjualanToolStripMenuItem";
-            this.rugiLabaPenjualanToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.rugiLabaPenjualanToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.rugiLabaPenjualanToolStripMenuItem.Text = "Rugi / Laba Penjualan";
             // 
             // rLToolStripMenuItem
             // 
             this.rLToolStripMenuItem.Name = "rLToolStripMenuItem";
-            this.rLToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.rLToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.rLToolStripMenuItem.Text = "R/L";
             // 
             // rlLengkapToolStripMenuItem
             // 
             this.rlLengkapToolStripMenuItem.Name = "rlLengkapToolStripMenuItem";
-            this.rlLengkapToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.rlLengkapToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.rlLengkapToolStripMenuItem.Text = "R/l Lengkap";
             // 
             // perAccountPOSToolStripMenuItem
             // 
             this.perAccountPOSToolStripMenuItem.Name = "perAccountPOSToolStripMenuItem";
-            this.perAccountPOSToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.perAccountPOSToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.perAccountPOSToolStripMenuItem.Text = "Per Account/POS";
             // 
             // toolStripSeparator19
             // 
+            this.toolStripSeparator19.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator19.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripSeparator19.Name = "toolStripSeparator19";
-            this.toolStripSeparator19.Size = new System.Drawing.Size(256, 6);
+            this.toolStripSeparator19.Size = new System.Drawing.Size(273, 6);
             // 
             // historyBelanjaPelangganToolStripMenuItem
             // 
+            this.historyBelanjaPelangganToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
             this.historyBelanjaPelangganToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.detailedToolStripMenuItem1,
             this.summaryToolStripMenuItem1});
+            this.historyBelanjaPelangganToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.historyBelanjaPelangganToolStripMenuItem.Name = "historyBelanjaPelangganToolStripMenuItem";
-            this.historyBelanjaPelangganToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.historyBelanjaPelangganToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.historyBelanjaPelangganToolStripMenuItem.Text = "History Belanja Pelanggan";
             // 
             // detailedToolStripMenuItem1
             // 
             this.detailedToolStripMenuItem1.Name = "detailedToolStripMenuItem1";
-            this.detailedToolStripMenuItem1.Size = new System.Drawing.Size(136, 22);
+            this.detailedToolStripMenuItem1.Size = new System.Drawing.Size(146, 22);
             this.detailedToolStripMenuItem1.Text = "Detailed";
             // 
             // summaryToolStripMenuItem1
             // 
             this.summaryToolStripMenuItem1.Name = "summaryToolStripMenuItem1";
-            this.summaryToolStripMenuItem1.Size = new System.Drawing.Size(136, 22);
+            this.summaryToolStripMenuItem1.Size = new System.Drawing.Size(146, 22);
             this.summaryToolStripMenuItem1.Text = "Summary";
             // 
             // toolStripSeparator20
             // 
+            this.toolStripSeparator20.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator20.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripSeparator20.Name = "toolStripSeparator20";
-            this.toolStripSeparator20.Size = new System.Drawing.Size(256, 6);
+            this.toolStripSeparator20.Size = new System.Drawing.Size(273, 6);
             // 
             // analisaUmurPiutangToolStripMenuItem
             // 
+            this.analisaUmurPiutangToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.analisaUmurPiutangToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.analisaUmurPiutangToolStripMenuItem.Name = "analisaUmurPiutangToolStripMenuItem";
-            this.analisaUmurPiutangToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.analisaUmurPiutangToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.analisaUmurPiutangToolStripMenuItem.Text = "Analisa Umur Piutang";
             // 
             // piutangLewatJatuhTempoToolStripMenuItem
             // 
+            this.piutangLewatJatuhTempoToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.piutangLewatJatuhTempoToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.piutangLewatJatuhTempoToolStripMenuItem.Name = "piutangLewatJatuhTempoToolStripMenuItem";
-            this.piutangLewatJatuhTempoToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.piutangLewatJatuhTempoToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.piutangLewatJatuhTempoToolStripMenuItem.Text = "Piutang Lewat Jatuh Tempo";
             // 
             // pembayaranPiutangToolStripMenuItem
             // 
+            this.pembayaranPiutangToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.pembayaranPiutangToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.pembayaranPiutangToolStripMenuItem.Name = "pembayaranPiutangToolStripMenuItem";
-            this.pembayaranPiutangToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.pembayaranPiutangToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.pembayaranPiutangToolStripMenuItem.Text = "Pembayaran Piutang";
             // 
             // toolStripSeparator21
             // 
+            this.toolStripSeparator21.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator21.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripSeparator21.Name = "toolStripSeparator21";
-            this.toolStripSeparator21.Size = new System.Drawing.Size(256, 6);
+            this.toolStripSeparator21.Size = new System.Drawing.Size(273, 6);
             // 
             // deviasiAdjustmentStokToolStripMenuItem
             // 
+            this.deviasiAdjustmentStokToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
             this.deviasiAdjustmentStokToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.negativeToolStripMenuItem,
             this.positiveToolStripMenuItem});
+            this.deviasiAdjustmentStokToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.deviasiAdjustmentStokToolStripMenuItem.Name = "deviasiAdjustmentStokToolStripMenuItem";
-            this.deviasiAdjustmentStokToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.deviasiAdjustmentStokToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.deviasiAdjustmentStokToolStripMenuItem.Text = "Deviasi (Adjustment) Stok";
             // 
             // negativeToolStripMenuItem
             // 
             this.negativeToolStripMenuItem.Name = "negativeToolStripMenuItem";
-            this.negativeToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.negativeToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.negativeToolStripMenuItem.Text = "Negative";
             // 
             // positiveToolStripMenuItem
             // 
             this.positiveToolStripMenuItem.Name = "positiveToolStripMenuItem";
-            this.positiveToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.positiveToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.positiveToolStripMenuItem.Text = "Positive";
             // 
             // returBarangToolStripMenuItem
             // 
+            this.returBarangToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
             this.returBarangToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pembelianToolStripMenuItem1,
             this.penjualanToolStripMenuItem1});
+            this.returBarangToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.returBarangToolStripMenuItem.Name = "returBarangToolStripMenuItem";
-            this.returBarangToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.returBarangToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.returBarangToolStripMenuItem.Text = "Retur Barang";
             // 
             // pembelianToolStripMenuItem1
             // 
             this.pembelianToolStripMenuItem1.Name = "pembelianToolStripMenuItem1";
-            this.pembelianToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
+            this.pembelianToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.pembelianToolStripMenuItem1.Text = "Pembelian";
             // 
             // penjualanToolStripMenuItem1
             // 
             this.penjualanToolStripMenuItem1.Name = "penjualanToolStripMenuItem1";
-            this.penjualanToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
+            this.penjualanToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.penjualanToolStripMenuItem1.Text = "Penjualan";
             // 
             // toolStripSeparator22
             // 
+            this.toolStripSeparator22.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator22.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripSeparator22.Name = "toolStripSeparator22";
-            this.toolStripSeparator22.Size = new System.Drawing.Size(256, 6);
+            this.toolStripSeparator22.Size = new System.Drawing.Size(273, 6);
             // 
             // stokDibawahLimitToolStripMenuItem
             // 
+            this.stokDibawahLimitToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.stokDibawahLimitToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.stokDibawahLimitToolStripMenuItem.Name = "stokDibawahLimitToolStripMenuItem";
-            this.stokDibawahLimitToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.stokDibawahLimitToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.stokDibawahLimitToolStripMenuItem.Text = "Stok Dibawah Limit";
             // 
             // penjualanPerSalesToolStripMenuItem
             // 
+            this.penjualanPerSalesToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
             this.penjualanPerSalesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.detailToolStripMenuItem,
             this.summaryToolStripMenuItem2});
+            this.penjualanPerSalesToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.penjualanPerSalesToolStripMenuItem.Name = "penjualanPerSalesToolStripMenuItem";
-            this.penjualanPerSalesToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.penjualanPerSalesToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.penjualanPerSalesToolStripMenuItem.Text = "Penjualan Per Sales";
             // 
             // detailToolStripMenuItem
             // 
             this.detailToolStripMenuItem.Name = "detailToolStripMenuItem";
-            this.detailToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.detailToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.detailToolStripMenuItem.Text = "Detail";
             // 
             // summaryToolStripMenuItem2
             // 
             this.summaryToolStripMenuItem2.Name = "summaryToolStripMenuItem2";
-            this.summaryToolStripMenuItem2.Size = new System.Drawing.Size(136, 22);
+            this.summaryToolStripMenuItem2.Size = new System.Drawing.Size(146, 22);
             this.summaryToolStripMenuItem2.Text = "Summary";
             // 
             // toolStripSeparator23
             // 
+            this.toolStripSeparator23.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator23.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripSeparator23.Name = "toolStripSeparator23";
-            this.toolStripSeparator23.Size = new System.Drawing.Size(256, 6);
+            this.toolStripSeparator23.Size = new System.Drawing.Size(273, 6);
             // 
             // historiPenjualanToolStripMenuItem
             // 
+            this.historiPenjualanToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.historiPenjualanToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.historiPenjualanToolStripMenuItem.Name = "historiPenjualanToolStripMenuItem";
-            this.historiPenjualanToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.historiPenjualanToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.historiPenjualanToolStripMenuItem.Text = "Histori Penjualan";
             // 
             // toolStripSeparator24
             // 
+            this.toolStripSeparator24.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator24.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripSeparator24.Name = "toolStripSeparator24";
-            this.toolStripSeparator24.Size = new System.Drawing.Size(256, 6);
+            this.toolStripSeparator24.Size = new System.Drawing.Size(273, 6);
             // 
             // mutasiBarangToolStripMenuItem
             // 
+            this.mutasiBarangToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.mutasiBarangToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.mutasiBarangToolStripMenuItem.Name = "mutasiBarangToolStripMenuItem";
-            this.mutasiBarangToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+            this.mutasiBarangToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.mutasiBarangToolStripMenuItem.Text = "Mutasi Barang";
             // 
             // viewToolStripMenuItem
             // 
-            this.viewToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.viewToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.kalkulatorToolStripMenuItem,
             this.toolStripSeparator25,
@@ -966,267 +848,64 @@
             this.temaDesktopToolStripMenuItem,
             this.toolStripSeparator26,
             this.lihatDataBarangToolStripMenuItem});
-            this.viewToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.viewToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.viewToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.viewToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.viewToolStripMenuItem.Text = "View";
             // 
             // kalkulatorToolStripMenuItem
             // 
+            this.kalkulatorToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.kalkulatorToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.kalkulatorToolStripMenuItem.Name = "kalkulatorToolStripMenuItem";
-            this.kalkulatorToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.kalkulatorToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.kalkulatorToolStripMenuItem.Text = "Kalkulator";
             // 
             // toolStripSeparator25
             // 
+            this.toolStripSeparator25.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator25.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripSeparator25.Name = "toolStripSeparator25";
-            this.toolStripSeparator25.Size = new System.Drawing.Size(191, 6);
+            this.toolStripSeparator25.Size = new System.Drawing.Size(203, 6);
             // 
             // warnaDesktopToolStripMenuItem
             // 
+            this.warnaDesktopToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.warnaDesktopToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.warnaDesktopToolStripMenuItem.Name = "warnaDesktopToolStripMenuItem";
-            this.warnaDesktopToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.warnaDesktopToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.warnaDesktopToolStripMenuItem.Text = "Warna Desktop";
             // 
             // temaDesktopToolStripMenuItem
             // 
+            this.temaDesktopToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.temaDesktopToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.temaDesktopToolStripMenuItem.Name = "temaDesktopToolStripMenuItem";
-            this.temaDesktopToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.temaDesktopToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.temaDesktopToolStripMenuItem.Text = "Tema Desktop";
             // 
             // toolStripSeparator26
             // 
+            this.toolStripSeparator26.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator26.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripSeparator26.Name = "toolStripSeparator26";
-            this.toolStripSeparator26.Size = new System.Drawing.Size(191, 6);
+            this.toolStripSeparator26.Size = new System.Drawing.Size(203, 6);
             // 
             // lihatDataBarangToolStripMenuItem
             // 
+            this.lihatDataBarangToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.lihatDataBarangToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.lihatDataBarangToolStripMenuItem.Name = "lihatDataBarangToolStripMenuItem";
-            this.lihatDataBarangToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.lihatDataBarangToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.lihatDataBarangToolStripMenuItem.Text = "Lihat Data Barang";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bukuPanduanToolStripMenuItem,
-            this.toolStripSeparator27,
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.helpToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // bukuPanduanToolStripMenuItem
-            // 
-            this.bukuPanduanToolStripMenuItem.Name = "bukuPanduanToolStripMenuItem";
-            this.bukuPanduanToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.bukuPanduanToolStripMenuItem.Text = "Buku Panduan";
-            // 
-            // toolStripSeparator27
-            // 
-            this.toolStripSeparator27.Name = "toolStripSeparator27";
-            this.toolStripSeparator27.Size = new System.Drawing.Size(165, 6);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripSeparator28,
-            this.toolStripButton2,
-            this.toolStripButton3,
-            this.toolStripButton4,
-            this.toolStripButton5,
-            this.toolStripSeparator29,
-            this.toolStripButton6,
-            this.toolStripButton7,
-            this.toolStripButton8,
-            this.toolStripButton9,
-            this.toolStripSeparator30,
-            this.toolStripButton10,
-            this.toolStripButton11});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1445, 71);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
-            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.toolStripButton1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton1.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(57, 68);
-            this.toolStripButton1.Text = "Barang";
-            this.toolStripButton1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripSeparator28
-            // 
-            this.toolStripSeparator28.Name = "toolStripSeparator28";
-            this.toolStripSeparator28.Size = new System.Drawing.Size(6, 71);
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton2.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(52, 68);
-            this.toolStripButton2.Text = "Beli";
-            this.toolStripButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton3.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(52, 68);
-            this.toolStripButton3.Text = "Jual";
-            this.toolStripButton3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripButton4
-            // 
-            this.toolStripButton4.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton4.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(61, 68);
-            this.toolStripButton4.Text = "Piutang";
-            this.toolStripButton4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripButton5
-            // 
-            this.toolStripButton5.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton5.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-            this.toolStripButton5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(59, 68);
-            this.toolStripButton5.Text = "Hutang";
-            this.toolStripButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripSeparator29
-            // 
-            this.toolStripSeparator29.Name = "toolStripSeparator29";
-            this.toolStripSeparator29.Size = new System.Drawing.Size(6, 71);
-            // 
-            // toolStripButton6
-            // 
-            this.toolStripButton6.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton6.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
-            this.toolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(52, 68);
-            this.toolStripButton6.Text = "Jurnal";
-            this.toolStripButton6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripButton7
-            // 
-            this.toolStripButton7.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton7.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
-            this.toolStripButton7.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(52, 68);
-            this.toolStripButton7.Text = "Grafik";
-            this.toolStripButton7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripButton8
-            // 
-            this.toolStripButton8.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton8.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripButton8.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton8.Image")));
-            this.toolStripButton8.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton8.Name = "toolStripButton8";
-            this.toolStripButton8.Size = new System.Drawing.Size(61, 68);
-            this.toolStripButton8.Text = "Ret.Beli";
-            this.toolStripButton8.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripButton9
-            // 
-            this.toolStripButton9.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton9.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton9.Image")));
-            this.toolStripButton9.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton9.Name = "toolStripButton9";
-            this.toolStripButton9.Size = new System.Drawing.Size(64, 68);
-            this.toolStripButton9.Text = "Ret.Jual";
-            this.toolStripButton9.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripSeparator30
-            // 
-            this.toolStripSeparator30.Name = "toolStripSeparator30";
-            this.toolStripSeparator30.Size = new System.Drawing.Size(6, 71);
-            // 
-            // toolStripButton10
-            // 
-            this.toolStripButton10.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton10.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripButton10.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton10.Image")));
-            this.toolStripButton10.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton10.Name = "toolStripButton10";
-            this.toolStripButton10.Size = new System.Drawing.Size(52, 68);
-            this.toolStripButton10.Text = "Label";
-            this.toolStripButton10.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripButton11
-            // 
-            this.toolStripButton11.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripButton11.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripButton11.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton11.Image")));
-            this.toolStripButton11.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton11.Name = "toolStripButton11";
-            this.toolStripButton11.Size = new System.Drawing.Size(52, 68);
-            this.toolStripButton11.Text = "Keluar";
-            this.toolStripButton11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.toolStripButton11.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(947, 582);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(486, 29);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "SENIN, 18 JANUARI 2016 21:00:00";
             // 
             // statusStrip1
             // 
+            this.statusStrip1.BackColor = System.Drawing.Color.SteelBlue;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.toolStripStatusLabel1,
+            this.timeStampStatusLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 697);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1445, 22);
@@ -1236,30 +915,250 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1186, 17);
+            this.toolStripStatusLabel1.Spring = true;
+            // 
+            // timeStampStatusLabel
+            // 
+            this.timeStampStatusLabel.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeStampStatusLabel.ForeColor = System.Drawing.Color.FloralWhite;
+            this.timeStampStatusLabel.Name = "timeStampStatusLabel";
+            this.timeStampStatusLabel.Size = new System.Drawing.Size(244, 17);
+            this.timeStampStatusLabel.Text = "Kamis, 21 Januari 2016 - 22:47:00";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // dataUserToolStripMenuItem
+            // 
+            this.dataUserToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.dataUserToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.dataUserToolStripMenuItem.Name = "dataUserToolStripMenuItem";
+            this.dataUserToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.dataUserToolStripMenuItem.Text = "Data User";
+            // 
+            // stokToolStripMenuItem
+            // 
+            this.stokToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.stokToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stokTaggingToolStripMenuItem1,
+            this.pecahBarangToolStripMenuItem,
+            this.updateHrgJualToolStripMenuItem,
+            this.toolStripSeparator14,
+            this.catatDeviasiNegativeStokToolStripMenuItem,
+            this.catatDeviasiPositiveStokToolStripMenuItem,
+            this.toolStripSeparator11,
+            this.rekapStokHarianToolStripMenuItem,
+            this.toolStripSeparator13,
+            this.cetakBarcodeToolStripMenuItem,
+            this.cetakLabelToolStripMenuItem});
+            this.stokToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stokToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.stokToolStripMenuItem.Name = "stokToolStripMenuItem";
+            this.stokToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.stokToolStripMenuItem.Text = "Stok";
+            // 
+            // catatDeviasiNegativeStokToolStripMenuItem
+            // 
+            this.catatDeviasiNegativeStokToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.catatDeviasiNegativeStokToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.catatDeviasiNegativeStokToolStripMenuItem.Name = "catatDeviasiNegativeStokToolStripMenuItem";
+            this.catatDeviasiNegativeStokToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F8;
+            this.catatDeviasiNegativeStokToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.catatDeviasiNegativeStokToolStripMenuItem.Text = "Deviasi Negatif Stok";
+            // 
+            // catatDeviasiPositiveStokToolStripMenuItem
+            // 
+            this.catatDeviasiPositiveStokToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.catatDeviasiPositiveStokToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.catatDeviasiPositiveStokToolStripMenuItem.Name = "catatDeviasiPositiveStokToolStripMenuItem";
+            this.catatDeviasiPositiveStokToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.catatDeviasiPositiveStokToolStripMenuItem.Text = "Deviasi Positif Stok";
+            // 
+            // pembayaranHutangKeSupplierToolStripMenuItem
+            // 
+            this.pembayaranHutangKeSupplierToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.pembayaranHutangKeSupplierToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.pembayaranHutangKeSupplierToolStripMenuItem.Name = "pembayaranHutangKeSupplierToolStripMenuItem";
+            this.pembayaranHutangKeSupplierToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F9;
+            this.pembayaranHutangKeSupplierToolStripMenuItem.Size = new System.Drawing.Size(335, 22);
+            this.pembayaranHutangKeSupplierToolStripMenuItem.Text = "Pembayaran Hutang ke Supplier";
+            // 
+            // pembayaranPiutangPelangganToolStripMenuItem
+            // 
+            this.pembayaranPiutangPelangganToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.pembayaranPiutangPelangganToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.pembayaranPiutangPelangganToolStripMenuItem.Name = "pembayaranPiutangPelangganToolStripMenuItem";
+            this.pembayaranPiutangPelangganToolStripMenuItem.Size = new System.Drawing.Size(307, 22);
+            this.pembayaranPiutangPelangganToolStripMenuItem.Text = "Pembayaran Piutang Pelanggan";
+            // 
+            // catatReturPembelianToolStripMenuItem
+            // 
+            this.catatReturPembelianToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.catatReturPembelianToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.catatReturPembelianToolStripMenuItem.Name = "catatReturPembelianToolStripMenuItem";
+            this.catatReturPembelianToolStripMenuItem.Size = new System.Drawing.Size(335, 22);
+            this.catatReturPembelianToolStripMenuItem.Text = "Retur Pembelian";
+            // 
+            // catatReturPenjualanToolStripMenuItem
+            // 
+            this.catatReturPenjualanToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.catatReturPenjualanToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.catatReturPenjualanToolStripMenuItem.Name = "catatReturPenjualanToolStripMenuItem";
+            this.catatReturPenjualanToolStripMenuItem.Size = new System.Drawing.Size(307, 22);
+            this.catatReturPenjualanToolStripMenuItem.Text = "Retur Penjualan";
+            // 
+            // taxToolStripMenuItem
+            // 
+            this.taxToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.taxToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.taxToolStripMenuItem.Name = "taxToolStripMenuItem";
+            this.taxToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.taxToolStripMenuItem.Text = "Tax";
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem3.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(244, 22);
+            this.toolStripMenuItem3.Text = "System Reset";
+            // 
+            // rekapStokHarianToolStripMenuItem
+            // 
+            this.rekapStokHarianToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.rekapStokHarianToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.rekapStokHarianToolStripMenuItem.Name = "rekapStokHarianToolStripMenuItem";
+            this.rekapStokHarianToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.rekapStokHarianToolStripMenuItem.Text = "Rekap Stok Harian";
+            // 
+            // cetakBarcodeToolStripMenuItem
+            // 
+            this.cetakBarcodeToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.cetakBarcodeToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.cetakBarcodeToolStripMenuItem.Name = "cetakBarcodeToolStripMenuItem";
+            this.cetakBarcodeToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.cetakBarcodeToolStripMenuItem.Text = "Cetak Barcode";
+            // 
+            // cetakLabelToolStripMenuItem
+            // 
+            this.cetakLabelToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.cetakLabelToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.cetakLabelToolStripMenuItem.Name = "cetakLabelToolStripMenuItem";
+            this.cetakLabelToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.cetakLabelToolStripMenuItem.Text = "Cetak Label";
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator5.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(332, 6);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator8.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(304, 6);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator9.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(180, 6);
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator11.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(244, 6);
+            // 
+            // toolStripSeparator13
+            // 
+            this.toolStripSeparator13.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripSeparator13.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripSeparator13.Name = "toolStripSeparator13";
+            this.toolStripSeparator13.Size = new System.Drawing.Size(244, 6);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(187, 6);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(187, 6);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(187, 6);
+            // 
+            // accountJurnalToolStripMenuItem
+            // 
+            this.accountJurnalToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.accountJurnalToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.accountJurnalToolStripMenuItem.Name = "accountJurnalToolStripMenuItem";
+            this.accountJurnalToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.accountJurnalToolStripMenuItem.Text = "Account Jurnal";
+            // 
+            // stokTaggingToolStripMenuItem1
+            // 
+            this.stokTaggingToolStripMenuItem1.BackColor = System.Drawing.Color.SteelBlue;
+            this.stokTaggingToolStripMenuItem1.ForeColor = System.Drawing.Color.FloralWhite;
+            this.stokTaggingToolStripMenuItem1.Name = "stokTaggingToolStripMenuItem1";
+            this.stokTaggingToolStripMenuItem1.Size = new System.Drawing.Size(247, 22);
+            this.stokTaggingToolStripMenuItem1.Text = "Stok Tagging";
+            // 
+            // pecahBarangToolStripMenuItem
+            // 
+            this.pecahBarangToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.pecahBarangToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.pecahBarangToolStripMenuItem.Name = "pecahBarangToolStripMenuItem";
+            this.pecahBarangToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.pecahBarangToolStripMenuItem.Text = "Pecah Barang";
+            // 
+            // toolStripSeparator14
+            // 
+            this.toolStripSeparator14.Name = "toolStripSeparator14";
+            this.toolStripSeparator14.Size = new System.Drawing.Size(244, 6);
+            // 
+            // updateHrgJualToolStripMenuItem
+            // 
+            this.updateHrgJualToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.updateHrgJualToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.updateHrgJualToolStripMenuItem.Name = "updateHrgJualToolStripMenuItem";
+            this.updateHrgJualToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.updateHrgJualToolStripMenuItem.Text = "Update Harga Jual";
             // 
             // adminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(1445, 719);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "adminForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MODUL ADMINISTRATOR";
             this.TopMost = true;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.adminForm_FormClosed);
+            this.Load += new System.EventHandler(this.adminForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -1277,13 +1176,11 @@
         private System.Windows.Forms.ToolStripMenuItem dataPelangganToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dataSupplierToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dataSalesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem catatAccountToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pembelianToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem penjualanToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem administrasiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem laporanToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pilihPrinterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem infoFolderDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem passwordMaintenanceToolStripMenuItem;
@@ -1291,32 +1188,13 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setingHitungToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem catatPembelianToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editPembelianToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem hapusPembelianToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reprintBuktiPembelianToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pesaanBarangBarcodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem catatLabelRakToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem catatPenjualanToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editPenjualanToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem hapusPenjualanToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reprintNotaPenjualanToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem catatMutasiToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editMutasiToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem hapusMutasiToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem catatDeviasiNegativeStokToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem catatDeviasiPositiveStokToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pembayaranHutangKeSupplierToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pembayaranPiutangPelangganToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem catatReturPembelianToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem catatToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem hapusToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem catatReturPenjualanToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem catatToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem hapusToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem catatJURNALToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rekapStokHarianToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pembelianBarangToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem analisaUmurHutangToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hutangLewatJatuhTempoToolStripMenuItem;
@@ -1358,17 +1236,8 @@
         private System.Windows.Forms.ToolStripMenuItem warnaDesktopToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem temaDesktopToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lihatDataBarangToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem bukuPanduanToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
@@ -1381,29 +1250,39 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator24;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator25;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator26;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator27;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator28;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator29;
-        private System.Windows.Forms.ToolStripButton toolStripButton6;
-        private System.Windows.Forms.ToolStripButton toolStripButton7;
-        private System.Windows.Forms.ToolStripButton toolStripButton8;
-        private System.Windows.Forms.ToolStripButton toolStripButton9;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator30;
-        private System.Windows.Forms.ToolStripButton toolStripButton10;
-        private System.Windows.Forms.ToolStripButton toolStripButton11;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel timeStampStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripMenuItem dataUserToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stokToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem catatDeviasiNegativeStokToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem catatDeviasiPositiveStokToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pembayaranHutangKeSupplierToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem catatReturPembelianToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pembayaranPiutangPelangganToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem catatReturPenjualanToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem taxToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem rekapStokHarianToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cetakBarcodeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cetakLabelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem accountJurnalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stokTaggingToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem pecahBarangToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
+        private System.Windows.Forms.ToolStripMenuItem updateHrgJualToolStripMenuItem;
     }
 }
 
