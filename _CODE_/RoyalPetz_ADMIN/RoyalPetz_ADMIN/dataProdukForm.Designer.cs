@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tagProdukDataGridView = new System.Windows.Forms.DataGridView();
             this.kodeProduk = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.namaProduk = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,14 +44,14 @@
             this.tagProdukDataGridView.AllowUserToAddRows = false;
             this.tagProdukDataGridView.AllowUserToDeleteRows = false;
             this.tagProdukDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tagProdukDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tagProdukDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.tagProdukDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tagProdukDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.kodeProduk,
@@ -61,6 +61,7 @@
             this.tagProdukDataGridView.RowHeadersVisible = false;
             this.tagProdukDataGridView.Size = new System.Drawing.Size(669, 480);
             this.tagProdukDataGridView.TabIndex = 0;
+            this.tagProdukDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tagProdukDataGridView_CellContentClick);
             // 
             // kodeProduk
             // 
@@ -85,6 +86,7 @@
             this.displayButton.TabIndex = 4;
             this.displayButton.Text = "DISPLAY";
             this.displayButton.UseVisualStyleBackColor = true;
+            this.displayButton.Click += new System.EventHandler(this.displayButton_Click);
             // 
             // textBox1
             // 
@@ -93,6 +95,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(260, 27);
             this.textBox1.TabIndex = 6;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // newButton
             // 
@@ -115,6 +118,7 @@
             this.label1.Size = new System.Drawing.Size(127, 18);
             this.label1.TabIndex = 5;
             this.label1.Text = "Nama Produk";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // dataProdukForm
             // 

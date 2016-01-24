@@ -10,18 +10,18 @@ using System.Windows.Forms;
 
 namespace RoyalPetz_ADMIN
 {
-    public partial class tagProdukForm : Form
+    public partial class dataUserForm : Form
     {
-        public tagProdukForm()
+        public dataUserForm()
         {
             InitializeComponent();
         }
 
-        private void newButton_Click_1(object sender, EventArgs e)
+        private void newButton_Click(object sender, EventArgs e)
         {
             this.Hide();
 
-            tagProdukDetailForm displayForm = new tagProdukDetailForm();
+            dataUserDetailForm displayForm = new dataUserDetailForm();
             displayForm.ShowDialog();
 
             this.Show();

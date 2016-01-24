@@ -50,6 +50,66 @@
     <Compile Include="adminForm.Designer.cs">
       <DependentUpon>adminForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="dataGroupDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataGroupDetailForm.Designer.cs">
+      <DependentUpon>dataGroupDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dataGroupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataGroupForm.Designer.cs">
+      <DependentUpon>dataGroupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dataPelangganDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataPelangganDetailForm.Designer.cs">
+      <DependentUpon>dataPelangganDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dataPelangganForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataPelangganForm.Designer.cs">
+      <DependentUpon>dataPelangganForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dataSalesDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataSalesDetailForm.Designer.cs">
+      <DependentUpon>dataSalesDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dataSalesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataSalesForm.Designer.cs">
+      <DependentUpon>dataSalesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dataSupplierDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataSupplierDetailForm.Designer.cs">
+      <DependentUpon>dataSupplierDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dataSupplierForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataSupplierForm.Designer.cs">
+      <DependentUpon>dataSupplierForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dataUserDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataUserDetailForm.Designer.cs">
+      <DependentUpon>dataUserDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dataUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataUserForm.Designer.cs">
+      <DependentUpon>dataUserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="dataProdukDetailForm.cs">
@@ -78,6 +138,36 @@
     </Compile>
     <EmbeddedResource Include="adminForm.resx">
       <DependentUpon>adminForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataGroupDetailForm.resx">
+      <DependentUpon>dataGroupDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataGroupForm.resx">
+      <DependentUpon>dataGroupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataPelangganDetailForm.resx">
+      <DependentUpon>dataPelangganDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataPelangganForm.resx">
+      <DependentUpon>dataPelangganForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataSalesDetailForm.resx">
+      <DependentUpon>dataSalesDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataSalesForm.resx">
+      <DependentUpon>dataSalesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataSupplierDetailForm.resx">
+      <DependentUpon>dataSupplierDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataSupplierForm.resx">
+      <DependentUpon>dataSupplierForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataUserDetailForm.resx">
+      <DependentUpon>dataUserDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataUserForm.resx">
+      <DependentUpon>dataUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

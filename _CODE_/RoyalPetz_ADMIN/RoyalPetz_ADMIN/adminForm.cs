@@ -74,5 +74,55 @@ namespace RoyalPetz_ADMIN
 
             this.Show();
         }
+
+        private void dataPelangganToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            dataPelangganForm displayedForm = new dataPelangganForm();
+            displayedForm.ShowDialog();
+
+            this.Show();
+        }
+
+        private void dataSupplierToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            dataSupplierForm displayedForm = new dataSupplierForm();
+            displayedForm.ShowDialog();
+
+            this.Show();
+        }
+
+        private void dataSalesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            dataSalesForm displayedForm = new dataSalesForm();
+            displayedForm.ShowDialog();
+
+            this.Show();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            dataGroupForm displayedForm = new dataGroupForm();
+            displayedForm.ShowDialog();
+
+            this.Show();
+        }
+
+        private void dataUserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            dataUserForm displayedForm = new dataUserForm();
+            displayedForm.ShowDialog();
+
+            this.Show();
+        }
     }
 }
