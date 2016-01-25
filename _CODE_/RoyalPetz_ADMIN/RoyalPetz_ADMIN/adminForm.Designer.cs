@@ -40,6 +40,7 @@
             this.dataSalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.dataUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stokToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stokTaggingToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pecahBarangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -144,7 +145,6 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.timeStampStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.dataGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -257,6 +257,15 @@
             this.dataUserToolStripMenuItem.Text = "Data User";
             this.dataUserToolStripMenuItem.Click += new System.EventHandler(this.dataUserToolStripMenuItem_Click);
             // 
+            // dataGroupToolStripMenuItem
+            // 
+            this.dataGroupToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.dataGroupToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.dataGroupToolStripMenuItem.Name = "dataGroupToolStripMenuItem";
+            this.dataGroupToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.dataGroupToolStripMenuItem.Text = "Data Group";
+            this.dataGroupToolStripMenuItem.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
             // stokToolStripMenuItem
             // 
             this.stokToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
@@ -293,6 +302,7 @@
             this.pecahBarangToolStripMenuItem.Name = "pecahBarangToolStripMenuItem";
             this.pecahBarangToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
             this.pecahBarangToolStripMenuItem.Text = "Pecah Barang";
+            this.pecahBarangToolStripMenuItem.Click += new System.EventHandler(this.pecahBarangToolStripMenuItem_Click);
             // 
             // updateHrgJualToolStripMenuItem
             // 
@@ -1143,15 +1153,6 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // dataGroupToolStripMenuItem
-            // 
-            this.dataGroupToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
-            this.dataGroupToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
-            this.dataGroupToolStripMenuItem.Name = "dataGroupToolStripMenuItem";
-            this.dataGroupToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.dataGroupToolStripMenuItem.Text = "Data Group";
-            this.dataGroupToolStripMenuItem.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // adminForm
             // 

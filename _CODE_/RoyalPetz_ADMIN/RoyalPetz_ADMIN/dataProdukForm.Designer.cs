@@ -61,7 +61,8 @@
             this.tagProdukDataGridView.RowHeadersVisible = false;
             this.tagProdukDataGridView.Size = new System.Drawing.Size(669, 480);
             this.tagProdukDataGridView.TabIndex = 0;
-            this.tagProdukDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tagProdukDataGridView_CellContentClick);
+            this.tagProdukDataGridView.DoubleClick += new System.EventHandler(this.tagProdukDataGridView_DoubleClick);
+            this.tagProdukDataGridView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tagProdukDataGridView_KeyPress);
             // 
             // kodeProduk
             // 
@@ -118,7 +119,6 @@
             this.label1.Size = new System.Drawing.Size(127, 18);
             this.label1.TabIndex = 5;
             this.label1.Text = "Nama Produk";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // dataProdukForm
             // 

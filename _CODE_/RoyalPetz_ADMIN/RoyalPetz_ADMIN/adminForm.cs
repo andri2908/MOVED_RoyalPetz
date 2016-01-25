@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Globalization;
 
+
 namespace RoyalPetz_ADMIN
 {
     public partial class adminForm : Form
@@ -120,6 +121,16 @@ namespace RoyalPetz_ADMIN
             this.Hide();
 
             dataUserForm displayedForm = new dataUserForm();
+            displayedForm.ShowDialog();
+
+            this.Show();
+        }
+
+        private void pecahBarangToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            dataProdukForm displayedForm = new dataProdukForm(globalConstants.STOK_PECAH_BARANG); // display dataProdukForm for browsing purpose only
             displayedForm.ShowDialog();
 
             this.Show();
