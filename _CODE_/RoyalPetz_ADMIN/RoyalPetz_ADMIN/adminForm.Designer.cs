@@ -96,7 +96,10 @@
             this.toolStripMenuItem41 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem42 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem34 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem40 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem35 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem44 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem45 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem29 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem39 = new System.Windows.Forms.ToolStripMenuItem();
@@ -134,9 +137,6 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.timeStampStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.toolStripMenuItem40 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem44 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem45 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -156,7 +156,7 @@
             this.viewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1445, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1354, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -181,6 +181,7 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(174, 20);
             this.fileToolStripMenuItem.Text = "Management System";
+            this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
             // infoFolderDatabaseToolStripMenuItem
             // 
@@ -732,6 +733,14 @@
             this.toolStripMenuItem34.Size = new System.Drawing.Size(155, 22);
             this.toolStripMenuItem34.Text = "By Product";
             // 
+            // toolStripMenuItem40
+            // 
+            this.toolStripMenuItem40.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem40.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem40.Name = "toolStripMenuItem40";
+            this.toolStripMenuItem40.Size = new System.Drawing.Size(155, 22);
+            this.toolStripMenuItem40.Text = "By Tags";
+            // 
             // toolStripMenuItem35
             // 
             this.toolStripMenuItem35.BackColor = System.Drawing.Color.SteelBlue;
@@ -742,6 +751,22 @@
             this.toolStripMenuItem35.Name = "toolStripMenuItem35";
             this.toolStripMenuItem35.Size = new System.Drawing.Size(301, 22);
             this.toolStripMenuItem35.Text = "Sales By Customer";
+            // 
+            // toolStripMenuItem44
+            // 
+            this.toolStripMenuItem44.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem44.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem44.Name = "toolStripMenuItem44";
+            this.toolStripMenuItem44.Size = new System.Drawing.Size(146, 22);
+            this.toolStripMenuItem44.Text = "Summary";
+            // 
+            // toolStripMenuItem45
+            // 
+            this.toolStripMenuItem45.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem45.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem45.Name = "toolStripMenuItem45";
+            this.toolStripMenuItem45.Size = new System.Drawing.Size(146, 22);
+            this.toolStripMenuItem45.Text = "Detailed";
             // 
             // toolStripSeparator16
             // 
@@ -1043,14 +1068,14 @@
             this.timeStampStatusLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 697);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1445, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1354, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1186, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1095, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // timeStampStatusLabel
@@ -1067,36 +1092,12 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // toolStripMenuItem40
-            // 
-            this.toolStripMenuItem40.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem40.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripMenuItem40.Name = "toolStripMenuItem40";
-            this.toolStripMenuItem40.Size = new System.Drawing.Size(155, 22);
-            this.toolStripMenuItem40.Text = "By Tags";
-            // 
-            // toolStripMenuItem44
-            // 
-            this.toolStripMenuItem44.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem44.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripMenuItem44.Name = "toolStripMenuItem44";
-            this.toolStripMenuItem44.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem44.Text = "Summary";
-            // 
-            // toolStripMenuItem45
-            // 
-            this.toolStripMenuItem45.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem45.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripMenuItem45.Name = "toolStripMenuItem45";
-            this.toolStripMenuItem45.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem45.Text = "Detailed";
-            // 
             // adminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(1445, 719);
+            this.ClientSize = new System.Drawing.Size(1354, 719);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
