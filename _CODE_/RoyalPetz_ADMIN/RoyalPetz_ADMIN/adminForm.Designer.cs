@@ -1075,7 +1075,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1095, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1064, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // timeStampStatusLabel
