@@ -50,6 +50,12 @@
     <Compile Include="adminForm.Designer.cs">
       <DependentUpon>adminForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="backupRestoreDatabaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="backupRestoreDatabaseForm.Designer.cs">
+      <DependentUpon>backupRestoreDatabaseForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="dataGroupDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +125,12 @@
     <Compile Include="dataProdukDetailForm.Designer.cs">
       <DependentUpon>dataProdukDetailForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="setDatabaseLocationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="setDatabaseLocationForm.Designer.cs">
+      <DependentUpon>setDatabaseLocationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="stokPecahBarangForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +157,9 @@
     </Compile>
     <EmbeddedResource Include="adminForm.resx">
       <DependentUpon>adminForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="backupRestoreDatabaseForm.resx">
+      <DependentUpon>backupRestoreDatabaseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dataGroupDetailForm.resx">
       <DependentUpon>dataGroupDetailForm.cs</DependentUpon>
@@ -187,6 +202,9 @@
     </Compile>
     <EmbeddedResource Include="dataProdukDetailForm.resx">
       <DependentUpon>dataProdukDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="setDatabaseLocationForm.resx">
+      <DependentUpon>setDatabaseLocationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="stokPecahBarangForm.resx">
       <DependentUpon>stokPecahBarangForm.cs</DependentUpon>

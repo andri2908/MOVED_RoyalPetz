@@ -46,3 +46,5 @@ C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN
 C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataProdukForm.resources
 C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.tagProdukForm.resources
 C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.csproj.GenerateResource.Cache
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.backupRestoreDatabaseForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.setDatabaseLocationForm.resources

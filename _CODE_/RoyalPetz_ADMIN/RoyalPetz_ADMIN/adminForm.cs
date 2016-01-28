@@ -32,7 +32,7 @@ namespace RoyalPetz_ADMIN
         private void updateLabel()
         {
             localDate = DateTime.Now;
-            timeStampStatusLabel.Text = String.Format(culture, "{0:dddd, dd-MM-yyyy - HH:mm:ss}", localDate);
+            timeStampStatusLabel.Text = String.Format(culture, "{0:dddd, dd-MM-yyyy - HH:mm}", localDate);
         }
 
         private void adminForm_Load(object sender, EventArgs e)
@@ -139,6 +139,85 @@ namespace RoyalPetz_ADMIN
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void stokTaggingToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuItem53_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void infoFolderDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            setDatabaseLocationForm displayedForm = new setDatabaseLocationForm(); 
+            displayedForm.ShowDialog();
+
+            this.Show();
+        }
+
+        private void backupRestoreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            backupRestoreDatabaseForm displayedForm = new backupRestoreDatabaseForm();
+            displayedForm.ShowDialog();
+
+            this.Show();
+        }
+
+        private void toolStripMenuItem15_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            dataUserForm displayedForm = new dataUserForm();
+            displayedForm.ShowDialog();
+
+            this.Show();
+        }
+
+        private void toolStripMenuItem47_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            dataGroupForm displayedForm = new dataGroupForm();
+            displayedForm.ShowDialog();
+
+            this.Show();
+        }
+
+        private void pilihPrinterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var cplPath = System.IO.Path.Combine(Environment.SystemDirectory, "control.exe");
+            System.Diagnostics.Process.Start(cplPath, "/name Microsoft.DevicesAndPrinters");
+        }
+
+        private void toolStripMenuItem32_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            string fileName = "";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    fileName = openFileDialog1.FileName;
+                    this.BackgroundImageLayout = ImageLayout.Stretch;
+                    this.BackgroundImage = Image.FromFile(fileName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                }
+            }
         }
     }
 }
