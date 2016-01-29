@@ -16,5 +16,25 @@ namespace RoyalPetz_ADMIN
         {
             InitializeComponent();
         }
+
+        private void newProduk_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            dataProdukDetailForm displayForm = new dataProdukDetailForm();
+            displayForm.ShowDialog();
+
+            this.Show();
+        }
+
+        private void browseProdukButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            dataProdukForm displayForm = new dataProdukForm(globalConstants.STOK_PECAH_BARANG);
+            displayForm.Show();
+
+            this.Show();
+        }
     }
 }

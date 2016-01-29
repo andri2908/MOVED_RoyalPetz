@@ -55,7 +55,7 @@ namespace RoyalPetz_ADMIN
 
             switch (originModuleID)
             { 
-                case 2: // PENGATURAN GROUP AKSES
+                case globalConstants.PENGATURAN_GRUP_AKSES: 
                     groupAccessModuleForm groupAccessForm = new groupAccessModuleForm();
                     groupAccessForm.ShowDialog();
                     break;

@@ -521,6 +521,7 @@
             this.toolStripMenuItem65.ShowShortcutKeys = false;
             this.toolStripMenuItem65.Size = new System.Drawing.Size(235, 22);
             this.toolStripMenuItem65.Text = "Request Order";
+            this.toolStripMenuItem65.Click += new System.EventHandler(this.toolStripMenuItem65_Click);
             // 
             // toolStripMenuItem66
             // 

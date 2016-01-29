@@ -30,7 +30,7 @@ namespace RoyalPetz_ADMIN
             {
                 this.Text = "DATA GROUP PELANGGAN";
             }
-            else if (originModuleID == globalConstants.TAMBAH_HAPUS_GROUP_USER)
+            else if ((originModuleID == globalConstants.TAMBAH_HAPUS_GROUP_USER) || (originModuleID == globalConstants.PENGATURAN_GRUP_AKSES))
             {
                 this.Text = "DATA GROUP USER";
             }

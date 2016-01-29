@@ -177,6 +177,12 @@
     <Compile Include="penyesuaianStokForm.Designer.cs">
       <DependentUpon>penyesuaianStokForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="permintaanProdukForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="permintaanProdukForm.Designer.cs">
+      <DependentUpon>permintaanProdukForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="dataProdukDetailForm.cs">
@@ -286,6 +292,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="penyesuaianStokForm.resx">
       <DependentUpon>penyesuaianStokForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="permintaanProdukForm.resx">
+      <DependentUpon>permintaanProdukForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

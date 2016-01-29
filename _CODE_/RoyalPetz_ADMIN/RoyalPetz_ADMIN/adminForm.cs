@@ -126,16 +126,6 @@ namespace RoyalPetz_ADMIN
             this.Show();
         }
 
-        private void pecahBarangToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-
-            dataProdukForm displayedForm = new dataProdukForm(globalConstants.STOK_PECAH_BARANG); // display dataProdukForm for browsing purpose only
-            displayedForm.ShowDialog();
-
-            this.Show();
-        }
-
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -148,7 +138,12 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripMenuItem53_Click(object sender, EventArgs e)
         {
+            this.Hide();
 
+            dataProdukForm displayedForm = new dataProdukForm(globalConstants.STOK_PECAH_BARANG); // display dataProdukForm for browsing purpose only
+            displayedForm.ShowDialog();
+
+            this.Show();
         }
 
         private void infoFolderDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
@@ -384,6 +379,16 @@ namespace RoyalPetz_ADMIN
             this.Hide();
 
             dataProdukForm displayedForm = new dataProdukForm(globalConstants.PENYESUAIAN_STOK);
+            displayedForm.ShowDialog();
+
+            this.Show();
+        }
+
+        private void toolStripMenuItem65_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            permintaanProdukForm displayedForm = new permintaanProdukForm();
             displayedForm.ShowDialog();
 
             this.Show();

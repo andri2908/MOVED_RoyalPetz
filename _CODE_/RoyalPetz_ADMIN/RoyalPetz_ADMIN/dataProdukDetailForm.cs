@@ -12,9 +12,19 @@ namespace RoyalPetz_ADMIN
 {
     public partial class dataProdukDetailForm : Form
     {
+        private int originModuleID = 0;
+        
         public dataProdukDetailForm()
         {
             InitializeComponent();
         }
+
+        public dataProdukDetailForm(int moduleID)
+        {
+            InitializeComponent();
+
+            originModuleID = moduleID;
+        }
+
     }
 }
