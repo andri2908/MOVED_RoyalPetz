@@ -31,18 +31,18 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(backupRestoreDatabaseForm));
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.backupButton = new System.Windows.Forms.Button();
             this.fileNameTextbox = new System.Windows.Forms.TextBox();
             this.searchButton = new System.Windows.Forms.Button();
             this.restoreButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.backupButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -60,17 +60,6 @@
             this.tabControl1.Size = new System.Drawing.Size(571, 207);
             this.tabControl1.TabIndex = 22;
             // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.backupButton);
-            this.tabPage1.Location = new System.Drawing.Point(4, 27);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(563, 176);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "BACKUP DATABASE";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.fileNameTextbox);
@@ -84,18 +73,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "RESTORE DATABASE";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // backupButton
-            // 
-            this.backupButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.backupButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.backupButton.Location = new System.Drawing.Point(166, 52);
-            this.backupButton.Name = "backupButton";
-            this.backupButton.Size = new System.Drawing.Size(208, 37);
-            this.backupButton.TabIndex = 21;
-            this.backupButton.Text = "BACKUP DATABASE";
-            this.backupButton.UseVisualStyleBackColor = true;
-            this.backupButton.Click += new System.EventHandler(this.backupButton_Click);
             // 
             // fileNameTextbox
             // 
@@ -129,6 +106,7 @@
             this.restoreButton.TabIndex = 31;
             this.restoreButton.Text = "RESTORE DATABASE";
             this.restoreButton.UseVisualStyleBackColor = true;
+            this.restoreButton.Click += new System.EventHandler(this.restoreButton_Click);
             // 
             // label2
             // 
@@ -141,6 +119,29 @@
             this.label2.Size = new System.Drawing.Size(127, 18);
             this.label2.TabIndex = 30;
             this.label2.Text = "File Location :";
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.backupButton);
+            this.tabPage1.Location = new System.Drawing.Point(4, 27);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(563, 176);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "BACKUP DATABASE";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // backupButton
+            // 
+            this.backupButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.backupButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.backupButton.Location = new System.Drawing.Point(166, 52);
+            this.backupButton.Name = "backupButton";
+            this.backupButton.Size = new System.Drawing.Size(208, 37);
+            this.backupButton.TabIndex = 21;
+            this.backupButton.Text = "BACKUP DATABASE";
+            this.backupButton.UseVisualStyleBackColor = true;
+            this.backupButton.Click += new System.EventHandler(this.backupButton_Click);
             // 
             // panel1
             // 
@@ -160,12 +161,13 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl1);
             this.Name = "backupRestoreDatabaseForm";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Backup / Restore Database";
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

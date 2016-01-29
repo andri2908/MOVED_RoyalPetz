@@ -42,8 +42,6 @@
             this.toolStripMenuItem16 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem48 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem55 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem58 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem59 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem49 = new System.Windows.Forms.ToolStripMenuItem();
             this.pilihPrinterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
@@ -125,7 +123,7 @@
             this.toolStripMenuItem74});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1354, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1284, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -232,6 +230,7 @@
             this.toolStripMenuItem16.Name = "toolStripMenuItem16";
             this.toolStripMenuItem16.Size = new System.Drawing.Size(280, 22);
             this.toolStripMenuItem16.Text = "Pengaturan Alamat IP Pusat";
+            this.toolStripMenuItem16.Click += new System.EventHandler(this.toolStripMenuItem16_Click);
             // 
             // toolStripMenuItem48
             // 
@@ -240,33 +239,16 @@
             this.toolStripMenuItem48.Name = "toolStripMenuItem48";
             this.toolStripMenuItem48.Size = new System.Drawing.Size(280, 22);
             this.toolStripMenuItem48.Text = "Tambah / Hapus Cabang";
+            this.toolStripMenuItem48.Click += new System.EventHandler(this.toolStripMenuItem48_Click);
             // 
             // toolStripMenuItem55
             // 
             this.toolStripMenuItem55.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem55.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem58,
-            this.toolStripMenuItem59});
             this.toolStripMenuItem55.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripMenuItem55.Name = "toolStripMenuItem55";
             this.toolStripMenuItem55.Size = new System.Drawing.Size(237, 22);
             this.toolStripMenuItem55.Text = "Sinkronisasi Informasi";
-            // 
-            // toolStripMenuItem58
-            // 
-            this.toolStripMenuItem58.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem58.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripMenuItem58.Name = "toolStripMenuItem58";
-            this.toolStripMenuItem58.Size = new System.Drawing.Size(255, 22);
-            this.toolStripMenuItem58.Text = "Import Data Sinkronisasi";
-            // 
-            // toolStripMenuItem59
-            // 
-            this.toolStripMenuItem59.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem59.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripMenuItem59.Name = "toolStripMenuItem59";
-            this.toolStripMenuItem59.Size = new System.Drawing.Size(255, 22);
-            this.toolStripMenuItem59.Text = "Export Data Sinkronisasi";
+            this.toolStripMenuItem55.Click += new System.EventHandler(this.toolStripMenuItem55_Click);
             // 
             // toolStripMenuItem49
             // 
@@ -334,6 +316,7 @@
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             this.toolStripMenuItem4.Size = new System.Drawing.Size(279, 22);
             this.toolStripMenuItem4.Text = "Tambah / Hapus Produk";
+            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
             // toolStripMenuItem10
             // 
@@ -341,7 +324,8 @@
             this.toolStripMenuItem10.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripMenuItem10.Name = "toolStripMenuItem10";
             this.toolStripMenuItem10.Size = new System.Drawing.Size(279, 22);
-            this.toolStripMenuItem10.Text = "Pengaturan Harga Jual";
+            this.toolStripMenuItem10.Text = "Pengaturan Harga";
+            this.toolStripMenuItem10.Click += new System.EventHandler(this.toolStripMenuItem10_Click);
             // 
             // toolStripMenuItem51
             // 
@@ -350,6 +334,7 @@
             this.toolStripMenuItem51.Name = "toolStripMenuItem51";
             this.toolStripMenuItem51.Size = new System.Drawing.Size(279, 22);
             this.toolStripMenuItem51.Text = "Pengaturan Limit Stok";
+            this.toolStripMenuItem51.Click += new System.EventHandler(this.toolStripMenuItem51_Click);
             // 
             // toolStripMenuItem52
             // 
@@ -375,6 +360,7 @@
             this.toolStripMenuItem54.Name = "toolStripMenuItem54";
             this.toolStripMenuItem54.Size = new System.Drawing.Size(279, 22);
             this.toolStripMenuItem54.Text = "Pengaturan Nomor Rak";
+            this.toolStripMenuItem54.Click += new System.EventHandler(this.toolStripMenuItem54_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -393,6 +379,7 @@
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
             this.toolStripMenuItem5.Size = new System.Drawing.Size(262, 22);
             this.toolStripMenuItem5.Text = "Tambah / Hapus Kategori";
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
             // toolStripMenuItem56
             // 
@@ -412,6 +399,7 @@
             this.toolStripMenuItem57.Name = "toolStripMenuItem57";
             this.toolStripMenuItem57.Size = new System.Drawing.Size(282, 22);
             this.toolStripMenuItem57.Text = "Tambah / Hapus Satuan";
+            this.toolStripMenuItem57.Click += new System.EventHandler(this.toolStripMenuItem57_Click);
             // 
             // toolStripMenuItem60
             // 
@@ -420,6 +408,7 @@
             this.toolStripMenuItem60.Name = "toolStripMenuItem60";
             this.toolStripMenuItem60.Size = new System.Drawing.Size(282, 22);
             this.toolStripMenuItem60.Text = "Pengaturan Konversi Satuan";
+            this.toolStripMenuItem60.Click += new System.EventHandler(this.toolStripMenuItem60_Click);
             // 
             // toolStripMenuItem6
             // 
@@ -439,6 +428,7 @@
             this.toolStripMenuItem61.Name = "toolStripMenuItem61";
             this.toolStripMenuItem61.Size = new System.Drawing.Size(205, 22);
             this.toolStripMenuItem61.Text = "Export Data";
+            this.toolStripMenuItem61.Click += new System.EventHandler(this.toolStripMenuItem61_Click);
             // 
             // toolStripMenuItem62
             // 
@@ -447,6 +437,7 @@
             this.toolStripMenuItem62.Name = "toolStripMenuItem62";
             this.toolStripMenuItem62.Size = new System.Drawing.Size(205, 22);
             this.toolStripMenuItem62.Text = "Penyesuaian Stok";
+            this.toolStripMenuItem62.Click += new System.EventHandler(this.toolStripMenuItem62_Click);
             // 
             // toolStripMenuItem8
             // 
@@ -507,6 +498,7 @@
             this.toolStripMenuItem9.ShowShortcutKeys = false;
             this.toolStripMenuItem9.Size = new System.Drawing.Size(252, 22);
             this.toolStripMenuItem9.Text = "Tambah / Hapus Supplier";
+            this.toolStripMenuItem9.Click += new System.EventHandler(this.toolStripMenuItem9_Click);
             // 
             // catatPembelianToolStripMenuItem
             // 
@@ -589,6 +581,7 @@
             this.toolStripMenuItem11.Name = "toolStripMenuItem11";
             this.toolStripMenuItem11.Size = new System.Drawing.Size(315, 22);
             this.toolStripMenuItem11.Text = "Tambah / Hapus Grup Pelanggan";
+            this.toolStripMenuItem11.Click += new System.EventHandler(this.toolStripMenuItem11_Click);
             // 
             // toolStripMenuItem12
             // 
@@ -597,6 +590,7 @@
             this.toolStripMenuItem12.Name = "toolStripMenuItem12";
             this.toolStripMenuItem12.Size = new System.Drawing.Size(315, 22);
             this.toolStripMenuItem12.Text = "Pengaturan Potongan Harga";
+            this.toolStripMenuItem12.Click += new System.EventHandler(this.toolStripMenuItem12_Click);
             // 
             // toolStripMenuItem14
             // 
@@ -605,6 +599,7 @@
             this.toolStripMenuItem14.Name = "toolStripMenuItem14";
             this.toolStripMenuItem14.Size = new System.Drawing.Size(315, 22);
             this.toolStripMenuItem14.Text = "Tambah / Hapus Pelanggan";
+            this.toolStripMenuItem14.Click += new System.EventHandler(this.toolStripMenuItem14_Click);
             // 
             // toolStripMenuItem20
             // 
@@ -842,14 +837,14 @@
             this.timeStampStatusLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 697);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1354, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1284, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1095, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1025, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // timeStampStatusLabel
@@ -875,7 +870,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(1354, 719);
+            this.ClientSize = new System.Drawing.Size(1284, 719);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -937,11 +932,8 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem51;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem52;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem53;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem54;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem55;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem58;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem59;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem56;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem57;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem60;
@@ -979,6 +971,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem31;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem32;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem54;
     }
 }
 

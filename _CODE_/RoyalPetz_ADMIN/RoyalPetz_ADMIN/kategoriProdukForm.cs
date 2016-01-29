@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace RoyalPetz_ADMIN
 {
-    public partial class tagProdukForm : Form
+    public partial class kategoriProdukForm : Form
     {
-        public tagProdukForm()
+        public kategoriProdukForm()
         {
             InitializeComponent();
         }
@@ -21,7 +21,7 @@ namespace RoyalPetz_ADMIN
         {
             this.Hide();
 
-            tagProdukDetailForm displayForm = new tagProdukDetailForm();
+            kategoriProdukDetailForm displayForm = new kategoriProdukDetailForm();
             displayForm.ShowDialog();
 
             this.Show();

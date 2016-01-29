@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace RoyalPetz_ADMIN
 {
-    public partial class tagProdukDetailForm : Form
+    public partial class IPPusatForm : Form
     {
-        public tagProdukDetailForm()
+        public IPPusatForm()
         {
             InitializeComponent();
+        }
+
+        private void IPPusatForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

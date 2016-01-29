@@ -1,6 +1,6 @@
 ﻿namespace RoyalPetz_ADMIN
 {
-    partial class tagProdukForm
+    partial class kategoriProdukForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,14 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tagProdukDataGridView = new System.Windows.Forms.DataGridView();
-            this.kodeProduk = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tagProduk = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.counter = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.displayButton = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.newButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.kodeKategori = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.namaKategori = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.counter = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.tagProdukDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,8 +56,8 @@
             this.tagProdukDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.tagProdukDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tagProdukDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.kodeProduk,
-            this.tagProduk,
+            this.kodeKategori,
+            this.namaKategori,
             this.counter,
             this.description});
             this.tagProdukDataGridView.Location = new System.Drawing.Point(0, 68);
@@ -65,33 +65,6 @@
             this.tagProdukDataGridView.RowHeadersVisible = false;
             this.tagProdukDataGridView.Size = new System.Drawing.Size(669, 480);
             this.tagProdukDataGridView.TabIndex = 0;
-            // 
-            // kodeProduk
-            // 
-            this.kodeProduk.HeaderText = "KODE PRODUK";
-            this.kodeProduk.Name = "kodeProduk";
-            this.kodeProduk.ReadOnly = true;
-            this.kodeProduk.Width = 180;
-            // 
-            // tagProduk
-            // 
-            this.tagProduk.HeaderText = "TAG PRODUK";
-            this.tagProduk.Name = "tagProduk";
-            this.tagProduk.ReadOnly = true;
-            this.tagProduk.Width = 180;
-            // 
-            // counter
-            // 
-            this.counter.HeaderText = "COUNTER";
-            this.counter.Name = "counter";
-            this.counter.ReadOnly = true;
-            // 
-            // description
-            // 
-            this.description.HeaderText = "DESKRIPSI";
-            this.description.Name = "description";
-            this.description.ReadOnly = true;
-            this.description.Width = 200;
             // 
             // displayButton
             // 
@@ -129,9 +102,36 @@
             this.label1.ForeColor = System.Drawing.Color.FloralWhite;
             this.label1.Location = new System.Drawing.Point(7, 30);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 18);
+            this.label1.Size = new System.Drawing.Size(103, 18);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Tag Produk";
+            this.label1.Text = "KATEGORI";
+            // 
+            // kodeKategori
+            // 
+            this.kodeKategori.HeaderText = "KODE KATEGORI";
+            this.kodeKategori.Name = "kodeKategori";
+            this.kodeKategori.ReadOnly = true;
+            this.kodeKategori.Width = 180;
+            // 
+            // namaKategori
+            // 
+            this.namaKategori.HeaderText = "NAMA KATEGORI";
+            this.namaKategori.Name = "namaKategori";
+            this.namaKategori.ReadOnly = true;
+            this.namaKategori.Width = 180;
+            // 
+            // counter
+            // 
+            this.counter.HeaderText = "COUNTER";
+            this.counter.Name = "counter";
+            this.counter.ReadOnly = true;
+            // 
+            // description
+            // 
+            this.description.HeaderText = "DESKRIPSI";
+            this.description.Name = "description";
+            this.description.ReadOnly = true;
+            this.description.Width = 200;
             // 
             // tagProdukForm
             // 
@@ -149,7 +149,7 @@
             this.Name = "tagProdukForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TAG PRODUK";
+            this.Text = "KATEGORI PRODUK";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.tagProdukDataGridView)).EndInit();
             this.ResumeLayout(false);
@@ -163,10 +163,10 @@
         private System.Windows.Forms.Button displayButton;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button newButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kodeProduk;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tagProduk;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kodeKategori;
+        private System.Windows.Forms.DataGridViewTextBoxColumn namaKategori;
         private System.Windows.Forms.DataGridViewTextBoxColumn counter;
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
-        private System.Windows.Forms.Label label1;
     }
 }

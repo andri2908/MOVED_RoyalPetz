@@ -56,6 +56,18 @@
     <Compile Include="backupRestoreDatabaseForm.Designer.cs">
       <DependentUpon>backupRestoreDatabaseForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="dataCabangDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataCabangDetailForm.Designer.cs">
+      <DependentUpon>dataCabangDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dataCabangForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataCabangForm.Designer.cs">
+      <DependentUpon>dataCabangForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="dataGroupDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +104,18 @@
     <Compile Include="dataSalesForm.Designer.cs">
       <DependentUpon>dataSalesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="dataSatuanDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataSatuanDetailForm.Designer.cs">
+      <DependentUpon>dataSatuanDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dataSatuanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataSatuanForm.Designer.cs">
+      <DependentUpon>dataSatuanForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="dataSupplierDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,7 +140,43 @@
     <Compile Include="dataUserForm.Designer.cs">
       <DependentUpon>dataUserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="exportStockOpnameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="exportStockOpnameForm.Designer.cs">
+      <DependentUpon>exportStockOpnameForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="globalConstants.cs" />
+    <Compile Include="groupAccessModuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="groupAccessModuleForm.Designer.cs">
+      <DependentUpon>groupAccessModuleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IPPusatForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IPPusatForm.Designer.cs">
+      <DependentUpon>IPPusatForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="konversiSatuanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="konversiSatuanForm.Designer.cs">
+      <DependentUpon>konversiSatuanForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pengaturanProdukForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pengaturanProdukForm.Designer.cs">
+      <DependentUpon>pengaturanProdukForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="penyesuaianStokForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="penyesuaianStokForm.Designer.cs">
+      <DependentUpon>penyesuaianStokForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="dataProdukDetailForm.cs">
@@ -131,17 +191,23 @@
     <Compile Include="setDatabaseLocationForm.Designer.cs">
       <DependentUpon>setDatabaseLocationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="sinkronisasiInformasiForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sinkronisasiInformasiForm.Designer.cs">
+      <DependentUpon>sinkronisasiInformasiForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="stokPecahBarangForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="stokPecahBarangForm.Designer.cs">
       <DependentUpon>stokPecahBarangForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="tagProdukDetailForm.cs">
+    <Compile Include="kategoriProdukDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="tagProdukDetailForm.Designer.cs">
-      <DependentUpon>tagProdukDetailForm.cs</DependentUpon>
+    <Compile Include="kategoriProdukDetailForm.Designer.cs">
+      <DependentUpon>kategoriProdukDetailForm.cs</DependentUpon>
     </Compile>
     <Compile Include="dataProdukForm.cs">
       <SubType>Form</SubType>
@@ -149,17 +215,23 @@
     <Compile Include="dataProdukForm.Designer.cs">
       <DependentUpon>dataProdukForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="tagProdukForm.cs">
+    <Compile Include="kategoriProdukForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="tagProdukForm.Designer.cs">
-      <DependentUpon>tagProdukForm.cs</DependentUpon>
+    <Compile Include="kategoriProdukForm.Designer.cs">
+      <DependentUpon>kategoriProdukForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="adminForm.resx">
       <DependentUpon>adminForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="backupRestoreDatabaseForm.resx">
       <DependentUpon>backupRestoreDatabaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataCabangDetailForm.resx">
+      <DependentUpon>dataCabangDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataCabangForm.resx">
+      <DependentUpon>dataCabangForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dataGroupDetailForm.resx">
       <DependentUpon>dataGroupDetailForm.cs</DependentUpon>
@@ -179,6 +251,12 @@
     <EmbeddedResource Include="dataSalesForm.resx">
       <DependentUpon>dataSalesForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dataSatuanDetailForm.resx">
+      <DependentUpon>dataSatuanDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataSatuanForm.resx">
+      <DependentUpon>dataSatuanForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dataSupplierDetailForm.resx">
       <DependentUpon>dataSupplierDetailForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -190,6 +268,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dataUserForm.resx">
       <DependentUpon>dataUserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="exportStockOpnameForm.resx">
+      <DependentUpon>exportStockOpnameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="groupAccessModuleForm.resx">
+      <DependentUpon>groupAccessModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IPPusatForm.resx">
+      <DependentUpon>IPPusatForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="konversiSatuanForm.resx">
+      <DependentUpon>konversiSatuanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pengaturanProdukForm.resx">
+      <DependentUpon>pengaturanProdukForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="penyesuaianStokForm.resx">
+      <DependentUpon>penyesuaianStokForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -206,17 +302,20 @@
     <EmbeddedResource Include="setDatabaseLocationForm.resx">
       <DependentUpon>setDatabaseLocationForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sinkronisasiInformasiForm.resx">
+      <DependentUpon>sinkronisasiInformasiForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="stokPecahBarangForm.resx">
       <DependentUpon>stokPecahBarangForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="tagProdukDetailForm.resx">
-      <DependentUpon>tagProdukDetailForm.cs</DependentUpon>
+    <EmbeddedResource Include="kategoriProdukDetailForm.resx">
+      <DependentUpon>kategoriProdukDetailForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dataProdukForm.resx">
       <DependentUpon>dataProdukForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="tagProdukForm.resx">
-      <DependentUpon>tagProdukForm.cs</DependentUpon>
+    <EmbeddedResource Include="kategoriProdukForm.resx">
+      <DependentUpon>kategoriProdukForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

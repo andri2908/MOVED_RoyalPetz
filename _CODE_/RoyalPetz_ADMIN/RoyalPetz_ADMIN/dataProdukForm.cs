@@ -12,18 +12,18 @@ namespace RoyalPetz_ADMIN
 {
     public partial class dataProdukForm : Form
     {
-        private int moduleID = 0;
+        private int originModuleID = 0;
 
         public dataProdukForm()
         {
             InitializeComponent();
         }
 
-        public dataProdukForm(int originModuleID)
+        public dataProdukForm(int moduleID)
         {
             InitializeComponent();
 
-            moduleID = originModuleID;
+            originModuleID = moduleID;
 
             // accessed from other form other than Master -> Data Produk
             // it means that this form is only displayed for browsing / searching purpose only
@@ -32,12 +32,18 @@ namespace RoyalPetz_ADMIN
 
         private void displaySpecificForm()
         {
-            switch (moduleID)
+            switch (originModuleID)
             {
-                case 1: // STOK PECAH PRODUK
+                case globalConstants.STOK_PECAH_BARANG: 
                     stokPecahBarangForm displaystokPecahBarangForm = new stokPecahBarangForm();
                     displaystokPecahBarangForm.ShowDialog();
                     break;
+
+                case globalConstants.PENYESUAIAN_STOK:
+                    penyesuaianStokForm penyesuaianStokForm = new penyesuaianStokForm();
+                    penyesuaianStokForm.ShowDialog();
+                    break;
+
                 default: // MASTER DATA PRODUK
                     dataProdukDetailForm displayForm = new dataProdukDetailForm();
                     displayForm.ShowDialog();
