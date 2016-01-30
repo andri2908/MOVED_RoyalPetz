@@ -36,17 +36,17 @@ namespace RoyalPetz_ADMIN
             {
                 case globalConstants.STOK_PECAH_BARANG: 
                     stokPecahBarangForm displaystokPecahBarangForm = new stokPecahBarangForm();
-                    displaystokPecahBarangForm.ShowDialog();
+                    displaystokPecahBarangForm.ShowDialog(this);
                     break;
 
                 case globalConstants.PENYESUAIAN_STOK:
                     penyesuaianStokForm penyesuaianStokForm = new penyesuaianStokForm();
-                    penyesuaianStokForm.ShowDialog();
+                    penyesuaianStokForm.ShowDialog(this);
                     break;
 
                 default: // MASTER DATA PRODUK
                     dataProdukDetailForm displayForm = new dataProdukDetailForm();
-                    displayForm.ShowDialog();
+                    displayForm.ShowDialog(this);
                     break;
             }   
         }
@@ -54,12 +54,8 @@ namespace RoyalPetz_ADMIN
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
             dataProdukDetailForm displayForm = new dataProdukDetailForm();
-            displayForm.ShowDialog();
-
-            this.Show();
+            displayForm.ShowDialog(this);
         }
 
         private void displayButton_Click(object sender, EventArgs e)
@@ -74,22 +70,14 @@ namespace RoyalPetz_ADMIN
 
         private void tagProdukDataGridView_DoubleClick(object sender, EventArgs e)
         {
-            this.Hide();
-
             displaySpecificForm();
-            
-            this.Show();
         }
 
         private void tagProdukDataGridView_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13) // Enter
             {
-                this.Hide();
-
                 displaySpecificForm();
-
-                this.Show();
             }
         }
 

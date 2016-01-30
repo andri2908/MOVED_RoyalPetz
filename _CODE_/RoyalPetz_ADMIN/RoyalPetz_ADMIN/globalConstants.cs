@@ -17,10 +17,13 @@ namespace RoyalPetz_ADMIN
         public const int PENGATURAN_HARGA_JUAL = 53;
         public const int PENGATURAN_LIMIT_STOK = 54;
         public const int PENGATURAN_KATEGORI_PRODUK = 55;
-        public const int PENGATURAN_NOMOR_RAK = 56;        
+        public const int PENGATURAN_NOMOR_RAK = 56;
+        public const int CEK_DATA_MUTASI = 57;        
 
         public const int STOK_PECAH_BARANG = 101;
         public const int PENYESUAIAN_STOK = 102;
+        public const int PERMINTAAN_BARANG = 103;
+        public const int REPRINT_PERMINTAAN_BARANG = 103;
 
 
 

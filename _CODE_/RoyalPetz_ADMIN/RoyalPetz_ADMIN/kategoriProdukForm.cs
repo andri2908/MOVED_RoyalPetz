@@ -19,12 +19,8 @@ namespace RoyalPetz_ADMIN
 
         private void newButton_Click_1(object sender, EventArgs e)
         {
-            this.Hide();
-
             kategoriProdukDetailForm displayForm = new kategoriProdukDetailForm();
-            displayForm.ShowDialog();
-
-            this.Show();
+            displayForm.ShowDialog(this);
         }
     }
 }

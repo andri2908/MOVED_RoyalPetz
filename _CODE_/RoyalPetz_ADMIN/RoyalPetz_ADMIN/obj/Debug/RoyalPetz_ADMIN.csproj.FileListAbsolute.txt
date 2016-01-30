@@ -97,3 +97,7 @@ D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_
 D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.kategoriProdukDetailForm.resources
 D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.kategoriProdukForm.resources
 D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.permintaanProdukForm.resources
+D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataMutasiBarangDetailForm.resources
+D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataMutasiBarangForm.resources
+D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.permintaanProdukForm.resources
+D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.importDataMutasiForm.resources

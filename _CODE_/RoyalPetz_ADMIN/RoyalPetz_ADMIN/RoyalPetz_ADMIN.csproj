@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dataMutasiBarangDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataMutasiBarangDetailForm.Designer.cs">
+      <DependentUpon>dataMutasiBarangDetailForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="adminForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +85,12 @@
     </Compile>
     <Compile Include="dataGroupForm.Designer.cs">
       <DependentUpon>dataGroupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dataMutasiBarangForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataMutasiBarangForm.Designer.cs">
+      <DependentUpon>dataMutasiBarangForm.cs</DependentUpon>
     </Compile>
     <Compile Include="dataPelangganDetailForm.cs">
       <SubType>Form</SubType>
@@ -152,6 +164,12 @@
     </Compile>
     <Compile Include="groupAccessModuleForm.Designer.cs">
       <DependentUpon>groupAccessModuleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="importDataMutasiForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="importDataMutasiForm.Designer.cs">
+      <DependentUpon>importDataMutasiForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IPPusatForm.cs">
       <SubType>Form</SubType>
@@ -227,6 +245,9 @@
     <Compile Include="kategoriProdukForm.Designer.cs">
       <DependentUpon>kategoriProdukForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="dataMutasiBarangDetailForm.resx">
+      <DependentUpon>dataMutasiBarangDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="adminForm.resx">
       <DependentUpon>adminForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -244,6 +265,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dataGroupForm.resx">
       <DependentUpon>dataGroupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataMutasiBarangForm.resx">
+      <DependentUpon>dataMutasiBarangForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dataPelangganDetailForm.resx">
       <DependentUpon>dataPelangganDetailForm.cs</DependentUpon>
@@ -280,6 +304,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="groupAccessModuleForm.resx">
       <DependentUpon>groupAccessModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="importDataMutasiForm.resx">
+      <DependentUpon>importDataMutasiForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IPPusatForm.resx">
       <DependentUpon>IPPusatForm.cs</DependentUpon>

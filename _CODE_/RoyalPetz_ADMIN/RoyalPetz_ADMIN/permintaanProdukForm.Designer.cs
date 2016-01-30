@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label8 = new System.Windows.Forms.Label();
@@ -51,11 +51,14 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.generateButton = new System.Windows.Forms.Button();
             this.detailRequestOrderDataGridView = new System.Windows.Forms.DataGridView();
-            this.moduleID = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.hakAkses = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.exportButton = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.button1 = new System.Windows.Forms.Button();
+            this.moduleID = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.hakAkses = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HPPColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hargaJualEcerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label10 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -92,7 +95,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label5, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel5, 2, 3);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 37);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 39);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -156,7 +159,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 233F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 182F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 184F));
             this.tableLayoutPanel2.Controls.Add(this.textBox2, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label9, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.textBox3, 3, 0);
@@ -173,7 +176,7 @@
             this.textBox2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.Location = new System.Drawing.Point(3, 4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(184, 27);
+            this.textBox2.Size = new System.Drawing.Size(183, 27);
             this.textBox2.TabIndex = 16;
             // 
             // label9
@@ -182,7 +185,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label9.Location = new System.Drawing.Point(210, 8);
+            this.label9.Location = new System.Drawing.Point(209, 8);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(225, 18);
             this.label9.TabIndex = 20;
@@ -192,7 +195,7 @@
             // 
             this.textBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(443, 4);
+            this.textBox3.Location = new System.Drawing.Point(442, 4);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(178, 27);
             this.textBox3.TabIndex = 21;
@@ -293,8 +296,7 @@
             // 
             // tableLayoutPanel5
             // 
-            this.tableLayoutPanel5.ColumnCount = 2;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.ColumnCount = 1;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.Controls.Add(this.textBox1, 0, 0);
             this.tableLayoutPanel5.Location = new System.Drawing.Point(261, 129);
@@ -310,14 +312,14 @@
             this.textBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(3, 4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(184, 27);
+            this.textBox1.Size = new System.Drawing.Size(618, 27);
             this.textBox1.TabIndex = 16;
             // 
             // generateButton
             // 
             this.generateButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.generateButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.generateButton.Location = new System.Drawing.Point(283, 634);
+            this.generateButton.Location = new System.Drawing.Point(287, 707);
             this.generateButton.Name = "generateButton";
             this.generateButton.Size = new System.Drawing.Size(248, 37);
             this.generateButton.TabIndex = 31;
@@ -327,23 +329,48 @@
             // detailRequestOrderDataGridView
             // 
             this.detailRequestOrderDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.detailRequestOrderDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.detailRequestOrderDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.detailRequestOrderDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.detailRequestOrderDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.moduleID,
-            this.hakAkses});
+            this.hakAkses,
+            this.HPPColumn,
+            this.hargaJualEcerColumn});
             this.detailRequestOrderDataGridView.Location = new System.Drawing.Point(6, 212);
             this.detailRequestOrderDataGridView.Name = "detailRequestOrderDataGridView";
             this.detailRequestOrderDataGridView.RowHeadersVisible = false;
             this.detailRequestOrderDataGridView.Size = new System.Drawing.Size(888, 401);
             this.detailRequestOrderDataGridView.TabIndex = 32;
+            // 
+            // exportButton
+            // 
+            this.exportButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.exportButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exportButton.Location = new System.Drawing.Point(562, 707);
+            this.exportButton.Name = "exportButton";
+            this.exportButton.Size = new System.Drawing.Size(305, 37);
+            this.exportButton.TabIndex = 33;
+            this.exportButton.Text = "EXPORT REQUEST ORDER";
+            this.exportButton.UseVisualStyleBackColor = true;
+            this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
+            // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.button1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(33, 707);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(226, 37);
+            this.button1.TabIndex = 34;
+            this.button1.Text = "SAVE REQUEST ORDER";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // moduleID
             // 
@@ -360,35 +387,37 @@
             this.hakAkses.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.hakAkses.Width = 150;
             // 
-            // exportButton
+            // HPPColumn
             // 
-            this.exportButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.exportButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exportButton.Location = new System.Drawing.Point(558, 634);
-            this.exportButton.Name = "exportButton";
-            this.exportButton.Size = new System.Drawing.Size(305, 37);
-            this.exportButton.TabIndex = 33;
-            this.exportButton.Text = "EXPORT REQUEST ORDER";
-            this.exportButton.UseVisualStyleBackColor = true;
-            this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
+            this.HPPColumn.HeaderText = "HARGA POKOK";
+            this.HPPColumn.Name = "HPPColumn";
+            this.HPPColumn.Width = 200;
             // 
-            // button1
+            // hargaJualEcerColumn
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.button1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(29, 634);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(226, 37);
-            this.button1.TabIndex = 34;
-            this.button1.Text = "SAVE REQUEST ORDER";
-            this.button1.UseVisualStyleBackColor = true;
+            this.hargaJualEcerColumn.HeaderText = "HARGA JUAL ECER";
+            this.hargaJualEcerColumn.Name = "hargaJualEcerColumn";
+            this.hargaJualEcerColumn.Width = 200;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label10.Location = new System.Drawing.Point(557, 635);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(195, 29);
+            this.label10.TabIndex = 35;
+            this.label10.Text = "TOTAL : Rp. 0";
             // 
             // permintaanProdukForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(901, 696);
+            this.ClientSize = new System.Drawing.Size(901, 768);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.exportButton);
             this.Controls.Add(this.detailRequestOrderDataGridView);
@@ -409,6 +438,7 @@
             this.tableLayoutPanel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.detailRequestOrderDataGridView)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -436,10 +466,13 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.DataGridView detailRequestOrderDataGridView;
-        private System.Windows.Forms.DataGridViewComboBoxColumn moduleID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn hakAkses;
         private System.Windows.Forms.Button exportButton;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewComboBoxColumn moduleID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hakAkses;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HPPColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hargaJualEcerColumn;
+        private System.Windows.Forms.Label label10;
     }
 }

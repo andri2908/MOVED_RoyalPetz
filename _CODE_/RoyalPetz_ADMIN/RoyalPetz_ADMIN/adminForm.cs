@@ -58,72 +58,72 @@ namespace RoyalPetz_ADMIN
 
         private void jenisProdukToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            
 
             kategoriProdukForm displayedForm = new kategoriProdukForm();
-            displayedForm.ShowDialog();
+            displayedForm.ShowDialog(this);
 
-            this.Show();
+            
         }
 
         private void dataProdukToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            
 
             dataProdukForm displayedForm = new dataProdukForm();
-            displayedForm.ShowDialog();
+            displayedForm.ShowDialog(this);
 
-            this.Show();
+            
         }
 
         private void dataPelangganToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            
 
             dataPelangganForm displayedForm = new dataPelangganForm();
-            displayedForm.ShowDialog();
+            displayedForm.ShowDialog(this);
 
-            this.Show();
+            
         }
 
         private void dataSupplierToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            
 
             dataSupplierForm displayedForm = new dataSupplierForm();
-            displayedForm.ShowDialog();
+            displayedForm.ShowDialog(this);
 
-            this.Show();
+            
         }
 
         private void dataSalesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            
 
             dataSalesForm displayedForm = new dataSalesForm();
-            displayedForm.ShowDialog();
+            displayedForm.ShowDialog(this);
 
-            this.Show();
+            
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            
 
             dataGroupForm displayedForm = new dataGroupForm();
-            displayedForm.ShowDialog();
+            displayedForm.ShowDialog(this);
 
-            this.Show();
+            
         }
 
         private void dataUserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            
 
             dataUserForm displayedForm = new dataUserForm();
-            displayedForm.ShowDialog();
+            displayedForm.ShowDialog(this);
 
-            this.Show();
+            
         }
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -138,52 +138,52 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripMenuItem53_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            
 
             dataProdukForm displayedForm = new dataProdukForm(globalConstants.STOK_PECAH_BARANG); // display dataProdukForm for browsing purpose only
-            displayedForm.ShowDialog();
+            displayedForm.ShowDialog(this);
 
-            this.Show();
+            
         }
 
         private void infoFolderDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            
 
             setDatabaseLocationForm displayedForm = new setDatabaseLocationForm(); 
-            displayedForm.ShowDialog();
+            displayedForm.ShowDialog(this);
 
-            this.Show();
+            
         }
 
         private void backupRestoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            
 
             backupRestoreDatabaseForm displayedForm = new backupRestoreDatabaseForm();
-            displayedForm.ShowDialog();
+            displayedForm.ShowDialog(this);
 
-            this.Show();
+            
         }
 
         private void toolStripMenuItem15_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            
 
             dataUserForm displayedForm = new dataUserForm();
-            displayedForm.ShowDialog();
+            displayedForm.ShowDialog(this);
 
-            this.Show();
+            
         }
 
         private void toolStripMenuItem47_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            
 
             dataGroupForm displayedForm = new dataGroupForm(globalConstants.TAMBAH_HAPUS_GROUP_USER);
-            displayedForm.ShowDialog();
+            displayedForm.ShowDialog(this);
 
-            this.Show();
+            
         }
 
         private void pilihPrinterToolStripMenuItem_Click(object sender, EventArgs e)
@@ -194,12 +194,12 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripMenuItem32_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            
 
             dataGroupForm displayedForm = new dataGroupForm(globalConstants.PENGATURAN_GRUP_AKSES);
-            displayedForm.ShowDialog();
+            displayedForm.ShowDialog(this);
 
-            this.Show();
+            
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
@@ -226,172 +226,122 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripMenuItem55_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
             sinkronisasiInformasiForm displayedForm = new sinkronisasiInformasiForm();
-            displayedForm.ShowDialog();
-
-            this.Show();
+            displayedForm.ShowDialog(this);
         }
 
         private void toolStripMenuItem16_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
             IPPusatForm displayedForm = new IPPusatForm();
-            displayedForm.ShowDialog();
-
-            this.Show();
+            displayedForm.ShowDialog(this);
         }
 
         private void toolStripMenuItem48_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
             dataCabangForm displayedForm = new dataCabangForm();
-            displayedForm.ShowDialog();
-
-            this.Show();
+            displayedForm.ShowDialog(this);
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
             dataProdukForm displayedForm = new dataProdukForm();
-            displayedForm.ShowDialog();
-
-            this.Show();
+            displayedForm.ShowDialog(this);
         }
 
         private void toolStripMenuItem14_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
             dataPelangganForm displayedForm = new dataPelangganForm();
-            displayedForm.ShowDialog();
-
-            this.Show();
+            displayedForm.ShowDialog(this);
         }
 
         private void toolStripMenuItem11_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
             dataGroupForm displayedForm = new dataGroupForm(globalConstants.TAMBAH_HAPUS_GROUP_PELANGGAN);
-            displayedForm.ShowDialog();
-
-            this.Show();
+            displayedForm.ShowDialog(this);
         }
 
         private void toolStripMenuItem12_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
             dataGroupForm displayedForm = new dataGroupForm(globalConstants.PENGATURAN_POTONGAN_HARGA);
-            displayedForm.ShowDialog();
-
-            this.Show();
+            displayedForm.ShowDialog(this);
         }
 
         private void toolStripMenuItem9_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
             dataSupplierForm displayedForm = new dataSupplierForm();
-            displayedForm.ShowDialog();
-
-            this.Show();
+            displayedForm.ShowDialog(this);
         }
 
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
             kategoriProdukForm displayedForm = new kategoriProdukForm();
-            displayedForm.ShowDialog();
-
-            this.Show();
+            displayedForm.ShowDialog(this);
         }
 
         private void toolStripMenuItem61_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
             exportStockOpnameForm displayedForm = new exportStockOpnameForm();
-            displayedForm.ShowDialog();
-
-            this.Show();
+            displayedForm.ShowDialog(this);
         }
 
         private void toolStripMenuItem10_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
             pengaturanProdukForm displayedForm = new pengaturanProdukForm(globalConstants.PENGATURAN_HARGA_JUAL);
-            displayedForm.ShowDialog();
-
-            this.Show();
+            displayedForm.ShowDialog(this);
         }
 
         private void toolStripMenuItem51_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
             pengaturanProdukForm displayedForm = new pengaturanProdukForm(globalConstants.PENGATURAN_LIMIT_STOK);
-            displayedForm.ShowDialog();
-
-            this.Show();
+            displayedForm.ShowDialog(this);
         }
 
         private void toolStripMenuItem54_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
             pengaturanProdukForm displayedForm = new pengaturanProdukForm(globalConstants.PENGATURAN_NOMOR_RAK);
-            displayedForm.ShowDialog();
-
-            this.Show();
+            displayedForm.ShowDialog(this);
         }
 
         private void toolStripMenuItem57_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
             dataSatuanForm displayedForm = new dataSatuanForm();
-            displayedForm.ShowDialog();
-
-            this.Show();
+            displayedForm.ShowDialog(this);
         }
 
         private void toolStripMenuItem60_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
             konversiSatuanForm displayedForm = new konversiSatuanForm();
-            displayedForm.ShowDialog();
-
-            this.Show();
+            displayedForm.ShowDialog(this);
         }
 
         private void toolStripMenuItem62_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
             dataProdukForm displayedForm = new dataProdukForm(globalConstants.PENYESUAIAN_STOK);
-            displayedForm.ShowDialog();
-
-            this.Show();
+            displayedForm.ShowDialog(this);
         }
 
         private void toolStripMenuItem65_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            dataMutasiBarangForm displayedForm = new dataMutasiBarangForm(globalConstants.PERMINTAAN_BARANG);
+            displayedForm.ShowDialog(this);
+        }
 
-            permintaanProdukForm displayedForm = new permintaanProdukForm();
-            displayedForm.ShowDialog();
+        private void toolStripMenuItem63_Click(object sender, EventArgs e)
+        {
+            dataMutasiBarangForm displayedForm = new dataMutasiBarangForm(globalConstants.CEK_DATA_MUTASI);
+            displayedForm.ShowDialog(this);
+        }
 
-            this.Show();
+        private void toolStripMenuItem64_Click(object sender, EventArgs e)
+        {
+            importDataMutasiForm displayedForm = new importDataMutasiForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem67_Click(object sender, EventArgs e)
+        {
+            dataMutasiBarangForm displayedForm = new dataMutasiBarangForm(globalConstants.REPRINT_PERMINTAAN_BARANG);
+            displayedForm.ShowDialog(this);
         }
     }
 }

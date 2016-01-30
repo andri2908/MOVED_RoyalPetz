@@ -19,12 +19,8 @@ namespace RoyalPetz_ADMIN
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
             dataCabangDetailForm displayedForm = new dataCabangDetailForm();
-            displayedForm.ShowDialog();
-
-            this.Show();
+            displayedForm.ShowDialog(this);
         }
     }
 }

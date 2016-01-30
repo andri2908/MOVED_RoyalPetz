@@ -455,16 +455,18 @@
             this.toolStripMenuItem63.BackColor = System.Drawing.Color.SteelBlue;
             this.toolStripMenuItem63.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripMenuItem63.Name = "toolStripMenuItem63";
-            this.toolStripMenuItem63.Size = new System.Drawing.Size(305, 22);
-            this.toolStripMenuItem63.Text = "Tambah / Hapus Mutasi Barang";
+            this.toolStripMenuItem63.Size = new System.Drawing.Size(247, 22);
+            this.toolStripMenuItem63.Text = "Cek Permintaan Barang";
+            this.toolStripMenuItem63.Click += new System.EventHandler(this.toolStripMenuItem63_Click);
             // 
             // toolStripMenuItem64
             // 
             this.toolStripMenuItem64.BackColor = System.Drawing.Color.SteelBlue;
             this.toolStripMenuItem64.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripMenuItem64.Name = "toolStripMenuItem64";
-            this.toolStripMenuItem64.Size = new System.Drawing.Size(305, 22);
+            this.toolStripMenuItem64.Size = new System.Drawing.Size(247, 22);
             this.toolStripMenuItem64.Text = "Import Data Mutasi";
+            this.toolStripMenuItem64.Click += new System.EventHandler(this.toolStripMenuItem64_Click);
             // 
             // pembelianToolStripMenuItem
             // 
@@ -540,6 +542,7 @@
             this.toolStripMenuItem67.ShowShortcutKeys = false;
             this.toolStripMenuItem67.Size = new System.Drawing.Size(235, 22);
             this.toolStripMenuItem67.Text = "Re-print Request Order";
+            this.toolStripMenuItem67.Click += new System.EventHandler(this.toolStripMenuItem67_Click);
             // 
             // toolStripMenuItem13
             // 

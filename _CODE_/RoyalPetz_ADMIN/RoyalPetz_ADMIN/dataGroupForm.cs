@@ -31,12 +31,8 @@ namespace RoyalPetz_ADMIN
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
             dataGroupDetailForm displayForm = new dataGroupDetailForm(originModuleID);
-            displayForm.ShowDialog();
-
-            this.Show();
+            displayForm.ShowDialog(this);
         }
 
         private void dataGroupForm_Load(object sender, EventArgs e)
@@ -51,21 +47,18 @@ namespace RoyalPetz_ADMIN
 
         private void dataSalesDataGridView_DoubleClick(object sender, EventArgs e)
         {
-            this.Hide();
-
             switch (originModuleID)
             { 
                 case globalConstants.PENGATURAN_GRUP_AKSES: 
                     groupAccessModuleForm groupAccessForm = new groupAccessModuleForm();
-                    groupAccessForm.ShowDialog();
+                    groupAccessForm.ShowDialog(this);
                     break;
             
                 default: // TAMBAH / HAPUS GROUP
                     dataGroupDetailForm displayForm = new dataGroupDetailForm(originModuleID);
-                    displayForm.ShowDialog();
+                    displayForm.ShowDialog(this);
                     break;
             }
-            this.Show();
         }
     }
 }
