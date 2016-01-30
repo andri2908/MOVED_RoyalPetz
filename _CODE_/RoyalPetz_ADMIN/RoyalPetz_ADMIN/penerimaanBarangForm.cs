@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace RoyalPetz_ADMIN
 {
-    public partial class kategoriProdukDetailForm : Form
+    public partial class penerimaanBarangForm : Form
     {
-        public kategoriProdukDetailForm()
+        public penerimaanBarangForm()
         {
             InitializeComponent();
         }

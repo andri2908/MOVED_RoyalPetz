@@ -53,7 +53,12 @@ namespace RoyalPetz_ADMIN
                     groupAccessModuleForm groupAccessForm = new groupAccessModuleForm();
                     groupAccessForm.ShowDialog(this);
                     break;
-            
+
+                case globalConstants.PENGATURAN_POTONGAN_HARGA:
+                    pengaturanPotonganHargaForm pengaturanHargaForm = new pengaturanPotonganHargaForm();
+                    pengaturanHargaForm.ShowDialog(this);
+                    break;
+
                 default: // TAMBAH / HAPUS GROUP
                     dataGroupDetailForm displayForm = new dataGroupDetailForm(originModuleID);
                     displayForm.ShowDialog(this);

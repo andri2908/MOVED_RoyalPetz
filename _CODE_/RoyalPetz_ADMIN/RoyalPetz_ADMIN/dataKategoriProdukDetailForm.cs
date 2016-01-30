@@ -10,17 +10,11 @@ using System.Windows.Forms;
 
 namespace RoyalPetz_ADMIN
 {
-    public partial class kategoriProdukForm : Form
+    public partial class dataKategoriProdukDetailForm : Form
     {
-        public kategoriProdukForm()
+        public dataKategoriProdukDetailForm()
         {
             InitializeComponent();
-        }
-
-        private void newButton_Click_1(object sender, EventArgs e)
-        {
-            kategoriProdukDetailForm displayForm = new kategoriProdukDetailForm();
-            displayForm.ShowDialog(this);
         }
     }
 }

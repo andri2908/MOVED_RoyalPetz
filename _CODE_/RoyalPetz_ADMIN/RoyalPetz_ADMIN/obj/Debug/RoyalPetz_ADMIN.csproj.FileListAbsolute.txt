@@ -94,10 +94,14 @@ D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_
 D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pengaturanProdukForm.resources
 D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.penyesuaianStokForm.resources
 D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.sinkronisasiInformasiForm.resources
-D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.kategoriProdukDetailForm.resources
-D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.kategoriProdukForm.resources
 D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.permintaanProdukForm.resources
 D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataMutasiBarangDetailForm.resources
 D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataMutasiBarangForm.resources
 D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.permintaanProdukForm.resources
 D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.importDataMutasiForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataMutasiBarangDetailForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataMutasiBarangForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.importDataMutasiForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pengaturanKategoriProdukForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataKategoriProdukDetailForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataKategoriProdukForm.resources

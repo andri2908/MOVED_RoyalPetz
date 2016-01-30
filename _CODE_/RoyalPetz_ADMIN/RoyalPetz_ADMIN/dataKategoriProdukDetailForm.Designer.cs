@@ -1,6 +1,6 @@
 ﻿namespace RoyalPetz_ADMIN
 {
-    partial class kategoriProdukDetailForm
+    partial class dataKategoriProdukDetailForm
     {
         /// <summary>
         /// Required designer variable.

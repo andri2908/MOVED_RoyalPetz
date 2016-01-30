@@ -32,13 +32,18 @@ namespace RoyalPetz_ADMIN
             switch (originModuleID)
             {
                 case globalConstants.CEK_DATA_MUTASI:
-                    dataMutasiBarangDetailForm displayedForm = new dataMutasiBarangDetailForm();
-                    displayedForm.ShowDialog(this);
+                        dataMutasiBarangDetailForm displayedForm = new dataMutasiBarangDetailForm();
+                        displayedForm.ShowDialog(this);
                     break;
 
                 case globalConstants.PERMINTAAN_BARANG:
-                    permintaanProdukForm permintaanProdukDisplayedForm = new permintaanProdukForm();
-                    permintaanProdukDisplayedForm.ShowDialog(this);
+                        permintaanProdukForm permintaanProdukDisplayedForm = new permintaanProdukForm();
+                        permintaanProdukDisplayedForm.ShowDialog(this);
+                    break;
+
+                case globalConstants.PENERIMAAN_BARANG:
+                        penerimaanBarangForm penerimaanBarangDisplayedForm = new penerimaanBarangForm();
+                        penerimaanBarangDisplayedForm.ShowDialog(this);
                     break;
             }
         }

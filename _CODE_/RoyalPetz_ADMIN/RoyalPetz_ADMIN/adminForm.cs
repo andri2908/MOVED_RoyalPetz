@@ -60,7 +60,7 @@ namespace RoyalPetz_ADMIN
         {
             
 
-            kategoriProdukForm displayedForm = new kategoriProdukForm();
+            dataKategoriProdukForm displayedForm = new dataKategoriProdukForm();
             displayedForm.ShowDialog(this);
 
             
@@ -274,7 +274,7 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
-            kategoriProdukForm displayedForm = new kategoriProdukForm();
+            dataKategoriProdukForm displayedForm = new dataKategoriProdukForm();
             displayedForm.ShowDialog(this);
         }
 
@@ -341,6 +341,24 @@ namespace RoyalPetz_ADMIN
         private void toolStripMenuItem67_Click(object sender, EventArgs e)
         {
             dataMutasiBarangForm displayedForm = new dataMutasiBarangForm(globalConstants.REPRINT_PERMINTAAN_BARANG);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem52_Click(object sender, EventArgs e)
+        {
+            dataKategoriProdukForm displayedForm = new dataKategoriProdukForm(globalConstants.PENGATURAN_KATEGORI_PRODUK);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem66_Click(object sender, EventArgs e)
+        {
+            dataMutasiBarangForm displayedForm = new dataMutasiBarangForm(globalConstants.PENERIMAAN_BARANG);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem19_Click(object sender, EventArgs e)
+        {
+            setNoFakturForm displayedForm = new setNoFakturForm();
             displayedForm.ShowDialog(this);
         }
     }

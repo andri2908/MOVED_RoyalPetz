@@ -343,6 +343,7 @@
             this.toolStripMenuItem52.Name = "toolStripMenuItem52";
             this.toolStripMenuItem52.Size = new System.Drawing.Size(279, 22);
             this.toolStripMenuItem52.Text = "Pengaturan Kategori Produk";
+            this.toolStripMenuItem52.Click += new System.EventHandler(this.toolStripMenuItem52_Click);
             // 
             // toolStripMenuItem53
             // 
@@ -533,6 +534,7 @@
             this.toolStripMenuItem66.ShowShortcutKeys = false;
             this.toolStripMenuItem66.Size = new System.Drawing.Size(235, 22);
             this.toolStripMenuItem66.Text = "Penerimaan Barang";
+            this.toolStripMenuItem66.Click += new System.EventHandler(this.toolStripMenuItem66_Click);
             // 
             // toolStripMenuItem67
             // 
@@ -631,6 +633,7 @@
             this.toolStripMenuItem19.Name = "toolStripMenuItem19";
             this.toolStripMenuItem19.Size = new System.Drawing.Size(174, 22);
             this.toolStripMenuItem19.Text = "Set No Faktur";
+            this.toolStripMenuItem19.Click += new System.EventHandler(this.toolStripMenuItem19_Click);
             // 
             // toolStripMenuItem21
             // 
