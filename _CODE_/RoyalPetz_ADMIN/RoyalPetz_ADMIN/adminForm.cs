@@ -361,5 +361,34 @@ namespace RoyalPetz_ADMIN
             setNoFakturForm displayedForm = new setNoFakturForm();
             displayedForm.ShowDialog(this);
         }
+
+        private void pengaturanPrinterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var cplPath = System.IO.Path.Combine(Environment.SystemDirectory, "control.exe");
+            System.Diagnostics.Process.Start(cplPath, "/name Microsoft.DevicesAndPrinters");
+        }
+
+        private void pengaturanGambarLatarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string fileName = "";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    fileName = openFileDialog1.FileName;
+                    this.BackgroundImageLayout = ImageLayout.Stretch;
+                    this.BackgroundImage = Image.FromFile(fileName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                }
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
