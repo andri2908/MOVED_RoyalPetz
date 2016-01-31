@@ -44,6 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dataNomorAkun.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataNomorAkun.Designer.cs">
+      <DependentUpon>dataNomorAkun.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dataPermintaanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataPermintaanForm.Designer.cs">
+      <DependentUpon>dataPermintaanForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="dataReturPenjualanForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +128,18 @@
     <Compile Include="dataPelangganForm.Designer.cs">
       <DependentUpon>dataPelangganForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="dataReturPermintaanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataReturPermintaanForm.Designer.cs">
+      <DependentUpon>dataReturPermintaanForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dataReturPenjualanStokAdjustmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataReturPenjualanStokAdjustmentForm.Designer.cs">
+      <DependentUpon>dataReturPenjualanStokAdjustmentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="dataSalesDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +175,12 @@
     </Compile>
     <Compile Include="dataSupplierForm.Designer.cs">
       <DependentUpon>dataSupplierForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dataTransaksiJurnalHarianDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataTransaksiJurnalHarianDetailForm.Designer.cs">
+      <DependentUpon>dataTransaksiJurnalHarianDetailForm.cs</DependentUpon>
     </Compile>
     <Compile Include="dataUserDetailForm.cs">
       <SubType>Form</SubType>
@@ -195,6 +225,18 @@
     <Compile Include="konversiSatuanForm.Designer.cs">
       <DependentUpon>konversiSatuanForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="pembayaranHutangForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pembayaranHutangForm.Designer.cs">
+      <DependentUpon>pembayaranHutangForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pembayaranPiutangForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pembayaranPiutangForm.Designer.cs">
+      <DependentUpon>pembayaranPiutangForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="penerimaanBarangForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,6 +248,18 @@
     </Compile>
     <Compile Include="pengaturanKategoriProdukForm.Designer.cs">
       <DependentUpon>pengaturanKategoriProdukForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dataNomorAkunDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataNomorAkunDetailForm.Designer.cs">
+      <DependentUpon>dataNomorAkunDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pengaturanLimitPajakForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pengaturanLimitPajakForm.Designer.cs">
+      <DependentUpon>pengaturanLimitPajakForm.cs</DependentUpon>
     </Compile>
     <Compile Include="pengaturanPotonganHargaForm.cs">
       <SubType>Form</SubType>
@@ -281,6 +335,15 @@
     <Compile Include="dataKategoriProdukForm.Designer.cs">
       <DependentUpon>dataKategoriProdukForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="dataNomorAkun.resx">
+      <DependentUpon>dataNomorAkun.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataNomorAkunDetailForm.resx">
+      <DependentUpon>dataNomorAkunDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataPermintaanForm.resx">
+      <DependentUpon>dataPermintaanForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dataReturPenjualanForm.resx">
       <DependentUpon>dataReturPenjualanForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -317,6 +380,12 @@
     <EmbeddedResource Include="dataPelangganForm.resx">
       <DependentUpon>dataPelangganForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dataReturPermintaanForm.resx">
+      <DependentUpon>dataReturPermintaanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataReturPenjualanStokAdjustmentForm.resx">
+      <DependentUpon>dataReturPenjualanStokAdjustmentForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dataSalesDetailForm.resx">
       <DependentUpon>dataSalesDetailForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -334,6 +403,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dataSupplierForm.resx">
       <DependentUpon>dataSupplierForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataTransaksiJurnalHarianDetailForm.resx">
+      <DependentUpon>dataTransaksiJurnalHarianDetailForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dataUserDetailForm.resx">
       <DependentUpon>dataUserDetailForm.cs</DependentUpon>
@@ -356,11 +428,20 @@
     <EmbeddedResource Include="konversiSatuanForm.resx">
       <DependentUpon>konversiSatuanForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="pembayaranHutangForm.resx">
+      <DependentUpon>pembayaranHutangForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pembayaranPiutangForm.resx">
+      <DependentUpon>pembayaranPiutangForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="penerimaanBarangForm.resx">
       <DependentUpon>penerimaanBarangForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pengaturanKategoriProdukForm.resx">
       <DependentUpon>pengaturanKategoriProdukForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pengaturanLimitPajakForm.resx">
+      <DependentUpon>pengaturanLimitPajakForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pengaturanPotonganHargaForm.resx">
       <DependentUpon>pengaturanPotonganHargaForm.cs</DependentUpon>

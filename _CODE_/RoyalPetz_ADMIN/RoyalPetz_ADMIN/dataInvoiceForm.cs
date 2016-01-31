@@ -12,15 +12,37 @@ namespace RoyalPetz_ADMIN
 {
     public partial class dataInvoiceForm : Form
     {
+        private int originModuleID = 0;
+
         public dataInvoiceForm()
         {
             InitializeComponent();
         }
 
+        public dataInvoiceForm(int moduleID)
+        {
+            InitializeComponent();
+            originModuleID = moduleID;
+        }
+
         private void dataInvoiceDataGridView_DoubleClick(object sender, EventArgs e)
         {
-            dataReturPenjualanForm displayedForm = new dataReturPenjualanForm();
-            displayedForm.ShowDialog(this);
+            switch(originModuleID)
+            {
+                case globalConstants.PEMBAYARAN_PIUTANG:
+                    pembayaranPiutangForm pembayaranForm = new pembayaranPiutangForm();
+                    pembayaranForm.ShowDialog(this);
+                    break;
+
+                default:
+                    dataReturPenjualanForm displayedForm = new dataReturPenjualanForm();
+                    displayedForm.ShowDialog(this);
+                    break;
+
+            }
+
+
+
         }
     }
 }

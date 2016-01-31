@@ -340,8 +340,8 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripMenuItem67_Click(object sender, EventArgs e)
         {
-            dataMutasiBarangForm displayedForm = new dataMutasiBarangForm(globalConstants.REPRINT_PERMINTAAN_BARANG);
-            displayedForm.ShowDialog(this);
+//            dataMutasiBarangForm displayedForm = new dataMutasiBarangForm(globalConstants.REPRINT_PERMINTAAN_BARANG);
+//            displayedForm.ShowDialog(this);
         }
 
         private void toolStripMenuItem52_Click(object sender, EventArgs e)
@@ -389,6 +389,101 @@ namespace RoyalPetz_ADMIN
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void toolStripMenuItem23_Click(object sender, EventArgs e)
+        {
+            dataReturPenjualanStokAdjustmentForm displayedForm = new dataReturPenjualanStokAdjustmentForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem13_Click(object sender, EventArgs e)
+        {
+            dataReturPermintaanForm displayedForm = new dataReturPermintaanForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void accountJurnalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataNomorAkun displayedForm = new dataNomorAkun();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem22_Click(object sender, EventArgs e)
+        {
+            dataInvoiceForm displayedForm = new dataInvoiceForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem68_Click(object sender, EventArgs e)
+        {
+            dataInvoiceForm displayedForm = new dataInvoiceForm(globalConstants.PEMBAYARAN_PIUTANG);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem69_Click(object sender, EventArgs e)
+        {
+            dataPermintaanForm displayedForm = new dataPermintaanForm(globalConstants.PEMBAYARAN_HUTANG);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem70_Click(object sender, EventArgs e)
+        {
+            pengaturanLimitPajakForm displayedForm = new pengaturanLimitPajakForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            dataProdukForm displayedForm = new dataProdukForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            permintaanProdukForm displayedForm = new permintaanProdukForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            dataInvoiceForm displayedForm = new dataInvoiceForm(globalConstants.PEMBAYARAN_PIUTANG);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            dataPermintaanForm displayedForm = new dataPermintaanForm(globalConstants.PEMBAYARAN_HUTANG);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem24_Click(object sender, EventArgs e)
+        {
+            dataTransaksiJurnalHarianDetailForm displayedForm = new dataTransaksiJurnalHarianDetailForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripButton9_Click(object sender, EventArgs e)
+        {
+            dataTransaksiJurnalHarianDetailForm displayedForm = new dataTransaksiJurnalHarianDetailForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripButton7_Click(object sender, EventArgs e)
+        {
+            dataReturPermintaanForm displayedForm = new dataReturPermintaanForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+            dataInvoiceForm displayedForm = new dataInvoiceForm();
+            displayedForm.ShowDialog(this);
         }
     }
 }

@@ -128,3 +128,17 @@ C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN
 C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.sinkronisasiInformasiForm.resources
 C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataKategoriProdukDetailForm.resources
 C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataKategoriProdukForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataReturPenjualanForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataInvoiceForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.penerimaanBarangForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pengaturanPotonganHargaForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.setNoFakturForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataNomorAkun.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataNomorAkunDetailForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataPermintaanForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataReturPermintaanForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataReturPenjualanStokAdjustmentForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataTransaksiJurnalHarianDetailForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pembayaranHutangForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pembayaranPiutangForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pengaturanLimitPajakForm.resources

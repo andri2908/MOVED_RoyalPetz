@@ -24,7 +24,8 @@ namespace RoyalPetz_ADMIN
             InitializeComponent();
             originModuleID = moduleID;
 
-            newButton.Visible = false;
+            if (moduleID != globalConstants.PERMINTAAN_BARANG)
+                newButton.Visible = false;
         }
 
         private void displaySpecificForm()

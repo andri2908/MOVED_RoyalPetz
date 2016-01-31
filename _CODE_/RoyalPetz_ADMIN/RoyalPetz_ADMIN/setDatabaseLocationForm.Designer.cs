@@ -48,7 +48,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 348F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 349F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label4, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 2, 0);
@@ -79,7 +79,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(118, 23);
+            this.label4.Location = new System.Drawing.Point(117, 23);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(9, 18);
             this.label4.TabIndex = 10;
@@ -91,7 +91,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.serverIPRadioButton, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.ipAddressMaskedTextbox, 0, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(133, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(132, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -131,7 +131,7 @@
             this.localhostRadioButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.localhostRadioButton.AutoSize = true;
             this.localhostRadioButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.localhostRadioButton.Location = new System.Drawing.Point(133, 78);
+            this.localhostRadioButton.Location = new System.Drawing.Point(132, 78);
             this.localhostRadioButton.Name = "localhostRadioButton";
             this.localhostRadioButton.Size = new System.Drawing.Size(134, 22);
             this.localhostRadioButton.TabIndex = 20;

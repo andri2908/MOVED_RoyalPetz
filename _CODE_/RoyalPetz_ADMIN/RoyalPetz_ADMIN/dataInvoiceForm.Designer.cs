@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.namaSupplierTextbox = new System.Windows.Forms.TextBox();
             this.dataInvoiceDataGridView = new System.Windows.Forms.DataGridView();
+            this.noInvoice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pelanggan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.displayButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.noInvoice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pelanggan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataInvoiceDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,14 +64,14 @@
             this.dataInvoiceDataGridView.AllowUserToAddRows = false;
             this.dataInvoiceDataGridView.AllowUserToDeleteRows = false;
             this.dataInvoiceDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataInvoiceDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataInvoiceDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataInvoiceDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataInvoiceDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.noInvoice,
@@ -82,6 +82,20 @@
             this.dataInvoiceDataGridView.Size = new System.Drawing.Size(602, 480);
             this.dataInvoiceDataGridView.TabIndex = 33;
             this.dataInvoiceDataGridView.DoubleClick += new System.EventHandler(this.dataInvoiceDataGridView_DoubleClick);
+            // 
+            // noInvoice
+            // 
+            this.noInvoice.HeaderText = "NO INVOICE";
+            this.noInvoice.Name = "noInvoice";
+            this.noInvoice.ReadOnly = true;
+            this.noInvoice.Width = 200;
+            // 
+            // pelanggan
+            // 
+            this.pelanggan.HeaderText = "PELANGGAN";
+            this.pelanggan.Name = "pelanggan";
+            this.pelanggan.ReadOnly = true;
+            this.pelanggan.Width = 350;
             // 
             // displayButton
             // 
@@ -112,20 +126,6 @@
             this.textBox1.Size = new System.Drawing.Size(260, 27);
             this.textBox1.TabIndex = 38;
             // 
-            // noInvoice
-            // 
-            this.noInvoice.HeaderText = "NO INVOICE";
-            this.noInvoice.Name = "noInvoice";
-            this.noInvoice.ReadOnly = true;
-            this.noInvoice.Width = 200;
-            // 
-            // pelanggan
-            // 
-            this.pelanggan.HeaderText = "PELANGGAN";
-            this.pelanggan.Name = "pelanggan";
-            this.pelanggan.ReadOnly = true;
-            this.pelanggan.Width = 350;
-            // 
             // dataInvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -139,7 +139,8 @@
             this.Controls.Add(this.dataInvoiceDataGridView);
             this.Controls.Add(this.displayButton);
             this.Name = "dataInvoiceForm";
-            this.Text = "dataInvoiceForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "DATA INVOICE";
             ((System.ComponentModel.ISupportInitialize)(this.dataInvoiceDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

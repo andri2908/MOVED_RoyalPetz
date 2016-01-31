@@ -45,17 +45,17 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.panel1 = new System.Windows.Forms.Panel();
             this.detailRequestOrderDataGridView = new System.Windows.Forms.DataGridView();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.saveButton = new System.Windows.Forms.Button();
             this.moduleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hargaJualColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hakAkses = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qtyReturn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.saveButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.detailRequestOrderDataGridView)).BeginInit();
@@ -92,7 +92,7 @@
             this.textBox6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox6.Location = new System.Drawing.Point(3, 4);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(179, 27);
+            this.textBox6.Size = new System.Drawing.Size(178, 27);
             this.textBox6.TabIndex = 16;
             // 
             // label11
@@ -101,7 +101,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label11.Location = new System.Drawing.Point(205, 8);
+            this.label11.Location = new System.Drawing.Point(204, 8);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(171, 18);
             this.label11.TabIndex = 20;
@@ -111,7 +111,7 @@
             // 
             this.textBox7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox7.Location = new System.Drawing.Point(438, 4);
+            this.textBox7.Location = new System.Drawing.Point(437, 4);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(178, 27);
             this.textBox7.TabIndex = 21;
@@ -146,7 +146,7 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 233F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 188F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 189F));
             this.tableLayoutPanel6.Controls.Add(this.textBox6, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.label11, 2, 0);
             this.tableLayoutPanel6.Controls.Add(this.textBox7, 3, 0);
@@ -163,7 +163,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 233F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 188F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 189F));
             this.tableLayoutPanel2.Controls.Add(this.textBox2, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label9, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.textBox3, 3, 0);
@@ -180,7 +180,7 @@
             this.textBox2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.Location = new System.Drawing.Point(3, 4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(179, 27);
+            this.textBox2.Size = new System.Drawing.Size(178, 27);
             this.textBox2.TabIndex = 16;
             // 
             // label9
@@ -189,7 +189,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label9.Location = new System.Drawing.Point(205, 8);
+            this.label9.Location = new System.Drawing.Point(204, 8);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(187, 18);
             this.label9.TabIndex = 20;
@@ -199,7 +199,7 @@
             // 
             this.textBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(438, 4);
+            this.textBox3.Location = new System.Drawing.Point(437, 4);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(178, 27);
             this.textBox3.TabIndex = 21;
@@ -241,12 +241,42 @@
             this.hargaJualColumn,
             this.hakAkses,
             this.qtyReturn});
-            this.detailRequestOrderDataGridView.Location = new System.Drawing.Point(3, 230);
+            this.detailRequestOrderDataGridView.Location = new System.Drawing.Point(3, 271);
             this.detailRequestOrderDataGridView.Name = "detailRequestOrderDataGridView";
             this.detailRequestOrderDataGridView.ReadOnly = true;
             this.detailRequestOrderDataGridView.RowHeadersVisible = false;
-            this.detailRequestOrderDataGridView.Size = new System.Drawing.Size(888, 433);
+            this.detailRequestOrderDataGridView.Size = new System.Drawing.Size(888, 392);
             this.detailRequestOrderDataGridView.TabIndex = 51;
+            // 
+            // moduleID
+            // 
+            this.moduleID.HeaderText = "NAMA PRODUK";
+            this.moduleID.Name = "moduleID";
+            this.moduleID.ReadOnly = true;
+            this.moduleID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.moduleID.Width = 350;
+            // 
+            // hargaJualColumn
+            // 
+            this.hargaJualColumn.HeaderText = "HARGA JUAL";
+            this.hargaJualColumn.Name = "hargaJualColumn";
+            this.hargaJualColumn.ReadOnly = true;
+            this.hargaJualColumn.Width = 200;
+            // 
+            // hakAkses
+            // 
+            this.hakAkses.HeaderText = "QTY";
+            this.hakAkses.Name = "hakAkses";
+            this.hakAkses.ReadOnly = true;
+            this.hakAkses.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.hakAkses.Width = 150;
+            // 
+            // qtyReturn
+            // 
+            this.qtyReturn.HeaderText = "QTY RETUR";
+            this.qtyReturn.Name = "qtyReturn";
+            this.qtyReturn.ReadOnly = true;
+            this.qtyReturn.Width = 180;
             // 
             // tableLayoutPanel1
             // 
@@ -281,47 +311,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(888, 187);
             this.tableLayoutPanel1.TabIndex = 49;
             // 
-            // saveButton
-            // 
-            this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(374, 680);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(122, 37);
-            this.saveButton.TabIndex = 52;
-            this.saveButton.Text = "SAVE ";
-            this.saveButton.UseVisualStyleBackColor = true;
-            // 
-            // moduleID
-            // 
-            this.moduleID.HeaderText = "NAMA PRODUK";
-            this.moduleID.Name = "moduleID";
-            this.moduleID.ReadOnly = true;
-            this.moduleID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.moduleID.Width = 350;
-            // 
-            // hargaJualColumn
-            // 
-            this.hargaJualColumn.HeaderText = "HARGA JUAL";
-            this.hargaJualColumn.Name = "hargaJualColumn";
-            this.hargaJualColumn.ReadOnly = true;
-            this.hargaJualColumn.Width = 200;
-            // 
-            // hakAkses
-            // 
-            this.hakAkses.HeaderText = "QTY";
-            this.hakAkses.Name = "hakAkses";
-            this.hakAkses.ReadOnly = true;
-            this.hakAkses.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.hakAkses.Width = 150;
-            // 
-            // qtyReturn
-            // 
-            this.qtyReturn.HeaderText = "QTY RETUR";
-            this.qtyReturn.Name = "qtyReturn";
-            this.qtyReturn.ReadOnly = true;
-            this.qtyReturn.Width = 180;
-            // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -346,18 +335,6 @@
             this.label5.TabIndex = 52;
             this.label5.Text = ":";
             // 
-            // label7
-            // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(3, 150);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(220, 18);
-            this.label7.TabIndex = 53;
-            this.label7.Text = "TOTAL SETELAH RETUR";
-            // 
             // label8
             // 
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -370,6 +347,18 @@
             this.label8.TabIndex = 54;
             this.label8.Text = ":";
             // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label7.Location = new System.Drawing.Point(3, 150);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(135, 18);
+            this.label7.TabIndex = 53;
+            this.label7.Text = "TOTAL RETUR";
+            // 
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -381,6 +370,17 @@
             this.label2.Size = new System.Drawing.Size(83, 29);
             this.label2.TabIndex = 55;
             this.label2.Text = "Rp. 0";
+            // 
+            // saveButton
+            // 
+            this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveButton.Location = new System.Drawing.Point(374, 680);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(122, 37);
+            this.saveButton.TabIndex = 52;
+            this.saveButton.Text = "SAVE ";
+            this.saveButton.UseVisualStyleBackColor = true;
             // 
             // dataReturPenjualanForm
             // 
