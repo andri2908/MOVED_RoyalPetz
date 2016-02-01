@@ -101,7 +101,7 @@
             this.detailRequestOrderDataGridView.Name = "detailRequestOrderDataGridView";
             this.detailRequestOrderDataGridView.ReadOnly = true;
             this.detailRequestOrderDataGridView.RowHeadersVisible = false;
-            this.detailRequestOrderDataGridView.Size = new System.Drawing.Size(976, 369);
+            this.detailRequestOrderDataGridView.Size = new System.Drawing.Size(976, 340);
             this.detailRequestOrderDataGridView.TabIndex = 39;
             // 
             // moduleID
@@ -192,7 +192,7 @@
             // 
             this.approveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.approveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.approveButton.Location = new System.Drawing.Point(79, 649);
+            this.approveButton.Location = new System.Drawing.Point(79, 611);
             this.approveButton.Name = "approveButton";
             this.approveButton.Size = new System.Drawing.Size(271, 37);
             this.approveButton.TabIndex = 41;
@@ -253,7 +253,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 233F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 187F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 188F));
             this.tableLayoutPanel2.Controls.Add(this.textBox2, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label9, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.textBox3, 3, 0);
@@ -270,7 +270,7 @@
             this.textBox2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.Location = new System.Drawing.Point(3, 4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(180, 27);
+            this.textBox2.Size = new System.Drawing.Size(179, 27);
             this.textBox2.TabIndex = 16;
             // 
             // label9
@@ -279,7 +279,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label9.Location = new System.Drawing.Point(206, 8);
+            this.label9.Location = new System.Drawing.Point(205, 8);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(225, 18);
             this.label9.TabIndex = 20;
@@ -289,7 +289,7 @@
             // 
             this.textBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(439, 4);
+            this.textBox3.Location = new System.Drawing.Point(438, 4);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(178, 27);
             this.textBox3.TabIndex = 21;
@@ -310,7 +310,7 @@
             // 
             this.rejectButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.rejectButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rejectButton.Location = new System.Drawing.Point(636, 649);
+            this.rejectButton.Location = new System.Drawing.Point(636, 611);
             this.rejectButton.Name = "rejectButton";
             this.rejectButton.Size = new System.Drawing.Size(248, 37);
             this.rejectButton.TabIndex = 38;
@@ -387,7 +387,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label5, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel5, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.label11, 2, 4);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 38);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 33);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -446,7 +446,7 @@
             // 
             this.reprintButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.reprintButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.reprintButton.Location = new System.Drawing.Point(368, 649);
+            this.reprintButton.Location = new System.Drawing.Point(368, 611);
             this.reprintButton.Name = "reprintButton";
             this.reprintButton.Size = new System.Drawing.Size(248, 37);
             this.reprintButton.TabIndex = 43;
@@ -458,7 +458,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(984, 711);
+            this.ClientSize = new System.Drawing.Size(984, 661);
             this.Controls.Add(this.reprintButton);
             this.Controls.Add(this.approveButton);
             this.Controls.Add(this.rejectButton);

@@ -56,7 +56,7 @@
             // 
             this.panel2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.panel2.BackColor = System.Drawing.Color.SteelBlue;
-            this.panel2.Location = new System.Drawing.Point(1, 164);
+            this.panel2.Location = new System.Drawing.Point(0, 163);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(596, 10);
             this.panel2.TabIndex = 40;
@@ -103,7 +103,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(175, 7);
+            this.label4.Location = new System.Drawing.Point(174, 7);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(14, 18);
             this.label4.TabIndex = 10;
@@ -115,7 +115,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(175, 47);
+            this.label6.Location = new System.Drawing.Point(174, 47);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(14, 18);
             this.label6.TabIndex = 12;
@@ -127,7 +127,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(175, 90);
+            this.label7.Location = new System.Drawing.Point(174, 90);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(14, 18);
             this.label7.TabIndex = 13;
@@ -137,7 +137,7 @@
             // 
             this.kodeGroupTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.kodeGroupTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kodeGroupTextbox.Location = new System.Drawing.Point(198, 3);
+            this.kodeGroupTextbox.Location = new System.Drawing.Point(197, 3);
             this.kodeGroupTextbox.Name = "kodeGroupTextbox";
             this.kodeGroupTextbox.ReadOnly = true;
             this.kodeGroupTextbox.Size = new System.Drawing.Size(93, 27);
@@ -147,7 +147,7 @@
             // 
             this.namaGroupTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.namaGroupTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaGroupTextbox.Location = new System.Drawing.Point(198, 42);
+            this.namaGroupTextbox.Location = new System.Drawing.Point(197, 42);
             this.namaGroupTextbox.Name = "namaGroupTextbox";
             this.namaGroupTextbox.ReadOnly = true;
             this.namaGroupTextbox.Size = new System.Drawing.Size(340, 27);
@@ -159,7 +159,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label8.Location = new System.Drawing.Point(188, 190);
+            this.label8.Location = new System.Drawing.Point(187, 189);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(14, 18);
             this.label8.TabIndex = 45;
@@ -169,7 +169,7 @@
             // 
             this.namaProdukTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.namaProdukTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaProdukTextbox.Location = new System.Drawing.Point(211, 187);
+            this.namaProdukTextbox.Location = new System.Drawing.Point(210, 186);
             this.namaProdukTextbox.Name = "namaProdukTextbox";
             this.namaProdukTextbox.Size = new System.Drawing.Size(210, 27);
             this.namaProdukTextbox.TabIndex = 44;
@@ -180,7 +180,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label5.Location = new System.Drawing.Point(15, 190);
+            this.label5.Location = new System.Drawing.Point(14, 189);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(142, 18);
             this.label5.TabIndex = 43;
@@ -190,7 +190,7 @@
             // 
             this.deskripsiTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.deskripsiTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deskripsiTextbox.Location = new System.Drawing.Point(198, 85);
+            this.deskripsiTextbox.Location = new System.Drawing.Point(197, 85);
             this.deskripsiTextbox.Name = "deskripsiTextbox";
             this.deskripsiTextbox.ReadOnly = true;
             this.deskripsiTextbox.Size = new System.Drawing.Size(210, 27);
@@ -213,10 +213,10 @@
             this.pengaturanKategoriDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.moduleID,
             this.potonganHarga});
-            this.pengaturanKategoriDataGridView.Location = new System.Drawing.Point(1, 251);
+            this.pengaturanKategoriDataGridView.Location = new System.Drawing.Point(1, 228);
             this.pengaturanKategoriDataGridView.Name = "pengaturanKategoriDataGridView";
             this.pengaturanKategoriDataGridView.RowHeadersVisible = false;
-            this.pengaturanKategoriDataGridView.Size = new System.Drawing.Size(594, 456);
+            this.pengaturanKategoriDataGridView.Size = new System.Drawing.Size(594, 433);
             this.pengaturanKategoriDataGridView.TabIndex = 42;
             // 
             // moduleID
@@ -237,7 +237,7 @@
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(456, 183);
+            this.saveButton.Location = new System.Drawing.Point(455, 182);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(95, 37);
             this.saveButton.TabIndex = 41;
@@ -251,7 +251,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 351F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 352F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
@@ -261,7 +261,7 @@
             this.tableLayoutPanel1.Controls.Add(this.kodeGroupTextbox, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.namaGroupTextbox, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.deskripsiTextbox, 2, 2);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 37);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 36);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -274,7 +274,7 @@
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.panel1.BackColor = System.Drawing.Color.SteelBlue;
-            this.panel1.Location = new System.Drawing.Point(1, 2);
+            this.panel1.Location = new System.Drawing.Point(0, 1);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(596, 29);
             this.panel1.TabIndex = 39;
@@ -284,7 +284,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(597, 709);
+            this.ClientSize = new System.Drawing.Size(597, 661);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.namaProdukTextbox);
