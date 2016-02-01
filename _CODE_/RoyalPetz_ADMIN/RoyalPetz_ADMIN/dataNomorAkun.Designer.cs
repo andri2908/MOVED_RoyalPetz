@@ -32,11 +32,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.namaSupplierTextbox = new System.Windows.Forms.TextBox();
             this.dataSalesDataGridView = new System.Windows.Forms.DataGridView();
-            this.newButton = new System.Windows.Forms.Button();
-            this.displayButton = new System.Windows.Forms.Button();
             this.kodeAkun = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deskripsi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tipe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.newButton = new System.Windows.Forms.Button();
+            this.displayButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataSalesDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,6 +84,25 @@
             this.dataSalesDataGridView.TabIndex = 33;
             this.dataSalesDataGridView.DoubleClick += new System.EventHandler(this.dataSalesDataGridView_DoubleClick);
             // 
+            // kodeAkun
+            // 
+            this.kodeAkun.HeaderText = "KODE AKUN";
+            this.kodeAkun.Name = "kodeAkun";
+            this.kodeAkun.ReadOnly = true;
+            this.kodeAkun.Width = 200;
+            // 
+            // deskripsi
+            // 
+            this.deskripsi.HeaderText = "DESKRIPSI";
+            this.deskripsi.Name = "deskripsi";
+            this.deskripsi.ReadOnly = true;
+            this.deskripsi.Width = 280;
+            // 
+            // tipe
+            // 
+            this.tipe.HeaderText = "TIPE";
+            this.tipe.Name = "tipe";
+            // 
             // newButton
             // 
             this.newButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -104,25 +123,6 @@
             this.displayButton.Text = "DISPLAY";
             this.displayButton.UseVisualStyleBackColor = true;
             // 
-            // kodeAkun
-            // 
-            this.kodeAkun.HeaderText = "KODE AKUN";
-            this.kodeAkun.Name = "kodeAkun";
-            this.kodeAkun.ReadOnly = true;
-            this.kodeAkun.Width = 200;
-            // 
-            // deskripsi
-            // 
-            this.deskripsi.HeaderText = "DESKRIPSI";
-            this.deskripsi.Name = "deskripsi";
-            this.deskripsi.ReadOnly = true;
-            this.deskripsi.Width = 280;
-            // 
-            // tipe
-            // 
-            this.tipe.HeaderText = "TIPE";
-            this.tipe.Name = "tipe";
-            // 
             // dataNomorAkun
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -134,7 +134,9 @@
             this.Controls.Add(this.dataSalesDataGridView);
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.displayButton);
+            this.MaximizeBox = false;
             this.Name = "dataNomorAkun";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DATA NOMOR AKUN";
             ((System.ComponentModel.ISupportInitialize)(this.dataSalesDataGridView)).EndInit();

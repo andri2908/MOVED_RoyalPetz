@@ -37,8 +37,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.kodeGroupTextbox = new System.Windows.Forms.TextBox();
             this.namaGroupTextbox = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.shiftCombobox = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.loginButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -50,7 +50,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 192F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 193F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
@@ -111,7 +111,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(129, 7);
+            this.label4.Location = new System.Drawing.Point(128, 7);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(11, 18);
             this.label4.TabIndex = 10;
@@ -123,7 +123,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(129, 47);
+            this.label6.Location = new System.Drawing.Point(128, 47);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(11, 18);
             this.label6.TabIndex = 12;
@@ -135,7 +135,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(129, 90);
+            this.label7.Location = new System.Drawing.Point(128, 90);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(11, 18);
             this.label7.TabIndex = 13;
@@ -145,7 +145,7 @@
             // 
             this.kodeGroupTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.kodeGroupTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kodeGroupTextbox.Location = new System.Drawing.Point(146, 3);
+            this.kodeGroupTextbox.Location = new System.Drawing.Point(145, 3);
             this.kodeGroupTextbox.Name = "kodeGroupTextbox";
             this.kodeGroupTextbox.ReadOnly = true;
             this.kodeGroupTextbox.Size = new System.Drawing.Size(187, 27);
@@ -155,20 +155,12 @@
             // 
             this.namaGroupTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.namaGroupTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaGroupTextbox.Location = new System.Drawing.Point(146, 42);
+            this.namaGroupTextbox.Location = new System.Drawing.Point(145, 42);
             this.namaGroupTextbox.Name = "namaGroupTextbox";
             this.namaGroupTextbox.PasswordChar = '*';
             this.namaGroupTextbox.ReadOnly = true;
             this.namaGroupTextbox.Size = new System.Drawing.Size(187, 27);
             this.namaGroupTextbox.TabIndex = 16;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.SteelBlue;
-            this.panel1.Location = new System.Drawing.Point(1, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(338, 29);
-            this.panel1.TabIndex = 60;
             // 
             // shiftCombobox
             // 
@@ -178,10 +170,18 @@
             this.shiftCombobox.Items.AddRange(new object[] {
             "SHIFT 1",
             "SHIFT 2"});
-            this.shiftCombobox.Location = new System.Drawing.Point(146, 88);
+            this.shiftCombobox.Location = new System.Drawing.Point(145, 86);
             this.shiftCombobox.Name = "shiftCombobox";
             this.shiftCombobox.Size = new System.Drawing.Size(187, 26);
             this.shiftCombobox.TabIndex = 17;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel1.Location = new System.Drawing.Point(1, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(338, 29);
+            this.panel1.TabIndex = 60;
             // 
             // loginButton
             // 
@@ -203,7 +203,9 @@
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.MaximizeBox = false;
             this.Name = "loginForm";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LOGIN";
             this.tableLayoutPanel1.ResumeLayout(false);

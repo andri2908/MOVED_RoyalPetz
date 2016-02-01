@@ -129,7 +129,9 @@
             this.Controls.Add(this.dataSalesDataGridView);
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.displayButton);
+            this.MaximizeBox = false;
             this.Name = "dataGroupForm";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NAMA GROUP";
             this.Load += new System.EventHandler(this.dataGroupForm_Load);

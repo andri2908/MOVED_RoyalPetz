@@ -76,6 +76,7 @@
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ipAddressMaskedTextbox);
+            this.MaximizeBox = false;
             this.Name = "IPPusatForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

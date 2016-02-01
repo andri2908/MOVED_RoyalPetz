@@ -127,7 +127,9 @@
             this.Controls.Add(this.dataPelangganDataGridView);
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.displayButton);
+            this.MaximizeBox = false;
             this.Name = "dataPelangganForm";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NAMA PELANGGAN";
             ((System.ComponentModel.ISupportInitialize)(this.dataPelangganDataGridView)).EndInit();

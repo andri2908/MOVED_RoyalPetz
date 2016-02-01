@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.namaSupplierTextbox = new System.Windows.Forms.TextBox();
             this.dataSalesDataGridView = new System.Windows.Forms.DataGridView();
-            this.newButton = new System.Windows.Forms.Button();
-            this.displayButton = new System.Windows.Forms.Button();
             this.kodeSales = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.namaSales = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.newButton = new System.Windows.Forms.Button();
+            this.displayButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataSalesDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,14 +63,14 @@
             this.dataSalesDataGridView.AllowUserToAddRows = false;
             this.dataSalesDataGridView.AllowUserToDeleteRows = false;
             this.dataSalesDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataSalesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataSalesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataSalesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataSalesDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.kodeSales,
@@ -80,6 +80,20 @@
             this.dataSalesDataGridView.RowHeadersVisible = false;
             this.dataSalesDataGridView.Size = new System.Drawing.Size(602, 480);
             this.dataSalesDataGridView.TabIndex = 18;
+            // 
+            // kodeSales
+            // 
+            this.kodeSales.HeaderText = "KODE SALES";
+            this.kodeSales.Name = "kodeSales";
+            this.kodeSales.ReadOnly = true;
+            this.kodeSales.Width = 200;
+            // 
+            // namaSales
+            // 
+            this.namaSales.HeaderText = "NAMA SALES";
+            this.namaSales.Name = "namaSales";
+            this.namaSales.ReadOnly = true;
+            this.namaSales.Width = 350;
             // 
             // newButton
             // 
@@ -102,20 +116,6 @@
             this.displayButton.Text = "DISPLAY";
             this.displayButton.UseVisualStyleBackColor = true;
             // 
-            // kodeSales
-            // 
-            this.kodeSales.HeaderText = "KODE SALES";
-            this.kodeSales.Name = "kodeSales";
-            this.kodeSales.ReadOnly = true;
-            this.kodeSales.Width = 200;
-            // 
-            // namaSales
-            // 
-            this.namaSales.HeaderText = "NAMA SALES";
-            this.namaSales.Name = "namaSales";
-            this.namaSales.ReadOnly = true;
-            this.namaSales.Width = 350;
-            // 
             // dataSalesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -127,7 +127,9 @@
             this.Controls.Add(this.dataSalesDataGridView);
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.displayButton);
+            this.MaximizeBox = false;
             this.Name = "dataSalesForm";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NAMA SALES";
             ((System.ComponentModel.ISupportInitialize)(this.dataSalesDataGridView)).EndInit();

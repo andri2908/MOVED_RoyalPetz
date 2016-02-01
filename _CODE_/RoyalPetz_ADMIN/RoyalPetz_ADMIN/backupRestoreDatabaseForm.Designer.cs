@@ -160,6 +160,7 @@
             this.ClientSize = new System.Drawing.Size(579, 248);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl1);
+            this.MaximizeBox = false;
             this.Name = "backupRestoreDatabaseForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

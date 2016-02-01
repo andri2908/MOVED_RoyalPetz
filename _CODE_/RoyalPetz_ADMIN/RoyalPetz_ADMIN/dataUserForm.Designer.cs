@@ -128,7 +128,9 @@
             this.Controls.Add(this.dataSalesDataGridView);
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.displayButton);
+            this.MaximizeBox = false;
             this.Name = "dataUserForm";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NAMA USER";
             ((System.ComponentModel.ISupportInitialize)(this.dataSalesDataGridView)).EndInit();

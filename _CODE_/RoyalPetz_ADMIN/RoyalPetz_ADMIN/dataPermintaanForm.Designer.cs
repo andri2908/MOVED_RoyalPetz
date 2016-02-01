@@ -226,7 +226,9 @@
             this.Controls.Add(this.namaSupplierTextbox);
             this.Controls.Add(this.dataSalesDataGridView);
             this.Controls.Add(this.displayButton);
+            this.MaximizeBox = false;
             this.Name = "dataPermintaanForm";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DATA PERMINTAAN";
             ((System.ComponentModel.ISupportInitialize)(this.dataSalesDataGridView)).EndInit();
