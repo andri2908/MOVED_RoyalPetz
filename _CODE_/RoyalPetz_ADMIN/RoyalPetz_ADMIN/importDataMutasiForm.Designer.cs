@@ -108,6 +108,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.restoreButton);
             this.Controls.Add(this.label2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "importDataMutasiForm";
             this.ShowIcon = false;

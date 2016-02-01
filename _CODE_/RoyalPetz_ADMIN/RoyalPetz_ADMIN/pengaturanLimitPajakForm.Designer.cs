@@ -56,7 +56,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 93.91534F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.084656F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 216F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 217F));
             this.tableLayoutPanel1.Controls.Add(this.maskedTextBox1, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
@@ -88,7 +88,7 @@
             // 
             this.maskedTextBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.maskedTextBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.maskedTextBox1.Location = new System.Drawing.Point(380, 38);
+            this.maskedTextBox1.Location = new System.Drawing.Point(379, 38);
             this.maskedTextBox1.Mask = "000";
             this.maskedTextBox1.Name = "maskedTextBox1";
             this.maskedTextBox1.Size = new System.Drawing.Size(49, 27);
@@ -160,7 +160,7 @@
             // 
             this.textBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(380, 74);
+            this.textBox3.Location = new System.Drawing.Point(379, 74);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(204, 27);
             this.textBox3.TabIndex = 17;
@@ -169,7 +169,7 @@
             // 
             this.maskedTextBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.maskedTextBox3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.maskedTextBox3.Location = new System.Drawing.Point(380, 3);
+            this.maskedTextBox3.Location = new System.Drawing.Point(379, 3);
             this.maskedTextBox3.Mask = "000";
             this.maskedTextBox3.Name = "maskedTextBox3";
             this.maskedTextBox3.Size = new System.Drawing.Size(49, 27);
@@ -193,7 +193,7 @@
             // 
             this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(380, 108);
+            this.textBox1.Location = new System.Drawing.Point(379, 108);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(204, 27);
             this.textBox1.TabIndex = 47;
@@ -226,7 +226,7 @@
             // 
             this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(380, 144);
+            this.textBox2.Location = new System.Drawing.Point(379, 144);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(204, 27);
             this.textBox2.TabIndex = 50;
@@ -284,6 +284,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "pengaturanLimitPajakForm";
             this.ShowIcon = false;

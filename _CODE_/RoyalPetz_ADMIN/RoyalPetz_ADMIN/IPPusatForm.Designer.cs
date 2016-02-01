@@ -76,6 +76,7 @@
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ipAddressMaskedTextbox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "IPPusatForm";
             this.ShowIcon = false;

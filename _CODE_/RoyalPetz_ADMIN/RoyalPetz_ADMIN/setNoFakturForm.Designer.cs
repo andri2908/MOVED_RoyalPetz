@@ -91,7 +91,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(204, 7);
+            this.label4.Location = new System.Drawing.Point(203, 7);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(14, 18);
             this.label4.TabIndex = 10;
@@ -103,7 +103,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(204, 43);
+            this.label6.Location = new System.Drawing.Point(203, 43);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(14, 18);
             this.label6.TabIndex = 12;
@@ -115,7 +115,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(204, 78);
+            this.label7.Location = new System.Drawing.Point(203, 78);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(14, 18);
             this.label7.TabIndex = 13;
@@ -145,7 +145,7 @@
             // 
             this.textBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(231, 74);
+            this.textBox3.Location = new System.Drawing.Point(230, 74);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(204, 27);
             this.textBox3.TabIndex = 17;
@@ -157,7 +157,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 349F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 350F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
@@ -188,7 +188,7 @@
             // 
             this.maskedTextBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.maskedTextBox3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.maskedTextBox3.Location = new System.Drawing.Point(231, 3);
+            this.maskedTextBox3.Location = new System.Drawing.Point(230, 3);
             this.maskedTextBox3.Mask = "000000000000000";
             this.maskedTextBox3.Name = "maskedTextBox3";
             this.maskedTextBox3.Size = new System.Drawing.Size(265, 27);
@@ -201,7 +201,7 @@
             this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.comboBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(231, 39);
+            this.comboBox1.Location = new System.Drawing.Point(230, 39);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(204, 26);
             this.comboBox1.TabIndex = 44;
@@ -224,7 +224,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label8.Location = new System.Drawing.Point(204, 113);
+            this.label8.Location = new System.Drawing.Point(203, 113);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(14, 18);
             this.label8.TabIndex = 46;
@@ -234,7 +234,7 @@
             // 
             this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(231, 108);
+            this.textBox1.Location = new System.Drawing.Point(230, 108);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(204, 27);
             this.textBox1.TabIndex = 47;
@@ -257,7 +257,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label10.Location = new System.Drawing.Point(204, 148);
+            this.label10.Location = new System.Drawing.Point(203, 148);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(14, 18);
             this.label10.TabIndex = 49;
@@ -267,7 +267,7 @@
             // 
             this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(231, 144);
+            this.textBox2.Location = new System.Drawing.Point(230, 144);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(342, 27);
             this.textBox2.TabIndex = 50;
@@ -281,6 +281,7 @@
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "setNoFakturForm";
             this.ShowIcon = false;

@@ -127,6 +127,7 @@
             this.Controls.Add(this.dataSupplierDataGridView);
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.displayButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "dataSupplierForm";
             this.ShowIcon = false;

@@ -145,7 +145,7 @@
             this.informasiToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1276, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1008, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -845,7 +845,7 @@
             this.toolStripMenuItem26.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripMenuItem26.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripMenuItem26.Name = "toolStripMenuItem26";
-            this.toolStripMenuItem26.Size = new System.Drawing.Size(109, 22);
+            this.toolStripMenuItem26.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem26.Text = "User";
             // 
             // toolStripMenuItem74
@@ -924,7 +924,7 @@
             this.developerToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
             this.developerToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.developerToolStripMenuItem.Name = "developerToolStripMenuItem";
-            this.developerToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.developerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.developerToolStripMenuItem.Text = "Developer";
             // 
             // statusStrip1
@@ -933,16 +933,16 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.timeStampStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 697);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 707);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1276, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1008, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1040, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(772, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // timeStampStatusLabel
@@ -979,7 +979,7 @@
             this.toolStripSeparator3});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1276, 69);
+            this.toolStrip1.Size = new System.Drawing.Size(1008, 69);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -1031,7 +1031,7 @@
             this.toolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(66, 66);
+            this.toolStripButton2.Size = new System.Drawing.Size(65, 66);
             this.toolStripButton2.Text = "PIUTANG";
             this.toolStripButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
@@ -1043,7 +1043,7 @@
             this.toolStripButton5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(62, 66);
+            this.toolStripButton5.Size = new System.Drawing.Size(61, 66);
             this.toolStripButton5.Text = "HUTANG";
             this.toolStripButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
@@ -1072,7 +1072,7 @@
             this.toolStripButton7.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(70, 66);
+            this.toolStripButton7.Size = new System.Drawing.Size(68, 66);
             this.toolStripButton7.Text = "RET. BELI";
             this.toolStripButton7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
@@ -1084,7 +1084,7 @@
             this.toolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(71, 66);
+            this.toolStripButton6.Size = new System.Drawing.Size(69, 66);
             this.toolStripButton6.Text = "RET. JUAL";
             this.toolStripButton6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
@@ -1096,21 +1096,21 @@
             // 
             // adminForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(1276, 719);
+            this.ClientSize = new System.Drawing.Size(1008, 729);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximizeBox = false;
             this.Name = "adminForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ADMINISTRATOR MODULE";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.adminForm_FormClosed);
             this.Load += new System.EventHandler(this.adminForm_Load);
             this.menuStrip1.ResumeLayout(false);

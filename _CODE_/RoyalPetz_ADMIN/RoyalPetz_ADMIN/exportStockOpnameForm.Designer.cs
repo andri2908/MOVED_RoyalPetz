@@ -93,6 +93,7 @@
             this.Controls.Add(this.exportToExcel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.exportToCSV);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "exportStockOpnameForm";
             this.ShowIcon = false;

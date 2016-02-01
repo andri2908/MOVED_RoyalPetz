@@ -138,6 +138,7 @@
             this.Controls.Add(this.namaSupplierTextbox);
             this.Controls.Add(this.dataInvoiceDataGridView);
             this.Controls.Add(this.displayButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "dataInvoiceForm";
             this.ShowIcon = false;

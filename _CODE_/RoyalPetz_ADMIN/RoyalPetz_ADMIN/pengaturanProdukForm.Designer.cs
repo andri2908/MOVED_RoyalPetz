@@ -88,7 +88,7 @@
             this.dataProdukDataGridView.Location = new System.Drawing.Point(0, 70);
             this.dataProdukDataGridView.Name = "dataProdukDataGridView";
             this.dataProdukDataGridView.RowHeadersVisible = false;
-            this.dataProdukDataGridView.Size = new System.Drawing.Size(1062, 500);
+            this.dataProdukDataGridView.Size = new System.Drawing.Size(997, 500);
             this.dataProdukDataGridView.TabIndex = 35;
             // 
             // kodeProduk
@@ -120,12 +120,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(1063, 571);
+            this.ClientSize = new System.Drawing.Size(998, 571);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataProdukDataGridView);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.namaSupplierTextbox);
             this.Controls.Add(this.displayButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "pengaturanProdukForm";
             this.ShowIcon = false;

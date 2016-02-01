@@ -117,6 +117,7 @@
             this.ClientSize = new System.Drawing.Size(938, 549);
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.dataMutasiBarangGridView);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "dataMutasiBarangForm";
             this.ShowIcon = false;

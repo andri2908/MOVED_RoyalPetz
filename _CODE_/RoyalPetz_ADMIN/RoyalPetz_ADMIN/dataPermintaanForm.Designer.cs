@@ -226,6 +226,7 @@
             this.Controls.Add(this.namaSupplierTextbox);
             this.Controls.Add(this.dataSalesDataGridView);
             this.Controls.Add(this.displayButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "dataPermintaanForm";
             this.ShowIcon = false;

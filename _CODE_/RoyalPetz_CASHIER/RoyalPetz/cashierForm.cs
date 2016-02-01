@@ -229,5 +229,10 @@ namespace RoyalPetz
         {
 
         }
+
+        private void panel9_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

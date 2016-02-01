@@ -50,7 +50,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 193F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 194F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
@@ -113,7 +113,7 @@
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label4.Location = new System.Drawing.Point(128, 7);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(11, 18);
+            this.label4.Size = new System.Drawing.Size(10, 18);
             this.label4.TabIndex = 10;
             this.label4.Text = ":";
             // 
@@ -125,7 +125,7 @@
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label6.Location = new System.Drawing.Point(128, 47);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(11, 18);
+            this.label6.Size = new System.Drawing.Size(10, 18);
             this.label6.TabIndex = 12;
             this.label6.Text = ":";
             // 
@@ -137,7 +137,7 @@
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label7.Location = new System.Drawing.Point(128, 90);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(11, 18);
+            this.label7.Size = new System.Drawing.Size(10, 18);
             this.label7.TabIndex = 13;
             this.label7.Text = ":";
             // 
@@ -145,7 +145,7 @@
             // 
             this.kodeGroupTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.kodeGroupTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kodeGroupTextbox.Location = new System.Drawing.Point(145, 3);
+            this.kodeGroupTextbox.Location = new System.Drawing.Point(144, 3);
             this.kodeGroupTextbox.Name = "kodeGroupTextbox";
             this.kodeGroupTextbox.ReadOnly = true;
             this.kodeGroupTextbox.Size = new System.Drawing.Size(187, 27);
@@ -155,7 +155,7 @@
             // 
             this.namaGroupTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.namaGroupTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaGroupTextbox.Location = new System.Drawing.Point(145, 42);
+            this.namaGroupTextbox.Location = new System.Drawing.Point(144, 42);
             this.namaGroupTextbox.Name = "namaGroupTextbox";
             this.namaGroupTextbox.PasswordChar = '*';
             this.namaGroupTextbox.ReadOnly = true;
@@ -170,7 +170,7 @@
             this.shiftCombobox.Items.AddRange(new object[] {
             "SHIFT 1",
             "SHIFT 2"});
-            this.shiftCombobox.Location = new System.Drawing.Point(145, 86);
+            this.shiftCombobox.Location = new System.Drawing.Point(144, 86);
             this.shiftCombobox.Name = "shiftCombobox";
             this.shiftCombobox.Size = new System.Drawing.Size(187, 26);
             this.shiftCombobox.TabIndex = 17;
@@ -203,6 +203,7 @@
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "loginForm";
             this.ShowIcon = false;

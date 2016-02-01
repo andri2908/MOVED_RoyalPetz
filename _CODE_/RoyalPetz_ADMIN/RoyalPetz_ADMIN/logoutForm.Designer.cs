@@ -54,7 +54,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.89189F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.108109F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 203F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 204F));
             this.tableLayoutPanel1.Controls.Add(this.label8, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.textBox1, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
@@ -85,7 +85,7 @@
             this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label8.Location = new System.Drawing.Point(229, 132);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(14, 18);
+            this.label8.Size = new System.Drawing.Size(13, 18);
             this.label8.TabIndex = 67;
             this.label8.Text = ":";
             // 
@@ -93,7 +93,7 @@
             // 
             this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(249, 80);
+            this.textBox1.Location = new System.Drawing.Point(248, 80);
             this.textBox1.Name = "textBox1";
             this.textBox1.PasswordChar = '*';
             this.textBox1.Size = new System.Drawing.Size(187, 27);
@@ -143,7 +143,7 @@
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label4.Location = new System.Drawing.Point(229, 7);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(14, 18);
+            this.label4.Size = new System.Drawing.Size(13, 18);
             this.label4.TabIndex = 10;
             this.label4.Text = ":";
             // 
@@ -155,7 +155,7 @@
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label6.Location = new System.Drawing.Point(229, 42);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(14, 18);
+            this.label6.Size = new System.Drawing.Size(13, 18);
             this.label6.TabIndex = 12;
             this.label6.Text = ":";
             // 
@@ -167,7 +167,7 @@
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label7.Location = new System.Drawing.Point(229, 84);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(14, 18);
+            this.label7.Size = new System.Drawing.Size(13, 18);
             this.label7.TabIndex = 13;
             this.label7.Text = ":";
             // 
@@ -175,7 +175,7 @@
             // 
             this.kodeGroupTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.kodeGroupTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kodeGroupTextbox.Location = new System.Drawing.Point(249, 3);
+            this.kodeGroupTextbox.Location = new System.Drawing.Point(248, 3);
             this.kodeGroupTextbox.Name = "kodeGroupTextbox";
             this.kodeGroupTextbox.Size = new System.Drawing.Size(187, 27);
             this.kodeGroupTextbox.TabIndex = 15;
@@ -184,7 +184,7 @@
             // 
             this.namaGroupTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.namaGroupTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaGroupTextbox.Location = new System.Drawing.Point(249, 38);
+            this.namaGroupTextbox.Location = new System.Drawing.Point(248, 38);
             this.namaGroupTextbox.Name = "namaGroupTextbox";
             this.namaGroupTextbox.PasswordChar = '*';
             this.namaGroupTextbox.Size = new System.Drawing.Size(187, 27);
@@ -206,7 +206,7 @@
             // 
             this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(249, 128);
+            this.textBox2.Location = new System.Drawing.Point(248, 128);
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = '*';
             this.textBox2.Size = new System.Drawing.Size(187, 27);
@@ -256,6 +256,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.logoutButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "logoutForm";
             this.ShowIcon = false;

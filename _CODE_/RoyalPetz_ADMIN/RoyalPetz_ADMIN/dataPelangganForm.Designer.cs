@@ -127,6 +127,7 @@
             this.Controls.Add(this.dataPelangganDataGridView);
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.displayButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "dataPelangganForm";
             this.ShowIcon = false;

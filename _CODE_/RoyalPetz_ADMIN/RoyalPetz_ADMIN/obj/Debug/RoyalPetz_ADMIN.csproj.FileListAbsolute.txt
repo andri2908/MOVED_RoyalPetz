@@ -161,3 +161,7 @@ D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPet
 D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.csproj.GenerateResource.Cache
 D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.exe
 D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pdb
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.cashierForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.changePasswordForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.loginForm.resources
+D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.logoutForm.resources
