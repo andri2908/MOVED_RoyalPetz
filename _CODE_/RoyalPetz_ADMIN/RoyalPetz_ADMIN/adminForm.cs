@@ -447,7 +447,8 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-
+            cashierForm displayedForm = new cashierForm();
+            displayedForm.ShowDialog(this);
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
@@ -501,6 +502,12 @@ namespace RoyalPetz_ADMIN
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             logoutForm displayedForm = new logoutForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem18_Click(object sender, EventArgs e)
+        {
+            cashierForm displayedForm = new cashierForm();
             displayedForm.ShowDialog(this);
         }
     }
