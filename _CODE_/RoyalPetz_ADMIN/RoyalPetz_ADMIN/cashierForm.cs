@@ -13,7 +13,7 @@ namespace RoyalPetz_ADMIN
 {
     public partial class cashierForm : Form
     {
-        private int objCounter;
+        public static int objCounter = 1;
 
         private Hotkeys.GlobalHotkey ghk_F1;
         private Hotkeys.GlobalHotkey ghk_F2;
@@ -40,15 +40,15 @@ namespace RoyalPetz_ADMIN
             switch (key)
             {
                 case Keys.F1:
-                    //MessageBox.Show("F1");
-                    cashierForm displayForm = new cashierForm(parentForm, parentForm.objCounter);
-                    displayForm.Show();
+                    MessageBox.Show("F1");
                     break;
                 case Keys.F2:
                     MessageBox.Show("F2");
                     break;
                 case Keys.F3:
-                    MessageBox.Show("F3");
+                    //MessageBox.Show("F3");
+                    cashierForm displayForm = new cashierForm(objCounter);
+                    displayForm.Show();
                     break;
                 case Keys.F4:
                     MessageBox.Show("F4");
@@ -203,13 +203,12 @@ namespace RoyalPetz_ADMIN
             InitializeComponent();
         }
 
-        public cashierForm(adminForm originForm, int counter)
+        public cashierForm(int counter)
         {
             InitializeComponent();
             label1.Text = "Struk # : " + counter;
 
-            parentForm = originForm;
-            parentForm.objCounter = counter + 1;
+            objCounter = counter + 1;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

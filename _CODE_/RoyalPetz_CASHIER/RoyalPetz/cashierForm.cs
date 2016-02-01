@@ -13,6 +13,8 @@ namespace RoyalPetz
 {
     public partial class cashierForm : Form
     {
+        public static int objCounter = 1;
+
         private Hotkeys.GlobalHotkey ghk_F1;
         private Hotkeys.GlobalHotkey ghk_F2;
         private Hotkeys.GlobalHotkey ghk_F3;
@@ -29,7 +31,7 @@ namespace RoyalPetz
         private Hotkeys.GlobalHotkey ghk_CTRL_C;
         private Hotkeys.GlobalHotkey ghk_CTRL_U;
 
-        private Hotkeys.GlobalHotkey ghk_ALT_F4;
+        private Hotkeys.GlobalHotkey ghk_ALT_F4;        
 
         private void captureAll(Keys key)
         {
@@ -42,7 +44,9 @@ namespace RoyalPetz
                     MessageBox.Show("F2");
                     break;
                 case Keys.F3:
-                    MessageBox.Show("F3");
+//                    MessageBox.Show("F3");
+                    cashierForm displayForm = new cashierForm(objCounter);
+                    displayForm.Show();
                     break;
                 case Keys.F4:
                     MessageBox.Show("F4");
@@ -195,8 +199,17 @@ namespace RoyalPetz
         public cashierForm()
         {
             InitializeComponent();
-
+            objCounter = objCounter + 1;
         }
+
+        public cashierForm(int counter)
+        {
+            InitializeComponent();
+
+            label1.Text = "Struk # : " + counter;
+            objCounter = counter + 1;
+        }
+
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -233,6 +246,27 @@ namespace RoyalPetz
         private void panel9_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void cashierForm_Activated(object sender, EventArgs e)
+        {
+            //MessageBox.Show(label1.Text);
+            //label6.Text = "AKTIF";
+        }
+
+        private void cashierForm_Enter(object sender, EventArgs e)
+        {
+ 
+        }
+
+        private void cashierForm_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void cashierForm_Deactivate(object sender, EventArgs e)
+        {
+            //label6.Text = "";
         }
     }
 }
