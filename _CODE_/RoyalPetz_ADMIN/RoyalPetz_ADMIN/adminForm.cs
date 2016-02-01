@@ -18,6 +18,7 @@ namespace RoyalPetz_ADMIN
     {
         private DateTime localDate = DateTime.Now;
         private CultureInfo culture = new CultureInfo("id-ID");
+        public int objCounter = 1;
 
         public adminForm()
         {
@@ -447,7 +448,7 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            cashierForm displayedForm = new cashierForm();
+            cashierForm displayedForm = new cashierForm(this, objCounter);
             displayedForm.ShowDialog(this);
         }
 
