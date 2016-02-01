@@ -50,6 +50,9 @@
     <Compile Include="changePasswordForm.Designer.cs">
       <DependentUpon>changePasswordForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Constants.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="dataNomorAkun.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -207,6 +210,9 @@
       <DependentUpon>exportStockOpnameForm.cs</DependentUpon>
     </Compile>
     <Compile Include="globalConstants.cs" />
+    <Compile Include="GlobalHotkey.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="groupAccessModuleForm.cs">
       <SubType>Form</SubType>
     </Compile>

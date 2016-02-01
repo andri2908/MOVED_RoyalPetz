@@ -494,7 +494,7 @@ namespace RoyalPetz_ADMIN
 
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dataUserForm displayedForm = new dataUserForm(globalConstants.CHANGE_PASSWORD);
+            changePasswordForm displayedForm = new changePasswordForm();
             displayedForm.ShowDialog(this);
         }
 

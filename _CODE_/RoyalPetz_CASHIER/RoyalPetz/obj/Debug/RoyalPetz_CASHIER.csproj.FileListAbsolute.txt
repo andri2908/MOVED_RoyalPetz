@@ -24,3 +24,12 @@ C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_CASHIER\RoyalPetz\obj
 C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_CASHIER\RoyalPetz\obj\Debug\RoyalPetz.cashierForm.resources
 C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_CASHIER\RoyalPetz\obj\Debug\RoyalPetz.Properties.Resources.resources
 C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_CASHIER\RoyalPetz\obj\Debug\RoyalPetz_CASHIER.csproj.GenerateResource.Cache
+D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_CASHIER\RoyalPetz\bin\Debug\RoyalPetz.exe.config
+D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_CASHIER\RoyalPetz\obj\Debug\RoyalPetz.exe
+D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_CASHIER\RoyalPetz\obj\Debug\RoyalPetz.pdb
+D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_CASHIER\RoyalPetz\bin\Debug\RoyalPetz.exe
+D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_CASHIER\RoyalPetz\bin\Debug\RoyalPetz.pdb
+D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_CASHIER\RoyalPetz\obj\Debug\RoyalPetz_CASHIER.csprojResolveAssemblyReference.cache
+D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_CASHIER\RoyalPetz\obj\Debug\RoyalPetz.cashierForm.resources
+D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_CASHIER\RoyalPetz\obj\Debug\RoyalPetz.Properties.Resources.resources
+D:\_PROJECT_\RoyalPetz\_CODE_\RoyalPetz_CASHIER\RoyalPetz\obj\Debug\RoyalPetz_CASHIER.csproj.GenerateResource.Cache
