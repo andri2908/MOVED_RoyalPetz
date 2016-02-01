@@ -62,7 +62,7 @@ namespace RoyalPetz_ADMIN
 
             DataGridViewColumn nomorRakColumn = new DataGridViewColumn();
             nomorRakColumn.HeaderText = "NOMOR RAK";
-            nomorRakColumn.Width = 100;
+            nomorRakColumn.Width = 150;
 
             dataProdukDataGridView.Columns.Add(kodeRakColumn);
             dataProdukDataGridView.Columns.Add(nomorRakColumn);

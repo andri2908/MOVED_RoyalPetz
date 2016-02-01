@@ -28,17 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label12 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.saveButton = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.detailRequestOrderDataGridView = new System.Windows.Forms.DataGridView();
+            this.moduleID = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.qtyRetur = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hargaJual = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -50,10 +54,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.moduleID = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.qtyRetur = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hargaJual = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.detailRequestOrderDataGridView)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -90,7 +90,7 @@
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(351, 784);
+            this.saveButton.Location = new System.Drawing.Point(390, 737);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(111, 37);
             this.saveButton.TabIndex = 40;
@@ -100,14 +100,14 @@
             // detailRequestOrderDataGridView
             // 
             this.detailRequestOrderDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.detailRequestOrderDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.detailRequestOrderDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.detailRequestOrderDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.detailRequestOrderDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.moduleID,
@@ -116,8 +116,28 @@
             this.detailRequestOrderDataGridView.Location = new System.Drawing.Point(6, 283);
             this.detailRequestOrderDataGridView.Name = "detailRequestOrderDataGridView";
             this.detailRequestOrderDataGridView.RowHeadersVisible = false;
-            this.detailRequestOrderDataGridView.Size = new System.Drawing.Size(888, 477);
+            this.detailRequestOrderDataGridView.Size = new System.Drawing.Size(888, 448);
             this.detailRequestOrderDataGridView.TabIndex = 38;
+            // 
+            // moduleID
+            // 
+            this.moduleID.HeaderText = "NAMA PRODUK";
+            this.moduleID.Name = "moduleID";
+            this.moduleID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.moduleID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.moduleID.Width = 350;
+            // 
+            // qtyRetur
+            // 
+            this.qtyRetur.HeaderText = "QTY RETUR";
+            this.qtyRetur.Name = "qtyRetur";
+            this.qtyRetur.Width = 150;
+            // 
+            // hargaJual
+            // 
+            this.hargaJual.HeaderText = "HARGA ";
+            this.hargaJual.Name = "hargaJual";
+            this.hargaJual.Width = 200;
             // 
             // textBox1
             // 
@@ -177,6 +197,16 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(624, 35);
             this.tableLayoutPanel3.TabIndex = 22;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.comboBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(3, 4);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(346, 26);
+            this.comboBox1.TabIndex = 0;
+            // 
             // label7
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -221,7 +251,7 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel5, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.label17, 1, 5);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 38);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(7, 35);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -240,7 +270,7 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 233F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 186F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 187F));
             this.tableLayoutPanel6.Controls.Add(this.textBox6, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.label18, 2, 0);
             this.tableLayoutPanel6.Controls.Add(this.textBox7, 3, 0);
@@ -257,7 +287,7 @@
             this.textBox6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox6.Location = new System.Drawing.Point(3, 4);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(181, 27);
+            this.textBox6.Size = new System.Drawing.Size(180, 27);
             this.textBox6.TabIndex = 16;
             // 
             // label18
@@ -266,7 +296,7 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label18.Location = new System.Drawing.Point(207, 8);
+            this.label18.Location = new System.Drawing.Point(206, 8);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(176, 18);
             this.label18.TabIndex = 20;
@@ -276,7 +306,7 @@
             // 
             this.textBox7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox7.Location = new System.Drawing.Point(440, 4);
+            this.textBox7.Location = new System.Drawing.Point(439, 4);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(178, 27);
             this.textBox7.TabIndex = 21;
@@ -325,42 +355,12 @@
             this.panel1.Size = new System.Drawing.Size(897, 29);
             this.panel1.TabIndex = 36;
             // 
-            // moduleID
-            // 
-            this.moduleID.HeaderText = "NAMA PRODUK";
-            this.moduleID.Name = "moduleID";
-            this.moduleID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.moduleID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.moduleID.Width = 350;
-            // 
-            // qtyRetur
-            // 
-            this.qtyRetur.HeaderText = "QTY RETUR";
-            this.qtyRetur.Name = "qtyRetur";
-            this.qtyRetur.Width = 150;
-            // 
-            // hargaJual
-            // 
-            this.hargaJual.HeaderText = "HARGA ";
-            this.hargaJual.Name = "hargaJual";
-            this.hargaJual.Width = 200;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.comboBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(3, 7);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(346, 26);
-            this.comboBox1.TabIndex = 0;
-            // 
             // dataReturPermintaanForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(901, 833);
+            this.ClientSize = new System.Drawing.Size(901, 782);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.detailRequestOrderDataGridView);
             this.Controls.Add(this.tableLayoutPanel1);

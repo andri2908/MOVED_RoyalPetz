@@ -44,6 +44,10 @@ namespace RoyalPetz_ADMIN
                     penyesuaianStokForm.ShowDialog(this);
                     break;
 
+                case globalConstants.BROWSE_STOK_PECAH_BARANG:
+                    this.Close();
+                    break;
+
                 default: // MASTER DATA PRODUK
                     dataProdukDetailForm displayForm = new dataProdukDetailForm();
                     displayForm.ShowDialog(this);

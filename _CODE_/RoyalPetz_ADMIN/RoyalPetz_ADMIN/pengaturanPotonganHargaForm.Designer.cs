@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,11 +43,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.deskripsiTextbox = new System.Windows.Forms.TextBox();
             this.pengaturanKategoriDataGridView = new System.Windows.Forms.DataGridView();
+            this.moduleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.potonganHarga = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.saveButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.moduleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.potonganHarga = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pengaturanKategoriDataGridView)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -103,7 +103,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(178, 7);
+            this.label4.Location = new System.Drawing.Point(177, 7);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(14, 18);
             this.label4.TabIndex = 10;
@@ -115,7 +115,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(178, 47);
+            this.label6.Location = new System.Drawing.Point(177, 47);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(14, 18);
             this.label6.TabIndex = 12;
@@ -127,7 +127,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(178, 90);
+            this.label7.Location = new System.Drawing.Point(177, 90);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(14, 18);
             this.label7.TabIndex = 13;
@@ -137,7 +137,7 @@
             // 
             this.kodeGroupTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.kodeGroupTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kodeGroupTextbox.Location = new System.Drawing.Point(201, 3);
+            this.kodeGroupTextbox.Location = new System.Drawing.Point(200, 3);
             this.kodeGroupTextbox.Name = "kodeGroupTextbox";
             this.kodeGroupTextbox.ReadOnly = true;
             this.kodeGroupTextbox.Size = new System.Drawing.Size(93, 27);
@@ -147,7 +147,7 @@
             // 
             this.namaGroupTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.namaGroupTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaGroupTextbox.Location = new System.Drawing.Point(201, 42);
+            this.namaGroupTextbox.Location = new System.Drawing.Point(200, 42);
             this.namaGroupTextbox.Name = "namaGroupTextbox";
             this.namaGroupTextbox.ReadOnly = true;
             this.namaGroupTextbox.Size = new System.Drawing.Size(340, 27);
@@ -190,7 +190,7 @@
             // 
             this.deskripsiTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.deskripsiTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deskripsiTextbox.Location = new System.Drawing.Point(201, 85);
+            this.deskripsiTextbox.Location = new System.Drawing.Point(200, 85);
             this.deskripsiTextbox.Name = "deskripsiTextbox";
             this.deskripsiTextbox.ReadOnly = true;
             this.deskripsiTextbox.Size = new System.Drawing.Size(210, 27);
@@ -201,14 +201,14 @@
             this.pengaturanKategoriDataGridView.AllowUserToAddRows = false;
             this.pengaturanKategoriDataGridView.AllowUserToDeleteRows = false;
             this.pengaturanKategoriDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.pengaturanKategoriDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.pengaturanKategoriDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.pengaturanKategoriDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.pengaturanKategoriDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.moduleID,
@@ -218,6 +218,20 @@
             this.pengaturanKategoriDataGridView.RowHeadersVisible = false;
             this.pengaturanKategoriDataGridView.Size = new System.Drawing.Size(594, 529);
             this.pengaturanKategoriDataGridView.TabIndex = 42;
+            // 
+            // moduleID
+            // 
+            this.moduleID.HeaderText = "NAMA PRODUK";
+            this.moduleID.Name = "moduleID";
+            this.moduleID.ReadOnly = true;
+            this.moduleID.Width = 350;
+            // 
+            // potonganHarga
+            // 
+            this.potonganHarga.HeaderText = "POTONGAN HARGA (%)";
+            this.potonganHarga.Name = "potonganHarga";
+            this.potonganHarga.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.potonganHarga.Width = 230;
             // 
             // saveButton
             // 
@@ -237,7 +251,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 348F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 349F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
@@ -265,20 +279,6 @@
             this.panel1.Size = new System.Drawing.Size(596, 29);
             this.panel1.TabIndex = 39;
             // 
-            // moduleID
-            // 
-            this.moduleID.HeaderText = "NAMA PRODUK";
-            this.moduleID.Name = "moduleID";
-            this.moduleID.ReadOnly = true;
-            this.moduleID.Width = 350;
-            // 
-            // potonganHarga
-            // 
-            this.potonganHarga.HeaderText = "POTONGAN HARGA (%)";
-            this.potonganHarga.Name = "potonganHarga";
-            this.potonganHarga.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.potonganHarga.Width = 230;
-            // 
             // pengaturanPotonganHargaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -295,6 +295,7 @@
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
             this.Name = "pengaturanPotonganHargaForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PENGATURAN POTONGAN HARGA";
             this.Load += new System.EventHandler(this.pengaturanPotonganHargaForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pengaturanKategoriDataGridView)).EndInit();

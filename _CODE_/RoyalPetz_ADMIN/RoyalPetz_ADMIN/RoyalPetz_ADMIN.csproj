@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="changePasswordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="changePasswordForm.Designer.cs">
+      <DependentUpon>changePasswordForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="dataNomorAkun.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -225,6 +231,18 @@
     <Compile Include="konversiSatuanForm.Designer.cs">
       <DependentUpon>konversiSatuanForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="loginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="loginForm.Designer.cs">
+      <DependentUpon>loginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="logoutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="logoutForm.Designer.cs">
+      <DependentUpon>logoutForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="pembayaranHutangForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -335,6 +353,9 @@
     <Compile Include="dataKategoriProdukForm.Designer.cs">
       <DependentUpon>dataKategoriProdukForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="changePasswordForm.resx">
+      <DependentUpon>changePasswordForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dataNomorAkun.resx">
       <DependentUpon>dataNomorAkun.cs</DependentUpon>
     </EmbeddedResource>
@@ -427,6 +448,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="konversiSatuanForm.resx">
       <DependentUpon>konversiSatuanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="loginForm.resx">
+      <DependentUpon>loginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="logoutForm.resx">
+      <DependentUpon>logoutForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pembayaranHutangForm.resx">
       <DependentUpon>pembayaranHutangForm.cs</DependentUpon>

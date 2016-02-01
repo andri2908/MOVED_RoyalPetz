@@ -137,7 +137,6 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NAMA PRODUK";
-            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.tagProdukDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

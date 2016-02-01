@@ -485,5 +485,23 @@ namespace RoyalPetz_ADMIN
             dataInvoiceForm displayedForm = new dataInvoiceForm();
             displayedForm.ShowDialog(this);
         }
+
+        private void logInToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            loginForm displayedForm = new loginForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataUserForm displayedForm = new dataUserForm(globalConstants.CHANGE_PASSWORD);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            logoutForm displayedForm = new logoutForm();
+            displayedForm.ShowDialog(this);
+        }
     }
 }

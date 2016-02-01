@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.namaSupplierTextbox = new System.Windows.Forms.TextBox();
             this.dataSalesDataGridView = new System.Windows.Forms.DataGridView();
-            this.newButton = new System.Windows.Forms.Button();
-            this.displayButton = new System.Windows.Forms.Button();
             this.kodeCabang = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.namaCabang = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.newButton = new System.Windows.Forms.Button();
+            this.displayButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataSalesDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,14 +63,14 @@
             this.dataSalesDataGridView.AllowUserToAddRows = false;
             this.dataSalesDataGridView.AllowUserToDeleteRows = false;
             this.dataSalesDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataSalesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataSalesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataSalesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataSalesDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.kodeCabang,
@@ -78,8 +78,22 @@
             this.dataSalesDataGridView.Location = new System.Drawing.Point(0, 60);
             this.dataSalesDataGridView.Name = "dataSalesDataGridView";
             this.dataSalesDataGridView.RowHeadersVisible = false;
-            this.dataSalesDataGridView.Size = new System.Drawing.Size(602, 480);
+            this.dataSalesDataGridView.Size = new System.Drawing.Size(602, 489);
             this.dataSalesDataGridView.TabIndex = 28;
+            // 
+            // kodeCabang
+            // 
+            this.kodeCabang.HeaderText = "KODE CABANG";
+            this.kodeCabang.Name = "kodeCabang";
+            this.kodeCabang.ReadOnly = true;
+            this.kodeCabang.Width = 200;
+            // 
+            // namaCabang
+            // 
+            this.namaCabang.HeaderText = "NAMA CABANG";
+            this.namaCabang.Name = "namaCabang";
+            this.namaCabang.ReadOnly = true;
+            this.namaCabang.Width = 350;
             // 
             // newButton
             // 
@@ -101,20 +115,6 @@
             this.displayButton.TabIndex = 29;
             this.displayButton.Text = "DISPLAY";
             this.displayButton.UseVisualStyleBackColor = true;
-            // 
-            // kodeCabang
-            // 
-            this.kodeCabang.HeaderText = "KODE CABANG";
-            this.kodeCabang.Name = "kodeCabang";
-            this.kodeCabang.ReadOnly = true;
-            this.kodeCabang.Width = 200;
-            // 
-            // namaCabang
-            // 
-            this.namaCabang.HeaderText = "NAMA CABANG";
-            this.namaCabang.Name = "namaCabang";
-            this.namaCabang.ReadOnly = true;
-            this.namaCabang.Width = 350;
             // 
             // dataCabangForm
             // 

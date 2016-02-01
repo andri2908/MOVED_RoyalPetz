@@ -28,6 +28,9 @@ namespace RoyalPetz_ADMIN
         public const int PENERIMAAN_BARANG = 105;
         public const int PEMBAYARAN_HUTANG = 106;
         public const int PEMBAYARAN_PIUTANG = 107;
+        public const int BROWSE_STOK_PECAH_BARANG = 108;
+        public const int CHANGE_PASSWORD = 109;
+        public const int LOGOUT_FORM = 110;
 
 
 

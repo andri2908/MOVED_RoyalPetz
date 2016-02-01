@@ -24,7 +24,7 @@ namespace RoyalPetz_ADMIN
             InitializeComponent();
             originModuleID = moduleID;
 
-            if (moduleID != globalConstants.PERMINTAAN_BARANG)
+            if ((moduleID != globalConstants.PERMINTAAN_BARANG) && (moduleID != globalConstants.CEK_DATA_MUTASI))
                 newButton.Visible = false;
         }
 

@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.namaSupplierTextbox = new System.Windows.Forms.TextBox();
             this.dataSalesDataGridView = new System.Windows.Forms.DataGridView();
-            this.newButton = new System.Windows.Forms.Button();
-            this.displayButton = new System.Windows.Forms.Button();
             this.kodeUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.namaUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.newButton = new System.Windows.Forms.Button();
+            this.displayButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataSalesDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,14 +63,14 @@
             this.dataSalesDataGridView.AllowUserToAddRows = false;
             this.dataSalesDataGridView.AllowUserToDeleteRows = false;
             this.dataSalesDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataSalesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataSalesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataSalesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataSalesDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.kodeUser,
@@ -80,6 +80,21 @@
             this.dataSalesDataGridView.RowHeadersVisible = false;
             this.dataSalesDataGridView.Size = new System.Drawing.Size(602, 480);
             this.dataSalesDataGridView.TabIndex = 23;
+            this.dataSalesDataGridView.DoubleClick += new System.EventHandler(this.dataSalesDataGridView_DoubleClick);
+            // 
+            // kodeUser
+            // 
+            this.kodeUser.HeaderText = "KODE USER";
+            this.kodeUser.Name = "kodeUser";
+            this.kodeUser.ReadOnly = true;
+            this.kodeUser.Width = 200;
+            // 
+            // namaUser
+            // 
+            this.namaUser.HeaderText = "NAMA USER";
+            this.namaUser.Name = "namaUser";
+            this.namaUser.ReadOnly = true;
+            this.namaUser.Width = 350;
             // 
             // newButton
             // 
@@ -101,20 +116,6 @@
             this.displayButton.TabIndex = 24;
             this.displayButton.Text = "DISPLAY";
             this.displayButton.UseVisualStyleBackColor = true;
-            // 
-            // kodeUser
-            // 
-            this.kodeUser.HeaderText = "KODE USER";
-            this.kodeUser.Name = "kodeUser";
-            this.kodeUser.ReadOnly = true;
-            this.kodeUser.Width = 200;
-            // 
-            // namaUser
-            // 
-            this.namaUser.HeaderText = "NAMA USER";
-            this.namaUser.Name = "namaUser";
-            this.namaUser.ReadOnly = true;
-            this.namaUser.Width = 350;
             // 
             // dataUserForm
             // 

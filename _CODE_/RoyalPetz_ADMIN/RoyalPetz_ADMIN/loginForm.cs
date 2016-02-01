@@ -10,22 +10,27 @@ using System.Windows.Forms;
 
 namespace RoyalPetz_ADMIN
 {
-    public partial class dataProdukDetailForm : Form
+    public partial class loginForm : Form
     {
         private int originModuleID = 0;
-        
-        public dataProdukDetailForm()
+
+        public loginForm()
         {
             InitializeComponent();
         }
 
-        public dataProdukDetailForm(int moduleID)
+        public loginForm(int moduleID)
         {
             InitializeComponent();
 
             originModuleID = moduleID;
-            deleteButton.Visible = false;
-        }
 
+            if (originModuleID == globalConstants.LOGOUT_FORM)
+            {
+                label1.Visible = false;
+                label7.Visible = false;
+                shiftCombobox.Visible = false;
+            }
+        }
     }
 }
