@@ -16,7 +16,7 @@ namespace RoyalPetz_ADMIN
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new adminForm());
+            Application.Run(new loginForm());
         }
     }
 }

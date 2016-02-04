@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(cashierForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.titleLabel = new System.Windows.Forms.Label();
@@ -39,13 +39,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cashierDataGridView = new System.Windows.Forms.DataGridView();
-            this.F8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qtyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.discColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qty2Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel5 = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -82,6 +75,14 @@
             this.userStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusShiftLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.dateTimeStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.F8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qtyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.disc2column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discRPcolumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cashierDataGridView)).BeginInit();
             this.panel5.SuspendLayout();
@@ -99,7 +100,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(984, 59);
+            this.panel1.Size = new System.Drawing.Size(985, 59);
             this.panel1.TabIndex = 1;
             // 
             // titleLabel
@@ -120,7 +121,7 @@
             this.panel4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panel4.BackColor = System.Drawing.Color.Black;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Location = new System.Drawing.Point(-1, -2);
+            this.panel4.Location = new System.Drawing.Point(-3, 0);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(985, 5);
             this.panel4.TabIndex = 7;
@@ -156,18 +157,18 @@
             this.cashierDataGridView.AllowUserToAddRows = false;
             this.cashierDataGridView.AllowUserToDeleteRows = false;
             this.cashierDataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.LightCyan;
-            this.cashierDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.LightCyan;
+            this.cashierDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.cashierDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            this.cashierDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.cashierDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            this.cashierDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FloralWhite;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.cashierDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.cashierDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cashierDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.F8,
@@ -175,79 +176,36 @@
             this.price,
             this.qtyColumn,
             this.discColumn,
-            this.amountColumn,
-            this.qty2Column});
+            this.disc2column,
+            this.discRPcolumn,
+            this.amountColumn});
             this.cashierDataGridView.Cursor = System.Windows.Forms.Cursors.Default;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.cashierDataGridView.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FloralWhite;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.cashierDataGridView.DefaultCellStyle = dataGridViewCellStyle7;
             this.cashierDataGridView.EnableHeadersVisualStyles = false;
             this.cashierDataGridView.GridColor = System.Drawing.Color.Black;
             this.cashierDataGridView.Location = new System.Drawing.Point(2, 130);
             this.cashierDataGridView.MultiSelect = false;
             this.cashierDataGridView.Name = "cashierDataGridView";
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.cashierDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.cashierDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.cashierDataGridView.RowHeadersVisible = false;
             this.cashierDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.cashierDataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.cashierDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.cashierDataGridView.Size = new System.Drawing.Size(982, 334);
             this.cashierDataGridView.TabIndex = 8;
-            // 
-            // F8
-            // 
-            this.F8.Frozen = true;
-            this.F8.HeaderText = "F8";
-            this.F8.Name = "F8";
-            this.F8.ReadOnly = true;
-            this.F8.Width = 44;
-            // 
-            // productName
-            // 
-            this.productName.HeaderText = "NAMA PRODUK";
-            this.productName.Name = "productName";
-            this.productName.ReadOnly = true;
-            this.productName.Width = 320;
-            // 
-            // price
-            // 
-            this.price.HeaderText = "HARGA";
-            this.price.Name = "price";
-            this.price.ReadOnly = true;
-            this.price.Width = 200;
-            // 
-            // qtyColumn
-            // 
-            this.qtyColumn.HeaderText = "QTY";
-            this.qtyColumn.Name = "qtyColumn";
-            // 
-            // discColumn
-            // 
-            this.discColumn.HeaderText = "DISC";
-            this.discColumn.Name = "discColumn";
-            this.discColumn.Width = 120;
-            // 
-            // amountColumn
-            // 
-            this.amountColumn.HeaderText = "JUMLAH";
-            this.amountColumn.Name = "amountColumn";
-            this.amountColumn.Width = 190;
-            // 
-            // qty2Column
-            // 
-            this.qty2Column.HeaderText = "[QTY]";
-            this.qty2Column.Name = "qty2Column";
             // 
             // panel5
             // 
@@ -608,9 +566,9 @@
             this.panel9.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panel9.BackColor = System.Drawing.Color.Black;
             this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel9.Location = new System.Drawing.Point(2, 466);
+            this.panel9.Location = new System.Drawing.Point(1, 465);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(1000, 10);
+            this.panel9.Size = new System.Drawing.Size(983, 10);
             this.panel9.TabIndex = 10;
             this.panel9.Paint += new System.Windows.Forms.PaintEventHandler(this.panel9_Paint);
             // 
@@ -647,7 +605,7 @@
             this.dateTimeStatusLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 639);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(984, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(985, 22);
             this.statusStrip1.TabIndex = 12;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -678,12 +636,63 @@
             this.dateTimeStatusLabel.Text = "| SABTU, 16 JANUARI 2016 - 21:00:00";
             this.dateTimeStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // F8
+            // 
+            this.F8.Frozen = true;
+            this.F8.HeaderText = "F8";
+            this.F8.Name = "F8";
+            this.F8.ReadOnly = true;
+            this.F8.Width = 44;
+            // 
+            // productName
+            // 
+            this.productName.HeaderText = "NAMA PRODUK";
+            this.productName.Name = "productName";
+            this.productName.ReadOnly = true;
+            this.productName.Width = 320;
+            // 
+            // price
+            // 
+            this.price.HeaderText = "HARGA";
+            this.price.Name = "price";
+            this.price.ReadOnly = true;
+            this.price.Width = 200;
+            // 
+            // qtyColumn
+            // 
+            this.qtyColumn.HeaderText = "QTY";
+            this.qtyColumn.Name = "qtyColumn";
+            // 
+            // discColumn
+            // 
+            this.discColumn.HeaderText = "DISC 1";
+            this.discColumn.Name = "discColumn";
+            this.discColumn.Width = 120;
+            // 
+            // disc2column
+            // 
+            this.disc2column.HeaderText = "DISC 2";
+            this.disc2column.Name = "disc2column";
+            this.disc2column.Width = 120;
+            // 
+            // discRPcolumn
+            // 
+            this.discRPcolumn.HeaderText = "DISC RP";
+            this.discRPcolumn.Name = "discRPcolumn";
+            this.discRPcolumn.Width = 120;
+            // 
+            // amountColumn
+            // 
+            this.amountColumn.HeaderText = "JUMLAH";
+            this.amountColumn.Name = "amountColumn";
+            this.amountColumn.Width = 190;
+            // 
             // cashierForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(984, 661);
+            this.ClientSize = new System.Drawing.Size(985, 661);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.totalLabel);
@@ -722,13 +731,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.DataGridView cashierDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn F8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn qtyColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn discColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn amountColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn qty2Column;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel6;
@@ -765,6 +767,14 @@
         private System.Windows.Forms.ToolStripStatusLabel userStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel statusShiftLabel;
         private System.Windows.Forms.ToolStripStatusLabel dateTimeStatusLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn F8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn qtyColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn discColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn disc2column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn discRPcolumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn amountColumn;
     }
 }
 
