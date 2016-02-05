@@ -8,11 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using MySql.Data;
+using MySql.Data.MySqlClient;
+
 namespace RoyalPetz_ADMIN
 {
     public partial class dataGroupForm : Form
     {
         private int originModuleID = 0;
+        private int selectedGroupID;
+
+
+        Data_Access DS = new Data_Access();
 
         public dataGroupForm()
         {
@@ -31,25 +38,44 @@ namespace RoyalPetz_ADMIN
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            dataGroupDetailForm displayForm = new dataGroupDetailForm(originModuleID);
+            dataGroupDetailForm displayForm = new dataGroupDetailForm(globalConstants.NEW_GROUP_USER);
             displayForm.ShowDialog(this);
         }
 
-        private void dataGroupForm_Load(object sender, EventArgs e)
+        private void loadUserGroupData()
         {
+            MySqlDataReader rdr;
+            DataTable dt = new DataTable();
+            string sqlCommand;
 
+            DS.mySqlConnect();
+
+            sqlCommand = "SELECT GROUP_ID, GROUP_USER_NAME AS 'NAMA GROUP', GROUP_USER_DESCRIPTION AS 'DESKRIPSI GROUP' FROM MASTER_GROUP WHERE GROUP_USER_ACTIVE = 1";
+
+            using (rdr = DS.getData(sqlCommand))
+            {
+                if (rdr.HasRows)
+                {
+                    dt.Load(rdr);
+                    dataUserGroupGridView.DataSource = dt;
+
+                    dataUserGroupGridView.Columns["GROUP_ID"].Visible = false;
+                    dataUserGroupGridView.Columns["NAMA GROUP"].Width = 200;
+                    dataUserGroupGridView.Columns["DESKRIPSI GROUP"].Width = 300;
+                }
+            }
         }
 
-        private void dataSalesDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dataSalesDataGridView_DoubleClick(object sender, EventArgs e)
+        private void displaySpecificForm()
         {
             switch (originModuleID)
-            { 
-                case globalConstants.PENGATURAN_GRUP_AKSES: 
+            {
+                case globalConstants.TAMBAH_HAPUS_GROUP_USER:
+                    dataGroupDetailForm displayNewGroupForm = new dataGroupDetailForm(globalConstants.EDIT_GROUP_USER, selectedGroupID);
+                    displayNewGroupForm.ShowDialog(this);
+                    break;
+                
+                case globalConstants.PENGATURAN_GRUP_AKSES:
                     groupAccessModuleForm groupAccessForm = new groupAccessModuleForm();
                     groupAccessForm.ShowDialog(this);
                     break;
@@ -58,12 +84,23 @@ namespace RoyalPetz_ADMIN
                     pengaturanPotonganHargaForm pengaturanHargaForm = new pengaturanPotonganHargaForm();
                     pengaturanHargaForm.ShowDialog(this);
                     break;
-
-                default: // TAMBAH / HAPUS GROUP
-                    dataGroupDetailForm displayForm = new dataGroupDetailForm(originModuleID);
-                    displayForm.ShowDialog(this);
-                    break;
             }
+        }
+
+        private void dataSalesDataGridView_DoubleClick(object sender, EventArgs e)
+        {
+            int selectedrowindex = dataUserGroupGridView.SelectedCells[0].RowIndex;
+
+            DataGridViewRow selectedRow = dataUserGroupGridView.Rows[selectedrowindex];
+            selectedGroupID = Convert.ToInt32(selectedRow.Cells["GROUP_ID"].Value);
+
+            displaySpecificForm();
+        }
+
+        private void dataGroupForm_Activated(object sender, EventArgs e)
+        {
+            //the codes below run when focus changed to this form               
+            loadUserGroupData();
         }
     }
 }

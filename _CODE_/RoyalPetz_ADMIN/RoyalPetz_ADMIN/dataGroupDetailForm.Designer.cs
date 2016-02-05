@@ -30,17 +30,14 @@
         {
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.namaGroupTextBox = new System.Windows.Forms.TextBox();
             this.saveButton = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.deskripsiTextBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.deleteButton = new System.Windows.Forms.Button();
+            this.nonAktifCheckbox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,9 +49,9 @@
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label2.Location = new System.Drawing.Point(3, 7);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(128, 18);
+            this.label2.Size = new System.Drawing.Size(130, 18);
             this.label2.TabIndex = 7;
-            this.label2.Text = "KODE GROUP";
+            this.label2.Text = "NAMA GROUP";
             // 
             // label3
             // 
@@ -64,21 +61,9 @@
             this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label3.Location = new System.Drawing.Point(3, 47);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(130, 18);
+            this.label3.Size = new System.Drawing.Size(107, 18);
             this.label3.TabIndex = 8;
-            this.label3.Text = "NAMA GROUP";
-            // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(3, 90);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 18);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "DESKRIPSI";
+            this.label3.Text = "DESKRIPSI";
             // 
             // label4
             // 
@@ -86,9 +71,9 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(178, 7);
+            this.label4.Location = new System.Drawing.Point(148, 7);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(14, 18);
+            this.label4.Size = new System.Drawing.Size(13, 18);
             this.label4.TabIndex = 10;
             this.label4.Text = ":";
             // 
@@ -98,52 +83,41 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(178, 47);
+            this.label6.Location = new System.Drawing.Point(148, 47);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(14, 18);
+            this.label6.Size = new System.Drawing.Size(13, 18);
             this.label6.TabIndex = 12;
             this.label6.Text = ":";
             // 
-            // label7
+            // namaGroupTextBox
             // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(178, 90);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(14, 18);
-            this.label7.TabIndex = 13;
-            this.label7.Text = ":";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(201, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(93, 27);
-            this.textBox1.TabIndex = 15;
+            this.namaGroupTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.namaGroupTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.namaGroupTextBox.Location = new System.Drawing.Point(167, 3);
+            this.namaGroupTextBox.Name = "namaGroupTextBox";
+            this.namaGroupTextBox.Size = new System.Drawing.Size(347, 27);
+            this.namaGroupTextBox.TabIndex = 15;
             // 
             // saveButton
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(295, 186);
+            this.saveButton.Location = new System.Drawing.Point(214, 184);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(95, 37);
             this.saveButton.TabIndex = 20;
-            this.saveButton.Text = "NEW";
+            this.saveButton.Text = "SAVE";
             this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
-            // textBox2
+            // deskripsiTextBox
             // 
-            this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(201, 42);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(340, 27);
-            this.textBox2.TabIndex = 16;
+            this.deskripsiTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.deskripsiTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deskripsiTextBox.Location = new System.Drawing.Point(167, 42);
+            this.deskripsiTextBox.Name = "deskripsiTextBox";
+            this.deskripsiTextBox.Size = new System.Drawing.Size(377, 27);
+            this.deskripsiTextBox.TabIndex = 16;
             // 
             // panel1
             // 
@@ -154,32 +128,21 @@
             this.panel1.Size = new System.Drawing.Size(555, 29);
             this.panel1.TabIndex = 22;
             // 
-            // textBox3
-            // 
-            this.textBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(201, 85);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(210, 27);
-            this.textBox3.TabIndex = 17;
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 348F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.41463F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.58537F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 382F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label4, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label6, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.textBox1, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.textBox2, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox3, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.namaGroupTextBox, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.deskripsiTextBox, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.nonAktifCheckbox, 2, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 43);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
@@ -189,16 +152,17 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(547, 119);
             this.tableLayoutPanel1.TabIndex = 19;
             // 
-            // deleteButton
+            // nonAktifCheckbox
             // 
-            this.deleteButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.deleteButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteButton.Location = new System.Drawing.Point(141, 186);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(95, 37);
-            this.deleteButton.TabIndex = 21;
-            this.deleteButton.Text = "DELETE";
-            this.deleteButton.UseVisualStyleBackColor = true;
+            this.nonAktifCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.nonAktifCheckbox.AutoSize = true;
+            this.nonAktifCheckbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nonAktifCheckbox.Location = new System.Drawing.Point(167, 88);
+            this.nonAktifCheckbox.Name = "nonAktifCheckbox";
+            this.nonAktifCheckbox.Size = new System.Drawing.Size(157, 22);
+            this.nonAktifCheckbox.TabIndex = 51;
+            this.nonAktifCheckbox.Text = "Non Aktif Group";
+            this.nonAktifCheckbox.UseVisualStyleBackColor = true;
             // 
             // dataGroupDetailForm
             // 
@@ -209,13 +173,12 @@
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.deleteButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "dataGroupDetailForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DATA GROUP";
+            this.Text = "DATA GROUP USER";
             this.Load += new System.EventHandler(this.dataGroupDetailForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -227,16 +190,13 @@
 
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox namaGroupTextBox;
         private System.Windows.Forms.Button saveButton;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox deskripsiTextBox;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.CheckBox nonAktifCheckbox;
     }
 }

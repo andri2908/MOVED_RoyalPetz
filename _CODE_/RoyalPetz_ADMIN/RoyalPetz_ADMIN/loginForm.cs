@@ -15,8 +15,10 @@ namespace RoyalPetz_ADMIN
 {
     public partial class loginForm : Form
     {
-        private int originModuleID = 0;
         private Data_Access DS = new Data_Access();
+        private globalStringOP stringOP = new globalStringOP();
+
+        private int originModuleID = 0;
 
         public loginForm()
         {
@@ -37,15 +39,6 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        public string allTrim(string valueToTrim)
-        {
-            string temp = "";
-
-            temp = valueToTrim.Replace(" ", "");
-
-            return temp;
-        }
-
         private bool checkUserNamePassword()
         {
             bool retVal = false;
@@ -55,8 +48,8 @@ namespace RoyalPetz_ADMIN
             
             string sqlCommand;
 
-            userName = allTrim(userNameTextBox.Text);
-            password = allTrim(passwordTextBox.Text);
+            userName = stringOP.allTrim(userNameTextBox.Text);
+            password = stringOP.allTrim(passwordTextBox.Text);
 
             sqlCommand = "SELECT COUNT(1) FROM MASTER_USER WHERE USER_NAME = '"+userName+"' AND USER_PASSWORD = '"+password+"'";
             result = DS.getDataSingleValue(sqlCommand);
@@ -73,11 +66,15 @@ namespace RoyalPetz_ADMIN
         private void loginButton_Click(object sender, EventArgs e)
         {
             if (checkUserNamePassword())
-            { 
+            {
                 this.Hide();
 
                 adminForm displayAdminForm = new adminForm();
                 displayAdminForm.ShowDialog(this);
+
+                userNameTextBox.Text = "";
+                passwordTextBox.Text = "";
+                userNameTextBox.Focus();
 
                 this.Show();
             }

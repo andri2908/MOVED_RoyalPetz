@@ -20,6 +20,7 @@ namespace RoyalPetz_ADMIN
         public const int PENGATURAN_NOMOR_RAK = 56;
         public const int CEK_DATA_MUTASI = 57;
         public const int TAMBAH_HAPUS_JURNAL_HARIAN = 58;
+        public const int TAMBAH_HAPUS_USER = 59;
 
         public const int STOK_PECAH_BARANG = 101;
         public const int PENYESUAIAN_STOK = 102;
@@ -32,6 +33,8 @@ namespace RoyalPetz_ADMIN
         public const int CHANGE_PASSWORD = 109;
         public const int LOGOUT_FORM = 110;
 
+        public const int NEW_GROUP_USER = 201;
+        public const int EDIT_GROUP_USER = 202;
 
 
     }

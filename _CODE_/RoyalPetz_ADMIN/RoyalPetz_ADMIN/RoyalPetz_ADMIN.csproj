@@ -221,6 +221,7 @@
     <Compile Include="GlobalHotkey.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="globalStringOP.cs" />
     <Compile Include="groupAccessModuleForm.cs">
       <SubType>Form</SubType>
     </Compile>

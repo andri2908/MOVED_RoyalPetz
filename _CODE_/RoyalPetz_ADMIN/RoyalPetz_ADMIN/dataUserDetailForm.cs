@@ -19,12 +19,8 @@ namespace RoyalPetz_ADMIN
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
-            dataGroupForm displayForm = new dataGroupForm(1);
-            displayForm.ShowDialog();
-
-            this.Show();
+            dataGroupForm displayForm = new dataGroupForm(globalConstants.TAMBAH_HAPUS_USER);
+            displayForm.ShowDialog(this);
         }
     }
 }

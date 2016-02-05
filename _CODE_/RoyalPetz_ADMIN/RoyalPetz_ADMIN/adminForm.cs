@@ -178,8 +178,6 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripMenuItem47_Click(object sender, EventArgs e)
         {
-            
-
             dataGroupForm displayedForm = new dataGroupForm(globalConstants.TAMBAH_HAPUS_GROUP_USER);
             displayedForm.ShowDialog(this);
 
