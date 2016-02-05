@@ -16,5 +16,10 @@ namespace RoyalPetz_ADMIN
         {
             InitializeComponent();
         }
+
+        private void dataSatuanDetailForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

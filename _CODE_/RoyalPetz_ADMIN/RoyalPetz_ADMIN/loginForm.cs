@@ -88,6 +88,7 @@ namespace RoyalPetz_ADMIN
             if (!DS.mySqlConnect())
             {
                 MessageBox.Show("CAN'T CONNECT");
+                this.Close();
             }
         }
     }

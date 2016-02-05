@@ -41,6 +41,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.deleteButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
+            this.nonAktifCheckbox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,7 +52,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 347F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 348F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
@@ -61,13 +62,15 @@
             this.tableLayoutPanel1.Controls.Add(this.textBox1, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox2, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.textBox3, 2, 2);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 46);
+            this.tableLayoutPanel1.Controls.Add(this.nonAktifCheckbox, 2, 3);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 32);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(547, 113);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(547, 149);
             this.tableLayoutPanel1.TabIndex = 15;
             // 
             // label2
@@ -88,7 +91,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label3.Location = new System.Drawing.Point(3, 43);
+            this.label3.Location = new System.Drawing.Point(3, 40);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(138, 18);
             this.label3.TabIndex = 8;
@@ -100,7 +103,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(3, 83);
+            this.label1.Location = new System.Drawing.Point(3, 73);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(107, 18);
             this.label1.TabIndex = 9;
@@ -112,7 +115,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(179, 7);
+            this.label4.Location = new System.Drawing.Point(178, 7);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(14, 18);
             this.label4.TabIndex = 10;
@@ -124,7 +127,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(179, 43);
+            this.label6.Location = new System.Drawing.Point(178, 40);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(14, 18);
             this.label6.TabIndex = 12;
@@ -136,7 +139,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(179, 83);
+            this.label7.Location = new System.Drawing.Point(178, 73);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(14, 18);
             this.label7.TabIndex = 13;
@@ -146,7 +149,7 @@
             // 
             this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(202, 3);
+            this.textBox1.Location = new System.Drawing.Point(201, 3);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(93, 27);
             this.textBox1.TabIndex = 15;
@@ -155,7 +158,7 @@
             // 
             this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(202, 39);
+            this.textBox2.Location = new System.Drawing.Point(201, 36);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(340, 27);
             this.textBox2.TabIndex = 16;
@@ -164,7 +167,7 @@
             // 
             this.textBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(202, 79);
+            this.textBox3.Location = new System.Drawing.Point(201, 69);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(341, 27);
             this.textBox3.TabIndex = 17;
@@ -173,7 +176,7 @@
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.panel1.BackColor = System.Drawing.Color.SteelBlue;
-            this.panel1.Location = new System.Drawing.Point(1, 4);
+            this.panel1.Location = new System.Drawing.Point(1, 1);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(555, 29);
             this.panel1.TabIndex = 18;
@@ -200,6 +203,18 @@
             this.saveButton.Text = "NEW";
             this.saveButton.UseVisualStyleBackColor = true;
             // 
+            // nonAktifCheckbox
+            // 
+            this.nonAktifCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.nonAktifCheckbox.AutoSize = true;
+            this.nonAktifCheckbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nonAktifCheckbox.Location = new System.Drawing.Point(201, 113);
+            this.nonAktifCheckbox.Name = "nonAktifCheckbox";
+            this.nonAktifCheckbox.Size = new System.Drawing.Size(166, 22);
+            this.nonAktifCheckbox.TabIndex = 51;
+            this.nonAktifCheckbox.Text = "Non Aktif Satuan";
+            this.nonAktifCheckbox.UseVisualStyleBackColor = true;
+            // 
             // dataSatuanDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -216,6 +231,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DATA SATUAN DETAIL";
+            this.Load += new System.EventHandler(this.dataSatuanDetailForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -237,5 +253,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.CheckBox nonAktifCheckbox;
     }
 }
