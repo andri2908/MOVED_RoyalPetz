@@ -18,6 +18,7 @@ namespace RoyalPetz_ADMIN
         private Data_Access DS = new Data_Access();
         private globalStringOP stringOP = new globalStringOP();
 
+        private int selectedUserID;
         private int originModuleID = 0;
 
         public loginForm()
@@ -51,13 +52,13 @@ namespace RoyalPetz_ADMIN
             userName = stringOP.allTrim(userNameTextBox.Text);
             password = stringOP.allTrim(passwordTextBox.Text);
 
-            sqlCommand = "SELECT COUNT(1) FROM MASTER_USER WHERE USER_NAME = '"+userName+"' AND USER_PASSWORD = '"+password+"'";
+            sqlCommand = "SELECT ID FROM MASTER_USER WHERE USER_NAME = '"+userName+"' AND USER_PASSWORD = '"+password+"'";
             result = DS.getDataSingleValue(sqlCommand);
 
             if (result != null)
             {
-                if (Convert.ToInt32(result) == 1)
-                    retVal = true;
+                selectedUserID = Convert.ToInt32(result);
+                retVal = true;
             }
 
             return retVal;
@@ -69,7 +70,7 @@ namespace RoyalPetz_ADMIN
             {
                 this.Hide();
 
-                adminForm displayAdminForm = new adminForm();
+                adminForm displayAdminForm = new adminForm(selectedUserID);
                 displayAdminForm.ShowDialog(this);
 
                 userNameTextBox.Text = "";
@@ -78,10 +79,16 @@ namespace RoyalPetz_ADMIN
 
                 this.Show();
             }
+            else
+            {
+                errorLabel.Text = "LOGIN FAILED";
+            }
         }
 
         private void loginForm_Load(object sender, EventArgs e)
         {
+            errorLabel.Text = "";
+
             if (!DS.mySqlConnect())
             {
                 MessageBox.Show("CAN'T CONNECT");

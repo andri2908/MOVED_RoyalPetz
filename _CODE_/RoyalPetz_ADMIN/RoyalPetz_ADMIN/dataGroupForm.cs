@@ -17,7 +17,7 @@ namespace RoyalPetz_ADMIN
     {
         private int originModuleID = 0;
         private int selectedGroupID;
-
+        private dataUserDetailForm userDetailForm;
 
         Data_Access DS = new Data_Access();
 
@@ -34,6 +34,17 @@ namespace RoyalPetz_ADMIN
                 newButton.Visible = false;
             
             originModuleID = moduleID;
+        }
+
+        public dataGroupForm(int moduleID, dataUserDetailForm parentForm)
+        {
+            InitializeComponent();
+
+            if (moduleID > 50)
+                newButton.Visible = false;
+
+            originModuleID = moduleID;
+            userDetailForm = parentForm;
         }
 
         private void newButton_Click(object sender, EventArgs e)
@@ -84,6 +95,11 @@ namespace RoyalPetz_ADMIN
                     pengaturanPotonganHargaForm pengaturanHargaForm = new pengaturanPotonganHargaForm();
                     pengaturanHargaForm.ShowDialog(this);
                     break;
+
+                case globalConstants.TAMBAH_HAPUS_USER:
+                    userDetailForm.setSelectedGroupID(selectedGroupID);
+                    this.Close();
+                    break;
             }
         }
 
@@ -100,7 +116,7 @@ namespace RoyalPetz_ADMIN
         private void dataGroupForm_Activated(object sender, EventArgs e)
         {
             //the codes below run when focus changed to this form               
-            loadUserGroupData();
+            loadUserGroupData();            
         }
     }
 }

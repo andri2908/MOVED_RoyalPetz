@@ -19,14 +19,16 @@ namespace RoyalPetz_ADMIN
         private DateTime localDate = DateTime.Now;
         private CultureInfo culture = new CultureInfo("id-ID");
 
-        public adminForm()
+        private Data_Access DS = new Data_Access();
+
+        private int selectedUserID = 0;
+
+
+        public adminForm(int userID)
         {
             InitializeComponent();
-        }
 
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
+            selectedUserID = userID;
         }
 
         private void updateLabel()
@@ -39,6 +41,8 @@ namespace RoyalPetz_ADMIN
         {
             updateLabel();
             timer1.Start();
+
+            welcomeLabel.Text = "WELCOME " + DS.getDataSingleValue("SELECT USER_FULL_NAME FROM MASTER_USER WHERE ID = " + selectedUserID).ToString();
         }
 
         private void adminForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -51,137 +55,76 @@ namespace RoyalPetz_ADMIN
             updateLabel();
         }
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
         private void jenisProdukToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-
             dataKategoriProdukForm displayedForm = new dataKategoriProdukForm();
             displayedForm.ShowDialog(this);
-
-            
         }
 
         private void dataProdukToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-
             dataProdukForm displayedForm = new dataProdukForm();
             displayedForm.ShowDialog(this);
-
-            
         }
 
         private void dataPelangganToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-
             dataPelangganForm displayedForm = new dataPelangganForm();
             displayedForm.ShowDialog(this);
-
-            
         }
 
         private void dataSupplierToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-
             dataSupplierForm displayedForm = new dataSupplierForm();
             displayedForm.ShowDialog(this);
-
-            
         }
 
         private void dataSalesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-
             dataSalesForm displayedForm = new dataSalesForm();
             displayedForm.ShowDialog(this);
-
-            
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            
-
             dataGroupForm displayedForm = new dataGroupForm();
             displayedForm.ShowDialog(this);
-
-            
         }
 
         private void dataUserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-
             dataUserForm displayedForm = new dataUserForm();
             displayedForm.ShowDialog(this);
-
-            
-        }
-
-        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void stokTaggingToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void toolStripMenuItem53_Click(object sender, EventArgs e)
         {
-            
-
             dataProdukForm displayedForm = new dataProdukForm(globalConstants.STOK_PECAH_BARANG); // display dataProdukForm for browsing purpose only
             displayedForm.ShowDialog(this);
-
-            
         }
 
         private void infoFolderDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-
             setDatabaseLocationForm displayedForm = new setDatabaseLocationForm(); 
             displayedForm.ShowDialog(this);
-
-            
         }
 
         private void backupRestoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-
             backupRestoreDatabaseForm displayedForm = new backupRestoreDatabaseForm();
             displayedForm.ShowDialog(this);
-
-            
         }
 
         private void toolStripMenuItem15_Click(object sender, EventArgs e)
         {
-            
-
             dataUserForm displayedForm = new dataUserForm();
             displayedForm.ShowDialog(this);
-
-            
         }
 
         private void toolStripMenuItem47_Click(object sender, EventArgs e)
         {
             dataGroupForm displayedForm = new dataGroupForm(globalConstants.TAMBAH_HAPUS_GROUP_USER);
             displayedForm.ShowDialog(this);
-
-            
         }
 
         private void pilihPrinterToolStripMenuItem_Click(object sender, EventArgs e)
@@ -192,12 +135,8 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripMenuItem32_Click(object sender, EventArgs e)
         {
-            
-
             dataGroupForm displayedForm = new dataGroupForm(globalConstants.PENGATURAN_GRUP_AKSES);
             displayedForm.ShowDialog(this);
-
-            
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
@@ -216,10 +155,6 @@ namespace RoyalPetz_ADMIN
                     MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
                 }
             }
-        }
-
-        private void toolStripMenuItem58_Click(object sender, EventArgs e)
-        {
         }
 
         private void toolStripMenuItem55_Click(object sender, EventArgs e)
@@ -493,7 +428,7 @@ namespace RoyalPetz_ADMIN
 
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            changePasswordForm displayedForm = new changePasswordForm();
+            changePasswordForm displayedForm = new changePasswordForm(selectedUserID);
             displayedForm.ShowDialog(this);
         }
 
