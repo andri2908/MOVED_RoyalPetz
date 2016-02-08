@@ -57,9 +57,9 @@ namespace RoyalPetz_ADMIN
                         deskripsiTextBox.Text = rdr.GetString("GROUP_USER_DESCRIPTION");
 
                         if (rdr.GetString("GROUP_USER_ACTIVE").Equals("1"))
-                            nonAktifCheckbox.Checked = true;
-                        else
                             nonAktifCheckbox.Checked = false;
+                        else
+                            nonAktifCheckbox.Checked = true;
                     }
                 }
             }
@@ -71,13 +71,17 @@ namespace RoyalPetz_ADMIN
             { 
                 loadUserGroupDataInformation();
             }
+
+            errorLabel.Text = "";
         }
 
         private bool dataValidated()
         {
-            bool result = false;
-
-
+            if (namaGroupTextBox.Text.Trim().Equals(""))
+            {
+                errorLabel.Text = "NAMA GROUP TIDAK BOLEH KOSONG";
+                return false;
+            }
 
             return true;
         }

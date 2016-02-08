@@ -52,8 +52,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.userPhoneTextBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.saveButton = new System.Windows.Forms.Button();
             this.errorLabel = new System.Windows.Forms.Label();
+            this.saveButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -66,7 +66,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 349F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 350F));
             this.tableLayoutPanel1.Controls.Add(this.label12, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.label11, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
@@ -187,7 +187,8 @@
             // 
             this.userNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.userNameTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userNameTextBox.Location = new System.Drawing.Point(229, 3);
+            this.userNameTextBox.Location = new System.Drawing.Point(228, 3);
+            this.userNameTextBox.MaxLength = 15;
             this.userNameTextBox.Name = "userNameTextBox";
             this.userNameTextBox.Size = new System.Drawing.Size(210, 27);
             this.userNameTextBox.TabIndex = 15;
@@ -196,7 +197,8 @@
             // 
             this.userFullNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.userFullNameTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userFullNameTextBox.Location = new System.Drawing.Point(229, 36);
+            this.userFullNameTextBox.Location = new System.Drawing.Point(228, 36);
+            this.userFullNameTextBox.MaxLength = 100;
             this.userFullNameTextBox.Name = "userFullNameTextBox";
             this.userFullNameTextBox.Size = new System.Drawing.Size(340, 27);
             this.userFullNameTextBox.TabIndex = 16;
@@ -205,7 +207,8 @@
             // 
             this.passwordTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.passwordTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordTextBox.Location = new System.Drawing.Point(229, 69);
+            this.passwordTextBox.Location = new System.Drawing.Point(228, 69);
+            this.passwordTextBox.MaxLength = 15;
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(210, 27);
@@ -240,7 +243,7 @@
             this.nonAktifCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.nonAktifCheckbox.AutoSize = true;
             this.nonAktifCheckbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nonAktifCheckbox.Location = new System.Drawing.Point(229, 178);
+            this.nonAktifCheckbox.Location = new System.Drawing.Point(228, 178);
             this.nonAktifCheckbox.Name = "nonAktifCheckbox";
             this.nonAktifCheckbox.Size = new System.Drawing.Size(146, 22);
             this.nonAktifCheckbox.TabIndex = 20;
@@ -266,7 +269,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.20354F));
             this.tableLayoutPanel2.Controls.Add(this.searchButton, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.groupNameTextBox, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(229, 135);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(228, 135);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -299,7 +302,8 @@
             // 
             this.password2TextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.password2TextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.password2TextBox.Location = new System.Drawing.Point(229, 102);
+            this.password2TextBox.Location = new System.Drawing.Point(228, 102);
+            this.password2TextBox.MaxLength = 15;
             this.password2TextBox.Name = "password2TextBox";
             this.password2TextBox.PasswordChar = '*';
             this.password2TextBox.Size = new System.Drawing.Size(210, 27);
@@ -333,7 +337,8 @@
             // 
             this.userPhoneTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.userPhoneTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userPhoneTextBox.Location = new System.Drawing.Point(229, 207);
+            this.userPhoneTextBox.Location = new System.Drawing.Point(228, 207);
+            this.userPhoneTextBox.MaxLength = 15;
             this.userPhoneTextBox.Name = "userPhoneTextBox";
             this.userPhoneTextBox.Size = new System.Drawing.Size(340, 27);
             this.userPhoneTextBox.TabIndex = 21;
@@ -348,18 +353,6 @@
             this.panel1.Size = new System.Drawing.Size(577, 29);
             this.panel1.TabIndex = 18;
             // 
-            // saveButton
-            // 
-            this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(230, 284);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(95, 37);
-            this.saveButton.TabIndex = 24;
-            this.saveButton.Text = "SAVE";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-            // 
             // errorLabel
             // 
             this.errorLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -372,6 +365,18 @@
             this.errorLabel.Size = new System.Drawing.Size(23, 18);
             this.errorLabel.TabIndex = 8;
             this.errorLabel.Text = "   ";
+            // 
+            // saveButton
+            // 
+            this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveButton.Location = new System.Drawing.Point(230, 284);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(95, 37);
+            this.saveButton.TabIndex = 24;
+            this.saveButton.Text = "SAVE";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // dataUserDetailForm
             // 

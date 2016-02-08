@@ -73,6 +73,9 @@ namespace RoyalPetz_ADMIN
                 adminForm displayAdminForm = new adminForm(selectedUserID);
                 displayAdminForm.ShowDialog(this);
 
+                logoutForm displayLogOutForm = new logoutForm();
+                displayLogOutForm.ShowDialog(this);
+                               
                 userNameTextBox.Text = "";
                 passwordTextBox.Text = "";
                 userNameTextBox.Focus();

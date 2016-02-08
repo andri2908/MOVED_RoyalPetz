@@ -66,9 +66,9 @@ namespace RoyalPetz_ADMIN
                         selectedGroupID = rdr.GetInt32("GROUP_ID");
 
                         if (rdr.GetString("USER_ACTIVE").Equals("1"))
-                            nonAktifCheckbox.Checked = true;
-                        else
                             nonAktifCheckbox.Checked = false;
+                        else
+                            nonAktifCheckbox.Checked = true;
 
                         userPhoneTextBox.Text = rdr.GetString("USER_PHONE");
                     }

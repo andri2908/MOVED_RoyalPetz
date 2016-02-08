@@ -38,6 +38,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.nonAktifCheckbox = new System.Windows.Forms.CheckBox();
+            this.errorLabel = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,9 +73,9 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(148, 7);
+            this.label4.Location = new System.Drawing.Point(147, 7);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(13, 18);
+            this.label4.Size = new System.Drawing.Size(12, 18);
             this.label4.TabIndex = 10;
             this.label4.Text = ":";
             // 
@@ -83,9 +85,9 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(148, 47);
+            this.label6.Location = new System.Drawing.Point(147, 47);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(13, 18);
+            this.label6.Size = new System.Drawing.Size(12, 18);
             this.label6.TabIndex = 12;
             this.label6.Text = ":";
             // 
@@ -93,7 +95,8 @@
             // 
             this.namaGroupTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.namaGroupTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaGroupTextBox.Location = new System.Drawing.Point(167, 3);
+            this.namaGroupTextBox.Location = new System.Drawing.Point(165, 3);
+            this.namaGroupTextBox.MaxLength = 30;
             this.namaGroupTextBox.Name = "namaGroupTextBox";
             this.namaGroupTextBox.Size = new System.Drawing.Size(347, 27);
             this.namaGroupTextBox.TabIndex = 15;
@@ -114,7 +117,8 @@
             // 
             this.deskripsiTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.deskripsiTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deskripsiTextBox.Location = new System.Drawing.Point(167, 42);
+            this.deskripsiTextBox.Location = new System.Drawing.Point(165, 42);
+            this.deskripsiTextBox.MaxLength = 100;
             this.deskripsiTextBox.Name = "deskripsiTextBox";
             this.deskripsiTextBox.Size = new System.Drawing.Size(377, 27);
             this.deskripsiTextBox.TabIndex = 16;
@@ -123,6 +127,7 @@
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.panel1.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel1.Controls.Add(this.errorLabel);
             this.panel1.Location = new System.Drawing.Point(1, 1);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(555, 29);
@@ -135,7 +140,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.41463F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.58537F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 382F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 384F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label4, 1, 0);
@@ -157,12 +162,25 @@
             this.nonAktifCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.nonAktifCheckbox.AutoSize = true;
             this.nonAktifCheckbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nonAktifCheckbox.Location = new System.Drawing.Point(167, 88);
+            this.nonAktifCheckbox.Location = new System.Drawing.Point(165, 88);
             this.nonAktifCheckbox.Name = "nonAktifCheckbox";
             this.nonAktifCheckbox.Size = new System.Drawing.Size(157, 22);
             this.nonAktifCheckbox.TabIndex = 51;
             this.nonAktifCheckbox.Text = "Non Aktif Group";
             this.nonAktifCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // errorLabel
+            // 
+            this.errorLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.BackColor = System.Drawing.Color.White;
+            this.errorLabel.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(3, 6);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(23, 18);
+            this.errorLabel.TabIndex = 25;
+            this.errorLabel.Text = "   ";
             // 
             // dataGroupDetailForm
             // 
@@ -180,6 +198,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DATA GROUP USER";
             this.Load += new System.EventHandler(this.dataGroupDetailForm_Load);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -198,5 +218,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.CheckBox nonAktifCheckbox;
+        private System.Windows.Forms.Label errorLabel;
     }
 }
