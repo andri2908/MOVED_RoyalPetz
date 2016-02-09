@@ -61,7 +61,7 @@ namespace RoyalPetz_ADMIN
 
             DS.mySqlConnect();
 
-            sqlCommand = "SELECT GROUP_ID, GROUP_USER_NAME AS 'NAMA GROUP', GROUP_USER_DESCRIPTION AS 'DESKRIPSI GROUP' FROM MASTER_GROUP WHERE GROUP_USER_ACTIVE = 1";
+            sqlCommand = "SELECT GROUP_ID, GROUP_USER_NAME AS 'NAMA GROUP', GROUP_USER_DESCRIPTION AS 'DESKRIPSI GROUP' FROM MASTER_GROUP WHERE GROUP_USER_ACTIVE = 1 AND GROUP_USER_NAME LIKE '%"+namaGroupTextbox.Text+"%'";
 
             using (rdr = DS.getData(sqlCommand))
             {
@@ -87,7 +87,7 @@ namespace RoyalPetz_ADMIN
                     break;
                 
                 case globalConstants.PENGATURAN_GRUP_AKSES:
-                    groupAccessModuleForm groupAccessForm = new groupAccessModuleForm();
+                    groupAccessModuleForm groupAccessForm = new groupAccessModuleForm(selectedGroupID);
                     groupAccessForm.ShowDialog(this);
                     break;
 
@@ -117,6 +117,11 @@ namespace RoyalPetz_ADMIN
         {
             //the codes below run when focus changed to this form               
             loadUserGroupData();            
+        }
+
+        private void namaGroupTextbox_TextChanged(object sender, EventArgs e)
+        {
+            loadUserGroupData();
         }
     }
 }

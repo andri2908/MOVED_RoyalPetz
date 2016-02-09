@@ -50,7 +50,7 @@ namespace RoyalPetz_ADMIN
                         ipAddressMaskedTextbox.Text = rdr.GetString("BRANCH_IP4");
                         branchAddress1TextBox.Text = rdr.GetString("BRANCH_ADDRESS_1");
                         branchAddress2TextBox.Text = rdr.GetString("BRANCH_ADDRESS_2");
-                        branchAddress3TextBox.Text = rdr.GetString("BRANCH_ADDRESS_3");
+                        branchAddressCityTextBox.Text = rdr.GetString("BRANCH_ADDRESS_CITY");
                         branchTelephoneTextBox.Text = rdr.GetString("BRANCH_TELEPHONE");
                         
                         if (rdr.GetString("BRANCH_ACTIVE").Equals("1"))
@@ -88,7 +88,7 @@ namespace RoyalPetz_ADMIN
             string branchIPv4 = ipAddressMaskedTextbox.Text.Trim();
             string branchAddress1 = branchAddress1TextBox.Text.Trim();
             string branchAddress2 = branchAddress2TextBox.Text.Trim();
-            string branchAddress3 = branchAddress3TextBox.Text.Trim();
+            string branchAddressCity = branchAddressCityTextBox.Text.Trim();
             string branchPhone = branchTelephoneTextBox.Text.Trim();
 
             byte branchStatus = 0;
@@ -107,15 +107,15 @@ namespace RoyalPetz_ADMIN
                 switch (originModuleID)
                 {
                     case globalConstants.NEW_BRANCH:
-                        sqlCommand = "INSERT INTO MASTER_BRANCH (BRANCH_NAME, BRANCH_ADDRESS_1, BRANCH_ADDRESS_2, BRANCH_ADDRESS_3, BRANCH_TELEPHONE, BRANCH_IP4, BRANCH_ACTIVE) " +
-                                            "VALUES ('" + branchName + "', '" + branchAddress1 + "', '" + branchAddress2 + "', '" + branchAddress3 + "', '" + branchPhone + "', '" + branchIPv4 + "', " + branchStatus + ")";
+                        sqlCommand = "INSERT INTO MASTER_BRANCH (BRANCH_NAME, BRANCH_ADDRESS_1, BRANCH_ADDRESS_2, BRANCH_ADDRESS_CITY, BRANCH_TELEPHONE, BRANCH_IP4, BRANCH_ACTIVE) " +
+                                            "VALUES ('" + branchName + "', '" + branchAddress1 + "', '" + branchAddress2 + "', '" + branchAddressCity + "', '" + branchPhone + "', '" + branchIPv4 + "', " + branchStatus + ")";
                         break;
                     case globalConstants.EDIT_BRANCH:
                         sqlCommand = "UPDATE MASTER_BRANCH SET " +
                                             "BRANCH_NAME = '" + branchName + "', " +
                                             "BRANCH_ADDRESS_1 = '" + branchAddress1 + "', " +
                                             "BRANCH_ADDRESS_2 = '" + branchAddress2 + "', " +
-                                            "BRANCH_ADDRESS_3 = '" + branchAddress3 + "', " +
+                                            "BRANCH_ADDRESS_3 = '" + branchAddressCity + "', " +
                                             "BRANCH_TELEPHONE = '" + branchPhone + "', " +
                                             "BRANCH_IP4 = '" + branchIPv4 + "', " +
                                             "BRANCH_ACTIVE = " + branchStatus + " " +

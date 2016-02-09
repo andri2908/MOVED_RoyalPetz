@@ -21,6 +21,8 @@ namespace RoyalPetz_ADMIN
         private Data_Access DS = new Data_Access();
         private globalStringOP stringOP = new globalStringOP();
 
+        private groupAccessModuleForm parentForm;
+
         public dataGroupDetailForm()
         {
             InitializeComponent();
@@ -38,6 +40,13 @@ namespace RoyalPetz_ADMIN
 
             originModuleID = moduleID;
             selectedGroupID = groupID;
+        }
+
+        public dataGroupDetailForm(int moduleID, groupAccessModuleForm originForm)
+        {
+            InitializeComponent();
+            originModuleID = moduleID;
+            parentForm = originForm;
         }
 
         private void loadUserGroupDataInformation()
@@ -151,6 +160,12 @@ namespace RoyalPetz_ADMIN
             }
             finally
             {
+                if (originModuleID == globalConstants.PENGATURAN_GRUP_AKSES)
+                {
+                    selectedGroupID = Convert.ToInt32(DS.getDataSingleValue("SELECT LAST_INSERT_ID()"));
+                    parentForm.setSelectedGroupID(selectedGroupID);
+                }
+
                 DS.mySqlClose();
                 result = true;
             }

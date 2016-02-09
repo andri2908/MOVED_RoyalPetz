@@ -33,7 +33,6 @@
             this.namaGroupTextbox = new System.Windows.Forms.TextBox();
             this.dataUserGroupGridView = new System.Windows.Forms.DataGridView();
             this.newButton = new System.Windows.Forms.Button();
-            this.displayButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataUserGroupGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,6 +54,7 @@
             this.namaGroupTextbox.Name = "namaGroupTextbox";
             this.namaGroupTextbox.Size = new System.Drawing.Size(260, 27);
             this.namaGroupTextbox.TabIndex = 31;
+            this.namaGroupTextbox.TextChanged += new System.EventHandler(this.namaGroupTextbox_TextChanged);
             // 
             // dataUserGroupGridView
             // 
@@ -80,23 +80,13 @@
             // newButton
             // 
             this.newButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newButton.Location = new System.Drawing.Point(491, 15);
+            this.newButton.Location = new System.Drawing.Point(429, 15);
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(95, 37);
             this.newButton.TabIndex = 32;
             this.newButton.Text = "NEW";
             this.newButton.UseVisualStyleBackColor = true;
             this.newButton.Click += new System.EventHandler(this.newButton_Click);
-            // 
-            // displayButton
-            // 
-            this.displayButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.displayButton.Location = new System.Drawing.Point(360, 16);
-            this.displayButton.Name = "displayButton";
-            this.displayButton.Size = new System.Drawing.Size(95, 37);
-            this.displayButton.TabIndex = 29;
-            this.displayButton.Text = "DISPLAY";
-            this.displayButton.UseVisualStyleBackColor = true;
             // 
             // dataGroupForm
             // 
@@ -108,7 +98,6 @@
             this.Controls.Add(this.namaGroupTextbox);
             this.Controls.Add(this.dataUserGroupGridView);
             this.Controls.Add(this.newButton);
-            this.Controls.Add(this.displayButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "dataGroupForm";
@@ -128,6 +117,5 @@
         private System.Windows.Forms.TextBox namaGroupTextbox;
         private System.Windows.Forms.DataGridView dataUserGroupGridView;
         private System.Windows.Forms.Button newButton;
-        private System.Windows.Forms.Button displayButton;
     }
 }
