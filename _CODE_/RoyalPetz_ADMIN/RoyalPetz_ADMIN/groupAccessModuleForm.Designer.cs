@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,11 +39,11 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.saveButton = new System.Windows.Forms.Button();
             this.groupAccessDataGridView = new System.Windows.Forms.DataGridView();
-            this.newGroupButton = new System.Windows.Forms.Button();
             this.moduleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hakAkses = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.moduleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.featureID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.newGroupButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupAccessDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -55,7 +55,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 350F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 351F));
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label6, 1, 1);
@@ -101,7 +101,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(176, 12);
+            this.label6.Location = new System.Drawing.Point(175, 12);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(14, 18);
             this.label6.TabIndex = 12;
@@ -113,7 +113,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(176, 54);
+            this.label7.Location = new System.Drawing.Point(175, 54);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(14, 18);
             this.label7.TabIndex = 13;
@@ -123,18 +123,20 @@
             // 
             this.namaGroupTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.namaGroupTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaGroupTextBox.Location = new System.Drawing.Point(199, 8);
+            this.namaGroupTextBox.Location = new System.Drawing.Point(198, 8);
             this.namaGroupTextBox.Name = "namaGroupTextBox";
-            this.namaGroupTextBox.Size = new System.Drawing.Size(340, 27);
+            this.namaGroupTextBox.ReadOnly = true;
+            this.namaGroupTextBox.Size = new System.Drawing.Size(346, 27);
             this.namaGroupTextBox.TabIndex = 16;
             // 
             // deskripsiTextBox
             // 
             this.deskripsiTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.deskripsiTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deskripsiTextBox.Location = new System.Drawing.Point(199, 49);
+            this.deskripsiTextBox.Location = new System.Drawing.Point(198, 49);
             this.deskripsiTextBox.Name = "deskripsiTextBox";
-            this.deskripsiTextBox.Size = new System.Drawing.Size(210, 27);
+            this.deskripsiTextBox.ReadOnly = true;
+            this.deskripsiTextBox.Size = new System.Drawing.Size(346, 27);
             this.deskripsiTextBox.TabIndex = 17;
             // 
             // panel1
@@ -156,20 +158,21 @@
             this.saveButton.TabIndex = 25;
             this.saveButton.Text = "SAVE";
             this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // groupAccessDataGridView
             // 
             this.groupAccessDataGridView.AllowUserToAddRows = false;
             this.groupAccessDataGridView.AllowUserToDeleteRows = false;
             this.groupAccessDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.groupAccessDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.groupAccessDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.groupAccessDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.groupAccessDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.moduleName,
@@ -181,18 +184,6 @@
             this.groupAccessDataGridView.RowHeadersVisible = false;
             this.groupAccessDataGridView.Size = new System.Drawing.Size(569, 477);
             this.groupAccessDataGridView.TabIndex = 29;
-            // 
-            // newGroupButton
-            // 
-            this.newGroupButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.newGroupButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newGroupButton.Location = new System.Drawing.Point(268, 136);
-            this.newGroupButton.Name = "newGroupButton";
-            this.newGroupButton.Size = new System.Drawing.Size(151, 37);
-            this.newGroupButton.TabIndex = 30;
-            this.newGroupButton.Text = "NEW GROUP";
-            this.newGroupButton.UseVisualStyleBackColor = true;
-            this.newGroupButton.Click += new System.EventHandler(this.newGroupButton_Click);
             // 
             // moduleName
             // 
@@ -220,6 +211,18 @@
             this.featureID.HeaderText = "featureID";
             this.featureID.Name = "featureID";
             this.featureID.Visible = false;
+            // 
+            // newGroupButton
+            // 
+            this.newGroupButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.newGroupButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newGroupButton.Location = new System.Drawing.Point(268, 136);
+            this.newGroupButton.Name = "newGroupButton";
+            this.newGroupButton.Size = new System.Drawing.Size(151, 37);
+            this.newGroupButton.TabIndex = 30;
+            this.newGroupButton.Text = "NEW GROUP";
+            this.newGroupButton.UseVisualStyleBackColor = true;
+            this.newGroupButton.Click += new System.EventHandler(this.newGroupButton_Click);
             // 
             // groupAccessModuleForm
             // 

@@ -52,8 +52,8 @@
             this.branchAddress1TextBox = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.nonAktifCheckbox = new System.Windows.Forms.CheckBox();
-            this.saveButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.saveButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel13.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel14.SuspendLayout();
@@ -70,7 +70,7 @@
             this.tableLayoutPanel13.ColumnCount = 1;
             this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel13.Controls.Add(this.branchNameTextBox, 0, 0);
-            this.tableLayoutPanel13.Location = new System.Drawing.Point(223, 4);
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(222, 4);
             this.tableLayoutPanel13.Name = "tableLayoutPanel13";
             this.tableLayoutPanel13.RowCount = 1;
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -104,7 +104,7 @@
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 95.33678F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 230F));
             this.tableLayoutPanel7.Controls.Add(this.branchAddressCityTextBox, 0, 0);
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(223, 162);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(222, 162);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -129,9 +129,9 @@
             this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.91549F));
             this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 52F));
             this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 9F));
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 259F));
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 260F));
             this.tableLayoutPanel14.Controls.Add(this.branchTelephoneTextBox, 0, 0);
-            this.tableLayoutPanel14.Location = new System.Drawing.Point(223, 200);
+            this.tableLayoutPanel14.Location = new System.Drawing.Point(222, 200);
             this.tableLayoutPanel14.Name = "tableLayoutPanel14";
             this.tableLayoutPanel14.RowCount = 1;
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -145,7 +145,7 @@
             this.branchTelephoneTextBox.Location = new System.Drawing.Point(3, 3);
             this.branchTelephoneTextBox.MaxLength = 15;
             this.branchTelephoneTextBox.Name = "branchTelephoneTextBox";
-            this.branchTelephoneTextBox.Size = new System.Drawing.Size(238, 27);
+            this.branchTelephoneTextBox.Size = new System.Drawing.Size(237, 27);
             this.branchTelephoneTextBox.TabIndex = 17;
             // 
             // panel1
@@ -177,7 +177,7 @@
             this.tableLayoutPanel6.ColumnCount = 1;
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 95.33678F));
             this.tableLayoutPanel6.Controls.Add(this.branchAddress2TextBox, 0, 0);
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(223, 121);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(222, 121);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -191,7 +191,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 92.76018F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.239819F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 615F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 616F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 3);
@@ -278,7 +278,7 @@
             this.label17.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label17.Location = new System.Drawing.Point(207, 10);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(10, 18);
+            this.label17.Size = new System.Drawing.Size(9, 18);
             this.label17.TabIndex = 33;
             this.label17.Text = ":";
             // 
@@ -290,7 +290,7 @@
             this.label18.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label18.Location = new System.Drawing.Point(207, 48);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(10, 18);
+            this.label18.Size = new System.Drawing.Size(9, 18);
             this.label18.TabIndex = 35;
             this.label18.Text = ":";
             // 
@@ -300,7 +300,7 @@
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 92.59259F));
             this.tableLayoutPanel3.Controls.Add(this.ipAddressMaskedTextbox, 0, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(223, 41);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(222, 41);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -326,7 +326,7 @@
             this.label23.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label23.Location = new System.Drawing.Point(207, 87);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(10, 18);
+            this.label23.Size = new System.Drawing.Size(9, 18);
             this.label23.TabIndex = 40;
             this.label23.Text = ":";
             // 
@@ -336,7 +336,7 @@
             this.tableLayoutPanel5.ColumnCount = 1;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 95.33678F));
             this.tableLayoutPanel5.Controls.Add(this.branchAddress1TextBox, 0, 0);
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(223, 80);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(222, 80);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -361,7 +361,7 @@
             this.label30.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label30.Location = new System.Drawing.Point(207, 208);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(10, 18);
+            this.label30.Size = new System.Drawing.Size(9, 18);
             this.label30.TabIndex = 46;
             this.label30.Text = ":";
             // 
@@ -370,24 +370,12 @@
             this.nonAktifCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.nonAktifCheckbox.AutoSize = true;
             this.nonAktifCheckbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nonAktifCheckbox.Location = new System.Drawing.Point(223, 252);
+            this.nonAktifCheckbox.Location = new System.Drawing.Point(222, 252);
             this.nonAktifCheckbox.Name = "nonAktifCheckbox";
             this.nonAktifCheckbox.Size = new System.Drawing.Size(170, 22);
             this.nonAktifCheckbox.TabIndex = 69;
             this.nonAktifCheckbox.Text = "Non Aktif Cabang";
             this.nonAktifCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // saveButton
-            // 
-            this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(380, 344);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(95, 37);
-            this.saveButton.TabIndex = 23;
-            this.saveButton.Text = "SAVE";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // label2
             // 
@@ -400,6 +388,18 @@
             this.label2.Size = new System.Drawing.Size(58, 18);
             this.label2.TabIndex = 70;
             this.label2.Text = "KOTA";
+            // 
+            // saveButton
+            // 
+            this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveButton.Location = new System.Drawing.Point(380, 344);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(95, 37);
+            this.saveButton.TabIndex = 23;
+            this.saveButton.Text = "SAVE";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // dataCabangDetailForm
             // 

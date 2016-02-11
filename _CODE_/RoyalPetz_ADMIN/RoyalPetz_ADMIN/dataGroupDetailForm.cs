@@ -128,6 +128,7 @@ namespace RoyalPetz_ADMIN
                 switch(originModuleID)
                 {
                     case globalConstants.NEW_GROUP_USER:
+                    case globalConstants.PENGATURAN_GRUP_AKSES:
                         sqlCommand = "INSERT INTO MASTER_GROUP (GROUP_USER_NAME, GROUP_USER_DESCRIPTION, GROUP_USER_ACTIVE) VALUES ('" + groupName + "', '" + groupDesc + "', " + groupStatus + ")";
                         break;
                     case globalConstants.EDIT_GROUP_USER:
@@ -162,7 +163,7 @@ namespace RoyalPetz_ADMIN
             {
                 if (originModuleID == globalConstants.PENGATURAN_GRUP_AKSES)
                 {
-                    selectedGroupID = Convert.ToInt32(DS.getDataSingleValue("SELECT LAST_INSERT_ID()"));
+                    selectedGroupID = Convert.ToInt32(DS.getDataSingleValue("SELECT MAX(GROUP_ID) FROM MASTER_GROUP WHERE GROUP_USER_NAME = '" + groupName + "' AND GROUP_USER_DESCRIPTION = '"+groupDesc+"' "));
                     parentForm.setSelectedGroupID(selectedGroupID);
                 }
 
@@ -177,6 +178,7 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
+                
                 MessageBox.Show("SUCCESS");
                 //this.Close();
             }

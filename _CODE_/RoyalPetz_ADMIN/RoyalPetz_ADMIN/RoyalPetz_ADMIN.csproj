@@ -217,6 +217,7 @@
     <Compile Include="exportStockOpnameForm.Designer.cs">
       <DependentUpon>exportStockOpnameForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="globalConstantModules.cs" />
     <Compile Include="globalConstants.cs" />
     <Compile Include="GlobalHotkey.cs">
       <SubType>Code</SubType>

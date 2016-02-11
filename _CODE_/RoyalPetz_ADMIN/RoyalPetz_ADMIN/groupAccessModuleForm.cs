@@ -47,7 +47,7 @@ namespace RoyalPetz_ADMIN
 
         private void newGroupButton_Click(object sender, EventArgs e)
         {
-            dataGroupDetailForm displayForm = new dataGroupDetailForm(globalConstants.PENGATURAN_GRUP_AKSES);
+            dataGroupDetailForm displayForm = new dataGroupDetailForm(globalConstants.PENGATURAN_GRUP_AKSES, this);
             displayForm.ShowDialog(this);
 
             loadGroupUserInformation();
@@ -99,21 +99,51 @@ namespace RoyalPetz_ADMIN
 
                         switch(moduleFeatures)
                         {
-                            case 1: // VIEW
-                                break;
-                            case 2: // ENABLE, DISABLE
+                            case 1: // ACCESS ONLY 
+                                // ACCESS = 1
                                 if (userAccess == 1)
-                                    groupAccessDataGridView.Rows.Add(rdr.GetString("MODULE_NAME"), true, rdr.GetString("MODULE_ID"), "1");
+                                    groupAccessDataGridView.Rows.Add(rdr.GetString("MODULE_NAME"), true, rdr.GetString("MODULE_ID"), "1");                     
                                 else
-                                    groupAccessDataGridView.Rows.Add(rdr.GetString("MODULE_NAME"), false, rdr.GetString("MODULE_ID"), "1");
+                                    groupAccessDataGridView.Rows.Add(rdr.GetString("MODULE_NAME"), false, rdr.GetString("MODULE_ID"), "1");                     
                                 break;
 
-                            case 3: // INSERT, UPDATE, DELETE
-                                //groupAccessDataGridView.Rows.Add(rdr.GetString("MODULE_NAME"), false, rdr.GetString("MODULE_ID"), "1111");
-                                groupAccessDataGridView.Rows.Add(rdr.GetString("MODULE_NAME") + " - VIEW", false, rdr.GetString("MODULE_ID"), "1000");
-                                groupAccessDataGridView.Rows.Add(rdr.GetString("MODULE_NAME") + " - INSERT", false, rdr.GetString("MODULE_ID"), "100");
-                                groupAccessDataGridView.Rows.Add(rdr.GetString("MODULE_NAME") + " - UPDATE", false, rdr.GetString("MODULE_ID"), "10");
-                                groupAccessDataGridView.Rows.Add(rdr.GetString("MODULE_NAME") + " - DELETE", false, rdr.GetString("MODULE_ID"), "1"); 
+                            case 3: // ACCESS + INSERT, UPDATE
+                                // INSERT OPERATION = 2
+                                // UPDATE OPERATION = 4
+                                if ( (userAccess == 2) || (userAccess == 6) )
+                                    groupAccessDataGridView.Rows.Add("[INSERT] - " + rdr.GetString("MODULE_NAME"), true, rdr.GetString("MODULE_ID"), "2");  
+                                else
+                                    groupAccessDataGridView.Rows.Add("[INSERT] - " + rdr.GetString("MODULE_NAME"), false, rdr.GetString("MODULE_ID"), "2"); 
+                                
+                                if ((userAccess == 4) || (userAccess == 6))
+                                    groupAccessDataGridView.Rows.Add("[UPDATE] - " + rdr.GetString("MODULE_NAME"), true, rdr.GetString("MODULE_ID"), "4"); 
+                                else
+                                    groupAccessDataGridView.Rows.Add("[UPDATE] - " + rdr.GetString("MODULE_NAME"), false, rdr.GetString("MODULE_ID"), "4");
+                                break;
+
+                            case 4: // VIEW ONLY
+                                // VIEW = 8
+                                if (userAccess == 8)
+                                    groupAccessDataGridView.Rows.Add("[LAPORAN] - " + rdr.GetString("MODULE_NAME"), true, rdr.GetString("MODULE_ID"), "8"); 
+                                else
+                                    groupAccessDataGridView.Rows.Add("[LAPORAN] - " + rdr.GetString("MODULE_NAME"), false, rdr.GetString("MODULE_ID"), "8"); 
+                                break;
+
+                            case 7: // VIEW + ACCESS + INSERT, UPDATE, DELETE
+                                if ((userAccess == 2) || (userAccess == 6) || (userAccess == 10) || (userAccess == 14))
+                                    groupAccessDataGridView.Rows.Add("[INSERT] - " + rdr.GetString("MODULE_NAME"), true, rdr.GetString("MODULE_ID"), "2");    
+                                else
+                                    groupAccessDataGridView.Rows.Add("[INSERT] - " + rdr.GetString("MODULE_NAME"), false, rdr.GetString("MODULE_ID"), "2");   
+
+                                if ((userAccess == 4) || (userAccess == 6) || (userAccess == 12) || (userAccess == 14))
+                                    groupAccessDataGridView.Rows.Add("[UPDATE] - " + rdr.GetString("MODULE_NAME"), true, rdr.GetString("MODULE_ID"), "4");  
+                                else
+                                    groupAccessDataGridView.Rows.Add("[UPDATE] - " + rdr.GetString("MODULE_NAME"), false, rdr.GetString("MODULE_ID"), "4"); 
+
+                                if ((userAccess == 8) || (userAccess == 10) || (userAccess == 12) || (userAccess == 14))
+                                    groupAccessDataGridView.Rows.Add("[LAPORAN] - " + rdr.GetString("MODULE_NAME"), true, rdr.GetString("MODULE_ID"), "8");
+                                else
+                                    groupAccessDataGridView.Rows.Add("[LAPORAN] - " + rdr.GetString("MODULE_NAME"), false, rdr.GetString("MODULE_ID"), "8");
                                 break;
                         }
                     }
@@ -126,6 +156,109 @@ namespace RoyalPetz_ADMIN
             loadGroupUserInformation();
             loadUserAccessInformation();
            //fillInDummyData();
+        }
+
+        private bool saveData()
+        {
+            bool result = false;
+            string sqlCommand = "";
+            int i=0;
+            int moduleIdValue = 0;
+            int tempModuleID = 0;
+            int userAccessValue = 0;
+
+            DS.beginTransaction();
+
+            try
+            {
+                DS.mySqlConnect();
+
+                i = 0;
+
+                while (i<groupAccessDataGridView.Rows.Count)
+                {
+                    tempModuleID = Convert.ToInt32(groupAccessDataGridView.Rows[i].Cells["moduleID"].Value);
+                    if (moduleIdValue != tempModuleID)
+                    {
+                        if (moduleIdValue != 0)
+                        { 
+                            if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM USER_ACCESS_MANAGEMENT WHERE MODULE_ID = " + moduleIdValue + " AND GROUP_ID = " + selectedGroupID)) == 0)
+                            {
+                                // INSERT MODE
+                                sqlCommand = "INSERT INTO USER_ACCESS_MANAGEMENT (GROUP_ID, MODULE_ID, USER_ACCESS_OPTION) VALUES (" + selectedGroupID + ", " + moduleIdValue + ", " + userAccessValue + ")";
+                                DS.executeNonQueryCommand(sqlCommand);
+                            }
+                            else
+                            {
+                                // EDIT MODE
+                                sqlCommand = "UPDATE USER_ACCESS_MANAGEMENT SET USER_ACCESS_OPTION = " + userAccessValue + " WHERE GROUP_ID = " + selectedGroupID + " AND MODULE_ID = " + moduleIdValue;
+                                DS.executeNonQueryCommand(sqlCommand);
+                            }
+                        }
+
+                        moduleIdValue = tempModuleID;
+                        userAccessValue = 0;
+                    }
+
+                    if (Convert.ToBoolean(groupAccessDataGridView.Rows[i].Cells["hakAkses"].Value))
+                        userAccessValue = userAccessValue + Convert.ToInt32(groupAccessDataGridView.Rows[i].Cells["featureID"].Value);
+                    
+                    i++;
+                }
+
+                // INSERT / UPDATE 
+                if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM USER_ACCESS_MANAGEMENT WHERE MODULE_ID = " + moduleIdValue + " AND GROUP_ID = " + selectedGroupID)) == 0)
+                {
+                    // INSERT MODE
+                    sqlCommand = "INSERT INTO USER_ACCESS_MANAGEMENT (GROUP_ID, MODULE_ID, USER_ACCESS_OPTION) VALUES (" + selectedGroupID + ", " + moduleIdValue + ", " + userAccessValue + ")";
+                    DS.executeNonQueryCommand(sqlCommand);
+                }
+                else
+                {
+                    // EDIT MODE
+                    sqlCommand = "UPDATE USER_ACCESS_MANAGEMENT SET USER_ACCESS_OPTION = " + userAccessValue + " WHERE GROUP_ID = " + selectedGroupID + " AND MODULE_ID = " + moduleIdValue + ")";
+                    DS.executeNonQueryCommand(sqlCommand);
+                }
+
+                //DS.executeNonQueryCommand(sqlCommand);
+
+                DS.commit();
+            }
+            catch (Exception e)
+            {
+                try
+                {
+                    //myTrans.Rollback();
+                }
+                catch (MySqlException ex)
+                {
+                    if (DS.getMyTransConnection() != null)
+                    {
+                        MessageBox.Show("An exception of type " + ex.GetType() +
+                                          " was encountered while attempting to roll back the transaction.");
+                    }
+                }
+
+                MessageBox.Show("An exception of type " + e.GetType() +
+                                  " was encountered while inserting the data.");
+                MessageBox.Show("Neither record was written to database.");
+            }
+            finally
+            {
+                DS.mySqlClose();
+                result = true;
+            }
+
+            return result;
+        }
+
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            if (saveData())
+            {
+                MessageBox.Show("SUCCESS");
+            }
         }
     }
 }
