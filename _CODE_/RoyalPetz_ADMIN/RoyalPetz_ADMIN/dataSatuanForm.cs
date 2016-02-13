@@ -8,10 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using MySql.Data;
+using MySql.Data.MySqlClient;
+
 namespace RoyalPetz_ADMIN
 {
     public partial class dataSatuanForm : Form
     {
+        private int originModuleID = 0;
+        private int selectedUnitID = 0;
+
+        Data_Access DS = new Data_Access();
+
         public dataSatuanForm()
         {
             InitializeComponent();
@@ -19,7 +27,56 @@ namespace RoyalPetz_ADMIN
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            dataSatuanDetailForm displayedForm = new dataSatuanDetailForm();
+            dataSatuanDetailForm displayedForm = new dataSatuanDetailForm(globalConstants.NEW_UNIT);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void loadUnitData()
+        {
+            MySqlDataReader rdr;
+            DataTable dt = new DataTable();
+            string sqlCommand;
+
+            if (unitNameTextBox.Text.Equals(""))
+                return;
+
+            DS.mySqlConnect();
+
+            sqlCommand = "SELECT UNIT_ID, UNIT_NAME AS 'NAMA UNIT', UNIT_DESCRIPTION AS 'DESKRIPSI UNIT' FROM MASTER_UNIT WHERE UNIT_ACTIVE = 1 AND UNIT_NAME LIKE '%" + unitNameTextBox.Text + "%'";
+
+            using (rdr = DS.getData(sqlCommand))
+            {
+                if (rdr.HasRows)
+                {
+                    dt.Load(rdr);
+
+                    dataUnitGridView.DataSource = dt;
+
+                    dataUnitGridView.Columns["UNIT_ID"].Visible = false;
+                    dataUnitGridView.Columns["NAMA UNIT"].Width = 200;
+                    dataUnitGridView.Columns["DESKRIPSI UNIT"].Width = 300;
+                }
+            }
+        }
+
+        private void dataSatuanForm_Activated(object sender, EventArgs e)
+        {
+            loadUnitData();
+        }
+
+        private void unitNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            loadUnitData();
+        }
+
+        private void dataUnitGridView_DoubleClick(object sender, EventArgs e)
+        {
+            int selectedrowindex = dataUnitGridView.SelectedCells[0].RowIndex;
+
+            DataGridViewRow selectedRow = dataUnitGridView.Rows[selectedrowindex];
+            selectedUnitID = Convert.ToInt32(selectedRow.Cells["UNIT_ID"].Value);
+
+            dataSatuanDetailForm displayedForm = new dataSatuanDetailForm(globalConstants.EDIT_UNIT, selectedUnitID);
             displayedForm.ShowDialog(this);
         }
     }

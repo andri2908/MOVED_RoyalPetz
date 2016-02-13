@@ -16,6 +16,7 @@ namespace RoyalPetz_ADMIN
 {
     public partial class adminForm : Form
     {
+        private const string BG_IMAGE = "bg.jpg";
         private DateTime localDate = DateTime.Now;
         private CultureInfo culture = new CultureInfo("id-ID");
 
@@ -23,12 +24,12 @@ namespace RoyalPetz_ADMIN
 
         private int selectedUserID = 0;
 
-
         public adminForm(int userID)
         {
             InitializeComponent();
 
             selectedUserID = userID;
+            loadBGimage();
         }
 
         private void updateLabel()
@@ -37,12 +38,33 @@ namespace RoyalPetz_ADMIN
             timeStampStatusLabel.Text = String.Format(culture, "{0:dddd, dd-MM-yyyy - HH:mm}", localDate);
         }
 
+        private void loadBGimage()
+        {
+
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.SetStyle(ControlStyles.UserPaint, true);
+
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+
+            try
+            {
+                this.BackgroundImage = Image.FromFile(BG_IMAGE);
+             }
+            catch(Exception ex)
+            {
+
+            }
+        }
+
         private void adminForm_Load(object sender, EventArgs e)
         {
             updateLabel();
             timer1.Start();
 
             welcomeLabel.Text = "WELCOME " + DS.getDataSingleValue("SELECT USER_FULL_NAME FROM MASTER_USER WHERE ID = " + selectedUserID).ToString();
+
+            //loadBGimage();
         }
 
         private void adminForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -139,23 +161,7 @@ namespace RoyalPetz_ADMIN
             displayedForm.ShowDialog(this);
         }
 
-        private void toolStripMenuItem3_Click(object sender, EventArgs e)
-        {
-            string fileName = "";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    fileName = openFileDialog1.FileName;
-                    this.BackgroundImageLayout = ImageLayout.Stretch;
-                    this.BackgroundImage = Image.FromFile(fileName);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
-                }
-            }
-        }
+        
 
         private void toolStripMenuItem55_Click(object sender, EventArgs e)
         {
@@ -311,6 +317,8 @@ namespace RoyalPetz_ADMIN
                     fileName = openFileDialog1.FileName;
                     this.BackgroundImageLayout = ImageLayout.Stretch;
                     this.BackgroundImage = Image.FromFile(fileName);
+
+                    System.IO.File.Copy(openFileDialog1.FileName, "bg.jpg");
                 }
                 catch (Exception ex)
                 {
@@ -442,6 +450,11 @@ namespace RoyalPetz_ADMIN
         {
             cashierForm displayedForm = new cashierForm(1);
             displayedForm.ShowDialog(this);
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

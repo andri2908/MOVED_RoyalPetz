@@ -39,7 +39,10 @@ namespace RoyalPetz_ADMIN
         public const int EDIT_USER = 204;
         public const int NEW_BRANCH = 205;
         public const int EDIT_BRANCH = 206;
-
+        public const int NEW_CATEGORY = 207;
+        public const int EDIT_CATEGORY = 208;
+        public const int NEW_UNIT = 209;
+        public const int EDIT_UNIT = 210;
 
 
 
