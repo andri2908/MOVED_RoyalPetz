@@ -52,7 +52,7 @@ namespace RoyalPetz_ADMIN
             userName = stringOP.allTrim(userNameTextBox.Text);
             password = stringOP.allTrim(passwordTextBox.Text);
 
-            sqlCommand = "SELECT ID FROM MASTER_USER WHERE USER_NAME = '"+userName+"' AND USER_PASSWORD = '"+password+"'";
+            sqlCommand = "SELECT ID FROM MASTER_USER WHERE USER_NAME = '"+userName+"' AND USER_PASSWORD = '" + password + "'";
             result = DS.getDataSingleValue(sqlCommand);
 
             if (result != null)
@@ -64,27 +64,100 @@ namespace RoyalPetz_ADMIN
             return retVal;
         }
 
+        private bool checkUserActive()
+        {
+            bool retVal = false;
+            string userName;
+            object result;
+
+            string sqlCommand;
+
+            userName = stringOP.allTrim(userNameTextBox.Text);
+
+            sqlCommand = "SELECT ID FROM MASTER_USER WHERE USER_NAME = '" + userName + "' AND USER_ACTIVE = '1'";
+            result = DS.getDataSingleValue(sqlCommand);
+
+            if (result != null)
+            {
+                retVal = true;
+            }
+
+            return retVal;
+        }
+
+        private bool checkUserExist()
+        {
+            bool retVal = false;
+            string userName;
+            object result;
+
+            string sqlCommand;
+
+            userName = stringOP.allTrim(userNameTextBox.Text);
+
+            sqlCommand = "SELECT ID FROM MASTER_USER WHERE USER_NAME = '" + userName + "'";
+            result = DS.getDataSingleValue(sqlCommand);
+
+            if (result != null)
+            {
+                retVal = true;
+            }
+
+            return retVal;
+        }
+
+        private bool checkTextBox()
+        {
+            bool retVal = false;
+            string userName;
+            string password;
+
+            userName = userNameTextBox.Text;
+            password = passwordTextBox.Text;
+
+            if (userName !="" & password != "")
+            {
+                retVal = true;
+            }
+
+            return retVal;
+        }
         private void loginButton_Click(object sender, EventArgs e)
         {
-            if (checkUserNamePassword())
+            if (checkTextBox())
             {
-                this.Hide();
+                if (checkUserActive())
+                {
+                    if (checkUserNamePassword())
+                    {
+                        this.Hide();
 
-                adminForm displayAdminForm = new adminForm(selectedUserID);
-                displayAdminForm.ShowDialog(this);
+                        adminForm displayAdminForm = new adminForm(selectedUserID);
+                        displayAdminForm.ShowDialog(this);
 
-                logoutForm displayLogOutForm = new logoutForm();
-                displayLogOutForm.ShowDialog(this);
-                               
-                userNameTextBox.Text = "";
-                passwordTextBox.Text = "";
-                userNameTextBox.Focus();
+                        logoutForm displayLogOutForm = new logoutForm();
+                        displayLogOutForm.ShowDialog(this);
 
-                this.Show();
+                        userNameTextBox.Text = "";
+                        passwordTextBox.Text = "";
+                        errorLabel.Text = "";
+                        userNameTextBox.Focus();
+
+                        this.Show();
+                    }
+                    else
+                    {
+                        errorLabel.Text = "LOGIN FAILED." + Environment.NewLine + "Please check username or password!";
+                    }
+                }
+                else
+                {
+                    errorLabel.Text = "USER NON ACTIVE." + Environment.NewLine + "Please contact Administrator!";
+                }
             }
             else
             {
-                errorLabel.Text = "LOGIN FAILED";
+                errorLabel.Text = "INPUT ERROR";
             }
         }
 
@@ -97,6 +170,39 @@ namespace RoyalPetz_ADMIN
                 MessageBox.Show("CAN'T CONNECT");
                 this.Close();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            userNameTextBox.Clear();
+            passwordTextBox.Clear();
+            shiftCombobox.Text = "SHIFT 1";
+            errorLabel.Text = "";
+        }
+
+        private void userNameTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            errorLabel.Text = "";
+            if (Convert.ToInt32(e.KeyChar) == 13)
+            {
+                if (checkUserExist())
+                {
+                    passwordTextBox.Focus();
+                }
+                else {
+                    errorLabel.Text = "USER NOT EXIST." + Environment.NewLine + "Please Contact Adminstrator!";
+                }
+            }
+
+        }
+
+        private void passwordTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Convert.ToInt32(e.KeyChar) == 13)
+            {
+                loginButton.Focus();
+            }
+
         }
     }
 }
