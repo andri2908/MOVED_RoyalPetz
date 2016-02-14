@@ -8,13 +8,253 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using MySql.Data;
+using MySql.Data.MySqlClient;
+
+using System.Text.RegularExpressions;
+
 namespace RoyalPetz_ADMIN
 {
     public partial class konversiSatuanForm : Form
     {
+        private int selectedUnit1_ID = 0;
+        private int selectedUnit2_ID = 0;
+
+        private const int NEW_CONVERSION = 1;
+        private const int EDIT_CONVERSION = 2;
+        private string previousInput = "";
+
+        private int currentMode = NEW_CONVERSION;
+
+        Data_Access DS = new Data_Access();
+
         public konversiSatuanForm()
         {
             InitializeComponent();
+        }
+
+        private void loadUnitData(ComboBox comboControlVisible, ComboBox comboControlHidden, int excludeID = 0)
+        {
+            MySqlDataReader rdr;
+            DataTable dt = new DataTable();
+            string sqlCommand;
+
+            comboControlVisible.Items.Clear();
+            comboControlHidden.Items.Clear();
+
+            DS.mySqlConnect();
+
+            if (excludeID == 0)
+                sqlCommand = "SELECT UNIT_ID, UNIT_NAME FROM MASTER_UNIT WHERE UNIT_ACTIVE = 1 ORDER BY UNIT_NAME ASC";
+            else
+                sqlCommand = "SELECT UNIT_ID, UNIT_NAME FROM MASTER_UNIT WHERE UNIT_ACTIVE = 1 AND UNIT_ID <> "+excludeID+" ORDER BY UNIT_NAME ASC";
+
+            using (rdr = DS.getData(sqlCommand))
+            {
+                while (rdr.Read())
+                {
+                    comboControlVisible.Items.Add(rdr.GetString("UNIT_NAME"));
+                    comboControlHidden.Items.Add(rdr.GetString("UNIT_ID"));
+                }
+            }
+        }
+
+        private void konversiSatuanForm_Load(object sender, EventArgs e)
+        {
+            errorLabel.Text = "";
+            loadUnitData(unit1Combo, unit1ComboHidden);
+        }
+
+        private void displayCurrentSavedConversion(int selectedID)
+        {
+            MySqlDataReader rdr;
+            DataTable dt = new DataTable();
+            string sqlCommand;
+
+            DS.mySqlConnect();
+
+            sqlCommand = "SELECT CONVERT_UNIT_ID_2, UNIT_NAME AS 'NAMA UNIT', UNIT_DESCRIPTION AS 'DESKRIPSI UNIT', CONVERT_MULTIPLIER AS 'NILAI KONVERSI' FROM UNIT_CONVERT, MASTER_UNIT WHERE CONVERT_UNIT_ID_2 = UNIT_ID AND CONVERT_UNIT_ID_1 = "+selectedUnit1_ID+" ORDER BY UNIT_NAME ASC";
+
+            dataConvertGridView.DataSource = null;
+
+            using (rdr = DS.getData(sqlCommand))
+            {
+                if (rdr.HasRows)
+                {
+                    dt.Load(rdr);
+
+                    dataConvertGridView.DataSource = dt;
+
+                    dataConvertGridView.Columns["CONVERT_UNIT_ID_2"].Visible = false;
+                    dataConvertGridView.Columns["NAMA UNIT"].Width= 200;
+                    dataConvertGridView.Columns["DESKRIPSI UNIT"].Width= 300;
+                    dataConvertGridView.Columns["NILAI KONVERSI"].Width = 300;
+                }
+            }
+        }
+
+        private void unit1Combo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectedIndex = 0;
+
+            selectedIndex = unit1Combo.SelectedIndex;
+            selectedUnit1_ID = Convert.ToInt32(unit1ComboHidden.Items[selectedIndex]);
+
+            displayCurrentSavedConversion(selectedUnit1_ID);
+            loadUnitData(unit2Combo, unit2ComboHidden, selectedUnit1_ID);
+            selectedUnit2_ID = 0;
+            unit2Combo.Text = "";
+
+            currentMode = NEW_CONVERSION;
+        }
+
+        private void unit2Combo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectedIndex = 0;
+
+            selectedIndex = unit2Combo.SelectedIndex;
+            selectedUnit2_ID = Convert.ToInt32(unit2ComboHidden.Items[selectedIndex]);
+            
+            currentMode = NEW_CONVERSION;
+        }
+
+        private bool dataValidated()
+        {
+            if (selectedUnit2_ID == 0)
+            {
+                errorLabel.Text = "PILIH UNIT 2 DULU";
+                return false;
+            }
+
+            if (convertValueTextBox.Text.Equals(""))
+            {
+                errorLabel.Text = "NILAI KONVERSI HARUS DIISI";
+                return false;
+            }
+
+            return true;
+        }
+
+        private double getConvertValue()
+        {
+            double retVal = 0;
+            int dotPos = 0;
+
+            string convertValueText = convertValueTextBox.Text;
+            dotPos = convertValueText.IndexOf(".");
+            
+            if (dotPos == convertValueText.Length - 1)
+                convertValueText = convertValueText.Substring(0, dotPos);
+
+            retVal = Convert.ToDouble(convertValueText);
+
+            return retVal;
+        }
+
+        private bool saveDataTransaction()
+        {
+            bool result = false;
+            string sqlCommand = "";
+
+            double unitConversion = getConvertValue();
+            
+            DS.beginTransaction();
+
+            try
+            {
+                DS.mySqlConnect();
+
+                switch (currentMode)
+                {
+                    case NEW_CONVERSION:
+                        sqlCommand = "INSERT INTO UNIT_CONVERT (CONVERT_UNIT_ID_1, CONVERT_UNIT_ID_2, CONVERT_MULTIPLIER) VALUES (" + selectedUnit1_ID + ", " + selectedUnit2_ID + ", " + unitConversion + ")";
+                        break;
+                    case EDIT_CONVERSION:
+                        sqlCommand = "UPDATE UNIT_CONVERT SET CONVERT_MULTIPLIER = " + unitConversion + " WHERE CONVERT_UNIT_ID_1 = " + selectedUnit1_ID + " AND CONVERT_UNIT_ID_2 = "+selectedUnit2_ID;
+                        break;
+                }
+
+                DS.executeNonQueryCommand(sqlCommand);
+
+                DS.commit();
+            }
+            catch (Exception e)
+            {
+                try
+                {
+                    //myTrans.Rollback();
+                }
+                catch (MySqlException ex)
+                {
+                    if (DS.getMyTransConnection() != null)
+                    {
+                        MessageBox.Show("An exception of type " + ex.GetType() +
+                                          " was encountered while attempting to roll back the transaction.");
+                    }
+                }
+
+                MessageBox.Show("An exception of type " + e.GetType() +
+                                  " was encountered while inserting the data.");
+                MessageBox.Show("Neither record was written to database.");
+            }
+            finally
+            {
+                DS.mySqlClose();
+                result = true;
+            }
+
+            return result;
+        }
+
+        private bool saveData()
+        {
+            if (dataValidated())
+            {
+                return saveDataTransaction();
+            }
+
+            return false;
+        }
+
+        private void newButton_Click(object sender, EventArgs e)
+        {
+            if (saveData())
+            {
+                MessageBox.Show("SUCCESS");
+                displayCurrentSavedConversion(selectedUnit1_ID);
+            }
+        }
+
+        private void dataConvertGridView_DoubleClick(object sender, EventArgs e)
+        {
+            int selectedrowindex = dataConvertGridView.SelectedCells[0].RowIndex;
+
+            DataGridViewRow selectedRow = dataConvertGridView.Rows[selectedrowindex];
+            selectedUnit2_ID = Convert.ToInt32(selectedRow.Cells["CONVERT_UNIT_ID_2"].Value);
+
+            unit2Combo.Text = selectedRow.Cells["NAMA UNIT"].Value.ToString();
+            convertValueTextBox.Text = selectedRow.Cells["NILAI KONVERSI"].Value.ToString();
+
+            currentMode = EDIT_CONVERSION;
+        }
+
+        private void convertValueTextBox_TextChanged(object sender, EventArgs e)
+        {
+            string regExValue = "";
+
+            regExValue = @"^[0-9]*\.?\d{0,2}$";
+            Regex r = new Regex(regExValue); // This is the main part, can be altered to match any desired form or limitations
+            Match m = r.Match(convertValueTextBox.Text);
+
+            if (m.Success)
+            {
+                previousInput = convertValueTextBox.Text;
+            }
+            else
+            {
+                convertValueTextBox.Text = previousInput;
+            }
+
         }
     }
 }
