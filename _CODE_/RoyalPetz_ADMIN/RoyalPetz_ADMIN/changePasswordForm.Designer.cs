@@ -39,8 +39,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.newPassword2TextBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.loginButton = new System.Windows.Forms.Button();
             this.errorLabel = new System.Windows.Forms.Label();
+            this.loginButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -52,7 +53,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 93.44827F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.551724F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 202F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 203F));
             this.tableLayoutPanel1.Controls.Add(this.label8, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.newPasswordTextBox, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
@@ -78,7 +79,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label8.Location = new System.Drawing.Point(271, 96);
+            this.label8.Location = new System.Drawing.Point(270, 96);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(12, 18);
             this.label8.TabIndex = 67;
@@ -88,7 +89,7 @@
             // 
             this.newPasswordTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.newPasswordTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newPasswordTextBox.Location = new System.Drawing.Point(289, 43);
+            this.newPasswordTextBox.Location = new System.Drawing.Point(288, 43);
             this.newPasswordTextBox.Name = "newPasswordTextBox";
             this.newPasswordTextBox.PasswordChar = '*';
             this.newPasswordTextBox.Size = new System.Drawing.Size(187, 27);
@@ -124,7 +125,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(271, 8);
+            this.label6.Location = new System.Drawing.Point(270, 8);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(12, 18);
             this.label6.TabIndex = 12;
@@ -136,7 +137,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(271, 48);
+            this.label7.Location = new System.Drawing.Point(270, 48);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(12, 18);
             this.label7.TabIndex = 13;
@@ -146,7 +147,7 @@
             // 
             this.oldPasswordTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.oldPasswordTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.oldPasswordTextBox.Location = new System.Drawing.Point(289, 4);
+            this.oldPasswordTextBox.Location = new System.Drawing.Point(288, 4);
             this.oldPasswordTextBox.Name = "oldPasswordTextBox";
             this.oldPasswordTextBox.PasswordChar = '*';
             this.oldPasswordTextBox.Size = new System.Drawing.Size(187, 27);
@@ -168,7 +169,7 @@
             // 
             this.newPassword2TextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.newPassword2TextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newPassword2TextBox.Location = new System.Drawing.Point(289, 91);
+            this.newPassword2TextBox.Location = new System.Drawing.Point(288, 91);
             this.newPassword2TextBox.Name = "newPassword2TextBox";
             this.newPassword2TextBox.PasswordChar = '*';
             this.newPassword2TextBox.Size = new System.Drawing.Size(187, 27);
@@ -183,19 +184,6 @@
             this.panel1.Size = new System.Drawing.Size(491, 29);
             this.panel1.TabIndex = 63;
             // 
-            // loginButton
-            // 
-            this.loginButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.loginButton.BackColor = System.Drawing.SystemColors.Control;
-            this.loginButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loginButton.Location = new System.Drawing.Point(210, 187);
-            this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(95, 37);
-            this.loginButton.TabIndex = 64;
-            this.loginButton.Text = "SAVE";
-            this.loginButton.UseVisualStyleBackColor = false;
-            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
-            // 
             // errorLabel
             // 
             this.errorLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -209,12 +197,39 @@
             this.errorLabel.TabIndex = 9;
             this.errorLabel.Text = "   ";
             // 
+            // loginButton
+            // 
+            this.loginButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.loginButton.BackColor = System.Drawing.SystemColors.Control;
+            this.loginButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loginButton.Location = new System.Drawing.Point(125, 187);
+            this.loginButton.Name = "loginButton";
+            this.loginButton.Size = new System.Drawing.Size(95, 37);
+            this.loginButton.TabIndex = 64;
+            this.loginButton.Text = "SAVE";
+            this.loginButton.UseVisualStyleBackColor = false;
+            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
+            // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.button1.BackColor = System.Drawing.SystemColors.Control;
+            this.button1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(270, 187);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(95, 37);
+            this.button1.TabIndex = 65;
+            this.button1.Text = "RESET";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // changePasswordForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(494, 236);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.loginButton);
@@ -248,5 +263,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox newPassword2TextBox;
         private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.Button button1;
     }
 }

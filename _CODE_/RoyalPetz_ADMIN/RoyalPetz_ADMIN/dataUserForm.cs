@@ -93,7 +93,7 @@ namespace RoyalPetz_ADMIN
 
         private void dataUserForm_Activated(object sender, EventArgs e)
         {
-            if (!namaUserTextbox.Text.Equals(""))
+             if (!namaUserTextbox.Text.Equals(""))
                 loadUserData(namaUserTextbox.Text);
         }
 
