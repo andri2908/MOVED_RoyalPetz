@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
-using System.Globalization;
 
+using System.Globalization;
 
 namespace RoyalPetz_ADMIN
 {
@@ -59,6 +59,11 @@ namespace RoyalPetz_ADMIN
 
         private void adminForm_Load(object sender, EventArgs e)
         {
+            if (!System.IO.Directory.Exists("PRODUCT_PHOTO"))
+            {
+                System.IO.Directory.CreateDirectory("PRODUCT_PHOTO");
+            }
+
             updateLabel();
             timer1.Start();
 
@@ -455,6 +460,17 @@ namespace RoyalPetz_ADMIN
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void adminForm_Deactivate(object sender, EventArgs e)
+        {
+            timer1.Stop();
+        }
+
+        private void adminForm_Activated(object sender, EventArgs e)
+        {
+            updateLabel();
+            timer1.Start();
         }
     }
 }

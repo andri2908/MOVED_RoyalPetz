@@ -31,11 +31,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.namaSupplierTextbox = new System.Windows.Forms.TextBox();
-            this.dataSupplierDataGridView = new System.Windows.Forms.DataGridView();
-            this.kodeSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.namaSupplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.newButton = new System.Windows.Forms.Button();
-            this.displayButton = new System.Windows.Forms.Button();
+            this.dataSupplierDataGridView = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataSupplierDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,6 +54,18 @@
             this.namaSupplierTextbox.Name = "namaSupplierTextbox";
             this.namaSupplierTextbox.Size = new System.Drawing.Size(260, 27);
             this.namaSupplierTextbox.TabIndex = 16;
+            this.namaSupplierTextbox.TextChanged += new System.EventHandler(this.namaSupplierTextbox_TextChanged);
+            // 
+            // newButton
+            // 
+            this.newButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newButton.Location = new System.Drawing.Point(421, 16);
+            this.newButton.Name = "newButton";
+            this.newButton.Size = new System.Drawing.Size(95, 37);
+            this.newButton.TabIndex = 17;
+            this.newButton.Text = "NEW";
+            this.newButton.UseVisualStyleBackColor = true;
+            this.newButton.Click += new System.EventHandler(this.newButton_Click);
             // 
             // dataSupplierDataGridView
             // 
@@ -72,49 +81,13 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataSupplierDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataSupplierDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataSupplierDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.kodeSupplier,
-            this.namaSupplier});
             this.dataSupplierDataGridView.Location = new System.Drawing.Point(0, 68);
             this.dataSupplierDataGridView.Name = "dataSupplierDataGridView";
             this.dataSupplierDataGridView.RowHeadersVisible = false;
             this.dataSupplierDataGridView.Size = new System.Drawing.Size(602, 480);
             this.dataSupplierDataGridView.TabIndex = 13;
-            // 
-            // kodeSupplier
-            // 
-            this.kodeSupplier.HeaderText = "KODE SUPPLIER";
-            this.kodeSupplier.Name = "kodeSupplier";
-            this.kodeSupplier.ReadOnly = true;
-            this.kodeSupplier.Width = 200;
-            // 
-            // namaSupplier
-            // 
-            this.namaSupplier.HeaderText = "NAMA SUPPLIER";
-            this.namaSupplier.Name = "namaSupplier";
-            this.namaSupplier.ReadOnly = true;
-            this.namaSupplier.Width = 350;
-            // 
-            // newButton
-            // 
-            this.newButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newButton.Location = new System.Drawing.Point(491, 16);
-            this.newButton.Name = "newButton";
-            this.newButton.Size = new System.Drawing.Size(95, 37);
-            this.newButton.TabIndex = 17;
-            this.newButton.Text = "NEW";
-            this.newButton.UseVisualStyleBackColor = true;
-            this.newButton.Click += new System.EventHandler(this.newButton_Click);
-            // 
-            // displayButton
-            // 
-            this.displayButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.displayButton.Location = new System.Drawing.Point(360, 17);
-            this.displayButton.Name = "displayButton";
-            this.displayButton.Size = new System.Drawing.Size(95, 37);
-            this.displayButton.TabIndex = 14;
-            this.displayButton.Text = "DISPLAY";
-            this.displayButton.UseVisualStyleBackColor = true;
+            this.dataSupplierDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataSupplierDataGridView_CellContentClick);
+            this.dataSupplierDataGridView.DoubleClick += new System.EventHandler(this.dataSupplierDataGridView_DoubleClick);
             // 
             // dataSupplierForm
             // 
@@ -126,13 +99,13 @@
             this.Controls.Add(this.namaSupplierTextbox);
             this.Controls.Add(this.dataSupplierDataGridView);
             this.Controls.Add(this.newButton);
-            this.Controls.Add(this.displayButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "dataSupplierForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NAMA SUPPLIER";
+            this.Activated += new System.EventHandler(this.dataSupplierForm_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.dataSupplierDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -143,10 +116,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox namaSupplierTextbox;
-        private System.Windows.Forms.DataGridView dataSupplierDataGridView;
         private System.Windows.Forms.Button newButton;
-        private System.Windows.Forms.Button displayButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kodeSupplier;
-        private System.Windows.Forms.DataGridViewTextBoxColumn namaSupplier;
+        private System.Windows.Forms.DataGridView dataSupplierDataGridView;
     }
 }

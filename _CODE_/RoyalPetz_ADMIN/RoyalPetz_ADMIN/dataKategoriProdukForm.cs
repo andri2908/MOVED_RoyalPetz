@@ -18,6 +18,8 @@ namespace RoyalPetz_ADMIN
         private int originModuleID = 0;
         private int selectedCategoryID = 0;
 
+        private dataProdukDetailForm parentForm;
+
         Data_Access DS = new Data_Access();
 
         public dataKategoriProdukForm()
@@ -31,7 +33,16 @@ namespace RoyalPetz_ADMIN
 
             originModuleID = moduleID;
 
-            newButton.Visible = false;
+            //newButton.Visible = false;
+        }
+
+        public dataKategoriProdukForm(int moduleID, dataProdukDetailForm thisForm)
+        {
+            InitializeComponent();
+
+            originModuleID = moduleID;
+            parentForm = thisForm;
+            //newButton.Visible = false;
         }
 
         private void loadKategoriData()
@@ -64,15 +75,26 @@ namespace RoyalPetz_ADMIN
 
         private void displaySpecificForm()
         {
+            int selectedrowindex = kategoriProdukDataGridView.SelectedCells[0].RowIndex;
+
+            DataGridViewRow selectedRow = kategoriProdukDataGridView.Rows[selectedrowindex];
+            selectedCategoryID = Convert.ToInt32(selectedRow.Cells["CATEGORY_ID"].Value);
+            
             switch(originModuleID)
             {
+                case globalConstants.PRODUK_DETAIL_FORM:
+                    parentForm.addSelectedKategoriID(selectedCategoryID);
+                    this.Close();
+                    break;
+
                 case globalConstants.PENGATURAN_KATEGORI_PRODUK:
                     pengaturanKategoriProdukForm pengaturanKategoriForm = new pengaturanKategoriProdukForm();
-                        pengaturanKategoriForm.ShowDialog(this);
+                    pengaturanKategoriForm.ShowDialog(this);
                     break;
+
                 default:
                     dataKategoriProdukDetailForm displayedForm = new dataKategoriProdukDetailForm(globalConstants.EDIT_CATEGORY, selectedCategoryID);
-                        displayedForm.ShowDialog(this);
+                    displayedForm.ShowDialog(this);
                     break;
             }
         }
@@ -85,12 +107,8 @@ namespace RoyalPetz_ADMIN
 
         private void tagProdukDataGridView_DoubleClick(object sender, EventArgs e)
         {
-            int selectedrowindex = kategoriProdukDataGridView.SelectedCells[0].RowIndex;
-
-            DataGridViewRow selectedRow = kategoriProdukDataGridView.Rows[selectedrowindex];
-            selectedCategoryID = Convert.ToInt32(selectedRow.Cells["CATEGORY_ID"].Value);
-
-            displaySpecificForm();
+            if (kategoriProdukDataGridView.Rows.Count > 0)
+                displaySpecificForm();
         }
 
         private void categoryNameTextBox_TextChanged(object sender, EventArgs e)

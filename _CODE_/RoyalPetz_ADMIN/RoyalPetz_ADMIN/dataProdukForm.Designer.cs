@@ -29,21 +29,18 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.tagProdukDataGridView = new System.Windows.Forms.DataGridView();
-            this.kodeProduk = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.namaProduk = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.displayButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.dataProdukGridView = new System.Windows.Forms.DataGridView();
+            this.namaProdukTextBox = new System.Windows.Forms.TextBox();
             this.newButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.tagProdukDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataProdukGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // tagProdukDataGridView
+            // dataProdukGridView
             // 
-            this.tagProdukDataGridView.AllowUserToAddRows = false;
-            this.tagProdukDataGridView.AllowUserToDeleteRows = false;
-            this.tagProdukDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
+            this.dataProdukGridView.AllowUserToAddRows = false;
+            this.dataProdukGridView.AllowUserToDeleteRows = false;
+            this.dataProdukGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -51,57 +48,29 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tagProdukDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.tagProdukDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tagProdukDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.kodeProduk,
-            this.namaProduk});
-            this.tagProdukDataGridView.Location = new System.Drawing.Point(0, 68);
-            this.tagProdukDataGridView.Name = "tagProdukDataGridView";
-            this.tagProdukDataGridView.RowHeadersVisible = false;
-            this.tagProdukDataGridView.Size = new System.Drawing.Size(669, 480);
-            this.tagProdukDataGridView.TabIndex = 0;
-            this.tagProdukDataGridView.DoubleClick += new System.EventHandler(this.tagProdukDataGridView_DoubleClick);
-            this.tagProdukDataGridView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tagProdukDataGridView_KeyPress);
+            this.dataProdukGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataProdukGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataProdukGridView.Location = new System.Drawing.Point(0, 68);
+            this.dataProdukGridView.Name = "dataProdukGridView";
+            this.dataProdukGridView.RowHeadersVisible = false;
+            this.dataProdukGridView.Size = new System.Drawing.Size(669, 480);
+            this.dataProdukGridView.TabIndex = 0;
+            this.dataProdukGridView.DoubleClick += new System.EventHandler(this.tagProdukDataGridView_DoubleClick);
+            this.dataProdukGridView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tagProdukDataGridView_KeyPress);
             // 
-            // kodeProduk
+            // namaProdukTextBox
             // 
-            this.kodeProduk.HeaderText = "KODE PRODUK";
-            this.kodeProduk.Name = "kodeProduk";
-            this.kodeProduk.ReadOnly = true;
-            this.kodeProduk.Width = 180;
-            // 
-            // namaProduk
-            // 
-            this.namaProduk.HeaderText = "NAMA PRODUK";
-            this.namaProduk.Name = "namaProduk";
-            this.namaProduk.ReadOnly = true;
-            this.namaProduk.Width = 300;
-            // 
-            // displayButton
-            // 
-            this.displayButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.displayButton.Location = new System.Drawing.Point(416, 22);
-            this.displayButton.Name = "displayButton";
-            this.displayButton.Size = new System.Drawing.Size(95, 37);
-            this.displayButton.TabIndex = 4;
-            this.displayButton.Text = "DISPLAY";
-            this.displayButton.UseVisualStyleBackColor = true;
-            this.displayButton.Click += new System.EventHandler(this.displayButton_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(140, 27);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(260, 27);
-            this.textBox1.TabIndex = 6;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.namaProdukTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.namaProdukTextBox.Location = new System.Drawing.Point(140, 27);
+            this.namaProdukTextBox.Name = "namaProdukTextBox";
+            this.namaProdukTextBox.Size = new System.Drawing.Size(260, 27);
+            this.namaProdukTextBox.TabIndex = 6;
+            this.namaProdukTextBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // newButton
             // 
             this.newButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newButton.Location = new System.Drawing.Point(547, 21);
+            this.newButton.Location = new System.Drawing.Point(483, 21);
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(95, 37);
             this.newButton.TabIndex = 7;
@@ -127,17 +96,17 @@
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(669, 549);
             this.Controls.Add(this.newButton);
-            this.Controls.Add(this.displayButton);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.tagProdukDataGridView);
+            this.Controls.Add(this.namaProdukTextBox);
+            this.Controls.Add(this.dataProdukGridView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "dataProdukForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NAMA PRODUK";
-            ((System.ComponentModel.ISupportInitialize)(this.tagProdukDataGridView)).EndInit();
+            this.Activated += new System.EventHandler(this.dataProdukForm_Activated);
+            ((System.ComponentModel.ISupportInitialize)(this.dataProdukGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -145,12 +114,9 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView tagProdukDataGridView;
-        private System.Windows.Forms.Button displayButton;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.DataGridView dataProdukGridView;
+        private System.Windows.Forms.TextBox namaProdukTextBox;
         private System.Windows.Forms.Button newButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kodeProduk;
-        private System.Windows.Forms.DataGridViewTextBoxColumn namaProduk;
     }
 }

@@ -17,12 +17,20 @@ namespace RoyalPetz_ADMIN
     {
         private int originModuleID = 0;
         private int selectedUnitID = 0;
+        private dataProdukDetailForm parentForm;
 
         Data_Access DS = new Data_Access();
 
         public dataSatuanForm()
         {
             InitializeComponent();
+        }
+
+        public dataSatuanForm(int moduleID, dataProdukDetailForm thisForm)
+        {
+            InitializeComponent();
+            originModuleID = moduleID;
+            parentForm = thisForm;
         }
 
         private void newButton_Click(object sender, EventArgs e)
@@ -63,21 +71,36 @@ namespace RoyalPetz_ADMIN
         {
             loadUnitData();
         }
-
+        
         private void unitNameTextBox_TextChanged(object sender, EventArgs e)
         {
             loadUnitData();
         }
 
-        private void dataUnitGridView_DoubleClick(object sender, EventArgs e)
+        private void displaySpecificForm()
         {
             int selectedrowindex = dataUnitGridView.SelectedCells[0].RowIndex;
-
             DataGridViewRow selectedRow = dataUnitGridView.Rows[selectedrowindex];
             selectedUnitID = Convert.ToInt32(selectedRow.Cells["UNIT_ID"].Value);
 
-            dataSatuanDetailForm displayedForm = new dataSatuanDetailForm(globalConstants.EDIT_UNIT, selectedUnitID);
-            displayedForm.ShowDialog(this);
+            switch (originModuleID)
+            {
+                case globalConstants.PRODUK_DETAIL_FORM:
+                    parentForm.setSelectedUnitID(selectedUnitID);
+                    this.Close();
+                    break;
+
+                default:                    
+                    dataSatuanDetailForm displayedForm = new dataSatuanDetailForm(globalConstants.EDIT_UNIT, selectedUnitID);
+                    displayedForm.ShowDialog(this);
+                    break;
+            }
+        }
+
+        private void dataUnitGridView_DoubleClick(object sender, EventArgs e)
+        {
+            if (dataUnitGridView.Rows.Count > 0)
+                displaySpecificForm();
         }
     }
 }

@@ -8,11 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using MySql.Data;
+using MySql.Data.MySqlClient;
+
 namespace RoyalPetz_ADMIN
 {
     public partial class dataProdukForm : Form
     {
         private int originModuleID = 0;
+        private int selectedProductID = 0;
+
+        private Data_Access DS = new Data_Access();
 
         public dataProdukForm()
         {
@@ -49,31 +55,61 @@ namespace RoyalPetz_ADMIN
                     break;
 
                 default: // MASTER DATA PRODUK
-                    dataProdukDetailForm displayForm = new dataProdukDetailForm();
+                    dataProdukDetailForm displayForm = new dataProdukDetailForm(globalConstants.EDIT_PRODUK, selectedProductID);
                     displayForm.ShowDialog(this);
                     break;
             }   
         }
 
-
         private void newButton_Click(object sender, EventArgs e)
         {
-            dataProdukDetailForm displayForm = new dataProdukDetailForm();
+            dataProdukDetailForm displayForm = new dataProdukDetailForm(globalConstants.NEW_PRODUK);
             displayForm.ShowDialog(this);
-        }
-
-        private void displayButton_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            loadProdukData();
+        }
 
+        private void loadProdukData()
+        {
+            MySqlDataReader rdr;
+            DataTable dt = new DataTable();
+            string sqlCommand;
+
+            DS.mySqlConnect();
+
+            if (namaProdukTextBox.Text.Equals(""))
+                return;
+
+            sqlCommand = "SELECT ID, PRODUCT_ID AS 'PRODUK ID', PRODUCT_NAME AS 'NAMA PRODUK', PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 AND PRODUCT_NAME LIKE '%" + namaProdukTextBox.Text + "%'";
+            
+            using (rdr = DS.getData(sqlCommand))
+            {
+                if (rdr.HasRows)
+                {
+                    dt.Load(rdr);
+                    dataProdukGridView.DataSource = dt;
+
+                    dataProdukGridView.Columns["ID"].Visible = false;
+                    dataProdukGridView.Columns["PRODUK ID"].Width = 200;
+                    dataProdukGridView.Columns["NAMA PRODUK"].Width = 200;
+                    dataProdukGridView.Columns["DESKRIPSI PRODUK"].Width = 300;                    
+                }
+            }
         }
 
         private void tagProdukDataGridView_DoubleClick(object sender, EventArgs e)
         {
+            if (dataProdukGridView.Rows.Count <= 0)
+                return;
+
+            int selectedrowindex = dataProdukGridView.SelectedCells[0].RowIndex;
+
+            DataGridViewRow selectedRow = dataProdukGridView.Rows[selectedrowindex];
+            selectedProductID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+
             displaySpecificForm();
         }
 
@@ -81,10 +117,21 @@ namespace RoyalPetz_ADMIN
         {
             if (e.KeyChar == 13) // Enter
             {
+                if (dataProdukGridView.Rows.Count <= 0)
+                    return;
+
+                int selectedrowindex = dataProdukGridView.SelectedCells[0].RowIndex;
+
+                DataGridViewRow selectedRow = dataProdukGridView.Rows[selectedrowindex];
+                selectedProductID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+
                 displaySpecificForm();
             }
         }
 
-
+        private void dataProdukForm_Activated(object sender, EventArgs e)
+        {
+            loadProdukData();
+        }
     }
 }

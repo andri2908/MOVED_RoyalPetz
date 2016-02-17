@@ -32,10 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.namaPelangganTextbox = new System.Windows.Forms.TextBox();
             this.dataPelangganDataGridView = new System.Windows.Forms.DataGridView();
-            this.kodePelanggan = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.namaPelanggan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.newButton = new System.Windows.Forms.Button();
-            this.displayButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataPelangganDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,6 +54,7 @@
             this.namaPelangganTextbox.Name = "namaPelangganTextbox";
             this.namaPelangganTextbox.Size = new System.Drawing.Size(260, 27);
             this.namaPelangganTextbox.TabIndex = 11;
+            this.namaPelangganTextbox.TextChanged += new System.EventHandler(this.namaPelangganTextbox_TextChanged);
             // 
             // dataPelangganDataGridView
             // 
@@ -72,49 +70,23 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataPelangganDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataPelangganDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataPelangganDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.kodePelanggan,
-            this.namaPelanggan});
             this.dataPelangganDataGridView.Location = new System.Drawing.Point(0, 68);
             this.dataPelangganDataGridView.Name = "dataPelangganDataGridView";
             this.dataPelangganDataGridView.RowHeadersVisible = false;
             this.dataPelangganDataGridView.Size = new System.Drawing.Size(602, 480);
             this.dataPelangganDataGridView.TabIndex = 8;
-            // 
-            // kodePelanggan
-            // 
-            this.kodePelanggan.HeaderText = "KODE PELANGGAN";
-            this.kodePelanggan.Name = "kodePelanggan";
-            this.kodePelanggan.ReadOnly = true;
-            this.kodePelanggan.Width = 200;
-            // 
-            // namaPelanggan
-            // 
-            this.namaPelanggan.HeaderText = "NAMA PELANGGAN";
-            this.namaPelanggan.Name = "namaPelanggan";
-            this.namaPelanggan.ReadOnly = true;
-            this.namaPelanggan.Width = 350;
+            this.dataPelangganDataGridView.DoubleClick += new System.EventHandler(this.dataPelangganDataGridView_DoubleClick);
             // 
             // newButton
             // 
             this.newButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newButton.Location = new System.Drawing.Point(491, 16);
+            this.newButton.Location = new System.Drawing.Point(444, 16);
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(95, 37);
             this.newButton.TabIndex = 12;
             this.newButton.Text = "NEW";
             this.newButton.UseVisualStyleBackColor = true;
             this.newButton.Click += new System.EventHandler(this.newButton_Click);
-            // 
-            // displayButton
-            // 
-            this.displayButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.displayButton.Location = new System.Drawing.Point(360, 17);
-            this.displayButton.Name = "displayButton";
-            this.displayButton.Size = new System.Drawing.Size(95, 37);
-            this.displayButton.TabIndex = 9;
-            this.displayButton.Text = "DISPLAY";
-            this.displayButton.UseVisualStyleBackColor = true;
             // 
             // dataPelangganForm
             // 
@@ -126,13 +98,13 @@
             this.Controls.Add(this.namaPelangganTextbox);
             this.Controls.Add(this.dataPelangganDataGridView);
             this.Controls.Add(this.newButton);
-            this.Controls.Add(this.displayButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "dataPelangganForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NAMA PELANGGAN";
+            this.Activated += new System.EventHandler(this.dataPelangganForm_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.dataPelangganDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -145,8 +117,5 @@
         private System.Windows.Forms.TextBox namaPelangganTextbox;
         private System.Windows.Forms.DataGridView dataPelangganDataGridView;
         private System.Windows.Forms.Button newButton;
-        private System.Windows.Forms.Button displayButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kodePelanggan;
-        private System.Windows.Forms.DataGridViewTextBoxColumn namaPelanggan;
     }
 }

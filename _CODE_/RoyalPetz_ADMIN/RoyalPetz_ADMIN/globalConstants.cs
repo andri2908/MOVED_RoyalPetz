@@ -32,6 +32,7 @@ namespace RoyalPetz_ADMIN
         public const int BROWSE_STOK_PECAH_BARANG = 108;
         public const int CHANGE_PASSWORD = 109;
         public const int LOGOUT_FORM = 110;
+        public const int PRODUK_DETAIL_FORM = 111;
 
         public const int NEW_GROUP_USER = 201;
         public const int EDIT_GROUP_USER = 202;
@@ -43,7 +44,12 @@ namespace RoyalPetz_ADMIN
         public const int EDIT_CATEGORY = 208;
         public const int NEW_UNIT = 209;
         public const int EDIT_UNIT = 210;
-
+        public const int NEW_CUSTOMER = 211;
+        public const int EDIT_CUSTOMER = 212;
+        public const int NEW_SUPPLIER = 213;
+        public const int EDIT_SUPPLIER = 214;
+        public const int NEW_PRODUK = 215;
+        public const int EDIT_PRODUK = 216;
 
 
     }
