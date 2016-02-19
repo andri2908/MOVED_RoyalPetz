@@ -163,7 +163,7 @@ namespace RoyalPetz_ADMIN
                         productShelves = rdr.GetString("PRODUCT_SHELVES");
 
                         noRakBarisTextBox.Text = productShelves.Substring(0, 2);
-                        noRakKolomTextBox.Text = productShelves.Substring(2, 2); 
+                        noRakKolomTextBox.Text = productShelves.Substring(2); 
 
                         selectedUnitID = rdr.GetInt32("UNIT_ID");
                         if (rdr.GetString("PRODUCT_ACTIVE").Equals("1"))
@@ -185,7 +185,7 @@ namespace RoyalPetz_ADMIN
                                 panelImage.BackgroundImageLayout = ImageLayout.Stretch;
                                 panelImage.BackgroundImage = Image.FromFile("PRODUCT_PHOTO/" + fileName);
 
-                                selectedPhoto = openFileDialog1.FileName;
+                                selectedPhoto = "PRODUCT_PHOTO/" + fileName;
                             }
                             catch (Exception ex)
                             {
@@ -339,6 +339,8 @@ namespace RoyalPetz_ADMIN
         {
             bool result = false;
             string sqlCommand = "";
+            string noRakBaris = "";
+            string noRakKolom = "";
 
             //string produkID = getProdukID();
             string produkID = kodeProdukTextBox.Text.Trim();
@@ -368,10 +370,17 @@ namespace RoyalPetz_ADMIN
             string limitStock = limitStokTextBox.Text;
             if (limitStock.Equals(""))
                 produkBrand = "0";
+
+            noRakBaris = noRakBarisTextBox.Text;
+            noRakKolom= noRakKolomTextBox.Text;
             
-            string produkShelves = noRakBarisTextBox.Text + noRakKolomTextBox.Text; ;
-            if (produkShelves.Equals(""))
-                produkShelves = "--00";
+            while (noRakBaris.Length < 2)
+                noRakBaris = "-" + noRakBaris;
+
+            while (noRakKolom.Length < 2)
+                noRakKolom = "0" + noRakKolom;
+
+            string produkShelves = noRakBaris + noRakKolom;
 
             byte produkSvc = 0;
             if (produkJasaCheckbox.Checked)
@@ -475,16 +484,19 @@ namespace RoyalPetz_ADMIN
             }
             finally
             {
-                panelImage.BackgroundImage = null;
-                if (System.IO.File.Exists("PRODUCT_PHOTO/" + produkPhoto))
+                if (!selectedPhoto.Equals("PRODUCT_PHOTO/" + produkPhoto))
                 {
-                    System.GC.Collect();
-                    System.GC.WaitForPendingFinalizers();
-                    System.IO.File.Delete("PRODUCT_PHOTO/" + produkPhoto);
-                }
+                    panelImage.BackgroundImage = null;
+                    if (System.IO.File.Exists("PRODUCT_PHOTO/" + produkPhoto))
+                    {
+                        System.GC.Collect();
+                        System.GC.WaitForPendingFinalizers();
+                        System.IO.File.Delete("PRODUCT_PHOTO/" + produkPhoto);
+                    }
 
-                System.IO.File.Copy(selectedPhoto, "PRODUCT_PHOTO/" + produkPhoto);
-                panelImage.BackgroundImage = Image.FromFile("PRODUCT_PHOTO/" + produkPhoto);
+                    System.IO.File.Copy(selectedPhoto, "PRODUCT_PHOTO/" + produkPhoto);
+                    panelImage.BackgroundImage = Image.FromFile("PRODUCT_PHOTO/" + produkPhoto);
+                }
 
                 DS.mySqlClose();
                 result = true;

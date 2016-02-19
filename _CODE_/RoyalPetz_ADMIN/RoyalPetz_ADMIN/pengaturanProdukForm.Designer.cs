@@ -28,14 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
-            this.namaSupplierTextbox = new System.Windows.Forms.TextBox();
-            this.displayButton = new System.Windows.Forms.Button();
+            this.namaProdukTextBox = new System.Windows.Forms.TextBox();
             this.dataProdukDataGridView = new System.Windows.Forms.DataGridView();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.CHANGED = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kodeProduk = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.namaProduk = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
+            this.errorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataProdukDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,46 +52,64 @@
             this.label1.TabIndex = 33;
             this.label1.Text = "Nama Produk";
             // 
-            // namaSupplierTextbox
+            // namaProdukTextBox
             // 
-            this.namaSupplierTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaSupplierTextbox.Location = new System.Drawing.Point(154, 27);
-            this.namaSupplierTextbox.Name = "namaSupplierTextbox";
-            this.namaSupplierTextbox.Size = new System.Drawing.Size(260, 27);
-            this.namaSupplierTextbox.TabIndex = 34;
-            // 
-            // displayButton
-            // 
-            this.displayButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.displayButton.Location = new System.Drawing.Point(452, 21);
-            this.displayButton.Name = "displayButton";
-            this.displayButton.Size = new System.Drawing.Size(95, 37);
-            this.displayButton.TabIndex = 32;
-            this.displayButton.Text = "DISPLAY";
-            this.displayButton.UseVisualStyleBackColor = true;
+            this.namaProdukTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.namaProdukTextBox.Location = new System.Drawing.Point(154, 27);
+            this.namaProdukTextBox.Name = "namaProdukTextBox";
+            this.namaProdukTextBox.Size = new System.Drawing.Size(260, 27);
+            this.namaProdukTextBox.TabIndex = 34;
+            this.namaProdukTextBox.TextChanged += new System.EventHandler(this.namaProdukTextBox_TextChanged);
             // 
             // dataProdukDataGridView
             // 
             this.dataProdukDataGridView.AllowUserToAddRows = false;
             this.dataProdukDataGridView.AllowUserToDeleteRows = false;
             this.dataProdukDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataProdukDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataProdukDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataProdukDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataProdukDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CHANGED,
+            this.ID,
             this.kodeProduk,
             this.namaProduk});
             this.dataProdukDataGridView.Location = new System.Drawing.Point(0, 70);
             this.dataProdukDataGridView.Name = "dataProdukDataGridView";
             this.dataProdukDataGridView.RowHeadersVisible = false;
+            this.dataProdukDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dataProdukDataGridView.Size = new System.Drawing.Size(984, 501);
             this.dataProdukDataGridView.TabIndex = 35;
+            this.dataProdukDataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataProdukDataGridView_CellValidated);
+            // 
+            // saveButton
+            // 
+            this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveButton.Location = new System.Drawing.Point(484, 21);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(95, 37);
+            this.saveButton.TabIndex = 36;
+            this.saveButton.Text = "SAVE";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // CHANGED
+            // 
+            this.CHANGED.HeaderText = "CHANGED";
+            this.CHANGED.Name = "CHANGED";
+            this.CHANGED.Visible = false;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.Visible = false;
             // 
             // kodeProduk
             // 
@@ -105,15 +125,18 @@
             this.namaProduk.ReadOnly = true;
             this.namaProduk.Width = 350;
             // 
-            // button1
+            // errorLabel
             // 
-            this.button1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(697, 21);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(95, 37);
-            this.button1.TabIndex = 36;
-            this.button1.Text = "SAVE";
-            this.button1.UseVisualStyleBackColor = true;
+            this.errorLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.BackColor = System.Drawing.Color.White;
+            this.errorLabel.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(617, 9);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(23, 18);
+            this.errorLabel.TabIndex = 37;
+            this.errorLabel.Text = "   ";
             // 
             // pengaturanProdukForm
             // 
@@ -121,11 +144,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(984, 571);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.errorLabel);
+            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.dataProdukDataGridView);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.namaSupplierTextbox);
-            this.Controls.Add(this.displayButton);
+            this.Controls.Add(this.namaProdukTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "pengaturanProdukForm";
@@ -142,11 +165,13 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox namaSupplierTextbox;
-        private System.Windows.Forms.Button displayButton;
+        private System.Windows.Forms.TextBox namaProdukTextBox;
         private System.Windows.Forms.DataGridView dataProdukDataGridView;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn CHANGED;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn kodeProduk;
         private System.Windows.Forms.DataGridViewTextBoxColumn namaProduk;
+        private System.Windows.Forms.Label errorLabel;
     }
 }
