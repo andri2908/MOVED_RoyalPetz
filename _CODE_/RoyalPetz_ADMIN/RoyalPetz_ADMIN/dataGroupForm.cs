@@ -60,8 +60,14 @@ namespace RoyalPetz_ADMIN
             string sqlCommand;
 
             DS.mySqlConnect();
-
-            sqlCommand = "SELECT GROUP_ID, GROUP_USER_NAME AS 'NAMA GROUP', GROUP_USER_DESCRIPTION AS 'DESKRIPSI GROUP' FROM MASTER_GROUP WHERE GROUP_USER_ACTIVE = 1 AND GROUP_USER_NAME LIKE '%"+namaGroupTextbox.Text+"%'";
+            if (groupnonactiveoption.Checked)
+            {
+                sqlCommand = "SELECT GROUP_ID, GROUP_USER_NAME AS 'NAMA GROUP', GROUP_USER_DESCRIPTION AS 'DESKRIPSI GROUP' FROM MASTER_GROUP WHERE GROUP_USER_NAME LIKE '%" + namaGroupTextbox.Text + "%'";
+            }
+            else
+            {
+                sqlCommand = "SELECT GROUP_ID, GROUP_USER_NAME AS 'NAMA GROUP', GROUP_USER_DESCRIPTION AS 'DESKRIPSI GROUP' FROM MASTER_GROUP WHERE GROUP_USER_ACTIVE = 1 AND GROUP_USER_NAME LIKE '%" + namaGroupTextbox.Text + "%'";
+            }
 
             using (rdr = DS.getData(sqlCommand))
             {
@@ -122,6 +128,13 @@ namespace RoyalPetz_ADMIN
         private void namaGroupTextbox_TextChanged(object sender, EventArgs e)
         {
             loadUserGroupData();
+        }
+
+        private void usernonactiveoption_CheckedChanged(object sender, EventArgs e)
+        {
+            dataUserGroupGridView.DataSource = null;
+            loadUserGroupData();
+
         }
     }
 }

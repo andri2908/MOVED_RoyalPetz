@@ -33,6 +33,7 @@
             this.namaGroupTextbox = new System.Windows.Forms.TextBox();
             this.dataUserGroupGridView = new System.Windows.Forms.DataGridView();
             this.newButton = new System.Windows.Forms.Button();
+            this.groupnonactiveoption = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataUserGroupGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -41,7 +42,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label1.Location = new System.Drawing.Point(7, 29);
+            this.label1.Location = new System.Drawing.Point(3, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 18);
             this.label1.TabIndex = 30;
@@ -50,7 +51,7 @@
             // namaGroupTextbox
             // 
             this.namaGroupTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaGroupTextbox.Location = new System.Drawing.Point(85, 21);
+            this.namaGroupTextbox.Location = new System.Drawing.Point(79, 11);
             this.namaGroupTextbox.Name = "namaGroupTextbox";
             this.namaGroupTextbox.Size = new System.Drawing.Size(260, 27);
             this.namaGroupTextbox.TabIndex = 31;
@@ -79,14 +80,26 @@
             // 
             // newButton
             // 
-            this.newButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newButton.Location = new System.Drawing.Point(429, 15);
+            this.newButton.Font = new System.Drawing.Font("Verdana", 11F, System.Drawing.FontStyle.Bold);
+            this.newButton.Location = new System.Drawing.Point(345, 11);
             this.newButton.Name = "newButton";
-            this.newButton.Size = new System.Drawing.Size(95, 37);
+            this.newButton.Size = new System.Drawing.Size(56, 27);
             this.newButton.TabIndex = 32;
             this.newButton.Text = "NEW";
             this.newButton.UseVisualStyleBackColor = true;
             this.newButton.Click += new System.EventHandler(this.newButton_Click);
+            // 
+            // groupnonactiveoption
+            // 
+            this.groupnonactiveoption.AutoSize = true;
+            this.groupnonactiveoption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupnonactiveoption.Location = new System.Drawing.Point(79, 44);
+            this.groupnonactiveoption.Name = "groupnonactiveoption";
+            this.groupnonactiveoption.Size = new System.Drawing.Size(172, 19);
+            this.groupnonactiveoption.TabIndex = 33;
+            this.groupnonactiveoption.Text = "Tampilkan Grup Non Aktif?";
+            this.groupnonactiveoption.UseVisualStyleBackColor = true;
+            this.groupnonactiveoption.CheckedChanged += new System.EventHandler(this.usernonactiveoption_CheckedChanged);
             // 
             // dataGroupForm
             // 
@@ -94,6 +107,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(602, 549);
+            this.Controls.Add(this.groupnonactiveoption);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.namaGroupTextbox);
             this.Controls.Add(this.dataUserGroupGridView);
@@ -117,5 +131,6 @@
         private System.Windows.Forms.TextBox namaGroupTextbox;
         private System.Windows.Forms.DataGridView dataUserGroupGridView;
         private System.Windows.Forms.Button newButton;
+        private System.Windows.Forms.CheckBox groupnonactiveoption;
     }
 }
