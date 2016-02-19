@@ -33,6 +33,7 @@
             this.namaBranchTextbox = new System.Windows.Forms.TextBox();
             this.dataCabangGridView = new System.Windows.Forms.DataGridView();
             this.newButton = new System.Windows.Forms.Button();
+            this.cabangnonactiveoption = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataCabangGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -41,7 +42,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label1.Location = new System.Drawing.Point(7, 22);
+            this.label1.Location = new System.Drawing.Point(4, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 18);
             this.label1.TabIndex = 30;
@@ -50,7 +51,7 @@
             // namaBranchTextbox
             // 
             this.namaBranchTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaBranchTextbox.Location = new System.Drawing.Point(85, 14);
+            this.namaBranchTextbox.Location = new System.Drawing.Point(69, 11);
             this.namaBranchTextbox.Name = "namaBranchTextbox";
             this.namaBranchTextbox.Size = new System.Drawing.Size(260, 27);
             this.namaBranchTextbox.TabIndex = 31;
@@ -70,30 +71,43 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataCabangGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataCabangGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataCabangGridView.Location = new System.Drawing.Point(0, 60);
+            this.dataCabangGridView.Location = new System.Drawing.Point(0, 77);
             this.dataCabangGridView.Name = "dataCabangGridView";
             this.dataCabangGridView.RowHeadersVisible = false;
-            this.dataCabangGridView.Size = new System.Drawing.Size(602, 489);
+            this.dataCabangGridView.Size = new System.Drawing.Size(402, 472);
             this.dataCabangGridView.TabIndex = 28;
             this.dataCabangGridView.DoubleClick += new System.EventHandler(this.dataCabangGridView_DoubleClick);
             // 
             // newButton
             // 
-            this.newButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newButton.Location = new System.Drawing.Point(449, 8);
+            this.newButton.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newButton.Location = new System.Drawing.Point(338, 10);
             this.newButton.Name = "newButton";
-            this.newButton.Size = new System.Drawing.Size(95, 37);
+            this.newButton.Size = new System.Drawing.Size(56, 28);
             this.newButton.TabIndex = 32;
             this.newButton.Text = "NEW";
             this.newButton.UseVisualStyleBackColor = true;
             this.newButton.Click += new System.EventHandler(this.newButton_Click);
+            // 
+            // cabangnonactiveoption
+            // 
+            this.cabangnonactiveoption.AutoSize = true;
+            this.cabangnonactiveoption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cabangnonactiveoption.Location = new System.Drawing.Point(69, 42);
+            this.cabangnonactiveoption.Name = "cabangnonactiveoption";
+            this.cabangnonactiveoption.Size = new System.Drawing.Size(188, 19);
+            this.cabangnonactiveoption.TabIndex = 34;
+            this.cabangnonactiveoption.Text = "Tampilkan Cabang Non Aktif?";
+            this.cabangnonactiveoption.UseVisualStyleBackColor = true;
+            this.cabangnonactiveoption.CheckedChanged += new System.EventHandler(this.cabangnonactiveoption_CheckedChanged);
             // 
             // dataCabangForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(602, 549);
+            this.ClientSize = new System.Drawing.Size(402, 549);
+            this.Controls.Add(this.cabangnonactiveoption);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.namaBranchTextbox);
             this.Controls.Add(this.dataCabangGridView);
@@ -117,5 +131,6 @@
         private System.Windows.Forms.TextBox namaBranchTextbox;
         private System.Windows.Forms.DataGridView dataCabangGridView;
         private System.Windows.Forms.Button newButton;
+        private System.Windows.Forms.CheckBox cabangnonactiveoption;
     }
 }

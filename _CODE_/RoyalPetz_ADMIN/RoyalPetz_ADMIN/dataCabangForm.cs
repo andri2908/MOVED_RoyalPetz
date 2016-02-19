@@ -28,6 +28,9 @@ namespace RoyalPetz_ADMIN
         {
             dataCabangDetailForm displayedForm = new dataCabangDetailForm(globalConstants.NEW_BRANCH, 0);
             displayedForm.ShowDialog(this);
+            dataCabangGridView.DataSource = null;
+            if (!namaBranchTextbox.Text.Equals(""))
+                loadBranchData(namaBranchTextbox.Text);
         }
 
         private void loadBranchData(string branchName)
@@ -37,8 +40,14 @@ namespace RoyalPetz_ADMIN
             string sqlCommand;
 
             DS.mySqlConnect();
-
-            sqlCommand = "SELECT BRANCH_ID, BRANCH_NAME AS 'NAMA CABANG', CONCAT(trim(substring(branch_ip4,1,3)),'.',trim(substring(branch_ip4,4,3)),'.',trim(substring(branch_ip4,7,3)),'.', trim(substring(branch_ip4,10))) AS 'ALAMAT IP CABANG' FROM MASTER_BRANCH WHERE BRANCH_ACTIVE = 1 AND BRANCH_NAME LIKE '%"+branchName+"%'";
+            if (cabangnonactiveoption.Checked)
+            {
+                sqlCommand = "SELECT BRANCH_ID, BRANCH_NAME AS 'NAMA CABANG', CONCAT(trim(substring(branch_ip4,1,3)),'.',trim(substring(branch_ip4,4,3)),'.',trim(substring(branch_ip4,7,3)),'.', trim(substring(branch_ip4,10))) AS 'ALAMAT IP CABANG' FROM MASTER_BRANCH WHERE BRANCH_NAME LIKE '%" + branchName + "%'";
+            }
+            else
+            {
+                sqlCommand = "SELECT BRANCH_ID, BRANCH_NAME AS 'NAMA CABANG', CONCAT(trim(substring(branch_ip4,1,3)),'.',trim(substring(branch_ip4,4,3)),'.',trim(substring(branch_ip4,7,3)),'.', trim(substring(branch_ip4,10))) AS 'ALAMAT IP CABANG' FROM MASTER_BRANCH WHERE BRANCH_ACTIVE = 1 AND BRANCH_NAME LIKE '%" + branchName + "%'";
+            }
             //sqlCommand = "SELECT BRANCH_ID, BRANCH_NAME AS 'NAMA CABANG' FROM MASTER_BRANCH WHERE BRANCH_ACTIVE = 1 AND BRANCH_NAME LIKE '%" + branchName + "%'";
 
             using (rdr = DS.getData(sqlCommand))
@@ -57,12 +66,14 @@ namespace RoyalPetz_ADMIN
 
         private void dataCabangForm_Activated(object sender, EventArgs e)
         {
-            loadBranchData(namaBranchTextbox.Text);
+            if (!namaBranchTextbox.Text.Equals(""))  //for showing all???
+                loadBranchData(namaBranchTextbox.Text);
         }
 
         private void namaBranchTextbox_TextChanged(object sender, EventArgs e)
         {
-            loadBranchData(namaBranchTextbox.Text);
+            if (!namaBranchTextbox.Text.Equals(""))
+                loadBranchData(namaBranchTextbox.Text);
         }
 
         private void dataCabangGridView_DoubleClick(object sender, EventArgs e)
@@ -76,7 +87,12 @@ namespace RoyalPetz_ADMIN
             displayedForm.ShowDialog(this);
         }
 
-
-
+        private void cabangnonactiveoption_CheckedChanged(object sender, EventArgs e)
+        {
+            dataCabangGridView.DataSource = null;
+           
+            if (!namaBranchTextbox.Text.Equals(""))
+                loadBranchData(namaBranchTextbox.Text);
+        }
     }
 }

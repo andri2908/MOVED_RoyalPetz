@@ -32,7 +32,7 @@ namespace RoyalPetz_ADMIN
             originModuleID = moduleID;
             selectedBranchID = branchID;
         }
-
+        
         private void loadBranchDataInformation()
         {
             MySqlDataReader rdr;
@@ -115,14 +115,15 @@ namespace RoyalPetz_ADMIN
                                             "BRANCH_NAME = '" + branchName + "', " +
                                             "BRANCH_ADDRESS_1 = '" + branchAddress1 + "', " +
                                             "BRANCH_ADDRESS_2 = '" + branchAddress2 + "', " +
-                                            "BRANCH_ADDRESS_3 = '" + branchAddressCity + "', " +
+                                            "BRANCH_ADDRESS_CITY = '" + branchAddressCity + "', " +
                                             "BRANCH_TELEPHONE = '" + branchPhone + "', " +
                                             "BRANCH_IP4 = '" + branchIPv4 + "', " +
-                                            "BRANCH_ACTIVE = " + branchStatus + " " +
-                                            "WHERE BRANCH_ID = " + selectedBranchID;
+                                            "BRANCH_ACTIVE = '" + branchStatus + "' " +
+                                            "WHERE BRANCH_ID = '" + selectedBranchID + "'";
+                        //sqlCommand = "UPDATE `sys_pos`.`master_branch` SET `BRANCH_ACTIVE`='1' WHERE `BRANCH_ID`='3';";
                         break;
                 }
-
+                
                 DS.executeNonQueryCommand(sqlCommand);
 
                 DS.commit();
@@ -170,13 +171,32 @@ namespace RoyalPetz_ADMIN
             if (saveData())
             {
                 MessageBox.Show("SUCCESS");
+                foreach (Control ctl in this.Controls)
+                {
+                    switch (ctl.GetType().ToString())
+                    {
+                        case "TextBox":
+                            ctl.Text = null;
+                            break;
+                        case "ComboBox":
+                            ctl.Text = null;
+                            break;
+                    }
+                }
             }
         }
 
         private void dataCabangDetailForm_Load(object sender, EventArgs e)
         {
             if (originModuleID == globalConstants.EDIT_BRANCH)
+            {
+                nonAktifCheckbox.Enabled = true;
                 loadBranchDataInformation();
+            }
+            else
+            {
+                nonAktifCheckbox.Enabled = false;
+            }
 
             errorLabel.Text = "";
         }
