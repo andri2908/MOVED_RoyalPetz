@@ -34,9 +34,9 @@ namespace RoyalPetz_ADMIN
 
             if (originModuleID == globalConstants.LOGOUT_FORM)
             {
-                label1.Visible = false;
-                label7.Visible = false;
-                shiftCombobox.Visible = false;
+                //label1.Visible = false;
+                //label7.Visible = false;
+                //shiftCombobox.Visible = false;
             }
         }
 
@@ -176,7 +176,7 @@ namespace RoyalPetz_ADMIN
         {
             userNameTextBox.Clear();
             passwordTextBox.Clear();
-            shiftCombobox.Text = "SHIFT 1";
+            //shiftCombobox.Text = "SHIFT 1";
             errorLabel.Text = "";
         }
 
