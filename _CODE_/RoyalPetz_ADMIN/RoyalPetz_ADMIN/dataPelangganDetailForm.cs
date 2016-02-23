@@ -239,6 +239,8 @@ namespace RoyalPetz_ADMIN
             if (saveData())
             {
                 MessageBox.Show("SUCCESS");
+
+                gUtil.ResetAllControls(this);
             }
         }
 

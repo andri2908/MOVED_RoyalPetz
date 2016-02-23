@@ -17,6 +17,7 @@ namespace RoyalPetz_ADMIN
     {
         private int originModuleID = 0;
         private int selectedBranchID = 0;
+        private globalUtilities gUtil = new globalUtilities();
 
         private Data_Access DS = new Data_Access();
 
@@ -166,7 +167,7 @@ namespace RoyalPetz_ADMIN
             return false;
         }
 
-        public static void ClearControls(Control ctrl)
+        /*public static void ClearControls(Control ctrl)
         {
             foreach (Control control in ctrl.Controls)
             {
@@ -220,14 +221,14 @@ namespace RoyalPetz_ADMIN
                 }
             }
             
-        }
+        }*/
 
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (saveData())
             {
                 MessageBox.Show("SUCCESS");
-                ResetAllControls(this);
+                gUtil.ResetAllControls(this);
             }
         }
 
