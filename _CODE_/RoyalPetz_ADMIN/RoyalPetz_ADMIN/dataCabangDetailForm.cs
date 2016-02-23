@@ -166,23 +166,68 @@ namespace RoyalPetz_ADMIN
             return false;
         }
 
+        public static void ClearControls(Control ctrl)
+        {
+            foreach (Control control in ctrl.Controls)
+            {
+                if (control is TextBox)
+                {
+                    TextBox textBox = (TextBox)control;
+                    textBox.Text = null;
+                }
+
+                if (control is MaskedTextBox)
+                {
+                    MaskedTextBox maskedtextBox = (MaskedTextBox)control;
+                    maskedtextBox.Text = null;
+                }
+
+                if (control is ComboBox)
+                {
+                    ComboBox comboBox = (ComboBox)control;
+                    if (comboBox.Items.Count > 0)
+                        comboBox.SelectedIndex = 0;
+                }
+
+                if (control is CheckBox)
+                {
+                    CheckBox checkBox = (CheckBox)control;
+                    checkBox.Checked = false;
+                }
+
+                if (control is ListBox)
+                {
+                    ListBox listBox = (ListBox)control;
+                    listBox.ClearSelected();
+                }
+            }
+        }
+
+        public static void ResetAllControls(Control form)
+        {
+            String typectrl = "";
+            ClearControls(form); //if controls are not nested
+            for (int i = 0; i <= form.Controls.Count - 1; i++) //if controls are nested
+            {
+
+                typectrl = "" + form.Controls[i].GetType();
+                //MessageBox.Show(typectrl);
+                if ((typectrl.Equals("System.Windows.Forms.Panel")) || (typectrl.Equals("System.Windows.Forms.TableLayoutPanel")))
+                {
+                    Control ctrl = form.Controls[i];
+                    //MessageBox.Show("" + ctrl.Controls.Count);
+                    ClearControls(ctrl);
+                }
+            }
+            
+        }
+
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (saveData())
             {
                 MessageBox.Show("SUCCESS");
-                foreach (Control ctl in this.Controls)
-                {
-                    switch (ctl.GetType().ToString())
-                    {
-                        case "TextBox":
-                            ctl.Text = null;
-                            break;
-                        case "ComboBox":
-                            ctl.Text = null;
-                            break;
-                    }
-                }
+                ResetAllControls(this);
             }
         }
 
@@ -200,7 +245,5 @@ namespace RoyalPetz_ADMIN
 
             errorLabel.Text = "";
         }
-
-
     }
 }
