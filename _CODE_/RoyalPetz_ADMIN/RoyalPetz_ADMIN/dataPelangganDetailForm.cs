@@ -95,6 +95,8 @@ namespace RoyalPetz_ADMIN
 
             if (originModuleID == globalConstants.NEW_CUSTOMER)
                 groupPelangganCombo.SelectedIndex = 0;
+
+            gUtil.reArrangeTabOrder(this);
         }
 
         private bool dataValidated()

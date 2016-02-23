@@ -612,6 +612,8 @@ namespace RoyalPetz_ADMIN
             loadProductCategoryData();
 
             loadKategoriIDInformation();
+
+            gUtil.reArrangeTabOrder(this);
         }
 
         private void barcodeTextBox_Validated(object sender, EventArgs e)

@@ -21,6 +21,8 @@ namespace RoyalPetz_ADMIN
         private int selectedUserID;
         private int originModuleID = 0;
 
+        private globalUtilities gUtil = new globalUtilities();
+
         public loginForm()
         {
             InitializeComponent();
@@ -170,6 +172,8 @@ namespace RoyalPetz_ADMIN
                 MessageBox.Show("CAN'T CONNECT");
                 this.Close();
             }
+
+            gUtil.reArrangeTabOrder(this);
         }
 
         private void button1_Click(object sender, EventArgs e)

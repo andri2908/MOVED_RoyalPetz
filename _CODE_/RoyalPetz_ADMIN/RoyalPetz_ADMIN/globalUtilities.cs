@@ -87,5 +87,13 @@ namespace RoyalPetz_ADMIN
             }
 
         }
+        public void reArrangeTabOrder(Control form)
+        {
+            TabOrderManager.TabScheme scheme;
+            scheme = TabOrderManager.TabScheme.DownFirst;
+            TabOrderManager tom = new TabOrderManager(form);
+            tom.SetTabOrder(scheme);
+
+        }
     }
 }
