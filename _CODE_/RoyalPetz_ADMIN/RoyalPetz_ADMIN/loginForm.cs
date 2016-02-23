@@ -16,7 +16,7 @@ namespace RoyalPetz_ADMIN
     public partial class loginForm : Form
     {
         private Data_Access DS = new Data_Access();
-        private globalStringOP stringOP = new globalStringOP();
+        private globalUtilities stringOP = new globalUtilities();
 
         private int selectedUserID;
         private int originModuleID = 0;

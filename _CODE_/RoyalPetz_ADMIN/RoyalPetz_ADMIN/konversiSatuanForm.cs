@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
-using System.Text.RegularExpressions;
+//using System.Text.RegularExpressions;
 
 namespace RoyalPetz_ADMIN
 {
@@ -25,6 +25,8 @@ namespace RoyalPetz_ADMIN
         private string previousInput = "";
 
         private int currentMode = NEW_CONVERSION;
+
+        private globalUtilities gUtil = new globalUtilities();
 
         Data_Access DS = new Data_Access();
 
@@ -240,13 +242,14 @@ namespace RoyalPetz_ADMIN
 
         private void convertValueTextBox_TextChanged(object sender, EventArgs e)
         {
-            string regExValue = "";
+            //string regExValue = "";
 
-            regExValue = @"^[0-9]*\.?\d{0,2}$";
-            Regex r = new Regex(regExValue); // This is the main part, can be altered to match any desired form or limitations
-            Match m = r.Match(convertValueTextBox.Text);
+            //regExValue = @"^[0-9]*\.?\d{0,2}$";
+            //Regex r = new Regex(regExValue); // This is the main part, can be altered to match any desired form or limitations
+            //Match m = r.Match(convertValueTextBox.Text);
 
-            if (m.Success)
+            //if (m.Success)
+            if (gUtil.matchRegEx(convertValueTextBox.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL))
             {
                 previousInput = convertValueTextBox.Text;
             }

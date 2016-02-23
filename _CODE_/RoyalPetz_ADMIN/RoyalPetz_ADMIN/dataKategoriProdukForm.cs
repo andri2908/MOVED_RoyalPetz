@@ -88,7 +88,7 @@ namespace RoyalPetz_ADMIN
                     break;
 
                 case globalConstants.PENGATURAN_KATEGORI_PRODUK:
-                    pengaturanKategoriProdukForm pengaturanKategoriForm = new pengaturanKategoriProdukForm();
+                    pengaturanKategoriProdukForm pengaturanKategoriForm = new pengaturanKategoriProdukForm(selectedCategoryID);
                     pengaturanKategoriForm.ShowDialog(this);
                     break;
 
@@ -119,6 +119,11 @@ namespace RoyalPetz_ADMIN
         private void dataKategoriProdukForm_Activated(object sender, EventArgs e)
         {
             loadKategoriData();
+        }
+
+        private void dataKategoriProdukForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

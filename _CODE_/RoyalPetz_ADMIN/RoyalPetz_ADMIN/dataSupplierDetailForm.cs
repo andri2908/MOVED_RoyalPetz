@@ -23,6 +23,7 @@ namespace RoyalPetz_ADMIN
         private string previousInputFax = "";
 
         private Data_Access DS = new Data_Access();
+        private globalUtilities gUtil = new globalUtilities();
 
         public dataSupplierDetailForm()
         {
@@ -212,13 +213,14 @@ namespace RoyalPetz_ADMIN
 
         private void supplierPhoneTextBox_TextChanged(object sender, EventArgs e)
         {
-            string regExValue = "";
+            //string regExValue = "";
 
-            regExValue = @"^[0-9]*$";
-            Regex r = new Regex(regExValue); // This is the main part, can be altered to match any desired form or limitations
-            Match m = r.Match(supplierPhoneTextBox.Text);
+            //regExValue = @"^[0-9]*$";
+            //Regex r = new Regex(regExValue); // This is the main part, can be altered to match any desired form or limitations
+            //Match m = r.Match(supplierPhoneTextBox.Text);
 
-            if (m.Success)
+            //if (m.Success)
+            if (gUtil.matchRegEx(supplierPhoneTextBox.Text, globalUtilities.REGEX_NUMBER_ONLY))
             {
                 previousInputPhone = supplierPhoneTextBox.Text;
             }
@@ -235,13 +237,14 @@ namespace RoyalPetz_ADMIN
 
         private void supplierFaxTextBox_TextChanged(object sender, EventArgs e)
         {
-            string regExValue = "";
+            //string regExValue = "";
 
-            regExValue = @"^[0-9]*$";
-            Regex r = new Regex(regExValue); // This is the main part, can be altered to match any desired form or limitations
-            Match m = r.Match(supplierFaxTextBox.Text);
+            //regExValue = @"^[0-9]*$";
+            //Regex r = new Regex(regExValue); // This is the main part, can be altered to match any desired form or limitations
+            //Match m = r.Match(supplierFaxTextBox.Text);
 
-            if (m.Success)
+            //if (m.Success)
+            if (gUtil.matchRegEx(supplierFaxTextBox.Text, globalUtilities.REGEX_NUMBER_ONLY))
             {
                 previousInputFax = supplierFaxTextBox.Text;
             }

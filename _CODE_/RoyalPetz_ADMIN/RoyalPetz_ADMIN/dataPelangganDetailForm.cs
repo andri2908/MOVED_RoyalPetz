@@ -28,6 +28,7 @@ namespace RoyalPetz_ADMIN
         private CultureInfo culture = new CultureInfo("id-ID");
 
         private Data_Access DS = new Data_Access();
+        private globalUtilities gUtil = new globalUtilities();
 
         public dataPelangganDetailForm()
         {
@@ -199,7 +200,7 @@ namespace RoyalPetz_ADMIN
                 try
                 {
                     //myTrans.Rollback();
-                }
+                } 
                 catch (MySqlException ex)
                 {
                     if (DS.getMyTransConnection() != null)
@@ -243,13 +244,13 @@ namespace RoyalPetz_ADMIN
 
         private void custTotalSalesTextBox_TextChanged(object sender, EventArgs e)
         {
-            string regExValue = "";
+            /*string regExValue = "";
 
             regExValue = @"^[0-9]*$";
             Regex r = new Regex(regExValue); // This is the main part, can be altered to match any desired form or limitations
             Match m = r.Match(custTotalSalesTextBox.Text);
-
-            if (m.Success)
+            */
+            if (gUtil.matchRegEx(custTotalSalesTextBox.Text, globalUtilities.REGEX_NUMBER_ONLY))
             {
                 previousInput = custTotalSalesTextBox.Text;
             }
@@ -261,13 +262,14 @@ namespace RoyalPetz_ADMIN
 
         private void custTelTextBox_TextChanged(object sender, EventArgs e)
         {
-            string regExValue = "";
+            //string regExValue = "";
 
-            regExValue = @"^[0-9]*$";
-            Regex r = new Regex(regExValue); // This is the main part, can be altered to match any desired form or limitations
-            Match m = r.Match(custTelTextBox.Text);
+            //regExValue = @"^[0-9]*$";
+            //Regex r = new Regex(regExValue); // This is the main part, can be altered to match any desired form or limitations
+            //Match m = r.Match(custTelTextBox.Text);
 
-            if (m.Success)
+            //if (m.Success)
+            if (gUtil.matchRegEx(custTelTextBox.Text, globalUtilities.REGEX_NUMBER_ONLY))
             {
                 previousInputPhone = custTelTextBox.Text;
             }
@@ -279,13 +281,14 @@ namespace RoyalPetz_ADMIN
 
         private void custFaxTextBox_TextChanged(object sender, EventArgs e)
         {
-            string regExValue = "";
+            //string regExValue = "";
 
-            regExValue = @"^[0-9]*$";
-            Regex r = new Regex(regExValue); // This is the main part, can be altered to match any desired form or limitations
-            Match m = r.Match(custFaxTextBox.Text);
+            //regExValue = @"^[0-9]*$";
+            //Regex r = new Regex(regExValue); // This is the main part, can be altered to match any desired form or limitations
+            //Match m = r.Match(custFaxTextBox.Text);
 
-            if (m.Success)
+            //if (m.Success)
+            if (gUtil.matchRegEx(custFaxTextBox.Text, globalUtilities.REGEX_NUMBER_ONLY))
             {
                 previousInputFax= custFaxTextBox.Text;
             }

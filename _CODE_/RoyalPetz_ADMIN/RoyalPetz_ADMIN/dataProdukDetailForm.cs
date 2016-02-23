@@ -18,9 +18,11 @@ namespace RoyalPetz_ADMIN
     public partial class dataProdukDetailForm : Form
     {
         private Data_Access DS = new Data_Access();
+        private globalUtilities gUtil = new globalUtilities();
 
         private int originModuleID = 0;
         private int selectedInternalProductID = 0;
+        private string productID = "";
         private int selectedUnitID;
         private List<int> currentSelectedKategoriID = new List<int>();
         
@@ -30,7 +32,9 @@ namespace RoyalPetz_ADMIN
         private string hargaEcerValueText = "";
         private string hargaPartaiText = "";
         private string hargaGrosirValueText = "";
-        private string selectedPhoto;
+        private string selectedPhoto = "";
+
+        private stokPecahBarangForm parentForm;
         
         public dataProdukDetailForm()
         {
@@ -43,6 +47,15 @@ namespace RoyalPetz_ADMIN
 
             originModuleID = moduleID;
         }
+
+        public dataProdukDetailForm(int moduleID, stokPecahBarangForm thisParentForm)
+        {
+            InitializeComponent();
+
+            originModuleID = moduleID;
+            parentForm = thisParentForm;
+        }
+
 
         public void setSelectedUnitID(int unitID)
         {
@@ -64,13 +77,13 @@ namespace RoyalPetz_ADMIN
 
         private bool checkRegEx(string textToCheck)
         {
-            string regExValue = "";
+            //string regExValue = "";
 
-            regExValue = @"^[0-9]*\.?\d{0,2}$";
-            Regex r = new Regex(regExValue); // This is the main part, can be altered to match any desired form or limitations
-            Match m = r.Match(textToCheck);
+            //regExValue = @"^[0-9]*\.?\d{0,2}$";
+            //Regex r = new Regex(regExValue); // This is the main part, can be altered to match any desired form or limitations
+            //Match m = r.Match(textToCheck);
 
-            if (m.Success)
+            if (gUtil.matchRegEx(textToCheck, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL))
                 return true;
 
             return false;            
@@ -324,6 +337,12 @@ namespace RoyalPetz_ADMIN
                 return false;
             }
 
+            if (unitTextBox.Text.Equals(""))
+            {
+                errorLabel.Text = "UNIT TIDAK BOLEH KOSONG";
+                return false;
+            }
+
             return true;
         }
 
@@ -343,7 +362,7 @@ namespace RoyalPetz_ADMIN
             string noRakKolom = "";
 
             //string produkID = getProdukID();
-            string produkID = kodeProdukTextBox.Text.Trim();
+            productID = kodeProdukTextBox.Text.Trim();
             string produkBarcode = barcodeTextBox.Text;
             if (produkBarcode.Equals(""))
                 produkBarcode = " ";
@@ -396,7 +415,7 @@ namespace RoyalPetz_ADMIN
 
             string produkPhoto = " ";
             if (!selectedPhoto.Equals(""))
-                produkPhoto = produkID + ".jpg";
+                produkPhoto = productID + ".jpg";
 
             DS.beginTransaction();
 
@@ -406,22 +425,6 @@ namespace RoyalPetz_ADMIN
 
                 switch (originModuleID)
                 {
-                    case globalConstants.NEW_PRODUK:
-                            // SAVE TO MASTER_PRODUK TABLE
-                            sqlCommand = "INSERT INTO MASTER_PRODUCT " +
-                                                "(PRODUCT_ID, PRODUCT_BARCODE, PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_BASE_PRICE, PRODUCT_RETAIL_PRICE, PRODUCT_BULK_PRICE, PRODUCT_WHOLESALE_PRICE, PRODUCT_PHOTO_1, UNIT_ID, PRODUCT_STOCK_QTY, PRODUCT_LIMIT_STOCK, PRODUCT_SHELVES, PRODUCT_ACTIVE, PRODUCT_BRAND, PRODUCT_IS_SERVICE) " +
-                                                "VALUES " +
-                                                "('" + produkID + "', '" + produkBarcode + "', '" + produkName + "', '" + produkDesc + "', " + produkHargaPokok + ", " + produkHargaEcer + ", " + produkHargaPartai + ", " + produkHargaGrosir + ", '" + produkPhoto + "', " + selectedUnitID + ", " + produkQty + ", " + limitStock + ", '" + produkShelves + "', " + produkStatus + ", '" + produkBrand + "', " + produkSvc + ")";
-
-                            DS.executeNonQueryCommand(sqlCommand);      
-
-                            // SAVE TO PRODUCT_CATEGORY TABLE
-                            for (int i = 0; i < currentSelectedKategoriID.Count(); i++ )
-                            {
-                                sqlCommand = "INSERT INTO PRODUCT_CATEGORY (PRODUCT_ID, CATEGORY_ID) VALUES ('" + produkID + "', " + currentSelectedKategoriID[i] + ")";
-                                DS.executeNonQueryCommand(sqlCommand);      
-                            }
-                            break;
                     case globalConstants.EDIT_PRODUK:
                             // UPDATE MASTER_PRODUK TABLE
                             sqlCommand = "UPDATE MASTER_PRODUCT SET " +
@@ -440,23 +443,41 @@ namespace RoyalPetz_ADMIN
                                                 "PRODUCT_ACTIVE = " + produkStatus + ", " +
                                                 "PRODUCT_BRAND = '" + produkBrand + "', " +
                                                 "PRODUCT_IS_SERVICE = " + produkSvc + " " +
-                                                "WHERE PRODUCT_ID = '" + produkID + "'";
+                                                "WHERE PRODUCT_ID = '" + productID + "'";
 
 
                             DS.executeNonQueryCommand(sqlCommand);      
 
                             // UPDATE PRODUCT_CATEGORY TABLE
                             // delete the content first, and insert the new data based on the currentSelectedKategoryID LIST
-                            sqlCommand = "DELETE FROM PRODUCT_CATEGORY WHERE PRODUCT_ID = '" + produkID + "'";
+                            sqlCommand = "DELETE FROM PRODUCT_CATEGORY WHERE PRODUCT_ID = '" + productID + "'";
                             DS.executeNonQueryCommand(sqlCommand);
 
                             // SAVE TO PRODUCT_CATEGORY TABLE
                             for (int i = 0; i < currentSelectedKategoriID.Count(); i++)
                             {
-                                sqlCommand = "INSERT INTO PRODUCT_CATEGORY (PRODUCT_ID, CATEGORY_ID) VALUES ('" + produkID + "', " + currentSelectedKategoriID[i] + ")";
+                                sqlCommand = "INSERT INTO PRODUCT_CATEGORY (PRODUCT_ID, CATEGORY_ID) VALUES ('" + productID + "', " + currentSelectedKategoriID[i] + ")";
                                 DS.executeNonQueryCommand(sqlCommand);
                             }
                         break;
+
+                    default: // NEW PRODUK
+                        // SAVE TO MASTER_PRODUK TABLE
+                        sqlCommand = "INSERT INTO MASTER_PRODUCT " +
+                                            "(PRODUCT_ID, PRODUCT_BARCODE, PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_BASE_PRICE, PRODUCT_RETAIL_PRICE, PRODUCT_BULK_PRICE, PRODUCT_WHOLESALE_PRICE, PRODUCT_PHOTO_1, UNIT_ID, PRODUCT_STOCK_QTY, PRODUCT_LIMIT_STOCK, PRODUCT_SHELVES, PRODUCT_ACTIVE, PRODUCT_BRAND, PRODUCT_IS_SERVICE) " +
+                                            "VALUES " +
+                                            "('" + productID + "', '" + produkBarcode + "', '" + produkName + "', '" + produkDesc + "', " + produkHargaPokok + ", " + produkHargaEcer + ", " + produkHargaPartai + ", " + produkHargaGrosir + ", '" + produkPhoto + "', " + selectedUnitID + ", " + produkQty + ", " + limitStock + ", '" + produkShelves + "', " + produkStatus + ", '" + produkBrand + "', " + produkSvc + ")";
+
+                        DS.executeNonQueryCommand(sqlCommand);
+
+                        // SAVE TO PRODUCT_CATEGORY TABLE
+                        for (int i = 0; i < currentSelectedKategoriID.Count(); i++)
+                        {
+                            sqlCommand = "INSERT INTO PRODUCT_CATEGORY (PRODUCT_ID, CATEGORY_ID) VALUES ('" + productID + "', " + currentSelectedKategoriID[i] + ")";
+                            DS.executeNonQueryCommand(sqlCommand);
+                        }
+                        break;
+                    
                 }
 
                 //DS.executeNonQueryCommand(sqlCommand);
@@ -484,7 +505,7 @@ namespace RoyalPetz_ADMIN
             }
             finally
             {
-                if (!selectedPhoto.Equals("PRODUCT_PHOTO/" + produkPhoto))
+                if ( !selectedPhoto.Equals("PRODUCT_PHOTO/" + produkPhoto) && !selectedPhoto.Equals("") )
                 {
                     panelImage.BackgroundImage = null;
                     if (System.IO.File.Exists("PRODUCT_PHOTO/" + produkPhoto))
@@ -515,11 +536,30 @@ namespace RoyalPetz_ADMIN
             return false;
         }
 
+        private int getInternalProductID(string productID)
+        {
+            int result;
+            DS.mySqlConnect();
+
+            result = Convert.ToInt32(DS.getDataSingleValue("SELECT ID FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
+
+            return result;
+        }
+
         private void saveButton_Click(object sender, EventArgs e)
         {
+            int internalProductID;
             if (saveData())
             {
                 MessageBox.Show("SUCCESS");
+
+                if (originModuleID == globalConstants.STOK_PECAH_BARANG)
+                {
+                    internalProductID = getInternalProductID(productID);
+                    parentForm.setNewSelectedProductID(internalProductID);
+
+                    this.Close();
+                }
             }
         }
 
@@ -549,7 +589,7 @@ namespace RoyalPetz_ADMIN
 
         private void kodeProdukTextBox_Validating(object sender, CancelEventArgs e)
         {
-            if ((productIDExist()) && (originModuleID == globalConstants.NEW_PRODUK))
+            if ((productIDExist()) &&  (originModuleID != globalConstants.EDIT_PRODUK))
                 errorLabel.Text = "PRODUK ID SUDAH ADA";
             else
                 errorLabel.Text = "";

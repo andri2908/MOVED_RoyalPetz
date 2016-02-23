@@ -8,18 +8,37 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using MySql.Data;
+using MySql.Data.MySqlClient;
+
 namespace RoyalPetz_ADMIN
 {
     public partial class pengaturanKategoriProdukForm : Form
     {
+        private struct categoryProduct
+        {
+            public string productID;
+            public bool hasCategoryID;
+        }
+
+        private string previousInput = "";
+        private int selectedCategoryID = 0;
+        private Data_Access DS = new Data_Access();
+        private List<categoryProduct> categoryProductValue = new List<categoryProduct>();
+        
         public pengaturanKategoriProdukForm()
         {
             InitializeComponent();
         }
 
+        public pengaturanKategoriProdukForm(int categoryID)
+        {
+            InitializeComponent();
+            selectedCategoryID = categoryID;
+        }
+
         private void fillInDummydata()
         {
-            kodeKategoriTextbox.Text = "PROMO";
             namaKategoriTextbox.Text = "PROMOSI";
             deskripsiTextbox.Text = "PROMOSI";
             namaProdukTextbox.Text = "ITEM";
@@ -30,9 +49,202 @@ namespace RoyalPetz_ADMIN
             pengaturanKategoriDataGridView.Rows.Add("item 4", true);
         }
 
+        private void loadKategoriInformation()
+        {
+            MySqlDataReader rdr;
+            DataTable dt = new DataTable();
+
+            DS.mySqlConnect();
+
+            using (rdr = DS.getData("SELECT * FROM MASTER_CATEGORY WHERE CATEGORY_ID=  " + selectedCategoryID))
+            {
+                if (rdr.HasRows)
+                {
+                    while (rdr.Read())
+                    {
+                        namaKategoriTextbox.Text = rdr.GetString("CATEGORY_NAME");
+                        deskripsiTextbox.Text = rdr.GetString("CATEGORY_DESCRIPTION");
+                    }
+                }
+            }            
+        }
+
+        private void loadProdukName()
+        {
+            MySqlDataReader rdr;
+            DataTable dt = new DataTable();
+            bool valCheckBox = false;
+            string sqlCommand = "";
+            categoryProduct tempValue;
+
+            DS.mySqlConnect();
+            sqlCommand = "SELECT M.PRODUCT_ID, M.PRODUCT_NAME, IFNULL(P.CATEGORY_ID, 0) AS CATEGORY_ID FROM MASTER_PRODUCT M LEFT OUTER JOIN PRODUCT_CATEGORY P ON (P.PRODUCT_ID = M.PRODUCT_ID AND P.CATEGORY_ID = " + selectedCategoryID + ") WHERE M.PRODUCT_NAME LIKE '%" + namaProdukTextbox.Text + "%'";
+
+            using (rdr = DS.getData(sqlCommand))
+            {
+                if (rdr.HasRows)
+                {
+                    while (rdr.Read())
+                    {
+                        if (!rdr.GetString("CATEGORY_ID").Equals("0"))
+                            valCheckBox = true;
+                        else
+                            valCheckBox = false;
+                        
+                        pengaturanKategoriDataGridView.Rows.Add(false, rdr.GetString("PRODUCT_ID"), rdr.GetString("PRODUCT_NAME"), valCheckBox);
+                        
+                        tempValue.productID = rdr.GetString("PRODUCT_ID");
+                        tempValue.hasCategoryID = valCheckBox;
+
+                        categoryProductValue.Add(tempValue);
+                    }
+                }
+            }            
+        }
+
         private void pengaturanKategoriProdukForm_Load(object sender, EventArgs e)
         {
-            fillInDummydata();
+            loadKategoriInformation();
+            //fillInDummydata();
+        }
+
+        private void namaProdukTextbox_TextChanged(object sender, EventArgs e)
+        {
+            bool continueProcess = true;
+
+            /*if ( previousInput.Equals(namaProdukTextbox.Text) )
+                return;
+
+            if (!previousInput.Equals(""))
+            {
+                if (DialogResult.Yes == MessageBox.Show("GANTI TAMPILAN DATA ?", "WARNING", MessageBoxButtons.YesNo))
+                    continueProcess = true;
+                else
+                    continueProcess = false;
+            }
+            */
+
+            if (continueProcess)
+            {
+                categoryProductValue.Clear();
+                pengaturanKategoriDataGridView.Rows.Clear();
+                loadProdukName();
+                
+                previousInput = namaProdukTextbox.Text;
+            }
+            else
+                namaProdukTextbox.Text = previousInput;           
+        }
+
+        private void pengaturanKategoriDataGridView_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            if ( pengaturanKategoriDataGridView.SelectedCells.Count <= 0 )
+                return;
+
+            int selectedrowindex = pengaturanKategoriDataGridView.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = pengaturanKategoriDataGridView.Rows[selectedrowindex];
+
+            if ( categoryProductValue[selectedrowindex].hasCategoryID != Convert.ToBoolean(selectedRow.Cells["hakAkses"].Value))                         
+            {
+                selectedRow.Cells["changed"].Value = true;
+
+                namaProdukTextbox.ReadOnly = true;
+                namaProdukTextbox.BackColor = Color.Red;
+            }
+
+        }
+
+        private bool dataValidated()
+        {
+            return true;
+        }
+
+        private bool saveDataTransaction()
+        {
+            bool result = false;
+            string sqlCommand = "";
+
+            DS.beginTransaction();
+
+            try
+            {
+                DS.mySqlConnect();
+
+                for (int i = 0; i < pengaturanKategoriDataGridView.Rows.Count; i++)
+                {
+                    if (categoryProductValue[i].hasCategoryID != Convert.ToBoolean(pengaturanKategoriDataGridView.Rows[i].Cells["hakAkses"].Value))
+                    {
+                        if ((categoryProductValue[i].hasCategoryID))
+                        {
+                            sqlCommand = "DELETE FROM PRODUCT_CATEGORY WHERE PRODUCT_ID = '" + pengaturanKategoriDataGridView.Rows[i].Cells["PRODUCT_ID"].Value.ToString() + "' AND CATEGORY_ID = " + selectedCategoryID;
+                        }
+                        else 
+                        {
+                            sqlCommand = "INSERT INTO PRODUCT_CATEGORY (PRODUCT_ID, CATEGORY_ID) VALUES ('" + pengaturanKategoriDataGridView.Rows[i].Cells["PRODUCT_ID"].Value.ToString() + "', " + selectedCategoryID + ")";
+                        }
+
+                        DS.executeNonQueryCommand(sqlCommand);
+                    }
+                }
+
+                DS.commit();
+            }
+            catch (Exception e)
+            {
+                try
+                {
+                    //myTrans.Rollback();
+                }
+                catch (MySqlException ex)
+                {
+                    if (DS.getMyTransConnection() != null)
+                    {
+                        MessageBox.Show("An exception of type " + ex.GetType() +
+                                          " was encountered while attempting to roll back the transaction.");
+                    }
+                }
+
+                MessageBox.Show("An exception of type " + e.GetType() +
+                                  " was encountered while inserting the data.");
+                MessageBox.Show("Neither record was written to database.");
+            }
+            finally
+            {
+                DS.mySqlClose();
+                result = true;
+            }
+
+            return result;
+        }
+
+        private bool saveData()
+        {
+            if (dataValidated())
+            {
+                return saveDataTransaction();
+            }
+
+            return false;
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            if (saveData())
+            {
+                MessageBox.Show("SUCCESS");
+                pengaturanKategoriDataGridView.Rows.Clear();
+                categoryProductValue.Clear();
+                namaProdukTextbox.ReadOnly = false;
+                namaProdukTextbox.BackColor = Color.White;
+
+
+                loadProdukName();
+            }
+        }
+
+        private void pengaturanKategoriDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+          
         }
     }
 }

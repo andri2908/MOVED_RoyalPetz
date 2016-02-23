@@ -19,7 +19,7 @@ namespace RoyalPetz_ADMIN
         private int selectedGroupID = 0;
 
         private Data_Access DS = new Data_Access();
-        private globalStringOP stringOP = new globalStringOP();
+        private globalUtilities stringOP = new globalUtilities();
 
         private groupAccessModuleForm parentForm;
 

@@ -17,6 +17,7 @@ namespace RoyalPetz_ADMIN
     {
         private int originModuleID = 0;
         private int selectedProductID = 0;
+        private stokPecahBarangForm parentForm;
 
         private Data_Access DS = new Data_Access();
 
@@ -36,12 +37,24 @@ namespace RoyalPetz_ADMIN
             newButton.Visible = false;
         }
 
+        public dataProdukForm(int moduleID, stokPecahBarangForm thisParentForm)
+        {
+            InitializeComponent();
+
+            originModuleID = moduleID;
+            parentForm = thisParentForm;
+
+            // accessed from other form other than Master -> Data Produk
+            // it means that this form is only displayed for browsing / searching purpose only
+            newButton.Visible = false;
+        }
+
         private void displaySpecificForm()
         {
             switch (originModuleID)
             {
                 case globalConstants.STOK_PECAH_BARANG: 
-                    stokPecahBarangForm displaystokPecahBarangForm = new stokPecahBarangForm();
+                    stokPecahBarangForm displaystokPecahBarangForm = new stokPecahBarangForm(selectedProductID);
                     displaystokPecahBarangForm.ShowDialog(this);
                     break;
 
@@ -51,6 +64,7 @@ namespace RoyalPetz_ADMIN
                     break;
 
                 case globalConstants.BROWSE_STOK_PECAH_BARANG:
+                    parentForm.setNewSelectedProductID(selectedProductID);
                     this.Close();
                     break;
 
@@ -84,6 +98,11 @@ namespace RoyalPetz_ADMIN
                 return;
 
             sqlCommand = "SELECT ID, PRODUCT_ID AS 'PRODUK ID', PRODUCT_NAME AS 'NAMA PRODUK', PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 AND PRODUCT_NAME LIKE '%" + namaProdukTextBox.Text + "%'";
+            
+            if (originModuleID == globalConstants.STOK_PECAH_BARANG)
+            {
+                sqlCommand = sqlCommand + " AND PRODUCT_IS_SERVICE = 0";
+            }
             
             using (rdr = DS.getData(sqlCommand))
             {
