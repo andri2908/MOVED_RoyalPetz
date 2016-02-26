@@ -176,7 +176,8 @@ namespace RoyalPetz_ADMIN
             previousInput = "";
             if ( detailRequestQty.Count < rowSelectedIndex+1 )
             {
-                if (gUtil.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL))
+                if (gUtil.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
+                    && (dataGridViewTextBoxEditingControl.Text.Length > 0))
                 {
                     detailRequestQty.Add(dataGridViewTextBoxEditingControl.Text);
                 }
@@ -187,7 +188,8 @@ namespace RoyalPetz_ADMIN
             }
             else
             {
-                if (gUtil.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL))
+                if (gUtil.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL) 
+                    && (dataGridViewTextBoxEditingControl.Text.Length > 0))
                 {
                     detailRequestQty[rowSelectedIndex] = dataGridViewTextBoxEditingControl.Text;
                 }
@@ -197,17 +199,24 @@ namespace RoyalPetz_ADMIN
                 }
             }
 
-            productQty = Convert.ToDouble(dataGridViewTextBoxEditingControl.Text);
-
-            if (null != selectedRow.Cells["hpp"].Value)
+            try
             {
-                hppValue = Convert.ToDouble(selectedRow.Cells["hpp"].Value);
-                subTotal = Math.Round((hppValue * productQty), 2);
+                productQty = Convert.ToDouble(dataGridViewTextBoxEditingControl.Text);
 
-                selectedRow.Cells["subTotal"].Value = subTotal;
+                if (null != selectedRow.Cells["hpp"].Value)
+                {
+                    hppValue = Convert.ToDouble(selectedRow.Cells["hpp"].Value);
+                    subTotal = Math.Round((hppValue * productQty), 2);
+
+                    selectedRow.Cells["subTotal"].Value = subTotal;
+                }
+
+                calculateTotal();
             }
-  
-            calculateTotal();
+            catch (Exception ex)
+            {
+                //dataGridViewTextBoxEditingControl.Text = previousInput;
+            }
         }
 
         private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -591,11 +600,6 @@ namespace RoyalPetz_ADMIN
             {
                 MessageBox.Show("SUCCESS");
             }
-        }
-
-        private void ROinvoiceTextBox_Validated(object sender, EventArgs e)
-        {
-            
         }
 
         private void detailRequestOrderDataGridView_KeyPress(object sender, KeyPressEventArgs e)

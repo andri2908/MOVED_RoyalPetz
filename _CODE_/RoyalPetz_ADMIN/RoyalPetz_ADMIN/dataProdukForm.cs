@@ -134,7 +134,28 @@ namespace RoyalPetz_ADMIN
 
         private void tagProdukDataGridView_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == 13) // Enter
+            /*if (e.KeyChar == 13) // Enter
+            {
+                if (dataProdukGridView.Rows.Count <= 0)
+                    return;
+
+                int selectedrowindex = (dataProdukGridView.SelectedCells[0].RowIndex) - 1;
+
+                DataGridViewRow selectedRow = dataProdukGridView.Rows[selectedrowindex];
+                selectedProductID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+
+                displaySpecificForm();
+            } */
+        }
+
+        private void dataProdukForm_Activated(object sender, EventArgs e)
+        {
+            loadProdukData();
+        }
+
+        private void dataProdukGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter) // Enter
             {
                 if (dataProdukGridView.Rows.Count <= 0)
                     return;
@@ -146,11 +167,6 @@ namespace RoyalPetz_ADMIN
 
                 displaySpecificForm();
             }
-        }
-
-        private void dataProdukForm_Activated(object sender, EventArgs e)
-        {
-            loadProdukData();
         }
     }
 }

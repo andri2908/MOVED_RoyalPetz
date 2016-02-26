@@ -275,7 +275,6 @@
             this.ROinvoiceTextBox.Size = new System.Drawing.Size(173, 27);
             this.ROinvoiceTextBox.TabIndex = 16;
             this.ROinvoiceTextBox.TextChanged += new System.EventHandler(this.ROinvoiceTextBox_TextChanged);
-            this.ROinvoiceTextBox.Validated += new System.EventHandler(this.ROinvoiceTextBox_Validated);
             // 
             // label6
             // 

@@ -513,6 +513,7 @@
             // 
             this.toolStripMenuItem8.BackColor = System.Drawing.Color.SteelBlue;
             this.toolStripMenuItem8.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem3,
             this.toolStripMenuItem63,
             this.toolStripMenuItem64});
             this.toolStripMenuItem8.ForeColor = System.Drawing.Color.FloralWhite;
@@ -577,7 +578,6 @@
             this.catatPembelianToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
             this.catatPembelianToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem65,
-            this.toolStripMenuItem3,
             this.toolStripMenuItem66,
             this.toolStripMenuItem67});
             this.catatPembelianToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
@@ -999,7 +999,7 @@
             this.toolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(66, 66);
+            this.toolStripButton2.Size = new System.Drawing.Size(65, 66);
             this.toolStripButton2.Text = "PIUTANG";
             this.toolStripButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
@@ -1011,7 +1011,7 @@
             this.toolStripButton5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(62, 66);
+            this.toolStripButton5.Size = new System.Drawing.Size(61, 66);
             this.toolStripButton5.Text = "HUTANG";
             this.toolStripButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
@@ -1040,7 +1040,7 @@
             this.toolStripButton7.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(70, 66);
+            this.toolStripButton7.Size = new System.Drawing.Size(68, 66);
             this.toolStripButton7.Text = "RET. BELI";
             this.toolStripButton7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
@@ -1052,7 +1052,7 @@
             this.toolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(71, 66);
+            this.toolStripButton6.Size = new System.Drawing.Size(69, 66);
             this.toolStripButton6.Text = "RET. JUAL";
             this.toolStripButton6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
@@ -1067,9 +1067,9 @@
             this.toolStripMenuItem3.BackColor = System.Drawing.Color.SteelBlue;
             this.toolStripMenuItem3.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.ShowShortcutKeys = false;
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(235, 22);
-            this.toolStripMenuItem3.Text = "Permintaan Mutasi";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(247, 22);
+            this.toolStripMenuItem3.Text = "Mutasi Barang";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // adminForm
             // 

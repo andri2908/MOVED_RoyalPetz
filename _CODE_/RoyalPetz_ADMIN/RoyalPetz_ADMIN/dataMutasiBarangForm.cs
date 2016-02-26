@@ -16,7 +16,7 @@ namespace RoyalPetz_ADMIN
     public partial class dataMutasiBarangForm : Form
     {
         private int originModuleID = 0;
-        private int selectedROID = 0;
+        private string selectedROID;
 
         private Data_Access DS = new Data_Access();
 
@@ -30,33 +30,23 @@ namespace RoyalPetz_ADMIN
             InitializeComponent();
             originModuleID = moduleID;
 
-            if ((moduleID != globalConstants.PERMINTAAN_BARANG) && (moduleID != globalConstants.CEK_DATA_MUTASI))
+            if (moduleID != globalConstants.CEK_DATA_MUTASI)
                 newButton.Visible = false;
-
-            if (moduleID != globalConstants.PERMINTAAN_MUTASI_BARANG)
-                importButton.Visible = false;
         }
 
-        private void displaySpecificForm(int roID = 0)
+        private void displaySpecificForm(string PMInvoice = "")
         {
+            int subModuleID;
             switch (originModuleID)
             {
                 case globalConstants.CEK_DATA_MUTASI:
-                        dataMutasiBarangDetailForm displayedForm = new dataMutasiBarangDetailForm();
-                        displayedForm.ShowDialog(this);
-                    break;
+                    if (!PMInvoice.Equals(""))
+                        subModuleID = globalConstants.VIEW_PRODUCT_MUTATION;
+                    else
+                        subModuleID = globalConstants.MUTASI_BARANG;
 
-                case globalConstants.PERMINTAAN_BARANG:
-                        if (roID == 0)
-                        { 
-                            permintaanProdukForm permintaanProdukDisplayedForm = new permintaanProdukForm(globalConstants.NEW_REQUEST_ORDER);
-                            permintaanProdukDisplayedForm.ShowDialog(this);
-                        }
-                        else
-                        { 
-                            permintaanProdukForm editPermintaanProdukDisplayedForm = new permintaanProdukForm(globalConstants.EDIT_REQUEST_ORDER, roID);
-                            editPermintaanProdukDisplayedForm.ShowDialog(this);
-                        }
+                        dataMutasiBarangDetailForm displayedForm = new dataMutasiBarangDetailForm(subModuleID, PMInvoice);
+                        displayedForm.ShowDialog(this);
                     break;
 
                 case globalConstants.PENERIMAAN_BARANG:
@@ -73,7 +63,7 @@ namespace RoyalPetz_ADMIN
 
             int rowSelectedIndex = dataRequestOrderGridView.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dataRequestOrderGridView.Rows[rowSelectedIndex];
-            selectedROID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+            selectedROID = selectedRow.Cells["NO MUTASI"].Value.ToString();
 
             displaySpecificForm(selectedROID);
         }
@@ -91,10 +81,15 @@ namespace RoyalPetz_ADMIN
 
             DS.mySqlConnect();
 
-            sqlCommand = "SELECT ID, RO_INVOICE AS 'NO PERMINTAAN', RO_DATETIME AS 'TANGGAL PERMINTAAN', RO_EXPIRED AS 'TANGGAL EXPIRED', M1.BRANCH_NAME AS 'ASAL PERMINTAAN', M2.BRANCH_NAME AS 'TUJUAN PERMINTAAN', RO_TOTAL AS 'TOTAL' " +
-                                "FROM REQUEST_ORDER_HEADER LEFT OUTER JOIN MASTER_BRANCH M1 ON (RO_BRANCH_ID_FROM = M1.BRANCH_ID) " +
-                                "LEFT OUTER JOIN MASTER_BRANCH M2 ON (RO_BRANCH_ID_TO = M2.BRANCH_ID) " +
-                                "WHERE RO_ACTIVE = 1 AND RO_EXPIRED > '" + DateTime.Now + "'";
+            //sqlCommand = "SELECT ID, RO_INVOICE AS 'NO PERMINTAAN', RO_DATETIME AS 'TANGGAL PERMINTAAN', RO_EXPIRED AS 'TANGGAL EXPIRED', M1.BRANCH_NAME AS 'ASAL PERMINTAAN', M2.BRANCH_NAME AS 'TUJUAN PERMINTAAN', RO_TOTAL AS 'TOTAL' " +
+             //                   "FROM REQUEST_ORDER_HEADER LEFT OUTER JOIN MASTER_BRANCH M1 ON (RO_BRANCH_ID_FROM = M1.BRANCH_ID) " +
+              //                  "LEFT OUTER JOIN MASTER_BRANCH M2 ON (RO_BRANCH_ID_TO = M2.BRANCH_ID) " +
+               //                 "WHERE RO_ACTIVE = 1 AND RO_EXPIRED > '" + DateTime.Now + "'";
+
+            sqlCommand = "SELECT ID, PM_INVOICE AS 'NO MUTASI', PM_DATETIME AS 'TANGGAL MUTASI', M1.BRANCH_NAME AS 'ASAL MUTASI', M2.BRANCH_NAME AS 'TUJUAN MUTASI', PM_TOTAL AS 'TOTAL', RO_INVOICE AS 'NO PERMINTAAN' " +
+                                "FROM PRODUCTS_MUTATION_HEADER LEFT OUTER JOIN MASTER_BRANCH M1 ON (BRANCH_ID_FROM = M1.BRANCH_ID) " +
+                                "LEFT OUTER JOIN MASTER_BRANCH M2 ON (BRANCH_ID_TO = M2.BRANCH_ID) " +
+                                "ORDER BY PM_DATETIME ASC";                                
 
             using (rdr = DS.getData(sqlCommand))
             {
@@ -105,12 +100,12 @@ namespace RoyalPetz_ADMIN
 
                     dataRequestOrderGridView.Columns["ID"].Visible = false;
 
-                    dataRequestOrderGridView.Columns["NO PERMINTAAN"].Width = 200;
-                    dataRequestOrderGridView.Columns["TANGGAL PERMINTAAN"].Width = 200;
-                    dataRequestOrderGridView.Columns["TANGGAL EXPIRED"].Width = 200;
-                    dataRequestOrderGridView.Columns["ASAL PERMINTAAN"].Width = 200;
-                    dataRequestOrderGridView.Columns["TUJUAN PERMINTAAN"].Width = 200;
+                    dataRequestOrderGridView.Columns["NO MUTASI"].Width = 200;
+                    dataRequestOrderGridView.Columns["TANGGAL MUTASI"].Width = 200;
+                    dataRequestOrderGridView.Columns["ASAL MUTASI"].Width = 200;
+                    dataRequestOrderGridView.Columns["TUJUAN MUTASI"].Width = 200;
                     dataRequestOrderGridView.Columns["TOTAL"].Width = 200;
+                    dataRequestOrderGridView.Columns["NO PERMINTAAN"].Width = 200;
                 }
 
                 rdr.Close();
@@ -136,14 +131,18 @@ namespace RoyalPetz_ADMIN
 
         private void dataRequestOrderGridView_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == 13)
+        }
+
+        private void dataRequestOrderGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
             {
                 if (dataRequestOrderGridView.Rows.Count <= 0)
                     return;
 
                 int rowSelectedIndex = dataRequestOrderGridView.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = dataRequestOrderGridView.Rows[rowSelectedIndex];
-                selectedROID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+                selectedROID = selectedRow.Cells["NO MUTASI"].Value.ToString();
 
                 displaySpecificForm(selectedROID);
             }
