@@ -10,8 +10,11 @@ using System.Windows.Forms;
 
 namespace RoyalPetz_ADMIN
 {
+    
     public partial class backupRestoreDatabaseForm : Form
     {
+
+        private globalUtilities gUtil = new globalUtilities();
         public backupRestoreDatabaseForm()
         {
             InitializeComponent();
@@ -42,12 +45,20 @@ namespace RoyalPetz_ADMIN
 
         private void restoreButton_Click(object sender, EventArgs e)
         {
-
+            if (fileNameTextbox.Text != "")
+            {
+                //restore database from file
+            }
+            else
+            {
+                String errormessage = "Filename is blank." + Environment.NewLine + "Please find the appropriate file!";
+                gUtil.showError(errormessage);
+            }
         }
 
         private void backupRestoreDatabaseForm_Load(object sender, EventArgs e)
         {
-
+            //gUtil.reArrangeTabOrder(this);
         }
     }
 }

@@ -34,20 +34,21 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.errorLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.branchNameTextBox = new System.Windows.Forms.TextBox();
+            this.ipAddressMaskedTextbox = new System.Windows.Forms.MaskedTextBox();
+            this.branchAddress1TextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.ipAddressMaskedTextbox = new System.Windows.Forms.MaskedTextBox();
             this.label23 = new System.Windows.Forms.Label();
-            this.branchAddress1TextBox = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
-            this.nonAktifCheckbox = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.nonAktifCheckbox = new System.Windows.Forms.CheckBox();
             this.saveButton = new System.Windows.Forms.Button();
-            this.branchNameTextBox = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -56,7 +57,7 @@
             // 
             this.branchAddress2TextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.branchAddress2TextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.branchAddress2TextBox.Location = new System.Drawing.Point(215, 124);
+            this.branchAddress2TextBox.Location = new System.Drawing.Point(211, 124);
             this.branchAddress2TextBox.MaxLength = 100;
             this.branchAddress2TextBox.Name = "branchAddress2TextBox";
             this.branchAddress2TextBox.Size = new System.Drawing.Size(618, 27);
@@ -66,7 +67,7 @@
             // 
             this.branchAddressCityTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.branchAddressCityTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.branchAddressCityTextBox.Location = new System.Drawing.Point(215, 164);
+            this.branchAddressCityTextBox.Location = new System.Drawing.Point(211, 164);
             this.branchAddressCityTextBox.MaxLength = 100;
             this.branchAddressCityTextBox.Name = "branchAddressCityTextBox";
             this.branchAddressCityTextBox.Size = new System.Drawing.Size(618, 27);
@@ -76,7 +77,7 @@
             // 
             this.branchTelephoneTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.branchTelephoneTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.branchTelephoneTextBox.Location = new System.Drawing.Point(215, 203);
+            this.branchTelephoneTextBox.Location = new System.Drawing.Point(211, 203);
             this.branchTelephoneTextBox.MaxLength = 15;
             this.branchTelephoneTextBox.Name = "branchTelephoneTextBox";
             this.branchTelephoneTextBox.Size = new System.Drawing.Size(146, 27);
@@ -87,9 +88,9 @@
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.panel1.BackColor = System.Drawing.Color.SteelBlue;
             this.panel1.Controls.Add(this.errorLabel);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Location = new System.Drawing.Point(3, 1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(853, 29);
+            this.panel1.Size = new System.Drawing.Size(836, 29);
             this.panel1.TabIndex = 22;
             // 
             // errorLabel
@@ -99,7 +100,7 @@
             this.errorLabel.BackColor = System.Drawing.Color.White;
             this.errorLabel.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(3, 5);
+            this.errorLabel.Location = new System.Drawing.Point(2, 5);
             this.errorLabel.Name = "errorLabel";
             this.errorLabel.Size = new System.Drawing.Size(23, 18);
             this.errorLabel.TabIndex = 0;
@@ -112,7 +113,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 92.76018F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.239819F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 623F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 627F));
             this.tableLayoutPanel1.Controls.Add(this.branchNameTextBox, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.ipAddressMaskedTextbox, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.branchAddress1TextBox, 2, 3);
@@ -129,7 +130,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.branchTelephoneTextBox, 2, 6);
             this.tableLayoutPanel1.Controls.Add(this.nonAktifCheckbox, 2, 7);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 35);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 35);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 8;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -142,6 +143,37 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(836, 278);
             this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // branchNameTextBox
+            // 
+            this.branchNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.branchNameTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.branchNameTextBox.Location = new System.Drawing.Point(211, 5);
+            this.branchNameTextBox.MaxLength = 30;
+            this.branchNameTextBox.Name = "branchNameTextBox";
+            this.branchNameTextBox.Size = new System.Drawing.Size(618, 27);
+            this.branchNameTextBox.TabIndex = 0;
+            // 
+            // ipAddressMaskedTextbox
+            // 
+            this.ipAddressMaskedTextbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.ipAddressMaskedTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ipAddressMaskedTextbox.Location = new System.Drawing.Point(211, 41);
+            this.ipAddressMaskedTextbox.Mask = "000.000.000.000";
+            this.ipAddressMaskedTextbox.Name = "ipAddressMaskedTextbox";
+            this.ipAddressMaskedTextbox.Size = new System.Drawing.Size(146, 27);
+            this.ipAddressMaskedTextbox.TabIndex = 1;
+            this.ipAddressMaskedTextbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            // 
+            // branchAddress1TextBox
+            // 
+            this.branchAddress1TextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.branchAddress1TextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.branchAddress1TextBox.Location = new System.Drawing.Point(211, 83);
+            this.branchAddress1TextBox.MaxLength = 100;
+            this.branchAddress1TextBox.Name = "branchAddress1TextBox";
+            this.branchAddress1TextBox.Size = new System.Drawing.Size(618, 27);
+            this.branchAddress1TextBox.TabIndex = 2;
             // 
             // label1
             // 
@@ -197,7 +229,7 @@
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label17.Location = new System.Drawing.Point(200, 10);
+            this.label17.Location = new System.Drawing.Point(196, 10);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(9, 18);
             this.label17.TabIndex = 12;
@@ -209,22 +241,11 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label18.Location = new System.Drawing.Point(200, 48);
+            this.label18.Location = new System.Drawing.Point(196, 48);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(9, 18);
             this.label18.TabIndex = 13;
             this.label18.Text = ":";
-            // 
-            // ipAddressMaskedTextbox
-            // 
-            this.ipAddressMaskedTextbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            this.ipAddressMaskedTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ipAddressMaskedTextbox.Location = new System.Drawing.Point(215, 41);
-            this.ipAddressMaskedTextbox.Mask = "000.000.000.000";
-            this.ipAddressMaskedTextbox.Name = "ipAddressMaskedTextbox";
-            this.ipAddressMaskedTextbox.Size = new System.Drawing.Size(146, 27);
-            this.ipAddressMaskedTextbox.TabIndex = 1;
-            this.ipAddressMaskedTextbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // label23
             // 
@@ -232,21 +253,11 @@
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label23.Location = new System.Drawing.Point(200, 87);
+            this.label23.Location = new System.Drawing.Point(196, 87);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(9, 18);
             this.label23.TabIndex = 14;
             this.label23.Text = ":";
-            // 
-            // branchAddress1TextBox
-            // 
-            this.branchAddress1TextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.branchAddress1TextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.branchAddress1TextBox.Location = new System.Drawing.Point(215, 83);
-            this.branchAddress1TextBox.MaxLength = 100;
-            this.branchAddress1TextBox.Name = "branchAddress1TextBox";
-            this.branchAddress1TextBox.Size = new System.Drawing.Size(618, 27);
-            this.branchAddress1TextBox.TabIndex = 2;
             // 
             // label30
             // 
@@ -254,23 +265,11 @@
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label30.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label30.Location = new System.Drawing.Point(200, 208);
+            this.label30.Location = new System.Drawing.Point(196, 208);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(9, 18);
             this.label30.TabIndex = 15;
             this.label30.Text = ":";
-            // 
-            // nonAktifCheckbox
-            // 
-            this.nonAktifCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.nonAktifCheckbox.AutoSize = true;
-            this.nonAktifCheckbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nonAktifCheckbox.Location = new System.Drawing.Point(215, 250);
-            this.nonAktifCheckbox.Name = "nonAktifCheckbox";
-            this.nonAktifCheckbox.Size = new System.Drawing.Size(170, 22);
-            this.nonAktifCheckbox.TabIndex = 6;
-            this.nonAktifCheckbox.Text = "Non Aktif Cabang";
-            this.nonAktifCheckbox.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -284,11 +283,23 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "KOTA";
             // 
+            // nonAktifCheckbox
+            // 
+            this.nonAktifCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.nonAktifCheckbox.AutoSize = true;
+            this.nonAktifCheckbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nonAktifCheckbox.Location = new System.Drawing.Point(211, 250);
+            this.nonAktifCheckbox.Name = "nonAktifCheckbox";
+            this.nonAktifCheckbox.Size = new System.Drawing.Size(170, 22);
+            this.nonAktifCheckbox.TabIndex = 6;
+            this.nonAktifCheckbox.Text = "Non Aktif Cabang";
+            this.nonAktifCheckbox.UseVisualStyleBackColor = true;
+            // 
             // saveButton
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(377, 343);
+            this.saveButton.Location = new System.Drawing.Point(301, 343);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(95, 37);
             this.saveButton.TabIndex = 0;
@@ -296,22 +307,25 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
-            // branchNameTextBox
+            // button1
             // 
-            this.branchNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.branchNameTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.branchNameTextBox.Location = new System.Drawing.Point(215, 5);
-            this.branchNameTextBox.MaxLength = 30;
-            this.branchNameTextBox.Name = "branchNameTextBox";
-            this.branchNameTextBox.Size = new System.Drawing.Size(618, 27);
-            this.branchNameTextBox.TabIndex = 0;
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.button1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(446, 343);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(95, 37);
+            this.button1.TabIndex = 23;
+            this.button1.Text = "RESET";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // dataCabangDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(853, 405);
+            this.ClientSize = new System.Drawing.Size(842, 405);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.saveButton);
@@ -351,5 +365,6 @@
         private System.Windows.Forms.Label errorLabel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox branchNameTextBox;
+        private System.Windows.Forms.Button button1;
     }
 }

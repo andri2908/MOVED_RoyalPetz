@@ -57,8 +57,8 @@
             this.tabControl1.Location = new System.Drawing.Point(4, 39);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(571, 207);
-            this.tabControl1.TabIndex = 22;
+            this.tabControl1.Size = new System.Drawing.Size(571, 150);
+            this.tabControl1.TabIndex = 1;
             // 
             // tabPage2
             // 
@@ -69,7 +69,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 27);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(563, 176);
+            this.tabPage2.Size = new System.Drawing.Size(563, 119);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "RESTORE DATABASE";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -78,7 +78,7 @@
             // 
             this.fileNameTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.fileNameTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fileNameTextbox.Location = new System.Drawing.Point(159, 28);
+            this.fileNameTextbox.Location = new System.Drawing.Point(160, 17);
             this.fileNameTextbox.Name = "fileNameTextbox";
             this.fileNameTextbox.ReadOnly = true;
             this.fileNameTextbox.Size = new System.Drawing.Size(340, 27);
@@ -89,7 +89,7 @@
             this.searchButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.searchButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("searchButton.BackgroundImage")));
             this.searchButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.searchButton.Location = new System.Drawing.Point(505, 28);
+            this.searchButton.Location = new System.Drawing.Point(506, 15);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(29, 30);
             this.searchButton.TabIndex = 32;
@@ -100,9 +100,9 @@
             // 
             this.restoreButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.restoreButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.restoreButton.Location = new System.Drawing.Point(159, 89);
+            this.restoreButton.Location = new System.Drawing.Point(180, 60);
             this.restoreButton.Name = "restoreButton";
-            this.restoreButton.Size = new System.Drawing.Size(228, 37);
+            this.restoreButton.Size = new System.Drawing.Size(202, 37);
             this.restoreButton.TabIndex = 31;
             this.restoreButton.Text = "RESTORE DATABASE";
             this.restoreButton.UseVisualStyleBackColor = true;
@@ -114,7 +114,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Location = new System.Drawing.Point(26, 31);
+            this.label2.Location = new System.Drawing.Point(27, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(127, 18);
             this.label2.TabIndex = 30;
@@ -126,7 +126,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(563, 176);
+            this.tabPage1.Size = new System.Drawing.Size(563, 119);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "BACKUP DATABASE";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -135,7 +135,7 @@
             // 
             this.backupButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.backupButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.backupButton.Location = new System.Drawing.Point(166, 52);
+            this.backupButton.Location = new System.Drawing.Point(177, 39);
             this.backupButton.Name = "backupButton";
             this.backupButton.Size = new System.Drawing.Size(208, 37);
             this.backupButton.TabIndex = 21;
@@ -157,7 +157,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(579, 248);
+            this.ClientSize = new System.Drawing.Size(579, 190);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

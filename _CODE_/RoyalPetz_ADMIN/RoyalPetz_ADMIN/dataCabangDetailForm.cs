@@ -225,9 +225,20 @@ namespace RoyalPetz_ADMIN
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            int options = 0;
             if (saveData())
             {
-                MessageBox.Show("SUCCESS");
+                switch (originModuleID)
+                {
+                    case globalConstants.NEW_BRANCH:
+                        options = gUtil.INS;
+                        break;
+                    case globalConstants.EDIT_BRANCH:
+                        options = gUtil.UPD;
+                        break;
+                }
+                //MessageBox.Show("SUCCESS");
+                gUtil.showSuccess(options);
                 gUtil.ResetAllControls(this);
             }
         }
@@ -243,8 +254,13 @@ namespace RoyalPetz_ADMIN
             {
                 nonAktifCheckbox.Enabled = false;
             }
-
+            gUtil.reArrangeTabOrder(this);
             errorLabel.Text = "";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            gUtil.ResetAllControls(this);
         }
     }
 }

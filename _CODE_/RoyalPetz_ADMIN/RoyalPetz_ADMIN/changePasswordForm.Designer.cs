@@ -51,9 +51,9 @@
             this.tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 93.44827F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.551724F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 203F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 94.27481F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.725191F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 209F));
             this.tableLayoutPanel1.Controls.Add(this.label8, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.newPasswordTextBox, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
@@ -63,7 +63,7 @@
             this.tableLayoutPanel1.Controls.Add(this.oldPasswordTextBox, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.newPassword2TextBox, 2, 3);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 35);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 35);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -79,9 +79,9 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label8.Location = new System.Drawing.Point(270, 96);
+            this.label8.Location = new System.Drawing.Point(266, 96);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(12, 18);
+            this.label8.Size = new System.Drawing.Size(10, 18);
             this.label8.TabIndex = 67;
             this.label8.Text = ":";
             // 
@@ -89,10 +89,10 @@
             // 
             this.newPasswordTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.newPasswordTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newPasswordTextBox.Location = new System.Drawing.Point(288, 43);
+            this.newPasswordTextBox.Location = new System.Drawing.Point(282, 43);
             this.newPasswordTextBox.Name = "newPasswordTextBox";
             this.newPasswordTextBox.PasswordChar = '*';
-            this.newPasswordTextBox.Size = new System.Drawing.Size(187, 27);
+            this.newPasswordTextBox.Size = new System.Drawing.Size(197, 27);
             this.newPasswordTextBox.TabIndex = 65;
             // 
             // label3
@@ -125,9 +125,9 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(270, 8);
+            this.label6.Location = new System.Drawing.Point(266, 8);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(12, 18);
+            this.label6.Size = new System.Drawing.Size(10, 18);
             this.label6.TabIndex = 12;
             this.label6.Text = ":";
             // 
@@ -137,9 +137,9 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(270, 48);
+            this.label7.Location = new System.Drawing.Point(266, 48);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(12, 18);
+            this.label7.Size = new System.Drawing.Size(10, 18);
             this.label7.TabIndex = 13;
             this.label7.Text = ":";
             // 
@@ -147,10 +147,10 @@
             // 
             this.oldPasswordTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.oldPasswordTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.oldPasswordTextBox.Location = new System.Drawing.Point(288, 4);
+            this.oldPasswordTextBox.Location = new System.Drawing.Point(282, 4);
             this.oldPasswordTextBox.Name = "oldPasswordTextBox";
             this.oldPasswordTextBox.PasswordChar = '*';
-            this.oldPasswordTextBox.Size = new System.Drawing.Size(187, 27);
+            this.oldPasswordTextBox.Size = new System.Drawing.Size(197, 27);
             this.oldPasswordTextBox.TabIndex = 16;
             // 
             // label5
@@ -169,19 +169,19 @@
             // 
             this.newPassword2TextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.newPassword2TextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newPassword2TextBox.Location = new System.Drawing.Point(288, 91);
+            this.newPassword2TextBox.Location = new System.Drawing.Point(282, 91);
             this.newPassword2TextBox.Name = "newPassword2TextBox";
             this.newPassword2TextBox.PasswordChar = '*';
-            this.newPassword2TextBox.Size = new System.Drawing.Size(187, 27);
+            this.newPassword2TextBox.Size = new System.Drawing.Size(197, 27);
             this.newPassword2TextBox.TabIndex = 66;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.SteelBlue;
             this.panel1.Controls.Add(this.errorLabel);
-            this.panel1.Location = new System.Drawing.Point(2, 3);
+            this.panel1.Location = new System.Drawing.Point(3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(491, 29);
+            this.panel1.Size = new System.Drawing.Size(489, 29);
             this.panel1.TabIndex = 63;
             // 
             // errorLabel
@@ -202,7 +202,7 @@
             this.loginButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.loginButton.BackColor = System.Drawing.SystemColors.Control;
             this.loginButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loginButton.Location = new System.Drawing.Point(125, 187);
+            this.loginButton.Location = new System.Drawing.Point(127, 187);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(95, 37);
             this.loginButton.TabIndex = 64;
@@ -215,7 +215,7 @@
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.button1.BackColor = System.Drawing.SystemColors.Control;
             this.button1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(270, 187);
+            this.button1.Location = new System.Drawing.Point(272, 187);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(95, 37);
             this.button1.TabIndex = 65;

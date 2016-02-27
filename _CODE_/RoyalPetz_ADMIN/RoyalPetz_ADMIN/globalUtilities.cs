@@ -13,6 +13,8 @@ namespace RoyalPetz_ADMIN
     {
         public const string REGEX_NUMBER_WITH_2_DECIMAL = @"^[0-9]*\.?\d{0,2}$";
         public const string REGEX_NUMBER_ONLY = @"^[0-9]*$";
+        public int INS = 1;
+        public int UPD = 2;
 
         public string allTrim(string valueToTrim)
         {
@@ -94,6 +96,32 @@ namespace RoyalPetz_ADMIN
             TabOrderManager tom = new TabOrderManager(form);
             tom.SetTabOrder(scheme);
 
+        }
+
+        public void showError(string errormessage)
+        {
+            String errorcaption = "POS Error Message";
+            DialogResult res1 = MessageBox.Show(errormessage, errorcaption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        public void showSuccess(int options)
+        {
+            String successcaption = "POS Success Message";
+            String successmessage = "";
+            if (options == INS) //insert success
+            {
+                successmessage = "Saving data to table success!";
+            }
+            else
+            {
+                if (options == UPD)
+                {
+                    successmessage = "Update data to table success!";
+
+                }
+            }
+
+            DialogResult res1 = MessageBox.Show(successmessage, successcaption, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

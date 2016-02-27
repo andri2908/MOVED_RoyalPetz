@@ -15,6 +15,7 @@ namespace RoyalPetz_ADMIN
 {
     public partial class changePasswordForm : Form
     {
+        globalUtilities gutil = new globalUtilities();
         private Data_Access DS = new Data_Access();
         
         private int selectedUserID = 0;
@@ -128,22 +129,21 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
-                MessageBox.Show("SUCCESS");
-                this.Close();
+                //MessageBox.Show("SUCCESS");
+                gutil.showSuccess(gutil.UPD);
+                gutil.ResetAllControls(this);                
             }
         }
 
         private void changePasswordForm_Load(object sender, EventArgs e)
         {
             errorLabel.Text = "";
+            gutil.reArrangeTabOrder(this);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            oldPasswordTextBox.Text = "";
-            newPasswordTextBox.Text = "";
-            newPassword2TextBox.Text = "";
-
+            gutil.ResetAllControls(this);
         }
     }
 }
