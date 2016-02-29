@@ -38,6 +38,8 @@ namespace RoyalPetz_ADMIN
 
             if (moduleID == globalConstants.CEK_DATA_MUTASI)
                 newButton.Visible = false;
+            else if (moduleID == globalConstants.PERMINTAAN_BARANG)
+                importButton.Visible = false;
         }
         
         private void displaySpecificForm(int roID = 0)
@@ -232,6 +234,100 @@ namespace RoyalPetz_ADMIN
         private void branchToCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedBranchToID = Convert.ToInt32(branchToHiddenCombo.Items[branchToCombo.SelectedIndex]);
+        }
+
+        private bool noROExist(string roInvoiceValue)
+        {
+            bool result = false;
+
+            if (0 < Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM REQUEST_ORDER_HEADER WHERE RO_INVOICE = '" + roInvoiceValue + "'")))
+                result = true;
+
+            return result;
+        }
+
+        private bool loadImportedDataRO(string filePath)
+        {
+            bool result = false;
+            string sqlCommand = "";
+            string roInvoice = "";
+            DS.beginTransaction();
+
+            try
+            {
+                DS.mySqlConnect();
+
+                System.IO.StreamReader file = new System.IO.StreamReader(filePath);
+
+                roInvoice = file.ReadLine();
+
+                if (!noROExist(roInvoice))
+                {
+                    while ((sqlCommand = file.ReadLine()) != null)
+                    {
+                        DS.executeNonQueryCommand(sqlCommand);
+                    }
+
+                    file.Close();
+
+                    DS.commit();
+                }
+                else
+                    MessageBox.Show("NOMOR REQUEST ORDER SUDAH ADA");
+            }
+            catch (Exception e)
+            {
+                try
+                {
+                    //myTrans.Rollback();
+                }
+                catch (MySqlException ex)
+                {
+                    if (DS.getMyTransConnection() != null)
+                    {
+                        MessageBox.Show("An exception of type " + ex.GetType() +
+                                          " was encountered while attempting to roll back the transaction.");
+                    }
+                }
+
+                MessageBox.Show("An exception of type " + e.GetType() +
+                                  " was encountered while inserting the data.");
+                MessageBox.Show("Neither record was written to database.");
+            }
+            finally
+            {
+                DS.mySqlClose();
+                result = true;
+            }
+
+            return result;
+        }
+
+        private void importButton_Click(object sender, EventArgs e)
+        {
+            string importFileName = "";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    importFileName = openFileDialog1.FileName;
+                    if (loadImportedDataRO(importFileName))
+                    {
+                        if (showAllCheckBox.Checked)
+                        {
+                            loadROdata(true);
+                        }
+                        else
+                            loadROdata();                        
+                    }
+                    else
+                        MessageBox.Show("ERROR CAN'T LOAD FILE");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                }
+            }
         }
 
     }

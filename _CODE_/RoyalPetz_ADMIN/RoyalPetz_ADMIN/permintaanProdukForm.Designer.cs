@@ -257,7 +257,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 233F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 195F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 196F));
             this.tableLayoutPanel2.Controls.Add(this.ROinvoiceTextBox, 0, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(261, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -272,7 +272,7 @@
             this.ROinvoiceTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ROinvoiceTextBox.Location = new System.Drawing.Point(3, 4);
             this.ROinvoiceTextBox.Name = "ROinvoiceTextBox";
-            this.ROinvoiceTextBox.Size = new System.Drawing.Size(173, 27);
+            this.ROinvoiceTextBox.Size = new System.Drawing.Size(172, 27);
             this.ROinvoiceTextBox.TabIndex = 16;
             this.ROinvoiceTextBox.TextChanged += new System.EventHandler(this.ROinvoiceTextBox_TextChanged);
             // 
@@ -516,7 +516,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(901, 661);
             this.Controls.Add(this.productNameComboHidden);

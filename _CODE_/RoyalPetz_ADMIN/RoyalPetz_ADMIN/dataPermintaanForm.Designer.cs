@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataRequestOrderGridView = new System.Windows.Forms.DataGridView();
             this.displayButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -44,11 +44,13 @@
             this.branchFromHiddenCombo = new System.Windows.Forms.ComboBox();
             this.branchToHiddenCombo = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.showApprovedROCheckbox = new System.Windows.Forms.CheckBox();
             this.noROInvoiceTextBox = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.showExpiredCheckBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.showApprovedROCheckbox = new System.Windows.Forms.CheckBox();
+            this.importButton = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataRequestOrderGridView)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -59,14 +61,14 @@
             this.dataRequestOrderGridView.AllowUserToAddRows = false;
             this.dataRequestOrderGridView.AllowUserToDeleteRows = false;
             this.dataRequestOrderGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataRequestOrderGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataRequestOrderGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataRequestOrderGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataRequestOrderGridView.Location = new System.Drawing.Point(0, 211);
             this.dataRequestOrderGridView.Name = "dataRequestOrderGridView";
@@ -79,7 +81,7 @@
             // displayButton
             // 
             this.displayButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.displayButton.Location = new System.Drawing.Point(337, 168);
+            this.displayButton.Location = new System.Drawing.Point(351, 168);
             this.displayButton.Name = "displayButton";
             this.displayButton.Size = new System.Drawing.Size(95, 37);
             this.displayButton.TabIndex = 34;
@@ -176,7 +178,7 @@
             // newButton
             // 
             this.newButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newButton.Location = new System.Drawing.Point(470, 168);
+            this.newButton.Location = new System.Drawing.Point(459, 168);
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(227, 37);
             this.newButton.TabIndex = 46;
@@ -244,19 +246,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(899, 142);
             this.tableLayoutPanel1.TabIndex = 50;
             // 
-            // showApprovedROCheckbox
-            // 
-            this.showApprovedROCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.showApprovedROCheckbox.AutoSize = true;
-            this.showApprovedROCheckbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showApprovedROCheckbox.ForeColor = System.Drawing.Color.FloralWhite;
-            this.showApprovedROCheckbox.Location = new System.Drawing.Point(555, 77);
-            this.showApprovedROCheckbox.Name = "showApprovedROCheckbox";
-            this.showApprovedROCheckbox.Size = new System.Drawing.Size(198, 22);
-            this.showApprovedROCheckbox.TabIndex = 49;
-            this.showApprovedROCheckbox.Text = "Show Approved RO";
-            this.showApprovedROCheckbox.UseVisualStyleBackColor = true;
-            // 
             // noROInvoiceTextBox
             // 
             this.noROInvoiceTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -306,6 +295,34 @@
             this.label1.TabIndex = 35;
             this.label1.Text = "No Permintaan";
             // 
+            // showApprovedROCheckbox
+            // 
+            this.showApprovedROCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.showApprovedROCheckbox.AutoSize = true;
+            this.showApprovedROCheckbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showApprovedROCheckbox.ForeColor = System.Drawing.Color.FloralWhite;
+            this.showApprovedROCheckbox.Location = new System.Drawing.Point(555, 77);
+            this.showApprovedROCheckbox.Name = "showApprovedROCheckbox";
+            this.showApprovedROCheckbox.Size = new System.Drawing.Size(198, 22);
+            this.showApprovedROCheckbox.TabIndex = 49;
+            this.showApprovedROCheckbox.Text = "Show Approved RO";
+            this.showApprovedROCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // importButton
+            // 
+            this.importButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.importButton.Location = new System.Drawing.Point(459, 168);
+            this.importButton.Name = "importButton";
+            this.importButton.Size = new System.Drawing.Size(265, 37);
+            this.importButton.TabIndex = 51;
+            this.importButton.Text = "IMPORT REQUEST ORDER";
+            this.importButton.UseVisualStyleBackColor = true;
+            this.importButton.Click += new System.EventHandler(this.importButton_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // dataPermintaanForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -318,6 +335,7 @@
             this.Controls.Add(this.dataRequestOrderGridView);
             this.Controls.Add(this.displayButton);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.importButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "dataPermintaanForm";
@@ -356,5 +374,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.CheckBox showExpiredCheckBox;
         private System.Windows.Forms.CheckBox showApprovedROCheckbox;
+        private System.Windows.Forms.Button importButton;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

@@ -69,8 +69,8 @@
             this.toolStripMenuItem61 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem62 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem63 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem64 = new System.Windows.Forms.ToolStripMenuItem();
             this.pembelianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,7 +123,6 @@
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -514,12 +513,20 @@
             this.toolStripMenuItem8.BackColor = System.Drawing.Color.SteelBlue;
             this.toolStripMenuItem8.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem3,
-            this.toolStripMenuItem63,
-            this.toolStripMenuItem64});
+            this.toolStripMenuItem63});
             this.toolStripMenuItem8.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
             this.toolStripMenuItem8.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem8.Text = "Mutasi Barang";
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem3.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(247, 22);
+            this.toolStripMenuItem3.Text = "Mutasi Barang";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // toolStripMenuItem63
             // 
@@ -529,15 +536,6 @@
             this.toolStripMenuItem63.Size = new System.Drawing.Size(247, 22);
             this.toolStripMenuItem63.Text = "Cek Permintaan Barang";
             this.toolStripMenuItem63.Click += new System.EventHandler(this.toolStripMenuItem63_Click);
-            // 
-            // toolStripMenuItem64
-            // 
-            this.toolStripMenuItem64.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem64.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripMenuItem64.Name = "toolStripMenuItem64";
-            this.toolStripMenuItem64.Size = new System.Drawing.Size(247, 22);
-            this.toolStripMenuItem64.Text = "Import Data Mutasi";
-            this.toolStripMenuItem64.Click += new System.EventHandler(this.toolStripMenuItem64_Click);
             // 
             // pembelianToolStripMenuItem
             // 
@@ -999,7 +997,7 @@
             this.toolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(65, 66);
+            this.toolStripButton2.Size = new System.Drawing.Size(66, 66);
             this.toolStripButton2.Text = "PIUTANG";
             this.toolStripButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
@@ -1011,7 +1009,7 @@
             this.toolStripButton5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(61, 66);
+            this.toolStripButton5.Size = new System.Drawing.Size(62, 66);
             this.toolStripButton5.Text = "HUTANG";
             this.toolStripButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
@@ -1040,7 +1038,7 @@
             this.toolStripButton7.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(68, 66);
+            this.toolStripButton7.Size = new System.Drawing.Size(70, 66);
             this.toolStripButton7.Text = "RET. BELI";
             this.toolStripButton7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
@@ -1052,7 +1050,7 @@
             this.toolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(69, 66);
+            this.toolStripButton6.Size = new System.Drawing.Size(71, 66);
             this.toolStripButton6.Text = "RET. JUAL";
             this.toolStripButton6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
@@ -1061,15 +1059,6 @@
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 69);
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem3.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(247, 22);
-            this.toolStripMenuItem3.Text = "Mutasi Barang";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // adminForm
             // 
@@ -1151,7 +1140,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem61;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem62;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem63;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem64;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem65;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem66;

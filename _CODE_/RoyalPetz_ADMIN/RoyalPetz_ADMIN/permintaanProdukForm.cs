@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Globalization;
+using System.IO;
 
 namespace RoyalPetz_ADMIN
 {
@@ -96,6 +97,7 @@ namespace RoyalPetz_ADMIN
                         
                         durationTextBox.Text = Convert.ToInt32((rdr.GetDateTime("RO_EXPIRED") - rdr.GetDateTime("RO_DATETIME")).TotalDays).ToString();
                         totalLabel.Text = "Rp. " + rdr.GetString("RO_TOTAL");
+                        globalTotalValue = rdr.GetDouble("RO_TOTAL");
                     }
 
                     rdr.Close();
@@ -254,10 +256,126 @@ namespace RoyalPetz_ADMIN
             calculateTotal();
         }
         
+        private bool exportDataRO()
+        {
+            bool result = false;
+
+            string exportedFileName = "";
+            string sqlCommand = "";
+
+            string roInvoice = "";
+            int branchIDFrom = 0;
+            int branchIDTo = 0;
+            string roDateTime = "";
+            double roTotal = 0;
+            string roDateExpired = "";
+            DateTime selectedRODate;
+            DateTime expiredRODate;
+            //string driveLetter = @"C:\";
+            string driveLetter = "";
+
+            string selectedDate = RODateTimePicker.Value.ToShortDateString();
+            selectedRODate = RODateTimePicker.Value;
+            expiredRODate = selectedRODate.AddDays(Convert.ToDouble(durationTextBox.Text));
+
+            roInvoice = ROinvoiceTextBox.Text;
+            branchIDFrom = selectedBranchFromID;
+            branchIDTo = selectedBranchToID;
+
+            roDateTime = String.Format(culture, "{0:dd-MM-yyyy}", Convert.ToDateTime(selectedDate));
+            roDateExpired = String.Format(culture, "{0:dd-MM-yyyy}", expiredRODate);
+            roTotal = globalTotalValue;
+
+            //saveFileDialog1.FileName = "dataRequestOrder" + roInvoice + ".exp";
+            //saveFileDialog1.DefaultExt = "*.exp";
+            //saveFileDialog1.ShowDialog();
+
+            //saveFileDialog1.
+            //exportedFileName = saveFileDialog1.FileName;
+            exportedFileName = driveLetter + "RO_" + roInvoice + "_" + String.Format(culture, "{0:ddMMyyyy}", Convert.ToDateTime(selectedDate)) + ".exp";
+
+            DS.beginTransaction();
+
+            try
+            {
+                DS.mySqlConnect();
+
+                //WRITE RO INVOICE
+                using (StreamWriter outputFile = new StreamWriter(exportedFileName))
+                {
+                    outputFile.WriteLine(roInvoice);
+                }
+
+                // WRITE HEADER TABLE SQL
+                sqlCommand = "INSERT INTO REQUEST_ORDER_HEADER (RO_INVOICE, RO_BRANCH_ID_FROM, RO_BRANCH_ID_TO, RO_DATETIME, RO_TOTAL, RO_EXPIRED, RO_ACTIVE) VALUES " +
+                                    "('" + roInvoice + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + roDateTime + "', '%d-%m-%Y'), " + roTotal + ", STR_TO_DATE('" + roDateExpired + "', '%d-%m-%Y'), 1)";
+
+                using (StreamWriter outputFile = new StreamWriter(exportedFileName, true))
+                {
+                    outputFile.WriteLine(sqlCommand);
+                }
+
+                // WRITE DETAIL TABLE SQL
+                for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count; i++)
+                {
+                    if (null != detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value)
+                    {
+                        sqlCommand = "INSERT INTO REQUEST_ORDER_DETAIL (RO_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, RO_QTY, RO_SUBTOTAL) VALUES " +
+                                            "('" + roInvoice + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["qty"].Value) + ", " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value) + ")";
+
+                        using (StreamWriter outputFile = new StreamWriter(exportedFileName, true))
+                        {
+                            outputFile.WriteLine(sqlCommand);
+                        }
+
+                    }
+                }
+
+                sqlCommand = "UPDATE REQUEST_ORDER_HEADER SET RO_EXPORTED = 1 WHERE RO_INVOICE = '" + roInvoice + "'";
+                DS.executeNonQueryCommand(sqlCommand);
+
+                result = true;
+
+                DS.commit();
+            }
+            catch (Exception e)
+            {
+                try
+                {
+                    if (System.IO.File.Exists(exportedFileName))
+                        System.IO.File.Delete(exportedFileName);
+
+                    //myTrans.Rollback();
+                }
+                catch (MySqlException ex)
+                {
+                    if (DS.getMyTransConnection() != null)
+                    {
+                        MessageBox.Show("An exception of type " + ex.GetType() +
+                                          " was encountered while attempting to roll back the transaction.");
+                    }
+                }
+
+                MessageBox.Show("An exception of type " + e.GetType() +
+                                  " was encountered while inserting the data.");
+                MessageBox.Show("Neither record was written to database.");
+            }
+            finally
+            {
+                DS.mySqlClose();
+                result = true;
+            }
+
+            return result;
+        }
+
         private void exportButton_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.ShowDialog();
-            MessageBox.Show(saveFileDialog1.FileName);
+            if (saveData())
+            {
+                exportDataRO();
+                MessageBox.Show("SUCCESS");
+            }
         }
 
         private double getHPPValue(string productID)
@@ -350,6 +468,25 @@ namespace RoyalPetz_ADMIN
                 branchToCombo.Text = getBranchName(selectedBranchToID);
 
                 loadDataDetailRO();
+
+                if (isExportedRO())
+                {
+                    ROinvoiceTextBox.ReadOnly = true;
+                    RODateTimePicker.Enabled = false;
+                    branchFromCombo.Enabled = false;
+                    branchToCombo.Enabled = false;
+                    durationTextBox.ReadOnly = true;
+                    detailRequestOrderDataGridView.ReadOnly = true;
+                    detailRequestOrderDataGridView.AllowUserToAddRows = false;
+
+                    //saveButton.Enabled = false;
+                    //generateButton.Enabled = false;
+                    //exportButton.Enabled = false;
+
+                    saveButton.Visible = false;
+                    generateButton.Visible = false;
+                    exportButton.Visible = false;
+                }
                 
                 isLoading = false;
             }
@@ -552,7 +689,6 @@ namespace RoyalPetz_ADMIN
                         }
                         break;
                 }
-
                 
                 DS.commit();
             }
@@ -598,7 +734,7 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
-                MessageBox.Show("SUCCESS");
+                MessageBox.Show("SUCCESS");               
             }
         }
 
@@ -628,6 +764,18 @@ namespace RoyalPetz_ADMIN
                     calculateTotal();
                 }
             }
+        }
+
+        private bool isExportedRO()
+        {
+            bool result = false;
+
+            if (0!=Convert.ToInt32(DS.getDataSingleValue("SELECT RO_EXPORTED FROM REQUEST_ORDER_HEADER WHERE RO_INVOICE = '"+ROinvoiceTextBox.Text+"'")))
+            {
+                result = true;
+            }
+
+            return result;
         }
     }
 }
