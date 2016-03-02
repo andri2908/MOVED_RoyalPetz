@@ -16,12 +16,12 @@ namespace RoyalPetz_ADMIN
     public partial class loginForm : Form
     {
         private Data_Access DS = new Data_Access();
-        private globalUtilities stringOP = new globalUtilities();
+        private globalUtilities gutil = new globalUtilities();
 
         private int selectedUserID;
         private int originModuleID = 0;
 
-        private globalUtilities gUtil = new globalUtilities();
+        //private globalUtilities gUtil = new globalUtilities();
 
         public loginForm()
         {
@@ -51,8 +51,8 @@ namespace RoyalPetz_ADMIN
             
             string sqlCommand;
 
-            userName = stringOP.allTrim(userNameTextBox.Text);
-            password = stringOP.allTrim(passwordTextBox.Text);
+            userName = gutil.allTrim(userNameTextBox.Text);
+            password = gutil.allTrim(passwordTextBox.Text);
 
             sqlCommand = "SELECT ID FROM MASTER_USER WHERE USER_NAME = '"+userName+"' AND USER_PASSWORD = '" + password + "'";
             result = DS.getDataSingleValue(sqlCommand);
@@ -74,7 +74,7 @@ namespace RoyalPetz_ADMIN
 
             string sqlCommand;
 
-            userName = stringOP.allTrim(userNameTextBox.Text);
+            userName = gutil.allTrim(userNameTextBox.Text);
 
             sqlCommand = "SELECT ID FROM MASTER_USER WHERE USER_NAME = '" + userName + "' AND USER_ACTIVE = '1'";
             result = DS.getDataSingleValue(sqlCommand);
@@ -95,7 +95,7 @@ namespace RoyalPetz_ADMIN
 
             string sqlCommand;
 
-            userName = stringOP.allTrim(userNameTextBox.Text);
+            userName = gutil.allTrim(userNameTextBox.Text);
 
             sqlCommand = "SELECT ID FROM MASTER_USER WHERE USER_NAME = '" + userName + "'";
             result = DS.getDataSingleValue(sqlCommand);
@@ -165,25 +165,15 @@ namespace RoyalPetz_ADMIN
 
         private void loginForm_Load(object sender, EventArgs e)
         {
-            errorLabel.Text = "";
+            gutil.reArrangeTabOrder(this);
 
-            if (!DS.mySqlConnect())
+            if (!DS.mySqlConnect()) //one time checked at load application
             {
-                MessageBox.Show("CAN'T CONNECT");
+                gutil.showError("DB fail to connect!");
                 this.Close();
             }
-
-            gUtil.reArrangeTabOrder(this);
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            userNameTextBox.Clear();
-            passwordTextBox.Clear();
-            //shiftCombobox.Text = "SHIFT 1";
-            errorLabel.Text = "";
-        }
-
+        
         private void userNameTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             errorLabel.Text = "";
@@ -204,8 +194,19 @@ namespace RoyalPetz_ADMIN
         {
             if (Convert.ToInt32(e.KeyChar) == 13)
             {
-                loginButton.Focus();
+                loginButton.PerformClick();
             }
+
+        }
+
+        private void resetbutton_Click(object sender, EventArgs e)
+        {
+            gutil.ResetAllControls(this);
+        }
+
+        private void loginForm_Activated(object sender, EventArgs e)
+        {
+            errorLabel.Text = "";
 
         }
     }

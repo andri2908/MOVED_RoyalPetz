@@ -576,99 +576,7 @@ namespace RoyalPetz_ADMIN
         }
 
         private void dataMutasiBarangDetailForm_Load(object sender, EventArgs e)
-        {
-            errorLabel.Text = "";
-
-            isLoading = true;
-
-            addColumnToDetailDataGrid();
-
-            if (!directMutasiBarang)
-            { 
-                if (originModuleID == globalConstants.VIEW_PRODUCT_MUTATION)
-                    loadDataHeaderPM();
-                else
-                    loadDataHeaderRO();
-
-                if (originModuleID != globalConstants.VIEW_PRODUCT_MUTATION && isNewRORequest())
-                {
-                    subModuleID = globalConstants.NEW_PRODUCT_MUTATION;
-
-                    approveButton.Visible = true;
-                    rejectButton.Visible = true;
-                    reprintButton.Visible = false;
-
-                    noMutasiTextBox.Focus();
-                }
-                else
-                {
-                    detailRequestOrderDataGridView.Columns["qtyRequest"].Visible = false;
-
-                    noMutasiTextBox.ReadOnly = true;
-                    PMDateTimePicker.Enabled = false;
-
-                    if (originModuleID != globalConstants.VIEW_PRODUCT_MUTATION)
-                    {
-                        noMutasiTextBox.Text = getNoMutasi();
-                        PMDateTimePicker.Value = getPMDateTimeValue();
-                    }
-
-                    detailRequestOrderDataGridView.ReadOnly = true;
-
-                    approveButton.Visible = false;
-                    rejectButton.Visible = false;
-                    reprintButton.Visible = true;
-
-                    totalApproved.Visible = false;
-                    totalApprovedLabel.Visible = false;
-                    label13.Visible = false;
-                }
-
-                branchFromCombo.Text = getBranchName(selectedBranchFromID);
-                branchToCombo.Text = getBranchName(selectedBranchToID);
-                branchFromCombo.Enabled = false;
-                branchToCombo.Enabled = false;
-
-                loadDataDetail();
-            }
-            else
-            {
-                subModuleID = globalConstants.NEW_PRODUCT_MUTATION;
-
-                branchFromCombo.Enabled = true;
-                branchToCombo.Enabled = true;
-
-                fillInBranchCombo(branchFromCombo, branchFromComboHidden);
-                fillInBranchCombo(branchToCombo, branchToComboHidden);
-
-
-                detailRequestOrderDataGridView.AllowUserToAddRows = true;
-            
-            }
-
-            if (!roInvoiceAvailable())
-            {
-                label1.Visible = false;
-                label14.Visible = false;
-                ROInvoiceTextBox.Visible = false;
-
-                label9.Visible = false;
-                label6.Visible = false;
-                RODateTimePicker.Visible = false;
-
-                label7.Visible = false;
-                label5.Visible = false;
-                ROExpiredDateTimePicker.Visible = false;
-
-                totalApproved.Visible = false;
-                totalApprovedLabel.Visible = false;
-                label13.Visible = false;
-            }
-
-            isLoading = false;
-
-            detailRequestOrderDataGridView.EditingControlShowing += detailRequestOrderDataGridView_EditingControlShowing;
-
+        {            
             gUtil.reArrangeTabOrder(this);
         }
 
@@ -850,6 +758,101 @@ namespace RoyalPetz_ADMIN
                 rejectButton.Visible = false;
                 reprintButton.Visible = false;
             }
+        }
+
+        private void dataMutasiBarangDetailForm_Activated(object sender, EventArgs e)
+        {
+            errorLabel.Text = "";
+
+            isLoading = true;
+
+            addColumnToDetailDataGrid();
+
+            if (!directMutasiBarang)
+            {
+                if (originModuleID == globalConstants.VIEW_PRODUCT_MUTATION)
+                    loadDataHeaderPM();
+                else
+                    loadDataHeaderRO();
+
+                if (originModuleID != globalConstants.VIEW_PRODUCT_MUTATION && isNewRORequest())
+                {
+                    subModuleID = globalConstants.NEW_PRODUCT_MUTATION;
+
+                    approveButton.Visible = true;
+                    rejectButton.Visible = true;
+                    reprintButton.Visible = false;
+
+                    noMutasiTextBox.Focus();
+                }
+                else
+                {
+                    detailRequestOrderDataGridView.Columns["qtyRequest"].Visible = false;
+
+                    noMutasiTextBox.ReadOnly = true;
+                    PMDateTimePicker.Enabled = false;
+
+                    if (originModuleID != globalConstants.VIEW_PRODUCT_MUTATION)
+                    {
+                        noMutasiTextBox.Text = getNoMutasi();
+                        PMDateTimePicker.Value = getPMDateTimeValue();
+                    }
+
+                    detailRequestOrderDataGridView.ReadOnly = true;
+
+                    approveButton.Visible = false;
+                    rejectButton.Visible = false;
+                    reprintButton.Visible = true;
+
+                    totalApproved.Visible = false;
+                    totalApprovedLabel.Visible = false;
+                    label13.Visible = false;
+                }
+
+                branchFromCombo.Text = getBranchName(selectedBranchFromID);
+                branchToCombo.Text = getBranchName(selectedBranchToID);
+                branchFromCombo.Enabled = false;
+                branchToCombo.Enabled = false;
+
+                loadDataDetail();
+            }
+            else
+            {
+                subModuleID = globalConstants.NEW_PRODUCT_MUTATION;
+
+                branchFromCombo.Enabled = true;
+                branchToCombo.Enabled = true;
+
+                fillInBranchCombo(branchFromCombo, branchFromComboHidden);
+                fillInBranchCombo(branchToCombo, branchToComboHidden);
+
+
+                detailRequestOrderDataGridView.AllowUserToAddRows = true;
+
+            }
+
+            if (!roInvoiceAvailable())
+            {
+                label1.Visible = false;
+                label14.Visible = false;
+                ROInvoiceTextBox.Visible = false;
+
+                label9.Visible = false;
+                label6.Visible = false;
+                RODateTimePicker.Visible = false;
+
+                label7.Visible = false;
+                label5.Visible = false;
+                ROExpiredDateTimePicker.Visible = false;
+
+                totalApproved.Visible = false;
+                totalApprovedLabel.Visible = false;
+                label13.Visible = false;
+            }
+
+            isLoading = false;
+
+            detailRequestOrderDataGridView.EditingControlShowing += detailRequestOrderDataGridView_EditingControlShowing;
         }
     }
 }

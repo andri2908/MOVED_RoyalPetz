@@ -133,6 +133,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NAMA SALES";
+            this.Load += new System.EventHandler(this.dataSalesForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataSalesDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

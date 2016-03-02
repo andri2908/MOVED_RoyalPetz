@@ -16,7 +16,7 @@ namespace RoyalPetz_ADMIN
     public partial class groupAccessModuleForm : Form
     {
         private Data_Access DS = new Data_Access();
-
+        private globalUtilities gutil = new globalUtilities();
         private int selectedGroupID = 0;
 
         private void fillInDummyData()
@@ -153,9 +153,11 @@ namespace RoyalPetz_ADMIN
 
         private void groupAccessModuleForm_Load(object sender, EventArgs e)
         {
-            loadGroupUserInformation();
-            loadUserAccessInformation();
-           //fillInDummyData();
+            //loadGroupUserInformation();
+            //loadUserAccessInformation();
+            //fillInDummyData();
+
+            gutil.reArrangeTabOrder(this);
         }
 
         private bool saveData()
@@ -257,8 +259,17 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
-                MessageBox.Show("SUCCESS");
+                //MessageBox.Show("SUCCESS");
+                gutil.showSuccess(gutil.UPD);
+                gutil.ResetAllControls(this);
             }
+        }
+
+        private void groupAccessModuleForm_Activated(object sender, EventArgs e)
+        {
+            //if need something
+            loadGroupUserInformation();
+            loadUserAccessInformation();
         }
     }
 }

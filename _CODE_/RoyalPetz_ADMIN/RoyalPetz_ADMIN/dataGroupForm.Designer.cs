@@ -42,7 +42,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label1.Location = new System.Drawing.Point(3, 15);
+            this.label1.Location = new System.Drawing.Point(8, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 18);
             this.label1.TabIndex = 30;
@@ -51,7 +51,7 @@
             // namaGroupTextbox
             // 
             this.namaGroupTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaGroupTextbox.Location = new System.Drawing.Point(79, 11);
+            this.namaGroupTextbox.Location = new System.Drawing.Point(79, 13);
             this.namaGroupTextbox.Name = "namaGroupTextbox";
             this.namaGroupTextbox.Size = new System.Drawing.Size(260, 27);
             this.namaGroupTextbox.TabIndex = 31;
@@ -71,17 +71,17 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataUserGroupGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataUserGroupGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataUserGroupGridView.Location = new System.Drawing.Point(0, 67);
+            this.dataUserGroupGridView.Location = new System.Drawing.Point(0, 74);
             this.dataUserGroupGridView.Name = "dataUserGroupGridView";
             this.dataUserGroupGridView.RowHeadersVisible = false;
-            this.dataUserGroupGridView.Size = new System.Drawing.Size(603, 482);
+            this.dataUserGroupGridView.Size = new System.Drawing.Size(603, 475);
             this.dataUserGroupGridView.TabIndex = 28;
             this.dataUserGroupGridView.DoubleClick += new System.EventHandler(this.dataSalesDataGridView_DoubleClick);
             // 
             // newButton
             // 
             this.newButton.Font = new System.Drawing.Font("Verdana", 11F, System.Drawing.FontStyle.Bold);
-            this.newButton.Location = new System.Drawing.Point(345, 11);
+            this.newButton.Location = new System.Drawing.Point(345, 13);
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(56, 27);
             this.newButton.TabIndex = 32;
@@ -93,7 +93,7 @@
             // 
             this.groupnonactiveoption.AutoSize = true;
             this.groupnonactiveoption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupnonactiveoption.Location = new System.Drawing.Point(79, 44);
+            this.groupnonactiveoption.Location = new System.Drawing.Point(79, 46);
             this.groupnonactiveoption.Name = "groupnonactiveoption";
             this.groupnonactiveoption.Size = new System.Drawing.Size(172, 19);
             this.groupnonactiveoption.TabIndex = 33;
@@ -119,6 +119,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NAMA GROUP";
             this.Activated += new System.EventHandler(this.dataGroupForm_Activated);
+            this.Load += new System.EventHandler(this.dataGroupForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataUserGroupGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

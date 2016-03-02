@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.convertValueTextBox = new System.Windows.Forms.TextBox();
             this.unit2Combo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,7 +41,6 @@
             this.dataConvertGridView = new System.Windows.Forms.DataGridView();
             this.unit1ComboHidden = new System.Windows.Forms.ComboBox();
             this.unit2ComboHidden = new System.Windows.Forms.ComboBox();
-            this.convertValueTextBox = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataConvertGridView)).BeginInit();
@@ -53,7 +53,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 89.55823F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 192F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 222F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 223F));
             this.tableLayoutPanel1.Controls.Add(this.convertValueTextBox, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.unit2Combo, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 2, 0);
@@ -67,12 +67,24 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(701, 50);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
+            // convertValueTextBox
+            // 
+            this.convertValueTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.convertValueTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.convertValueTextBox.Location = new System.Drawing.Point(291, 11);
+            this.convertValueTextBox.MaxLength = 13;
+            this.convertValueTextBox.Name = "convertValueTextBox";
+            this.convertValueTextBox.Size = new System.Drawing.Size(180, 27);
+            this.convertValueTextBox.TabIndex = 43;
+            this.convertValueTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.convertValueTextBox.TextChanged += new System.EventHandler(this.convertValueTextBox_TextChanged);
+            // 
             // unit2Combo
             // 
             this.unit2Combo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.unit2Combo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unit2Combo.FormattingEnabled = true;
-            this.unit2Combo.Location = new System.Drawing.Point(481, 12);
+            this.unit2Combo.Location = new System.Drawing.Point(480, 12);
             this.unit2Combo.Name = "unit2Combo";
             this.unit2Combo.Size = new System.Drawing.Size(204, 26);
             this.unit2Combo.TabIndex = 35;
@@ -84,7 +96,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(261, 16);
+            this.label1.Location = new System.Drawing.Point(260, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(21, 18);
             this.label1.TabIndex = 10;
@@ -152,14 +164,14 @@
             this.dataConvertGridView.AllowUserToAddRows = false;
             this.dataConvertGridView.AllowUserToDeleteRows = false;
             this.dataConvertGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataConvertGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataConvertGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataConvertGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataConvertGridView.Location = new System.Drawing.Point(1, 94);
             this.dataConvertGridView.Name = "dataConvertGridView";
@@ -191,18 +203,6 @@
             this.unit2ComboHidden.TabIndex = 36;
             this.unit2ComboHidden.Visible = false;
             // 
-            // convertValueTextBox
-            // 
-            this.convertValueTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.convertValueTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.convertValueTextBox.Location = new System.Drawing.Point(292, 11);
-            this.convertValueTextBox.MaxLength = 13;
-            this.convertValueTextBox.Name = "convertValueTextBox";
-            this.convertValueTextBox.Size = new System.Drawing.Size(180, 27);
-            this.convertValueTextBox.TabIndex = 43;
-            this.convertValueTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.convertValueTextBox.TextChanged += new System.EventHandler(this.convertValueTextBox_TextChanged);
-            // 
             // konversiSatuanForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -221,6 +221,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "KONVERSI SATUAN";
+            this.Activated += new System.EventHandler(this.konversiSatuanForm_Activated);
             this.Load += new System.EventHandler(this.konversiSatuanForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

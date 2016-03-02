@@ -19,7 +19,7 @@ namespace RoyalPetz_ADMIN
         private int selectedCategoryID = 0;
 
         private dataProdukDetailForm parentForm;
-
+        private globalUtilities gutil = new globalUtilities();
         Data_Access DS = new Data_Access();
 
         public dataKategoriProdukForm()
@@ -56,7 +56,13 @@ namespace RoyalPetz_ADMIN
 
             DS.mySqlConnect();
 
-            sqlCommand = "SELECT CATEGORY_ID, CATEGORY_NAME AS 'NAMA KATEGORI', CATEGORY_DESCRIPTION AS 'DESKRIPSI KATEGORI' FROM MASTER_CATEGORY WHERE CATEGORY_ACTIVE = 1 AND CATEGORY_NAME LIKE '%" + categoryNameTextBox.Text + "%'";
+            if (tagnonactiveoption.Checked == true)
+            {
+                sqlCommand = "SELECT CATEGORY_ID, CATEGORY_NAME AS 'NAMA KATEGORI', CATEGORY_DESCRIPTION AS 'DESKRIPSI KATEGORI' FROM MASTER_CATEGORY WHERE CATEGORY_NAME LIKE '%" + categoryNameTextBox.Text + "%'";
+            }
+            else {
+                sqlCommand = "SELECT CATEGORY_ID, CATEGORY_NAME AS 'NAMA KATEGORI', CATEGORY_DESCRIPTION AS 'DESKRIPSI KATEGORI' FROM MASTER_CATEGORY WHERE CATEGORY_ACTIVE = 1 AND CATEGORY_NAME LIKE '%" + categoryNameTextBox.Text + "%'";
+            }
 
             using (rdr = DS.getData(sqlCommand))
             {
@@ -113,17 +119,32 @@ namespace RoyalPetz_ADMIN
 
         private void categoryNameTextBox_TextChanged(object sender, EventArgs e)
         {
-            loadKategoriData();
+            if (!categoryNameTextBox.Text.Equals(""))
+            {
+                loadKategoriData();
+            }
         }
 
         private void dataKategoriProdukForm_Activated(object sender, EventArgs e)
         {
-            loadKategoriData();
+            if (!categoryNameTextBox.Text.Equals(""))
+            {
+                loadKategoriData();
+            }
         }
 
         private void dataKategoriProdukForm_Load(object sender, EventArgs e)
         {
+            gutil.reArrangeTabOrder(this);
+        }
 
+        private void groupnonactiveoption_CheckedChanged(object sender, EventArgs e)
+        {
+            kategoriProdukDataGridView.DataSource = null;
+            if (!categoryNameTextBox.Text.Equals(""))
+            {
+                loadKategoriData();
+            }
         }
     }
 }

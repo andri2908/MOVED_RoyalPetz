@@ -33,7 +33,7 @@ namespace RoyalPetz_ADMIN
         private string hargaPartaiText = "";
         private string hargaGrosirValueText = "";
         private string selectedPhoto = "";
-
+        private int options = 0;
         private stokPecahBarangForm parentForm;
         
         public dataProdukDetailForm()
@@ -551,8 +551,8 @@ namespace RoyalPetz_ADMIN
             int internalProductID;
             if (saveData())
             {
-                MessageBox.Show("SUCCESS");
-
+                //MessageBox.Show("SUCCESS");
+                gUtil.showSuccess(options);
                 if (originModuleID == globalConstants.STOK_PECAH_BARANG)
                 {
                     internalProductID = getInternalProductID(productID);
@@ -560,6 +560,7 @@ namespace RoyalPetz_ADMIN
 
                     this.Close();
                 }
+                gUtil.ResetAllControls(this);
             }
         }
 
@@ -603,17 +604,7 @@ namespace RoyalPetz_ADMIN
 
         private void dataProdukDetailForm_Load(object sender, EventArgs e)
         {
-            errorLabel.Text = "";
-
-            loadProdukData();
-            
-            loadUnitIDInformation();
-            
-            loadProductCategoryData();
-
-            loadKategoriIDInformation();
-
-            gUtil.reArrangeTabOrder(this);
+            gUtil.reArrangeTabOrder(this);            
         }
 
         private void barcodeTextBox_Validated(object sender, EventArgs e)
@@ -624,5 +615,32 @@ namespace RoyalPetz_ADMIN
                 errorLabel.Text = "";
         }
 
+        private void resetbutton_Click(object sender, EventArgs e)
+        {
+            gUtil.ResetAllControls(this);
+        }
+
+        private void dataProdukDetailForm_Activated(object sender, EventArgs e)
+        {
+            errorLabel.Text = "";
+
+            loadProdukData();
+
+            loadUnitIDInformation();
+
+            loadProductCategoryData();
+
+            loadKategoriIDInformation();
+
+            switch (originModuleID)
+            {
+                case globalConstants.NEW_PRODUK:
+                    options = gUtil.INS;
+                    break;
+                case globalConstants.EDIT_PRODUK:
+                    options = gUtil.UPD;
+                    break;
+            }
+        }
     }
 }

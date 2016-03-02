@@ -24,7 +24,8 @@ namespace RoyalPetz_ADMIN
 
         private Data_Access DS = new Data_Access();
         private globalUtilities gUtil = new globalUtilities();
-
+        private int options = 0;
+        
         public dataSupplierDetailForm()
         {
             InitializeComponent();
@@ -76,11 +77,8 @@ namespace RoyalPetz_ADMIN
         }
 
         private void dataSupplierDetailForm_Load(object sender, EventArgs e)
-        {
-            if (selectedSupplierID != 0)
-                loadSupplierData();
-
-            errorLabel.Text = "";
+        {            
+            gUtil.reArrangeTabOrder(this);
         }
 
         private bool dataValidated()
@@ -207,7 +205,9 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
-                MessageBox.Show("SUCCESS");
+                //MessageBox.Show("SUCCESS");
+                gUtil.showSuccess(options);
+                gUtil.ResetAllControls(this);
             }
         }
 
@@ -230,11 +230,6 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        private void supplierFaxTextBox_TextAlignChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void supplierFaxTextBox_TextChanged(object sender, EventArgs e)
         {
             //string regExValue = "";
@@ -254,5 +249,28 @@ namespace RoyalPetz_ADMIN
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            gUtil.ResetAllControls(this);
+        }
+
+        private void dataSupplierDetailForm_Activated(object sender, EventArgs e)
+        {
+            /*if (selectedSupplierID != 0)  //old code
+                loadSupplierData(); */
+            errorLabel.Text = "";
+            switch (originModuleID)
+            {
+                case globalConstants.NEW_SUPPLIER:
+                    options = gUtil.INS;
+                    nonAktifCheckbox.Enabled = false;
+                    break;
+                case globalConstants.EDIT_SUPPLIER:
+                    options = gUtil.UPD;
+                    nonAktifCheckbox.Enabled = true;
+                    loadSupplierData();
+                    break;
+            }
+        }
     }
 }

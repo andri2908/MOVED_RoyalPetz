@@ -12,9 +12,16 @@ namespace RoyalPetz_ADMIN
 {
     public partial class dataReturPermintaanForm : Form
     {
+        private globalUtilities GUTIL = new globalUtilities();
+
         public dataReturPermintaanForm()
         {
             InitializeComponent();
+        }
+
+        private void dataReturPermintaanForm_Load(object sender, EventArgs e)
+        {
+            GUTIL.reArrangeTabOrder(this);
         }
     }
 }

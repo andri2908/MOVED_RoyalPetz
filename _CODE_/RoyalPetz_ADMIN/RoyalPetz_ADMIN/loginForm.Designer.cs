@@ -38,7 +38,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.errorLabel = new System.Windows.Forms.Label();
             this.loginButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.resetbutton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -50,7 +50,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 202F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 203F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label4, 1, 0);
@@ -96,7 +96,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(139, 7);
+            this.label4.Location = new System.Drawing.Point(138, 7);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(12, 18);
             this.label4.TabIndex = 10;
@@ -108,7 +108,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(139, 44);
+            this.label6.Location = new System.Drawing.Point(138, 44);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(12, 18);
             this.label6.TabIndex = 1;
@@ -118,7 +118,7 @@
             // 
             this.userNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.userNameTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userNameTextBox.Location = new System.Drawing.Point(157, 3);
+            this.userNameTextBox.Location = new System.Drawing.Point(156, 3);
             this.userNameTextBox.Name = "userNameTextBox";
             this.userNameTextBox.Size = new System.Drawing.Size(187, 27);
             this.userNameTextBox.TabIndex = 4;
@@ -128,7 +128,7 @@
             // 
             this.passwordTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.passwordTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordTextBox.Location = new System.Drawing.Point(157, 40);
+            this.passwordTextBox.Location = new System.Drawing.Point(156, 40);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(187, 27);
@@ -169,17 +169,17 @@
             this.loginButton.UseVisualStyleBackColor = true;
             this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
-            // button1
+            // resetbutton
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.button1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(189, 127);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(95, 37);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "RESET";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.resetbutton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.resetbutton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resetbutton.Location = new System.Drawing.Point(189, 127);
+            this.resetbutton.Name = "resetbutton";
+            this.resetbutton.Size = new System.Drawing.Size(95, 37);
+            this.resetbutton.TabIndex = 3;
+            this.resetbutton.Text = "RESET";
+            this.resetbutton.UseVisualStyleBackColor = true;
+            this.resetbutton.Click += new System.EventHandler(this.resetbutton_Click);
             // 
             // loginForm
             // 
@@ -189,7 +189,7 @@
             this.ClientSize = new System.Drawing.Size(362, 176);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.loginButton);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.resetbutton);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -197,6 +197,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LOGIN";
+            this.Activated += new System.EventHandler(this.loginForm_Activated);
             this.Load += new System.EventHandler(this.loginForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -218,6 +219,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button loginButton;
         private System.Windows.Forms.Label errorLabel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button resetbutton;
     }
 }

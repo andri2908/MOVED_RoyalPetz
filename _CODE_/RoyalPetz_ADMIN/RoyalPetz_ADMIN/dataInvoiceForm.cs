@@ -13,6 +13,7 @@ namespace RoyalPetz_ADMIN
     public partial class dataInvoiceForm : Form
     {
         private int originModuleID = 0;
+        private globalUtilities gutil = new globalUtilities();
 
         public dataInvoiceForm()
         {
@@ -43,6 +44,16 @@ namespace RoyalPetz_ADMIN
 
 
 
+        }
+
+        private void displayButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataInvoiceForm_Load(object sender, EventArgs e)
+        {
+            gutil.reArrangeTabOrder(this);
         }
     }
 }

@@ -54,7 +54,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.89189F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.108109F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 204F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 205F));
             this.tableLayoutPanel1.Controls.Add(this.label8, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.textBox1, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
@@ -83,7 +83,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label8.Location = new System.Drawing.Point(229, 132);
+            this.label8.Location = new System.Drawing.Point(228, 132);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(13, 18);
             this.label8.TabIndex = 67;
@@ -93,7 +93,7 @@
             // 
             this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(248, 80);
+            this.textBox1.Location = new System.Drawing.Point(247, 80);
             this.textBox1.Name = "textBox1";
             this.textBox1.PasswordChar = '*';
             this.textBox1.Size = new System.Drawing.Size(187, 27);
@@ -141,7 +141,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(229, 7);
+            this.label4.Location = new System.Drawing.Point(228, 7);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(13, 18);
             this.label4.TabIndex = 10;
@@ -153,7 +153,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(229, 42);
+            this.label6.Location = new System.Drawing.Point(228, 42);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(13, 18);
             this.label6.TabIndex = 12;
@@ -165,7 +165,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(229, 84);
+            this.label7.Location = new System.Drawing.Point(228, 84);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(13, 18);
             this.label7.TabIndex = 13;
@@ -175,7 +175,7 @@
             // 
             this.kodeGroupTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.kodeGroupTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kodeGroupTextbox.Location = new System.Drawing.Point(248, 3);
+            this.kodeGroupTextbox.Location = new System.Drawing.Point(247, 3);
             this.kodeGroupTextbox.Name = "kodeGroupTextbox";
             this.kodeGroupTextbox.Size = new System.Drawing.Size(187, 27);
             this.kodeGroupTextbox.TabIndex = 15;
@@ -184,7 +184,7 @@
             // 
             this.namaGroupTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.namaGroupTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaGroupTextbox.Location = new System.Drawing.Point(248, 38);
+            this.namaGroupTextbox.Location = new System.Drawing.Point(247, 38);
             this.namaGroupTextbox.Name = "namaGroupTextbox";
             this.namaGroupTextbox.PasswordChar = '*';
             this.namaGroupTextbox.Size = new System.Drawing.Size(187, 27);
@@ -206,7 +206,7 @@
             // 
             this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(248, 128);
+            this.textBox2.Location = new System.Drawing.Point(247, 128);
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = '*';
             this.textBox2.Size = new System.Drawing.Size(187, 27);
@@ -225,7 +225,7 @@
             this.logoutButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.logoutButton.BackColor = System.Drawing.SystemColors.Control;
             this.logoutButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.logoutButton.Location = new System.Drawing.Point(108, 223);
+            this.logoutButton.Location = new System.Drawing.Point(104, 223);
             this.logoutButton.Name = "logoutButton";
             this.logoutButton.Size = new System.Drawing.Size(95, 37);
             this.logoutButton.TabIndex = 67;
@@ -238,7 +238,7 @@
             this.endShiftButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.endShiftButton.BackColor = System.Drawing.SystemColors.Control;
             this.endShiftButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.endShiftButton.Location = new System.Drawing.Point(234, 223);
+            this.endShiftButton.Location = new System.Drawing.Point(230, 223);
             this.endShiftButton.Name = "endShiftButton";
             this.endShiftButton.Size = new System.Drawing.Size(122, 37);
             this.endShiftButton.TabIndex = 68;
@@ -262,6 +262,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LOGOUT FORM";
+            this.Load += new System.EventHandler(this.logoutForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

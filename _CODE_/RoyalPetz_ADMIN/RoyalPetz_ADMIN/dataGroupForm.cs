@@ -20,6 +20,7 @@ namespace RoyalPetz_ADMIN
         private dataUserDetailForm userDetailForm;
 
         Data_Access DS = new Data_Access();
+        private globalUtilities gutil = new globalUtilities();
 
         public dataGroupForm()
         {
@@ -122,19 +123,33 @@ namespace RoyalPetz_ADMIN
         private void dataGroupForm_Activated(object sender, EventArgs e)
         {
             //the codes below run when focus changed to this form               
-            loadUserGroupData();            
+            if (!namaGroupTextbox.Text.Equals(""))
+            {
+                loadUserGroupData();
+            }
+                           
         }
 
         private void namaGroupTextbox_TextChanged(object sender, EventArgs e)
         {
-            loadUserGroupData();
+            if (!namaGroupTextbox.Text.Equals(""))
+            {
+                loadUserGroupData();
+            }
         }
 
         private void usernonactiveoption_CheckedChanged(object sender, EventArgs e)
         {
             dataUserGroupGridView.DataSource = null;
-            loadUserGroupData();
+            if (!namaGroupTextbox.Text.Equals(""))
+            {
+                loadUserGroupData();
+            }
+        }
 
+        private void dataGroupForm_Load(object sender, EventArgs e)
+        {
+            gutil.reArrangeTabOrder(this);
         }
     }
 }

@@ -12,9 +12,21 @@ namespace RoyalPetz_ADMIN
 {
     public partial class dataNomorAkunDetailForm : Form
     {
+        private globalUtilities gutil = new globalUtilities();
+
         public dataNomorAkunDetailForm()
         {
             InitializeComponent();
+        }
+
+        private void dataNomorAkunDetailForm_Load(object sender, EventArgs e)
+        {
+            gutil.reArrangeTabOrder(this);
+        }
+
+        private void dataNomorAkunDetailForm_Activated(object sender, EventArgs e)
+        {
+            //if need something
         }
     }
 }

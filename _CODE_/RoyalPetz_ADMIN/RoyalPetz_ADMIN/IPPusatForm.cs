@@ -12,6 +12,7 @@ namespace RoyalPetz_ADMIN
 {
     public partial class IPPusatForm : Form
     {
+        private globalUtilities gutil = new globalUtilities();
         public IPPusatForm()
         {
             InitializeComponent();
@@ -19,7 +20,7 @@ namespace RoyalPetz_ADMIN
 
         private void IPPusatForm_Load(object sender, EventArgs e)
         {
-
+            gutil.reArrangeTabOrder(this);
         }
     }
 }

@@ -12,6 +12,8 @@ namespace RoyalPetz_ADMIN
 {
     public partial class exportStockOpnameForm : Form
     {
+        private globalUtilities gutil = new globalUtilities();
+
         public exportStockOpnameForm()
         {
             InitializeComponent();
@@ -49,6 +51,11 @@ namespace RoyalPetz_ADMIN
         {
             saveFileDialog1.ShowDialog();
             MessageBox.Show(saveFileDialog1.FileName);
+        }
+
+        private void exportStockOpnameForm_Load(object sender, EventArgs e)
+        {
+            gutil.reArrangeTabOrder(this);
         }
     }
 }

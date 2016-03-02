@@ -18,7 +18,7 @@ namespace RoyalPetz_ADMIN
         private int originModuleID = 0;
         private int selectedBranchID = 0;
         private globalUtilities gUtil = new globalUtilities();
-
+        private int options = 0;
         private Data_Access DS = new Data_Access();
 
         public dataCabangDetailForm()
@@ -225,18 +225,8 @@ namespace RoyalPetz_ADMIN
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            int options = 0;
             if (saveData())
-            {
-                switch (originModuleID)
-                {
-                    case globalConstants.NEW_BRANCH:
-                        options = gUtil.INS;
-                        break;
-                    case globalConstants.EDIT_BRANCH:
-                        options = gUtil.UPD;
-                        break;
-                }
+            {                
                 //MessageBox.Show("SUCCESS");
                 gUtil.showSuccess(options);
                 gUtil.ResetAllControls(this);
@@ -245,22 +235,29 @@ namespace RoyalPetz_ADMIN
 
         private void dataCabangDetailForm_Load(object sender, EventArgs e)
         {
-            if (originModuleID == globalConstants.EDIT_BRANCH)
-            {
-                nonAktifCheckbox.Enabled = true;
-                loadBranchDataInformation();
-            }
-            else
-            {
-                nonAktifCheckbox.Enabled = false;
-            }
-            gUtil.reArrangeTabOrder(this);
-            errorLabel.Text = "";
+            gUtil.reArrangeTabOrder(this);            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             gUtil.ResetAllControls(this);
+        }
+
+        private void dataCabangDetailForm_Activated(object sender, EventArgs e)
+        {    
+            switch (originModuleID)
+            {
+                case globalConstants.NEW_BRANCH:
+                    options = gUtil.INS;
+                    nonAktifCheckbox.Enabled = false;
+                    break;
+                case globalConstants.EDIT_BRANCH:
+                    options = gUtil.UPD;
+                    nonAktifCheckbox.Enabled = true;
+                    loadBranchDataInformation();
+                    break;
+            }
+            errorLabel.Text = "";
         }
     }
 }

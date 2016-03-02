@@ -12,9 +12,20 @@ namespace RoyalPetz_ADMIN
 {
     public partial class dataReturPenjualanStokAdjustmentForm : Form
     {
+        private globalUtilities gutil = new globalUtilities();
         public dataReturPenjualanStokAdjustmentForm()
         {
             InitializeComponent();
+        }
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataReturPenjualanStokAdjustmentForm_Load(object sender, EventArgs e)
+        {
+            gutil.reArrangeTabOrder(this);
         }
     }
 }

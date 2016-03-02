@@ -12,6 +12,8 @@ namespace RoyalPetz_ADMIN
 {
     public partial class dataTransaksiJurnalHarianDetailForm : Form
     {
+        private globalUtilities gutil = new globalUtilities();
+
         public dataTransaksiJurnalHarianDetailForm()
         {
             InitializeComponent();
@@ -26,6 +28,16 @@ namespace RoyalPetz_ADMIN
         {
             dataNomorAkun displayedForm = new dataNomorAkun(globalConstants.TAMBAH_HAPUS_JURNAL_HARIAN);
             displayedForm.ShowDialog(this);
+        }
+
+        private void dataTransaksiJurnalHarianDetailForm_Load(object sender, EventArgs e)
+        {
+            gutil.reArrangeTabOrder(this);
+        }
+
+        private void dataTransaksiJurnalHarianDetailForm_Activated(object sender, EventArgs e)
+        {
+            //if need something
         }
     }
 }

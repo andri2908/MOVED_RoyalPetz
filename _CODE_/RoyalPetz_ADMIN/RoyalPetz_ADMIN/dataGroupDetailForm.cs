@@ -19,7 +19,8 @@ namespace RoyalPetz_ADMIN
         private int selectedGroupID = 0;
 
         private Data_Access DS = new Data_Access();
-        private globalUtilities stringOP = new globalUtilities();
+        private globalUtilities gutil = new globalUtilities();
+        private int options = 0;
 
         private groupAccessModuleForm parentForm;
 
@@ -76,12 +77,7 @@ namespace RoyalPetz_ADMIN
 
         private void dataGroupDetailForm_Load(object sender, EventArgs e)
         {
-            if (originModuleID == globalConstants.EDIT_GROUP_USER)
-            { 
-                loadUserGroupDataInformation();
-            }
-
-            errorLabel.Text = "";
+            gutil.reArrangeTabOrder(this);
         }
 
         private bool dataValidated()
@@ -128,7 +124,7 @@ namespace RoyalPetz_ADMIN
                 switch(originModuleID)
                 {
                     case globalConstants.NEW_GROUP_USER:
-                    case globalConstants.PENGATURAN_GRUP_AKSES:
+                    //case globalConstants.PENGATURAN_GRUP_AKSES:  //need to check validty of code
                         sqlCommand = "INSERT INTO MASTER_GROUP (GROUP_USER_NAME, GROUP_USER_DESCRIPTION, GROUP_USER_ACTIVE) VALUES ('" + groupName + "', '" + groupDesc + "', " + groupStatus + ")";
                         break;
                     case globalConstants.EDIT_GROUP_USER:
@@ -175,13 +171,36 @@ namespace RoyalPetz_ADMIN
         }
 
         private void saveButton_Click(object sender, EventArgs e)
-        {
+        {           
             if (saveData())
             {
-                
-                MessageBox.Show("SUCCESS");
+                gutil.showSuccess(options);
+                gutil.ResetAllControls(this);
+                //MessageBox.Show("SUCCESS");
                 //this.Close();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            gutil.ResetAllControls(this);
+        }
+
+        private void dataGroupDetailForm_Activated(object sender, EventArgs e)
+        {
+            switch (originModuleID)
+            {
+                case (globalConstants.NEW_GROUP_USER):
+                    options = gutil.INS;
+                    nonAktifCheckbox.Enabled = false;
+                    break;
+                case (globalConstants.EDIT_GROUP_USER):
+                    options = gutil.UPD;
+                    nonAktifCheckbox.Enabled = true;
+                    loadUserGroupDataInformation();
+                    break;
+            }            
+            errorLabel.Text = "";
         }
     }
 }

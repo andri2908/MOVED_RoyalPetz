@@ -12,6 +12,7 @@ namespace RoyalPetz_ADMIN
 {
     public partial class logoutForm : Form
     {
+        private globalUtilities gutil = new globalUtilities();
         public logoutForm()
         {
             InitializeComponent();
@@ -27,6 +28,11 @@ namespace RoyalPetz_ADMIN
         {
             loginForm displayLoginForm = new loginForm(globalConstants.LOGOUT_FORM);
             displayLoginForm.ShowDialog(this);
+        }
+
+        private void logoutForm_Load(object sender, EventArgs e)
+        {
+            gutil.reArrangeTabOrder(this);
         }
     }
 }

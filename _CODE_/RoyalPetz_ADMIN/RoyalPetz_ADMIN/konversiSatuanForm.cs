@@ -63,8 +63,7 @@ namespace RoyalPetz_ADMIN
 
         private void konversiSatuanForm_Load(object sender, EventArgs e)
         {
-            errorLabel.Text = "";
-            loadUnitData(unit1Combo, unit1ComboHidden);
+            gUtil.reArrangeTabOrder(this);
         }
 
         private void displayCurrentSavedConversion(int selectedID)
@@ -222,7 +221,8 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
-                MessageBox.Show("SUCCESS");
+                //MessageBox.Show("SUCCESS");
+                gUtil.showSuccess(gUtil.UPD);
                 displayCurrentSavedConversion(selectedUnit1_ID);
             }
         }
@@ -258,6 +258,12 @@ namespace RoyalPetz_ADMIN
                 convertValueTextBox.Text = previousInput;
             }
 
+        }
+
+        private void konversiSatuanForm_Activated(object sender, EventArgs e)
+        {
+            errorLabel.Text = "";
+            loadUnitData(unit1Combo, unit1ComboHidden);
         }
     }
 }

@@ -15,6 +15,8 @@ namespace RoyalPetz_ADMIN
 {
     public partial class dataSatuanDetailForm : Form
     {
+        private globalUtilities gutil = new globalUtilities();
+        private int options = 0;
         private int originModuleID = 0;
         private int selectedUnitID = 0;
 
@@ -67,9 +69,7 @@ namespace RoyalPetz_ADMIN
 
         private void dataSatuanDetailForm_Load(object sender, EventArgs e)
         {
-            errorLabel.Text = "";
-
-            loadUnitData();
+            gutil.reArrangeTabOrder(this);
         }
 
         private bool dataValidated()
@@ -153,7 +153,31 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
-                MessageBox.Show("SUCCESS");
+                //MessageBox.Show("SUCCESS");
+                gutil.showSuccess(options);
+                gutil.ResetAllControls(this);
+            }
+        }
+
+        private void resetbutton_Click(object sender, EventArgs e)
+        {
+            gutil.ResetAllControls(this);
+        }
+
+        private void dataSatuanDetailForm_Activated(object sender, EventArgs e)
+        {
+            errorLabel.Text = "";
+            switch (originModuleID)
+            {
+                case globalConstants.NEW_UNIT:
+                    options = gutil.INS;
+                    nonAktifCheckbox.Enabled = false;
+                    break;
+                case globalConstants.EDIT_UNIT:
+                    options = gutil.UPD;
+                    nonAktifCheckbox.Enabled = true;
+                    loadUnitData(); 
+                    break;
             }
         }
     }

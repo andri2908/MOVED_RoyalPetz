@@ -23,6 +23,7 @@ namespace RoyalPetz_ADMIN
         private Data_Access DS = new Data_Access();
 
         private int selectedUserID = 0;
+        private globalUtilities gutil = new globalUtilities();
 
         public adminForm(int userID)
         {
@@ -63,13 +64,12 @@ namespace RoyalPetz_ADMIN
             {
                 System.IO.Directory.CreateDirectory("PRODUCT_PHOTO");
             }
-
             updateLabel();
             timer1.Start();
-
             welcomeLabel.Text = "WELCOME " + DS.getDataSingleValue("SELECT USER_FULL_NAME FROM MASTER_USER WHERE ID = " + selectedUserID).ToString();
-
             //loadBGimage();
+
+            gutil.reArrangeTabOrder(this);
         }
 
         private void adminForm_FormClosed(object sender, FormClosedEventArgs e)

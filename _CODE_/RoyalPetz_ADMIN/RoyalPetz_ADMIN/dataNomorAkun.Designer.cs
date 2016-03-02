@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.namaSupplierTextbox = new System.Windows.Forms.TextBox();
             this.dataSalesDataGridView = new System.Windows.Forms.DataGridView();
@@ -37,6 +37,7 @@
             this.tipe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.newButton = new System.Windows.Forms.Button();
             this.displayButton = new System.Windows.Forms.Button();
+            this.accountnonactiveoption = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataSalesDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,7 +46,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label1.Location = new System.Drawing.Point(7, 29);
+            this.label1.Location = new System.Drawing.Point(7, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 18);
             this.label1.TabIndex = 35;
@@ -54,7 +55,7 @@
             // namaSupplierTextbox
             // 
             this.namaSupplierTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaSupplierTextbox.Location = new System.Drawing.Point(100, 22);
+            this.namaSupplierTextbox.Location = new System.Drawing.Point(100, 14);
             this.namaSupplierTextbox.Name = "namaSupplierTextbox";
             this.namaSupplierTextbox.Size = new System.Drawing.Size(260, 27);
             this.namaSupplierTextbox.TabIndex = 36;
@@ -64,23 +65,23 @@
             this.dataSalesDataGridView.AllowUserToAddRows = false;
             this.dataSalesDataGridView.AllowUserToDeleteRows = false;
             this.dataSalesDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataSalesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataSalesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataSalesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataSalesDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.kodeAkun,
             this.deskripsi,
             this.tipe});
-            this.dataSalesDataGridView.Location = new System.Drawing.Point(0, 67);
+            this.dataSalesDataGridView.Location = new System.Drawing.Point(0, 72);
             this.dataSalesDataGridView.Name = "dataSalesDataGridView";
             this.dataSalesDataGridView.RowHeadersVisible = false;
-            this.dataSalesDataGridView.Size = new System.Drawing.Size(602, 480);
+            this.dataSalesDataGridView.Size = new System.Drawing.Size(602, 475);
             this.dataSalesDataGridView.TabIndex = 33;
             this.dataSalesDataGridView.DoubleClick += new System.EventHandler(this.dataSalesDataGridView_DoubleClick);
             // 
@@ -106,22 +107,36 @@
             // newButton
             // 
             this.newButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newButton.Location = new System.Drawing.Point(495, 15);
+            this.newButton.Location = new System.Drawing.Point(502, 14);
             this.newButton.Name = "newButton";
-            this.newButton.Size = new System.Drawing.Size(95, 37);
+            this.newButton.Size = new System.Drawing.Size(59, 27);
             this.newButton.TabIndex = 37;
             this.newButton.Text = "NEW";
             this.newButton.UseVisualStyleBackColor = true;
+            this.newButton.Click += new System.EventHandler(this.newButton_Click);
             // 
             // displayButton
             // 
             this.displayButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.displayButton.Location = new System.Drawing.Point(379, 15);
+            this.displayButton.Location = new System.Drawing.Point(381, 14);
             this.displayButton.Name = "displayButton";
-            this.displayButton.Size = new System.Drawing.Size(95, 37);
+            this.displayButton.Size = new System.Drawing.Size(95, 27);
             this.displayButton.TabIndex = 34;
             this.displayButton.Text = "DISPLAY";
             this.displayButton.UseVisualStyleBackColor = true;
+            this.displayButton.Click += new System.EventHandler(this.displayButton_Click);
+            // 
+            // accountnonactiveoption
+            // 
+            this.accountnonactiveoption.AutoSize = true;
+            this.accountnonactiveoption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.accountnonactiveoption.Location = new System.Drawing.Point(100, 47);
+            this.accountnonactiveoption.Name = "accountnonactiveoption";
+            this.accountnonactiveoption.Size = new System.Drawing.Size(172, 19);
+            this.accountnonactiveoption.TabIndex = 38;
+            this.accountnonactiveoption.Text = "Tampilkan Akun Non Aktif?";
+            this.accountnonactiveoption.UseVisualStyleBackColor = true;
+            this.accountnonactiveoption.CheckedChanged += new System.EventHandler(this.accountnonactiveoption_CheckedChanged);
             // 
             // dataNomorAkun
             // 
@@ -129,6 +144,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(602, 549);
+            this.Controls.Add(this.accountnonactiveoption);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.namaSupplierTextbox);
             this.Controls.Add(this.dataSalesDataGridView);
@@ -140,6 +156,8 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DATA NOMOR AKUN";
+            this.Activated += new System.EventHandler(this.dataNomorAkun_Activated);
+            this.Load += new System.EventHandler(this.dataNomorAkun_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataSalesDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -156,5 +174,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn kodeAkun;
         private System.Windows.Forms.DataGridViewTextBoxColumn deskripsi;
         private System.Windows.Forms.DataGridViewTextBoxColumn tipe;
+        private System.Windows.Forms.CheckBox accountnonactiveoption;
     }
 }

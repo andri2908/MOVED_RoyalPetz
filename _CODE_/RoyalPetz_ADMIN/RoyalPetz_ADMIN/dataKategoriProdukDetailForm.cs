@@ -17,7 +17,8 @@ namespace RoyalPetz_ADMIN
     {
         private int originModuleID = 0;
         private int selectedCategoryID = 0;
-
+        private globalUtilities gutil = new globalUtilities();
+        private int options = 0;
         Data_Access DS = new Data_Access();
 
         public dataKategoriProdukDetailForm()
@@ -67,9 +68,7 @@ namespace RoyalPetz_ADMIN
 
         private void dataKategoriProdukDetailForm_Load(object sender, EventArgs e)
         {
-            errorLabel.Text = "";
-
-            loadDataKategori();
+            gutil.reArrangeTabOrder(this);            
         }
 
         private bool dataValidated()
@@ -171,7 +170,31 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
-                MessageBox.Show("SUCCESS");
+                //MessageBox.Show("SUCCESS");
+                gutil.showSuccess(options);
+                gutil.ResetAllControls(this);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            gutil.ResetAllControls(this);
+        }
+
+        private void dataKategoriProdukDetailForm_Activated(object sender, EventArgs e)
+        {
+            errorLabel.Text = "";
+            switch (originModuleID)
+            {
+                case globalConstants.NEW_CATEGORY:
+                    options = gutil.INS;
+                    nonAktifCheckbox.Enabled = false;
+                    break;
+                case globalConstants.EDIT_CATEGORY:
+                    nonAktifCheckbox.Enabled = true;
+                    options = gutil.UPD;
+                    loadDataKategori();
+                    break;
             }
         }
     }

@@ -15,6 +15,8 @@ namespace RoyalPetz_ADMIN
 {
     public partial class dataSatuanForm : Form
     {
+        private globalUtilities gutil = new globalUtilities();
+
         private int originModuleID = 0;
         private int selectedUnitID = 0;
         private dataProdukDetailForm parentForm;
@@ -49,8 +51,14 @@ namespace RoyalPetz_ADMIN
                 return;
 
             DS.mySqlConnect();
-
-            sqlCommand = "SELECT UNIT_ID, UNIT_NAME AS 'NAMA UNIT', UNIT_DESCRIPTION AS 'DESKRIPSI UNIT' FROM MASTER_UNIT WHERE UNIT_ACTIVE = 1 AND UNIT_NAME LIKE '%" + unitNameTextBox.Text + "%'";
+            if (satuannonactiveoption.Checked == true)
+            {
+                sqlCommand = "SELECT UNIT_ID, UNIT_NAME AS 'NAMA UNIT', UNIT_DESCRIPTION AS 'DESKRIPSI UNIT' FROM MASTER_UNIT WHERE UNIT_NAME LIKE '%" + unitNameTextBox.Text + "%'";
+            }
+            else
+            {
+                sqlCommand = "SELECT UNIT_ID, UNIT_NAME AS 'NAMA UNIT', UNIT_DESCRIPTION AS 'DESKRIPSI UNIT' FROM MASTER_UNIT WHERE UNIT_ACTIVE = 1 AND UNIT_NAME LIKE '%" + unitNameTextBox.Text + "%'";
+            }
 
             using (rdr = DS.getData(sqlCommand))
             {
@@ -69,12 +77,20 @@ namespace RoyalPetz_ADMIN
 
         private void dataSatuanForm_Activated(object sender, EventArgs e)
         {
-            loadUnitData();
+            //loadUnitData();
+            if (!unitNameTextBox.Text.Equals(""))
+            {
+                loadUnitData();
+            }
         }
         
         private void unitNameTextBox_TextChanged(object sender, EventArgs e)
         {
-            loadUnitData();
+            //loadUnitData();
+            if (!unitNameTextBox.Text.Equals(""))
+            {
+                loadUnitData();
+            }
         }
 
         private void displaySpecificForm()
@@ -101,6 +117,20 @@ namespace RoyalPetz_ADMIN
         {
             if (dataUnitGridView.Rows.Count > 0)
                 displaySpecificForm();
+        }
+
+        private void satuannonactiveoption_CheckedChanged(object sender, EventArgs e)
+        {
+            dataUnitGridView.DataSource = null;
+            if (!unitNameTextBox.Text.Equals(""))
+            {
+                loadUnitData();
+            }
+        }
+
+        private void dataSatuanForm_Load(object sender, EventArgs e)
+        {
+            gutil.reArrangeTabOrder(this);
         }
     }
 }

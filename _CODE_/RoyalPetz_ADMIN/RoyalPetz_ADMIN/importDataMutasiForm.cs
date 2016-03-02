@@ -12,6 +12,7 @@ namespace RoyalPetz_ADMIN
 {
     public partial class importDataMutasiForm : Form
     {
+        private globalUtilities gutil = new globalUtilities();
         public importDataMutasiForm()
         {
             InitializeComponent();
@@ -37,6 +38,11 @@ namespace RoyalPetz_ADMIN
                     MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
                 }
             }
+        }
+
+        private void importDataMutasiForm_Load(object sender, EventArgs e)
+        {
+            gutil.reArrangeTabOrder(this);
         }
     }
 }

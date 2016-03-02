@@ -19,6 +19,8 @@ namespace RoyalPetz_ADMIN
 
         private Data_Access DS = new Data_Access();
 
+        private globalUtilities gutil = new globalUtilities();
+
         public dataCabangForm()
         {
             InitializeComponent();
@@ -93,6 +95,11 @@ namespace RoyalPetz_ADMIN
            
             if (!namaBranchTextbox.Text.Equals(""))
                 loadBranchData(namaBranchTextbox.Text);
+        }
+
+        private void dataCabangForm_Load(object sender, EventArgs e)
+        {
+            gutil.reArrangeTabOrder(this);
         }
     }
 }

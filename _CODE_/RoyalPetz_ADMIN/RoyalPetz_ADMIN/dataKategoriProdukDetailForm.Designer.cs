@@ -29,16 +29,17 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.nonAktifCheckbox = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.categoryNameTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.categoryDescriptionTextBox = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.saveButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.nonAktifCheckbox = new System.Windows.Forms.CheckBox();
             this.errorLabel = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -50,7 +51,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 354F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 356F));
             this.tableLayoutPanel1.Controls.Add(this.nonAktifCheckbox, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.label6, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 0);
@@ -67,6 +68,30 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(546, 119);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
+            // nonAktifCheckbox
+            // 
+            this.nonAktifCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.nonAktifCheckbox.AutoSize = true;
+            this.nonAktifCheckbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nonAktifCheckbox.Location = new System.Drawing.Point(192, 86);
+            this.nonAktifCheckbox.Name = "nonAktifCheckbox";
+            this.nonAktifCheckbox.Size = new System.Drawing.Size(170, 22);
+            this.nonAktifCheckbox.TabIndex = 70;
+            this.nonAktifCheckbox.Text = "Non Aktif Cabang";
+            this.nonAktifCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label6.Location = new System.Drawing.Point(170, 48);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(14, 18);
+            this.label6.TabIndex = 12;
+            this.label6.Text = ":";
+            // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -78,6 +103,15 @@
             this.label3.Size = new System.Drawing.Size(160, 18);
             this.label3.TabIndex = 8;
             this.label3.Text = "NAMA KATEGORI";
+            // 
+            // categoryNameTextBox
+            // 
+            this.categoryNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.categoryNameTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.categoryNameTextBox.Location = new System.Drawing.Point(192, 6);
+            this.categoryNameTextBox.Name = "categoryNameTextBox";
+            this.categoryNameTextBox.Size = new System.Drawing.Size(196, 27);
+            this.categoryNameTextBox.TabIndex = 16;
             // 
             // label1
             // 
@@ -91,17 +125,14 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "DESKRIPSI";
             // 
-            // label6
+            // categoryDescriptionTextBox
             // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(172, 48);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(14, 18);
-            this.label6.TabIndex = 12;
-            this.label6.Text = ":";
+            this.categoryDescriptionTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.categoryDescriptionTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.categoryDescriptionTextBox.Location = new System.Drawing.Point(192, 44);
+            this.categoryDescriptionTextBox.Name = "categoryDescriptionTextBox";
+            this.categoryDescriptionTextBox.Size = new System.Drawing.Size(340, 27);
+            this.categoryDescriptionTextBox.TabIndex = 17;
             // 
             // label7
             // 
@@ -109,35 +140,17 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(172, 10);
+            this.label7.Location = new System.Drawing.Point(170, 10);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(14, 18);
             this.label7.TabIndex = 13;
             this.label7.Text = ":";
             // 
-            // categoryNameTextBox
-            // 
-            this.categoryNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.categoryNameTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.categoryNameTextBox.Location = new System.Drawing.Point(194, 6);
-            this.categoryNameTextBox.Name = "categoryNameTextBox";
-            this.categoryNameTextBox.Size = new System.Drawing.Size(196, 27);
-            this.categoryNameTextBox.TabIndex = 16;
-            // 
-            // categoryDescriptionTextBox
-            // 
-            this.categoryDescriptionTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.categoryDescriptionTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.categoryDescriptionTextBox.Location = new System.Drawing.Point(194, 44);
-            this.categoryDescriptionTextBox.Name = "categoryDescriptionTextBox";
-            this.categoryDescriptionTextBox.Size = new System.Drawing.Size(340, 27);
-            this.categoryDescriptionTextBox.TabIndex = 17;
-            // 
             // saveButton
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(224, 167);
+            this.saveButton.Location = new System.Drawing.Point(154, 167);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(95, 37);
             this.saveButton.TabIndex = 8;
@@ -155,18 +168,6 @@
             this.panel1.Size = new System.Drawing.Size(547, 29);
             this.panel1.TabIndex = 10;
             // 
-            // nonAktifCheckbox
-            // 
-            this.nonAktifCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.nonAktifCheckbox.AutoSize = true;
-            this.nonAktifCheckbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nonAktifCheckbox.Location = new System.Drawing.Point(194, 86);
-            this.nonAktifCheckbox.Name = "nonAktifCheckbox";
-            this.nonAktifCheckbox.Size = new System.Drawing.Size(170, 22);
-            this.nonAktifCheckbox.TabIndex = 70;
-            this.nonAktifCheckbox.Text = "Non Aktif Cabang";
-            this.nonAktifCheckbox.UseVisualStyleBackColor = true;
-            // 
             // errorLabel
             // 
             this.errorLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -180,12 +181,25 @@
             this.errorLabel.TabIndex = 71;
             this.errorLabel.Text = "   ";
             // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.button1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(299, 167);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(95, 37);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "RESET";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // dataKategoriProdukDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(548, 221);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -196,6 +210,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "KATEGORI PRODUK DETAIL";
+            this.Activated += new System.EventHandler(this.dataKategoriProdukDetailForm_Activated);
             this.Load += new System.EventHandler(this.dataKategoriProdukDetailForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -218,5 +233,6 @@
         private System.Windows.Forms.CheckBox nonAktifCheckbox;
         private System.Windows.Forms.Label errorLabel;
         private System.Windows.Forms.TextBox categoryNameTextBox;
+        private System.Windows.Forms.Button button1;
     }
 }

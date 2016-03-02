@@ -42,7 +42,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label1.Location = new System.Drawing.Point(4, 15);
+            this.label1.Location = new System.Drawing.Point(4, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 18);
             this.label1.TabIndex = 30;
@@ -51,7 +51,7 @@
             // namaBranchTextbox
             // 
             this.namaBranchTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaBranchTextbox.Location = new System.Drawing.Point(69, 11);
+            this.namaBranchTextbox.Location = new System.Drawing.Point(69, 13);
             this.namaBranchTextbox.Name = "namaBranchTextbox";
             this.namaBranchTextbox.Size = new System.Drawing.Size(260, 27);
             this.namaBranchTextbox.TabIndex = 31;
@@ -81,7 +81,7 @@
             // newButton
             // 
             this.newButton.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newButton.Location = new System.Drawing.Point(338, 10);
+            this.newButton.Location = new System.Drawing.Point(338, 12);
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(56, 28);
             this.newButton.TabIndex = 32;
@@ -93,7 +93,7 @@
             // 
             this.cabangnonactiveoption.AutoSize = true;
             this.cabangnonactiveoption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cabangnonactiveoption.Location = new System.Drawing.Point(69, 42);
+            this.cabangnonactiveoption.Location = new System.Drawing.Point(69, 46);
             this.cabangnonactiveoption.Name = "cabangnonactiveoption";
             this.cabangnonactiveoption.Size = new System.Drawing.Size(188, 19);
             this.cabangnonactiveoption.TabIndex = 34;
@@ -119,6 +119,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DATA CABANG";
             this.Activated += new System.EventHandler(this.dataCabangForm_Activated);
+            this.Load += new System.EventHandler(this.dataCabangForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataCabangGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -30,11 +30,12 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.addButton = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.noreturtextbox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -44,7 +45,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.saveButton = new System.Windows.Forms.Button();
-            this.addButton = new System.Windows.Forms.Button();
             this.dataProdukDataGridView = new System.Windows.Forms.DataGridView();
             this.kodeProduk = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.namaProduk = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,15 +57,17 @@
             // 
             this.tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.71795F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.28205F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 301F));
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 83.58778F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.41221F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 349F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 64F));
+            this.tableLayoutPanel1.Controls.Add(this.addButton, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.comboBox2, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label9, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.textBox1, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.noreturtextbox, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.label8, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label10, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.comboBox1, 2, 2);
@@ -81,17 +83,28 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(512, 168);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(639, 168);
             this.tableLayoutPanel1.TabIndex = 20;
+            // 
+            // addButton
+            // 
+            this.addButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.addButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addButton.Location = new System.Drawing.Point(577, 126);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(58, 37);
+            this.addButton.TabIndex = 37;
+            this.addButton.Text = "ADD";
+            this.addButton.UseVisualStyleBackColor = true;
             // 
             // comboBox2
             // 
             this.comboBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.comboBox2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(213, 132);
+            this.comboBox2.Location = new System.Drawing.Point(228, 132);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(292, 26);
+            this.comboBox2.Size = new System.Drawing.Size(343, 26);
             this.comboBox2.TabIndex = 51;
             // 
             // label2
@@ -100,7 +113,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Location = new System.Drawing.Point(190, 91);
+            this.label2.Location = new System.Drawing.Point(191, 91);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(14, 18);
             this.label2.TabIndex = 50;
@@ -124,20 +137,21 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label9.Location = new System.Drawing.Point(190, 11);
+            this.label9.Location = new System.Drawing.Point(191, 11);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(14, 18);
             this.label9.TabIndex = 46;
             this.label9.Text = ":";
             // 
-            // textBox1
+            // noreturtextbox
             // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(213, 7);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(248, 27);
-            this.textBox1.TabIndex = 22;
+            this.noreturtextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.tableLayoutPanel1.SetColumnSpan(this.noreturtextbox, 2);
+            this.noreturtextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noreturtextbox.Location = new System.Drawing.Point(228, 7);
+            this.noreturtextbox.Name = "noreturtextbox";
+            this.noreturtextbox.Size = new System.Drawing.Size(185, 27);
+            this.noreturtextbox.TabIndex = 22;
             // 
             // label8
             // 
@@ -157,7 +171,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label10.Location = new System.Drawing.Point(190, 51);
+            this.label10.Location = new System.Drawing.Point(191, 51);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(14, 18);
             this.label10.TabIndex = 47;
@@ -168,9 +182,9 @@
             this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.comboBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(213, 87);
+            this.comboBox1.Location = new System.Drawing.Point(228, 87);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(292, 26);
+            this.comboBox1.Size = new System.Drawing.Size(343, 26);
             this.comboBox1.TabIndex = 45;
             // 
             // label11
@@ -189,9 +203,9 @@
             // 
             this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBox2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(213, 46);
+            this.textBox2.Location = new System.Drawing.Point(228, 46);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(248, 27);
+            this.textBox2.Size = new System.Drawing.Size(185, 27);
             this.textBox2.TabIndex = 49;
             // 
             // label5
@@ -212,7 +226,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(190, 136);
+            this.label4.Location = new System.Drawing.Point(191, 136);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(14, 18);
             this.label4.TabIndex = 10;
@@ -231,23 +245,12 @@
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(244, 215);
+            this.saveButton.Location = new System.Drawing.Point(274, 215);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(95, 37);
             this.saveButton.TabIndex = 21;
             this.saveButton.Text = "SAVE";
             this.saveButton.UseVisualStyleBackColor = true;
-            // 
-            // addButton
-            // 
-            this.addButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.addButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addButton.Location = new System.Drawing.Point(536, 163);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(95, 37);
-            this.addButton.TabIndex = 22;
-            this.addButton.Text = "ADD";
-            this.addButton.UseVisualStyleBackColor = true;
             // 
             // dataProdukDataGridView
             // 
@@ -300,16 +303,16 @@
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(643, 623);
             this.Controls.Add(this.dataProdukDataGridView);
-            this.Controls.Add(this.addButton);
-            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.saveButton);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "dataReturPenjualanStokAdjustmentForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RETUR PERMINTAAN BARANG STOK ADJUSTMENT";
+            this.Load += new System.EventHandler(this.dataReturPenjualanStokAdjustmentForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProdukDataGridView)).EndInit();
@@ -324,7 +327,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox noreturtextbox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox comboBox1;
@@ -334,10 +337,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button saveButton;
-        private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.DataGridView dataProdukDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn kodeProduk;
         private System.Windows.Forms.DataGridViewTextBoxColumn namaProduk;
         private System.Windows.Forms.DataGridViewTextBoxColumn qty;
+        private System.Windows.Forms.Button addButton;
     }
 }

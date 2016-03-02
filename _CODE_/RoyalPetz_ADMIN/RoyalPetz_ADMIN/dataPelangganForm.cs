@@ -16,6 +16,7 @@ namespace RoyalPetz_ADMIN
     public partial class dataPelangganForm : Form
     {
         private int selectedCustomerID = 0;
+        private globalUtilities gutil = new globalUtilities();
 
         private Data_Access DS = new Data_Access();
 
@@ -41,8 +42,14 @@ namespace RoyalPetz_ADMIN
             if (namaPelangganTextbox.Text.Equals(""))
                 return;
 
-            sqlCommand = "SELECT CUSTOMER_ID, CUSTOMER_FULL_NAME AS 'NAMA PELANGGAN', DATE_FORMAT(CUSTOMER_JOINED_DATE,'%d-%m-%Y') AS 'TANGGAL BERGABUNG', IF(CUSTOMER_GROUP = 1,'ECER', IF(CUSTOMER_GROUP = 2,'PARTAI', 'GROSIR')) AS 'GROUP CUSTOMER' FROM MASTER_CUSTOMER WHERE CUSTOMER_ACTIVE = 1 AND CUSTOMER_FULL_NAME LIKE '%" + namaPelangganTextbox.Text + "%'";
-            
+            if (pelanggangnonactiveoption.Checked == true)
+            {
+                sqlCommand = "SELECT CUSTOMER_ID, CUSTOMER_FULL_NAME AS 'NAMA PELANGGAN', DATE_FORMAT(CUSTOMER_JOINED_DATE,'%d-%m-%Y') AS 'TANGGAL BERGABUNG', IF(CUSTOMER_GROUP = 1,'ECER', IF(CUSTOMER_GROUP = 2,'PARTAI', 'GROSIR')) AS 'GROUP CUSTOMER' FROM MASTER_CUSTOMER WHERE CUSTOMER_FULL_NAME LIKE '%" + namaPelangganTextbox.Text + "%'";
+            }
+            else {
+                sqlCommand = "SELECT CUSTOMER_ID, CUSTOMER_FULL_NAME AS 'NAMA PELANGGAN', DATE_FORMAT(CUSTOMER_JOINED_DATE,'%d-%m-%Y') AS 'TANGGAL BERGABUNG', IF(CUSTOMER_GROUP = 1,'ECER', IF(CUSTOMER_GROUP = 2,'PARTAI', 'GROSIR')) AS 'GROUP CUSTOMER' FROM MASTER_CUSTOMER WHERE CUSTOMER_ACTIVE = 1 AND CUSTOMER_FULL_NAME LIKE '%" + namaPelangganTextbox.Text + "%'";
+            }
+
             using (rdr = DS.getData(sqlCommand))
             {
                 if (rdr.HasRows)
@@ -60,12 +67,20 @@ namespace RoyalPetz_ADMIN
 
         private void dataPelangganForm_Activated(object sender, EventArgs e)
         {
-            loadCustomerData();
+            //loadCustomerData();
+            if (!namaPelangganTextbox.Text.Equals(""))
+            {
+                loadCustomerData();
+            }
         }
 
         private void namaPelangganTextbox_TextChanged(object sender, EventArgs e)
         {
-            loadCustomerData();
+            //loadCustomerData();
+            if (!namaPelangganTextbox.Text.Equals(""))
+            {
+                loadCustomerData();
+            }
         }
 
         private void dataPelangganDataGridView_DoubleClick(object sender, EventArgs e)
@@ -80,6 +95,22 @@ namespace RoyalPetz_ADMIN
 
             dataPelangganDetailForm displayedForm = new dataPelangganDetailForm(globalConstants.EDIT_CUSTOMER, selectedCustomerID);
             displayedForm.ShowDialog(this);
+        }
+
+        private void dataPelangganForm_Load(object sender, EventArgs e)
+        {
+            gutil.reArrangeTabOrder(this);
+        }
+
+        private void pelanggangnonactiveoption_CheckedChanged(object sender, EventArgs e)
+        {
+            dataPelangganDataGridView.DataSource = null;
+
+            if (!namaPelangganTextbox.Text.Equals(""))
+            {
+                loadCustomerData();
+            }
+            
         }
     }
 }

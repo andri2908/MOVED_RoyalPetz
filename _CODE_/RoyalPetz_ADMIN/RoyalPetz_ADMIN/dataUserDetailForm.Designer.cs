@@ -54,6 +54,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.errorLabel = new System.Windows.Forms.Label();
             this.saveButton = new System.Windows.Forms.Button();
+            this.resetbutton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -66,7 +67,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 350F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 351F));
             this.tableLayoutPanel1.Controls.Add(this.label12, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.label11, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
@@ -105,7 +106,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label12.Location = new System.Drawing.Point(202, 212);
+            this.label12.Location = new System.Drawing.Point(201, 212);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(14, 18);
             this.label12.TabIndex = 58;
@@ -153,7 +154,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(202, 7);
+            this.label4.Location = new System.Drawing.Point(201, 7);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(14, 18);
             this.label4.TabIndex = 10;
@@ -165,7 +166,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(202, 40);
+            this.label6.Location = new System.Drawing.Point(201, 40);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(14, 18);
             this.label6.TabIndex = 12;
@@ -177,7 +178,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(202, 73);
+            this.label7.Location = new System.Drawing.Point(201, 73);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(14, 18);
             this.label7.TabIndex = 13;
@@ -187,7 +188,7 @@
             // 
             this.userNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.userNameTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userNameTextBox.Location = new System.Drawing.Point(228, 3);
+            this.userNameTextBox.Location = new System.Drawing.Point(227, 3);
             this.userNameTextBox.MaxLength = 15;
             this.userNameTextBox.Name = "userNameTextBox";
             this.userNameTextBox.Size = new System.Drawing.Size(210, 27);
@@ -197,7 +198,7 @@
             // 
             this.userFullNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.userFullNameTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userFullNameTextBox.Location = new System.Drawing.Point(228, 36);
+            this.userFullNameTextBox.Location = new System.Drawing.Point(227, 36);
             this.userFullNameTextBox.MaxLength = 100;
             this.userFullNameTextBox.Name = "userFullNameTextBox";
             this.userFullNameTextBox.Size = new System.Drawing.Size(340, 27);
@@ -207,7 +208,7 @@
             // 
             this.passwordTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.passwordTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordTextBox.Location = new System.Drawing.Point(228, 69);
+            this.passwordTextBox.Location = new System.Drawing.Point(227, 69);
             this.passwordTextBox.MaxLength = 15;
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
@@ -243,7 +244,7 @@
             this.nonAktifCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.nonAktifCheckbox.AutoSize = true;
             this.nonAktifCheckbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nonAktifCheckbox.Location = new System.Drawing.Point(228, 178);
+            this.nonAktifCheckbox.Location = new System.Drawing.Point(227, 178);
             this.nonAktifCheckbox.Name = "nonAktifCheckbox";
             this.nonAktifCheckbox.Size = new System.Drawing.Size(146, 22);
             this.nonAktifCheckbox.TabIndex = 20;
@@ -256,7 +257,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label8.Location = new System.Drawing.Point(202, 144);
+            this.label8.Location = new System.Drawing.Point(201, 144);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(14, 18);
             this.label8.TabIndex = 19;
@@ -269,7 +270,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.20354F));
             this.tableLayoutPanel2.Controls.Add(this.searchButton, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.groupNameTextBox, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(228, 135);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(227, 135);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -302,7 +303,7 @@
             // 
             this.password2TextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.password2TextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.password2TextBox.Location = new System.Drawing.Point(228, 102);
+            this.password2TextBox.Location = new System.Drawing.Point(227, 102);
             this.password2TextBox.MaxLength = 15;
             this.password2TextBox.Name = "password2TextBox";
             this.password2TextBox.PasswordChar = '*';
@@ -327,7 +328,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label10.Location = new System.Drawing.Point(202, 106);
+            this.label10.Location = new System.Drawing.Point(201, 106);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(14, 18);
             this.label10.TabIndex = 55;
@@ -337,7 +338,7 @@
             // 
             this.userPhoneTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.userPhoneTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userPhoneTextBox.Location = new System.Drawing.Point(228, 207);
+            this.userPhoneTextBox.Location = new System.Drawing.Point(227, 207);
             this.userPhoneTextBox.MaxLength = 15;
             this.userPhoneTextBox.Name = "userPhoneTextBox";
             this.userPhoneTextBox.Size = new System.Drawing.Size(340, 27);
@@ -360,7 +361,7 @@
             this.errorLabel.BackColor = System.Drawing.Color.White;
             this.errorLabel.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(3, 6);
+            this.errorLabel.Location = new System.Drawing.Point(3, -5);
             this.errorLabel.Name = "errorLabel";
             this.errorLabel.Size = new System.Drawing.Size(23, 18);
             this.errorLabel.TabIndex = 8;
@@ -370,7 +371,7 @@
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(230, 284);
+            this.saveButton.Location = new System.Drawing.Point(169, 291);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(95, 37);
             this.saveButton.TabIndex = 24;
@@ -378,12 +379,25 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
+            // resetbutton
+            // 
+            this.resetbutton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.resetbutton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resetbutton.Location = new System.Drawing.Point(314, 291);
+            this.resetbutton.Name = "resetbutton";
+            this.resetbutton.Size = new System.Drawing.Size(95, 37);
+            this.resetbutton.TabIndex = 25;
+            this.resetbutton.Text = "RESET";
+            this.resetbutton.UseVisualStyleBackColor = true;
+            this.resetbutton.Click += new System.EventHandler(this.resetbutton_Click);
+            // 
             // dataUserDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(578, 333);
+            this.ClientSize = new System.Drawing.Size(578, 355);
+            this.Controls.Add(this.resetbutton);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.saveButton);
@@ -432,5 +446,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox userPhoneTextBox;
         private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.Button resetbutton;
     }
 }

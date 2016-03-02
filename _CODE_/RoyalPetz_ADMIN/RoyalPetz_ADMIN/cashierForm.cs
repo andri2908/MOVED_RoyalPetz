@@ -14,6 +14,7 @@ namespace RoyalPetz_ADMIN
     public partial class cashierForm : Form
     {
         public static int objCounter = 1;
+        private globalUtilities gutil = new globalUtilities();
 
         private Hotkeys.GlobalHotkey ghk_F1;
         private Hotkeys.GlobalHotkey ghk_F2;
@@ -246,6 +247,16 @@ namespace RoyalPetz_ADMIN
         private void panel9_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void cashierForm_Load(object sender, EventArgs e)
+        {
+            gutil.reArrangeTabOrder(this);
+        }
+
+        private void cashierForm_Activated(object sender, EventArgs e)
+        {
+            //if need something
         }
     }
 }

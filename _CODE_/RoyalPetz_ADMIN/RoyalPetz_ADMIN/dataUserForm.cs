@@ -19,6 +19,7 @@ namespace RoyalPetz_ADMIN
         private int selectedUserID = 0;
 
         Data_Access DS = new Data_Access();
+        private globalUtilities gutil = new globalUtilities();
 
         public dataUserForm()
         {
@@ -50,6 +51,7 @@ namespace RoyalPetz_ADMIN
                 sqlfiltergroup = "AND MASTER_USER.GROUP_ID = '" + filtergroup + "' ";
             }
             DS.mySqlConnect();
+
             if (usernonactiveoption.Checked)
             {
                 sqlCommand = "SELECT ID, USER_NAME AS 'USER NAME', USER_FULL_NAME AS 'USER FULL NAME', MASTER_GROUP.GROUP_USER_NAME AS 'NAMA GROUP' " +
@@ -152,7 +154,7 @@ namespace RoyalPetz_ADMIN
 
         private void dataUserForm_Load(object sender, EventArgs e)
         {
-
+            gutil.reArrangeTabOrder(this);
         }
 
         private void usernonactiveoption_CheckedChanged(object sender, EventArgs e)

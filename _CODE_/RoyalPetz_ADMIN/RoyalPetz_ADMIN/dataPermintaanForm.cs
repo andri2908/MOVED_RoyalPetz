@@ -332,5 +332,9 @@ namespace RoyalPetz_ADMIN
             }
         }
 
+        private void dataPermintaanForm_Activated(object sender, EventArgs e)
+        {
+            //if need something
+        }
     }
 }

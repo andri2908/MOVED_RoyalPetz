@@ -21,7 +21,7 @@ namespace RoyalPetz_ADMIN
         private int selectedBranchFromID = 0;
         private int selectedBranchToID = 0;
         private CultureInfo culture = new CultureInfo("id-ID");
-
+        private globalUtilities gutil = new globalUtilities();
         private Data_Access DS = new Data_Access();
 
         public dataMutasiBarangForm()
@@ -148,8 +148,7 @@ namespace RoyalPetz_ADMIN
 
         private void dataMutasiBarangForm_Load(object sender, EventArgs e)
         {
-            fillInBranchCombo(branchFromCombo, branchFromComboHidden);
-            fillInBranchCombo(branchToCombo, branchToComboHidden);
+            gutil.reArrangeTabOrder(this);
         }
 
         private void dataMutasiBarangForm_Deactivate(object sender, EventArgs e)
@@ -160,6 +159,8 @@ namespace RoyalPetz_ADMIN
         private void dataMutasiBarangForm_Activated(object sender, EventArgs e)
         {
             //loadROdata();
+            fillInBranchCombo(branchFromCombo, branchFromComboHidden);
+            fillInBranchCombo(branchToCombo, branchToComboHidden);
         }
 
         private void dataRequestOrderGridView_KeyPress(object sender, KeyPressEventArgs e)

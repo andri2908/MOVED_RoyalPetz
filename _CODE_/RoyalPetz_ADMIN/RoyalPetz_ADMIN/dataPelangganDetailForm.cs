@@ -29,6 +29,8 @@ namespace RoyalPetz_ADMIN
 
         private Data_Access DS = new Data_Access();
         private globalUtilities gUtil = new globalUtilities();
+        private int options = 0;
+        
 
         public dataPelangganDetailForm()
         {
@@ -87,14 +89,8 @@ namespace RoyalPetz_ADMIN
 
         private void dataPelangganDetailForm_Load(object sender, EventArgs e)
         {
-            errorLabel.Text = "";
-
-            loadCustomerData();
             dateJoinedDateTimePicked.Format = DateTimePickerFormat.Custom;
             dateJoinedDateTimePicked.CustomFormat = "dd-MM-yyyy";
-
-            if (originModuleID == globalConstants.NEW_CUSTOMER)
-                groupPelangganCombo.SelectedIndex = 0;
 
             gUtil.reArrangeTabOrder(this);
         }
@@ -240,8 +236,8 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
-                MessageBox.Show("SUCCESS");
-
+                //MessageBox.Show("SUCCESS");
+                gUtil.showSuccess(options);
                 gUtil.ResetAllControls(this);
             }
         }
@@ -302,5 +298,27 @@ namespace RoyalPetz_ADMIN
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            gUtil.ResetAllControls(this);
+        }
+
+        private void dataPelangganDetailForm_Activated(object sender, EventArgs e)
+        {
+            errorLabel.Text = "";
+            switch (originModuleID)
+            {
+                case globalConstants.NEW_CUSTOMER:
+                    nonAktifCheckbox.Enabled = false;
+                    groupPelangganCombo.SelectedIndex = 0;
+                    options = gUtil.INS;
+                    break;
+                case globalConstants.EDIT_CUSTOMER:
+                    nonAktifCheckbox.Enabled = true;
+                    loadCustomerData();
+                    options = gUtil.UPD;
+                    break;
+            }
+        }
     }
 }

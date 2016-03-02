@@ -100,12 +100,13 @@
             // displayButton
             // 
             this.displayButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.displayButton.Location = new System.Drawing.Point(437, 37);
+            this.displayButton.Location = new System.Drawing.Point(455, 31);
             this.displayButton.Name = "displayButton";
             this.displayButton.Size = new System.Drawing.Size(95, 37);
             this.displayButton.TabIndex = 34;
             this.displayButton.Text = "DISPLAY";
             this.displayButton.UseVisualStyleBackColor = true;
+            this.displayButton.Click += new System.EventHandler(this.displayButton_Click);
             // 
             // label2
             // 
@@ -144,6 +145,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DATA INVOICE";
+            this.Load += new System.EventHandler(this.dataInvoiceForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataInvoiceDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -12,6 +12,7 @@ namespace RoyalPetz_ADMIN
 {
     public partial class dataSalesForm : Form
     {
+        private globalUtilities gutil = new globalUtilities();
         public dataSalesForm()
         {
             InitializeComponent();
@@ -25,6 +26,11 @@ namespace RoyalPetz_ADMIN
             displayedForm.ShowDialog();
 
             this.Show();
+        }
+
+        private void dataSalesForm_Load(object sender, EventArgs e)
+        {
+            gutil.reArrangeTabOrder(this);
         }
     }
 }

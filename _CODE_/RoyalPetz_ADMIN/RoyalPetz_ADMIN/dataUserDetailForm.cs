@@ -20,6 +20,8 @@ namespace RoyalPetz_ADMIN
         private int selectedGroupID = 0;
 
         Data_Access DS = new Data_Access();
+        private globalUtilities gutil = new globalUtilities();
+        private int options = 0;
 
         public dataUserDetailForm()
         {
@@ -215,21 +217,39 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
-                MessageBox.Show("SUCCESS");
-                
-                this.Close();
+                //MessageBox.Show("SUCCESS");
+                gutil.showSuccess(options);
+                gutil.ResetAllControls(this);
+                //this.Close();
             }
         }
 
         private void dataUserDetailForm_Activated(object sender, EventArgs e)
         {
             //loadUserDataInformation();
+            switch (originModuleID)
+            {
+                case globalConstants.NEW_USER:
+                    options = gutil.INS;
+                    nonAktifCheckbox.Enabled = false;
+                    break;
+                case globalConstants.EDIT_USER:
+                    options = gutil.UPD;
+                    nonAktifCheckbox.Enabled = false;
+                    loadUserDataInformation();
+                    break;
+            }
         }
 
         private void dataUserDetailForm_Load(object sender, EventArgs e)
         {
             errorLabel.Text = "";
-            loadUserDataInformation();
+            gutil.reArrangeTabOrder(this);
+        }
+
+        private void resetbutton_Click(object sender, EventArgs e)
+        {
+            gutil.ResetAllControls(this);
         }
     }
 }
