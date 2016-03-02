@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.Globalization;
 
 namespace RoyalPetz_ADMIN
 {
@@ -17,6 +18,9 @@ namespace RoyalPetz_ADMIN
     {
         private int originModuleID = 0;
         private string selectedROID;
+        private int selectedBranchFromID = 0;
+        private int selectedBranchToID = 0;
+        private CultureInfo culture = new CultureInfo("id-ID");
 
         private Data_Access DS = new Data_Access();
 
@@ -50,10 +54,12 @@ namespace RoyalPetz_ADMIN
                     break;
 
                 case globalConstants.PENERIMAAN_BARANG:
-                        penerimaanBarangForm penerimaanBarangDisplayedForm = new penerimaanBarangForm();
+                        penerimaanBarangForm penerimaanBarangDisplayedForm = new penerimaanBarangForm(selectedROID);
                         penerimaanBarangDisplayedForm.ShowDialog(this);
                     break;
             }
+
+            loadROdata();
         }
 
         private void dataSalesDataGridView_DoubleClick(object sender, EventArgs e)
@@ -78,6 +84,8 @@ namespace RoyalPetz_ADMIN
             MySqlDataReader rdr;
             DataTable dt = new DataTable();
             string sqlCommand;
+            string dateFrom;
+            string dateTo;
 
             DS.mySqlConnect();
 
@@ -86,10 +94,34 @@ namespace RoyalPetz_ADMIN
               //                  "LEFT OUTER JOIN MASTER_BRANCH M2 ON (RO_BRANCH_ID_TO = M2.BRANCH_ID) " +
                //                 "WHERE RO_ACTIVE = 1 AND RO_EXPIRED > '" + DateTime.Now + "'";
 
-            sqlCommand = "SELECT ID, PM_INVOICE AS 'NO MUTASI', PM_DATETIME AS 'TANGGAL MUTASI', M1.BRANCH_NAME AS 'ASAL MUTASI', M2.BRANCH_NAME AS 'TUJUAN MUTASI', PM_TOTAL AS 'TOTAL', RO_INVOICE AS 'NO PERMINTAAN' " +
+            sqlCommand = "SELECT ID, PM_INVOICE AS 'NO MUTASI', PM_DATETIME AS 'TGL MUTASI', M1.BRANCH_NAME AS 'ASAL MUTASI', M2.BRANCH_NAME AS 'TUJUAN MUTASI', PM_TOTAL AS 'TOTAL', RO_INVOICE AS 'NO PERMINTAAN' " +
                                 "FROM PRODUCTS_MUTATION_HEADER LEFT OUTER JOIN MASTER_BRANCH M1 ON (BRANCH_ID_FROM = M1.BRANCH_ID) " +
                                 "LEFT OUTER JOIN MASTER_BRANCH M2 ON (BRANCH_ID_TO = M2.BRANCH_ID) " +
-                                "ORDER BY PM_DATETIME ASC";                                
+                                "WHERE 1 = 1";
+
+            if (!showAllCheckBox.Checked)
+            {
+                if (noMutasiTextBox.Text.Length > 0)
+                {
+                    sqlCommand = sqlCommand + " AND PM_INVOICE LIKE '%" + noMutasiTextBox.Text + "%'";
+                }
+
+                dateFrom = String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(PMDtPicker_1.Value));
+                dateTo = String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(PMDtPicker_2.Value));
+                sqlCommand = sqlCommand + " AND DATE_FORMAT(PM_DATETIME, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(PM_DATETIME, '%Y%m%d')  <= '" + dateTo + "'";
+
+                if (branchFromCombo.SelectedIndex > 0)
+                {
+                    sqlCommand = sqlCommand + " AND BRANCH_ID_FROM = " + selectedBranchFromID;
+                }
+
+                if (branchToCombo.SelectedIndex > 0)
+                {
+                    sqlCommand = sqlCommand + " AND BRANCH_ID_TO = " + selectedBranchToID;
+                }
+            }
+                
+            sqlCommand = sqlCommand + " ORDER BY PM_DATETIME ASC";                                
 
             using (rdr = DS.getData(sqlCommand))
             {
@@ -101,7 +133,7 @@ namespace RoyalPetz_ADMIN
                     dataRequestOrderGridView.Columns["ID"].Visible = false;
 
                     dataRequestOrderGridView.Columns["NO MUTASI"].Width = 200;
-                    dataRequestOrderGridView.Columns["TANGGAL MUTASI"].Width = 200;
+                    dataRequestOrderGridView.Columns["TGL MUTASI"].Width = 200;
                     dataRequestOrderGridView.Columns["ASAL MUTASI"].Width = 200;
                     dataRequestOrderGridView.Columns["TUJUAN MUTASI"].Width = 200;
                     dataRequestOrderGridView.Columns["TOTAL"].Width = 200;
@@ -116,7 +148,8 @@ namespace RoyalPetz_ADMIN
 
         private void dataMutasiBarangForm_Load(object sender, EventArgs e)
         {
-
+            fillInBranchCombo(branchFromCombo, branchFromComboHidden);
+            fillInBranchCombo(branchToCombo, branchToComboHidden);
         }
 
         private void dataMutasiBarangForm_Deactivate(object sender, EventArgs e)
@@ -126,7 +159,7 @@ namespace RoyalPetz_ADMIN
 
         private void dataMutasiBarangForm_Activated(object sender, EventArgs e)
         {
-            loadROdata();
+            //loadROdata();
         }
 
         private void dataRequestOrderGridView_KeyPress(object sender, KeyPressEventArgs e)
@@ -147,5 +180,44 @@ namespace RoyalPetz_ADMIN
                 displaySpecificForm(selectedROID);
             }
         }
+
+        private void fillInBranchCombo(ComboBox visibleCombo, ComboBox hiddenCombo)
+        {
+            MySqlDataReader rdr;
+            string sqlCommand = "";
+
+            sqlCommand = "SELECT BRANCH_ID, BRANCH_NAME FROM MASTER_BRANCH WHERE BRANCH_ACTIVE = 1 ORDER BY BRANCH_NAME ASC";
+
+            visibleCombo.Items.Clear();
+            hiddenCombo.Items.Clear();
+
+            using (rdr = DS.getData(sqlCommand))
+            {
+                while (rdr.Read())
+                {
+                    visibleCombo.Items.Add(rdr.GetString("BRANCH_NAME"));
+                    hiddenCombo.Items.Add(rdr.GetString("BRANCH_ID"));
+                }
+            }
+
+            rdr.Close();
+        }
+
+        private void displayButton_Click(object sender, EventArgs e)
+        {
+            loadROdata();
+        }
+
+        private void branchFromCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedBranchFromID = Convert.ToInt32(branchFromComboHidden.Items[branchFromCombo.SelectedIndex]);
+        }
+
+        private void branchToCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedBranchToID = Convert.ToInt32(branchToComboHidden.Items[branchToCombo.SelectedIndex]);
+        }
+
+
     }
 }

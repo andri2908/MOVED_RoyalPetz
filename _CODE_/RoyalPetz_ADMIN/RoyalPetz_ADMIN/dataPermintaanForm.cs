@@ -138,9 +138,11 @@ namespace RoyalPetz_ADMIN
                     sqlCommand = sqlCommand + " AND RO_INVOICE LIKE '%" + noROInvoiceTextBox.Text + "%'";
                 }
 
-                dateFrom = String.Format(culture, "{0:dd-MM-yyyy}", Convert.ToDateTime(RODtPicker_1.Value));
-                dateTo = String.Format(culture, "{0:dd-MM-yyyy}", Convert.ToDateTime(RODtPicker_2.Value));
-                sqlCommand = sqlCommand + " AND DATE_FORMAT(RO_DATETIME, '%d-%m-%Y')  >= '" + dateFrom + "' AND DATE_FORMAT(RO_DATETIME, '%d-%m-%Y')  <= '" + dateTo + "'";
+                //dateFrom = String.Format(culture, "{0:dd-MM-yyyy}", Convert.ToDateTime(RODtPicker_1.Value));
+                //dateTo = String.Format(culture, "{0:dd-MM-yyyy}", Convert.ToDateTime(RODtPicker_2.Value));
+                dateFrom = String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(RODtPicker_1.Value));
+                dateTo= String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(RODtPicker_2.Value));
+                sqlCommand = sqlCommand + " AND DATE_FORMAT(RO_DATETIME, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(RO_DATETIME, '%Y%m%d')  <= '" + dateTo + "'";
 
                 if (branchFromCombo.SelectedIndex > 0)
                 {

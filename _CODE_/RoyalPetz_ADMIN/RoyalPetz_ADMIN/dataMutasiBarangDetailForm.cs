@@ -563,6 +563,18 @@ namespace RoyalPetz_ADMIN
             detailRequestOrderDataGridView.Columns.Add(productIDColumn);
         }
 
+        private bool roInvoiceAvailable()
+        {
+            bool result = false;
+            string roInvoice;
+
+            roInvoice = DS.getDataSingleValue("SELECT RO_INVOICE FROM PRODUCTS_MUTATION_HEADER WHERE PM_INVOICE = '" + selectedPMInvoice + "'").ToString();
+            if (roInvoice.Length>0)
+                result = true;
+
+            return result;
+        }
+
         private void dataMutasiBarangDetailForm_Load(object sender, EventArgs e)
         {
             errorLabel.Text = "";
@@ -629,13 +641,30 @@ namespace RoyalPetz_ADMIN
                 fillInBranchCombo(branchFromCombo, branchFromComboHidden);
                 fillInBranchCombo(branchToCombo, branchToComboHidden);
 
+
                 detailRequestOrderDataGridView.AllowUserToAddRows = true;
             
+            }
+
+            if (!roInvoiceAvailable())
+            {
+                label1.Visible = false;
+                label14.Visible = false;
+                ROInvoiceTextBox.Visible = false;
+
+                label9.Visible = false;
+                label6.Visible = false;
+                RODateTimePicker.Visible = false;
+
+                label7.Visible = false;
+                label5.Visible = false;
+                ROExpiredDateTimePicker.Visible = false;
+
                 totalApproved.Visible = false;
                 totalApprovedLabel.Visible = false;
                 label13.Visible = false;
             }
-            
+
             isLoading = false;
 
             detailRequestOrderDataGridView.EditingControlShowing += detailRequestOrderDataGridView_EditingControlShowing;
