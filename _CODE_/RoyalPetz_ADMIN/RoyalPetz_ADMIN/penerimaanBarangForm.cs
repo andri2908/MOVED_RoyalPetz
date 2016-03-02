@@ -12,9 +12,23 @@ namespace RoyalPetz_ADMIN
 {
     public partial class penerimaanBarangForm : Form
     {
+        string selectedPMInvoice;
+
         public penerimaanBarangForm()
         {
             InitializeComponent();
+        }
+
+        public penerimaanBarangForm(string pmInvoice)
+        {
+            InitializeComponent();
+
+            selectedPMInvoice = pmInvoice;
+        }
+
+        private void penerimaanBarangForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
