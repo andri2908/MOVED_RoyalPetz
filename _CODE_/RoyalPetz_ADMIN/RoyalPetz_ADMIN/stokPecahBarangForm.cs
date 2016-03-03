@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.Globalization;
 
 namespace RoyalPetz_ADMIN
 {
@@ -26,7 +27,9 @@ namespace RoyalPetz_ADMIN
 
         private Data_Access DS = new Data_Access();
         private string previousInput = "";
+        private string previousInputActual = "";
         private globalUtilities gUtil = new globalUtilities();
+        private CultureInfo culture = new CultureInfo("id-ID");
 
         public stokPecahBarangForm()
         {
@@ -172,6 +175,8 @@ namespace RoyalPetz_ADMIN
             loadUnitInformation();
 
             loadCategoryInformation();
+
+            gUtil.reArrangeTabOrder(this);
         }
 
         private double getNewUnitConverterValue()
@@ -196,6 +201,7 @@ namespace RoyalPetz_ADMIN
 
                 result = Math.Round(tempValue * newUnitConverter,2);
                 resultTextBox.Text = result.ToString();
+                actualQtyTextBox.Text = result.ToString();
             }
             else
             {
@@ -203,9 +209,17 @@ namespace RoyalPetz_ADMIN
             }
         }
 
+        private bool isValidQtyInput(string textToCheck)
+        {
+            if (gUtil.matchRegEx(textToCheck, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL) && (!textToCheck.Equals("")) && (!textToCheck.Equals(".")))
+                return true;
+
+            return false;
+        }
+
         private void numberOfProductTextBox_TextChanged(object sender, EventArgs e)
         {
-            if ( gUtil.matchRegEx(numberOfProductTextBox.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL) && (!numberOfProductTextBox.Text.Equals("")) && (!numberOfProductTextBox.Text.Equals(".")) )
+            if (isValidQtyInput(numberOfProductTextBox.Text))
             {
                 previousInput = numberOfProductTextBox.Text;
                 calculateResultForNewProduct();
@@ -225,8 +239,19 @@ namespace RoyalPetz_ADMIN
         {
             bool result = false;
             string sqlCommand = "";
+            double calculatedResult = 0;
+            double actualResult = 0;
+            double productLoss = 0;
+            string selectedDate = DateTime.Now.ToString();
+            string pl_Date = String.Format(culture, "{0:dd-MM-yyyy}", Convert.ToDateTime(selectedDate));
+
 
             DS.beginTransaction();
+
+            calculatedResult = Convert.ToDouble(resultTextBox.Text);
+            actualResult = Convert.ToDouble(actualQtyTextBox.Text);
+
+            productLoss = calculatedResult - actualResult;
 
             try
             {
@@ -237,8 +262,16 @@ namespace RoyalPetz_ADMIN
                 DS.executeNonQueryCommand(sqlCommand);
 
                 //INCREASE NEW STOCK QTY
-                sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY + " + Convert.ToDouble(resultTextBox.Text) + " WHERE ID = " + newSelectedInternalProductID;
+                sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY + " + actualResult + " WHERE ID = " + newSelectedInternalProductID;
                 DS.executeNonQueryCommand(sqlCommand);
+
+                if (actualResult < calculatedResult)
+                {
+                    // INSERT INTO PRODUCT LOSS TABLE
+                    sqlCommand = "INSERT INTO PRODUCT_LOSS (PL_DATETIME, PRODUCT_ID, PRODUCT_QTY, NEW_PRODUCT_ID, NEW_PRODUCT_QTY, TOTAL_LOSS) " +
+                                        "VALUES (STR_TO_DATE('" + pl_Date + "', '%d-%m-%Y'), " + selectedInternalProductID + ", " + Convert.ToDouble(numberOfProductTextBox.Text) + ", " + newSelectedInternalProductID + ", " + Convert.ToDouble(resultTextBox.Text) + ", " + productLoss + ")";
+                    DS.executeNonQueryCommand(sqlCommand);
+                }
 
                 DS.commit();
             }
@@ -288,6 +321,20 @@ namespace RoyalPetz_ADMIN
 
                 stockTextBox.Text = (currentStockQty - Convert.ToDouble(numberOfProductTextBox.Text)).ToString();
 
+            }
+        }
+
+        private void actualQtyTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if ( (isValidQtyInput(actualQtyTextBox.Text)) 
+                && (Convert.ToDouble(actualQtyTextBox.Text) <= Convert.ToDouble(resultTextBox.Text))
+               )
+            {
+                previousInput = actualQtyTextBox.Text;
+            }
+            else
+            {
+                actualQtyTextBox.Text = previousInput;
             }
         }
     }

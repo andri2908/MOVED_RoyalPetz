@@ -57,6 +57,7 @@
             this.dataProdukGridView.Size = new System.Drawing.Size(669, 474);
             this.dataProdukGridView.TabIndex = 0;
             this.dataProdukGridView.DoubleClick += new System.EventHandler(this.tagProdukDataGridView_DoubleClick);
+            this.dataProdukGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataProdukGridView_KeyDown);
             this.dataProdukGridView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tagProdukDataGridView_KeyPress);
             // 
             // namaProdukTextBox

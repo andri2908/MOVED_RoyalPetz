@@ -298,8 +298,7 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripMenuItem66_Click(object sender, EventArgs e)
         {
-            dataMutasiBarangForm displayedForm = new dataMutasiBarangForm(globalConstants.PENERIMAAN_BARANG);
-            displayedForm.ShowDialog(this);
+            
         }
 
         private void toolStripMenuItem19_Click(object sender, EventArgs e)
@@ -481,6 +480,11 @@ namespace RoyalPetz_ADMIN
             displayForm.ShowDialog(this); 
             //dataMutasiBarangDetailForm displayForm = new dataMutasiBarangDetailForm(globalConstants.MUTASI_BARANG);
             //displayForm.ShowDialog(this);
+        }
+        private void toolStripMenuItem11_Click_1(object sender, EventArgs e)
+        {
+            dataMutasiBarangForm displayedForm = new dataMutasiBarangForm(globalConstants.PENERIMAAN_BARANG);
+            displayedForm.ShowDialog(this);
         }
     }
 }

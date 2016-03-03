@@ -123,6 +123,8 @@
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -597,6 +599,9 @@
             // toolStripMenuItem66
             // 
             this.toolStripMenuItem66.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem66.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem11,
+            this.toolStripMenuItem12});
             this.toolStripMenuItem66.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripMenuItem66.Name = "toolStripMenuItem66";
             this.toolStripMenuItem66.ShowShortcutKeys = false;
@@ -1060,6 +1065,24 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 69);
             // 
+            // toolStripMenuItem11
+            // 
+            this.toolStripMenuItem11.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem11.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem11.Name = "toolStripMenuItem11";
+            this.toolStripMenuItem11.ShowShortcutKeys = false;
+            this.toolStripMenuItem11.Size = new System.Drawing.Size(205, 22);
+            this.toolStripMenuItem11.Text = "Dari Mutasi Barang";
+            this.toolStripMenuItem11.Click += new System.EventHandler(this.toolStripMenuItem11_Click_1);
+            // 
+            // toolStripMenuItem12
+            // 
+            this.toolStripMenuItem12.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem12.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem12.Name = "toolStripMenuItem12";
+            this.toolStripMenuItem12.ShowShortcutKeys = false;
+            this.toolStripMenuItem12.Size = new System.Drawing.Size(205, 22);
+            this.toolStripMenuItem12.Text = "Dari PO";
             // adminForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1188,6 +1211,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripStatusLabel welcomeLabel;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem11;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem12;
     }
 }
 
