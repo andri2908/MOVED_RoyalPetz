@@ -374,7 +374,8 @@ namespace RoyalPetz_ADMIN
             if (saveData())
             {
                 exportDataRO();
-                MessageBox.Show("SUCCESS");
+                gUtil.showSuccess(gUtil.UPD);
+                //MessageBox.Show("SUCCESS");
             }
         }
 
@@ -450,46 +451,7 @@ namespace RoyalPetz_ADMIN
 
         private void permintaanProdukForm_Load(object sender, EventArgs e)
         {
-            errorLabel.Text = "";
-            fillInBranchFromCombo();
-            fillInProductNameCombo();
-
-            detailRequestOrderDataGridView.EditingControlShowing += detailRequestOrderDataGridView_EditingControlShowing;
-
-            if (originModuleID == globalConstants.EDIT_REQUEST_ORDER)
-            {
-                isLoading = true;
-
-                loadDataHeaderRO();
-                selectedROInvoice = ROinvoiceTextBox.Text;
-                ROinvoiceTextBox.ReadOnly = true;
-
-                branchFromCombo.Text = getBranchName(selectedBranchFromID);
-                branchToCombo.Text = getBranchName(selectedBranchToID);
-
-                loadDataDetailRO();
-
-                if (isExportedRO())
-                {
-                    ROinvoiceTextBox.ReadOnly = true;
-                    RODateTimePicker.Enabled = false;
-                    branchFromCombo.Enabled = false;
-                    branchToCombo.Enabled = false;
-                    durationTextBox.ReadOnly = true;
-                    detailRequestOrderDataGridView.ReadOnly = true;
-                    detailRequestOrderDataGridView.AllowUserToAddRows = false;
-
-                    //saveButton.Enabled = false;
-                    //generateButton.Enabled = false;
-                    //exportButton.Enabled = false;
-
-                    saveButton.Visible = false;
-                    generateButton.Visible = false;
-                    exportButton.Visible = false;
-                }
-                
-                isLoading = false;
-            }
+            gUtil.reArrangeTabOrder(this);            
         }
 
         private bool invoiceExist()
@@ -734,7 +696,8 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
-                MessageBox.Show("SUCCESS");               
+                //MessageBox.Show("SUCCESS");
+                gUtil.showSuccess(gUtil.UPD);        
             }
         }
 
@@ -776,6 +739,55 @@ namespace RoyalPetz_ADMIN
             }
 
             return result;
+        }
+
+        private void permintaanProdukForm_Activated(object sender, EventArgs e)
+        {
+            errorLabel.Text = "";
+            fillInBranchFromCombo();
+            fillInProductNameCombo();
+
+            detailRequestOrderDataGridView.EditingControlShowing += detailRequestOrderDataGridView_EditingControlShowing;
+
+            if (originModuleID == globalConstants.EDIT_REQUEST_ORDER)
+            {
+                isLoading = true;
+
+                loadDataHeaderRO();
+                selectedROInvoice = ROinvoiceTextBox.Text;
+                ROinvoiceTextBox.ReadOnly = true;
+
+                branchFromCombo.Text = getBranchName(selectedBranchFromID);
+                branchToCombo.Text = getBranchName(selectedBranchToID);
+
+                loadDataDetailRO();
+
+                if (isExportedRO())
+                {
+                    ROinvoiceTextBox.ReadOnly = true;
+                    RODateTimePicker.Enabled = false;
+                    branchFromCombo.Enabled = false;
+                    branchToCombo.Enabled = false;
+                    durationTextBox.ReadOnly = true;
+                    detailRequestOrderDataGridView.ReadOnly = true;
+                    detailRequestOrderDataGridView.AllowUserToAddRows = false;
+
+                    //saveButton.Enabled = false;
+                    //generateButton.Enabled = false;
+                    //exportButton.Enabled = false;
+
+                    saveButton.Visible = false;
+                    generateButton.Visible = false;
+                    exportButton.Visible = false;
+                }
+
+                isLoading = false;
+            }
+        }
+
+        private void generateButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

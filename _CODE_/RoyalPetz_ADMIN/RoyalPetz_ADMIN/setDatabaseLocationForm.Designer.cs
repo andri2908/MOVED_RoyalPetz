@@ -48,17 +48,17 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 353F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 354F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label4, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.localhostRadioButton, 2, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 45);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 36);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(479, 113);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(487, 113);
             this.tableLayoutPanel1.TabIndex = 15;
             // 
             // label2
@@ -79,7 +79,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(113, 23);
+            this.label4.Location = new System.Drawing.Point(120, 23);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(9, 18);
             this.label4.TabIndex = 10;
@@ -91,7 +91,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.serverIPRadioButton, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.ipAddressMaskedTextbox, 0, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(128, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(135, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -131,7 +131,7 @@
             this.localhostRadioButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.localhostRadioButton.AutoSize = true;
             this.localhostRadioButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.localhostRadioButton.Location = new System.Drawing.Point(128, 78);
+            this.localhostRadioButton.Location = new System.Drawing.Point(135, 78);
             this.localhostRadioButton.Name = "localhostRadioButton";
             this.localhostRadioButton.Size = new System.Drawing.Size(134, 22);
             this.localhostRadioButton.TabIndex = 20;
@@ -145,7 +145,7 @@
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.panel1.BackColor = System.Drawing.Color.SteelBlue;
-            this.panel1.Location = new System.Drawing.Point(1, 3);
+            this.panel1.Location = new System.Drawing.Point(1, 1);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(487, 29);
             this.panel1.TabIndex = 18;
@@ -154,7 +154,7 @@
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(180, 178);
+            this.saveButton.Location = new System.Drawing.Point(190, 164);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(108, 37);
             this.saveButton.TabIndex = 16;
@@ -166,7 +166,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(482, 245);
+            this.ClientSize = new System.Drawing.Size(489, 215);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.saveButton);
@@ -176,6 +176,8 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pengaturan Lokasi Database";
+            this.Activated += new System.EventHandler(this.setDatabaseLocationForm_Activated);
+            this.Load += new System.EventHandler(this.setDatabaseLocationForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);

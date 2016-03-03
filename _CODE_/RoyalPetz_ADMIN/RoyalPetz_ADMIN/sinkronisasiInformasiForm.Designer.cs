@@ -191,6 +191,8 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sinkronisasi Informasi";
+            this.Activated += new System.EventHandler(this.sinkronisasiInformasiForm_Activated);
+            this.Load += new System.EventHandler(this.sinkronisasiInformasiForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();

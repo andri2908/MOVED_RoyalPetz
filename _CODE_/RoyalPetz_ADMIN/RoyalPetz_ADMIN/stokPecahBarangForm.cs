@@ -168,14 +168,6 @@ namespace RoyalPetz_ADMIN
 
         private void stokPecahBarangForm_Load(object sender, EventArgs e)
         {
-            errorLabel.Text = "";
-
-            loadProductInformation();
-
-            loadUnitInformation();
-
-            loadCategoryInformation();
-
             gUtil.reArrangeTabOrder(this);
         }
 
@@ -317,8 +309,8 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
-                MessageBox.Show("SUCCESS");
-
+                //MessageBox.Show("SUCCESS");
+                gUtil.showSuccess(gUtil.UPD);
                 stockTextBox.Text = (currentStockQty - Convert.ToDouble(numberOfProductTextBox.Text)).ToString();
 
             }
@@ -336,6 +328,18 @@ namespace RoyalPetz_ADMIN
             {
                 actualQtyTextBox.Text = previousInput;
             }
+        }
+
+        private void stokPecahBarangForm_Activated(object sender, EventArgs e)
+        {
+
+            errorLabel.Text = "";
+
+            loadProductInformation();
+
+            loadUnitInformation();
+
+            loadCategoryInformation();
         }
     }
 }

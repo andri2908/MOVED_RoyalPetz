@@ -12,9 +12,20 @@ namespace RoyalPetz_ADMIN
 {
     public partial class pembayaranHutangForm : Form
     {
+        private globalUtilities gutil = new globalUtilities();
         public pembayaranHutangForm()
         {
             InitializeComponent();
+        }
+
+        private void pembayaranHutangForm_Load(object sender, EventArgs e)
+        {
+            gutil.reArrangeTabOrder(this);
+        }
+
+        private void pembayaranHutangForm_Activated(object sender, EventArgs e)
+        {
+            //if need something
         }
     }
 }

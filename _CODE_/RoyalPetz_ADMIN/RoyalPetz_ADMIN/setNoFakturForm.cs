@@ -12,9 +12,25 @@ namespace RoyalPetz_ADMIN
 {
     public partial class setNoFakturForm : Form
     {
+        private globalUtilities gutil = new globalUtilities();
         public setNoFakturForm()
         {
             InitializeComponent();
+        }
+
+        private void setNoFakturForm_Load(object sender, EventArgs e)
+        {
+            gutil.reArrangeTabOrder(this);
+        }
+
+        private void setNoFakturForm_Activated(object sender, EventArgs e)
+        {
+            //if need something
+        }
+
+        private void resetbutton_Click(object sender, EventArgs e)
+        {
+            gutil.ResetAllControls(this);
         }
     }
 }

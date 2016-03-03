@@ -12,6 +12,8 @@ namespace RoyalPetz_ADMIN
 {
     public partial class sinkronisasiInformasiForm : Form
     {
+        private globalUtilities gutil = new globalUtilities();
+
         public sinkronisasiInformasiForm()
         {
             InitializeComponent();
@@ -40,5 +42,14 @@ namespace RoyalPetz_ADMIN
             MessageBox.Show(saveFileDialog1.FileName);
         }
 
+        private void sinkronisasiInformasiForm_Load(object sender, EventArgs e)
+        {
+            gutil.reArrangeTabOrder(this);
+        }
+
+        private void sinkronisasiInformasiForm_Activated(object sender, EventArgs e)
+        {
+            //if need something
+        }
     }
 }

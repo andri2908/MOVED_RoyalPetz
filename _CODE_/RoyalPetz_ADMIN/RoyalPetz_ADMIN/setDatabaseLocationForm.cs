@@ -12,6 +12,7 @@ namespace RoyalPetz_ADMIN
 {
     public partial class setDatabaseLocationForm : Form
     {
+        private globalUtilities gutil = new globalUtilities();
         public setDatabaseLocationForm()
         {
             InitializeComponent();
@@ -57,6 +58,16 @@ namespace RoyalPetz_ADMIN
                 localhostRadioButton.Checked = false;
                 serverIPRadioButton.Checked = true;
             }
+        }
+
+        private void setDatabaseLocationForm_Load(object sender, EventArgs e)
+        {
+            gutil.reArrangeTabOrder(this);
+        }
+
+        private void setDatabaseLocationForm_Activated(object sender, EventArgs e)
+        {
+            //if need something
         }
     }
 }

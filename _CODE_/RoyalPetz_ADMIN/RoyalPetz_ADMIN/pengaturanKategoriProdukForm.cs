@@ -25,6 +25,7 @@ namespace RoyalPetz_ADMIN
         private int selectedCategoryID = 0;
         private Data_Access DS = new Data_Access();
         private List<categoryProduct> categoryProductValue = new List<categoryProduct>();
+        private globalUtilities gutil = new globalUtilities();
         
         public pengaturanKategoriProdukForm()
         {
@@ -104,8 +105,9 @@ namespace RoyalPetz_ADMIN
 
         private void pengaturanKategoriProdukForm_Load(object sender, EventArgs e)
         {
-            loadKategoriInformation();
+            //loadKategoriInformation();
             //fillInDummydata();
+            gutil.reArrangeTabOrder(this);
         }
 
         private void namaProdukTextbox_TextChanged(object sender, EventArgs e)
@@ -231,12 +233,13 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
-                MessageBox.Show("SUCCESS");
+                //MessageBox.Show("SUCCESS");
+                gutil.showSuccess(gutil.UPD);
+                //gutil.ResetAllControls(this); //notneeded?
                 pengaturanKategoriDataGridView.Rows.Clear();
                 categoryProductValue.Clear();
                 namaProdukTextbox.ReadOnly = false;
                 namaProdukTextbox.BackColor = Color.White;
-
 
                 loadProdukName();
             }
@@ -245,6 +248,11 @@ namespace RoyalPetz_ADMIN
         private void pengaturanKategoriDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
           
+        }
+
+        private void pengaturanKategoriProdukForm_Activated(object sender, EventArgs e)
+        {
+            loadKategoriInformation();
         }
     }
 }

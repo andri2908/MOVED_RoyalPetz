@@ -13,6 +13,7 @@ namespace RoyalPetz_ADMIN
     public partial class penerimaanBarangForm : Form
     {
         string selectedPMInvoice;
+        private globalUtilities gutil = new globalUtilities();
 
         public penerimaanBarangForm()
         {
@@ -28,7 +29,12 @@ namespace RoyalPetz_ADMIN
 
         private void penerimaanBarangForm_Load(object sender, EventArgs e)
         {
+            gutil.reArrangeTabOrder(this);
+        }
 
+        private void penerimaanBarangForm_Activated(object sender, EventArgs e)
+        {
+            //if need something
         }
     }
 }

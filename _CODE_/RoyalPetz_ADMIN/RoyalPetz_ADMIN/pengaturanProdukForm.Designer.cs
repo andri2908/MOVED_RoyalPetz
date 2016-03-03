@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.namaProdukTextBox = new System.Windows.Forms.TextBox();
             this.dataProdukDataGridView = new System.Windows.Forms.DataGridView();
-            this.saveButton = new System.Windows.Forms.Button();
             this.CHANGED = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kodeProduk = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.namaProduk = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.saveButton = new System.Windows.Forms.Button();
             this.errorLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataProdukDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -66,14 +66,14 @@
             this.dataProdukDataGridView.AllowUserToAddRows = false;
             this.dataProdukDataGridView.AllowUserToDeleteRows = false;
             this.dataProdukDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataProdukDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataProdukDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataProdukDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataProdukDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CHANGED,
@@ -87,17 +87,6 @@
             this.dataProdukDataGridView.Size = new System.Drawing.Size(984, 501);
             this.dataProdukDataGridView.TabIndex = 35;
             this.dataProdukDataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataProdukDataGridView_CellValidated);
-            // 
-            // saveButton
-            // 
-            this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(484, 21);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(95, 37);
-            this.saveButton.TabIndex = 36;
-            this.saveButton.Text = "SAVE";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // CHANGED
             // 
@@ -124,6 +113,17 @@
             this.namaProduk.Name = "namaProduk";
             this.namaProduk.ReadOnly = true;
             this.namaProduk.Width = 350;
+            // 
+            // saveButton
+            // 
+            this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveButton.Location = new System.Drawing.Point(484, 21);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(95, 37);
+            this.saveButton.TabIndex = 36;
+            this.saveButton.Text = "SAVE";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // errorLabel
             // 
@@ -155,6 +155,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PENGATURAN PRODUK";
+            this.Activated += new System.EventHandler(this.pengaturanProdukForm_Activated);
             this.Load += new System.EventHandler(this.pengaturanProdukForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataProdukDataGridView)).EndInit();
             this.ResumeLayout(false);

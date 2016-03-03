@@ -12,6 +12,7 @@ namespace RoyalPetz_ADMIN
 {
     public partial class pengaturanPotonganHargaForm : Form
     {
+        private globalUtilities gutil= new globalUtilities();
         public pengaturanPotonganHargaForm()
         {
             InitializeComponent();
@@ -31,6 +32,12 @@ namespace RoyalPetz_ADMIN
         }
 
         private void pengaturanPotonganHargaForm_Load(object sender, EventArgs e)
+        {
+            //fillInDummydata();
+            gutil.reArrangeTabOrder(this);
+        }
+
+        private void pengaturanPotonganHargaForm_Activated(object sender, EventArgs e)
         {
             fillInDummydata();
         }
