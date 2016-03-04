@@ -477,7 +477,7 @@ CREATE TABLE `purchase_detail` (
   `PRODUCT_QTY` double DEFAULT NULL,
   `PURCHASE_SUBTOTAL` double DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -486,7 +486,6 @@ CREATE TABLE `purchase_detail` (
 
 LOCK TABLES `purchase_detail` WRITE;
 /*!40000 ALTER TABLE `purchase_detail` DISABLE KEYS */;
-INSERT INTO `purchase_detail` VALUES (1,'PO001','KRG001',2000,2,4000),(2,'PO001','SAK001',1,3,3),(3,'1321','213',2,1,2),(9,'PO002','213',10,2,20),(13,'PO003','123',11,11,121),(14,'PO003','SAK001',20,20,400);
 /*!40000 ALTER TABLE `purchase_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -505,12 +504,11 @@ CREATE TABLE `purchase_header` (
   `PURCHASE_TOTAL` double DEFAULT NULL,
   `PURCHASE_TERM_OF_PAYMENT` tinyint(3) unsigned DEFAULT NULL,
   `PURCHASE_TERM_OF_PAYMENT_DATE` date DEFAULT NULL,
-  `PURCHASE_PAID` tinyint(3) unsigned DEFAULT '0',
-  `PURCHASE_SENT` tinyint(3) unsigned DEFAULT '0',
-  `RO_INVOICE` varchar(30) DEFAULT NULL,
+  `PURCHASE_PAID` tinyint(3) unsigned DEFAULT NULL,
+  `PURCHASE_SENT` tinyint(3) unsigned DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `PURCHASE_INVOICE_UNIQUE` (`PURCHASE_INVOICE`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -519,7 +517,6 @@ CREATE TABLE `purchase_header` (
 
 LOCK TABLES `purchase_header` WRITE;
 /*!40000 ALTER TABLE `purchase_header` DISABLE KEYS */;
-INSERT INTO `purchase_header` VALUES (2,'PO001',1,'2016-03-04',4003,1,'2016-03-14',0,0,'REQ001'),(3,'1321',1,'2016-03-04',2,0,'2016-03-04',0,0,NULL),(4,'PO002',1,'2016-03-04',20,1,'2016-03-24',0,0,NULL),(5,'PO003',1,'2016-03-04',521,0,'2016-03-04',0,0,NULL);
 /*!40000 ALTER TABLE `purchase_header` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -538,7 +535,7 @@ CREATE TABLE `request_order_detail` (
   `RO_QTY` double DEFAULT NULL,
   `RO_SUBTOTAL` double DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -547,7 +544,7 @@ CREATE TABLE `request_order_detail` (
 
 LOCK TABLES `request_order_detail` WRITE;
 /*!40000 ALTER TABLE `request_order_detail` DISABLE KEYS */;
-INSERT INTO `request_order_detail` VALUES (17,'123','213',10,2,20),(24,'1111','KRG001',110,1,110),(25,'1111','SAK001',10,2,20),(26,'1111','KRG001',110,1,110),(27,'1111','SAK001',10,2,20),(28,'1111','KRG001',110,1,110),(29,'1111','SAK001',10,2,20),(31,'132','KRG001',110,4,440),(32,'11','213',10,1,10),(33,'REQ001','KRG001',2000,2,4000),(34,'REQ001','SAK001',1,3,3);
+INSERT INTO `request_order_detail` VALUES (17,'123','213',10,2,20),(24,'1111','KRG001',110,1,110),(25,'1111','SAK001',10,2,20),(26,'1111','KRG001',110,1,110),(27,'1111','SAK001',10,2,20),(28,'1111','KRG001',110,1,110),(29,'1111','SAK001',10,2,20),(31,'132','KRG001',110,4,440),(32,'11','213',10,1,10);
 /*!40000 ALTER TABLE `request_order_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -570,7 +567,7 @@ CREATE TABLE `request_order_header` (
   `RO_EXPORTED` tinyint(4) unsigned DEFAULT '0',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `RO_INVOICE_UNIQUE` (`RO_INVOICE`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -579,7 +576,7 @@ CREATE TABLE `request_order_header` (
 
 LOCK TABLES `request_order_header` WRITE;
 /*!40000 ALTER TABLE `request_order_header` DISABLE KEYS */;
-INSERT INTO `request_order_header` VALUES (1,'123',1,2,'2016-02-23',20,'2016-02-25',1,0),(3,'11',1,2,'2016-02-23',230,'2016-02-25',1,1),(4,'1111',2,1,'2016-02-23',0,'2016-02-24',1,1),(5,'132',1,2,'2016-02-26',0,'2016-02-27',1,1),(8,'REQ001',1,2,'2016-03-04',4003,'2016-03-05',1,0);
+INSERT INTO `request_order_header` VALUES (1,'123',1,2,'2016-02-23',20,'2016-02-25',1,0),(3,'11',1,2,'2016-02-23',230,'2016-02-25',1,1),(4,'1111',2,1,'2016-02-23',0,'2016-02-24',1,1),(5,'132',1,2,'2016-02-26',0,'2016-02-27',1,1);
 /*!40000 ALTER TABLE `request_order_header` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -643,4 +640,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-04 15:42:03
+-- Dump completed on 2016-03-04  1:35:59
