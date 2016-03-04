@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="aboutusform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="aboutusform.Designer.cs">
+      <DependentUpon>aboutusform.cs</DependentUpon>
+    </Compile>
     <Compile Include="cashierForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -375,6 +382,9 @@
     <Compile Include="TabSchemeProvider.cs">
       <SubType>Component</SubType>
     </Compile>
+    <EmbeddedResource Include="aboutusform.resx">
+      <DependentUpon>aboutusform.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="cashierForm.resx">
       <DependentUpon>cashierForm.cs</DependentUpon>
     </EmbeddedResource>
