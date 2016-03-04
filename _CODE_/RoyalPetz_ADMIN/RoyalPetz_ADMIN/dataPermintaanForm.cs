@@ -209,18 +209,6 @@ namespace RoyalPetz_ADMIN
 
         private void dataRequestOrderGridView_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == 13)
-            {
-                if (dataRequestOrderGridView.Rows.Count <= 0)
-                    return;
-
-                int rowSelectedIndex = (dataRequestOrderGridView.SelectedCells[0].RowIndex)-1;
-                DataGridViewRow selectedRow = dataRequestOrderGridView.Rows[rowSelectedIndex];
-                selectedROID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
-
-                displaySpecificForm(selectedROID);
-            }
-
         }
 
         private void newButton_Click(object sender, EventArgs e)
@@ -335,6 +323,22 @@ namespace RoyalPetz_ADMIN
         private void dataPermintaanForm_Activated(object sender, EventArgs e)
         {
             //if need something
+        }
+        private void dataRequestOrderGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (dataRequestOrderGridView.Rows.Count <= 0)
+                    return;
+
+                int rowSelectedIndex = (dataRequestOrderGridView.SelectedCells[0].RowIndex);
+                DataGridViewRow selectedRow = dataRequestOrderGridView.Rows[rowSelectedIndex];
+                selectedROID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+
+                displaySpecificForm(selectedROID);
+            }
+
+
         }
     }
 }

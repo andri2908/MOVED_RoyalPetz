@@ -44,27 +44,27 @@ namespace RoyalPetz_ADMIN
             switch (originModuleID)
             {
                 case globalConstants.CEK_DATA_MUTASI:
-                    reprintButton.Visible = false;
+                    //reprintButton.Visible = false;
                     break;
 
                 case globalConstants.REPRINT_PERMINTAAN_BARANG:
                     approveButton.Visible = false;
-                    rejectButton.Visible = false;
+                    createPOButton.Visible = false;
                     detailRequestOrderDataGridView.ReadOnly = true;
                     break;
 
                 case globalConstants.MUTASI_BARANG:
                     approveButton.Text = "SAVE MUTASI";
-                    reprintButton.Text = "REPRINT DATA MUTASI";
-                    rejectButton.Visible = false;
+                    //reprintButton.Text = "REPRINT DATA MUTASI";
+                    createPOButton.Visible = false;
 
                     directMutasiBarang = true;
                     break;
 
                 case globalConstants.VIEW_PRODUCT_MUTATION:
                     approveButton.Visible = false;
-                    rejectButton.Visible = false;
-                    reprintButton.Text = "REPRINT DATA MUTASI";
+                    createPOButton.Visible = false;
+                    //reprintButton.Text = "REPRINT DATA MUTASI";
                     detailRequestOrderDataGridView.ReadOnly = true;
                     break;
             }           
@@ -566,12 +566,14 @@ namespace RoyalPetz_ADMIN
         private bool roInvoiceAvailable()
         {
             bool result = false;
-            string roInvoice;
+            object resultQuery;
 
-            roInvoice = DS.getDataSingleValue("SELECT RO_INVOICE FROM PRODUCTS_MUTATION_HEADER WHERE PM_INVOICE = '" + selectedPMInvoice + "'").ToString();
-            if (roInvoice.Length>0)
+            resultQuery = DS.getDataSingleValue("SELECT RO_INVOICE FROM PRODUCTS_MUTATION_HEADER WHERE PM_INVOICE = '" + selectedPMInvoice + "'");
+
+            if (null != resultQuery)
+            {
                 result = true;
-
+            }
             return result;
         }
 
@@ -640,11 +642,11 @@ namespace RoyalPetz_ADMIN
                         }
                         break;
 
-                    case globalConstants.REJECT_PRODUCT_MUTATION:
-                        // UPDATE REQUEST ORDER HEADER TABLE
-                        sqlCommand = "UPDATE REQUEST_ORDER_HEADER SET RO_ACTIVE = 0 WHERE RO_INVOICE = '" + roInvoice + "'";
-                        DS.executeNonQueryCommand(sqlCommand);
-                        break;
+                    //case globalConstants.REJECT_PRODUCT_MUTATION:
+                    //    // UPDATE REQUEST ORDER HEADER TABLE
+                    //    sqlCommand = "UPDATE REQUEST_ORDER_HEADER SET RO_ACTIVE = 0 WHERE RO_INVOICE = '" + roInvoice + "'";
+                    //    DS.executeNonQueryCommand(sqlCommand);
+                    //    break;
                 }
 
                 DS.commit();
@@ -710,9 +712,9 @@ namespace RoyalPetz_ADMIN
                 noMutasiTextBox.ReadOnly = true;
                 PMDateTimePicker.Enabled = false;
                 approveButton.Visible = false;
-                rejectButton.Visible = false;
+                createPOButton.Visible = false;
 
-                reprintButton.Visible = true;
+                //reprintButton.Visible = true;
             }
         }
 
@@ -756,7 +758,7 @@ namespace RoyalPetz_ADMIN
                 detailRequestOrderDataGridView.ReadOnly = true;
                 approveButton.Visible = false;
                 rejectButton.Visible = false;
-                reprintButton.Visible = false;
+                //reprintButton.Visible = false;
             }
         }
 
@@ -780,8 +782,8 @@ namespace RoyalPetz_ADMIN
                     subModuleID = globalConstants.NEW_PRODUCT_MUTATION;
 
                     approveButton.Visible = true;
-                    rejectButton.Visible = true;
-                    reprintButton.Visible = false;
+                    createPOButton.Visible = true;
+                    //reprintButton.Visible = false;
 
                     noMutasiTextBox.Focus();
                 }
@@ -801,8 +803,20 @@ namespace RoyalPetz_ADMIN
                     detailRequestOrderDataGridView.ReadOnly = true;
 
                     approveButton.Visible = false;
-                    rejectButton.Visible = false;
-                    reprintButton.Visible = true;
+                    createPOButton.Visible = false;
+                    //reprintButton.Visible = true;
+
+                    label1.Visible = false;
+                    label14.Visible = false;
+                    ROInvoiceTextBox.Visible = false;
+
+                    label9.Visible = false;
+                    label6.Visible = false;
+                    RODateTimePicker.Visible = false;
+
+                    label7.Visible = false;
+                    label5.Visible = false;
+                    ROExpiredDateTimePicker.Visible = false;
 
                     totalApproved.Visible = false;
                     totalApprovedLabel.Visible = false;
@@ -831,28 +845,64 @@ namespace RoyalPetz_ADMIN
 
             }
 
-            if (!roInvoiceAvailable())
-            {
-                label1.Visible = false;
-                label14.Visible = false;
-                ROInvoiceTextBox.Visible = false;
-
-                label9.Visible = false;
-                label6.Visible = false;
-                RODateTimePicker.Visible = false;
-
-                label7.Visible = false;
-                label5.Visible = false;
-                ROExpiredDateTimePicker.Visible = false;
-
-                totalApproved.Visible = false;
-                totalApprovedLabel.Visible = false;
-                label13.Visible = false;
-            }
-
             isLoading = false;
 
             detailRequestOrderDataGridView.EditingControlShowing += detailRequestOrderDataGridView_EditingControlShowing;
+        }
+
+        private void deleteCurrentRow()
+        {
+            if (detailRequestOrderDataGridView.SelectedCells.Count > 0)
+            {
+                int rowSelectedIndex = detailRequestOrderDataGridView.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[rowSelectedIndex];
+
+                detailRequestOrderDataGridView.Rows.Remove(selectedRow);
+            }
+        }
+
+        private void detailRequestOrderDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (DialogResult.Yes == MessageBox.Show("DELETE CURRENT ROW?", "WARNING", MessageBoxButtons.YesNo))
+                {
+                    deleteCurrentRow();
+                    calculateTotal();
+                }
+            }
+        }
+
+        private void reprintButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private bool isROActive()
+        {
+            bool result = false;
+
+            if (1 == Convert.ToInt32(DS.getDataSingleValue("SELECT RO_ACTIVE FROM REQUEST_ORDER_HEADER WHERE RO_INVOICE = '"+selectedROInvoice+"'")))
+                result = true;
+
+            return result;
+        }
+
+        private void createPOButton_Click(object sender, EventArgs e)
+        {
+            purchaseOrderDetailForm displayedForm = new purchaseOrderDetailForm(globalConstants.PURCHASE_ORDER_DARI_RO, selectedROInvoice);
+            displayedForm.ShowDialog(this);
+
+            if (!isROActive())
+            {
+                detailRequestOrderDataGridView.ReadOnly = true;
+
+                noMutasiTextBox.ReadOnly = true;
+                PMDateTimePicker.Enabled = false;
+                approveButton.Visible = false;
+                createPOButton.Visible = false;
+            }
+
         }
     }
 }

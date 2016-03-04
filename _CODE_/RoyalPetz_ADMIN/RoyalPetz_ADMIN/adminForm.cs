@@ -538,6 +538,17 @@ namespace RoyalPetz_ADMIN
             displayedform.ShowDialog();
         }
 
+        private void toolStripMenuItem36_Click(object sender, EventArgs e)
+        {
+            dataPOForm displayedForm = new dataPOForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem12_Click_1(object sender, EventArgs e)
+        {
+            dataPOForm displayedForm = new dataPOForm(globalConstants.PENERIMAAN_BARANG_DARI_PO);
+            displayedForm.ShowDialog(this);
+        }
         private void fileToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
         {
             fileToolStripMenuItem.ForeColor = Color.Black;

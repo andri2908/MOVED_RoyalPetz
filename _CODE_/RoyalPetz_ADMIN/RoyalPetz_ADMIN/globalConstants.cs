@@ -25,6 +25,7 @@ namespace RoyalPetz_ADMIN
         public const int MUTASI_BARANG = 61;
         public const int PENERIMAAN_BARANG_DARI_MUTASI = 62;
         public const int PENERIMAAN_BARANG_DARI_PO = 63;
+        public const int PURCHASE_ORDER_DARI_RO = 64;
 
         public const int STOK_PECAH_BARANG = 101;
         public const int PENYESUAIAN_STOK = 102;
@@ -59,6 +60,8 @@ namespace RoyalPetz_ADMIN
         public const int NEW_PRODUCT_MUTATION = 219;
         public const int VIEW_PRODUCT_MUTATION = 220;
         public const int REJECT_PRODUCT_MUTATION = 221;
-
+        public const int NEW_PURCHASE_ORDER = 222;
+        public const int EDIT_PURCHASE_ORDER = 223;
+        public const int PRINTOUT_PURCHASE_ORDER = 224;
     }
 }

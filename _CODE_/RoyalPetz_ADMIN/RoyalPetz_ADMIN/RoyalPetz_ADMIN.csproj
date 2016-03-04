@@ -79,6 +79,12 @@
     <Compile Include="dataPermintaanForm.Designer.cs">
       <DependentUpon>dataPermintaanForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="dataPOForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataPOForm.Designer.cs">
+      <DependentUpon>dataPOForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="dataReturPenjualanForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -334,6 +340,12 @@
     <Compile Include="dataProdukDetailForm.Designer.cs">
       <DependentUpon>dataProdukDetailForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="purchaseOrderDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="purchaseOrderDetailForm.Designer.cs">
+      <DependentUpon>purchaseOrderDetailForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="setDatabaseLocationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -399,6 +411,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dataPermintaanForm.resx">
       <DependentUpon>dataPermintaanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataPOForm.resx">
+      <DependentUpon>dataPOForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dataReturPenjualanForm.resx">
       <DependentUpon>dataReturPenjualanForm.cs</DependentUpon>
@@ -528,6 +543,9 @@
     </Compile>
     <EmbeddedResource Include="dataProdukDetailForm.resx">
       <DependentUpon>dataProdukDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="purchaseOrderDetailForm.resx">
+      <DependentUpon>purchaseOrderDetailForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="setDatabaseLocationForm.resx">
       <DependentUpon>setDatabaseLocationForm.cs</DependentUpon>

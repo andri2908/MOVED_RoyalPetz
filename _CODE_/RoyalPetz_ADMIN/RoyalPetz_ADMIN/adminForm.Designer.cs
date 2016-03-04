@@ -76,6 +76,7 @@
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
             this.catatPembelianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem65 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem36 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem66 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
@@ -551,7 +552,7 @@
             this.catatPembelianToolStripMenuItem,
             this.toolStripMenuItem13});
             this.pembelianToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pembelianToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.pembelianToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.pembelianToolStripMenuItem.Name = "pembelianToolStripMenuItem";
             this.pembelianToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
             this.pembelianToolStripMenuItem.Text = "Pembelian";
@@ -584,6 +585,7 @@
             this.catatPembelianToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
             this.catatPembelianToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem65,
+            this.toolStripMenuItem36,
             this.toolStripMenuItem66,
             this.toolStripMenuItem67});
             this.catatPembelianToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
@@ -601,6 +603,16 @@
             this.toolStripMenuItem65.Size = new System.Drawing.Size(235, 22);
             this.toolStripMenuItem65.Text = "Request Order";
             this.toolStripMenuItem65.Click += new System.EventHandler(this.toolStripMenuItem65_Click);
+            // 
+            // toolStripMenuItem36
+            // 
+            this.toolStripMenuItem36.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem36.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem36.Name = "toolStripMenuItem36";
+            this.toolStripMenuItem36.ShowShortcutKeys = false;
+            this.toolStripMenuItem36.Size = new System.Drawing.Size(235, 22);
+            this.toolStripMenuItem36.Text = "Purchase Order";
+            this.toolStripMenuItem36.Click += new System.EventHandler(this.toolStripMenuItem36_Click);
             // 
             // toolStripMenuItem66
             // 
@@ -633,6 +645,7 @@
             this.toolStripMenuItem12.ShowShortcutKeys = false;
             this.toolStripMenuItem12.Size = new System.Drawing.Size(205, 22);
             this.toolStripMenuItem12.Text = "Dari PO";
+            this.toolStripMenuItem12.Click += new System.EventHandler(this.toolStripMenuItem12_Click_1);
             // 
             // toolStripMenuItem67
             // 
@@ -1231,6 +1244,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem11;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem12;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem36;
     }
 }
 

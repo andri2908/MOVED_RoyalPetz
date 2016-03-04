@@ -76,6 +76,7 @@
             this.dataRequestOrderGridView.Size = new System.Drawing.Size(921, 427);
             this.dataRequestOrderGridView.TabIndex = 33;
             this.dataRequestOrderGridView.DoubleClick += new System.EventHandler(this.dataRequestOrderGridView_DoubleClick);
+            this.dataRequestOrderGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataRequestOrderGridView_KeyDown);
             this.dataRequestOrderGridView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataRequestOrderGridView_KeyPress);
             // 
             // displayButton

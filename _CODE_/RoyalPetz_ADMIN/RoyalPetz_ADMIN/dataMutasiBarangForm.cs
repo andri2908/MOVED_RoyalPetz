@@ -54,7 +54,7 @@ namespace RoyalPetz_ADMIN
                     break;
 
                 case globalConstants.PENERIMAAN_BARANG:
-                        penerimaanBarangForm penerimaanBarangDisplayedForm = new penerimaanBarangForm(selectedROID);
+                        penerimaanBarangForm penerimaanBarangDisplayedForm = new penerimaanBarangForm(globalConstants.PENERIMAAN_BARANG_DARI_MUTASI, selectedROID);
                         penerimaanBarangDisplayedForm.ShowDialog(this);
                     break;
             }
@@ -97,7 +97,7 @@ namespace RoyalPetz_ADMIN
             sqlCommand = "SELECT ID, PM_INVOICE AS 'NO MUTASI', PM_DATETIME AS 'TGL MUTASI', M1.BRANCH_NAME AS 'ASAL MUTASI', M2.BRANCH_NAME AS 'TUJUAN MUTASI', PM_TOTAL AS 'TOTAL', RO_INVOICE AS 'NO PERMINTAAN' " +
                                 "FROM PRODUCTS_MUTATION_HEADER LEFT OUTER JOIN MASTER_BRANCH M1 ON (BRANCH_ID_FROM = M1.BRANCH_ID) " +
                                 "LEFT OUTER JOIN MASTER_BRANCH M2 ON (BRANCH_ID_TO = M2.BRANCH_ID) " +
-                                "WHERE 1 = 1";
+                                "WHERE 1 = 1 AND PM_RECEIVED = 0";
 
             if (!showAllCheckBox.Checked)
             {

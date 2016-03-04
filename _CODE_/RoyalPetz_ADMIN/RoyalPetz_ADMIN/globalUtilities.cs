@@ -13,6 +13,7 @@ namespace RoyalPetz_ADMIN
     {
         public const string REGEX_NUMBER_WITH_2_DECIMAL = @"^[0-9]*\.?\d{0,2}$";
         public const string REGEX_NUMBER_ONLY = @"^[0-9]*$";
+        public const string CUSTOM_DATE_FORMAT = "dd MMM yyyy";
         public int INS = 1;
         public int UPD = 2;
 
