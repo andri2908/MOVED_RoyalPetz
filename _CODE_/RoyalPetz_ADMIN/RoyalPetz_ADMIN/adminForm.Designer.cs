@@ -170,6 +170,8 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(159, 20);
             this.fileToolStripMenuItem.Text = "Manajemen Sistem";
+            this.fileToolStripMenuItem.DropDownClosed += new System.EventHandler(this.fileToolStripMenuItem_DropDownClosed);
+            this.fileToolStripMenuItem.DropDownOpened += new System.EventHandler(this.fileToolStripMenuItem_DropDownOpened);
             // 
             // logInToolStripMenuItem
             // 
@@ -363,6 +365,8 @@
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(75, 20);
             this.toolStripMenuItem1.Text = "Gudang";
+            this.toolStripMenuItem1.DropDownClosed += new System.EventHandler(this.toolStripMenuItem1_DropDownClosed);
+            this.toolStripMenuItem1.DropDownOpened += new System.EventHandler(this.toolStripMenuItem1_DropDownOpened);
             // 
             // toolStripMenuItem50
             // 
@@ -547,10 +551,12 @@
             this.catatPembelianToolStripMenuItem,
             this.toolStripMenuItem13});
             this.pembelianToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pembelianToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.pembelianToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.pembelianToolStripMenuItem.Name = "pembelianToolStripMenuItem";
             this.pembelianToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
             this.pembelianToolStripMenuItem.Text = "Pembelian";
+            this.pembelianToolStripMenuItem.DropDownClosed += new System.EventHandler(this.pembelianToolStripMenuItem_DropDownClosed);
+            this.pembelianToolStripMenuItem.DropDownOpened += new System.EventHandler(this.pembelianToolStripMenuItem_DropDownOpened);
             // 
             // toolStripMenuItem7
             // 
@@ -660,6 +666,8 @@
             this.penjualanToolStripMenuItem.Name = "penjualanToolStripMenuItem";
             this.penjualanToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
             this.penjualanToolStripMenuItem.Text = "Penjualan";
+            this.penjualanToolStripMenuItem.DropDownClosed += new System.EventHandler(this.penjualanToolStripMenuItem_DropDownClosed);
+            this.penjualanToolStripMenuItem.DropDownOpened += new System.EventHandler(this.penjualanToolStripMenuItem_DropDownOpened);
             // 
             // toolStripMenuItem17
             // 
@@ -750,6 +758,8 @@
             this.administrasiToolStripMenuItem.Name = "administrasiToolStripMenuItem";
             this.administrasiToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
             this.administrasiToolStripMenuItem.Text = "Keuangan";
+            this.administrasiToolStripMenuItem.DropDownClosed += new System.EventHandler(this.administrasiToolStripMenuItem_DropDownClosed);
+            this.administrasiToolStripMenuItem.DropDownOpened += new System.EventHandler(this.administrasiToolStripMenuItem_DropDownOpened);
             // 
             // accountJurnalToolStripMenuItem
             // 
@@ -818,6 +828,8 @@
             this.toolStripMenuItem25.Name = "toolStripMenuItem25";
             this.toolStripMenuItem25.Size = new System.Drawing.Size(68, 20);
             this.toolStripMenuItem25.Text = "Report";
+            this.toolStripMenuItem25.DropDownClosed += new System.EventHandler(this.toolStripMenuItem25_DropDownClosed);
+            this.toolStripMenuItem25.DropDownOpened += new System.EventHandler(this.toolStripMenuItem25_DropDownOpened);
             // 
             // toolStripMenuItem26
             // 
@@ -839,6 +851,8 @@
             this.toolStripMenuItem74.Name = "toolStripMenuItem74";
             this.toolStripMenuItem74.Size = new System.Drawing.Size(66, 20);
             this.toolStripMenuItem74.Text = "Admin";
+            this.toolStripMenuItem74.DropDownClosed += new System.EventHandler(this.toolStripMenuItem74_DropDownClosed);
+            this.toolStripMenuItem74.DropDownOpened += new System.EventHandler(this.toolStripMenuItem74_DropDownOpened);
             // 
             // toolStripMenuItem27
             // 
@@ -898,13 +912,15 @@
             this.informasiToolStripMenuItem.Name = "informasiToolStripMenuItem";
             this.informasiToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
             this.informasiToolStripMenuItem.Text = "Informasi";
+            this.informasiToolStripMenuItem.DropDownClosed += new System.EventHandler(this.informasiToolStripMenuItem_DropDownClosed);
+            this.informasiToolStripMenuItem.DropDownOpened += new System.EventHandler(this.informasiToolStripMenuItem_DropDownOpened);
             // 
             // developerToolStripMenuItem
             // 
             this.developerToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
             this.developerToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.developerToolStripMenuItem.Name = "developerToolStripMenuItem";
-            this.developerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.developerToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.developerToolStripMenuItem.Text = "Developer";
             this.developerToolStripMenuItem.Click += new System.EventHandler(this.developerToolStripMenuItem_Click);
             // 

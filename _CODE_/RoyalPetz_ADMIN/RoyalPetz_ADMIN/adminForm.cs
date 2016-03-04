@@ -57,7 +57,51 @@ namespace RoyalPetz_ADMIN
 
             }
         }
+        private class MyRenderer : ToolStripProfessionalRenderer
+        {
+            public MyRenderer() : base(new MyColors()) { }
+        }
 
+        private class MyColors : ProfessionalColorTable //color scheme for menustrip
+        {
+            public override Color MenuItemSelected
+            {
+                get { return Color.MediumAquamarine; }
+            }
+            public override Color MenuItemSelectedGradientBegin
+            {
+                get { return Color.Aquamarine; }
+            }
+            public override Color MenuItemSelectedGradientEnd
+            {
+                get { return Color.DarkBlue; }
+            }
+            /*public override Color MenuItemBorder
+            {
+                get { return Color.Green; }
+            }*/
+            public override Color MenuStripGradientBegin
+            {
+                get { return Color.Green; }
+            }
+            public override Color MenuStripGradientEnd
+            {
+                get { return Color.DarkGreen; }
+            }
+            /*public override Color ToolStripGradientBegin
+            {
+                get { return Color.Black; }
+            }
+            public override Color ToolStripGradientEnd //ToolStripDropDownBackground
+            {
+                get { return Color.Black; }
+            }*/
+            public override Color MenuBorder
+            {
+                get { return Color.Black; }
+            }
+        }
+        
         private void adminForm_Load(object sender, EventArgs e)
         {
             if (!System.IO.Directory.Exists("PRODUCT_PHOTO"))
@@ -68,7 +112,7 @@ namespace RoyalPetz_ADMIN
             timer1.Start();
             welcomeLabel.Text = "WELCOME " + DS.getDataSingleValue("SELECT USER_FULL_NAME FROM MASTER_USER WHERE ID = " + selectedUserID).ToString();
             //loadBGimage();
-
+            menuStrip1.Renderer = new MyRenderer();
             gutil.reArrangeTabOrder(this);
         }
 
@@ -335,6 +379,7 @@ namespace RoyalPetz_ADMIN
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            logOutToolStripMenuItem.PerformClick();
             Application.Exit();
         }
 
@@ -491,6 +536,86 @@ namespace RoyalPetz_ADMIN
         {
             AboutUsForm displayedform = new AboutUsForm();
             displayedform.ShowDialog();
+        }
+
+        private void fileToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
+        {
+            fileToolStripMenuItem.ForeColor = Color.Black;
+        }
+
+        private void fileToolStripMenuItem_DropDownClosed(object sender, EventArgs e)
+        {
+            fileToolStripMenuItem.ForeColor = Color.FloralWhite;
+        }
+
+        private void toolStripMenuItem1_DropDownClosed(object sender, EventArgs e)
+        {
+            toolStripMenuItem1.ForeColor = Color.FloralWhite;
+        }
+
+        private void toolStripMenuItem1_DropDownOpened(object sender, EventArgs e)
+        {
+            toolStripMenuItem1.ForeColor = Color.Black;
+        }
+
+        private void pembelianToolStripMenuItem_DropDownClosed(object sender, EventArgs e)
+        {
+            pembelianToolStripMenuItem.ForeColor = Color.FloralWhite;
+        }
+
+        private void pembelianToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
+        {
+            pembelianToolStripMenuItem.ForeColor = Color.Black;
+        }
+
+        private void penjualanToolStripMenuItem_DropDownClosed(object sender, EventArgs e)
+        {
+            penjualanToolStripMenuItem.ForeColor = Color.FloralWhite;
+        }
+
+        private void penjualanToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
+        {
+            penjualanToolStripMenuItem.ForeColor = Color.Black;
+        }
+
+        private void administrasiToolStripMenuItem_DropDownClosed(object sender, EventArgs e)
+        {
+            administrasiToolStripMenuItem.ForeColor = Color.FloralWhite;
+        }
+
+        private void administrasiToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
+        {
+            administrasiToolStripMenuItem.ForeColor = Color.Black;
+        }
+
+        private void toolStripMenuItem25_DropDownClosed(object sender, EventArgs e)
+        {
+            toolStripMenuItem25.ForeColor = Color.FloralWhite;
+        }
+
+        private void toolStripMenuItem25_DropDownOpened(object sender, EventArgs e)
+        {
+            toolStripMenuItem25.ForeColor = Color.Black;
+        }
+
+        private void toolStripMenuItem74_DropDownClosed(object sender, EventArgs e)
+        {
+            toolStripMenuItem74.ForeColor = Color.FloralWhite;
+        }
+
+        private void toolStripMenuItem74_DropDownOpened(object sender, EventArgs e)
+        {
+            toolStripMenuItem74.ForeColor = Color.Black;
+        }
+
+        private void informasiToolStripMenuItem_DropDownClosed(object sender, EventArgs e)
+        {
+            informasiToolStripMenuItem.ForeColor = Color.FloralWhite;
+        }
+
+        private void informasiToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
+        {
+            informasiToolStripMenuItem.ForeColor = Color.Black;
         }
     }
 }
