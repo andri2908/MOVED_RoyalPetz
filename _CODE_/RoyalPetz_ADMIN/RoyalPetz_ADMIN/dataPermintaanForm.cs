@@ -189,6 +189,9 @@ namespace RoyalPetz_ADMIN
 
         private void dataPermintaanForm_Load(object sender, EventArgs e)
         {
+            RODtPicker_1.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+            RODtPicker_2.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+
             fillInBranchCombo(branchFromCombo, branchFromHiddenCombo);
             fillInBranchCombo(branchToCombo, branchToHiddenCombo);
 

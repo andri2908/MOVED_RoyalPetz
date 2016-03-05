@@ -105,10 +105,10 @@
             // RODtPicker_1
             // 
             this.RODtPicker_1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RODtPicker_1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.RODtPicker_1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.RODtPicker_1.Location = new System.Drawing.Point(3, 3);
             this.RODtPicker_1.Name = "RODtPicker_1";
-            this.RODtPicker_1.Size = new System.Drawing.Size(135, 27);
+            this.RODtPicker_1.Size = new System.Drawing.Size(151, 27);
             this.RODtPicker_1.TabIndex = 38;
             // 
             // label3
@@ -158,10 +158,10 @@
             // RODtPicker_2
             // 
             this.RODtPicker_2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RODtPicker_2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.RODtPicker_2.Location = new System.Drawing.Point(166, 3);
+            this.RODtPicker_2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.RODtPicker_2.Location = new System.Drawing.Point(187, 3);
             this.RODtPicker_2.Name = "RODtPicker_2";
-            this.RODtPicker_2.Size = new System.Drawing.Size(136, 27);
+            this.RODtPicker_2.Size = new System.Drawing.Size(145, 27);
             this.RODtPicker_2.TabIndex = 43;
             // 
             // label5
@@ -170,9 +170,9 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label5.Location = new System.Drawing.Point(144, 7);
+            this.label5.Location = new System.Drawing.Point(169, 7);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(16, 18);
+            this.label5.Size = new System.Drawing.Size(12, 18);
             this.label5.TabIndex = 44;
             this.label5.Text = "-";
             // 
@@ -258,9 +258,9 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.40828F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.621302F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.26627F));
             this.tableLayoutPanel2.Controls.Add(this.RODtPicker_1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label5, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.RODtPicker_2, 2, 0);
@@ -268,7 +268,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(311, 33);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(338, 33);
             this.tableLayoutPanel2.TabIndex = 43;
             // 
             // showExpiredCheckBox

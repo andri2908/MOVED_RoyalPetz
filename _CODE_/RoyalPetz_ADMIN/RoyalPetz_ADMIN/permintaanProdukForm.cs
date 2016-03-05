@@ -451,6 +451,13 @@ namespace RoyalPetz_ADMIN
 
         private void permintaanProdukForm_Load(object sender, EventArgs e)
         {
+            RODateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+            
+            fillInBranchFromCombo();
+            fillInProductNameCombo();
+
+            detailRequestOrderDataGridView.EditingControlShowing += detailRequestOrderDataGridView_EditingControlShowing;
+            
             gUtil.reArrangeTabOrder(this);            
         }
 
@@ -697,7 +704,23 @@ namespace RoyalPetz_ADMIN
             if (saveData())
             {
                 //MessageBox.Show("SUCCESS");
-                gUtil.showSuccess(gUtil.UPD);        
+                gUtil.showSuccess(gUtil.UPD);
+
+                ROinvoiceTextBox.ReadOnly = true;
+                RODateTimePicker.Enabled = false;
+                branchFromCombo.Enabled = false;
+                branchToCombo.Enabled = false;
+                durationTextBox.ReadOnly = true;
+                detailRequestOrderDataGridView.ReadOnly = true;
+                detailRequestOrderDataGridView.AllowUserToAddRows = false;
+
+                //saveButton.Enabled = false;
+                //generateButton.Enabled = false;
+                //exportButton.Enabled = false;
+
+                saveButton.Visible = false;
+                generateButton.Visible = false;
+                exportButton.Visible = false;
             }
         }
 
@@ -744,10 +767,8 @@ namespace RoyalPetz_ADMIN
         private void permintaanProdukForm_Activated(object sender, EventArgs e)
         {
             errorLabel.Text = "";
-            fillInBranchFromCombo();
-            fillInProductNameCombo();
 
-            detailRequestOrderDataGridView.EditingControlShowing += detailRequestOrderDataGridView_EditingControlShowing;
+          
 
             if (originModuleID == globalConstants.EDIT_REQUEST_ORDER)
             {

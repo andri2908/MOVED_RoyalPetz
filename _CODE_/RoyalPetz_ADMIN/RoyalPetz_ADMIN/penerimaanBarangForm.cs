@@ -16,7 +16,7 @@ namespace RoyalPetz_ADMIN
 {
     public partial class penerimaanBarangForm : Form
     {
-        string selectedPMInvoice;
+        string selectedInvoice;
         int originModuleId = 0;
         int selectedFromID = 0;
         int selectedToID = 0;
@@ -41,7 +41,7 @@ namespace RoyalPetz_ADMIN
             InitializeComponent();
 
             originModuleId = moduleID;
-            selectedPMInvoice = pmInvoice;
+            selectedInvoice = pmInvoice;
         }
 
         private void initializeScreen()
@@ -56,6 +56,13 @@ namespace RoyalPetz_ADMIN
                     break;
 
                 case globalConstants.PENERIMAAN_BARANG_DARI_PO:
+                    labelNo.Text = "NO PO";
+                    labelTanggal.Text = "TANGGAL PO";
+                    labelAsal.Text = "SUPPLIER";
+                    //labelTujuan.Text = "TUJUAN MUTASI";
+                    labelTujuan.Visible = false;
+                    labelTujuan_1.Visible = false;
+                    branchToTextBox.Visible = false;
                     break;
             }
         }
@@ -68,7 +75,7 @@ namespace RoyalPetz_ADMIN
             switch (originModuleId)
             {
                 case globalConstants.PENERIMAAN_BARANG_DARI_MUTASI:
-                    sqlCommand = "SELECT * FROM PRODUCTS_MUTATION_HEADER WHERE PM_INVOICE = '" + selectedPMInvoice + "'";
+                    sqlCommand = "SELECT * FROM PRODUCTS_MUTATION_HEADER WHERE PM_INVOICE = '" + selectedInvoice + "'";
                     using (rdr = DS.getData(sqlCommand))
                     {
                         if (rdr.HasRows)
@@ -87,6 +94,27 @@ namespace RoyalPetz_ADMIN
                         }
                     }
                     break;
+
+                case globalConstants.PENERIMAAN_BARANG_DARI_PO:
+                    sqlCommand = "SELECT * FROM PURCHASE_HEADER WHERE PURCHASE_INVOICE = '" + selectedInvoice + "'";
+                    using (rdr = DS.getData(sqlCommand))
+                    {
+                        if (rdr.HasRows)
+                        {
+                            while (rdr.Read())
+                            {
+                                noInvoiceTextBox.Text = rdr.GetString("PURCHASE_INVOICE");
+                                invoiceDtPicker.Value = rdr.GetDateTime("PURCHASE_DATETIME");
+                                selectedFromID = rdr.GetInt32("SUPPLIER_ID");
+                                //selectedToID = rdr.GetInt32("BRANCH_ID_TO");
+                                labelTotalValue.Text = "Rp. " + rdr.GetString("PURCHASE_TOTAL");
+                                labelAcceptValue.Text = "Rp. " + rdr.GetString("PURCHASE_TOTAL");
+
+                                globalTotalValue = rdr.GetDouble("PURCHASE_TOTAL");
+                            }
+                        }
+                    }
+                    break;
             }
         }
 
@@ -98,7 +126,7 @@ namespace RoyalPetz_ADMIN
             switch (originModuleId)
             {
                 case globalConstants.PENERIMAAN_BARANG_DARI_MUTASI:
-                    sqlCommand = "SELECT PM.*, M.PRODUCT_NAME FROM PRODUCTS_MUTATION_DETAIL PM, MASTER_PRODUCT M WHERE PM_INVOICE = '" + selectedPMInvoice + "' AND PM.PRODUCT_ID = M.PRODUCT_ID";
+                    sqlCommand = "SELECT PM.*, M.PRODUCT_NAME FROM PRODUCTS_MUTATION_DETAIL PM, MASTER_PRODUCT M WHERE PM_INVOICE = '" + selectedInvoice + "' AND PM.PRODUCT_ID = M.PRODUCT_ID";
                     using (rdr = DS.getData(sqlCommand))
                     {
                         if (rdr.HasRows)
@@ -109,6 +137,23 @@ namespace RoyalPetz_ADMIN
 
                                 detailRequestQty.Add(rdr.GetString("PRODUCT_QTY"));
                                 detailHpp.Add(rdr.GetString("PRODUCT_BASE_PRICE"));
+                            }
+                        }
+                    }
+                    break;
+
+                case globalConstants.PENERIMAAN_BARANG_DARI_PO:
+                    sqlCommand = "SELECT PO.*, M.PRODUCT_NAME FROM PURCHASE_DETAIL PO, MASTER_PRODUCT M WHERE PURCHASE_INVOICE = '" + selectedInvoice + "' AND PO.PRODUCT_ID = M.PRODUCT_ID";
+                    using (rdr = DS.getData(sqlCommand))
+                    {
+                        if (rdr.HasRows)
+                        {
+                            while (rdr.Read())
+                            {
+                                detailGridView.Rows.Add(rdr.GetString("PRODUCT_NAME"), rdr.GetString("PRODUCT_QTY"), rdr.GetString("PRODUCT_PRICE"), rdr.GetString("PRODUCT_QTY"), rdr.GetString("PURCHASE_SUBTOTAL"), rdr.GetString("PRODUCT_ID"));
+
+                                detailRequestQty.Add(rdr.GetString("PRODUCT_QTY"));
+                                detailHpp.Add(rdr.GetString("PRODUCT_PRICE"));
                             }
                         }
                     }
@@ -125,6 +170,15 @@ namespace RoyalPetz_ADMIN
             return result;
         }
 
+        private string getSupplierName(int suppID)
+        {
+            string result = "";
+
+            result = DS.getDataSingleValue("SELECT SUPPLIER_FULL_NAME FROM MASTER_SUPPLIER WHERE SUPPLIER_ID = " + suppID).ToString();
+
+            return result;
+        }
+
         private void penerimaanBarangForm_Load(object sender, EventArgs e)
         {
             errorLabel.Text = "";
@@ -137,8 +191,15 @@ namespace RoyalPetz_ADMIN
             loadDataHeader();
             loadDataDetail();
 
-            branchFromTextBox.Text = getBranchName(selectedFromID);
-            branchToTextBox.Text = getBranchName(selectedToID);
+            if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_MUTASI)
+            { 
+                branchFromTextBox.Text = getBranchName(selectedFromID);
+                branchToTextBox.Text = getBranchName(selectedToID);
+            }
+            else
+            {
+                branchFromTextBox.Text = getSupplierName(selectedFromID);
+            }
 
             isLoading = false;
 
@@ -259,6 +320,8 @@ namespace RoyalPetz_ADMIN
             {
                 errorLabel.Text = "NO PENERIMAAN SUDAH ADA";
             }
+            else
+                errorLabel.Text = "";
         }
 
         private bool dataValidated()
@@ -348,7 +411,8 @@ namespace RoyalPetz_ADMIN
                 }
                 else
                 {
-
+                    sqlCommand = "UPDATE PURCHASE_HEADER SET PURCHASE_RECEIVED = 1 WHERE PM_INVOICE = '" + noInvoiceTextBox.Text + "'";
+                    DS.executeNonQueryCommand(sqlCommand);
                 }
 
                 DS.commit();

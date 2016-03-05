@@ -329,13 +329,15 @@ namespace RoyalPetz_ADMIN
             addDataGridColumn();
             termOfPaymentCombo.SelectedIndex = 0;
 
+            isLoading = true;
+
+            loadDataHeader();
+            loadDataDetail();
+
+            isLoading = false;
+
             if (originModuleID != globalConstants.NEW_PURCHASE_ORDER && originModuleID!= globalConstants.PURCHASE_ORDER_DARI_RO)
             { 
-                isLoading = true;
-
-                loadDataHeader();
-                loadDataDetail();
-
                 POinvoiceTextBox.ReadOnly = true;
 
                 if (isPOSent())
@@ -349,7 +351,6 @@ namespace RoyalPetz_ADMIN
                     detailPODataGridView.AllowUserToAddRows = false;
                 }
 
-                isLoading = false;
             }
             else
             {
@@ -499,7 +500,7 @@ namespace RoyalPetz_ADMIN
 
                     case globalConstants.PRINTOUT_PURCHASE_ORDER:
                         // UPDATE PURCHASE ORDER TABLE
-                        sqlCommand = "UPDATE PURCHASE_ORDER_HEADER SET PURCHASE_SENT = 1 WHERE PO_INVOICE = '" + POInvoice + "'";
+                        sqlCommand = "UPDATE PURCHASE_HEADER SET PURCHASE_SENT = 1 WHERE PURCHASE_INVOICE = '" + POInvoice + "'";
                         DS.executeNonQueryCommand(sqlCommand);
                         break;
                 }
@@ -551,6 +552,14 @@ namespace RoyalPetz_ADMIN
             {
                 errorLabel.Text = "";
                 generateButton.Visible = true;
+
+                saveButton.Visible = false;
+                PODateTimePicker.Enabled = false;
+                supplierCombo.Enabled = false;
+                termOfPaymentCombo.Enabled = false;
+                durationTextBox.ReadOnly = true;
+                detailPODataGridView.ReadOnly = true;
+                detailPODataGridView.AllowUserToAddRows = false;
 
                 gUtil.showSuccess(gUtil.INS);
             }

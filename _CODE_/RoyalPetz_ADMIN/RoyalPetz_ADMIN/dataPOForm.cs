@@ -76,9 +76,14 @@ namespace RoyalPetz_ADMIN
             sqlCommand = "SELECT ID, PURCHASE_INVOICE AS 'NO PURCHASE', DATE_FORMAT(PURCHASE_DATETIME, '%d-%M-%Y')  AS 'TANGGAL PURCHASE', " +
                                 "IF(PURCHASE_TERM_OF_PAYMENT = 0, 'TUNAI', 'KREDIT') AS 'MODE PEMBAYARAN', " +
                                 "DATE_FORMAT(PURCHASE_TERM_OF_PAYMENT_DATE, '%d-%M-%Y') AS 'TANGGAL JATUH TEMPO', " +
-                                "M.SUPPLIER_FULL_NAME AS 'NAMA SUPPLIER', PURCHASE_TOTAL AS 'TOTAL' " +
+                                "M.SUPPLIER_FULL_NAME AS 'NAMA SUPPLIER', PURCHASE_TOTAL AS 'TOTAL', PURCHASE_SENT " +
                                 "FROM PURCHASE_HEADER P, MASTER_SUPPLIER M " +
                                 "WHERE P.SUPPLIER_ID = M.SUPPLIER_ID AND P.PURCHASE_PAID = 0";
+
+            if (originModuleID == globalConstants.PENERIMAAN_BARANG_DARI_PO)
+            {
+                sqlCommand = sqlCommand + " AND PURCHASE_SENT = 1 AND PURCHASE_RECEIVED = 0";
+            }
 
             if (!showAllCheckBox.Checked)
             {
@@ -106,6 +111,7 @@ namespace RoyalPetz_ADMIN
                     dataPurchaseOrder.DataSource = dt;
 
                     dataPurchaseOrder.Columns["ID"].Visible = false;
+                    dataPurchaseOrder.Columns["PURCHASE_SENT"].Visible = false;
 
                     dataPurchaseOrder.Columns["NO PURCHASE"].Width = 200;
                     dataPurchaseOrder.Columns["TANGGAL PURCHASE"].Width = 200;
@@ -141,6 +147,7 @@ namespace RoyalPetz_ADMIN
 
         private void dataPurchaseOrder_KeyDown(object sender, KeyEventArgs e)
         {
+            string selectedPurchaseInvoice;
             if (e.KeyCode == Keys.Enter)
             {
                 if (dataPurchaseOrder.Rows.Count <= 0)
@@ -148,13 +155,49 @@ namespace RoyalPetz_ADMIN
 
                 int rowSelectedIndex = (dataPurchaseOrder.SelectedCells[0].RowIndex);
                 DataGridViewRow selectedRow = dataPurchaseOrder.Rows[rowSelectedIndex];
-                selectedPOID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+                
 
-                purchaseOrderDetailForm displayedForm = new purchaseOrderDetailForm(globalConstants.EDIT_PURCHASE_ORDER, selectedPOID);
-                displayedForm.ShowDialog(this);
+                if (originModuleID == 0)
+                {
+                    selectedPOID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+                    purchaseOrderDetailForm displayedForm = new purchaseOrderDetailForm(globalConstants.EDIT_PURCHASE_ORDER, selectedPOID);
+                    displayedForm.ShowDialog(this);
+                }
+                else
+                {
+                    selectedPurchaseInvoice = selectedRow.Cells["NO PURCHASE"].Value.ToString();  
+                    penerimaanBarangForm displayedPenerimaanForm = new penerimaanBarangForm(originModuleID, selectedPurchaseInvoice);
+                    displayedPenerimaanForm.ShowDialog(this);
+                }
 
                 loadPOData();
             }
+        }
+
+        private void dataPurchaseOrder_DoubleClick(object sender, EventArgs e)
+        {
+            string selectedPurchaseInvoice;
+
+            if (dataPurchaseOrder.Rows.Count <= 0)
+                return;
+
+            int rowSelectedIndex = (dataPurchaseOrder.SelectedCells[0].RowIndex);
+            DataGridViewRow selectedRow = dataPurchaseOrder.Rows[rowSelectedIndex];
+
+            if (originModuleID == 0)
+            {
+                selectedPOID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+                purchaseOrderDetailForm displayedForm = new purchaseOrderDetailForm(globalConstants.EDIT_PURCHASE_ORDER, selectedPOID);
+                displayedForm.ShowDialog(this);
+            }
+            else
+            {
+                selectedPurchaseInvoice = selectedRow.Cells["NO PURCHASE"].Value.ToString();
+                penerimaanBarangForm displayedPenerimaanForm = new penerimaanBarangForm(originModuleID, selectedPurchaseInvoice);
+                displayedPenerimaanForm.ShowDialog(this);
+            }
+
+            loadPOData();
         }
     }
 }

@@ -893,7 +893,9 @@ namespace RoyalPetz_ADMIN
             purchaseOrderDetailForm displayedForm = new purchaseOrderDetailForm(globalConstants.PURCHASE_ORDER_DARI_RO, selectedROInvoice);
             displayedForm.ShowDialog(this);
 
-            if (!isROActive())
+            this.Close();
+
+            /*if (!isROActive())
             {
                 detailRequestOrderDataGridView.ReadOnly = true;
 
@@ -902,7 +904,7 @@ namespace RoyalPetz_ADMIN
                 approveButton.Visible = false;
                 createPOButton.Visible = false;
             }
-
+            */
         }
     }
 }
