@@ -105,6 +105,16 @@ namespace RoyalPetz_ADMIN
             DialogResult res1 = MessageBox.Show(errormessage, errorcaption, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        public void showDBOPError(Exception ex, string dbOp)
+        {
+            String errorcaption = "POS Error Message";
+            string displayedErrorMessage;
+            
+            displayedErrorMessage = "An exception of type " + ex.GetType() + " and message [" + ex.Message +"] was encountered while " + dbOp +" the data.";
+
+            DialogResult res1 = MessageBox.Show(displayedErrorMessage, errorcaption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
         public void showSuccess(int options)
         {
             String successcaption = "POS Success Message";

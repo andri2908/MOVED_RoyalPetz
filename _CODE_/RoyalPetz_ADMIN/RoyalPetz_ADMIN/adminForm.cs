@@ -391,7 +391,7 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripMenuItem13_Click(object sender, EventArgs e)
         {
-            dataReturPermintaanForm displayedForm = new dataReturPermintaanForm();
+            dataReturPermintaanForm displayedForm = new dataReturPermintaanForm(globalConstants.RETUR_PEMBELIAN_KE_SUPPLIER);
             displayedForm.ShowDialog(this);
         }
 
@@ -627,6 +627,13 @@ namespace RoyalPetz_ADMIN
         private void informasiToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
         {
             informasiToolStripMenuItem.ForeColor = Color.Black;
+        }
+
+        private void toolStripMenuItem37_Click(object sender, EventArgs e)
+        {
+            dataReturPermintaanForm displayedForm = new dataReturPermintaanForm(globalConstants.RETUR_PEMBELIAN_KE_PUSAT);
+            displayedForm.ShowDialog(this);
+
         }
     }
 }

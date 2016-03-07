@@ -74,7 +74,8 @@ namespace RoyalPetz_ADMIN
             string sqlCommand = "";
 
             string newPassword = newPasswordTextBox.Text;
-            
+            MySqlException internalEX = null;
+
             DS.beginTransaction();
 
             try
@@ -83,33 +84,32 @@ namespace RoyalPetz_ADMIN
 
                 sqlCommand = "UPDATE MASTER_USER SET USER_PASSWORD = '"+newPassword+"' WHERE ID = " + selectedUserID;
 
-                DS.executeNonQueryCommand(sqlCommand);
+                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                    throw internalEX;
 
                 DS.commit();
+                result = true;
             }
             catch (Exception e)
             {
                 try
                 {
-                    //myTrans.Rollback();
+                    DS.rollBack();
                 }
                 catch (MySqlException ex)
                 {
                     if (DS.getMyTransConnection() != null)
                     {
-                        MessageBox.Show("An exception of type " + ex.GetType() +
-                                          " was encountered while attempting to roll back the transaction.");
+                        gutil.showDBOPError(ex, "ROLLBACK");
                     }
                 }
 
-                MessageBox.Show("An exception of type " + e.GetType() +
-                                  " was encountered while inserting the data.");
-                MessageBox.Show("Neither record was written to database.");
+                gutil.showDBOPError(e, "INSERT");
+                result = false;
             }
             finally
             {
                 DS.mySqlClose();
-                result = true;
             }
 
             return result;
@@ -129,7 +129,6 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
-                //MessageBox.Show("SUCCESS");
                 gutil.showSuccess(gutil.UPD);
                 gutil.ResetAllControls(this);                
             }

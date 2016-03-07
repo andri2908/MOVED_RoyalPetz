@@ -89,12 +89,7 @@ namespace RoyalPetz_ADMIN
 
             DS.mySqlConnect();
 
-            //sqlCommand = "SELECT ID, RO_INVOICE AS 'NO PERMINTAAN', RO_DATETIME AS 'TANGGAL PERMINTAAN', RO_EXPIRED AS 'TANGGAL EXPIRED', M1.BRANCH_NAME AS 'ASAL PERMINTAAN', M2.BRANCH_NAME AS 'TUJUAN PERMINTAAN', RO_TOTAL AS 'TOTAL' " +
-             //                   "FROM REQUEST_ORDER_HEADER LEFT OUTER JOIN MASTER_BRANCH M1 ON (RO_BRANCH_ID_FROM = M1.BRANCH_ID) " +
-              //                  "LEFT OUTER JOIN MASTER_BRANCH M2 ON (RO_BRANCH_ID_TO = M2.BRANCH_ID) " +
-               //                 "WHERE RO_ACTIVE = 1 AND RO_EXPIRED > '" + DateTime.Now + "'";
-
-            sqlCommand = "SELECT ID, PM_INVOICE AS 'NO MUTASI', PM_DATETIME AS 'TGL MUTASI', M1.BRANCH_NAME AS 'ASAL MUTASI', M2.BRANCH_NAME AS 'TUJUAN MUTASI', PM_TOTAL AS 'TOTAL', RO_INVOICE AS 'NO PERMINTAAN' " +
+            sqlCommand = "SELECT ID, PM_INVOICE AS 'NO MUTASI', DATE_FORMAT(PM_DATETIME,'%d-%M-%Y') AS 'TGL MUTASI', M1.BRANCH_NAME AS 'ASAL MUTASI', M2.BRANCH_NAME AS 'TUJUAN MUTASI', PM_TOTAL AS 'TOTAL', RO_INVOICE AS 'NO PERMINTAAN' " +
                                 "FROM PRODUCTS_MUTATION_HEADER LEFT OUTER JOIN MASTER_BRANCH M1 ON (BRANCH_ID_FROM = M1.BRANCH_ID) " +
                                 "LEFT OUTER JOIN MASTER_BRANCH M2 ON (BRANCH_ID_TO = M2.BRANCH_ID) " +
                                 "WHERE 1 = 1 AND PM_RECEIVED = 0";
@@ -148,6 +143,9 @@ namespace RoyalPetz_ADMIN
 
         private void dataMutasiBarangForm_Load(object sender, EventArgs e)
         {
+            PMDtPicker_1.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+            PMDtPicker_2.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+
             gutil.reArrangeTabOrder(this);
         }
 

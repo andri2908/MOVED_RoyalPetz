@@ -182,6 +182,9 @@ namespace RoyalPetz_ADMIN
         private void penerimaanBarangForm_Load(object sender, EventArgs e)
         {
             errorLabel.Text = "";
+            PRDtPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+            invoiceDtPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+
             initializeScreen();
 
             detailGridView.EditingControlShowing += detailGridView_EditingControlShowing;
@@ -342,6 +345,7 @@ namespace RoyalPetz_ADMIN
         {
             bool result = false;
             string sqlCommand = "";
+            MySqlException internalEX = null;
 
             string PRInvoice = "";
             int branchIDFrom = 0;
@@ -374,7 +378,8 @@ namespace RoyalPetz_ADMIN
                     sqlCommand = "INSERT INTO PRODUCTS_RECEIVED_HEADER (PR_INVOICE, PR_FROM, PR_TO, PR_DATE, PR_TOTAL, PURCHASE_INVOICE) " +
                                         "VALUES ('" + PRInvoice + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), " + PRTotal + ", '" + noInvoiceTextBox.Text + "')";
 
-                DS.executeNonQueryCommand(sqlCommand);
+                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                    throw internalEX;
 
                 // SAVE DETAIL TABLE
                 for (int i = 0; i < detailGridView.Rows.Count; i++)
@@ -394,11 +399,13 @@ namespace RoyalPetz_ADMIN
                         sqlCommand = "INSERT INTO PRODUCTS_RECEIVED_DETAIL (PR_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, PRODUCT_QTY, PRODUCT_ACTUAL_QTY, PR_SUBTOTAL, PRODUCT_PRICE_CHANGE) VALUES " +
                                             "('" + PRInvoice + "', '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + newHPP + ", " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyRequest"].Value) + ", " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", " + Convert.ToDouble(detailGridView.Rows[i].Cells["subtotal"].Value) + ", " + priceChange + ")";
 
-                        DS.executeNonQueryCommand(sqlCommand);
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
 
                         // UPDATE TO MASTER PRODUCT
                         sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_BASE_PRICE = " + newHPP + ", PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY + " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + " WHERE PRODUCT_ID = '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "'";
-                        DS.executeNonQueryCommand(sqlCommand);
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
                     }
                 }
 
@@ -407,40 +414,39 @@ namespace RoyalPetz_ADMIN
                 if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_MUTASI)
                 {
                     sqlCommand = "UPDATE PRODUCTS_MUTATION_HEADER SET PM_RECEIVED = 1 WHERE PM_INVOICE = '" + noInvoiceTextBox.Text + "'";
-                    DS.executeNonQueryCommand(sqlCommand);
+                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        throw internalEX;
                 }
                 else
                 {
                     sqlCommand = "UPDATE PURCHASE_HEADER SET PURCHASE_RECEIVED = 1 WHERE PM_INVOICE = '" + noInvoiceTextBox.Text + "'";
-                    DS.executeNonQueryCommand(sqlCommand);
+                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        throw internalEX;
                 }
 
                 DS.commit();
+                result = true;
             }
             catch (Exception e)
             {
-                result = false;
                 try
                 {
-                    //myTrans.Rollback();
+                    DS.rollBack();
                 }
                 catch (MySqlException ex)
                 {
                     if (DS.getMyTransConnection() != null)
                     {
-                        MessageBox.Show("An exception of type " + ex.GetType() +
-                                          " was encountered while attempting to roll back the transaction.");
+                        gUtil.showDBOPError(ex, "ROLLBACK");
                     }
                 }
 
-                MessageBox.Show("An exception of type " + e.GetType() +
-                                  " was encountered while inserting the data.");
-                MessageBox.Show("Neither record was written to database.");
+                gUtil.showDBOPError(e, "INSERT"); 
+                result = false;
             }
             finally
             {
                 DS.mySqlClose();
-                result = true;
             }
 
             return result;

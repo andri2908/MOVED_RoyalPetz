@@ -209,7 +209,6 @@ namespace RoyalPetz_ADMIN
             dataProdukDataGridView.Columns.Add(nomorRakColumn);
         }
 
-
         private void inisialisasiInterface()
         {
             switch(originModuleID)
@@ -320,6 +319,7 @@ namespace RoyalPetz_ADMIN
             string sqlCommand = "";
             string kodeRakValue;
             string nomorRakValue;
+            MySqlException internalEX = null;
 
             DS.beginTransaction();
 
@@ -340,7 +340,8 @@ namespace RoyalPetz_ADMIN
                                                         "PRODUCT_WHOLESALE_PRICE = " + Convert.ToInt32(dataProdukDataGridView.Rows[i].Cells["HARGA_GROSIR"].Value) + " " +
                                                         "WHERE ID = " + Convert.ToInt32(dataProdukDataGridView.Rows[i].Cells["ID"].Value);
 
-                                    DS.executeNonQueryCommand(sqlCommand);  
+                                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                        throw internalEX;
                                 }
                             }
                             break;
@@ -353,7 +354,8 @@ namespace RoyalPetz_ADMIN
                                                         "PRODUCT_LIMIT_STOCK = " + Convert.ToInt32(dataProdukDataGridView.Rows[i].Cells["LIMIT_STOK"].Value) + " " +
                                                         "WHERE ID = " + Convert.ToInt32(dataProdukDataGridView.Rows[i].Cells["ID"].Value);
 
-                                    DS.executeNonQueryCommand(sqlCommand);  
+                                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                        throw internalEX;
                                 }
                             }
                         break;
@@ -374,39 +376,35 @@ namespace RoyalPetz_ADMIN
                                                         "PRODUCT_SHELVES = '" + kodeRakValue + nomorRakValue + "' " +
                                                         "WHERE ID = " + Convert.ToInt32(dataProdukDataGridView.Rows[i].Cells["ID"].Value);
 
-                                    DS.executeNonQueryCommand(sqlCommand);  
+                                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                        throw internalEX;
                                 }
                             }
                         break;
                 }
 
-                //DS.executeNonQueryCommand(sqlCommand);
-
                 DS.commit();
+                result = true;
             }
             catch (Exception e)
             {
                 try
                 {
-                    //myTrans.Rollback();
+                    DS.rollBack();
                 }
                 catch (MySqlException ex)
                 {
                     if (DS.getMyTransConnection() != null)
                     {
-                        MessageBox.Show("An exception of type " + ex.GetType() +
-                                          " was encountered while attempting to roll back the transaction.");
+                        gutil.showDBOPError(ex, "ROLLBACK");
                     }
                 }
-
-                MessageBox.Show("An exception of type " + e.GetType() +
-                                  " was encountered while inserting the data.");
-                MessageBox.Show("Neither record was written to database.");
+                gutil.showDBOPError(e, "INSERT");
+                result = false;
             }
             finally
             {
                 DS.mySqlClose();
-                result = true;
             }
 
             return result;

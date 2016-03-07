@@ -578,7 +578,11 @@ namespace RoyalPetz_ADMIN
         }
 
         private void dataMutasiBarangDetailForm_Load(object sender, EventArgs e)
-        {            
+        {
+            PMDateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+            RODateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+            ROExpiredDateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+
             gUtil.reArrangeTabOrder(this);
         }
 
@@ -586,6 +590,7 @@ namespace RoyalPetz_ADMIN
         {
             bool result = false;
             string sqlCommand = "";
+            MySqlException internalEX = null;
 
             string roInvoice = "0";
             string noMutasi = "";
@@ -631,7 +636,8 @@ namespace RoyalPetz_ADMIN
                             sqlCommand = "INSERT INTO PRODUCTS_MUTATION_DETAIL (PM_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, PRODUCT_QTY, PM_SUBTOTAL) VALUES " +
                                                 "('" + noMutasi + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["hpp"].Value) + ", " + qtyApproved + ", " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value) + ")";
 
-                            DS.executeNonQueryCommand(sqlCommand);
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
                         }
 
                         if (!directMutasiBarang)
@@ -650,6 +656,7 @@ namespace RoyalPetz_ADMIN
                 }
 
                 DS.commit();
+                result = true;
             }
             catch (Exception e)
             {
@@ -660,20 +667,15 @@ namespace RoyalPetz_ADMIN
                 catch (MySqlException ex)
                 {
                     if (DS.getMyTransConnection() != null)
-                    {
-                        MessageBox.Show("An exception of type " + ex.GetType() +
-                                          " was encountered while attempting to roll back the transaction.");
-                    }
-                }
+                       gUtil.showDBOPError(ex, "ROLLBACK");
+               }
 
-                MessageBox.Show("An exception of type " + e.GetType() +
-                                  " was encountered while inserting the data.");
-                MessageBox.Show("Neither record was written to database.");
+                gUtil.showDBOPError(e, "INSERT");
+                result = false;
             }
             finally
             {
                 DS.mySqlClose();
-                result = true;
             }
 
             return result;
@@ -743,7 +745,7 @@ namespace RoyalPetz_ADMIN
             else
                 errorLabel.Text = "";
         }
-
+        
         private void rejectButton_Click(object sender, EventArgs e)
         {
             subModuleID = globalConstants.REJECT_PRODUCT_MUTATION;
@@ -761,7 +763,6 @@ namespace RoyalPetz_ADMIN
                 //reprintButton.Visible = false;
             }
         }
-
         private void dataMutasiBarangDetailForm_Activated(object sender, EventArgs e)
         {
             errorLabel.Text = "";

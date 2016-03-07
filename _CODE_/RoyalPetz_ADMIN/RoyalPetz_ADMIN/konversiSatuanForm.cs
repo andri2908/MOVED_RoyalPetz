@@ -156,6 +156,7 @@ namespace RoyalPetz_ADMIN
         {
             bool result = false;
             string sqlCommand = "";
+            MySqlException internalEX = null;
 
             double unitConversion = getConvertValue();
             
@@ -175,33 +176,30 @@ namespace RoyalPetz_ADMIN
                         break;
                 }
 
-                DS.executeNonQueryCommand(sqlCommand);
+                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                    throw internalEX;
 
                 DS.commit();
+                result = true;
             }
             catch (Exception e)
             {
                 try
                 {
-                    //myTrans.Rollback();
+                    DS.rollBack();
                 }
                 catch (MySqlException ex)
                 {
                     if (DS.getMyTransConnection() != null)
-                    {
-                        MessageBox.Show("An exception of type " + ex.GetType() +
-                                          " was encountered while attempting to roll back the transaction.");
-                    }
+                        gUtil.showDBOPError(ex, "ROLLBACK");
                 }
 
-                MessageBox.Show("An exception of type " + e.GetType() +
-                                  " was encountered while inserting the data.");
-                MessageBox.Show("Neither record was written to database.");
+                gUtil.showDBOPError(e, "INSERT");
+                result = false;
             }
             finally
             {
                 DS.mySqlClose();
-                result = true;
             }
 
             return result;
@@ -264,6 +262,18 @@ namespace RoyalPetz_ADMIN
         {
             errorLabel.Text = "";
             loadUnitData(unit1Combo, unit1ComboHidden);
+        }
+
+        private void unit1Combo_Validated(object sender, EventArgs e)
+        {
+            if (!unit1Combo.Items.Contains(unit1Combo.Text))
+                unit1Combo.Focus();
+        }
+
+        private void unit2Combo_Validated(object sender, EventArgs e)
+        {
+            if (!unit2Combo.Items.Contains(unit2Combo.Text))
+                unit2Combo.Focus();
         }
     }
 }

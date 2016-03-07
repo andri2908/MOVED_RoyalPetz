@@ -84,6 +84,7 @@ namespace RoyalPetz_ADMIN
         {
             bool result = false;
             string sqlCommand = "";
+            MySqlException internalEX = null;
 
             string branchName = branchNameTextBox.Text.Trim();
             string branchIPv4 = ipAddressMaskedTextbox.Text.Trim();
@@ -121,37 +122,35 @@ namespace RoyalPetz_ADMIN
                                             "BRANCH_IP4 = '" + branchIPv4 + "', " +
                                             "BRANCH_ACTIVE = '" + branchStatus + "' " +
                                             "WHERE BRANCH_ID = '" + selectedBranchID + "'";
-                        //sqlCommand = "UPDATE `sys_pos`.`master_branch` SET `BRANCH_ACTIVE`='1' WHERE `BRANCH_ID`='3';";
                         break;
                 }
-                
-                DS.executeNonQueryCommand(sqlCommand);
+
+                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                    throw internalEX;
 
                 DS.commit();
+                result = true;
             }
             catch (Exception e)
             {
                 try
                 {
-                    //myTrans.Rollback();
+                    DS.rollBack();
                 }
                 catch (MySqlException ex)
                 {
                     if (DS.getMyTransConnection() != null)
                     {
-                        MessageBox.Show("An exception of type " + ex.GetType() +
-                                          " was encountered while attempting to roll back the transaction.");
+                        gUtil.showDBOPError(ex, "ROLLBACK");
                     }
                 }
 
-                MessageBox.Show("An exception of type " + e.GetType() +
-                                  " was encountered while inserting the data.");
-                MessageBox.Show("Neither record was written to database.");
+                gUtil.showDBOPError(e, "INSERT");
+                result = false;                
             }
             finally
             {
                 DS.mySqlClose();
-                result = true;
             }
 
             return result;
@@ -166,62 +165,6 @@ namespace RoyalPetz_ADMIN
 
             return false;
         }
-
-        /*public static void ClearControls(Control ctrl)
-        {
-            foreach (Control control in ctrl.Controls)
-            {
-                if (control is TextBox)
-                {
-                    TextBox textBox = (TextBox)control;
-                    textBox.Text = null;
-                }
-
-                if (control is MaskedTextBox)
-                {
-                    MaskedTextBox maskedtextBox = (MaskedTextBox)control;
-                    maskedtextBox.Text = null;
-                }
-
-                if (control is ComboBox)
-                {
-                    ComboBox comboBox = (ComboBox)control;
-                    if (comboBox.Items.Count > 0)
-                        comboBox.SelectedIndex = 0;
-                }
-
-                if (control is CheckBox)
-                {
-                    CheckBox checkBox = (CheckBox)control;
-                    checkBox.Checked = false;
-                }
-
-                if (control is ListBox)
-                {
-                    ListBox listBox = (ListBox)control;
-                    listBox.ClearSelected();
-                }
-            }
-        }
-
-        public static void ResetAllControls(Control form)
-        {
-            String typectrl = "";
-            ClearControls(form); //if controls are not nested
-            for (int i = 0; i <= form.Controls.Count - 1; i++) //if controls are nested
-            {
-
-                typectrl = "" + form.Controls[i].GetType();
-                //MessageBox.Show(typectrl);
-                if ((typectrl.Equals("System.Windows.Forms.Panel")) || (typectrl.Equals("System.Windows.Forms.TableLayoutPanel")))
-                {
-                    Control ctrl = form.Controls[i];
-                    //MessageBox.Show("" + ctrl.Controls.Count);
-                    ClearControls(ctrl);
-                }
-            }
-            
-        }*/
 
         private void saveButton_Click(object sender, EventArgs e)
         {

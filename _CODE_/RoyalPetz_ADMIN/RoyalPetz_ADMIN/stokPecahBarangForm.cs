@@ -231,12 +231,13 @@ namespace RoyalPetz_ADMIN
         {
             bool result = false;
             string sqlCommand = "";
+            MySqlException internalEX = null;
+            
             double calculatedResult = 0;
             double actualResult = 0;
             double productLoss = 0;
             string selectedDate = DateTime.Now.ToString();
             string pl_Date = String.Format(culture, "{0:dd-MM-yyyy}", Convert.ToDateTime(selectedDate));
-
 
             DS.beginTransaction();
 
@@ -251,45 +252,46 @@ namespace RoyalPetz_ADMIN
 
                 //REDUCE CURRENT STOCK QTY
                 sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + Convert.ToDouble(numberOfProductTextBox.Text) + " WHERE ID = " + selectedInternalProductID;
-                DS.executeNonQueryCommand(sqlCommand);
+                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                    throw internalEX;
 
                 //INCREASE NEW STOCK QTY
                 sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY + " + actualResult + " WHERE ID = " + newSelectedInternalProductID;
-                DS.executeNonQueryCommand(sqlCommand);
+                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                    throw internalEX;
 
                 if (actualResult < calculatedResult)
                 {
                     // INSERT INTO PRODUCT LOSS TABLE
                     sqlCommand = "INSERT INTO PRODUCT_LOSS (PL_DATETIME, PRODUCT_ID, PRODUCT_QTY, NEW_PRODUCT_ID, NEW_PRODUCT_QTY, TOTAL_LOSS) " +
                                         "VALUES (STR_TO_DATE('" + pl_Date + "', '%d-%m-%Y'), " + selectedInternalProductID + ", " + Convert.ToDouble(numberOfProductTextBox.Text) + ", " + newSelectedInternalProductID + ", " + Convert.ToDouble(resultTextBox.Text) + ", " + productLoss + ")";
-                    DS.executeNonQueryCommand(sqlCommand);
+                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        throw internalEX;
                 }
 
                 DS.commit();
+                result = true;
             }
             catch (Exception e)
             {
                 try
                 {
-                    //myTrans.Rollback();
+                    DS.rollBack();
                 }
                 catch (MySqlException ex)
                 {
                     if (DS.getMyTransConnection() != null)
                     {
-                        MessageBox.Show("An exception of type " + ex.GetType() +
-                                          " was encountered while attempting to roll back the transaction.");
+                        gUtil.showDBOPError(ex, "ROLLBACK");
                     }
                 }
 
-                MessageBox.Show("An exception of type " + e.GetType() +
-                                  " was encountered while inserting the data.");
-                MessageBox.Show("Neither record was written to database.");
+                gUtil.showDBOPError(e, "INSERT");
+                result = false;
             }
             finally
             {
                 DS.mySqlClose();
-                result = true;
             }
 
             return result;

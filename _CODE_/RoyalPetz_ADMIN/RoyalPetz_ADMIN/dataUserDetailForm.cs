@@ -135,6 +135,7 @@ namespace RoyalPetz_ADMIN
         {
             bool result = false;
             string sqlCommand = "";
+            MySqlException internalEX = null;
 
             string userName = userNameTextBox.Text.Trim();
             string userFullName = userFullNameTextBox.Text.Trim();
@@ -171,33 +172,31 @@ namespace RoyalPetz_ADMIN
                         break;
                 }
 
-                DS.executeNonQueryCommand(sqlCommand);
+                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                    throw internalEX;
 
                 DS.commit();
+                result = true;
             }
             catch (Exception e)
             {
                 try
                 {
-                    //myTrans.Rollback();
+                    DS.rollBack();
                 }
                 catch (MySqlException ex)
                 {
                     if (DS.getMyTransConnection() != null)
                     {
-                        MessageBox.Show("An exception of type " + ex.GetType() +
-                                          " was encountered while attempting to roll back the transaction.");
+                        gutil.showDBOPError(ex, "ROLLBACK");
                     }
                 }
-
-                MessageBox.Show("An exception of type " + e.GetType() +
-                                  " was encountered while inserting the data.");
-                MessageBox.Show("Neither record was written to database.");
+                gutil.showDBOPError(e, "INSERT");
+                result = false;
             }
             finally
             {
                 DS.mySqlClose();
-                result = true;
             }
 
             return result;
@@ -217,10 +216,8 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
-                //MessageBox.Show("SUCCESS");
                 gutil.showSuccess(options);
                 gutil.ResetAllControls(this);
-                //this.Close();
             }
         }
 

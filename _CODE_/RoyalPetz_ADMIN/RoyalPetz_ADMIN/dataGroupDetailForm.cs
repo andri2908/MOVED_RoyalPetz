@@ -105,6 +105,7 @@ namespace RoyalPetz_ADMIN
         {
             bool result = false;
             string sqlCommand = "";
+            MySqlException internalEX = null;
 
             string groupName = namaGroupTextBox.Text.Trim();
             string groupDesc = deskripsiTextBox.Text.Trim();
@@ -124,7 +125,6 @@ namespace RoyalPetz_ADMIN
                 switch(originModuleID)
                 {
                     case globalConstants.NEW_GROUP_USER:
-                    //case globalConstants.PENGATURAN_GRUP_AKSES:  //need to check validty of code
                         sqlCommand = "INSERT INTO MASTER_GROUP (GROUP_USER_NAME, GROUP_USER_DESCRIPTION, GROUP_USER_ACTIVE) VALUES ('" + groupName + "', '" + groupDesc + "', " + groupStatus + ")";
                         break;
                     case globalConstants.EDIT_GROUP_USER:
@@ -132,39 +132,38 @@ namespace RoyalPetz_ADMIN
                         break;
                 }
 
-                DS.executeNonQueryCommand(sqlCommand);
+                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                    throw internalEX;
 
                 DS.commit();
+                result = true;
             }
             catch (Exception e)
             {
                 try
                 {
-                    //myTrans.Rollback();
+                    DS.rollBack();
                 }
                 catch (MySqlException ex)
                 {
                     if (DS.getMyTransConnection() != null)
                     {
-                        MessageBox.Show("An exception of type " + ex.GetType() +
-                                          " was encountered while attempting to roll back the transaction.");
+                        gutil.showDBOPError(ex, "ROLLBACK");
                     }
                 }
 
-                MessageBox.Show("An exception of type " + e.GetType() +
-                                  " was encountered while inserting the data.");
-                MessageBox.Show("Neither record was written to database.");
+                gutil.showDBOPError(e, "INSERT");
+                result = false;
             }
             finally
             {
-                if (originModuleID == globalConstants.PENGATURAN_GRUP_AKSES)
+                if (originModuleID == globalConstants.PENGATURAN_GRUP_AKSES && result == true)
                 {
                     selectedGroupID = Convert.ToInt32(DS.getDataSingleValue("SELECT MAX(GROUP_ID) FROM MASTER_GROUP WHERE GROUP_USER_NAME = '" + groupName + "' AND GROUP_USER_DESCRIPTION = '"+groupDesc+"' "));
                     parentForm.setSelectedGroupID(selectedGroupID);
                 }
 
                 DS.mySqlClose();
-                result = true;
             }
 
             return result;

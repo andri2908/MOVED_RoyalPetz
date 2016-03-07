@@ -164,6 +164,8 @@ namespace RoyalPetz_ADMIN
         {
             bool result = false;
             string sqlCommand = "";
+            MySqlException internalEX = null;
+
             int i=0;
             int moduleIdValue = 0;
             int tempModuleID = 0;
@@ -188,13 +190,17 @@ namespace RoyalPetz_ADMIN
                             {
                                 // INSERT MODE
                                 sqlCommand = "INSERT INTO USER_ACCESS_MANAGEMENT (GROUP_ID, MODULE_ID, USER_ACCESS_OPTION) VALUES (" + selectedGroupID + ", " + moduleIdValue + ", " + userAccessValue + ")";
-                                DS.executeNonQueryCommand(sqlCommand);
+
+                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                    throw internalEX;
                             }
                             else
                             {
                                 // EDIT MODE
                                 sqlCommand = "UPDATE USER_ACCESS_MANAGEMENT SET USER_ACCESS_OPTION = " + userAccessValue + " WHERE GROUP_ID = " + selectedGroupID + " AND MODULE_ID = " + moduleIdValue;
-                                DS.executeNonQueryCommand(sqlCommand);
+
+                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                    throw internalEX;
                             }
                         }
 
@@ -213,47 +219,47 @@ namespace RoyalPetz_ADMIN
                 {
                     // INSERT MODE
                     sqlCommand = "INSERT INTO USER_ACCESS_MANAGEMENT (GROUP_ID, MODULE_ID, USER_ACCESS_OPTION) VALUES (" + selectedGroupID + ", " + moduleIdValue + ", " + userAccessValue + ")";
-                    DS.executeNonQueryCommand(sqlCommand);
+
+                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        throw internalEX;
                 }
                 else
                 {
                     // EDIT MODE
                     sqlCommand = "UPDATE USER_ACCESS_MANAGEMENT SET USER_ACCESS_OPTION = " + userAccessValue + " WHERE GROUP_ID = " + selectedGroupID + " AND MODULE_ID = " + moduleIdValue + ")";
-                    DS.executeNonQueryCommand(sqlCommand);
+
+                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        throw internalEX;
                 }
 
                 //DS.executeNonQueryCommand(sqlCommand);
 
                 DS.commit();
+                result = true;
             }
             catch (Exception e)
             {
                 try
                 {
-                    //myTrans.Rollback();
+                    DS.rollBack();
                 }
                 catch (MySqlException ex)
                 {
                     if (DS.getMyTransConnection() != null)
                     {
-                        MessageBox.Show("An exception of type " + ex.GetType() +
-                                          " was encountered while attempting to roll back the transaction.");
+                        gutil.showDBOPError(ex, "ROLLBACK");
                     }
                 }
-
-                MessageBox.Show("An exception of type " + e.GetType() +
-                                  " was encountered while inserting the data.");
-                MessageBox.Show("Neither record was written to database.");
+                gutil.showDBOPError(e, "INSERT");
+                result = false;
             }
             finally
             {
                 DS.mySqlClose();
-                result = true;
             }
 
             return result;
         }
-
 
         private void saveButton_Click(object sender, EventArgs e)
         {

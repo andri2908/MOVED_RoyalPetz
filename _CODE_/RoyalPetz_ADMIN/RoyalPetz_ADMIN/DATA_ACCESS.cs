@@ -100,6 +100,31 @@ namespace RoyalPetz_ADMIN
             return retVal;
         }
 
+        public bool executeNonQueryCommand(string sqlCommand, ref MySqlException returnEx)
+        {
+            bool retVal = true;
+            //myConnectionString = Properties.Settings.Default.connectionString;
+            int temp;
+
+            try
+            {
+                myTransCommand.CommandText = sqlCommand;
+                if (myTransCommand.Connection.State.ToString() != "Open")
+                    myTransCommand.Connection.Open();
+
+                temp = myTransCommand.ExecuteNonQuery();
+
+                retVal = true;
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                retVal = false;
+                returnEx = ex;
+            }
+
+            return retVal;
+        }
+
         public bool dataExist(string sqlCommand)
         {
             if (conn.State.ToString() != "Open")

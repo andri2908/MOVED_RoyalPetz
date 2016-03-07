@@ -90,7 +90,7 @@ namespace RoyalPetz_ADMIN
         private void dataPelangganDetailForm_Load(object sender, EventArgs e)
         {
             dateJoinedDateTimePicked.Format = DateTimePickerFormat.Custom;
-            dateJoinedDateTimePicked.CustomFormat = "dd-MM-yyyy";
+            dateJoinedDateTimePicked.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
 
             gUtil.reArrangeTabOrder(this);
         }
@@ -116,6 +116,7 @@ namespace RoyalPetz_ADMIN
         {
             bool result = false;
             string sqlCommand = "";
+            MySqlException internalEX = null;
 
             string selectedDate = dateJoinedDateTimePicked.Value.ToShortDateString();
             string custJoinedDate = String.Format(culture, "{0:dd-MM-yyyy}", Convert.ToDateTime(selectedDate));
@@ -189,33 +190,32 @@ namespace RoyalPetz_ADMIN
                         break;
                 }
 
-                DS.executeNonQueryCommand(sqlCommand);
+                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                    throw internalEX;
 
                 DS.commit();
+                result = true;
             }
             catch (Exception e)
             {
                 try
                 {
-                    //myTrans.Rollback();
+                    DS.rollBack();
                 } 
                 catch (MySqlException ex)
                 {
                     if (DS.getMyTransConnection() != null)
                     {
-                        MessageBox.Show("An exception of type " + ex.GetType() +
-                                          " was encountered while attempting to roll back the transaction.");
+                        gUtil.showDBOPError(ex, "ROLLBACK");
                     }
                 }
 
-                MessageBox.Show("An exception of type " + e.GetType() +
-                                  " was encountered while inserting the data.");
-                MessageBox.Show("Neither record was written to database.");
+                gUtil.showDBOPError(e, "INSERT");
+                result = false;
             }
             finally
             {
                 DS.mySqlClose();
-                result = true;
             }
 
             return result;
@@ -236,7 +236,6 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
-                //MessageBox.Show("SUCCESS");
                 gUtil.showSuccess(options);
                 gUtil.ResetAllControls(this);
             }
@@ -244,12 +243,6 @@ namespace RoyalPetz_ADMIN
 
         private void custTotalSalesTextBox_TextChanged(object sender, EventArgs e)
         {
-            /*string regExValue = "";
-
-            regExValue = @"^[0-9]*$";
-            Regex r = new Regex(regExValue); // This is the main part, can be altered to match any desired form or limitations
-            Match m = r.Match(custTotalSalesTextBox.Text);
-            */
             if (gUtil.matchRegEx(custTotalSalesTextBox.Text, globalUtilities.REGEX_NUMBER_ONLY))
             {
                 previousInput = custTotalSalesTextBox.Text;
@@ -262,13 +255,6 @@ namespace RoyalPetz_ADMIN
 
         private void custTelTextBox_TextChanged(object sender, EventArgs e)
         {
-            //string regExValue = "";
-
-            //regExValue = @"^[0-9]*$";
-            //Regex r = new Regex(regExValue); // This is the main part, can be altered to match any desired form or limitations
-            //Match m = r.Match(custTelTextBox.Text);
-
-            //if (m.Success)
             if (gUtil.matchRegEx(custTelTextBox.Text, globalUtilities.REGEX_NUMBER_ONLY))
             {
                 previousInputPhone = custTelTextBox.Text;
@@ -281,13 +267,6 @@ namespace RoyalPetz_ADMIN
 
         private void custFaxTextBox_TextChanged(object sender, EventArgs e)
         {
-            //string regExValue = "";
-
-            //regExValue = @"^[0-9]*$";
-            //Regex r = new Regex(regExValue); // This is the main part, can be altered to match any desired form or limitations
-            //Match m = r.Match(custFaxTextBox.Text);
-
-            //if (m.Success)
             if (gUtil.matchRegEx(custFaxTextBox.Text, globalUtilities.REGEX_NUMBER_ONLY))
             {
                 previousInputFax= custFaxTextBox.Text;
@@ -306,6 +285,7 @@ namespace RoyalPetz_ADMIN
         private void dataPelangganDetailForm_Activated(object sender, EventArgs e)
         {
             errorLabel.Text = "";
+
             switch (originModuleID)
             {
                 case globalConstants.NEW_CUSTOMER:
@@ -313,6 +293,7 @@ namespace RoyalPetz_ADMIN
                     groupPelangganCombo.SelectedIndex = 0;
                     options = gUtil.INS;
                     break;
+
                 case globalConstants.EDIT_CUSTOMER:
                     nonAktifCheckbox.Enabled = true;
                     loadCustomerData();

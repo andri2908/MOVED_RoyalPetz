@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.detailRequestOrderDataGridView = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -86,14 +86,14 @@
             this.detailRequestOrderDataGridView.AllowUserToAddRows = false;
             this.detailRequestOrderDataGridView.AllowUserToDeleteRows = false;
             this.detailRequestOrderDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.detailRequestOrderDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.detailRequestOrderDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.detailRequestOrderDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.detailRequestOrderDataGridView.Location = new System.Drawing.Point(0, 308);
             this.detailRequestOrderDataGridView.Name = "detailRequestOrderDataGridView";
@@ -149,20 +149,20 @@
             // 
             this.ROExpiredDateTimePicker.Enabled = false;
             this.ROExpiredDateTimePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ROExpiredDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.ROExpiredDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.ROExpiredDateTimePicker.Location = new System.Drawing.Point(427, 3);
             this.ROExpiredDateTimePicker.Name = "ROExpiredDateTimePicker";
-            this.ROExpiredDateTimePicker.Size = new System.Drawing.Size(137, 27);
+            this.ROExpiredDateTimePicker.Size = new System.Drawing.Size(149, 27);
             this.ROExpiredDateTimePicker.TabIndex = 23;
             // 
             // RODateTimePicker
             // 
             this.RODateTimePicker.Enabled = false;
             this.RODateTimePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RODateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.RODateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.RODateTimePicker.Location = new System.Drawing.Point(3, 3);
             this.RODateTimePicker.Name = "RODateTimePicker";
-            this.RODateTimePicker.Size = new System.Drawing.Size(137, 27);
+            this.RODateTimePicker.Size = new System.Drawing.Size(146, 27);
             this.RODateTimePicker.TabIndex = 22;
             // 
             // label7
@@ -405,10 +405,10 @@
             // PMDateTimePicker
             // 
             this.PMDateTimePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PMDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.PMDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.PMDateTimePicker.Location = new System.Drawing.Point(427, 3);
             this.PMDateTimePicker.Name = "PMDateTimePicker";
-            this.PMDateTimePicker.Size = new System.Drawing.Size(137, 27);
+            this.PMDateTimePicker.Size = new System.Drawing.Size(149, 27);
             this.PMDateTimePicker.TabIndex = 27;
             // 
             // label11

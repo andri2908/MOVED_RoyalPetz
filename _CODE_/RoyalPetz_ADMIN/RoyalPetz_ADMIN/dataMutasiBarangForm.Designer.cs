@@ -161,7 +161,7 @@
             this.branchToCombo.FormattingEnabled = true;
             this.branchToCombo.Location = new System.Drawing.Point(150, 107);
             this.branchToCombo.Name = "branchToCombo";
-            this.branchToCombo.Size = new System.Drawing.Size(311, 26);
+            this.branchToCombo.Size = new System.Drawing.Size(321, 26);
             this.branchToCombo.TabIndex = 42;
             this.branchToCombo.SelectedIndexChanged += new System.EventHandler(this.branchToCombo_SelectedIndexChanged);
             // 
@@ -171,16 +171,16 @@
             this.branchFromCombo.FormattingEnabled = true;
             this.branchFromCombo.Location = new System.Drawing.Point(150, 75);
             this.branchFromCombo.Name = "branchFromCombo";
-            this.branchFromCombo.Size = new System.Drawing.Size(311, 26);
+            this.branchFromCombo.Size = new System.Drawing.Size(321, 26);
             this.branchFromCombo.TabIndex = 40;
             this.branchFromCombo.SelectedIndexChanged += new System.EventHandler(this.branchFromCombo_SelectedIndexChanged);
             // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.70588F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.705883F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.PMDtPicker_1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label5, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.PMDtPicker_2, 2, 0);
@@ -188,16 +188,16 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(311, 33);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(340, 33);
             this.tableLayoutPanel2.TabIndex = 43;
             // 
             // PMDtPicker_1
             // 
             this.PMDtPicker_1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PMDtPicker_1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.PMDtPicker_1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.PMDtPicker_1.Location = new System.Drawing.Point(3, 3);
             this.PMDtPicker_1.Name = "PMDtPicker_1";
-            this.PMDtPicker_1.Size = new System.Drawing.Size(135, 27);
+            this.PMDtPicker_1.Size = new System.Drawing.Size(146, 27);
             this.PMDtPicker_1.TabIndex = 38;
             // 
             // label5
@@ -206,19 +206,19 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label5.Location = new System.Drawing.Point(144, 7);
+            this.label5.Location = new System.Drawing.Point(155, 7);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(16, 18);
+            this.label5.Size = new System.Drawing.Size(10, 18);
             this.label5.TabIndex = 44;
             this.label5.Text = "-";
             // 
             // PMDtPicker_2
             // 
             this.PMDtPicker_2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PMDtPicker_2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.PMDtPicker_2.Location = new System.Drawing.Point(166, 3);
+            this.PMDtPicker_2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.PMDtPicker_2.Location = new System.Drawing.Point(171, 3);
             this.PMDtPicker_2.Name = "PMDtPicker_2";
-            this.PMDtPicker_2.Size = new System.Drawing.Size(136, 27);
+            this.PMDtPicker_2.Size = new System.Drawing.Size(150, 27);
             this.PMDtPicker_2.TabIndex = 43;
             // 
             // label1

@@ -404,6 +404,7 @@ namespace RoyalPetz_ADMIN
             int termOfPayment;
             DateTime selectedPODate;
             DateTime PODueDate;
+            MySqlException internalEX = null;
 
             roInvoice = ROInvoiceTextBox.Text;
             POInvoice = POinvoiceTextBox.Text;
@@ -431,7 +432,9 @@ namespace RoyalPetz_ADMIN
                         // SAVE HEADER TABLE
                         sqlCommand = "INSERT INTO PURCHASE_HEADER (PURCHASE_INVOICE, SUPPLIER_ID, PURCHASE_DATETIME, PURCHASE_TOTAL, PURCHASE_TERM_OF_PAYMENT, PURCHASE_TERM_OF_PAYMENT_DATE, RO_INVOICE) VALUES " +
                                             "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + POTotal + ", " + termOfPayment + ", STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), '" + roInvoice + "')";
-                        DS.executeNonQueryCommand(sqlCommand);
+
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
 
                         // SAVE DETAIL TABLE
                         for (int i = 0; i < detailPODataGridView.Rows.Count - 1; i++)
@@ -441,13 +444,15 @@ namespace RoyalPetz_ADMIN
                                 sqlCommand = "INSERT INTO PURCHASE_DETAIL (PURCHASE_INVOICE, PRODUCT_ID, PRODUCT_PRICE, PRODUCT_QTY, PURCHASE_SUBTOTAL) VALUES " +
                                                     "('" + POInvoice + "', '" + detailPODataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["qty"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["subTotal"].Value) + ")";
 
-                                DS.executeNonQueryCommand(sqlCommand);
+                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                    throw internalEX;
                             }
                         }
 
                         // UPDATE REQUEST ORDER TABLE
                         sqlCommand = "UPDATE REQUEST_ORDER_HEADER SET RO_ACTIVE = 0 WHERE RO_INVOICE = '" + roInvoice + "'";
-                        DS.executeNonQueryCommand(sqlCommand);
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
 
                         break;
 
@@ -455,7 +460,8 @@ namespace RoyalPetz_ADMIN
                         // SAVE HEADER TABLE
                         sqlCommand = "INSERT INTO PURCHASE_HEADER (PURCHASE_INVOICE, SUPPLIER_ID, PURCHASE_DATETIME, PURCHASE_TOTAL, PURCHASE_TERM_OF_PAYMENT, PURCHASE_TERM_OF_PAYMENT_DATE) VALUES " +
                                             "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + POTotal + ", " + termOfPayment + ", STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'))";
-                        DS.executeNonQueryCommand(sqlCommand);
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
 
                         // SAVE DETAIL TABLE
                         for (int i = 0; i < detailPODataGridView.Rows.Count - 1; i++)
@@ -465,7 +471,8 @@ namespace RoyalPetz_ADMIN
                                 sqlCommand = "INSERT INTO PURCHASE_DETAIL (PURCHASE_INVOICE, PRODUCT_ID, PRODUCT_PRICE, PRODUCT_QTY, PURCHASE_SUBTOTAL) VALUES " +
                                                     "('" + POInvoice + "', '" + detailPODataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["qty"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["subTotal"].Value) + ")";
 
-                                DS.executeNonQueryCommand(sqlCommand);
+                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                    throw internalEX;
                             }
                         }
                         break;
@@ -479,11 +486,13 @@ namespace RoyalPetz_ADMIN
                                             "PURCHASE_TERM_OF_PAYMENT = " + termOfPayment + ", " + 
                                             "PURCHASE_TERM_OF_PAYMENT_DATE = STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y') " +
                                             "WHERE PURCHASE_INVOICE = '" +POInvoice+ "'";
-                        DS.executeNonQueryCommand(sqlCommand);
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
 
                         // DELETE DETAIL TABLE
                         sqlCommand = "DELETE FROM PURCHASE_DETAIL WHERE PURCHASE_INVOICE = '" + POInvoice + "'";
-                        DS.executeNonQueryCommand(sqlCommand);
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
 
                         // RE-INSERT DETAIL TABLE
                         for (int i = 0; i < detailPODataGridView.Rows.Count - 1; i++)
@@ -493,7 +502,8 @@ namespace RoyalPetz_ADMIN
                                 sqlCommand = "INSERT INTO PURCHASE_DETAIL (PURCHASE_INVOICE, PRODUCT_ID, PRODUCT_PRICE, PRODUCT_QTY, PURCHASE_SUBTOTAL) VALUES " +
                                                     "('" + POInvoice + "', '" + detailPODataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["qty"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["subTotal"].Value) + ")";
 
-                                DS.executeNonQueryCommand(sqlCommand);
+                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                    throw internalEX;
                             }
                         }
                         break;
@@ -501,15 +511,17 @@ namespace RoyalPetz_ADMIN
                     case globalConstants.PRINTOUT_PURCHASE_ORDER:
                         // UPDATE PURCHASE ORDER TABLE
                         sqlCommand = "UPDATE PURCHASE_HEADER SET PURCHASE_SENT = 1 WHERE PURCHASE_INVOICE = '" + POInvoice + "'";
-                        DS.executeNonQueryCommand(sqlCommand);
+
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;                        
                         break;
                 }
 
                 DS.commit();
+                result = true;
             }
             catch (Exception e)
             {
-                result = false;
                 try
                 {
                     DS.rollBack();
@@ -518,19 +530,16 @@ namespace RoyalPetz_ADMIN
                 {
                     if (DS.getMyTransConnection() != null)
                     {
-                        MessageBox.Show("An exception of type " + ex.GetType() +
-                                          " was encountered while attempting to roll back the transaction.");
+                        gUtil.showDBOPError(ex, "ROLLBACK");
                     }
                 }
 
-                MessageBox.Show("An exception of type " + e.GetType() +
-                                  " was encountered while inserting the data.");
-                MessageBox.Show("Neither record was written to database.");
+                gUtil.showDBOPError(e, "INSERT");
+                result = false;
             }
             finally
             {
                 DS.mySqlClose();
-                result = true;
             }
 
             return result;
@@ -715,6 +724,12 @@ namespace RoyalPetz_ADMIN
 
                 gUtil.showSuccess(gUtil.INS);
             }
+        }
+
+        private void supplierCombo_Validated(object sender, EventArgs e)
+        {
+            if (!supplierCombo.Items.Contains(supplierCombo.Text))
+                supplierCombo.Focus();
         }
     }
 }

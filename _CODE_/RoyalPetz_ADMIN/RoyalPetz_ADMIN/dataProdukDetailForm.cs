@@ -360,6 +360,7 @@ namespace RoyalPetz_ADMIN
             string sqlCommand = "";
             string noRakBaris = "";
             string noRakKolom = "";
+            MySqlException internalEX = null;
 
             //string produkID = getProdukID();
             productID = kodeProdukTextBox.Text.Trim();
@@ -446,18 +447,21 @@ namespace RoyalPetz_ADMIN
                                                 "WHERE PRODUCT_ID = '" + productID + "'";
 
 
-                            DS.executeNonQueryCommand(sqlCommand);      
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
 
                             // UPDATE PRODUCT_CATEGORY TABLE
                             // delete the content first, and insert the new data based on the currentSelectedKategoryID LIST
                             sqlCommand = "DELETE FROM PRODUCT_CATEGORY WHERE PRODUCT_ID = '" + productID + "'";
-                            DS.executeNonQueryCommand(sqlCommand);
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
 
                             // SAVE TO PRODUCT_CATEGORY TABLE
                             for (int i = 0; i < currentSelectedKategoriID.Count(); i++)
                             {
                                 sqlCommand = "INSERT INTO PRODUCT_CATEGORY (PRODUCT_ID, CATEGORY_ID) VALUES ('" + productID + "', " + currentSelectedKategoriID[i] + ")";
-                                DS.executeNonQueryCommand(sqlCommand);
+                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                    throw internalEX;
                             }
                         break;
 
@@ -468,13 +472,15 @@ namespace RoyalPetz_ADMIN
                                             "VALUES " +
                                             "('" + productID + "', '" + produkBarcode + "', '" + produkName + "', '" + produkDesc + "', " + produkHargaPokok + ", " + produkHargaEcer + ", " + produkHargaPartai + ", " + produkHargaGrosir + ", '" + produkPhoto + "', " + selectedUnitID + ", " + produkQty + ", " + limitStock + ", '" + produkShelves + "', " + produkStatus + ", '" + produkBrand + "', " + produkSvc + ")";
 
-                        DS.executeNonQueryCommand(sqlCommand);
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
 
                         // SAVE TO PRODUCT_CATEGORY TABLE
                         for (int i = 0; i < currentSelectedKategoriID.Count(); i++)
                         {
                             sqlCommand = "INSERT INTO PRODUCT_CATEGORY (PRODUCT_ID, CATEGORY_ID) VALUES ('" + productID + "', " + currentSelectedKategoriID[i] + ")";
-                            DS.executeNonQueryCommand(sqlCommand);
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
                         }
                         break;
                     
@@ -483,29 +489,28 @@ namespace RoyalPetz_ADMIN
                 //DS.executeNonQueryCommand(sqlCommand);
 
                 DS.commit();
+                result = true;
             }
             catch (Exception e)
             {
                 try
                 {
-                    //myTrans.Rollback();
+                    DS.rollBack();
                 }
                 catch (MySqlException ex)
                 {
                     if (DS.getMyTransConnection() != null)
                     {
-                        MessageBox.Show("An exception of type " + ex.GetType() +
-                                          " was encountered while attempting to roll back the transaction.");
+                        gUtil.showDBOPError(ex, "ROLLBACK");
                     }
                 }
 
-                MessageBox.Show("An exception of type " + e.GetType() +
-                                  " was encountered while inserting the data.");
-                MessageBox.Show("Neither record was written to database.");
+                gUtil.showDBOPError(e, "ROLLBACK");
+                result = false;
             }
             finally
             {
-                if ( !selectedPhoto.Equals("PRODUCT_PHOTO/" + produkPhoto) && !selectedPhoto.Equals("") )
+                if ( !selectedPhoto.Equals("PRODUCT_PHOTO/" + produkPhoto) && !selectedPhoto.Equals("") && result == true)
                 {
                     panelImage.BackgroundImage = null;
                     if (System.IO.File.Exists("PRODUCT_PHOTO/" + produkPhoto))
@@ -520,7 +525,6 @@ namespace RoyalPetz_ADMIN
                 }
 
                 DS.mySqlClose();
-                result = true;
             }
 
             return result;

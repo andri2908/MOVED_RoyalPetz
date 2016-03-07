@@ -580,6 +580,7 @@ namespace RoyalPetz_ADMIN
         {
             bool result = false;
             string sqlCommand = "";
+            MySqlException internalEX = null;
 
             string roInvoice = "";
             int branchIDFrom = 0;
@@ -614,7 +615,9 @@ namespace RoyalPetz_ADMIN
                         // SAVE HEADER TABLE
                         sqlCommand = "INSERT INTO REQUEST_ORDER_HEADER (RO_INVOICE, RO_BRANCH_ID_FROM, RO_BRANCH_ID_TO, RO_DATETIME, RO_TOTAL, RO_EXPIRED, RO_ACTIVE) VALUES " +
                                             "('" + roInvoice + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + roDateTime + "', '%d-%m-%Y'), " + roTotal + ", STR_TO_DATE('" + roDateExpired + "', '%d-%m-%Y'), 1)";
-                        DS.executeNonQueryCommand(sqlCommand);
+
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
 
                         // SAVE DETAIL TABLE
                         for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count; i++)
@@ -624,7 +627,8 @@ namespace RoyalPetz_ADMIN
                                 sqlCommand = "INSERT INTO REQUEST_ORDER_DETAIL (RO_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, RO_QTY, RO_SUBTOTAL) VALUES " +
                                                     "('" + roInvoice + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["qty"].Value) + ", " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value) + ")";
 
-                                DS.executeNonQueryCommand(sqlCommand);
+                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                    throw internalEX;
                             }
                         }
                         break;
@@ -638,12 +642,14 @@ namespace RoyalPetz_ADMIN
                                             "RO_TOTAL = " + roTotal + ", " +
                                             "RO_EXPIRED = STR_TO_DATE('" + roDateExpired + "', '%d-%m-%Y') " +
                                             "WHERE RO_INVOICE = '" + roInvoice + "'";
-                    
-                        DS.executeNonQueryCommand(sqlCommand);
+
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
 
                         // DELETE DETAIL TABLE
                         sqlCommand = "DELETE FROM REQUEST_ORDER_DETAIL WHERE RO_INVOICE = '" + roInvoice + "'";
-                        DS.executeNonQueryCommand(sqlCommand);
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
 
                         // RE-INSERT DETAIL TABLE
                         for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count; i++)
@@ -653,37 +659,36 @@ namespace RoyalPetz_ADMIN
                                 sqlCommand = "INSERT INTO REQUEST_ORDER_DETAIL (RO_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, RO_QTY, RO_SUBTOTAL) VALUES " +
                                                     "('" + roInvoice + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["qty"].Value) + ", " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value) + ")";
 
-                                DS.executeNonQueryCommand(sqlCommand);
+                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                    throw internalEX;
                             }
                         }
                         break;
                 }
                 
                 DS.commit();
+                result = true;
             }
             catch (Exception e)
             {
                 try
                 {
-                    //myTrans.Rollback();
+                    DS.rollBack();
                 }
                 catch (MySqlException ex)
                 {
                     if (DS.getMyTransConnection() != null)
                     {
-                        MessageBox.Show("An exception of type " + ex.GetType() +
-                                          " was encountered while attempting to roll back the transaction.");
+                        gUtil.showDBOPError(ex, "ROLLBACK");
                     }
                 }
 
-                MessageBox.Show("An exception of type " + e.GetType() +
-                                  " was encountered while inserting the data.");
-                MessageBox.Show("Neither record was written to database.");
+                gUtil.showDBOPError(e, "INSERT");
+                result = false;
             }
             finally
             {
                 DS.mySqlClose();
-                result = true;
             }
 
             return result;
@@ -809,6 +814,18 @@ namespace RoyalPetz_ADMIN
         private void generateButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void branchFromCombo_Validated(object sender, EventArgs e)
+        {
+            if (!branchFromCombo.Items.Contains(branchFromCombo.Text))
+                branchFromCombo.Focus();
+        }
+
+        private void branchToCombo_Validated(object sender, EventArgs e)
+        {
+            if (!branchToCombo.Items.Contains(branchToCombo.Text))
+                branchToCombo.Focus();
         }
     }
 }

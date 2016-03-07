@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelAcceptValue = new System.Windows.Forms.Label();
             this.labelTotal_1 = new System.Windows.Forms.Label();
@@ -47,26 +47,26 @@
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.prInvoiceTextBox = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.PRDtPicker = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.noInvoiceTextBox = new System.Windows.Forms.TextBox();
             this.labelTanggal = new System.Windows.Forms.Label();
+            this.invoiceDtPicker = new System.Windows.Forms.DateTimePicker();
             this.labelTotal = new System.Windows.Forms.Label();
             this.labelTotalValue = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.errorLabel = new System.Windows.Forms.Label();
             this.detailGridView = new System.Windows.Forms.DataGridView();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.saveButton = new System.Windows.Forms.Button();
-            this.PRDtPicker = new System.Windows.Forms.DateTimePicker();
-            this.invoiceDtPicker = new System.Windows.Forms.DateTimePicker();
             this.productName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qtyRequest = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hpp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qtyReceived = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.errorLabel = new System.Windows.Forms.Label();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.saveButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -83,7 +83,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.47287F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.527132F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 635F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 636F));
             this.tableLayoutPanel1.Controls.Add(this.labelAcceptValue, 2, 6);
             this.tableLayoutPanel1.Controls.Add(this.labelTotal_1, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.labelTujuan_1, 1, 3);
@@ -122,7 +122,7 @@
             this.labelAcceptValue.AutoSize = true;
             this.labelAcceptValue.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelAcceptValue.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.labelAcceptValue.Location = new System.Drawing.Point(328, 227);
+            this.labelAcceptValue.Location = new System.Drawing.Point(327, 227);
             this.labelAcceptValue.Name = "labelAcceptValue";
             this.labelAcceptValue.Size = new System.Drawing.Size(83, 29);
             this.labelAcceptValue.TabIndex = 55;
@@ -134,7 +134,7 @@
             this.labelTotal_1.AutoSize = true;
             this.labelTotal_1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTotal_1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.labelTotal_1.Location = new System.Drawing.Point(301, 183);
+            this.labelTotal_1.Location = new System.Drawing.Point(300, 183);
             this.labelTotal_1.Name = "labelTotal_1";
             this.labelTotal_1.Size = new System.Drawing.Size(14, 18);
             this.labelTotal_1.TabIndex = 49;
@@ -146,7 +146,7 @@
             this.labelTujuan_1.AutoSize = true;
             this.labelTujuan_1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTujuan_1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.labelTujuan_1.Location = new System.Drawing.Point(301, 137);
+            this.labelTujuan_1.Location = new System.Drawing.Point(300, 137);
             this.labelTujuan_1.Name = "labelTujuan_1";
             this.labelTujuan_1.Size = new System.Drawing.Size(14, 18);
             this.labelTujuan_1.TabIndex = 54;
@@ -170,7 +170,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(301, 11);
+            this.label4.Location = new System.Drawing.Point(300, 11);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(14, 18);
             this.label4.TabIndex = 10;
@@ -182,7 +182,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(301, 52);
+            this.label6.Location = new System.Drawing.Point(300, 52);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(14, 18);
             this.label6.TabIndex = 12;
@@ -194,7 +194,7 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.25F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.75F));
             this.tableLayoutPanel4.Controls.Add(this.branchFromTextBox, 0, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(328, 85);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(327, 85);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -218,7 +218,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label5.Location = new System.Drawing.Point(301, 95);
+            this.label5.Location = new System.Drawing.Point(300, 95);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(14, 18);
             this.label5.TabIndex = 20;
@@ -266,7 +266,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.41026F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.58974F));
             this.tableLayoutPanel3.Controls.Add(this.branchToTextBox, 0, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(328, 129);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(327, 129);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -290,11 +290,11 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 233F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 192F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 193F));
             this.tableLayoutPanel6.Controls.Add(this.prInvoiceTextBox, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.label11, 2, 0);
             this.tableLayoutPanel6.Controls.Add(this.PRDtPicker, 3, 0);
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(328, 3);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(327, 3);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -307,7 +307,7 @@
             this.prInvoiceTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.prInvoiceTextBox.Location = new System.Drawing.Point(3, 4);
             this.prInvoiceTextBox.Name = "prInvoiceTextBox";
-            this.prInvoiceTextBox.Size = new System.Drawing.Size(175, 27);
+            this.prInvoiceTextBox.Size = new System.Drawing.Size(174, 27);
             this.prInvoiceTextBox.TabIndex = 16;
             this.prInvoiceTextBox.TextChanged += new System.EventHandler(this.prInvoiceTextBox_TextChanged);
             // 
@@ -317,11 +317,20 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label11.Location = new System.Drawing.Point(201, 8);
+            this.label11.Location = new System.Drawing.Point(200, 8);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(224, 18);
             this.label11.TabIndex = 20;
             this.label11.Text = "TANGGAL PENERIMAAN:";
+            // 
+            // PRDtPicker
+            // 
+            this.PRDtPicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PRDtPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.PRDtPicker.Location = new System.Drawing.Point(433, 3);
+            this.PRDtPicker.Name = "PRDtPicker";
+            this.PRDtPicker.Size = new System.Drawing.Size(147, 27);
+            this.PRDtPicker.TabIndex = 39;
             // 
             // tableLayoutPanel2
             // 
@@ -329,11 +338,11 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 233F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 192F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 193F));
             this.tableLayoutPanel2.Controls.Add(this.noInvoiceTextBox, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.labelTanggal, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.invoiceDtPicker, 3, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(328, 44);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(327, 44);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -348,7 +357,7 @@
             this.noInvoiceTextBox.Location = new System.Drawing.Point(3, 4);
             this.noInvoiceTextBox.Name = "noInvoiceTextBox";
             this.noInvoiceTextBox.ReadOnly = true;
-            this.noInvoiceTextBox.Size = new System.Drawing.Size(175, 27);
+            this.noInvoiceTextBox.Size = new System.Drawing.Size(174, 27);
             this.noInvoiceTextBox.TabIndex = 16;
             // 
             // labelTanggal
@@ -357,11 +366,21 @@
             this.labelTanggal.AutoSize = true;
             this.labelTanggal.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTanggal.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.labelTanggal.Location = new System.Drawing.Point(201, 8);
+            this.labelTanggal.Location = new System.Drawing.Point(200, 8);
             this.labelTanggal.Name = "labelTanggal";
             this.labelTanggal.Size = new System.Drawing.Size(225, 18);
             this.labelTanggal.TabIndex = 20;
             this.labelTanggal.Text = "TANGGAL PERMINTAAN:";
+            // 
+            // invoiceDtPicker
+            // 
+            this.invoiceDtPicker.Enabled = false;
+            this.invoiceDtPicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.invoiceDtPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.invoiceDtPicker.Location = new System.Drawing.Point(433, 3);
+            this.invoiceDtPicker.Name = "invoiceDtPicker";
+            this.invoiceDtPicker.Size = new System.Drawing.Size(147, 27);
+            this.invoiceDtPicker.TabIndex = 40;
             // 
             // labelTotal
             // 
@@ -381,7 +400,7 @@
             this.labelTotalValue.AutoSize = true;
             this.labelTotalValue.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTotalValue.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.labelTotalValue.Location = new System.Drawing.Point(328, 177);
+            this.labelTotalValue.Location = new System.Drawing.Point(327, 177);
             this.labelTotalValue.Name = "labelTotalValue";
             this.labelTotalValue.Size = new System.Drawing.Size(83, 29);
             this.labelTotalValue.TabIndex = 51;
@@ -393,7 +412,7 @@
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label16.Location = new System.Drawing.Point(301, 233);
+            this.label16.Location = new System.Drawing.Point(300, 233);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(14, 18);
             this.label16.TabIndex = 53;
@@ -420,18 +439,31 @@
             this.panel1.Size = new System.Drawing.Size(980, 29);
             this.panel1.TabIndex = 45;
             // 
+            // errorLabel
+            // 
+            this.errorLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.BackColor = System.Drawing.Color.White;
+            this.errorLabel.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(5, 5);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(23, 18);
+            this.errorLabel.TabIndex = 49;
+            this.errorLabel.Text = "   ";
+            // 
             // detailGridView
             // 
             this.detailGridView.AllowUserToAddRows = false;
             this.detailGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.detailGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.detailGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.detailGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.detailGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.productName,
@@ -445,37 +477,6 @@
             this.detailGridView.RowHeadersVisible = false;
             this.detailGridView.Size = new System.Drawing.Size(979, 299);
             this.detailGridView.TabIndex = 47;
-            // 
-            // saveButton
-            // 
-            this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(438, 615);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(122, 37);
-            this.saveButton.TabIndex = 48;
-            this.saveButton.Text = "SAVE ";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-            // 
-            // PRDtPicker
-            // 
-            this.PRDtPicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PRDtPicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.PRDtPicker.Location = new System.Drawing.Point(434, 3);
-            this.PRDtPicker.Name = "PRDtPicker";
-            this.PRDtPicker.Size = new System.Drawing.Size(135, 27);
-            this.PRDtPicker.TabIndex = 39;
-            // 
-            // invoiceDtPicker
-            // 
-            this.invoiceDtPicker.Enabled = false;
-            this.invoiceDtPicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoiceDtPicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.invoiceDtPicker.Location = new System.Drawing.Point(434, 3);
-            this.invoiceDtPicker.Name = "invoiceDtPicker";
-            this.invoiceDtPicker.Size = new System.Drawing.Size(135, 27);
-            this.invoiceDtPicker.TabIndex = 40;
             // 
             // productName
             // 
@@ -517,18 +518,17 @@
             this.productID.Name = "productID";
             this.productID.Visible = false;
             // 
-            // errorLabel
+            // saveButton
             // 
-            this.errorLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.errorLabel.AutoSize = true;
-            this.errorLabel.BackColor = System.Drawing.Color.White;
-            this.errorLabel.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(5, 5);
-            this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(23, 18);
-            this.errorLabel.TabIndex = 49;
-            this.errorLabel.Text = "   ";
+            this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveButton.Location = new System.Drawing.Point(438, 615);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(122, 37);
+            this.saveButton.TabIndex = 48;
+            this.saveButton.Text = "SAVE ";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // penerimaanBarangForm
             // 
