@@ -17,12 +17,25 @@ namespace RoyalPetz_ADMIN
     {
         private int selectedCustomerID = 0;
         private globalUtilities gutil = new globalUtilities();
+        cashierForm parentForm;
+        int originModuleID = 0;
 
         private Data_Access DS = new Data_Access();
 
         public dataPelangganForm()
         {
             InitializeComponent();
+        }
+
+        public dataPelangganForm(int moduleID, cashierForm originForm)
+        {
+            InitializeComponent();
+
+            originModuleID = moduleID;
+            parentForm = originForm;
+
+            if (originModuleID == globalConstants.CASHIER_MODULE)
+                newButton.Visible = false;
         }
 
         private void newButton_Click(object sender, EventArgs e)
@@ -93,8 +106,16 @@ namespace RoyalPetz_ADMIN
             DataGridViewRow selectedRow = dataPelangganDataGridView.Rows[selectedrowindex];
             selectedCustomerID= Convert.ToInt32(selectedRow.Cells["CUSTOMER_ID"].Value);
 
-            dataPelangganDetailForm displayedForm = new dataPelangganDetailForm(globalConstants.EDIT_CUSTOMER, selectedCustomerID);
-            displayedForm.ShowDialog(this);
+            if (originModuleID != globalConstants.CASHIER_MODULE)
+            { 
+                dataPelangganDetailForm displayedForm = new dataPelangganDetailForm(globalConstants.EDIT_CUSTOMER, selectedCustomerID);
+                displayedForm.ShowDialog(this);
+            }
+            else
+            {
+                parentForm.setCustomerID(selectedCustomerID);
+                this.Close();
+            }
         }
 
         private void dataPelangganForm_Load(object sender, EventArgs e)
@@ -111,6 +132,31 @@ namespace RoyalPetz_ADMIN
                 loadCustomerData();
             }
             
+        }
+
+        private void dataPelangganDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (dataPelangganDataGridView.Rows.Count <= 0)
+                    return;
+
+                int selectedrowindex = dataPelangganDataGridView.SelectedCells[0].RowIndex;
+
+                DataGridViewRow selectedRow = dataPelangganDataGridView.Rows[selectedrowindex];
+                selectedCustomerID = Convert.ToInt32(selectedRow.Cells["CUSTOMER_ID"].Value);
+
+                if (originModuleID != globalConstants.CASHIER_MODULE)
+                {
+                    dataPelangganDetailForm displayedForm = new dataPelangganDetailForm(globalConstants.EDIT_CUSTOMER, selectedCustomerID);
+                    displayedForm.ShowDialog(this);
+                }
+                else
+                {
+                    parentForm.setCustomerID(selectedCustomerID);
+                    this.Close();
+                }
+            }
         }
     }
 }

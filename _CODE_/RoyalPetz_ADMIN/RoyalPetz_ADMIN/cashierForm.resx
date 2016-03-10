@@ -117,35 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="F8.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="productName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="price.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="qtyColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="discColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="disc2column.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="discRPcolumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="amountColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="button4.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wgAADsIBFShKgAAAAdpJREFUOE+NkFtIk3EYh1cXRZAWhDeWxugmMWyo6RIdZU0mhS4+mLADfe3smFpL
+        vgAADr4B6kKxwAAAAdpJREFUOE+NkFtIk3EYh1cXRZAWhDeWxugmMWyo6RIdZU0mhS4+mLADfe3smFpL
         N0PKi0wr52kq66B0p4SzpDahE3kRuAtBLBgpXQoVUXdRXrinqSW7aN/2g4f3zx9+D7yvLFU8+mrazx/G
         V3sIq0rO3+/M0qkvYjk6w4/V2CYr8yG6BDkmbW16UWudnMXZfmJzY0k8ZGGmG49yFzbzJWlJQDzIy5GG
         bSL+evoMBQyaz/Di2iksojG1oN1lImjax6PGAwlyGNLn0Ksr4vPrYeLv/PwKWbHr1KkFPreFGzX78Qt5
@@ -159,7 +135,7 @@
   <data name="button2.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wgAADsIBFShKgAAAAfRJREFUWEfFlYFywyAMQ/vp+bT+WWbJFrGBpGnWS3TnGAz4CbbbXhe1pnhE6/v9
+        vgAADr4B6kKxwAAAAfRJREFUWEfFlYFywyAMQ/vp+bT+WWbJFrGBpGnWS3TnGAz4CbbbXhe1pnhE6/v9
         ftbAuj74Arp95Ed0249AkB52y4/AIJuWZWFobfYCaf3fCqyDMVdo3r+ADCqifElONgnm5aL2Ag3IvTWu
         GiEcgCMD7QUSPIsmrN4MnhAbQoIjoFijZEp1n/s+reV1RvSK9al4AEobmxEI835NNRlo89ijGucRqUcR
         G0Jq7OWo52YcOwjZa24A4tPH/gAVA4zoY1HUboxxDvt4mDBfFjehuQzoEhDGugx75r7beFA70B+yTzGx
@@ -173,7 +149,7 @@
   <data name="button3.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wgAADsIBFShKgAAABLFJREFUWEe1lyF04loQhnMQFQgEAoFAVFRUICoQFREIRAUCUVFRURGxAoFArEBU
+        vgAADr4B6kKxwAAABLFJREFUWEe1lyF04loQhnMQFQgEAoFAVFRUICoQFREIRAUCUVFRURGxAoFArEBU
         VCAqKhCICAQCgUAgEAgEIgKBQCAQiAgEAhGBuLPzz81Nk5b3lp495Jzv0M1N+f6ZzE261qnD8zwKf/x2
         XGItceDC4/FIw+Hw2y9cYu3bMZlMyPf9kxdfYu3bgYtWqxX1er1vF19iLTrUXYqODC5aLpfkui7tblPk
         36Roy6yvk2tePiXMcpr42jCdEvpXmvhaN5USQq0+lJ0h1ZuSmgfU6XRou93KJwKp9rte6w4SawimnCdS
@@ -1226,6 +1202,9 @@
   </data>
   <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>133, 17</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>48</value>

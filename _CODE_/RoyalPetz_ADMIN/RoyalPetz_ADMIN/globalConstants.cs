@@ -42,6 +42,7 @@ namespace RoyalPetz_ADMIN
         public const int PRODUK_DETAIL_FORM = 111;
         public const int RETUR_PEMBELIAN = 112;
         public const int RETUR_PENJUALAN = 113;
+        public const int CASHIER_MODULE = 114;
 
         public const int NEW_GROUP_USER = 201;
         public const int EDIT_GROUP_USER = 202;

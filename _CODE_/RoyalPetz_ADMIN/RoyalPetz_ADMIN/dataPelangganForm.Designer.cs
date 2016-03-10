@@ -77,6 +77,7 @@
             this.dataPelangganDataGridView.Size = new System.Drawing.Size(602, 475);
             this.dataPelangganDataGridView.TabIndex = 8;
             this.dataPelangganDataGridView.DoubleClick += new System.EventHandler(this.dataPelangganDataGridView_DoubleClick);
+            this.dataPelangganDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataPelangganDataGridView_KeyDown);
             // 
             // newButton
             // 
