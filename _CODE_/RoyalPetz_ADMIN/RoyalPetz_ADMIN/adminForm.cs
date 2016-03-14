@@ -387,7 +387,8 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripMenuItem23_Click(object sender, EventArgs e)
         {
-            dataReturPenjualanStokAdjustmentForm displayedForm = new dataReturPenjualanStokAdjustmentForm();
+            //dataReturPenjualanStokAdjustmentForm displayedForm = new dataReturPenjualanStokAdjustmentForm();
+            dataPelangganForm displayedForm = new dataPelangganForm();
             displayedForm.ShowDialog(this);
         }
 
@@ -405,7 +406,7 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripMenuItem22_Click(object sender, EventArgs e)
         {
-            dataInvoiceForm displayedForm = new dataInvoiceForm();
+            dataInvoiceForm displayedForm = new dataInvoiceForm(globalConstants.RETUR_PENJUALAN);
             displayedForm.ShowDialog(this);
         }
 

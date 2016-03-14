@@ -230,7 +230,7 @@ namespace RoyalPetz_ADMIN
         private void pengaturanProdukForm_Load(object sender, EventArgs e)
         {
             //errorLabel.Text = "";
-            //inisialisasiInterface();
+            inisialisasiInterface();
             gutil.reArrangeTabOrder(this);
         }
 
@@ -438,7 +438,6 @@ namespace RoyalPetz_ADMIN
         private void pengaturanProdukForm_Activated(object sender, EventArgs e)
         {
             errorLabel.Text = "";
-            inisialisasiInterface();
         }
     }
 }

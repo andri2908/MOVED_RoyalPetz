@@ -30,26 +30,23 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.addButton = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.noreturtextbox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.pelangganCombo = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.saveButton = new System.Windows.Forms.Button();
             this.dataProdukDataGridView = new System.Windows.Forms.DataGridView();
-            this.kodeProduk = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.namaProduk = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productComboHidden = new System.Windows.Forms.ComboBox();
+            this.pelangganComboHidden = new System.Windows.Forms.ComboBox();
+            this.errorLabel = new System.Windows.Forms.Label();
+            this.rsDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProdukDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,51 +58,25 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 83.58778F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.41221F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 349F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 64F));
-            this.tableLayoutPanel1.Controls.Add(this.addButton, 3, 3);
-            this.tableLayoutPanel1.Controls.Add(this.comboBox2, 2, 3);
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
+            this.tableLayoutPanel1.Controls.Add(this.rsDateTimePicker, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label9, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.noreturtextbox, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.label8, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label10, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.comboBox1, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.pelangganCombo, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.label11, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox2, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 1, 3);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 37);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 51.72414F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.27586F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(639, 168);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(639, 123);
             this.tableLayoutPanel1.TabIndex = 20;
-            // 
-            // addButton
-            // 
-            this.addButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.addButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addButton.Location = new System.Drawing.Point(577, 126);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(58, 37);
-            this.addButton.TabIndex = 37;
-            this.addButton.Text = "ADD";
-            this.addButton.UseVisualStyleBackColor = true;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.comboBox2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(228, 132);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(343, 26);
-            this.comboBox2.TabIndex = 51;
             // 
             // label2
             // 
@@ -113,7 +84,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Location = new System.Drawing.Point(191, 91);
+            this.label2.Location = new System.Drawing.Point(191, 92);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(14, 18);
             this.label2.TabIndex = 50;
@@ -125,7 +96,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(3, 91);
+            this.label1.Location = new System.Drawing.Point(3, 92);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(117, 18);
             this.label1.TabIndex = 22;
@@ -148,10 +119,11 @@
             this.noreturtextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tableLayoutPanel1.SetColumnSpan(this.noreturtextbox, 2);
             this.noreturtextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noreturtextbox.Location = new System.Drawing.Point(228, 7);
+            this.noreturtextbox.Location = new System.Drawing.Point(227, 7);
             this.noreturtextbox.Name = "noreturtextbox";
             this.noreturtextbox.Size = new System.Drawing.Size(185, 27);
             this.noreturtextbox.TabIndex = 22;
+            this.noreturtextbox.TextChanged += new System.EventHandler(this.noreturtextbox_TextChanged);
             // 
             // label8
             // 
@@ -177,15 +149,16 @@
             this.label10.TabIndex = 47;
             this.label10.Text = ":";
             // 
-            // comboBox1
+            // pelangganCombo
             // 
-            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.comboBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(228, 87);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(343, 26);
-            this.comboBox1.TabIndex = 45;
+            this.pelangganCombo.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pelangganCombo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pelangganCombo.FormattingEnabled = true;
+            this.pelangganCombo.Location = new System.Drawing.Point(227, 88);
+            this.pelangganCombo.Name = "pelangganCombo";
+            this.pelangganCombo.Size = new System.Drawing.Size(343, 26);
+            this.pelangganCombo.TabIndex = 45;
+            this.pelangganCombo.SelectedIndexChanged += new System.EventHandler(this.pelangganCombo_SelectedIndexChanged);
             // 
             // label11
             // 
@@ -199,43 +172,11 @@
             this.label11.TabIndex = 48;
             this.label11.Text = "TANGGAL RETUR";
             // 
-            // textBox2
-            // 
-            this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(228, 46);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(185, 27);
-            this.textBox2.TabIndex = 49;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label5.Location = new System.Drawing.Point(3, 136);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(142, 18);
-            this.label5.TabIndex = 19;
-            this.label5.Text = "NAMA PRODUK";
-            // 
-            // label4
-            // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(191, 136);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(14, 18);
-            this.label4.TabIndex = 10;
-            this.label4.Text = ":";
-            // 
             // panel1
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.panel1.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel1.Controls.Add(this.errorLabel);
             this.panel1.Location = new System.Drawing.Point(3, 2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(639, 29);
@@ -245,7 +186,7 @@
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(274, 215);
+            this.saveButton.Location = new System.Drawing.Point(257, 574);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(95, 37);
             this.saveButton.TabIndex = 21;
@@ -254,7 +195,6 @@
             // 
             // dataProdukDataGridView
             // 
-            this.dataProdukDataGridView.AllowUserToAddRows = false;
             this.dataProdukDataGridView.AllowUserToDeleteRows = false;
             this.dataProdukDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -266,35 +206,58 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataProdukDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataProdukDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataProdukDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.kodeProduk,
-            this.namaProduk,
-            this.qty});
-            this.dataProdukDataGridView.Location = new System.Drawing.Point(3, 263);
+            this.dataProdukDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dataProdukDataGridView.Location = new System.Drawing.Point(3, 240);
             this.dataProdukDataGridView.Name = "dataProdukDataGridView";
             this.dataProdukDataGridView.RowHeadersVisible = false;
-            this.dataProdukDataGridView.Size = new System.Drawing.Size(639, 359);
+            this.dataProdukDataGridView.Size = new System.Drawing.Size(639, 313);
             this.dataProdukDataGridView.TabIndex = 36;
+            this.dataProdukDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataProdukDataGridView_RowsAdded);
             // 
-            // kodeProduk
+            // productComboHidden
             // 
-            this.kodeProduk.HeaderText = "KODE PRODUK";
-            this.kodeProduk.Name = "kodeProduk";
-            this.kodeProduk.ReadOnly = true;
-            this.kodeProduk.Width = 200;
+            this.productComboHidden.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.productComboHidden.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productComboHidden.FormattingEnabled = true;
+            this.productComboHidden.Location = new System.Drawing.Point(375, 180);
+            this.productComboHidden.Name = "productComboHidden";
+            this.productComboHidden.Size = new System.Drawing.Size(267, 26);
+            this.productComboHidden.TabIndex = 52;
+            this.productComboHidden.Visible = false;
             // 
-            // namaProduk
+            // pelangganComboHidden
             // 
-            this.namaProduk.HeaderText = "NAMA PRODUK";
-            this.namaProduk.Name = "namaProduk";
-            this.namaProduk.ReadOnly = true;
-            this.namaProduk.Width = 350;
+            this.pelangganComboHidden.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pelangganComboHidden.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pelangganComboHidden.FormattingEnabled = true;
+            this.pelangganComboHidden.Location = new System.Drawing.Point(1, 174);
+            this.pelangganComboHidden.Name = "pelangganComboHidden";
+            this.pelangganComboHidden.Size = new System.Drawing.Size(267, 26);
+            this.pelangganComboHidden.TabIndex = 53;
+            this.pelangganComboHidden.Visible = false;
             // 
-            // qty
+            // errorLabel
             // 
-            this.qty.HeaderText = "QTY";
-            this.qty.Name = "qty";
-            this.qty.Width = 80;
+            this.errorLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.BackColor = System.Drawing.Color.White;
+            this.errorLabel.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(3, 5);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(23, 18);
+            this.errorLabel.TabIndex = 54;
+            this.errorLabel.Text = "   ";
+            // 
+            // rsDateTimePicker
+            // 
+            this.rsDateTimePicker.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.rsDateTimePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rsDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.rsDateTimePicker.Location = new System.Drawing.Point(227, 46);
+            this.rsDateTimePicker.Name = "rsDateTimePicker";
+            this.rsDateTimePicker.Size = new System.Drawing.Size(173, 27);
+            this.rsDateTimePicker.TabIndex = 54;
             // 
             // dataReturPenjualanStokAdjustmentForm
             // 
@@ -303,6 +266,8 @@
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(643, 623);
             this.Controls.Add(this.dataProdukDataGridView);
+            this.Controls.Add(this.pelangganComboHidden);
+            this.Controls.Add(this.productComboHidden);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -315,6 +280,8 @@
             this.Load += new System.EventHandler(this.dataReturPenjualanStokAdjustmentForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProdukDataGridView)).EndInit();
             this.ResumeLayout(false);
 
@@ -323,24 +290,20 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox noreturtextbox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox pelangganCombo;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.DataGridView dataProdukDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kodeProduk;
-        private System.Windows.Forms.DataGridViewTextBoxColumn namaProduk;
-        private System.Windows.Forms.DataGridViewTextBoxColumn qty;
-        private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.ComboBox productComboHidden;
+        private System.Windows.Forms.ComboBox pelangganComboHidden;
+        private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.DateTimePicker rsDateTimePicker;
     }
 }

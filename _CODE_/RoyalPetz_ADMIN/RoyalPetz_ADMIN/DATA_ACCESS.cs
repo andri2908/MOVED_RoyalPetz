@@ -160,10 +160,22 @@ namespace RoyalPetz_ADMIN
             myTransCommand.Connection = transConnection;
             myTransCommand.Transaction = myTrans;
         }
-    
+
+        public void rollBack(ref MySqlException returnEx)
+        {
+            try 
+            { 
+                myTrans.Rollback();
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                returnEx = ex;
+            }
+        }
+
         public void rollBack()
         {
-            myTrans.Rollback();
+                myTrans.Rollback();
         }
 
         public MySqlConnection getMyTransConnection()

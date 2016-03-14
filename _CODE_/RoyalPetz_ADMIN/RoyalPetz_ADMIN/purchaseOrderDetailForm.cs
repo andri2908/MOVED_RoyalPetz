@@ -185,7 +185,7 @@ namespace RoyalPetz_ADMIN
             }
 
             globalTotalValue = total;
-            totalLabel.Text = "Rp. " + total.ToString();
+            totalLabel.Text = total.ToString("C", culture);
         }
 
         private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -454,6 +454,14 @@ namespace RoyalPetz_ADMIN
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
+                        if (termOfPaymentCombo.SelectedIndex == 1)
+                        {
+                            // SAVE TO DEBT TABLE
+                            sqlCommand = "INSERT INTO DEBT (PURCHASE_INVOICE, DEBT_DUE_DATE, DEBT_NOMINAL, DEBT_PAID) VALUES ('" + POInvoice + "', STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), " + POTotal + ", 0)";
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+                        }
+
                         break;
 
                     case globalConstants.NEW_PURCHASE_ORDER:
@@ -475,6 +483,15 @@ namespace RoyalPetz_ADMIN
                                     throw internalEX;
                             }
                         }
+
+                        if (termOfPaymentCombo.SelectedIndex == 1)
+                        {
+                            // SAVE TO DEBT TABLE
+                            sqlCommand = "INSERT INTO DEBT (PURCHASE_INVOICE, DEBT_DUE_DATE, DEBT_NOMINAL, DEBT_PAID) VALUES ('" + POInvoice + "', STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), " + POTotal + ", 0)";
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+                        }
+
                         break;
 
                     case globalConstants.EDIT_PURCHASE_ORDER:
@@ -506,6 +523,19 @@ namespace RoyalPetz_ADMIN
                                     throw internalEX;
                             }
                         }
+
+                        if (termOfPaymentCombo.SelectedIndex == 1)
+                        {
+                            // UPDATE DEBT TABLE
+                            sqlCommand = "UPDATE DEBT " +
+                                                "SET DEBT_DUE_DATE = STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), " +
+                                                "DEBT_NOMINAL = " + POTotal + " " +
+                                                "WHERE PURCHASE_INVOICE = '" + POInvoice + "'";
+
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+                        }
+
                         break;
 
                     case globalConstants.PRINTOUT_PURCHASE_ORDER:

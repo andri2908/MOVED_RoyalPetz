@@ -30,13 +30,13 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
-            this.namaSupplierTextbox = new System.Windows.Forms.TextBox();
+            this.noInvoiceTextBox = new System.Windows.Forms.TextBox();
             this.dataInvoiceDataGridView = new System.Windows.Forms.DataGridView();
-            this.noInvoice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pelanggan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.displayButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pelangganCombo = new System.Windows.Forms.ComboBox();
+            this.pelangganComboHidden = new System.Windows.Forms.ComboBox();
+            this.showAllCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataInvoiceDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,13 +51,13 @@
             this.label1.TabIndex = 35;
             this.label1.Text = "NO INVOICE";
             // 
-            // namaSupplierTextbox
+            // noInvoiceTextBox
             // 
-            this.namaSupplierTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaSupplierTextbox.Location = new System.Drawing.Point(147, 20);
-            this.namaSupplierTextbox.Name = "namaSupplierTextbox";
-            this.namaSupplierTextbox.Size = new System.Drawing.Size(260, 27);
-            this.namaSupplierTextbox.TabIndex = 36;
+            this.noInvoiceTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noInvoiceTextBox.Location = new System.Drawing.Point(147, 20);
+            this.noInvoiceTextBox.Name = "noInvoiceTextBox";
+            this.noInvoiceTextBox.Size = new System.Drawing.Size(260, 27);
+            this.noInvoiceTextBox.TabIndex = 36;
             // 
             // dataInvoiceDataGridView
             // 
@@ -73,34 +73,17 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataInvoiceDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataInvoiceDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataInvoiceDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.noInvoice,
-            this.pelanggan});
-            this.dataInvoiceDataGridView.Location = new System.Drawing.Point(0, 105);
+            this.dataInvoiceDataGridView.Location = new System.Drawing.Point(0, 136);
             this.dataInvoiceDataGridView.Name = "dataInvoiceDataGridView";
             this.dataInvoiceDataGridView.RowHeadersVisible = false;
-            this.dataInvoiceDataGridView.Size = new System.Drawing.Size(602, 480);
+            this.dataInvoiceDataGridView.Size = new System.Drawing.Size(602, 449);
             this.dataInvoiceDataGridView.TabIndex = 33;
             this.dataInvoiceDataGridView.DoubleClick += new System.EventHandler(this.dataInvoiceDataGridView_DoubleClick);
-            // 
-            // noInvoice
-            // 
-            this.noInvoice.HeaderText = "NO INVOICE";
-            this.noInvoice.Name = "noInvoice";
-            this.noInvoice.ReadOnly = true;
-            this.noInvoice.Width = 200;
-            // 
-            // pelanggan
-            // 
-            this.pelanggan.HeaderText = "PELANGGAN";
-            this.pelanggan.Name = "pelanggan";
-            this.pelanggan.ReadOnly = true;
-            this.pelanggan.Width = 350;
             // 
             // displayButton
             // 
             this.displayButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.displayButton.Location = new System.Drawing.Point(455, 31);
+            this.displayButton.Location = new System.Drawing.Point(147, 93);
             this.displayButton.Name = "displayButton";
             this.displayButton.Size = new System.Drawing.Size(95, 37);
             this.displayButton.TabIndex = 34;
@@ -119,13 +102,41 @@
             this.label2.TabIndex = 37;
             this.label2.Text = "PELANGGAN";
             // 
-            // textBox1
+            // pelangganCombo
             // 
-            this.textBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(147, 53);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(260, 27);
-            this.textBox1.TabIndex = 38;
+            this.pelangganCombo.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pelangganCombo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pelangganCombo.FormattingEnabled = true;
+            this.pelangganCombo.Location = new System.Drawing.Point(147, 53);
+            this.pelangganCombo.Name = "pelangganCombo";
+            this.pelangganCombo.Size = new System.Drawing.Size(260, 26);
+            this.pelangganCombo.TabIndex = 46;
+            this.pelangganCombo.SelectedIndexChanged += new System.EventHandler(this.pelangganCombo_SelectedIndexChanged);
+            this.pelangganCombo.Validated += new System.EventHandler(this.pelangganCombo_Validated);
+            // 
+            // pelangganComboHidden
+            // 
+            this.pelangganComboHidden.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pelangganComboHidden.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pelangganComboHidden.FormattingEnabled = true;
+            this.pelangganComboHidden.Location = new System.Drawing.Point(290, 211);
+            this.pelangganComboHidden.Name = "pelangganComboHidden";
+            this.pelangganComboHidden.Size = new System.Drawing.Size(260, 26);
+            this.pelangganComboHidden.TabIndex = 47;
+            this.pelangganComboHidden.Visible = false;
+            // 
+            // showAllCheckBox
+            // 
+            this.showAllCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.showAllCheckBox.AutoSize = true;
+            this.showAllCheckBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showAllCheckBox.ForeColor = System.Drawing.Color.FloralWhite;
+            this.showAllCheckBox.Location = new System.Drawing.Point(432, 57);
+            this.showAllCheckBox.Name = "showAllCheckBox";
+            this.showAllCheckBox.Size = new System.Drawing.Size(101, 22);
+            this.showAllCheckBox.TabIndex = 48;
+            this.showAllCheckBox.Text = "Show All";
+            this.showAllCheckBox.UseVisualStyleBackColor = true;
             // 
             // dataInvoiceForm
             // 
@@ -133,10 +144,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(602, 586);
+            this.Controls.Add(this.showAllCheckBox);
+            this.Controls.Add(this.pelangganComboHidden);
+            this.Controls.Add(this.pelangganCombo);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.namaSupplierTextbox);
+            this.Controls.Add(this.noInvoiceTextBox);
             this.Controls.Add(this.dataInvoiceDataGridView);
             this.Controls.Add(this.displayButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -155,12 +168,12 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox namaSupplierTextbox;
+        private System.Windows.Forms.TextBox noInvoiceTextBox;
         private System.Windows.Forms.DataGridView dataInvoiceDataGridView;
         private System.Windows.Forms.Button displayButton;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn noInvoice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pelanggan;
+        private System.Windows.Forms.ComboBox pelangganCombo;
+        private System.Windows.Forms.ComboBox pelangganComboHidden;
+        private System.Windows.Forms.CheckBox showAllCheckBox;
     }
 }
