@@ -24,6 +24,7 @@ namespace RoyalPetz_ADMIN
         private bool isLoading = false;
         private List<string> returnQty = new List<string>();
         string previousInput = "";
+        double extraAmount = 0;
 
         private Data_Access DS = new Data_Access();
         private globalUtilities gutil = new globalUtilities();
@@ -381,13 +382,17 @@ namespace RoyalPetz_ADMIN
             string returID = "0";
             int customerID = 0;
             string ReturDateTime = "";
+            DateTime selectedReturDate;
             double returTotal = 0;
             double hppValue;
             double qtyValue;
             double soQty = 0;
             string descriptionValue;
-            DateTime selectedReturDate;
             MySqlException internalEX = null;
+            double totalCredit = 0;
+            
+            
+            int selectedCreditID;
 
             returID = noReturTextBox.Text;
             customerID = selectedCustomerID;
@@ -427,6 +432,7 @@ namespace RoyalPetz_ADMIN
                     {
                         descriptionValue = " ";
                     }
+
                     sqlCommand = "INSERT INTO RETURN_SALES_DETAIL (RS_INVOICE, PRODUCT_ID, PRODUCT_SALES_PRICE, PRODUCT_SALES_QTY, PRODUCT_RETURN_QTY, RS_DESCRIPTION, RS_SUBTOTAL) VALUES " +
                                         "('" + returID + "', '" + detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + hppValue + ", " + soQty + ", " + qtyValue + ", '" + descriptionValue + "', " + Convert.ToDouble(detailReturDataGridView.Rows[i].Cells["subTotal"].Value) + ")";
 
@@ -438,6 +444,60 @@ namespace RoyalPetz_ADMIN
 
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
+                }
+
+                extraAmount = 0;
+                // IF THERE'S ANY CREDIT LEFT FOR THAT PARTICULAR INVOICE
+                if (originModuleID == globalConstants.RETUR_PENJUALAN)
+                {
+                    totalCredit = getTotalCredit();
+                    selectedCreditID = getCreditID();
+
+                    if (selectedCreditID > 0)
+                    {
+                        if (totalCredit >= globalTotalValue)
+                        {
+                            // RETUR VALUE LESS THAN OR EQUAL TOTAL CREDIT
+                            // add retur as cash payment with description retur no
+                            sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED) VALUES " +
+                                                "(" + selectedCreditID + ", STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), 1, " + globalTotalValue + ", 'RETUR [" + returID + "]', 1)";
+                
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+
+                            if (totalCredit == globalTotalValue)
+                            {
+                                // UPDATE SALES HEADER TABLE
+                                sqlCommand = "UPDATE SALES_HEADER SET SALES_PAID = 1 WHERE SALES_INVOICE = '" + selectedSalesInvoice + "'";
+
+                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                    throw internalEX;
+
+                                // UPDATE CREDIT TABLE
+                                sqlCommand = "UPDATE CREDIT SET CREDIT_PAID = 1 WHERE CREDIT_ID = " + selectedCreditID;
+
+                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                    throw internalEX;
+                            }
+                        }
+                        else
+                        {
+                            // RETUR VALUE BIGGER THAN TOTAL CREDIT
+                            // return the extra amount as cash
+                            extraAmount = globalTotalValue - totalCredit;
+                            sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED) VALUES " +
+                                                "(" + selectedCreditID + ", STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), 1, " + totalCredit + ", 'RETUR [" + noReturTextBox.Text + "]', 1)";
+                        
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+                        }
+                    }
+                    else
+                        extraAmount = globalTotalValue;
+                }
+                else if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
+                {
+
                 }
 
                 DS.commit();
@@ -478,16 +538,42 @@ namespace RoyalPetz_ADMIN
             return false;
         }
 
+        private double getTotalCredit()
+        {
+            double totalPayment = 0;
+            double totalSales = 0;
+            double totalCredit = 0;
+            string sqlCommand = "";
+
+            // get Total sales for that particular Invoice
+            sqlCommand = "SELECT IFNULL(SALES_TOTAL, 0) FROM SALES_HEADER WHERE SALES_INVOICE = '" +selectedSalesInvoice + "'";
+            totalSales = Convert.ToDouble(DS.getDataSingleValue(sqlCommand));
+
+            // get Total Payment for that invoice 
+            sqlCommand = "SELECT IFNULL(SUM(PAYMENT_NOMINAL), 0) FROM PAYMENT_CREDIT, CREDIT WHERE CREDIT.SALES_INVOICE = '" + selectedSalesInvoice + "' AND PAYMENT_CREDIT.CREDIT_ID = CREDIT.CREDIT_ID";
+            totalPayment = Convert.ToDouble(DS.getDataSingleValue(sqlCommand));
+
+            totalCredit = totalSales - totalPayment;
+
+            return totalCredit;
+        }
+
+        private int getCreditID()
+        {
+            int result = 0;
+
+            result = Convert.ToInt32(DS.getDataSingleValue("SELECT IFNULL(CREDIT_ID, 0) FROM CREDIT WHERE SALES_INVOICE = '" + selectedSalesInvoice + "'"));
+
+            return result;
+        }
+
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (saveData())
             {
-                // CHECK FOR ANY OUTSTANDING CREDIT
-                // IF THERE'S AN EXISTING OUTSTANDING CREDIT
-                //    - DEDUCT THE CREDIT AMOUNT BASED ON THE RETUR VALUE
-                //    - IF THE RETUR VALUE > OUTSTANDING CREDIT
-                //       - RETURN THE MONEY IN CASH FORM
-                
+                if (extraAmount > 0)
+                    MessageBox.Show("JUMLAH YANG DIKEMBALIKAN SEBESAR " + extraAmount.ToString("C", culture));
+
                 errorLabel.Text = "";
                 gutil.showSuccess(gutil.INS);
                 saveButton.Enabled = false;
@@ -496,7 +582,6 @@ namespace RoyalPetz_ADMIN
         
         private void dataReturPenjualanForm_Load(object sender, EventArgs e)
         {
-            errorLabel.Text = "";
             rsDateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
             invoiceTotalLabelValue.Text = "Rp. " + getInvoiceTotalValue();
 

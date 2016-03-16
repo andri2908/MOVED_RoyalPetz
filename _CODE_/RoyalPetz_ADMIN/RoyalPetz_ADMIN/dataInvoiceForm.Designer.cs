@@ -79,6 +79,7 @@
             this.dataInvoiceDataGridView.Size = new System.Drawing.Size(602, 449);
             this.dataInvoiceDataGridView.TabIndex = 33;
             this.dataInvoiceDataGridView.DoubleClick += new System.EventHandler(this.dataInvoiceDataGridView_DoubleClick);
+            this.dataInvoiceDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataInvoiceDataGridView_KeyDown);
             // 
             // displayButton
             // 

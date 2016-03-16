@@ -150,5 +150,31 @@ namespace RoyalPetz_ADMIN
             fillInPelangganCombo();
         }
 
+        private void dataInvoiceDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (dataInvoiceDataGridView.Rows.Count <= 0)
+                    return;
+
+                int rowSelectedIndex = dataInvoiceDataGridView.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = dataInvoiceDataGridView.Rows[rowSelectedIndex];
+                selectedSO = selectedRow.Cells["SALES_INVOICE"].Value.ToString();
+
+                switch (originModuleID)
+                {
+                    case globalConstants.PEMBAYARAN_PIUTANG:
+                        pembayaranPiutangForm pembayaranForm = new pembayaranPiutangForm(selectedSO);
+                        pembayaranForm.ShowDialog(this);
+                        break;
+
+                    case globalConstants.RETUR_PENJUALAN:
+                        dataReturPenjualanForm displayedForm = new dataReturPenjualanForm(originModuleID, selectedSO);
+                        displayedForm.ShowDialog(this);
+                        break;
+                }
+            }
+        }
+
     }
 }

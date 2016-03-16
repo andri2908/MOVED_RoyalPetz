@@ -110,14 +110,16 @@ namespace RoyalPetz_ADMIN
             DataTable dt = new DataTable();
             string sqlCommand = "";
 
-            sqlCommand = "SELECT DATE_FORMAT(PAYMENT_DATE, '%d-%M-%Y') AS 'TANGGAL', PAYMENT_NOMINAL AS 'NOMINAL', PAYMENT_DESCRIPTION AS 'DESKRIPSI' FROM PAYMENT_CREDIT WHERE CREDIT_ID = " + selectedCreditID;
+            sqlCommand = "SELECT PAYMENT_ID, PM_NAME AS 'TIPE', IF(PAYMENT_CONFIRMED = 1, 'Y', 'N') AS STATUS, DATE_FORMAT(PAYMENT_DATE, '%d-%M-%Y') AS 'TANGGAL', PAYMENT_NOMINAL AS 'NOMINAL', PAYMENT_DESCRIPTION AS 'DESKRIPSI' FROM PAYMENT_CREDIT PC, PAYMENT_METHOD PM WHERE PC.PM_ID = PM.PM_ID AND CREDIT_ID = " + selectedCreditID;
             using (rdr = DS.getData(sqlCommand))
             {
+                detailPaymentInfoDataGrid.DataSource = null;
                 if (rdr.HasRows)
                 {
                     dt.Load(rdr);
                     detailPaymentInfoDataGrid.DataSource = dt;
 
+                    detailPaymentInfoDataGrid.Columns["PAYMENT_ID"].Visible= false;
                     detailPaymentInfoDataGrid.Columns["TANGGAL"].Width = 200;
                     detailPaymentInfoDataGrid.Columns["NOMINAL"].Width = 200;                    
                     detailPaymentInfoDataGrid.Columns["DESKRIPSI"].Width = 300;
@@ -145,10 +147,15 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        private void calculateTotalCredit()
+        private void calculateTotalCredit(bool globalCalculation = false)
         {
             double totalPayment = 0;
-
+            
+            if (globalCalculation)
+            {
+                globalTotalValue = Convert.ToDouble(DS.getDataSingleValue("SELECT SALES_TOTAL FROM SALES_HEADER WHERE SALES_INVOICE = '" + selectedSOInvoice+"'"));
+            }
+            
             totalPayment = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(SUM(PAYMENT_NOMINAL), 0) AS PAYMENT FROM PAYMENT_CREDIT WHERE CREDIT_ID = " + selectedCreditID));
 
             globalTotalValue = globalTotalValue - totalPayment;
@@ -195,9 +202,13 @@ namespace RoyalPetz_ADMIN
             paymentDateTime = String.Format(culture, "{0:dd-MM-yyyy}", selectedPaymentDate);
             paymentNominal = Convert.ToDouble(paymentMaskedTextBox.Text);
             paymentMethod = paymentCombo.SelectedIndex + 1;
+            paymentDescription = descriptionTextBox.Text;
 
             if (paymentNominal > globalTotalValue)
                 paymentNominal = globalTotalValue;
+
+            if (paymentMethod == 1)
+                paymentConfirmed = 1;
 
             DS.beginTransaction();
 
@@ -279,13 +290,158 @@ namespace RoyalPetz_ADMIN
                 }
 
                 loadDataDetailPayment();
-                calculateTotalCredit();
+                calculateTotalCredit(true);
             }
         }
 
         private void paymentMaskedTextBox_TextChanged(object sender, EventArgs e)
         {
             paymentMaskedTextBox.Text = gutil.allTrim(paymentMaskedTextBox.Text);
+        }
+
+        private bool confirmPembayaran(string paymentID)
+        {
+            bool result = false;
+            string sqlCommand;
+            MySqlException internalEX = null;
+
+            DS.beginTransaction();
+
+            try
+            {
+                DS.mySqlConnect();
+
+                // SAVE HEADER TABLE
+                sqlCommand = "UPDATE PAYMENT_CREDIT SET PAYMENT_CONFIRMED = 1 WHERE PAYMENT_ID = " + paymentID;
+            
+                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                    throw internalEX;
+
+                DS.commit();
+                result = true;
+            }
+            catch (Exception e)
+            {
+                try
+                {
+                    DS.rollBack();
+                }
+                catch (MySqlException ex)
+                {
+                    if (DS.getMyTransConnection() != null)
+                    {
+                        gutil.showDBOPError(ex, "ROLLBACK");
+                    }
+                }
+
+                gutil.showDBOPError(e, "INSERT");
+                result = false;
+            }
+            finally
+            {
+                DS.mySqlClose();
+            }
+
+            return result;
+        }
+
+        private bool checkCreditStatus()
+        {
+            bool result = true;
+            string sqlCommand;
+            int numOfUnconfirmedPayment;
+            MySqlException internalEX = null;
+
+            sqlCommand = "SELECT COUNT(1) FROM PAYMENT_CREDIT WHERE CREDIT_ID = " + selectedCreditID + " AND PAYMENT_CONFIRMED = 0";
+            numOfUnconfirmedPayment = Convert.ToInt32(DS.getDataSingleValue(sqlCommand));
+
+            if (numOfUnconfirmedPayment <= 0)
+            {
+                if (globalTotalValue <= 0)
+                {
+                    DS.beginTransaction();
+
+                    try
+                    {
+                        DS.mySqlConnect();
+
+                        // UPDATE CREDIT TABLE
+                        sqlCommand = "UPDATE CREDIT SET CREDIT_PAID = 1 WHERE CREDIT_ID = " + selectedCreditID;
+
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
+
+                        // UPDATE SALES HEADER TABLE
+                        sqlCommand = "UPDATE SALES_HEADER SET SALES_PAID = 1 WHERE SALES_INVOICE = '" + selectedSOInvoice + "'";
+
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
+
+                        DS.commit();
+                        result = true;
+                    }
+                    catch (Exception e)
+                    {
+                        try
+                        {
+                            DS.rollBack();
+                        }
+                        catch (MySqlException ex)
+                        {
+                            if (DS.getMyTransConnection() != null)
+                            {
+                                gutil.showDBOPError(ex, "ROLLBACK");
+                            }
+                        }
+
+                        gutil.showDBOPError(e, "INSERT");
+                        result = false;
+                    }
+                    finally
+                    {
+                        DS.mySqlClose();
+                    }
+                }
+            }
+
+            return result;
+        }
+        
+        private void detailPaymentInfoDataGrid_KeyDown(object sender, KeyEventArgs e)
+        {
+            string selectedPaymentID = "";
+
+            if (e.KeyCode == Keys.F5)
+            {
+                if (detailPaymentInfoDataGrid.Rows.Count <= 0)
+                    return;
+
+                int rowSelectedIndex = detailPaymentInfoDataGrid.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = detailPaymentInfoDataGrid.Rows[rowSelectedIndex];
+
+                if (selectedRow.Cells["STATUS"].Value.ToString().Equals("N"))
+                {
+                    selectedRow.DefaultCellStyle.BackColor = Color.Red;
+
+                    if (DialogResult.Yes == MessageBox.Show("KONFIRMASI PEMBAYARAN ? ", "KONFIRMASI", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        selectedPaymentID = selectedRow.Cells["PAYMENT_ID"].Value.ToString();
+
+                        if (confirmPembayaran(selectedPaymentID))
+                        {
+                            calculateTotalCredit(true);
+                            if (checkCreditStatus())
+                            { 
+                                gutil.showSuccess(gutil.INS);
+                            }
+
+                            loadDataDetailPayment();
+                        }
+                    }
+
+                    selectedRow.DefaultCellStyle.BackColor = Color.White;
+                }
+            }
         }
 
         private void pembayaranPiutangForm_Load(object sender, EventArgs e)

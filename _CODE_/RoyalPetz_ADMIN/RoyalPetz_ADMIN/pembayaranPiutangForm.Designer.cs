@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.invoiceNoTextBox = new System.Windows.Forms.TextBox();
             this.detailPaymentInfoDataGrid = new System.Windows.Forms.DataGridView();
             this.label13 = new System.Windows.Forms.Label();
@@ -45,23 +45,23 @@
             this.label9 = new System.Windows.Forms.Label();
             this.saveButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.paymentCombo = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.pelangganNameTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.label11 = new System.Windows.Forms.Label();
             this.paymentDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.invoiceDateTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.paymentCombo = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.detailPaymentInfoDataGrid)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.detailSalesOrderDataGridView)).BeginInit();
@@ -86,21 +86,23 @@
             this.detailPaymentInfoDataGrid.AllowUserToAddRows = false;
             this.detailPaymentInfoDataGrid.AllowUserToDeleteRows = false;
             this.detailPaymentInfoDataGrid.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.detailPaymentInfoDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.detailPaymentInfoDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.detailPaymentInfoDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.detailPaymentInfoDataGrid.Location = new System.Drawing.Point(468, 306);
+            this.detailPaymentInfoDataGrid.Location = new System.Drawing.Point(3, 450);
+            this.detailPaymentInfoDataGrid.MultiSelect = false;
             this.detailPaymentInfoDataGrid.Name = "detailPaymentInfoDataGrid";
             this.detailPaymentInfoDataGrid.ReadOnly = true;
             this.detailPaymentInfoDataGrid.RowHeadersVisible = false;
-            this.detailPaymentInfoDataGrid.Size = new System.Drawing.Size(424, 303);
+            this.detailPaymentInfoDataGrid.Size = new System.Drawing.Size(889, 151);
             this.detailPaymentInfoDataGrid.TabIndex = 62;
+            this.detailPaymentInfoDataGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.detailPaymentInfoDataGrid_KeyDown);
             // 
             // label13
             // 
@@ -199,20 +201,20 @@
             this.detailSalesOrderDataGridView.AllowUserToAddRows = false;
             this.detailSalesOrderDataGridView.AllowUserToDeleteRows = false;
             this.detailSalesOrderDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.detailSalesOrderDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.detailSalesOrderDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.detailSalesOrderDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.detailSalesOrderDataGridView.Location = new System.Drawing.Point(4, 306);
+            this.detailSalesOrderDataGridView.Location = new System.Drawing.Point(4, 303);
             this.detailSalesOrderDataGridView.Name = "detailSalesOrderDataGridView";
             this.detailSalesOrderDataGridView.ReadOnly = true;
             this.detailSalesOrderDataGridView.RowHeadersVisible = false;
-            this.detailSalesOrderDataGridView.Size = new System.Drawing.Size(458, 303);
+            this.detailSalesOrderDataGridView.Size = new System.Drawing.Size(888, 141);
             this.detailSalesOrderDataGridView.TabIndex = 60;
             // 
             // label9
@@ -280,12 +282,34 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(888, 269);
             this.tableLayoutPanel1.TabIndex = 58;
             // 
+            // label11
+            // 
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label11.Location = new System.Drawing.Point(3, 10);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(183, 18);
+            this.label11.TabIndex = 20;
+            this.label11.Text = "TGL PEMBAYARAN :";
+            // 
+            // paymentCombo
+            // 
+            this.paymentCombo.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.paymentCombo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.paymentCombo.FormattingEnabled = true;
+            this.paymentCombo.Location = new System.Drawing.Point(261, 158);
+            this.paymentCombo.Name = "paymentCombo";
+            this.paymentCombo.Size = new System.Drawing.Size(229, 26);
+            this.paymentCombo.TabIndex = 63;
+            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 198F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tableLayoutPanel3.Controls.Add(this.pelangganNameTextBox, 0, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(261, 79);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -342,18 +366,6 @@
             this.tableLayoutPanel6.Size = new System.Drawing.Size(624, 32);
             this.tableLayoutPanel6.TabIndex = 28;
             // 
-            // label11
-            // 
-            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label11.Location = new System.Drawing.Point(3, 10);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(183, 18);
-            this.label11.TabIndex = 20;
-            this.label11.Text = "TGL PEMBAYARAN :";
-            // 
             // paymentDateTimePicker
             // 
             this.paymentDateTimePicker.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -402,6 +414,18 @@
             this.label5.TabIndex = 52;
             this.label5.Text = ":";
             // 
+            // label8
+            // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label8.Location = new System.Drawing.Point(239, 239);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(14, 18);
+            this.label8.TabIndex = 64;
+            this.label8.Text = ":";
+            // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -414,18 +438,6 @@
             this.label3.TabIndex = 51;
             this.label3.Text = "TOTAL";
             // 
-            // label2
-            // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Location = new System.Drawing.Point(3, 239);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 18);
-            this.label2.TabIndex = 62;
-            this.label2.Text = "DESKRIPSI";
-            // 
             // label7
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -437,18 +449,6 @@
             this.label7.Size = new System.Drawing.Size(197, 18);
             this.label7.TabIndex = 63;
             this.label7.Text = "TOTAL PEMBAYARAN";
-            // 
-            // label8
-            // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label8.Location = new System.Drawing.Point(239, 239);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(14, 18);
-            this.label8.TabIndex = 64;
-            this.label8.Text = ":";
             // 
             // label10
             // 
@@ -474,15 +474,17 @@
             this.label16.TabIndex = 66;
             this.label16.Text = ":";
             // 
-            // paymentCombo
+            // label2
             // 
-            this.paymentCombo.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.paymentCombo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.paymentCombo.FormattingEnabled = true;
-            this.paymentCombo.Location = new System.Drawing.Point(261, 158);
-            this.paymentCombo.Name = "paymentCombo";
-            this.paymentCombo.Size = new System.Drawing.Size(229, 26);
-            this.paymentCombo.TabIndex = 63;
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label2.Location = new System.Drawing.Point(3, 239);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(107, 18);
+            this.label2.TabIndex = 62;
+            this.label2.Text = "DESKRIPSI";
             // 
             // pembayaranPiutangForm
             // 
