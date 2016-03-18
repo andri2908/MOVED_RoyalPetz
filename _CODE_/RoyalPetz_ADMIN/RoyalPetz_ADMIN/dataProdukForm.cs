@@ -83,7 +83,6 @@ namespace RoyalPetz_ADMIN
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            //loadProdukData();
             if (!namaProdukTextBox.Text.Equals(""))
             {
                 loadProdukData();
@@ -167,10 +166,8 @@ namespace RoyalPetz_ADMIN
                 displaySpecificForm();
             }
         }
-
         private void dataProdukForm_Activated(object sender, EventArgs e)
         {
-            //loadProdukData();
             if (!namaProdukTextBox.Text.Equals(""))
             {
                 loadProdukData();

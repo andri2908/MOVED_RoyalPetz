@@ -13,8 +13,8 @@ namespace RoyalPetz_ADMIN
     
     public partial class backupRestoreDatabaseForm : Form
     {
-        private globalUtilities gUtil = new globalUtilities();
 
+        private globalUtilities gUtil = new globalUtilities();
         public backupRestoreDatabaseForm()
         {
             InitializeComponent();
@@ -60,7 +60,6 @@ namespace RoyalPetz_ADMIN
         {
             gUtil.reArrangeTabOrder(this);
         }
-
         private void backupRestoreDatabaseForm_Activated(object sender, EventArgs e)
         {
             //ig need something

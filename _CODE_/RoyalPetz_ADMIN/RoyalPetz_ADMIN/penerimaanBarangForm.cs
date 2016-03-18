@@ -419,7 +419,7 @@ namespace RoyalPetz_ADMIN
                 }
                 else
                 {
-                    sqlCommand = "UPDATE PURCHASE_HEADER SET PURCHASE_RECEIVED = 1 WHERE PM_INVOICE = '" + noInvoiceTextBox.Text + "'";
+                    sqlCommand = "UPDATE PURCHASE_HEADER SET PURCHASE_RECEIVED = 1 WHERE PURCHASE_INVOICE = '" + noInvoiceTextBox.Text + "'";
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
                 }

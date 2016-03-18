@@ -640,5 +640,11 @@ namespace RoyalPetz_ADMIN
             displayedForm.ShowDialog(this);
 
         }
+
+        private void toolStripMenuItem38_Click(object sender, EventArgs e)
+        {
+            dataPOForm displayedForm = new dataPOForm(globalConstants.PEMBAYARAN_HUTANG);
+            displayedForm.ShowDialog(this);
+        }
     }
 }

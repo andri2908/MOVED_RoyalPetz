@@ -410,9 +410,9 @@ namespace RoyalPetz_ADMIN
             {
                 while (rdr.Read())
                 {
-                    productNameCmb.Items.Add(rdr.GetString("PRODUCT_NAME"));
-                    productIDComboHidden.Items.Add(rdr.GetString("PRODUCT_ID"));
-                    productNameComboHidden.Items.Add(rdr.GetString("PRODUCT_NAME"));
+                        productNameCmb.Items.Add(rdr.GetString("PRODUCT_NAME"));
+                        productIDComboHidden.Items.Add(rdr.GetString("PRODUCT_ID"));
+                        productNameComboHidden.Items.Add(rdr.GetString("PRODUCT_NAME"));
                 }
             }
 

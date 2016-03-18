@@ -464,21 +464,6 @@ namespace RoyalPetz_ADMIN
                 
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;
-
-                            if (totalCredit == globalTotalValue)
-                            {
-                                // UPDATE SALES HEADER TABLE
-                                sqlCommand = "UPDATE SALES_HEADER SET SALES_PAID = 1 WHERE SALES_INVOICE = '" + selectedSalesInvoice + "'";
-
-                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                                    throw internalEX;
-
-                                // UPDATE CREDIT TABLE
-                                sqlCommand = "UPDATE CREDIT SET CREDIT_PAID = 1 WHERE CREDIT_ID = " + selectedCreditID;
-
-                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                                    throw internalEX;
-                            }
                         }
                         else
                         {
@@ -491,13 +476,28 @@ namespace RoyalPetz_ADMIN
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;
                         }
+
+                        if (totalCredit <= globalTotalValue)
+                        {
+                            // UPDATE SALES HEADER TABLE
+                            sqlCommand = "UPDATE SALES_HEADER SET SALES_PAID = 1 WHERE SALES_INVOICE = '" + selectedSalesInvoice + "'";
+
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+
+                            // UPDATE CREDIT TABLE
+                            sqlCommand = "UPDATE CREDIT SET CREDIT_PAID = 1 WHERE CREDIT_ID = " + selectedCreditID;
+
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+                        }
                     }
                     else
                         extraAmount = globalTotalValue;
                 }
                 else if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
                 {
-
+                    extraAmount = globalTotalValue;
                 }
 
                 DS.commit();

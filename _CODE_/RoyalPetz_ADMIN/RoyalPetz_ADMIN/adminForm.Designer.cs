@@ -82,6 +82,7 @@
             this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem67 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem37 = new System.Windows.Forms.ToolStripMenuItem();
             this.penjualanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem17 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem14 = new System.Windows.Forms.ToolStripMenuItem();
@@ -126,7 +127,7 @@
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem37 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem38 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -669,6 +670,16 @@
             this.toolStripMenuItem13.Text = "Retur Pembelian ke Supplier";
             this.toolStripMenuItem13.Click += new System.EventHandler(this.toolStripMenuItem13_Click);
             // 
+            // toolStripMenuItem37
+            // 
+            this.toolStripMenuItem37.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem37.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem37.Name = "toolStripMenuItem37";
+            this.toolStripMenuItem37.ShowShortcutKeys = false;
+            this.toolStripMenuItem37.Size = new System.Drawing.Size(271, 22);
+            this.toolStripMenuItem37.Text = "Retur Permintaan ke Pusat";
+            this.toolStripMenuItem37.Click += new System.EventHandler(this.toolStripMenuItem37_Click);
+            // 
             // penjualanToolStripMenuItem
             // 
             this.penjualanToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
@@ -791,7 +802,8 @@
             this.transaksiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem24,
             this.toolStripMenuItem68,
-            this.toolStripMenuItem69});
+            this.toolStripMenuItem69,
+            this.toolStripMenuItem38});
             this.transaksiToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.transaksiToolStripMenuItem.Name = "transaksiToolStripMenuItem";
             this.transaksiToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
@@ -821,7 +833,7 @@
             this.toolStripMenuItem69.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripMenuItem69.Name = "toolStripMenuItem69";
             this.toolStripMenuItem69.Size = new System.Drawing.Size(322, 22);
-            this.toolStripMenuItem69.Text = "Penerimaan Hutang";
+            this.toolStripMenuItem69.Text = "Pembayaran Hutang ke Pusat";
             this.toolStripMenuItem69.Click += new System.EventHandler(this.toolStripMenuItem69_Click);
             // 
             // toolStripMenuItem70
@@ -1116,15 +1128,14 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 69);
             // 
-            // toolStripMenuItem37
+            // toolStripMenuItem38
             // 
-            this.toolStripMenuItem37.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem37.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripMenuItem37.Name = "toolStripMenuItem37";
-            this.toolStripMenuItem37.ShowShortcutKeys = false;
-            this.toolStripMenuItem37.Size = new System.Drawing.Size(271, 22);
-            this.toolStripMenuItem37.Text = "Retur Permintaan ke Pusat";
-            this.toolStripMenuItem37.Click += new System.EventHandler(this.toolStripMenuItem37_Click);
+            this.toolStripMenuItem38.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem38.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem38.Name = "toolStripMenuItem38";
+            this.toolStripMenuItem38.Size = new System.Drawing.Size(322, 22);
+            this.toolStripMenuItem38.Text = "Pembayaran Hutang ke Supplier";
+            this.toolStripMenuItem38.Click += new System.EventHandler(this.toolStripMenuItem38_Click);
             // 
             // adminForm
             // 
@@ -1258,6 +1269,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem12;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem36;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem37;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem38;
     }
 }
 
