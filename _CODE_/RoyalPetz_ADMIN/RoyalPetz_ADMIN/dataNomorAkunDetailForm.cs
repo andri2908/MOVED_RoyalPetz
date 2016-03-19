@@ -46,7 +46,7 @@ namespace RoyalPetz_ADMIN
 
         private void loadAccountData()
         {
-            loadtypeaccount();
+            //loadtypeaccount();
 
             MySqlDataReader rdr;
             DataTable dt = new DataTable();
@@ -83,14 +83,14 @@ namespace RoyalPetz_ADMIN
 
             DS.mySqlConnect();
 
-            using (rdr = DS.getData("SELECT ACCOUNT_TYPE_ID, ACCOUNT_TYPE_NAME FROM MASTER_ACCOUNT_TYPE"))
+            using (rdr = DS.getData("SELECT ACCOUNT_TYPE_ID as 'ID', ACCOUNT_TYPE_NAME AS 'NAME' FROM MASTER_ACCOUNT_TYPE"))
             {
                 if (rdr.HasRows)
                 {
                     dt.Load(rdr);
-                    TipeComboBox.DisplayMember = "ACCOUNT_TYPE_NAME";
-                    TipeComboBox.ValueMember = "ACCOUNT_TYPE_ID";
                     TipeComboBox.DataSource = dt;
+                    TipeComboBox.ValueMember = "ID";
+                    TipeComboBox.DisplayMember = "NAME";
                 }
             }
             TipeComboBox.SelectedIndex = 1;
@@ -99,6 +99,8 @@ namespace RoyalPetz_ADMIN
         private void dataNomorAkunDetailForm_Activated(object sender, EventArgs e)
         {
             //if need something
+            loadtypeaccount();
+            errorLabel.Text = "";
             switch (originModuleID)
             {
                 case globalConstants.NEW_AKUN:
@@ -111,7 +113,6 @@ namespace RoyalPetz_ADMIN
                     loadAccountData();
                     break;
             }
-            errorLabel.Text = "";
         }
 
         private void ResetButton_Click(object sender, EventArgs e)
@@ -129,7 +130,7 @@ namespace RoyalPetz_ADMIN
 
             if (DeskripsiTextbox.Text.Trim().Equals(""))
             {
-                errorLabel.Text = errorLabel.Text + "DESKRIPSI AKUN TIDAK BOLEH KOSONG";
+                errorLabel.Text = "DESKRIPSI AKUN TIDAK BOLEH KOSONG";
                 return false;
             }
 
@@ -144,7 +145,7 @@ namespace RoyalPetz_ADMIN
 
             string kodeakun = kodeTextbox.Text.Trim();
             string deskripsiakun = DeskripsiTextbox.Text.Trim();
-            string tipeakun = TipeComboBox.SelectedValue.ToString();
+            int tipeakun = Int32.Parse(TipeComboBox.SelectedValue.ToString());
             int nonactive = 1;
             if (NonactiveCheckbox.Checked == true)
             {
@@ -221,6 +222,12 @@ namespace RoyalPetz_ADMIN
                 gUtil.showSuccess(options);
                 gUtil.ResetAllControls(this);
             }
+        }
+
+        private void TipeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //string tmp = TipeComboBox.SelectedIndex.ToString();
+            //selectedtipeakun = 1 + Int32.Parse(tmp);
         }
     }
 }

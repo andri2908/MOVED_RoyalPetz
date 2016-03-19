@@ -37,12 +37,12 @@
             this.saveButton = new System.Windows.Forms.Button();
             this.DeskripsiTextbox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.errorLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.TipeComboBox = new System.Windows.Forms.ComboBox();
             this.NonactiveCheckbox = new System.Windows.Forms.CheckBox();
             this.ResetButton = new System.Windows.Forms.Button();
-            this.errorLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -77,7 +77,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(179, 7);
+            this.label4.Location = new System.Drawing.Point(178, 7);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(14, 18);
             this.label4.TabIndex = 10;
@@ -89,7 +89,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(179, 40);
+            this.label6.Location = new System.Drawing.Point(178, 40);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(14, 18);
             this.label6.TabIndex = 12;
@@ -101,7 +101,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(179, 73);
+            this.label7.Location = new System.Drawing.Point(178, 73);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(14, 18);
             this.label7.TabIndex = 13;
@@ -111,7 +111,7 @@
             // 
             this.kodeTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.kodeTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kodeTextbox.Location = new System.Drawing.Point(202, 3);
+            this.kodeTextbox.Location = new System.Drawing.Point(201, 3);
             this.kodeTextbox.Name = "kodeTextbox";
             this.kodeTextbox.Size = new System.Drawing.Size(93, 27);
             this.kodeTextbox.TabIndex = 15;
@@ -132,7 +132,7 @@
             // 
             this.DeskripsiTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.DeskripsiTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DeskripsiTextbox.Location = new System.Drawing.Point(202, 36);
+            this.DeskripsiTextbox.Location = new System.Drawing.Point(201, 36);
             this.DeskripsiTextbox.Name = "DeskripsiTextbox";
             this.DeskripsiTextbox.Size = new System.Drawing.Size(340, 27);
             this.DeskripsiTextbox.TabIndex = 16;
@@ -147,6 +147,19 @@
             this.panel1.Size = new System.Drawing.Size(555, 29);
             this.panel1.TabIndex = 26;
             // 
+            // errorLabel
+            // 
+            this.errorLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.BackColor = System.Drawing.Color.White;
+            this.errorLabel.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(3, 6);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(23, 18);
+            this.errorLabel.TabIndex = 1;
+            this.errorLabel.Text = "   ";
+            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -154,7 +167,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 355F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 356F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
@@ -195,16 +208,17 @@
             this.TipeComboBox.Items.AddRange(new object[] {
             "Debet",
             "Kredit"});
-            this.TipeComboBox.Location = new System.Drawing.Point(202, 69);
+            this.TipeComboBox.Location = new System.Drawing.Point(201, 69);
             this.TipeComboBox.Name = "TipeComboBox";
             this.TipeComboBox.Size = new System.Drawing.Size(187, 26);
             this.TipeComboBox.TabIndex = 17;
+            this.TipeComboBox.SelectedIndexChanged += new System.EventHandler(this.TipeComboBox_SelectedIndexChanged);
             // 
             // NonactiveCheckbox
             // 
             this.NonactiveCheckbox.AutoSize = true;
             this.NonactiveCheckbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NonactiveCheckbox.Location = new System.Drawing.Point(202, 101);
+            this.NonactiveCheckbox.Location = new System.Drawing.Point(201, 101);
             this.NonactiveCheckbox.Name = "NonactiveCheckbox";
             this.NonactiveCheckbox.Size = new System.Drawing.Size(173, 22);
             this.NonactiveCheckbox.TabIndex = 18;
@@ -222,19 +236,6 @@
             this.ResetButton.Text = "RESET";
             this.ResetButton.UseVisualStyleBackColor = true;
             this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
-            // 
-            // errorLabel
-            // 
-            this.errorLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.errorLabel.AutoSize = true;
-            this.errorLabel.BackColor = System.Drawing.Color.White;
-            this.errorLabel.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(3, 6);
-            this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(23, 18);
-            this.errorLabel.TabIndex = 1;
-            this.errorLabel.Text = "   ";
             // 
             // dataNomorAkunDetailForm
             // 
