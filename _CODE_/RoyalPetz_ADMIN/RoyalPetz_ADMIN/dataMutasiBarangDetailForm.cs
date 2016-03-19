@@ -583,6 +583,89 @@ namespace RoyalPetz_ADMIN
             RODateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
             ROExpiredDateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
 
+            isLoading = true;
+
+            addColumnToDetailDataGrid();
+
+            if (!directMutasiBarang)
+            {
+                if (originModuleID == globalConstants.VIEW_PRODUCT_MUTATION)
+                    loadDataHeaderPM();
+                else
+                    loadDataHeaderRO();
+
+                if (originModuleID != globalConstants.VIEW_PRODUCT_MUTATION && isNewRORequest())
+                {
+                    subModuleID = globalConstants.NEW_PRODUCT_MUTATION;
+
+                    approveButton.Visible = true;
+                    createPOButton.Visible = true;
+                    //reprintButton.Visible = false;
+
+                    noMutasiTextBox.Focus();
+                }
+                else
+                {
+                    detailRequestOrderDataGridView.Columns["qtyRequest"].Visible = false;
+
+                    noMutasiTextBox.ReadOnly = true;
+                    PMDateTimePicker.Enabled = false;
+
+                    if (originModuleID != globalConstants.VIEW_PRODUCT_MUTATION)
+                    {
+                        noMutasiTextBox.Text = getNoMutasi();
+                        PMDateTimePicker.Value = getPMDateTimeValue();
+                    }
+
+                    detailRequestOrderDataGridView.ReadOnly = true;
+
+                    approveButton.Visible = false;
+                    createPOButton.Visible = false;
+                    //reprintButton.Visible = true;
+
+                    label1.Visible = false;
+                    label14.Visible = false;
+                    ROInvoiceTextBox.Visible = false;
+
+                    label9.Visible = false;
+                    label6.Visible = false;
+                    RODateTimePicker.Visible = false;
+
+                    label7.Visible = false;
+                    label5.Visible = false;
+                    ROExpiredDateTimePicker.Visible = false;
+
+                    totalApproved.Visible = false;
+                    totalApprovedLabel.Visible = false;
+                    label13.Visible = false;
+                }
+
+                branchFromCombo.Text = getBranchName(selectedBranchFromID);
+                branchToCombo.Text = getBranchName(selectedBranchToID);
+                branchFromCombo.Enabled = false;
+                branchToCombo.Enabled = false;
+
+                loadDataDetail();
+            }
+            else
+            {
+                subModuleID = globalConstants.NEW_PRODUCT_MUTATION;
+
+                branchFromCombo.Enabled = true;
+                branchToCombo.Enabled = true;
+
+                fillInBranchCombo(branchFromCombo, branchFromComboHidden);
+                fillInBranchCombo(branchToCombo, branchToComboHidden);
+
+
+                detailRequestOrderDataGridView.AllowUserToAddRows = true;
+
+            }
+
+            isLoading = false;
+
+            detailRequestOrderDataGridView.EditingControlShowing += detailRequestOrderDataGridView_EditingControlShowing;
+
             gUtil.reArrangeTabOrder(this);
         }
 
@@ -644,8 +727,17 @@ namespace RoyalPetz_ADMIN
                         { 
                             // UPDATE REQUEST ORDER HEADER TABLE
                             sqlCommand = "UPDATE REQUEST_ORDER_HEADER SET RO_ACTIVE = 0 WHERE RO_INVOICE = '" + roInvoice + "'";
-                            DS.executeNonQueryCommand(sqlCommand);
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
                         }
+
+                        // INSERT CREDIT TABLE FOR THAT PARTICULAR BRANCH
+                        sqlCommand = "INSERT INTO CREDIT (PM_INVOICE, CREDIT_DUE_DATE, CREDIT_NOMINAL, CREDIT_PAID) VALUES " +
+                                            "('" + noMutasi + "', STR_TO_DATE('" + PMDateTime + "', '%d-%m-%Y'), " + PMTotal + ", 0)"; 
+                    
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+                        
                         break;
 
                     //case globalConstants.REJECT_PRODUCT_MUTATION:
@@ -763,92 +855,11 @@ namespace RoyalPetz_ADMIN
                 //reprintButton.Visible = false;
             }
         }
+
         private void dataMutasiBarangDetailForm_Activated(object sender, EventArgs e)
         {
             errorLabel.Text = "";
 
-            isLoading = true;
-
-            addColumnToDetailDataGrid();
-
-            if (!directMutasiBarang)
-            {
-                if (originModuleID == globalConstants.VIEW_PRODUCT_MUTATION)
-                    loadDataHeaderPM();
-                else
-                    loadDataHeaderRO();
-
-                if (originModuleID != globalConstants.VIEW_PRODUCT_MUTATION && isNewRORequest())
-                {
-                    subModuleID = globalConstants.NEW_PRODUCT_MUTATION;
-
-                    approveButton.Visible = true;
-                    createPOButton.Visible = true;
-                    //reprintButton.Visible = false;
-
-                    noMutasiTextBox.Focus();
-                }
-                else
-                {
-                    detailRequestOrderDataGridView.Columns["qtyRequest"].Visible = false;
-
-                    noMutasiTextBox.ReadOnly = true;
-                    PMDateTimePicker.Enabled = false;
-
-                    if (originModuleID != globalConstants.VIEW_PRODUCT_MUTATION)
-                    {
-                        noMutasiTextBox.Text = getNoMutasi();
-                        PMDateTimePicker.Value = getPMDateTimeValue();
-                    }
-
-                    detailRequestOrderDataGridView.ReadOnly = true;
-
-                    approveButton.Visible = false;
-                    createPOButton.Visible = false;
-                    //reprintButton.Visible = true;
-
-                    label1.Visible = false;
-                    label14.Visible = false;
-                    ROInvoiceTextBox.Visible = false;
-
-                    label9.Visible = false;
-                    label6.Visible = false;
-                    RODateTimePicker.Visible = false;
-
-                    label7.Visible = false;
-                    label5.Visible = false;
-                    ROExpiredDateTimePicker.Visible = false;
-
-                    totalApproved.Visible = false;
-                    totalApprovedLabel.Visible = false;
-                    label13.Visible = false;
-                }
-
-                branchFromCombo.Text = getBranchName(selectedBranchFromID);
-                branchToCombo.Text = getBranchName(selectedBranchToID);
-                branchFromCombo.Enabled = false;
-                branchToCombo.Enabled = false;
-
-                loadDataDetail();
-            }
-            else
-            {
-                subModuleID = globalConstants.NEW_PRODUCT_MUTATION;
-
-                branchFromCombo.Enabled = true;
-                branchToCombo.Enabled = true;
-
-                fillInBranchCombo(branchFromCombo, branchFromComboHidden);
-                fillInBranchCombo(branchToCombo, branchToComboHidden);
-
-
-                detailRequestOrderDataGridView.AllowUserToAddRows = true;
-
-            }
-
-            isLoading = false;
-
-            detailRequestOrderDataGridView.EditingControlShowing += detailRequestOrderDataGridView_EditingControlShowing;
         }
 
         private void deleteCurrentRow()
@@ -906,6 +917,16 @@ namespace RoyalPetz_ADMIN
                 createPOButton.Visible = false;
             }
             */
+        }
+
+        private void branchFromCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedBranchFromID = Convert.ToInt32(branchFromComboHidden.Items[branchFromCombo.SelectedIndex].ToString());
+        }
+
+        private void branchToCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedBranchToID = Convert.ToInt32(branchToComboHidden.Items[branchToCombo.SelectedIndex].ToString());
         }
     }
 }

@@ -101,7 +101,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label11.Location = new System.Drawing.Point(195, 8);
+            this.label11.Location = new System.Drawing.Point(235, 8);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(171, 18);
             this.label11.TabIndex = 20;
@@ -136,8 +136,8 @@
             this.tableLayoutPanel6.ColumnCount = 4;
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 233F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 198F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 192F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 199F));
             this.tableLayoutPanel6.Controls.Add(this.rsDateTimePicker, 3, 0);
             this.tableLayoutPanel6.Controls.Add(this.noReturTextBox, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.label11, 2, 0);
@@ -153,21 +153,20 @@
             this.rsDateTimePicker.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.rsDateTimePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rsDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.rsDateTimePicker.Location = new System.Drawing.Point(428, 4);
+            this.rsDateTimePicker.Location = new System.Drawing.Point(427, 4);
             this.rsDateTimePicker.Name = "rsDateTimePicker";
             this.rsDateTimePicker.Size = new System.Drawing.Size(173, 27);
             this.rsDateTimePicker.TabIndex = 55;
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 4;
+            this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 233F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 198F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 194F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 199F));
             this.tableLayoutPanel2.Controls.Add(this.invoiceInfoTextBox, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.invoiceDateLabel, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.invoiceDateTextBox, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.invoiceDateLabel, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.invoiceDateTextBox, 2, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(261, 44);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
@@ -181,7 +180,8 @@
             this.invoiceInfoTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.invoiceInfoTextBox.Location = new System.Drawing.Point(3, 4);
             this.invoiceInfoTextBox.Name = "invoiceInfoTextBox";
-            this.invoiceInfoTextBox.Size = new System.Drawing.Size(170, 27);
+            this.invoiceInfoTextBox.ReadOnly = true;
+            this.invoiceInfoTextBox.Size = new System.Drawing.Size(225, 27);
             this.invoiceInfoTextBox.TabIndex = 16;
             // 
             // invoiceDateLabel
@@ -190,7 +190,7 @@
             this.invoiceDateLabel.AutoSize = true;
             this.invoiceDateLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.invoiceDateLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.invoiceDateLabel.Location = new System.Drawing.Point(195, 8);
+            this.invoiceDateLabel.Location = new System.Drawing.Point(234, 8);
             this.invoiceDateLabel.Name = "invoiceDateLabel";
             this.invoiceDateLabel.Size = new System.Drawing.Size(187, 18);
             this.invoiceDateLabel.TabIndex = 20;
@@ -202,6 +202,7 @@
             this.invoiceDateTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.invoiceDateTextBox.Location = new System.Drawing.Point(428, 4);
             this.invoiceDateTextBox.Name = "invoiceDateTextBox";
+            this.invoiceDateTextBox.ReadOnly = true;
             this.invoiceDateTextBox.Size = new System.Drawing.Size(178, 27);
             this.invoiceDateTextBox.TabIndex = 21;
             // 

@@ -284,6 +284,12 @@
     <Compile Include="pembayaranPiutangForm.Designer.cs">
       <DependentUpon>pembayaranPiutangForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="pembayaranPiutangLumpSumForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pembayaranPiutangLumpSumForm.Designer.cs">
+      <DependentUpon>pembayaranPiutangLumpSumForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="penerimaanBarangForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -510,6 +516,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pembayaranPiutangForm.resx">
       <DependentUpon>pembayaranPiutangForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pembayaranPiutangLumpSumForm.resx">
+      <DependentUpon>pembayaranPiutangLumpSumForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="penerimaanBarangForm.resx">
       <DependentUpon>penerimaanBarangForm.cs</DependentUpon>

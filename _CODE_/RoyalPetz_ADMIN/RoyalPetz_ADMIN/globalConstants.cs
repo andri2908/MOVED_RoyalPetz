@@ -44,7 +44,8 @@ namespace RoyalPetz_ADMIN
         public const int RETUR_PENJUALAN = 113;
         public const int RETUR_PENJUALAN_STOCK_ADJUSTMENT = 114;
         public const int CASHIER_MODULE = 115;
-
+        public const int DATA_PIUTANG_MUTASI = 116;
+        
         public const int NEW_GROUP_USER = 201;
         public const int EDIT_GROUP_USER = 202;
         public const int NEW_USER = 203;
@@ -71,7 +72,6 @@ namespace RoyalPetz_ADMIN
         public const int PRINTOUT_PURCHASE_ORDER = 224;
         public const int NEW_RETUR_PEMBELIAN = 225;
         public const int EDIT_RETUR_PEMBELIAN = 226;
-
         public const int NEW_AKUN = 501;  //start from 5
         public const int EDIT_AKUN = 502;
     }

@@ -388,7 +388,7 @@ namespace RoyalPetz_ADMIN
         private void toolStripMenuItem23_Click(object sender, EventArgs e)
         {
             //dataReturPenjualanStokAdjustmentForm displayedForm = new dataReturPenjualanStokAdjustmentForm();
-            dataPelangganForm displayedForm = new dataPelangganForm();
+            dataPelangganForm displayedForm = new dataPelangganForm(globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT);
             displayedForm.ShowDialog(this);
         }
 
@@ -644,6 +644,11 @@ namespace RoyalPetz_ADMIN
         private void toolStripMenuItem38_Click(object sender, EventArgs e)
         {
             dataPOForm displayedForm = new dataPOForm(globalConstants.PEMBAYARAN_HUTANG);
+            displayedForm.ShowDialog(this);
+        }
+        private void toolStripMenuItem39_Click(object sender, EventArgs e)
+        {
+            dataCabangForm displayedForm = new dataCabangForm(globalConstants.DATA_PIUTANG_MUTASI);
             displayedForm.ShowDialog(this);
         }
     }

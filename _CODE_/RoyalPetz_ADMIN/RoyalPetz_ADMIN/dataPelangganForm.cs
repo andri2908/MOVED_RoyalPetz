@@ -123,7 +123,7 @@ namespace RoyalPetz_ADMIN
             }
             else if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
             {
-                dataReturPenjualanForm displayedReturForm = new dataReturPenjualanForm(originModuleID);
+                dataReturPenjualanForm displayedReturForm = new dataReturPenjualanForm(originModuleID, "", selectedCustomerID);
                 displayedReturForm.ShowDialog(this);
             }
             else
@@ -161,15 +161,20 @@ namespace RoyalPetz_ADMIN
                 DataGridViewRow selectedRow = dataPelangganDataGridView.Rows[selectedrowindex];
                 selectedCustomerID = Convert.ToInt32(selectedRow.Cells["CUSTOMER_ID"].Value);
 
-                if (originModuleID != globalConstants.CASHIER_MODULE)
-                {
-                    dataPelangganDetailForm displayedForm = new dataPelangganDetailForm(globalConstants.EDIT_CUSTOMER, selectedCustomerID);
-                    displayedForm.ShowDialog(this);
-                }
-                else
+                if (originModuleID == globalConstants.CASHIER_MODULE)
                 {
                     parentForm.setCustomerID(selectedCustomerID);
                     this.Close();
+                }
+                else if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
+                {
+                    dataReturPenjualanForm displayDataReturPenjualan = new dataReturPenjualanForm(originModuleID, "", selectedCustomerID);
+                    displayDataReturPenjualan.ShowDialog(this);
+                }
+                else 
+                {
+                    dataPelangganDetailForm displayedForm = new dataPelangganDetailForm(globalConstants.EDIT_CUSTOMER, selectedCustomerID);
+                    displayedForm.ShowDialog(this);
                 }
             }
         }

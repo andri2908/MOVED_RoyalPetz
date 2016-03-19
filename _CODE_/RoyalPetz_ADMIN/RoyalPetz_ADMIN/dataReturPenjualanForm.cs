@@ -19,9 +19,10 @@ namespace RoyalPetz_ADMIN
         private int originModuleID;
         private int selectedCustomerID;
         private string selectedProductID;
-        private string selectedSalesInvoice = "";
+        private string selectedSalesInvoice = " ";
         private double globalTotalValue = 0;
         private bool isLoading = false;
+        private bool returnCash = false;
         private List<string> returnQty = new List<string>();
         string previousInput = "";
         double extraAmount = 0;
@@ -74,8 +75,9 @@ namespace RoyalPetz_ADMIN
                 sqlCommand = "SELECT M.PRODUCT_ID, M.PRODUCT_NAME FROM MASTER_PRODUCT M, SALES_DETAIL SD " +
                                     "WHERE SD.SALES_INVOICE = '" + selectedSalesInvoice + "' AND SD.PRODUCT_ID = M.PRODUCT_ID";
             else
-                sqlCommand = "SELECT M.PRODUCT_ID, M.PRODUCT_NAME FROM MASTER_PRODUCT M " +
-                                    "WHERE PRODUCT_ACTIVE = 1";
+                sqlCommand = "SELECT M.PRODUCT_ID, M.PRODUCT_NAME FROM MASTER_PRODUCT M, SALES_DETAIL SD, SALES_HEADER SH " +
+                                    "WHERE PRODUCT_ACTIVE = 1 AND SH.SALES_INVOICE = SD.SALES_INVOICE AND SD.PRODUCT_ID = M.PRODUCT_ID AND SH.CUSTOMER_ID = " + selectedCustomerID + 
+                                    " GROUP BY M.PRODUCT_ID";
 
             productComboHidden.Items.Clear();
 
@@ -147,7 +149,7 @@ namespace RoyalPetz_ADMIN
                 comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
             }
 
-            if ((detailReturDataGridView.CurrentCell.ColumnIndex == 3) && e.Control is TextBox)
+            if ((detailReturDataGridView.CurrentCell.ColumnIndex == 2 || detailReturDataGridView.CurrentCell.ColumnIndex == 3) && e.Control is TextBox)
             {
                 TextBox textBox = e.Control as TextBox;
                 textBox.TextChanged += TextBox_TextChanged;
@@ -390,7 +392,16 @@ namespace RoyalPetz_ADMIN
             string descriptionValue;
             MySqlException internalEX = null;
             double totalCredit = 0;
-            
+
+            double returNominal = 0;
+            double actualReturAmount = 0;
+            double outstandingCreditAmount = 0;
+            MySqlDataReader rdr;
+            DataTable dt = new DataTable();
+            int rowCounter;
+            int currentCreditID;
+            bool fullyPaid = false;
+
             
             int selectedCreditID;
 
@@ -401,6 +412,7 @@ namespace RoyalPetz_ADMIN
             ReturDateTime = String.Format(culture, "{0:dd-MM-yyyy}", selectedReturDate);
 
             returTotal = globalTotalValue;
+            returNominal = returTotal;
 
             DS.beginTransaction();
 
@@ -409,8 +421,12 @@ namespace RoyalPetz_ADMIN
                 DS.mySqlConnect();
 
                 // SAVE HEADER TABLE
-                sqlCommand = "INSERT INTO RETURN_SALES_HEADER (RS_INVOICE, SALES_INVOICE, CUSTOMER_ID, RS_DATETIME, RS_TOTAL) VALUES " +
-                                    "('" + returID + "', " + selectedSalesInvoice + ", " + selectedCustomerID +", STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), " + returTotal + ")";
+                if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
+                    sqlCommand = "INSERT INTO RETURN_SALES_HEADER (RS_INVOICE, CUSTOMER_ID, RS_DATETIME, RS_TOTAL) VALUES " +
+                                        "('" + returID + "', " + selectedCustomerID +", STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), " + returTotal + ")";
+                else
+                    sqlCommand = "INSERT INTO RETURN_SALES_HEADER (RS_INVOICE, SALES_INVOICE, CUSTOMER_ID, RS_DATETIME, RS_TOTAL) VALUES " +
+                                    "('" + returID + "', '" + selectedSalesInvoice + "', " + selectedCustomerID + ", STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), " + returTotal + ")";
 
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
@@ -497,7 +513,60 @@ namespace RoyalPetz_ADMIN
                 }
                 else if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
                 {
-                    extraAmount = globalTotalValue;
+                    if (returnCash)
+                        extraAmount = globalTotalValue;
+                    else
+                    {
+                        // GET A LIST OF OUTSTANDING SALES CREDIT
+                        sqlCommand = "SELECT C.CREDIT_ID, (CREDIT_NOMINAL - IFNULL(PC.PAYMENT, 0)) AS 'SISA PIUTANG' " +
+                                            "FROM SALES_HEADER S, CREDIT C LEFT OUTER JOIN (SELECT CREDIT_ID, SUM(PAYMENT_NOMINAL) AS PAYMENT FROM PAYMENT_CREDIT GROUP BY CREDIT_ID) PC ON PC.CREDIT_ID = C.CREDIT_ID  " +
+                                            "WHERE S.CUSTOMER_ID = " + selectedCustomerID + " AND C.CREDIT_PAID = 0 " +
+                                            "AND C.SALES_INVOICE = S.SALES_INVOICE ORDER BY C.CREDIT_ID ASC";
+
+                        using (rdr = DS.getData(sqlCommand))
+                        {
+                            if (rdr.HasRows)
+                                dt.Load(rdr);
+                        }
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            rowCounter = 0;
+                            while (returNominal > 0 && rowCounter < dt.Rows.Count)
+                            {
+                                fullyPaid = false;
+
+                                currentCreditID = Convert.ToInt32(dt.Rows[rowCounter]["CREDIT_ID"].ToString());
+                                outstandingCreditAmount = Convert.ToDouble(dt.Rows[rowCounter]["SISA PIUTANG"].ToString());
+
+                                if (outstandingCreditAmount <= returNominal && outstandingCreditAmount > 0)
+                                {
+                                    actualReturAmount = outstandingCreditAmount;
+                                    fullyPaid = true;
+                                }
+                                else
+                                    actualReturAmount = returNominal;
+
+                                sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED) VALUES " +
+                                                    "(" + currentCreditID + ", STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), 1, " + actualReturAmount + ", 'RETUR [" + returID + "]', 1)";
+
+                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                    throw internalEX;
+
+                                if (fullyPaid)
+                                {
+                                    // UPDATE CREDIT TABLE
+                                    sqlCommand = "UPDATE CREDIT SET CREDIT_PAID = 1 WHERE CREDIT_ID = " + currentCreditID;
+
+                                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                        throw internalEX;
+                                }
+
+                                returNominal = returNominal - actualReturAmount;
+                                rowCounter += 1;
+                            }
+                        }
+                    }
                 }
 
                 DS.commit();
@@ -569,6 +638,12 @@ namespace RoyalPetz_ADMIN
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
+            {
+                if (DialogResult.Yes == MessageBox.Show("RETUR BERUPA UANG CASH?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    returnCash = true;
+            }
+
             if (saveData())
             {
                 if (extraAmount > 0)
@@ -582,16 +657,16 @@ namespace RoyalPetz_ADMIN
         
         private void dataReturPenjualanForm_Load(object sender, EventArgs e)
         {
+            errorLabel.Text = "";
             rsDateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
-            invoiceTotalLabelValue.Text = "Rp. " + getInvoiceTotalValue();
 
             isLoading = true;
             if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
                 invoiceInfoTextBox.Text = getPelangganName();
             else
             {
+                invoiceTotalLabelValue.Text = "Rp. " + getInvoiceTotalValue();
                 loadDataHeader();
-
             }
 
             addDataGridColumn();
