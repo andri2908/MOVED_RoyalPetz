@@ -24,27 +24,27 @@ namespace RoyalPetz_ADMIN
             if (exportToCSV.Checked)
             {
                 exportToCSV.Checked = false;
-                exportToExcel.Checked = true;
+                //exportToExcel.Checked = true;
             }
             else
             {
                 exportToCSV.Checked = true;
-                exportToExcel.Checked = false;
+             //   exportToExcel.Checked = false;
             }
         }
 
         private void exportToExcel_Click(object sender, EventArgs e)
         {
-            if (exportToExcel.Checked)
-            {
-                exportToCSV.Checked = true;
-                exportToExcel.Checked = false;
-            }
-            else
-            {
-                exportToCSV.Checked = false;
-                exportToExcel.Checked = true;
-            }
+            //if (exportToExcel.Checked)
+            //{
+            //    exportToCSV.Checked = true;
+            //    exportToExcel.Checked = false;
+            //}
+            //else
+            //{
+            //    exportToCSV.Checked = false;
+            //    exportToExcel.Checked = true;
+            //}
         }
 
         private void newButton_Click(object sender, EventArgs e)

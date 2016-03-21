@@ -33,7 +33,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(cashierForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.titleLabel = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -44,12 +43,8 @@
             this.errorLabel = new System.Windows.Forms.Label();
             this.tempoMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
             this.pelangganTextBox = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.sizeComboBox = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.printoutCheckBox = new System.Windows.Forms.CheckBox();
             this.paymentComboBox = new System.Windows.Forms.ComboBox();
             this.labelCaraBayar = new System.Windows.Forms.Label();
@@ -204,12 +199,8 @@
             this.panel5.Controls.Add(this.errorLabel);
             this.panel5.Controls.Add(this.tempoMaskedTextBox);
             this.panel5.Controls.Add(this.pelangganTextBox);
-            this.panel5.Controls.Add(this.button4);
-            this.panel5.Controls.Add(this.button2);
-            this.panel5.Controls.Add(this.button3);
             this.panel5.Controls.Add(this.sizeComboBox);
             this.panel5.Controls.Add(this.label7);
-            this.panel5.Controls.Add(this.button1);
             this.panel5.Controls.Add(this.printoutCheckBox);
             this.panel5.Controls.Add(this.paymentComboBox);
             this.panel5.Controls.Add(this.labelCaraBayar);
@@ -260,36 +251,6 @@
             this.pelangganTextBox.Size = new System.Drawing.Size(181, 27);
             this.pelangganTextBox.TabIndex = 17;
             // 
-            // button4
-            // 
-            this.button4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button4.BackgroundImage")));
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button4.Location = new System.Drawing.Point(511, 65);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(27, 32);
-            this.button4.TabIndex = 16;
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button2.Location = new System.Drawing.Point(544, 41);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(48, 43);
-            this.button2.TabIndex = 15;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button3.Location = new System.Drawing.Point(544, 92);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(48, 43);
-            this.button3.TabIndex = 14;
-            this.button3.UseVisualStyleBackColor = true;
-            // 
             // sizeComboBox
             // 
             this.sizeComboBox.FormattingEnabled = true;
@@ -310,19 +271,9 @@
             this.label7.ForeColor = System.Drawing.Color.FloralWhite;
             this.label7.Location = new System.Drawing.Point(340, 43);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(100, 18);
+            this.label7.Size = new System.Drawing.Size(101, 18);
             this.label7.TabIndex = 10;
             this.label7.Text = "Size Kertas";
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Location = new System.Drawing.Point(568, 7);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(24, 26);
-            this.button1.TabIndex = 9;
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // printoutCheckBox
             // 
@@ -333,7 +284,7 @@
             this.printoutCheckBox.ForeColor = System.Drawing.Color.FloralWhite;
             this.printoutCheckBox.Location = new System.Drawing.Point(11, 110);
             this.printoutCheckBox.Name = "printoutCheckBox";
-            this.printoutCheckBox.Size = new System.Drawing.Size(234, 22);
+            this.printoutCheckBox.Size = new System.Drawing.Size(236, 22);
             this.printoutCheckBox.TabIndex = 8;
             this.printoutCheckBox.Text = "Tanpa Cetak &Struk - Nota";
             this.printoutCheckBox.UseVisualStyleBackColor = true;
@@ -381,7 +332,7 @@
             this.cashRadioButton.ForeColor = System.Drawing.Color.FloralWhite;
             this.cashRadioButton.Location = new System.Drawing.Point(154, 41);
             this.cashRadioButton.Name = "cashRadioButton";
-            this.cashRadioButton.Size = new System.Drawing.Size(69, 22);
+            this.cashRadioButton.Size = new System.Drawing.Size(71, 22);
             this.cashRadioButton.TabIndex = 4;
             this.cashRadioButton.TabStop = true;
             this.cashRadioButton.Text = "Tuna&i";
@@ -638,7 +589,7 @@
             this.userStatusLabel.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userStatusLabel.ForeColor = System.Drawing.Color.FloralWhite;
             this.userStatusLabel.Name = "userStatusLabel";
-            this.userStatusLabel.Size = new System.Drawing.Size(104, 17);
+            this.userStatusLabel.Size = new System.Drawing.Size(105, 17);
             this.userStatusLabel.Text = "Welcome, JOKO";
             // 
             // statusShiftLabel
@@ -653,7 +604,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(692, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(691, 17);
             this.toolStripStatusLabel1.Spring = true;
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
@@ -738,10 +689,6 @@
         private System.Windows.Forms.CheckBox printoutCheckBox;
         private System.Windows.Forms.ComboBox sizeComboBox;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label label13;

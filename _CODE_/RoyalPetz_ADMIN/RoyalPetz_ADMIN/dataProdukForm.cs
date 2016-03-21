@@ -59,7 +59,7 @@ namespace RoyalPetz_ADMIN
                     break;
 
                 case globalConstants.PENYESUAIAN_STOK:
-                    penyesuaianStokForm penyesuaianStokForm = new penyesuaianStokForm();
+                    penyesuaianStokForm penyesuaianStokForm = new penyesuaianStokForm(selectedProductID);
                     penyesuaianStokForm.ShowDialog(this);
                     break;
 

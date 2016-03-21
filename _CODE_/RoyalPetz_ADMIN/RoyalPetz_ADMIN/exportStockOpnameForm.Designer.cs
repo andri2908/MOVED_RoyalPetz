@@ -30,7 +30,6 @@
         {
             this.exportToCSV = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.exportToExcel = new System.Windows.Forms.RadioButton();
             this.newButton = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
@@ -59,19 +58,6 @@
             this.panel1.Size = new System.Drawing.Size(238, 29);
             this.panel1.TabIndex = 21;
             // 
-            // exportToExcel
-            // 
-            this.exportToExcel.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.exportToExcel.AutoSize = true;
-            this.exportToExcel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exportToExcel.Location = new System.Drawing.Point(36, 78);
-            this.exportToExcel.Name = "exportToExcel";
-            this.exportToExcel.Size = new System.Drawing.Size(159, 22);
-            this.exportToExcel.TabIndex = 22;
-            this.exportToExcel.Text = "Export to Excel";
-            this.exportToExcel.UseVisualStyleBackColor = true;
-            this.exportToExcel.Click += new System.EventHandler(this.exportToExcel_Click);
-            // 
             // newButton
             // 
             this.newButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -90,7 +76,6 @@
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(241, 183);
             this.Controls.Add(this.newButton);
-            this.Controls.Add(this.exportToExcel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.exportToCSV);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -109,7 +94,6 @@
 
         private System.Windows.Forms.RadioButton exportToCSV;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton exportToExcel;
         private System.Windows.Forms.Button newButton;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
