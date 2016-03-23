@@ -74,5 +74,8 @@ namespace RoyalPetz_ADMIN
         public const int EDIT_RETUR_PEMBELIAN = 226;
         public const int NEW_AKUN = 501;  //start from 5
         public const int EDIT_AKUN = 502;
+        public const int NEW_DJ = 503;
+        public const int EDIT_DJ = 504;
+
     }
 }
