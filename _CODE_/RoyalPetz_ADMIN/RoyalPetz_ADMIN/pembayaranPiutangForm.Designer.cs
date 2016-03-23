@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.invoiceNoTextBox = new System.Windows.Forms.TextBox();
@@ -62,6 +63,9 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.confirmBayar = new System.Windows.Forms.ToolStripMenuItem();
+            this.invalidPayment = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.detailPaymentInfoDataGrid)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.detailSalesOrderDataGridView)).BeginInit();
@@ -69,6 +73,7 @@
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // invoiceNoTextBox
@@ -95,6 +100,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.detailPaymentInfoDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.detailPaymentInfoDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.detailPaymentInfoDataGrid.ContextMenuStrip = this.contextMenuStrip1;
             this.detailPaymentInfoDataGrid.Location = new System.Drawing.Point(3, 450);
             this.detailPaymentInfoDataGrid.MultiSelect = false;
             this.detailPaymentInfoDataGrid.Name = "detailPaymentInfoDataGrid";
@@ -309,7 +315,7 @@
             this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 202F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 203F));
             this.tableLayoutPanel3.Controls.Add(this.pelangganNameTextBox, 0, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(261, 79);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -486,6 +492,29 @@
             this.label2.TabIndex = 62;
             this.label2.Text = "DESKRIPSI";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.confirmBayar,
+            this.invalidPayment});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(188, 48);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // confirmBayar
+            // 
+            this.confirmBayar.Name = "confirmBayar";
+            this.confirmBayar.Size = new System.Drawing.Size(187, 22);
+            this.confirmBayar.Text = "Confirm Pembayaran";
+            this.confirmBayar.Click += new System.EventHandler(this.confirmBayar_Click);
+            // 
+            // invalidPayment
+            // 
+            this.invalidPayment.Name = "invalidPayment";
+            this.invalidPayment.Size = new System.Drawing.Size(187, 22);
+            this.invalidPayment.Text = "Pembayaran Invalid";
+            this.invalidPayment.Click += new System.EventHandler(this.invalidPayment_Click);
+            // 
             // pembayaranPiutangForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -516,6 +545,7 @@
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -554,5 +584,8 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox paymentCombo;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem confirmBayar;
+        private System.Windows.Forms.ToolStripMenuItem invalidPayment;
     }
 }

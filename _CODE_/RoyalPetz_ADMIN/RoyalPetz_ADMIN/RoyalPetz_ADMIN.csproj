@@ -242,6 +242,12 @@
     <Compile Include="groupAccessModuleForm.Designer.cs">
       <DependentUpon>groupAccessModuleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="importDataCSVForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="importDataCSVForm.Designer.cs">
+      <DependentUpon>importDataCSVForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="importDataMutasiForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -495,6 +501,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="groupAccessModuleForm.resx">
       <DependentUpon>groupAccessModuleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="importDataCSVForm.resx">
+      <DependentUpon>importDataCSVForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="importDataMutasiForm.resx">
       <DependentUpon>importDataMutasiForm.cs</DependentUpon>

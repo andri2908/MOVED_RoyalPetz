@@ -31,7 +31,6 @@
             this.exportToCSV = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.newButton = new System.Windows.Forms.Button();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // exportToCSV
@@ -95,6 +94,5 @@
         private System.Windows.Forms.RadioButton exportToCSV;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button newButton;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

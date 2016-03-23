@@ -934,7 +934,10 @@ namespace RoyalPetz_ADMIN
         {
             double totalAfterDisc = 0;
 
-            totalAfterDisc = globalTotalValue - Convert.ToDouble(discJualMaskedTextBox.Text);
+            if (discJualMaskedTextBox.Text.Length > 0)
+                totalAfterDisc = globalTotalValue - Convert.ToDouble(discJualMaskedTextBox.Text);
+            else
+                totalAfterDisc = globalTotalValue;
 
             totalAfterDiscTextBox.Text = totalAfterDisc.ToString();
         }

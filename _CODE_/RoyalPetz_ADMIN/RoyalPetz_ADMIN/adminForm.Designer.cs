@@ -97,6 +97,7 @@
             this.transaksiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem24 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem68 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem39 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem38 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem70 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem25 = new System.Windows.Forms.ToolStripMenuItem();
@@ -127,7 +128,7 @@
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem39 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem40 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -493,6 +494,7 @@
             this.toolStripMenuItem6.BackColor = System.Drawing.Color.SteelBlue;
             this.toolStripMenuItem6.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem61,
+            this.toolStripMenuItem40,
             this.toolStripMenuItem62});
             this.toolStripMenuItem6.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
@@ -505,7 +507,7 @@
             this.toolStripMenuItem61.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripMenuItem61.Name = "toolStripMenuItem61";
             this.toolStripMenuItem61.Size = new System.Drawing.Size(205, 22);
-            this.toolStripMenuItem61.Text = "Export Data";
+            this.toolStripMenuItem61.Text = "Export Data CSV";
             this.toolStripMenuItem61.Click += new System.EventHandler(this.toolStripMenuItem61_Click);
             // 
             // toolStripMenuItem62
@@ -827,6 +829,12 @@
             this.toolStripMenuItem68.Text = "Pembayaran Piutang";
             this.toolStripMenuItem68.Click += new System.EventHandler(this.toolStripMenuItem68_Click);
             // 
+            this.toolStripMenuItem39.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem39.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem39.Name = "toolStripMenuItem39";
+            this.toolStripMenuItem39.Size = new System.Drawing.Size(322, 22);
+            this.toolStripMenuItem39.Text = "Pembayaran Piutang Mutasi";
+            this.toolStripMenuItem39.Click += new System.EventHandler(this.toolStripMenuItem39_Click);
             // toolStripMenuItem38
             // 
             this.toolStripMenuItem38.BackColor = System.Drawing.Color.SteelBlue;
@@ -1130,12 +1138,12 @@
             // 
             // toolStripMenuItem39
             // 
-            this.toolStripMenuItem39.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem39.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripMenuItem39.Name = "toolStripMenuItem39";
-            this.toolStripMenuItem39.Size = new System.Drawing.Size(322, 22);
-            this.toolStripMenuItem39.Text = "Pembayaran Piutang Mutasi";
-            this.toolStripMenuItem39.Click += new System.EventHandler(this.toolStripMenuItem39_Click);
+            this.toolStripMenuItem40.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem40.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem40.Name = "toolStripMenuItem40";
+            this.toolStripMenuItem40.Size = new System.Drawing.Size(205, 22);
+            this.toolStripMenuItem40.Text = "Import Data CSV";
+            this.toolStripMenuItem40.Click += new System.EventHandler(this.toolStripMenuItem40_Click);
             // 
             // adminForm
             // 
@@ -1270,6 +1278,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem37;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem38;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem39;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem40;
     }
 }
 

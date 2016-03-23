@@ -37,10 +37,16 @@ namespace RoyalPetz_ADMIN
             }
         }
 
+        private void backupDatabase()
+        {
+
+        }
+
         private void backupButton_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.ShowDialog();
-            MessageBox.Show(saveFileDialog1.FileName);
+            //saveFileDialog1.ShowDialog();
+            //MessageBox.Show(saveFileDialog1.FileName);
+            backupDatabase();
         }
 
         private void restoreButton_Click(object sender, EventArgs e)

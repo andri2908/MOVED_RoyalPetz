@@ -436,7 +436,8 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            permintaanProdukForm displayedForm = new permintaanProdukForm();
+            //permintaanProdukForm displayedForm = new permintaanProdukForm();
+            dataPOForm displayedForm = new dataPOForm();
             displayedForm.ShowDialog(this);
         }
 
@@ -454,7 +455,8 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
-            dataPermintaanForm displayedForm = new dataPermintaanForm(globalConstants.PEMBAYARAN_HUTANG);
+            //dataPermintaanForm displayedForm = new dataPermintaanForm(globalConstants.PEMBAYARAN_HUTANG);
+            dataPOForm displayedForm = new dataPOForm(globalConstants.PEMBAYARAN_HUTANG);
             displayedForm.ShowDialog(this);
         }
 
@@ -472,13 +474,15 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripButton7_Click(object sender, EventArgs e)
         {
-            dataReturPermintaanForm displayedForm = new dataReturPermintaanForm();
+            //dataReturPermintaanForm displayedForm = new dataReturPermintaanForm();
+            dataReturPermintaanForm displayedForm = new dataReturPermintaanForm(globalConstants.RETUR_PEMBELIAN_KE_SUPPLIER);
             displayedForm.ShowDialog(this);
         }
 
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
-            dataInvoiceForm displayedForm = new dataInvoiceForm();
+            //dataInvoiceForm displayedForm = new dataInvoiceForm();
+            dataInvoiceForm displayedForm = new dataInvoiceForm(globalConstants.RETUR_PENJUALAN);
             displayedForm.ShowDialog(this);
         }
 
@@ -646,9 +650,16 @@ namespace RoyalPetz_ADMIN
             dataPOForm displayedForm = new dataPOForm(globalConstants.PEMBAYARAN_HUTANG);
             displayedForm.ShowDialog(this);
         }
+
         private void toolStripMenuItem39_Click(object sender, EventArgs e)
         {
             dataCabangForm displayedForm = new dataCabangForm(globalConstants.DATA_PIUTANG_MUTASI);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem40_Click(object sender, EventArgs e)
+        {
+            importDataCSVForm displayedForm = new importDataCSVForm();
             displayedForm.ShowDialog(this);
         }
     }
