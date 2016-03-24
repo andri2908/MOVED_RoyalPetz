@@ -187,7 +187,6 @@
             // userNameTextBox
             // 
             this.userNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.userNameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.userNameTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userNameTextBox.Location = new System.Drawing.Point(226, 3);
             this.userNameTextBox.MaxLength = 15;
@@ -209,7 +208,6 @@
             // passwordTextBox
             // 
             this.passwordTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.passwordTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.passwordTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordTextBox.Location = new System.Drawing.Point(226, 69);
             this.passwordTextBox.MaxLength = 15;
@@ -306,7 +304,6 @@
             // password2TextBox
             // 
             this.password2TextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.password2TextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.password2TextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.password2TextBox.Location = new System.Drawing.Point(226, 102);
             this.password2TextBox.MaxLength = 15;
@@ -367,7 +364,7 @@
             this.errorLabel.BackColor = System.Drawing.Color.White;
             this.errorLabel.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(3, -5);
+            this.errorLabel.Location = new System.Drawing.Point(3, 5);
             this.errorLabel.Name = "errorLabel";
             this.errorLabel.Size = new System.Drawing.Size(23, 18);
             this.errorLabel.TabIndex = 8;

@@ -56,13 +56,13 @@ namespace RoyalPetz_ADMIN
             {
                 sqlCommand = "SELECT ID, USER_NAME AS 'USER NAME', USER_FULL_NAME AS 'USER FULL NAME', MASTER_GROUP.GROUP_USER_NAME AS 'NAMA GROUP' " +
                                 "FROM MASTER_USER, MASTER_GROUP " +
-                                "WHERE MASTER_USER.GROUP_ID = MASTER_GROUP.GROUP_ID " + sqlfiltergroup + "AND MASTER_USER.USER_NAME LIKE '%" + userName + "%'";
+                                "WHERE MASTER_USER.GROUP_ID = MASTER_GROUP.GROUP_ID " + sqlfiltergroup + "AND UPPER(MASTER_USER.USER_NAME) LIKE '%" + userName + "%'";
             }
             else
             {
                 sqlCommand = "SELECT ID, USER_NAME AS 'USER NAME', USER_FULL_NAME AS 'USER FULL NAME', MASTER_GROUP.GROUP_USER_NAME AS 'NAMA GROUP' " +
                                 "FROM MASTER_USER, MASTER_GROUP " +
-                                "WHERE USER_ACTIVE = 1 AND MASTER_USER.GROUP_ID = MASTER_GROUP.GROUP_ID " + sqlfiltergroup + "AND MASTER_USER.USER_NAME LIKE '%" + userName + "%'";
+                                "WHERE USER_ACTIVE = 1 AND MASTER_USER.GROUP_ID = MASTER_GROUP.GROUP_ID " + sqlfiltergroup + "AND UPPER(MASTER_USER.USER_NAME) LIKE '%" + userName + "%'";
             }
             
 
@@ -152,10 +152,6 @@ namespace RoyalPetz_ADMIN
                 loadUserData(namaUserTextbox.Text);
         }
 
-        private void dataUserForm_Load(object sender, EventArgs e)
-        {
-            gutil.reArrangeTabOrder(this);
-        }
 
         private void usernonactiveoption_CheckedChanged(object sender, EventArgs e)
         {
@@ -169,6 +165,20 @@ namespace RoyalPetz_ADMIN
             dataUserGridView.DataSource = null;
             if (!namaUserTextbox.Text.Equals(""))
                 loadUserData(namaUserTextbox.Text);
+        }
+        private void dataUserGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                int selectedrowindex = dataUserGridView.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = dataUserGridView.Rows[selectedrowindex];
+                selectedUserID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+                displaySpecificForm();
+            }
+        }
+        private void dataUserForm_Load(object sender, EventArgs e)
+        {
+            gutil.reArrangeTabOrder(this);
         }
     }
 }

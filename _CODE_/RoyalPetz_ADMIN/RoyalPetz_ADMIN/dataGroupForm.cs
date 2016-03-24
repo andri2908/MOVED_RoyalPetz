@@ -147,6 +147,16 @@ namespace RoyalPetz_ADMIN
             }
         }
 
+        private void dataUserGroupGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                int selectedrowindex = dataUserGroupGridView.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = dataUserGroupGridView.Rows[selectedrowindex];
+                selectedGroupID = Convert.ToInt32(selectedRow.Cells["GROUP_ID"].Value);
+                displaySpecificForm();
+            }
+        }
         private void dataGroupForm_Load(object sender, EventArgs e)
         {
             gutil.reArrangeTabOrder(this);

@@ -92,6 +92,7 @@ namespace RoyalPetz_ADMIN
             {
                 if (rdr.HasRows)
                 {
+                    groupAccessDataGridView.Rows.Clear();
                     while (rdr.Read())
                     {
                         moduleFeatures = rdr.GetInt32("MODULE_FEATURES");

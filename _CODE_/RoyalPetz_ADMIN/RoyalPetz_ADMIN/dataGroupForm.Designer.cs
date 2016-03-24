@@ -79,6 +79,7 @@
             this.dataUserGroupGridView.Size = new System.Drawing.Size(603, 475);
             this.dataUserGroupGridView.TabIndex = 28;
             this.dataUserGroupGridView.DoubleClick += new System.EventHandler(this.dataSalesDataGridView_DoubleClick);
+            this.dataUserGroupGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataUserGroupGridView_KeyDown);
             // 
             // newButton
             // 

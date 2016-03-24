@@ -82,6 +82,7 @@
             this.dataUserGridView.Size = new System.Drawing.Size(602, 458);
             this.dataUserGridView.TabIndex = 2;
             this.dataUserGridView.DoubleClick += new System.EventHandler(this.dataSalesDataGridView_DoubleClick);
+            this.dataUserGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataUserGridView_KeyDown);
             // 
             // newButton
             // 
