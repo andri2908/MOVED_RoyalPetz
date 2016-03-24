@@ -102,7 +102,7 @@
             // 
             this.PODateTimePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PODateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.PODateTimePicker.Location = new System.Drawing.Point(414, 3);
+            this.PODateTimePicker.Location = new System.Drawing.Point(413, 3);
             this.PODateTimePicker.Name = "PODateTimePicker";
             this.PODateTimePicker.Size = new System.Drawing.Size(173, 27);
             this.PODateTimePicker.TabIndex = 21;
@@ -113,7 +113,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label9.Location = new System.Drawing.Point(267, 8);
+            this.label9.Location = new System.Drawing.Point(266, 8);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(135, 18);
             this.label9.TabIndex = 20;
@@ -234,7 +234,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 147F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 212F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 213F));
             this.tableLayoutPanel2.Controls.Add(this.PODateTimePicker, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.POinvoiceTextBox, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label9, 2, 0);

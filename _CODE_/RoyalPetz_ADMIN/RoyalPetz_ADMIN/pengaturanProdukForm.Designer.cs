@@ -81,6 +81,7 @@
             this.ID,
             this.kodeProduk,
             this.namaProduk});
+            this.dataProdukDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataProdukDataGridView.Location = new System.Drawing.Point(0, 70);
             this.dataProdukDataGridView.Name = "dataProdukDataGridView";
             this.dataProdukDataGridView.RowHeadersVisible = false;

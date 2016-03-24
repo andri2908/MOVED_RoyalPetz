@@ -125,6 +125,7 @@ namespace RoyalPetz_ADMIN
                 switch(originModuleID)
                 {
                     case globalConstants.NEW_GROUP_USER:
+                    case globalConstants.PENGATURAN_GRUP_AKSES:
                         sqlCommand = "INSERT INTO MASTER_GROUP (GROUP_USER_NAME, GROUP_USER_DESCRIPTION, GROUP_USER_ACTIVE) VALUES ('" + groupName + "', '" + groupDesc + "', " + groupStatus + ")";
                         break;
                     case globalConstants.EDIT_GROUP_USER:
@@ -173,8 +174,19 @@ namespace RoyalPetz_ADMIN
         {           
             if (saveData())
             {
-                gutil.showSuccess(options);
-                gutil.ResetAllControls(this);
+                if (originModuleID != globalConstants.PENGATURAN_GRUP_AKSES)
+                { 
+                    gutil.showSuccess(options);
+                    gutil.ResetAllControls(this);
+
+                    originModuleID = globalConstants.NEW_GROUP_USER;
+                    options = gutil.INS;
+                }
+                else
+                {
+                    gutil.showSuccess(options);
+                    this.Close();
+                }
                 //MessageBox.Show("SUCCESS");
                 //this.Close();
             }
@@ -190,6 +202,7 @@ namespace RoyalPetz_ADMIN
             switch (originModuleID)
             {
                 case (globalConstants.NEW_GROUP_USER):
+                case (globalConstants.PENGATURAN_GRUP_AKSES):
                     options = gutil.INS;
                     nonAktifCheckbox.Enabled = false;
                     break;

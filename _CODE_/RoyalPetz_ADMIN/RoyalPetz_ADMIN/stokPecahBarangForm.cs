@@ -313,7 +313,7 @@ namespace RoyalPetz_ADMIN
             {
                 //MessageBox.Show("SUCCESS");
                 gUtil.showSuccess(gUtil.UPD);
-                stockTextBox.Text = (currentStockQty - Convert.ToDouble(numberOfProductTextBox.Text)).ToString();
+                stockTextBox.Text = currentStockQty.ToString();
 
             }
         }

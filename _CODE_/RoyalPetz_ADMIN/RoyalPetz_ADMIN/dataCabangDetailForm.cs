@@ -173,6 +173,9 @@ namespace RoyalPetz_ADMIN
                 //MessageBox.Show("SUCCESS");
                 gUtil.showSuccess(options);
                 gUtil.ResetAllControls(this);
+
+                originModuleID = globalConstants.NEW_BRANCH;
+                options = gUtil.INS;
             }
         }
 
@@ -184,6 +187,9 @@ namespace RoyalPetz_ADMIN
         private void button1_Click(object sender, EventArgs e)
         {
             gUtil.ResetAllControls(this);
+
+            originModuleID = globalConstants.NEW_BRANCH;
+            options = gUtil.INS;
         }
 
         private void dataCabangDetailForm_Activated(object sender, EventArgs e)

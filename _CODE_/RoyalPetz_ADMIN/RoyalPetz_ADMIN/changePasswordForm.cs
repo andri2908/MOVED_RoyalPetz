@@ -30,10 +30,10 @@ namespace RoyalPetz_ADMIN
         private bool validateOldPassword()
         {
             string oldPassword = oldPasswordTextBox.Text;
-            object result;
+            int result;
 
-            result = DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_USER WHERE ID = " + selectedUserID + " AND USER_PASSWORD = '" + oldPassword + "'");
-            if (result != null)
+            result = Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_USER WHERE ID = " + selectedUserID + " AND USER_PASSWORD = '" + oldPassword + "'"));
+            if (result != 0)
                 return true;
 
             return false;
