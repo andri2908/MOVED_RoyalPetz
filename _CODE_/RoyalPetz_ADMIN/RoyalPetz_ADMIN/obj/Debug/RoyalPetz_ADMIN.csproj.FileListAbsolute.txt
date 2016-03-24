@@ -228,3 +228,23 @@ C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debu
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.AboutUsForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataPOForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.purchaseOrderDetailForm.resources
+C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.AboutUsForm.resources
+C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.cashierForm.resources
+C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.changePasswordForm.resources
+C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataNomorAkun.resources
+C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataNomorAkunDetailForm.resources
+C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataPermintaanForm.resources
+C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataPOForm.resources
+C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataReturPermintaanForm.resources
+C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataReturPenjualanStokAdjustmentForm.resources
+C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataTransaksiJurnalHarianDetailForm.resources
+C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.importDataCSVForm.resources
+C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.loginForm.resources
+C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.logoutForm.resources
+C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pembayaranHutangForm.resources
+C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pembayaranPiutangForm.resources
+C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pembayaranPiutangLumpSumForm.resources
+C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pengaturanLimitPajakForm.resources
+C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.purchaseOrderDetailForm.resources
+C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.TabSchemeProvider.resources
+C:\Users\alpha\Documents\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\bin\Debug\MySql.Data.dll

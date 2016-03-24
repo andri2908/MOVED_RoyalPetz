@@ -16,8 +16,8 @@ namespace RoyalPetz_ADMIN
     {
         private globalUtilities gUtil = new globalUtilities();
         private int originModuleID = 0;
-        private int selectedAccountID = 0;
         private int options = 0;
+        private int selectedAccountID =0;
         private Data_Access DS = new Data_Access();
 
         public dataNomorAkunDetailForm()
@@ -38,7 +38,7 @@ namespace RoyalPetz_ADMIN
             originModuleID = moduleID;
             selectedAccountID = AccountID;
         }
-        
+
         private void dataNomorAkunDetailForm_Load(object sender, EventArgs e)
         {
             gUtil.reArrangeTabOrder(this);

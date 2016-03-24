@@ -17,7 +17,8 @@ namespace RoyalPetz_ADMIN
     {
         private int originModuleID = 0;
         private globalUtilities gutil = new globalUtilities();
-        private int selectedAccountID;
+        private int selectedAccountID = 0;
+        private dataTransaksiJurnalHarianDetailForm parentForm;
         private Data_Access DS = new Data_Access();
 
         public dataNomorAkun()
@@ -31,6 +32,34 @@ namespace RoyalPetz_ADMIN
 
             originModuleID = moduleID;
             newButton.Visible = false;
+        }
+
+        public dataNomorAkun(int moduleID, dataTransaksiJurnalHarianDetailForm thisForm)
+        {
+            InitializeComponent();
+
+            originModuleID = moduleID;
+            parentForm = thisForm;
+        }
+
+        private void displaySpecificForm()
+        {
+            int selectedrowindex = dataAccountGridView.SelectedCells[0].RowIndex;
+
+            DataGridViewRow selectedRow = dataAccountGridView.Rows[selectedrowindex];
+            selectedAccountID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+
+            switch (originModuleID)
+            {
+                case globalConstants.TAMBAH_HAPUS_JURNAL_HARIAN:
+                    parentForm.addSelectedAccountID(selectedAccountID);
+                    this.Close();
+                    break;
+                default:
+                    dataNomorAkunDetailForm displayedForm = new dataNomorAkunDetailForm(globalConstants.EDIT_AKUN, selectedAccountID);
+                    displayedForm.ShowDialog(this);
+                    break;
+            }
         }
 
         private void loadAccountData(string accountname)
@@ -104,13 +133,18 @@ namespace RoyalPetz_ADMIN
 
         private void dataAccountGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            int selectedrowindex = dataAccountGridView.SelectedCells[0].RowIndex;
+            if (dataAccountGridView.Rows.Count > 0)
+                displaySpecificForm();
+
+           /* int selectedrowindex = dataAccountGridView.SelectedCells[0].RowIndex;
 
             DataGridViewRow selectedRow = dataAccountGridView.Rows[selectedrowindex];
             selectedAccountID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
 
             dataNomorAkunDetailForm displayedForm = new dataNomorAkunDetailForm(globalConstants.EDIT_AKUN, selectedAccountID);
             displayedForm.ShowDialog(this);
+
+            */
         }
     
     }
