@@ -34,6 +34,7 @@ namespace RoyalPetz_ADMIN
         private string hargaGrosirValueText = "";
         private string selectedPhoto = "";
         private int options = 0;
+        private bool isLoading = false;
         private stokPecahBarangForm parentForm;
         
         public dataProdukDetailForm()
@@ -56,7 +57,6 @@ namespace RoyalPetz_ADMIN
             parentForm = thisParentForm;
         }
 
-
         public void setSelectedUnitID(int unitID)
         {
             selectedUnitID = unitID;
@@ -77,12 +77,6 @@ namespace RoyalPetz_ADMIN
 
         private bool checkRegEx(string textToCheck)
         {
-            //string regExValue = "";
-
-            //regExValue = @"^[0-9]*\.?\d{0,2}$";
-            //Regex r = new Regex(regExValue); // This is the main part, can be altered to match any desired form or limitations
-            //Match m = r.Match(textToCheck);
-
             if (gUtil.matchRegEx(textToCheck, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL))
                 return true;
 
@@ -219,7 +213,7 @@ namespace RoyalPetz_ADMIN
 
             DS.mySqlConnect();
 
-            using (rdr = DS.getData("SELECT * FROM PRODUCT_CATEGORY WHERE PRODUCT_ID =  " + kodeProdukTextBox.Text))
+            using (rdr = DS.getData("SELECT * FROM PRODUCT_CATEGORY WHERE PRODUCT_ID =  '" + kodeProdukTextBox.Text +"'"))
             {
                 if (rdr.HasRows)
                 {
@@ -240,7 +234,7 @@ namespace RoyalPetz_ADMIN
             if (selectedUnitID == 0)
                 return;
 
-            sqlCommand = "SELECT UNIT_NAME FROM MASTER_UNIT WHERE UNIT_ID = " + selectedUnitID;
+            sqlCommand = "SELECT IFNULL(UNIT_NAME, '') FROM MASTER_UNIT WHERE UNIT_ID = " + selectedUnitID;
             unitName = DS.getDataSingleValue(sqlCommand).ToString();
 
             unitTextBox.Text = unitName;
@@ -257,7 +251,7 @@ namespace RoyalPetz_ADMIN
 
             for (int i = 0;i<currentSelectedKategoriID.Count;i++)
             {
-                sqlCommand = "SELECT CATEGORY_NAME FROM MASTER_CATEGORY WHERE CATEGORY_ID = " + currentSelectedKategoriID[i];
+                sqlCommand = "SELECT IFNULL(CATEGORY_NAME, '') FROM MASTER_CATEGORY WHERE CATEGORY_ID = " + currentSelectedKategoriID[i];
 
                 if (!kategoriName.Equals(""))
                     kategoriName = kategoriName + ", ";
@@ -288,7 +282,6 @@ namespace RoyalPetz_ADMIN
                     panelImage.BackgroundImage = Image.FromFile(fileName);
 
                     selectedPhoto = openFileDialog1.FileName;
-                    //System.IO.File.Copy(openFileDialog1.FileName, "bg.jpg");
                 }
                 catch (Exception ex)
                 {
@@ -327,13 +320,13 @@ namespace RoyalPetz_ADMIN
 
             if (Convert.ToInt32(hargaGrosirTextBox.Text) == 0)
             {
-                errorLabel.Text = "HARGA GROSIR TIDAK BOLEH 0";
+                errorLabel.Text = "HARGA PARTAI TIDAK BOLEH 0";
                 return false;
             }
 
             if (Convert.ToInt32(hargaPartaiTextBox.Text) == 0)
             {
-                errorLabel.Text = "HARGA PARTAI TIDAK BOLEH 0";
+                errorLabel.Text = "HARGA GROSIR TIDAK BOLEH 0";
                 return false;
             }
 
@@ -343,15 +336,19 @@ namespace RoyalPetz_ADMIN
                 return false;
             }
 
-            return true;
-        }
+            if (barcodeTextBox.Text.Length > 0 && (barcodeExist()) && (originModuleID == globalConstants.NEW_PRODUK))
+            {
+                errorLabel.Text = "BARCODE SUDAH ADA";
+                return false;
+            }
 
-        private string getProdukID()
-        {
-            if (originModuleID == globalConstants.NEW_PRODUK)
-                return "TMPPRD001";
-            else
-                return kodeProdukTextBox.Text;
+            if ((productIDExist()) && (originModuleID != globalConstants.EDIT_PRODUK))
+            {
+                errorLabel.Text = "PRODUK ID SUDAH ADA";
+                return false;
+            }
+
+            return true;
         }
 
         private bool saveDataTransaction()
@@ -362,11 +359,10 @@ namespace RoyalPetz_ADMIN
             string noRakKolom = "";
             MySqlException internalEX = null;
 
-            //string produkID = getProdukID();
-            productID = kodeProdukTextBox.Text.Trim();
+            productID = kodeProdukTextBox.Text;
             string produkBarcode = barcodeTextBox.Text;
             if (produkBarcode.Equals(""))
-                produkBarcode = " ";
+                produkBarcode = "0";
 
             string produkName = namaProdukTextBox.Text.Trim();
 
@@ -429,7 +425,7 @@ namespace RoyalPetz_ADMIN
                     case globalConstants.EDIT_PRODUK:
                             // UPDATE MASTER_PRODUK TABLE
                             sqlCommand = "UPDATE MASTER_PRODUCT SET " +
-                                                "PRODUCT_BARCODE = '" + produkBarcode + "', " +
+                                                "PRODUCT_BARCODE = " + produkBarcode + ", " +
                                                 "PRODUCT_NAME =  '" + produkName + "', " +
                                                 "PRODUCT_DESCRIPTION =  '" + produkDesc + "', " +
                                                 "PRODUCT_BASE_PRICE = " + produkHargaPokok + ", " +
@@ -485,8 +481,6 @@ namespace RoyalPetz_ADMIN
                         break;
                     
                 }
-
-                //DS.executeNonQueryCommand(sqlCommand);
 
                 DS.commit();
                 result = true;
@@ -565,6 +559,21 @@ namespace RoyalPetz_ADMIN
                     this.Close();
                 }
                 gUtil.ResetAllControls(this);
+
+                stokAwalTextBox.Text = "0";
+                limitStokTextBox.Text = "0";
+                hppTextBox.Text = "0";
+                hargaEcerTextBox.Text = "0";
+                hargaGrosirTextBox.Text = "0";
+                hargaPartaiTextBox.Text = "0";
+
+                selectedPhoto = "";
+                panelImage.BackgroundImage = null;
+                
+                errorLabel.Text = "";
+                
+                originModuleID = globalConstants.NEW_PRODUK;
+                kodeProdukTextBox.Enabled = true;
             }
         }
 
@@ -584,7 +593,7 @@ namespace RoyalPetz_ADMIN
         {
             bool result = false;
 
-            if (!DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_BARCODE = '" + barcodeTextBox.Text.Trim() + "'").ToString().Equals("0"))
+            if (!DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_BARCODE = " + barcodeTextBox.Text).ToString().Equals("0"))
             {
                 result = true;
             }
@@ -592,42 +601,72 @@ namespace RoyalPetz_ADMIN
             return result;
         }
 
-        private void kodeProdukTextBox_Validating(object sender, CancelEventArgs e)
-        {
-            if ((productIDExist()) &&  (originModuleID != globalConstants.EDIT_PRODUK))
-                errorLabel.Text = "PRODUK ID SUDAH ADA";
-            else
-                errorLabel.Text = "";
-        }
-
         private void kodeProdukTextBox_TextChanged(object sender, EventArgs e)
         {
-            string temp = kodeProdukTextBox.Text.Trim();
-            kodeProdukTextBox.Text = temp;
-        }
+            if (isLoading)
+                return;
 
-        private void dataProdukDetailForm_Load(object sender, EventArgs e)
-        {
-            gUtil.reArrangeTabOrder(this);            
-        }
+            kodeProdukTextBox.Text = gUtil.allTrim(kodeProdukTextBox.Text);
 
-        private void barcodeTextBox_Validated(object sender, EventArgs e)
-        {
-            if ((barcodeExist()) && (originModuleID == globalConstants.NEW_PRODUK))
-                errorLabel.Text = "BARCODE SUDAH ADA";
+            if ((productIDExist()) && (originModuleID != globalConstants.EDIT_PRODUK))
+            {
+                errorLabel.Text = "PRODUK ID SUDAH ADA";
+                kodeProdukTextBox.Focus();
+                kodeProdukTextBox.BackColor = Color.Red;
+            }
             else
+            {
                 errorLabel.Text = "";
+                kodeProdukTextBox.BackColor = Color.White;
+            }
         }
 
         private void resetbutton_Click(object sender, EventArgs e)
         {
             gUtil.ResetAllControls(this);
+
+            stokAwalTextBox.Text = "0";
+            limitStokTextBox.Text = "0";
+            hppTextBox.Text = "0";
+            hargaEcerTextBox.Text = "0";
+            hargaGrosirTextBox.Text = "0";
+            hargaPartaiTextBox.Text = "0";
+
+            selectedPhoto = "";
+            panelImage.BackgroundImage = null;
+            
+            errorLabel.Text = "";
+            
+            currentSelectedKategoriID.Clear();
+            originModuleID = globalConstants.NEW_PRODUK;
+            kodeProdukTextBox.Enabled = true;
         }
 
-        private void dataProdukDetailForm_Activated(object sender, EventArgs e)
+        private void barcodeTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (isLoading)
+                return;
+
+            barcodeTextBox.Text = gUtil.allTrim(barcodeTextBox.Text);
+
+            if (barcodeTextBox.Text.Length > 0 && (barcodeExist()) && (originModuleID == globalConstants.NEW_PRODUK))
+            {
+                errorLabel.Text = "BARCODE SUDAH ADA";
+                barcodeTextBox.Focus();
+                barcodeTextBox.BackColor = Color.Red;
+            }
+            else
+            {
+                errorLabel.Text = "";
+                barcodeTextBox.BackColor = Color.White;
+            }
+        }
+
+        private void dataProdukDetailForm_Load(object sender, EventArgs e)
         {
             errorLabel.Text = "";
 
+            isLoading = true;
             loadProdukData();
 
             loadUnitIDInformation();
@@ -640,11 +679,17 @@ namespace RoyalPetz_ADMIN
             {
                 case globalConstants.NEW_PRODUK:
                     options = gUtil.INS;
+                    kodeProdukTextBox.Enabled = true;
                     break;
                 case globalConstants.EDIT_PRODUK:
                     options = gUtil.UPD;
+                    kodeProdukTextBox.Enabled = false;
                     break;
             }
+            isLoading = false;
+
+            gUtil.reArrangeTabOrder(this);            
         }
+
     }
 }

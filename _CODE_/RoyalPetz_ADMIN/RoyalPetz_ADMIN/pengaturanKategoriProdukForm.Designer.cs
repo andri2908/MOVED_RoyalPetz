@@ -58,7 +58,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 356F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 357F));
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label6, 1, 1);
@@ -104,7 +104,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(171, 7);
+            this.label6.Location = new System.Drawing.Point(170, 7);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(14, 18);
             this.label6.TabIndex = 12;
@@ -116,7 +116,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(171, 42);
+            this.label7.Location = new System.Drawing.Point(170, 42);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(14, 18);
             this.label7.TabIndex = 13;
@@ -126,7 +126,7 @@
             // 
             this.namaKategoriTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.namaKategoriTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaKategoriTextbox.Location = new System.Drawing.Point(193, 3);
+            this.namaKategoriTextbox.Location = new System.Drawing.Point(192, 3);
             this.namaKategoriTextbox.Name = "namaKategoriTextbox";
             this.namaKategoriTextbox.ReadOnly = true;
             this.namaKategoriTextbox.Size = new System.Drawing.Size(340, 27);
@@ -136,7 +136,7 @@
             // 
             this.deskripsiTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.deskripsiTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deskripsiTextbox.Location = new System.Drawing.Point(193, 38);
+            this.deskripsiTextbox.Location = new System.Drawing.Point(192, 38);
             this.deskripsiTextbox.Name = "deskripsiTextbox";
             this.deskripsiTextbox.ReadOnly = true;
             this.deskripsiTextbox.Size = new System.Drawing.Size(210, 27);
@@ -232,6 +232,7 @@
             // namaProdukTextbox
             // 
             this.namaProdukTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.namaProdukTextbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.namaProdukTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.namaProdukTextbox.Location = new System.Drawing.Point(207, 130);
             this.namaProdukTextbox.Name = "namaProdukTextbox";

@@ -184,9 +184,9 @@ namespace RoyalPetz_ADMIN
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            dataNomorAkun displayedForm = new dataNomorAkun(globalConstants.TAMBAH_HAPUS_JURNAL_HARIAN,this);
-            displayedForm.ShowDialog(this);
-            loadDeskripsi(selectedAccountID);
+            //dataNomorAkun displayedForm = new dataNomorAkun(globalConstants.TAMBAH_HAPUS_JURNAL_HARIAN,this);
+            //displayedForm.ShowDialog(this);
+            //loadDeskripsi(selectedAccountID);
         }
 
         private void dataTransaksiJurnalHarianDetailForm_Load(object sender, EventArgs e)

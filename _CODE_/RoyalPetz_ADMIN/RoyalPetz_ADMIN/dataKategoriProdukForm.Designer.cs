@@ -53,6 +53,7 @@
             this.kategoriProdukDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.kategoriProdukDataGridView.Location = new System.Drawing.Point(0, 74);
             this.kategoriProdukDataGridView.Name = "kategoriProdukDataGridView";
+            this.kategoriProdukDataGridView.ReadOnly = true;
             this.kategoriProdukDataGridView.RowHeadersVisible = false;
             this.kategoriProdukDataGridView.Size = new System.Drawing.Size(669, 474);
             this.kategoriProdukDataGridView.TabIndex = 0;
@@ -60,6 +61,7 @@
             // 
             // categoryNameTextBox
             // 
+            this.categoryNameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.categoryNameTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.categoryNameTextBox.Location = new System.Drawing.Point(124, 16);
             this.categoryNameTextBox.Name = "categoryNameTextBox";

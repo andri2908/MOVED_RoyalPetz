@@ -50,6 +50,7 @@
             // 
             // namaGroupTextbox
             // 
+            this.namaGroupTextbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.namaGroupTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.namaGroupTextbox.Location = new System.Drawing.Point(79, 13);
             this.namaGroupTextbox.Name = "namaGroupTextbox";
@@ -73,6 +74,7 @@
             this.dataUserGroupGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataUserGroupGridView.Location = new System.Drawing.Point(0, 74);
             this.dataUserGroupGridView.Name = "dataUserGroupGridView";
+            this.dataUserGroupGridView.ReadOnly = true;
             this.dataUserGroupGridView.RowHeadersVisible = false;
             this.dataUserGroupGridView.Size = new System.Drawing.Size(603, 475);
             this.dataUserGroupGridView.TabIndex = 28;

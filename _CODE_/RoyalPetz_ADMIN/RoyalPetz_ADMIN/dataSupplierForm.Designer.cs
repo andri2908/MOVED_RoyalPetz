@@ -50,6 +50,7 @@
             // 
             // namaSupplierTextbox
             // 
+            this.namaSupplierTextbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.namaSupplierTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.namaSupplierTextbox.Location = new System.Drawing.Point(85, 12);
             this.namaSupplierTextbox.Name = "namaSupplierTextbox";
@@ -84,6 +85,7 @@
             this.dataSupplierDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataSupplierDataGridView.Location = new System.Drawing.Point(0, 68);
             this.dataSupplierDataGridView.Name = "dataSupplierDataGridView";
+            this.dataSupplierDataGridView.ReadOnly = true;
             this.dataSupplierDataGridView.RowHeadersVisible = false;
             this.dataSupplierDataGridView.Size = new System.Drawing.Size(438, 480);
             this.dataSupplierDataGridView.TabIndex = 13;

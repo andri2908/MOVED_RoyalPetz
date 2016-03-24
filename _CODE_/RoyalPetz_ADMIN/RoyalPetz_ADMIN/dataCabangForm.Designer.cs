@@ -50,6 +50,7 @@
             // 
             // namaBranchTextbox
             // 
+            this.namaBranchTextbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.namaBranchTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.namaBranchTextbox.Location = new System.Drawing.Point(69, 13);
             this.namaBranchTextbox.Name = "namaBranchTextbox";
@@ -73,6 +74,7 @@
             this.dataCabangGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataCabangGridView.Location = new System.Drawing.Point(0, 77);
             this.dataCabangGridView.Name = "dataCabangGridView";
+            this.dataCabangGridView.ReadOnly = true;
             this.dataCabangGridView.RowHeadersVisible = false;
             this.dataCabangGridView.Size = new System.Drawing.Size(402, 472);
             this.dataCabangGridView.TabIndex = 28;

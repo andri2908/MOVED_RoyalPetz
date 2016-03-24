@@ -50,6 +50,7 @@
             // 
             // unitNameTextBox
             // 
+            this.unitNameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.unitNameTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unitNameTextBox.Location = new System.Drawing.Point(89, 12);
             this.unitNameTextBox.Name = "unitNameTextBox";
@@ -73,6 +74,7 @@
             this.dataUnitGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataUnitGridView.Location = new System.Drawing.Point(0, 70);
             this.dataUnitGridView.Name = "dataUnitGridView";
+            this.dataUnitGridView.ReadOnly = true;
             this.dataUnitGridView.RowHeadersVisible = false;
             this.dataUnitGridView.Size = new System.Drawing.Size(518, 479);
             this.dataUnitGridView.TabIndex = 28;

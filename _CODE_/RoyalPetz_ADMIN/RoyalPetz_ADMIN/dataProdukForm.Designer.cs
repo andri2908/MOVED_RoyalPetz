@@ -53,6 +53,7 @@
             this.dataProdukGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataProdukGridView.Location = new System.Drawing.Point(0, 74);
             this.dataProdukGridView.Name = "dataProdukGridView";
+            this.dataProdukGridView.ReadOnly = true;
             this.dataProdukGridView.RowHeadersVisible = false;
             this.dataProdukGridView.Size = new System.Drawing.Size(669, 474);
             this.dataProdukGridView.TabIndex = 0;
@@ -62,6 +63,7 @@
             // 
             // namaProdukTextBox
             // 
+            this.namaProdukTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.namaProdukTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.namaProdukTextBox.Location = new System.Drawing.Point(137, 12);
             this.namaProdukTextBox.Name = "namaProdukTextBox";

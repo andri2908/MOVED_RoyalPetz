@@ -54,6 +54,7 @@
             // 
             // namaProdukTextBox
             // 
+            this.namaProdukTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.namaProdukTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.namaProdukTextBox.Location = new System.Drawing.Point(154, 27);
             this.namaProdukTextBox.Name = "namaProdukTextBox";
