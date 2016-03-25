@@ -207,6 +207,8 @@ namespace RoyalPetz_ADMIN
             {
                 gUtil.showSuccess(options);
                 gUtil.ResetAllControls(this);
+                originModuleID = globalConstants.NEW_SUPPLIER;
+                options = gUtil.INS;
             }
         }
 
@@ -251,6 +253,8 @@ namespace RoyalPetz_ADMIN
         private void button1_Click(object sender, EventArgs e)
         {
             gUtil.ResetAllControls(this);
+            originModuleID = globalConstants.NEW_SUPPLIER;
+            options = gUtil.INS;
         }
 
         private void dataSupplierDetailForm_Activated(object sender, EventArgs e)

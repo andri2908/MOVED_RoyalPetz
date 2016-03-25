@@ -116,7 +116,7 @@ namespace RoyalPetz_ADMIN
 
             DS.mySqlConnect();
 
-            sqlCommand = "SELECT ID, RO_INVOICE AS 'NO PERMINTAAN', DATE_FORMAT(RO_DATETIME, '%d-%M-%Y')  AS 'TANGGAL PERMINTAAN', DATE_FORMAT(RO_EXPIRED, '%d-%M-%Y)' AS 'TANGGAL EXPIRED', M1.BRANCH_NAME AS 'ASAL PERMINTAAN', M2.BRANCH_NAME AS 'TUJUAN PERMINTAAN', RO_TOTAL AS 'TOTAL' " +
+            sqlCommand = "SELECT ID, RO_INVOICE AS 'NO PERMINTAAN', DATE_FORMAT(RO_DATETIME, '%d-%M-%Y')  AS 'TANGGAL PERMINTAAN', DATE_FORMAT(RO_EXPIRED, '%d-%M-%Y') AS 'TANGGAL EXPIRED', M1.BRANCH_NAME AS 'ASAL PERMINTAAN', M2.BRANCH_NAME AS 'TUJUAN PERMINTAAN', RO_TOTAL AS 'TOTAL' " +
                                 "FROM REQUEST_ORDER_HEADER LEFT OUTER JOIN MASTER_BRANCH M1 ON (RO_BRANCH_ID_FROM = M1.BRANCH_ID) " +
                                 "LEFT OUTER JOIN MASTER_BRANCH M2 ON (RO_BRANCH_ID_TO = M2.BRANCH_ID) " +
                                 "WHERE 1 = 1";
@@ -144,12 +144,12 @@ namespace RoyalPetz_ADMIN
                 dateTo= String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(RODtPicker_2.Value));
                 sqlCommand = sqlCommand + " AND DATE_FORMAT(RO_DATETIME, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(RO_DATETIME, '%Y%m%d')  <= '" + dateTo + "'";
 
-                if (branchFromCombo.SelectedIndex > 0)
+                if (branchFromCombo.Text.Length > 0 )
                 {
                     sqlCommand = sqlCommand + " AND RO_BRANCH_ID_FROM = " + selectedBranchFromID;
                 }
 
-                if (branchToCombo.SelectedIndex > 0)
+                if (branchToCombo.Text.Length > 0)
                 {
                     sqlCommand = sqlCommand + " AND RO_BRANCH_ID_TO = " + selectedBranchToID;
                 }
@@ -326,6 +326,8 @@ namespace RoyalPetz_ADMIN
         private void dataPermintaanForm_Activated(object sender, EventArgs e)
         {
             //if need something
+            if (noROInvoiceTextBox.Text.Length > 0)
+                displayButton.PerformClick();
         }
 
         private void dataRequestOrderGridView_KeyDown(object sender, KeyEventArgs e)

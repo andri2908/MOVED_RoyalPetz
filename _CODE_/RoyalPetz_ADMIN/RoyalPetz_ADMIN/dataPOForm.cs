@@ -100,7 +100,7 @@ namespace RoyalPetz_ADMIN
                 dateTo = String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(PODtPicker_2.Value));
                 sqlCommand = sqlCommand + " AND DATE_FORMAT(PURCHASE_DATETIME, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(PURCHASE_DATETIME, '%Y%m%d')  <= '" + dateTo + "'";
 
-                if (supplierCombo.SelectedIndex > 0)
+                if (supplierCombo.Text.Length > 0)
                 {
                     sqlCommand = sqlCommand + " AND P.SUPPLIER_ID = " + supplierID;
                 }
@@ -215,6 +215,11 @@ namespace RoyalPetz_ADMIN
             }
 
             loadPOData();
+        }
+        private void dataPOForm_Activated(object sender, EventArgs e)
+        {
+            if (noPOInvoiceTextBox.Text.Length > 0)
+                displayButton.PerformClick();
         }
     }
 }

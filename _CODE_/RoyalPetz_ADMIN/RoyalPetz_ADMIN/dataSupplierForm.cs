@@ -53,6 +53,7 @@ namespace RoyalPetz_ADMIN
 
             using (rdr = DS.getData(sqlCommand))
             {
+                dataSupplierDataGridView.DataSource = null;
                 if (rdr.HasRows)
                 {
                     dt.Load(rdr);
@@ -108,10 +109,26 @@ namespace RoyalPetz_ADMIN
 
         private void suppliernonactiveoption_CheckedChanged(object sender, EventArgs e)
         {
-            dataSupplierDataGridView.DataSource = null;
             if (!namaSupplierTextbox.Text.Equals(""))
             {
                 loadSupplierData();
+            }
+        }
+
+        private void dataSupplierDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (dataSupplierDataGridView.Rows.Count <= 0)
+                return;
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                int selectedrowindex = dataSupplierDataGridView.SelectedCells[0].RowIndex;
+
+                DataGridViewRow selectedRow = dataSupplierDataGridView.Rows[selectedrowindex];
+                selectedSupplierID = Convert.ToInt32(selectedRow.Cells["SUPPLIER_ID"].Value);
+
+                dataSupplierDetailForm displayedForm = new dataSupplierDetailForm(globalConstants.EDIT_SUPPLIER, selectedSupplierID);
+                displayedForm.ShowDialog(this);
             }
         }
     }

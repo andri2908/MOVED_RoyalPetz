@@ -249,6 +249,7 @@
             // 
             // noROInvoiceTextBox
             // 
+            this.noROInvoiceTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.noROInvoiceTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.noROInvoiceTextBox.Location = new System.Drawing.Point(195, 3);
             this.noROInvoiceTextBox.Name = "noROInvoiceTextBox";

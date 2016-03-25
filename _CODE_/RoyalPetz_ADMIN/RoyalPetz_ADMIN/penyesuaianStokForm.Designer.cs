@@ -29,7 +29,10 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.errorLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.namaProductTextBox = new System.Windows.Forms.TextBox();
+            this.kodeProductTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -42,10 +45,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.jumlahAwalMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
             this.saveButton = new System.Windows.Forms.Button();
-            this.resetbutton = new System.Windows.Forms.Button();
-            this.namaProductTextBox = new System.Windows.Forms.TextBox();
-            this.kodeProductTextBox = new System.Windows.Forms.TextBox();
-            this.errorLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -60,6 +59,16 @@
             this.panel1.Size = new System.Drawing.Size(549, 29);
             this.panel1.TabIndex = 16;
             // 
+            this.errorLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.BackColor = System.Drawing.Color.White;
+            this.errorLabel.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(4, 6);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(23, 18);
+            this.errorLabel.TabIndex = 54;
+            this.errorLabel.Text = "   ";
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -67,7 +76,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 352F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 353F));
             this.tableLayoutPanel1.Controls.Add(this.namaProductTextBox, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.kodeProductTextBox, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 1);
@@ -91,6 +100,20 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(547, 246);
             this.tableLayoutPanel1.TabIndex = 17;
+            this.namaProductTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.namaProductTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.namaProductTextBox.Location = new System.Drawing.Point(196, 36);
+            this.namaProductTextBox.Name = "namaProductTextBox";
+            this.namaProductTextBox.ReadOnly = true;
+            this.namaProductTextBox.Size = new System.Drawing.Size(347, 27);
+            this.namaProductTextBox.TabIndex = 20;
+            this.kodeProductTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.kodeProductTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kodeProductTextBox.Location = new System.Drawing.Point(196, 3);
+            this.kodeProductTextBox.Name = "kodeProductTextBox";
+            this.kodeProductTextBox.ReadOnly = true;
+            this.kodeProductTextBox.Size = new System.Drawing.Size(297, 27);
+            this.kodeProductTextBox.TabIndex = 21;
             // 
             // label5
             // 
@@ -134,7 +157,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(174, 180);
+            this.label7.Location = new System.Drawing.Point(173, 180);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(14, 18);
             this.label7.TabIndex = 13;
@@ -144,7 +167,7 @@
             // 
             this.descriptionTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.descriptionTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.descriptionTextBox.Location = new System.Drawing.Point(197, 140);
+            this.descriptionTextBox.Location = new System.Drawing.Point(196, 140);
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.Size = new System.Drawing.Size(340, 97);
@@ -168,7 +191,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(174, 106);
+            this.label6.Location = new System.Drawing.Point(173, 106);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(14, 18);
             this.label6.TabIndex = 12;
@@ -178,7 +201,7 @@
             // 
             this.jumlahBaruMaskedTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.jumlahBaruMaskedTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.jumlahBaruMaskedTextBox.Location = new System.Drawing.Point(197, 102);
+            this.jumlahBaruMaskedTextBox.Location = new System.Drawing.Point(196, 102);
             this.jumlahBaruMaskedTextBox.Mask = "00000";
             this.jumlahBaruMaskedTextBox.Name = "jumlahBaruMaskedTextBox";
             this.jumlahBaruMaskedTextBox.Size = new System.Drawing.Size(144, 27);
@@ -205,7 +228,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(174, 73);
+            this.label4.Location = new System.Drawing.Point(173, 73);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(14, 18);
             this.label4.TabIndex = 10;
@@ -215,7 +238,7 @@
             // 
             this.jumlahAwalMaskedTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.jumlahAwalMaskedTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.jumlahAwalMaskedTextBox.Location = new System.Drawing.Point(197, 69);
+            this.jumlahAwalMaskedTextBox.Location = new System.Drawing.Point(196, 69);
             this.jumlahAwalMaskedTextBox.Mask = "00000";
             this.jumlahAwalMaskedTextBox.Name = "jumlahAwalMaskedTextBox";
             this.jumlahAwalMaskedTextBox.ReadOnly = true;
@@ -228,7 +251,7 @@
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(156, 296);
+            this.saveButton.Location = new System.Drawing.Point(219, 296);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(95, 37);
             this.saveButton.TabIndex = 18;
@@ -238,48 +261,15 @@
             // 
             // resetbutton
             // 
-            this.resetbutton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.resetbutton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetbutton.Location = new System.Drawing.Point(299, 296);
-            this.resetbutton.Name = "resetbutton";
-            this.resetbutton.Size = new System.Drawing.Size(95, 37);
-            this.resetbutton.TabIndex = 19;
-            this.resetbutton.Text = "RESET";
-            this.resetbutton.UseVisualStyleBackColor = true;
-            this.resetbutton.Click += new System.EventHandler(this.resetbutton_Click);
             // 
             // namaProductTextBox
             // 
-            this.namaProductTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.namaProductTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaProductTextBox.Location = new System.Drawing.Point(197, 36);
-            this.namaProductTextBox.Name = "namaProductTextBox";
-            this.namaProductTextBox.ReadOnly = true;
-            this.namaProductTextBox.Size = new System.Drawing.Size(347, 27);
-            this.namaProductTextBox.TabIndex = 20;
             // 
             // kodeProductTextBox
             // 
-            this.kodeProductTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.kodeProductTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kodeProductTextBox.Location = new System.Drawing.Point(197, 3);
-            this.kodeProductTextBox.Name = "kodeProductTextBox";
-            this.kodeProductTextBox.ReadOnly = true;
-            this.kodeProductTextBox.Size = new System.Drawing.Size(297, 27);
-            this.kodeProductTextBox.TabIndex = 21;
             // 
             // errorLabel
             // 
-            this.errorLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.errorLabel.AutoSize = true;
-            this.errorLabel.BackColor = System.Drawing.Color.White;
-            this.errorLabel.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(4, 6);
-            this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(23, 18);
-            this.errorLabel.TabIndex = 54;
-            this.errorLabel.Text = "   ";
             // 
             // penyesuaianStokForm
             // 
@@ -287,7 +277,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(552, 345);
-            this.Controls.Add(this.resetbutton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
@@ -323,7 +312,6 @@
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button resetbutton;
         private System.Windows.Forms.TextBox namaProductTextBox;
         private System.Windows.Forms.TextBox kodeProductTextBox;
         private System.Windows.Forms.Label errorLabel;

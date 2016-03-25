@@ -304,7 +304,7 @@ namespace RoyalPetz_ADMIN
             }
 
             globalTotalValue = total;
-            labelAcceptValue.Text = "Rp. " + globalTotalValue;
+            labelAcceptValue.Text = globalTotalValue.ToString("c", culture);
         }
 
         private bool isNoPRExist()
@@ -329,6 +329,11 @@ namespace RoyalPetz_ADMIN
 
         private bool dataValidated()
         {
+            if (prInvoiceTextBox.Text.Length <=0)
+            {
+                errorLabel.Text = "NO PENERIMAAN TIDAK BOLEH KOSONG";
+                return false;
+            }
             return true;
         }
 
@@ -467,6 +472,8 @@ namespace RoyalPetz_ADMIN
             if (saveData())
             {
                 saveButton.Visible = false;
+                prInvoiceTextBox.Enabled = false;
+                PRDtPicker.Enabled = false;
                 gUtil.showSuccess(gUtil.INS);
             }
         }

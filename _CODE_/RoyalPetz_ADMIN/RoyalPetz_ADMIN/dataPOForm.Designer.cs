@@ -56,6 +56,7 @@
             // 
             // noPOInvoiceTextBox
             // 
+            this.noPOInvoiceTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.noPOInvoiceTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.noPOInvoiceTextBox.Location = new System.Drawing.Point(185, 3);
             this.noPOInvoiceTextBox.Name = "noPOInvoiceTextBox";
@@ -258,6 +259,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DATA PURCHASE ORDER";
+            this.Activated += new System.EventHandler(this.dataPOForm_Activated);
             this.Load += new System.EventHandler(this.dataPOForm_Load);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();

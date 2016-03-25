@@ -105,12 +105,12 @@ namespace RoyalPetz_ADMIN
                 dateTo = String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(PMDtPicker_2.Value));
                 sqlCommand = sqlCommand + " AND DATE_FORMAT(PM_DATETIME, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(PM_DATETIME, '%Y%m%d')  <= '" + dateTo + "'";
 
-                if (branchFromCombo.SelectedIndex > 0)
+                if (branchFromCombo.Text.Length > 0)
                 {
                     sqlCommand = sqlCommand + " AND BRANCH_ID_FROM = " + selectedBranchFromID;
                 }
 
-                if (branchToCombo.SelectedIndex > 0)
+                if (branchToCombo.Text.Length > 0)
                 {
                     sqlCommand = sqlCommand + " AND BRANCH_ID_TO = " + selectedBranchToID;
                 }
@@ -120,6 +120,7 @@ namespace RoyalPetz_ADMIN
 
             using (rdr = DS.getData(sqlCommand))
             {
+                dataRequestOrderGridView.DataSource = null;
                 if (rdr.HasRows)
                 {
                     dt.Load(rdr);

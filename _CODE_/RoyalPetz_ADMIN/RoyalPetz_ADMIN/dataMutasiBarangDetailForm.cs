@@ -102,9 +102,9 @@ namespace RoyalPetz_ADMIN
             globalTotalValue = total;
 
             if (!directMutasiBarang)
-                totalApproved.Text = "Rp. " + total.ToString();
+                totalApproved.Text = total.ToString("C", culture);
             else
-                totalLabel.Text = "Rp. " + total.ToString();
+                totalLabel.Text = total.ToString("C", culture);
         }
 
         private bool stockIsEnough(string productID, double qtyRequested)
@@ -292,8 +292,8 @@ namespace RoyalPetz_ADMIN
 
                         selectedROInvoice = rdr.GetString("RO_INVOICE");
 
-                        totalLabel.Text = "Rp. " + rdr.GetString("RO_TOTAL");
-                        totalApproved.Text = "Rp. " + rdr.GetString("RO_TOTAL");
+                        totalLabel.Text = rdr.GetDouble("RO_TOTAL").ToString("C", culture);
+                        totalApproved.Text = rdr.GetDouble("RO_TOTAL").ToString("C", culture);
                         globalTotalValue = rdr.GetDouble("RO_TOTAL");
                     }
 
@@ -325,8 +325,8 @@ namespace RoyalPetz_ADMIN
 
                         selectedROInvoice = rdr.GetString("RO_INVOICE");
 
-                        totalLabel.Text = "Rp. " + rdr.GetString("PM_TOTAL");
-                        totalApproved.Text = "Rp. " + rdr.GetString("PM_TOTAL");
+                        totalLabel.Text = rdr.GetDouble("PM_TOTAL").ToString("C", culture);
+                        totalApproved.Text = rdr.GetDouble("PM_TOTAL").ToString("C", culture);
                         globalTotalValue = rdr.GetDouble("PM_TOTAL");
                     }
 
@@ -711,6 +711,9 @@ namespace RoyalPetz_ADMIN
                         // SAVE DETAIL TABLE
                         for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count - 1; i++)
                         {
+                            if (null == detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value)
+                                continue;
+
                             if (null != detailRequestOrderDataGridView.Rows[i].Cells["qty"].Value)
                                 qtyApproved = Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["qty"].Value);
                             else
@@ -775,12 +778,32 @@ namespace RoyalPetz_ADMIN
 
         private bool dataValidated()
         {
+            bool dataExist = false;
+            int i = 0;
+
             if (subModuleID == globalConstants.REJECT_PRODUCT_MUTATION)
                 return true;
 
             if (noMutasiTextBox.Text.Length <= 0)
             {
                 errorLabel.Text = "NO MUTASI TIDAK BOLEH KOSONG";
+                return false;
+            }
+
+            while ( i < detailRequestOrderDataGridView.Rows.Count)
+            { 
+                if (null != detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value)
+                { 
+                    dataExist = true;
+                    break;
+                }
+
+                i++;
+            }
+
+            if (!dataExist)
+            {
+                errorLabel.Text = "TIDAK ADA PRODUK YANG DIPILIH";
                 return false;
             }
 
@@ -799,7 +822,8 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
-                MessageBox.Show("SUCCESS");
+                //MessageBox.Show("SUCCESS");
+                gUtil.showSuccess(gUtil.INS);
 
                 detailRequestOrderDataGridView.ReadOnly = true;
 

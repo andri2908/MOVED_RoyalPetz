@@ -96,7 +96,7 @@ namespace RoyalPetz_ADMIN
                         selectedBranchToID = rdr.GetInt32("RO_BRANCH_ID_TO");
                         
                         durationTextBox.Text = Convert.ToInt32((rdr.GetDateTime("RO_EXPIRED") - rdr.GetDateTime("RO_DATETIME")).TotalDays).ToString();
-                        totalLabel.Text = "Rp. " + rdr.GetString("RO_TOTAL");
+                        totalLabel.Text = rdr.GetDouble("RO_TOTAL").ToString("C", culture);
                         globalTotalValue = rdr.GetDouble("RO_TOTAL");
                     }
 
@@ -142,7 +142,7 @@ namespace RoyalPetz_ADMIN
             }
 
             globalTotalValue = total;
-            totalLabel.Text = "Rp. " + total.ToString();
+            totalLabel.Text = total.ToString("C", culture);
         }
 
         private void detailRequestOrderDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -286,12 +286,6 @@ namespace RoyalPetz_ADMIN
             roDateExpired = String.Format(culture, "{0:dd-MM-yyyy}", expiredRODate);
             roTotal = globalTotalValue;
 
-            //saveFileDialog1.FileName = "dataRequestOrder" + roInvoice + ".exp";
-            //saveFileDialog1.DefaultExt = "*.exp";
-            //saveFileDialog1.ShowDialog();
-
-            //saveFileDialog1.
-            //exportedFileName = saveFileDialog1.FileName;
             exportedFileName = driveLetter + "RO_" + roInvoice + "_" + String.Format(culture, "{0:ddMMyyyy}", Convert.ToDateTime(selectedDate)) + ".exp";
 
             DS.beginTransaction();
@@ -374,7 +368,18 @@ namespace RoyalPetz_ADMIN
             if (saveData())
             {
                 exportDataRO();
+
+                gUtil.ResetAllControls(this);
+                originModuleID = globalConstants.NEW_REQUEST_ORDER;
+                detailRequestOrderDataGridView.Rows.Clear();
+                totalLabel.Text = "Rp. 0";
+
+                selectedBranchFromID = 0;
+                selectedBranchToID = 0;
+
                 gUtil.showSuccess(gUtil.UPD);
+
+                ROinvoiceTextBox.Focus();
                 //MessageBox.Show("SUCCESS");
             }
         }
@@ -482,10 +487,13 @@ namespace RoyalPetz_ADMIN
             if (invoiceExist())
             {
                 errorLabel.Text = "NO PERMINTAAN SUDAH ADA";
+                ROinvoiceTextBox.BackColor = Color.Red;
+                ROinvoiceTextBox.Focus();
             }
             else
             {
                 errorLabel.Text = "";
+                ROinvoiceTextBox.BackColor = Color.White;
             }
         }
 
@@ -555,12 +563,11 @@ namespace RoyalPetz_ADMIN
                 selectedBranchToID = Convert.ToInt32(branchToComboHidden.Items[branchToCombo.SelectedIndex].ToString());
         }
 
-        private void detailRequestOrderDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-        }
-
         private bool dataValidated()
         {
+            int i = 0;
+            bool dataExist = false;
+
             if (ROinvoiceTextBox.Text.Equals(""))
             {
                 errorLabel.Text = "NO PERMINTAAN TIDAK BOLEH KOSONG";
@@ -568,6 +575,19 @@ namespace RoyalPetz_ADMIN
             }
 
             if (detailRequestOrderDataGridView.Rows.Count <= 0)
+            {
+                errorLabel.Text = "TIDAK ADA BARANG YANG DIMINTA";
+                return false;
+            }
+
+            while (i<detailRequestOrderDataGridView.Rows.Count && !dataExist)
+            {
+                if (null != detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value)
+                    dataExist = true;
+
+                i++;
+            }
+            if (!dataExist)
             {
                 errorLabel.Text = "TIDAK ADA BARANG YANG DIMINTA";
                 return false;
@@ -709,9 +729,22 @@ namespace RoyalPetz_ADMIN
             if (saveData())
             {
                 //MessageBox.Show("SUCCESS");
-                gUtil.showSuccess(gUtil.UPD);
+                gUtil.ResetAllControls(this);
+                originModuleID = globalConstants.NEW_REQUEST_ORDER;
+                detailRequestOrderDataGridView.Rows.Clear();
+                totalLabel.Text = "Rp. 0";
 
-                ROinvoiceTextBox.ReadOnly = true;
+                selectedBranchFromID = 0;
+                selectedBranchToID = 0;
+
+                if (originModuleID == globalConstants.NEW_REQUEST_ORDER)
+                    gUtil.showSuccess(gUtil.INS);
+                else if (originModuleID == globalConstants.EDIT_REQUEST_ORDER)
+                    gUtil.showSuccess(gUtil.UPD);
+                
+                ROinvoiceTextBox.Focus();
+                
+                /*ROinvoiceTextBox.ReadOnly = true;
                 RODateTimePicker.Enabled = false;
                 branchFromCombo.Enabled = false;
                 branchToCombo.Enabled = false;
@@ -725,7 +758,7 @@ namespace RoyalPetz_ADMIN
 
                 saveButton.Visible = false;
                 generateButton.Visible = false;
-                exportButton.Visible = false;
+                exportButton.Visible = false;*/
             }
         }
 
@@ -772,8 +805,6 @@ namespace RoyalPetz_ADMIN
         private void permintaanProdukForm_Activated(object sender, EventArgs e)
         {
             errorLabel.Text = "";
-
-          
 
             if (originModuleID == globalConstants.EDIT_REQUEST_ORDER)
             {

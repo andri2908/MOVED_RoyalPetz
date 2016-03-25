@@ -535,11 +535,11 @@ namespace RoyalPetz_ADMIN
             //displayForm.ShowDialog(this);
         }
 
-        private void toolStripMenuItem11_Click_1(object sender, EventArgs e)
-        {
-            dataMutasiBarangForm displayedForm = new dataMutasiBarangForm(globalConstants.PENERIMAAN_BARANG);
-            displayedForm.ShowDialog(this);
-        }
+        //private void toolStripMenuItem11_Click_1(object sender, EventArgs e)
+        //{
+        //    dataMutasiBarangForm displayedForm = new dataMutasiBarangForm(globalConstants.PENERIMAAN_BARANG);
+        //    displayedForm.ShowDialog(this);
+        //}
 
         private void developerToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -553,11 +553,11 @@ namespace RoyalPetz_ADMIN
             displayedForm.ShowDialog(this);
         }
 
-        private void toolStripMenuItem12_Click_1(object sender, EventArgs e)
-        {
-            dataPOForm displayedForm = new dataPOForm(globalConstants.PENERIMAAN_BARANG_DARI_PO);
-            displayedForm.ShowDialog(this);
-        }
+        //private void toolStripMenuItem12_Click_1(object sender, EventArgs e)
+        //{
+        //    dataPOForm displayedForm = new dataPOForm(globalConstants.PENERIMAAN_BARANG_DARI_PO);
+        //    displayedForm.ShowDialog(this);
+        //}
 
         private void fileToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
         {
@@ -661,6 +661,16 @@ namespace RoyalPetz_ADMIN
         private void toolStripMenuItem40_Click(object sender, EventArgs e)
         {
             importDataCSVForm displayedForm = new importDataCSVForm();
+            displayedForm.ShowDialog(this);
+        }
+        private void toolStripMenuItem11_Click_2(object sender, EventArgs e)
+        {
+            dataMutasiBarangForm displayedForm = new dataMutasiBarangForm(globalConstants.PENERIMAAN_BARANG);
+            displayedForm.ShowDialog(this);
+        }
+        private void toolStripMenuItem12_Click_2(object sender, EventArgs e)
+        {
+            dataPOForm displayedForm = new dataPOForm(globalConstants.PENERIMAAN_BARANG_DARI_PO);
             displayedForm.ShowDialog(this);
         }
     }

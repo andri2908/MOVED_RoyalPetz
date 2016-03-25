@@ -257,7 +257,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 233F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 199F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tableLayoutPanel2.Controls.Add(this.ROinvoiceTextBox, 0, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(261, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -269,10 +269,11 @@
             // ROinvoiceTextBox
             // 
             this.ROinvoiceTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ROinvoiceTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.ROinvoiceTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ROinvoiceTextBox.Location = new System.Drawing.Point(3, 4);
             this.ROinvoiceTextBox.Name = "ROinvoiceTextBox";
-            this.ROinvoiceTextBox.Size = new System.Drawing.Size(169, 27);
+            this.ROinvoiceTextBox.Size = new System.Drawing.Size(168, 27);
             this.ROinvoiceTextBox.TabIndex = 16;
             this.ROinvoiceTextBox.TextChanged += new System.EventHandler(this.ROinvoiceTextBox_TextChanged);
             // 
@@ -458,13 +459,13 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.detailRequestOrderDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.detailRequestOrderDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.detailRequestOrderDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.detailRequestOrderDataGridView.Location = new System.Drawing.Point(5, 303);
             this.detailRequestOrderDataGridView.Name = "detailRequestOrderDataGridView";
             this.detailRequestOrderDataGridView.RowHeadersVisible = false;
             this.detailRequestOrderDataGridView.Size = new System.Drawing.Size(888, 308);
             this.detailRequestOrderDataGridView.TabIndex = 32;
             this.detailRequestOrderDataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailRequestOrderDataGridView_CellValidated);
-            this.detailRequestOrderDataGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.detailRequestOrderDataGridView_CellValidating);
             this.detailRequestOrderDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.detailRequestOrderDataGridView_KeyDown);
             this.detailRequestOrderDataGridView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.detailRequestOrderDataGridView_KeyPress);
             // 
