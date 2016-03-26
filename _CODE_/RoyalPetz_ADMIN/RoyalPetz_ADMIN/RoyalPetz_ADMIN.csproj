@@ -67,6 +67,12 @@
     <Compile Include="Constants.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="createConfigFileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="createConfigFileForm.Designer.cs">
+      <DependentUpon>createConfigFileForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="dataNomorAkun.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -414,6 +420,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="changePasswordForm.resx">
       <DependentUpon>changePasswordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="createConfigFileForm.resx">
+      <DependentUpon>createConfigFileForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dataNomorAkun.resx">
       <DependentUpon>dataNomorAkun.cs</DependentUpon>

@@ -33,19 +33,17 @@
             this.serverIPRadioButton = new System.Windows.Forms.RadioButton();
             this.localhostRadioButton = new System.Windows.Forms.RadioButton();
             this.ConModeBox = new System.Windows.Forms.GroupBox();
+            this.ipServerBox = new System.Windows.Forms.GroupBox();
+            this.ip3Textbox = new System.Windows.Forms.MaskedTextBox();
+            this.ip4Textbox = new System.Windows.Forms.MaskedTextBox();
+            this.ip2Textbox = new System.Windows.Forms.MaskedTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.errorLabel = new System.Windows.Forms.Label();
             this.saveButton = new System.Windows.Forms.Button();
             this.AppModeBox = new System.Windows.Forms.GroupBox();
-            this.BranchIDTextbox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.ip2Textbox = new System.Windows.Forms.MaskedTextBox();
-            this.ip3Textbox = new System.Windows.Forms.MaskedTextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.ip4Textbox = new System.Windows.Forms.MaskedTextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.branchIDBox = new System.Windows.Forms.GroupBox();
-            this.ipServerBox = new System.Windows.Forms.GroupBox();
             this.HQIPBox = new System.Windows.Forms.GroupBox();
             this.HQIP3 = new System.Windows.Forms.MaskedTextBox();
             this.HQIP1 = new System.Windows.Forms.MaskedTextBox();
@@ -54,12 +52,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.branchIDBox = new System.Windows.Forms.GroupBox();
+            this.BranchIDTextbox = new System.Windows.Forms.TextBox();
             this.ConModeBox.SuspendLayout();
+            this.ipServerBox.SuspendLayout();
             this.panel1.SuspendLayout();
             this.AppModeBox.SuspendLayout();
-            this.branchIDBox.SuspendLayout();
-            this.ipServerBox.SuspendLayout();
             this.HQIPBox.SuspendLayout();
+            this.branchIDBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -85,6 +85,7 @@
             this.ip1Textbox.TabIndex = 20;
             this.ip1Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.ip1Textbox.Visible = false;
+            this.ip1Textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ip1Textbox_KeyPress);
             // 
             // serverIPRadioButton
             // 
@@ -126,6 +127,91 @@
             this.ConModeBox.TabIndex = 23;
             this.ConModeBox.TabStop = false;
             this.ConModeBox.Text = "Opsi Jaringan";
+            // 
+            // ipServerBox
+            // 
+            this.ipServerBox.Controls.Add(this.ip3Textbox);
+            this.ipServerBox.Controls.Add(this.ip1Textbox);
+            this.ipServerBox.Controls.Add(this.ip4Textbox);
+            this.ipServerBox.Controls.Add(this.ip2Textbox);
+            this.ipServerBox.Controls.Add(this.label1);
+            this.ipServerBox.Controls.Add(this.label4);
+            this.ipServerBox.Controls.Add(this.label3);
+            this.ipServerBox.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ipServerBox.Location = new System.Drawing.Point(9, 73);
+            this.ipServerBox.Name = "ipServerBox";
+            this.ipServerBox.Size = new System.Drawing.Size(200, 59);
+            this.ipServerBox.TabIndex = 25;
+            this.ipServerBox.TabStop = false;
+            this.ipServerBox.Text = "IP Server";
+            // 
+            // ip3Textbox
+            // 
+            this.ip3Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.ip3Textbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ip3Textbox.Location = new System.Drawing.Point(106, 18);
+            this.ip3Textbox.Mask = "000";
+            this.ip3Textbox.Name = "ip3Textbox";
+            this.ip3Textbox.Size = new System.Drawing.Size(38, 27);
+            this.ip3Textbox.TabIndex = 24;
+            this.ip3Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.ip3Textbox.Visible = false;
+            this.ip3Textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ip3Textbox_KeyPress);
+            // 
+            // ip4Textbox
+            // 
+            this.ip4Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.ip4Textbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ip4Textbox.Location = new System.Drawing.Point(156, 18);
+            this.ip4Textbox.Mask = "000";
+            this.ip4Textbox.Name = "ip4Textbox";
+            this.ip4Textbox.Size = new System.Drawing.Size(38, 27);
+            this.ip4Textbox.TabIndex = 26;
+            this.ip4Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.ip4Textbox.Visible = false;
+            // 
+            // ip2Textbox
+            // 
+            this.ip2Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.ip2Textbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ip2Textbox.Location = new System.Drawing.Point(56, 18);
+            this.ip2Textbox.Mask = "000";
+            this.ip2Textbox.Name = "ip2Textbox";
+            this.ip2Textbox.Size = new System.Drawing.Size(38, 27);
+            this.ip2Textbox.TabIndex = 22;
+            this.ip2Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.ip2Textbox.Visible = false;
+            this.ip2Textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ip2Textbox_KeyPress);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Verdana", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(40, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(22, 25);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "-";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Verdana", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(140, 20);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(22, 25);
+            this.label4.TabIndex = 25;
+            this.label4.Text = "-";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Verdana", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(90, 20);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(22, 25);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "-";
             // 
             // panel1
             // 
@@ -172,109 +258,6 @@
             this.AppModeBox.TabIndex = 24;
             this.AppModeBox.TabStop = false;
             this.AppModeBox.Text = "Pengaturan ID Aplikasi";
-            // 
-            // BranchIDTextbox
-            // 
-            this.BranchIDTextbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.BranchIDTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BranchIDTextbox.Location = new System.Drawing.Point(6, 19);
-            this.BranchIDTextbox.Name = "BranchIDTextbox";
-            this.BranchIDTextbox.Size = new System.Drawing.Size(188, 27);
-            this.BranchIDTextbox.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Verdana", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(40, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(22, 25);
-            this.label1.TabIndex = 21;
-            this.label1.Text = "-";
-            // 
-            // ip2Textbox
-            // 
-            this.ip2Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            this.ip2Textbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ip2Textbox.Location = new System.Drawing.Point(56, 18);
-            this.ip2Textbox.Mask = "000";
-            this.ip2Textbox.Name = "ip2Textbox";
-            this.ip2Textbox.Size = new System.Drawing.Size(38, 27);
-            this.ip2Textbox.TabIndex = 22;
-            this.ip2Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            this.ip2Textbox.Visible = false;
-            // 
-            // ip3Textbox
-            // 
-            this.ip3Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            this.ip3Textbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ip3Textbox.Location = new System.Drawing.Point(106, 18);
-            this.ip3Textbox.Mask = "000";
-            this.ip3Textbox.Name = "ip3Textbox";
-            this.ip3Textbox.Size = new System.Drawing.Size(38, 27);
-            this.ip3Textbox.TabIndex = 24;
-            this.ip3Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            this.ip3Textbox.Visible = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Verdana", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(90, 20);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(22, 25);
-            this.label3.TabIndex = 23;
-            this.label3.Text = "-";
-            // 
-            // ip4Textbox
-            // 
-            this.ip4Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            this.ip4Textbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ip4Textbox.Location = new System.Drawing.Point(156, 18);
-            this.ip4Textbox.Mask = "000";
-            this.ip4Textbox.Name = "ip4Textbox";
-            this.ip4Textbox.Size = new System.Drawing.Size(38, 27);
-            this.ip4Textbox.TabIndex = 26;
-            this.ip4Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            this.ip4Textbox.Visible = false;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Verdana", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(140, 20);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(22, 25);
-            this.label4.TabIndex = 25;
-            this.label4.Text = "-";
-            // 
-            // branchIDBox
-            // 
-            this.branchIDBox.Controls.Add(this.BranchIDTextbox);
-            this.branchIDBox.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.branchIDBox.Location = new System.Drawing.Point(9, 86);
-            this.branchIDBox.Name = "branchIDBox";
-            this.branchIDBox.Size = new System.Drawing.Size(200, 54);
-            this.branchIDBox.TabIndex = 25;
-            this.branchIDBox.TabStop = false;
-            this.branchIDBox.Text = "Branch ID";
-            // 
-            // ipServerBox
-            // 
-            this.ipServerBox.Controls.Add(this.ip3Textbox);
-            this.ipServerBox.Controls.Add(this.ip1Textbox);
-            this.ipServerBox.Controls.Add(this.ip4Textbox);
-            this.ipServerBox.Controls.Add(this.ip2Textbox);
-            this.ipServerBox.Controls.Add(this.label1);
-            this.ipServerBox.Controls.Add(this.label4);
-            this.ipServerBox.Controls.Add(this.label3);
-            this.ipServerBox.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ipServerBox.Location = new System.Drawing.Point(9, 73);
-            this.ipServerBox.Name = "ipServerBox";
-            this.ipServerBox.Size = new System.Drawing.Size(200, 59);
-            this.ipServerBox.TabIndex = 25;
-            this.ipServerBox.TabStop = false;
-            this.ipServerBox.Text = "IP Server";
             // 
             // HQIPBox
             // 
@@ -367,6 +350,26 @@
             this.label7.TabIndex = 23;
             this.label7.Text = "-";
             // 
+            // branchIDBox
+            // 
+            this.branchIDBox.Controls.Add(this.BranchIDTextbox);
+            this.branchIDBox.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.branchIDBox.Location = new System.Drawing.Point(9, 86);
+            this.branchIDBox.Name = "branchIDBox";
+            this.branchIDBox.Size = new System.Drawing.Size(200, 54);
+            this.branchIDBox.TabIndex = 25;
+            this.branchIDBox.TabStop = false;
+            this.branchIDBox.Text = "Branch ID";
+            // 
+            // BranchIDTextbox
+            // 
+            this.BranchIDTextbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.BranchIDTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BranchIDTextbox.Location = new System.Drawing.Point(6, 19);
+            this.BranchIDTextbox.Name = "BranchIDTextbox";
+            this.BranchIDTextbox.Size = new System.Drawing.Size(188, 27);
+            this.BranchIDTextbox.TabIndex = 2;
+            // 
             // SetApplicationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -388,15 +391,15 @@
             this.Load += new System.EventHandler(this.setDatabaseLocationForm_Load);
             this.ConModeBox.ResumeLayout(false);
             this.ConModeBox.PerformLayout();
+            this.ipServerBox.ResumeLayout(false);
+            this.ipServerBox.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.AppModeBox.ResumeLayout(false);
-            this.branchIDBox.ResumeLayout(false);
-            this.branchIDBox.PerformLayout();
-            this.ipServerBox.ResumeLayout(false);
-            this.ipServerBox.PerformLayout();
             this.HQIPBox.ResumeLayout(false);
             this.HQIPBox.PerformLayout();
+            this.branchIDBox.ResumeLayout(false);
+            this.branchIDBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

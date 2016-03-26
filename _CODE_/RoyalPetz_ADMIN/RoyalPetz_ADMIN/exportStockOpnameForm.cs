@@ -19,39 +19,13 @@ namespace RoyalPetz_ADMIN
     {
         private globalUtilities gutil = new globalUtilities();
         private Data_Access DS = new Data_Access();
-        private CultureInfo culture = new CultureInfo("id-ID");        
+        private CultureInfo culture = new CultureInfo("id-ID");
+
+        string appPath = Application.StartupPath;
 
         public exportStockOpnameForm()
         {
             InitializeComponent();
-        }
-
-        private void exportToCSV_Click(object sender, EventArgs e)
-        {
-            //if (exportToCSV.Checked)
-            //{
-            //    exportToCSV.Checked = false;
-            //    //exportToExcel.Checked = true;
-            //}
-            //else
-            //{
-            //    exportToCSV.Checked = true;
-            // //   exportToExcel.Checked = false;
-            //}
-        }
-
-        private void exportToExcel_Click(object sender, EventArgs e)
-        {
-            //if (exportToExcel.Checked)
-            //{
-            //    exportToCSV.Checked = true;
-            //    exportToExcel.Checked = false;
-            //}
-            //else
-            //{
-            //    exportToCSV.Checked = false;
-            //    exportToExcel.Checked = true;
-            //}
         }
 
         private bool saveToCSV()
@@ -67,25 +41,30 @@ namespace RoyalPetz_ADMIN
 
             fileName = "EXPORT_" + localDate + ".csv";
 
+            localDate = String.Format(culture, "{0:dd-MMM-yyyy}", DateTime.Now);
+
             sqlCommand = "SELECT * FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 ORDER BY ID";
 
             using (rdr = DS.getData(sqlCommand))
             {
                 if (rdr.HasRows)
                 {
-                    if (!File.Exists(fileName)) 
-                        sw = File.CreateText(fileName);
+                    if (!File.Exists(fileName))
+                        sw = File.CreateText(appPath + "\\" + fileName);
                     else
                     { 
                         File.Delete(fileName);
-                        sw = File.CreateText(fileName);
+                        sw = File.CreateText(appPath + "\\" + fileName);
                     }
 
-                    line = "KODE PRODUK, BARCODE PRODUK, NAMA PRODUK, QTY PRODUK, QTY RIIL";
+                    sw.WriteLine(localDate);
+
+                    line = "KODE PRODUK, BARCODE PRODUK, NAMA PRODUK, QTY PRODUK, QTY RIIL, DESCRIPTION";
                     sw.WriteLine(line);
+
                     while (rdr.Read())
                     {
-                        line = rdr.GetString("PRODUCT_ID") + "," + rdr.GetString("PRODUCT_BARCODE") + "," + rdr.GetString("PRODUCT_NAME") + "," + rdr.GetString("PRODUCT_STOCK_QTY") + ",0";
+                        line = rdr.GetString("PRODUCT_ID") + "," + rdr.GetString("PRODUCT_BARCODE") + "," + rdr.GetString("PRODUCT_NAME") + "," + rdr.GetString("PRODUCT_STOCK_QTY") + ",0,";
                         sw.WriteLine(line);
                     }
 
@@ -98,16 +77,15 @@ namespace RoyalPetz_ADMIN
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            //saveFileDialog1.ShowDialog();
             if (saveToCSV())
             {
-                //gutil.showSuccess(gutil.INS);
                 MessageBox.Show("SUCCESS");
             }        
         }
 
         private void exportStockOpnameForm_Load(object sender, EventArgs e)
         {
+            newButton.Focus();
             gutil.reArrangeTabOrder(this);
         }
     }

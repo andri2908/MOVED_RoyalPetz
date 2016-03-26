@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.IO;
 
 namespace RoyalPetz_ADMIN
 {
@@ -16,26 +17,90 @@ namespace RoyalPetz_ADMIN
         private MySqlTransaction myTrans;
         private MySqlCommand myTransCommand;
         public bool connectToLive = true;
-
-        private string myConnectionString = "server=127.0.0.1;uid=SYS_POS_ADMIN;pwd=pass123;database=SYS_POS;";
+        private static string configFileConnectionString = "";
+        //private string myConnectionString = "server=127.0.0.1;uid=SYS_POS_ADMIN;pwd=pass123;database=SYS_POS;";
+        private string configFile = "pos.cfg";
 
         private MySqlConnection transConnection;
+
+        public bool setIPServer()
+        {
+            string s = "";
+
+            if (configFileConnectionString.Length <= 0)
+            {
+                if (File.Exists(configFile))
+                {
+                    using (StreamReader sr = File.OpenText(configFile))
+                    {
+                        if ((s = sr.ReadLine()) != null)
+                        {
+                            configFileConnectionString = "server=" + s + ";uid=SYS_POS_ADMIN;pwd=pass123;database=SYS_POS;";
+                        }
+                    }
+                    return true;
+                }
+            }
+            else
+                return true;
+            
+            return false;
+        }
+
+        public void setConfigFileConnectionString(string ipAddress)
+        {            
+            configFileConnectionString = "server=" + ipAddress + ";uid=SYS_POS_ADMIN;pwd=pass123;database=SYS_POS;";
+        }
+
+        public bool testConfigConnectionString(ref MySqlException returnEx)
+        {
+            try
+            {
+                conn.ConnectionString = configFileConnectionString;
+                conn.Open();
+
+                return true;
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                returnEx = ex;
+                return false;
+            }
+        }
 
         public MySqlConnection getDSConn()
         {
             return conn;
         }
 
-        public bool mySqlConnect()
-        {     
-          //Properties.Settings.Default.connectionString;
-            
+        public bool firstMySqlConnect()
+        {
             try
             {
-                conn.ConnectionString = myConnectionString;
-                conn.Open();
+                if (setIPServer())
+                {
+                    conn.ConnectionString = configFileConnectionString;//myConnectionString;
+                    conn.Open();
 
-                return true;
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                return false;
+            }
+        }
+
+        public bool mySqlConnect()
+        {     
+            try
+            {
+                    conn.ConnectionString = configFileConnectionString;//myConnectionString;
+                    conn.Open();
+
+                    return true;
             }
             catch (MySql.Data.MySqlClient.MySqlException ex)
             {
@@ -147,7 +212,9 @@ namespace RoyalPetz_ADMIN
         {
             //myConnectionString = Properties.Settings.Default.connectionString;
 
-            transConnection = new MySqlConnection(myConnectionString);
+            //transConnection = new MySqlConnection(myConnectionString);
+            //setConfigFileConnectionFromTable();
+            transConnection = new MySqlConnection(configFileConnectionString);
             transConnection.Open();
 
             myTransCommand = transConnection.CreateCommand();

@@ -46,7 +46,6 @@
             this.exportToCSV.TabStop = true;
             this.exportToCSV.Text = "Export to CSV";
             this.exportToCSV.UseVisualStyleBackColor = true;
-            this.exportToCSV.Click += new System.EventHandler(this.exportToCSV_Click);
             // 
             // panel1
             // 
@@ -82,7 +81,7 @@
             this.Name = "exportStockOpnameForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "EXPORT STOCK OPNAME";
+            this.Text = "EXPORT DATA";
             this.Load += new System.EventHandler(this.exportStockOpnameForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -64,6 +64,7 @@ namespace RoyalPetz_ADMIN
         private const string BG_IMAGE = "bg.jpg";
         private DateTime localDate = DateTime.Now;
         private CultureInfo culture = new CultureInfo("id-ID");
+        string appPath = Application.StartupPath;
 
         private Data_Access DS = new Data_Access();
 
@@ -105,9 +106,9 @@ namespace RoyalPetz_ADMIN
         
         private void adminForm_Load(object sender, EventArgs e)
         {
-            if (!System.IO.Directory.Exists("PRODUCT_PHOTO"))
+            if (!System.IO.Directory.Exists(appPath + "\\PRODUCT_PHOTO"))
             {
-                System.IO.Directory.CreateDirectory("PRODUCT_PHOTO");
+                System.IO.Directory.CreateDirectory(appPath + "\\PRODUCT_PHOTO");
             }
 
             updateLabel();
@@ -180,7 +181,7 @@ namespace RoyalPetz_ADMIN
 
         private void infoFolderDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            setDatabaseLocationForm displayedForm = new setDatabaseLocationForm(); 
+            SetApplicationForm displayedForm = new SetApplicationForm(); 
             displayedForm.ShowDialog(this);
         }
 
@@ -367,10 +368,15 @@ namespace RoyalPetz_ADMIN
                 try
                 {
                     fileName = openFileDialog1.FileName;
-                    this.BackgroundImageLayout = ImageLayout.Stretch;
-                    this.BackgroundImage = Image.FromFile(fileName);
 
-                    System.IO.File.Copy(openFileDialog1.FileName, "bg.jpg");
+                    this.BackgroundImage.Dispose();
+                    
+                    System.IO.File.Delete(appPath + "\\bg.jpg");
+                    System.IO.File.Copy(openFileDialog1.FileName, appPath + "\\bg.jpg");
+
+                    this.BackgroundImage = Image.FromFile(BG_IMAGE);
+                    this.BackgroundImageLayout = ImageLayout.Stretch;
+
                 }
                 catch (Exception ex)
                 {

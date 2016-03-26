@@ -167,10 +167,14 @@ namespace RoyalPetz_ADMIN
         {
             gutil.reArrangeTabOrder(this);
 
-            if (!DS.mySqlConnect()) //one time checked at load application
+            while (!DS.firstMySqlConnect()) //one time checked at load application
             {
                 gutil.showError("DB fail to connect!");
-                this.Close();
+
+                createConfigFileForm displayedForm = new createConfigFileForm();
+                displayedForm.ShowDialog();
+
+                //this.Close();
             }
         }
         

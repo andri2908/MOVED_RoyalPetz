@@ -743,11 +743,11 @@ namespace RoyalPetz_ADMIN
                         
                         break;
 
-                    //case globalConstants.REJECT_PRODUCT_MUTATION:
-                    //    // UPDATE REQUEST ORDER HEADER TABLE
-                    //    sqlCommand = "UPDATE REQUEST_ORDER_HEADER SET RO_ACTIVE = 0 WHERE RO_INVOICE = '" + roInvoice + "'";
-                    //    DS.executeNonQueryCommand(sqlCommand);
-                    //    break;
+                    case globalConstants.REJECT_PRODUCT_MUTATION:
+                        // UPDATE REQUEST ORDER HEADER TABLE
+                        sqlCommand = "UPDATE REQUEST_ORDER_HEADER SET RO_ACTIVE = 0 WHERE RO_INVOICE = '" + roInvoice + "'";
+                        DS.executeNonQueryCommand(sqlCommand);
+                        break;
                 }
 
                 DS.commit();
@@ -869,7 +869,7 @@ namespace RoyalPetz_ADMIN
             {
                 totalApproved.Text = "Rp. 0";
 
-                MessageBox.Show("SUCCESS");
+                MessageBox.Show("PERMINTAAN DITOLAK, SEGERA HUBUNGI CABANG");
 
                 noMutasiTextBox.ReadOnly = true;
                 PMDateTimePicker.Enabled = false;

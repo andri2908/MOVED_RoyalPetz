@@ -31,7 +31,7 @@ namespace RoyalPetz_ADMIN
 
         private void loadNoFaktur()
         {
-            noFakturValue = DS.getDataSingleValue("SELECT IFNULL(NO_FAKTUR, '') FROM SYS_CONFIG").ToString();
+            noFakturValue = DS.getDataSingleValue("SELECT IFNULL(NO_FAKTUR, '') FROM SYS_CONFIG WHERE ID = 1").ToString();
             noFakturTextBox.Text = noFakturValue;
         }
 
@@ -64,7 +64,7 @@ namespace RoyalPetz_ADMIN
             {
                 DS.mySqlConnect();
 
-                sqlCommand = "UPDATE SYS_CONFIG SET NO_FAKTUR = '" + noFakturValue + "'";
+                sqlCommand = "UPDATE SYS_CONFIG SET NO_FAKTUR = '" + noFakturValue + "' WHERE ID = 1";
 
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;

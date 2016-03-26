@@ -281,8 +281,8 @@ namespace RoyalPetz_ADMIN
                 switch (mode)
                 {
                     case 1:
-                        sqlCommand = "INSERT INTO SYS_CONFIG (NO_FAKTUR, BRANCH_ID, HQ_IP4) " +
-                                            "VALUES ('" + branchID + "', '" + HQIP + "')";
+                        sqlCommand = "INSERT INTO SYS_CONFIG (ID, NO_FAKTUR, BRANCH_ID, HQ_IP4) " +
+                                            "VALUES (2, '', '" + branchID + "', '" + HQIP + "')";
                         options = gutil.INS;
                         break;
                     case 2:
@@ -382,5 +382,24 @@ namespace RoyalPetz_ADMIN
             ip3Textbox.Visible = true;
             ip4Textbox.Visible = true;
         }
+
+        private void ip1Textbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '.')
+                ip2Textbox.Focus();
+        }
+
+        private void ip2Textbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '.')
+                ip3Textbox.Focus();
+        }
+
+        private void ip3Textbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '.')
+                ip4Textbox.Focus();
+        }
+
     }
 }

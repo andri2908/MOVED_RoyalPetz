@@ -59,7 +59,7 @@ namespace RoyalPetz_ADMIN
                         invoiceDateTextBox.Text = String.Format(culture, "{0:dd MMM yyyy}", salesDate);
                         globalTotalValue = rdr.GetDouble("SALES_TOTAL");
                     }
-                }
+               }
             }
         }
 
@@ -67,7 +67,8 @@ namespace RoyalPetz_ADMIN
         {
             string result = "";
 
-            result = DS.getDataSingleValue("SELECT CUSTOMER_FULL_NAME FROM MASTER_CUSTOMER WHERE CUSTOMER_ID = " + selectedCustomerID).ToString();
+            if (selectedCustomerID != 0)
+                result = DS.getDataSingleValue("SELECT IFNULL(CUSTOMER_FULL_NAME, ' ') FROM MASTER_CUSTOMER WHERE CUSTOMER_ID = " + selectedCustomerID).ToString();
 
             return result;
         }

@@ -20,7 +20,9 @@ namespace RoyalPetz_ADMIN
         public static int objCounter = 1;
         private DateTime localDate = DateTime.Now;
         private double globalTotalValue = 0;
+        private double discValue = 0;
         private int selectedPelangganID = 0;
+        private int selectedPaymentMethod = 0;
         private bool isLoading = false;
 
         private Data_Access DS = new Data_Access();
@@ -333,6 +335,12 @@ namespace RoyalPetz_ADMIN
                 return false;
             }
 
+            if (cashierDataGridView.Rows.Count <= 0)
+            {
+                errorLabel.Text = "TIDAK ADA BARANG";
+                return false;
+            }
+
             for (int i = 0; i < cashierDataGridView.Rows.Count; i++ )
             {
                 if (
@@ -345,6 +353,11 @@ namespace RoyalPetz_ADMIN
                 }
             }
 
+            if (selectedPelangganID == 0)
+                if (DialogResult.No == MessageBox.Show("PELANGGAN KOSONG, LANJUTKAN ?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    return false;
+
+            errorLabel.Text = "";
             return true;
         }
 
@@ -354,9 +367,6 @@ namespace RoyalPetz_ADMIN
             string sqlCommand = "";
 
             string salesInvoice = "0";
-            bool newID = false;
-            string salesInvPrefix = "";
-            int currentCounter = 0;
             
             string SODateTime = "";
             DateTime SODueDateTimeValue;
@@ -427,15 +437,12 @@ namespace RoyalPetz_ADMIN
                     }
                 }
 
-                if (salesPaid == 0)
-                {
-                    // SAVE TO CREDIT TABLE
-                    sqlCommand = "INSERT INTO CREDIT (SALES_INVOICE, CREDIT_DUE_DATE, CREDIT_NOMINAL, CREDIT_PAID) VALUES " +
-                                        "('" + salesInvoice + "', STR_TO_DATE('" + SODueDateTime + "', '%d-%m-%Y'), " + globalTotalValue + ", 0)";
+                // SAVE TO CREDIT TABLE
+                sqlCommand = "INSERT INTO CREDIT (SALES_INVOICE, CREDIT_DUE_DATE, CREDIT_NOMINAL, CREDIT_PAID) VALUES " +
+                                    "('" + salesInvoice + "', STR_TO_DATE('" + SODueDateTime + "', '%d-%m-%Y'), " + globalTotalValue + ", " + salesPaid + ")";
 
-                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                        throw internalEX;
-                }
+                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                    throw internalEX;
 
                 DS.commit();
                 result = true;
@@ -479,25 +486,39 @@ namespace RoyalPetz_ADMIN
         {
             if (DialogResult.Yes == MessageBox.Show("SAVE AND PRINT OUT ?", "WARNING", MessageBoxButtons.YesNo,MessageBoxIcon.Warning))
             {
+                totalPenjualanTextBox.Focus();
                 if (saveData())
                 {
                     gutil.showSuccess(gutil.INS);
 
                     isLoading = true;
                     
-                    while (cashierDataGridView.Rows.Count > 0 )
-                        cashierDataGridView.Rows.Remove(cashierDataGridView.Rows[0]);
-
+                    //while (cashierDataGridView.Rows.Count > 0 )
+                    //    cashierDataGridView.Rows.Remove(cashierDataGridView.Rows[0]);
+                    cashierDataGridView.Rows.Clear();
                     isLoading = false;
 
                     salesQty.Clear();
                     disc1.Clear();
                     disc2.Clear();
                     discRP.Clear();
+                    selectedPelangganID = 0;
+                    globalTotalValue = 0;
+                    discValue = 0;
+                    totalLabel.Text = "Rp. 0";
 
                     gutil.ResetAllControls(this);
                 }
             }
+        }
+
+        private string getNoFaktur()
+        {
+            string rsult = "";
+
+            rsult = DS.getDataSingleValue("SELECT IFNULL(NO_FAKTUR, '') FROM SYS_CONFIG WHERE ID = 1").ToString();
+
+            return rsult;
         }
 
         private string getSalesInvoiceID()
@@ -508,14 +529,21 @@ namespace RoyalPetz_ADMIN
             double maxSalesInvoiceValue = 0;
             string salesInvPrefix;
             string sqlCommand = "";
-           
-            salesInvPrefix= String.Format(culture, "{0:yyyyMMdd}", localDate);
 
-            sqlCommand = "SELECT IFNULL(MAX(SALES_INVOICE),'123456780') AS SALES_INVOICE FROM SALES_HEADER WHERE SALES_INVOICE LIKE '" + salesInvPrefix + "%'";
+            salesInvPrefix = getNoFaktur() + "-";//String.Format(culture, "{0:yyyyMMdd}", localDate);
+
+            sqlCommand = "SELECT IFNULL(MAX(SALES_INVOICE),'') AS SALES_INVOICE FROM SALES_HEADER WHERE SALES_INVOICE LIKE '" + salesInvPrefix + "%'";
 
             maxSalesInvoice = DS.getDataSingleValue(sqlCommand).ToString();
-            maxSalesInvoice = maxSalesInvoice.Substring(8);
-            maxSalesInvoiceValue = Convert.ToInt32(maxSalesInvoice);
+            if (maxSalesInvoice.Length > salesInvPrefix.Length)
+            {
+                maxSalesInvoice = maxSalesInvoice.Substring(salesInvPrefix.Length);
+                maxSalesInvoiceValue = Convert.ToInt32(maxSalesInvoice);
+            }
+            else
+            {
+                maxSalesInvoiceValue = 0;
+            }
 
             if (maxSalesInvoiceValue > 0)
             {
@@ -527,8 +555,8 @@ namespace RoyalPetz_ADMIN
                 maxSalesInvoice = "1";
             }
 
-            while (maxSalesInvoice.Length < 10)
-                maxSalesInvoice = "0" + maxSalesInvoice;
+            //while (maxSalesInvoice.Length < 10)
+            //    maxSalesInvoice = "0" + maxSalesInvoice;
 
             salesInvoice = salesInvPrefix + maxSalesInvoice;
 
@@ -754,7 +782,7 @@ namespace RoyalPetz_ADMIN
             {
                 paymentComboBox.Visible = false;
                 tempoMaskedTextBox.Visible = true;
-                
+                bayarTextBox.Enabled = false;  
                 labelCaraBayar.Text = "Tempo            :";
             }
         }
@@ -907,8 +935,6 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-
-
         private void calculateTotal()
         {
             double total = 0;
@@ -922,7 +948,7 @@ namespace RoyalPetz_ADMIN
             globalTotalValue = total;
             totalLabel.Text = total.ToString("C", culture);
 
-            totalPenjualanTextBox.Text = total.ToString();
+            totalPenjualanTextBox.Text = total.ToString("C", culture);
         }
 
         private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
@@ -935,11 +961,17 @@ namespace RoyalPetz_ADMIN
             double totalAfterDisc = 0;
 
             if (discJualMaskedTextBox.Text.Length > 0)
+            {
                 totalAfterDisc = globalTotalValue - Convert.ToDouble(discJualMaskedTextBox.Text);
+                discValue = Convert.ToDouble(discJualMaskedTextBox.Text);
+            }
             else
+            { 
                 totalAfterDisc = globalTotalValue;
+                discValue = 0;
+            }
 
-            totalAfterDiscTextBox.Text = totalAfterDisc.ToString();
+            totalAfterDiscTextBox.Text = totalAfterDisc.ToString("C", culture);
         }
 
         private void customerComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -958,7 +990,33 @@ namespace RoyalPetz_ADMIN
                 tempoMaskedTextBox.Visible = false;
                 labelCaraBayar.Text = "Cara Bayar       :";
                 paymentComboBox.Visible = true;
+                paymentComboBox.SelectedIndex = 0;
+                paymentComboBox.Text = paymentComboBox.Items[0].ToString();
+                bayarTextBox.Enabled = true;
             }
+        }
+
+        private void bayarTextBox_TextChanged(object sender, EventArgs e)
+        {
+            double bayarAmount = 0;
+            double sisaBayar = 0;
+            double totalAfterDisc = 0;
+            if (bayarTextBox.Text.Length > 0)
+            {
+                bayarAmount = Convert.ToDouble(bayarTextBox.Text);
+                totalAfterDisc = globalTotalValue - discValue;
+                if (bayarAmount > totalAfterDisc)
+                    sisaBayar = bayarAmount - totalAfterDisc;
+                else
+                    sisaBayar = 0;
+
+                uangKembaliTextBox.Text = sisaBayar.ToString("C", culture);
+            }
+        }
+
+        private void paymentComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedPaymentMethod = paymentComboBox.SelectedIndex;
         }
 
     }
