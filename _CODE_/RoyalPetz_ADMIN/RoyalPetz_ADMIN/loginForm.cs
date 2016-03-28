@@ -167,7 +167,7 @@ namespace RoyalPetz_ADMIN
         {
             gutil.reArrangeTabOrder(this);
 
-            while (!DS.firstMySqlConnect()) //one time checked at load application
+            if (!DS.firstMySqlConnect()) //one time checked at load application
             {
                 gutil.showError("DB fail to connect!");
 

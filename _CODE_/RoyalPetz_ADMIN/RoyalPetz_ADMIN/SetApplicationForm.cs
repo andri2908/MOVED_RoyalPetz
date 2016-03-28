@@ -107,19 +107,19 @@ namespace RoyalPetz_ADMIN
                         tmp = tmp.Substring(pos + 1);
                         ip4 = tmp;
                         HQIP4.Text = ip4;
-                        if (String.IsNullOrEmpty(rdr.GetString("NAME")))
+                        if (!String.IsNullOrEmpty(rdr.GetString("NAME")))
                         {
                             NamaTokoTextbox.Text = rdr.GetString("NAME");
                         }
-                        if (String.IsNullOrEmpty(rdr.GetString("ADDRESS")))
+                        if (!String.IsNullOrEmpty(rdr.GetString("ADDRESS")))
                         {
                             AlamatTextbox.Text = rdr.GetString("ADDRESS");
                         }
-                        if (String.IsNullOrEmpty(rdr.GetString("PHONE")))
+                        if (!String.IsNullOrEmpty(rdr.GetString("PHONE")))
                         {
                             TeleponTextbox.Text = rdr.GetString("PHONE");
                         }
-                        if (String.IsNullOrEmpty(rdr.GetString("EMAIL")))
+                        if (!String.IsNullOrEmpty(rdr.GetString("EMAIL")))
                         {
                             EmailTextbox.Text = rdr.GetString("EMAIL");
                         }                                  

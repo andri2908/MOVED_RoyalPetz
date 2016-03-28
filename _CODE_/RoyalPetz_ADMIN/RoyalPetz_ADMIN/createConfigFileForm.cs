@@ -19,6 +19,7 @@ namespace RoyalPetz_ADMIN
         private Data_Access DS = new Data_Access();
         private globalUtilities gUtil = new globalUtilities();
         private string appPath = Application.StartupPath;
+        private bool configFileSaved = false;
 
         private string ipAddress = "";
 
@@ -32,7 +33,11 @@ namespace RoyalPetz_ADMIN
             bool result = false;
             MySqlException internalEX = null;
 
-            ipAddress = gUtil.allTrim(IPMasked_1.Text) + "." + gUtil.allTrim(IPMasked_2.Text) + "." + gUtil.allTrim(IPMasked_3.Text) + "." + gUtil.allTrim(IPMasked_4.Text);
+            if (localhostRadioButton.Checked)
+                ipAddress = "localhost";
+            else
+                ipAddress = gUtil.allTrim(ip1Textbox.Text) + "." + gUtil.allTrim(ip2Textbox.Text) + "." + gUtil.allTrim(ip3Textbox.Text) + "." + gUtil.allTrim(ip4Textbox.Text);
+
             DS.setConfigFileConnectionString(ipAddress);
 
             result = DS.testConfigConnectionString(ref internalEX);
@@ -82,6 +87,7 @@ namespace RoyalPetz_ADMIN
             if (testConnection(true))
             {
                 saveConfigFile();
+                configFileSaved = true;
             }
 
             this.Close();
@@ -90,19 +96,43 @@ namespace RoyalPetz_ADMIN
         private void IPMasked_1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == '.')
-                IPMasked_2.Focus();
+                ip2Textbox.Focus();
         }
 
         private void IPMasked_2_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == '.')
-                IPMasked_3.Focus();
+                ip3Textbox.Focus();
         }
 
         private void IPMasked_3_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == '.')
-                IPMasked_4.Focus();
+                ip4Textbox.Focus();
+        }
+
+        private void createConfigFileForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (!configFileSaved)
+                Application.Exit();
+        }
+
+        private void serverIPRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (serverIPRadioButton.Checked)
+            {
+                ip1Textbox.Visible = true;
+                ip2Textbox.Visible = true;
+                ip3Textbox.Visible = true;
+                ip4Textbox.Visible = true;
+            }
+            else
+            {
+                ip1Textbox.Visible = false;
+                ip2Textbox.Visible = false;
+                ip3Textbox.Visible = false;
+                ip4Textbox.Visible = false;
+            }
         }
     }
 }

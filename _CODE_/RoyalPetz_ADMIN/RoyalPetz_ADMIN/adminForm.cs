@@ -387,7 +387,7 @@ namespace RoyalPetz_ADMIN
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            logOutToolStripMenuItem.PerformClick();
+            MENU_logOut.PerformClick();
             Application.Exit();
         }
 
@@ -567,52 +567,52 @@ namespace RoyalPetz_ADMIN
 
         private void fileToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
         {
-            fileToolStripMenuItem.ForeColor = Color.Black;
+            MAINMENU_manajemenSistem.ForeColor = Color.Black;
         }
 
         private void fileToolStripMenuItem_DropDownClosed(object sender, EventArgs e)
         {
-            fileToolStripMenuItem.ForeColor = Color.FloralWhite;
+            MAINMENU_manajemenSistem.ForeColor = Color.FloralWhite;
         }
 
         private void toolStripMenuItem1_DropDownClosed(object sender, EventArgs e)
         {
-            toolStripMenuItem1.ForeColor = Color.FloralWhite;
+            MAINMENU_gudang.ForeColor = Color.FloralWhite;
         }
 
         private void toolStripMenuItem1_DropDownOpened(object sender, EventArgs e)
         {
-            toolStripMenuItem1.ForeColor = Color.Black;
+            MAINMENU_gudang.ForeColor = Color.Black;
         }
 
         private void pembelianToolStripMenuItem_DropDownClosed(object sender, EventArgs e)
         {
-            pembelianToolStripMenuItem.ForeColor = Color.FloralWhite;
+            MAINMENU_pembelian.ForeColor = Color.FloralWhite;
         }
 
         private void pembelianToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
         {
-            pembelianToolStripMenuItem.ForeColor = Color.Black;
+            MAINMENU_pembelian.ForeColor = Color.Black;
         }
 
         private void penjualanToolStripMenuItem_DropDownClosed(object sender, EventArgs e)
         {
-            penjualanToolStripMenuItem.ForeColor = Color.FloralWhite;
+            MAINMENU_penjualan.ForeColor = Color.FloralWhite;
         }
 
         private void penjualanToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
         {
-            penjualanToolStripMenuItem.ForeColor = Color.Black;
+            MAINMENU_penjualan.ForeColor = Color.Black;
         }
 
         private void administrasiToolStripMenuItem_DropDownClosed(object sender, EventArgs e)
         {
-            administrasiToolStripMenuItem.ForeColor = Color.FloralWhite;
+            MAINMENU_KEUANGAN.ForeColor = Color.FloralWhite;
         }
 
         private void administrasiToolStripMenuItem_DropDownOpened(object sender, EventArgs e)
         {
-            administrasiToolStripMenuItem.ForeColor = Color.Black;
+            MAINMENU_KEUANGAN.ForeColor = Color.Black;
         }
 
         private void toolStripMenuItem25_DropDownClosed(object sender, EventArgs e)
@@ -669,11 +669,13 @@ namespace RoyalPetz_ADMIN
             importDataCSVForm displayedForm = new importDataCSVForm();
             displayedForm.ShowDialog(this);
         }
+
         private void toolStripMenuItem11_Click_2(object sender, EventArgs e)
         {
             dataMutasiBarangForm displayedForm = new dataMutasiBarangForm(globalConstants.PENERIMAAN_BARANG);
             displayedForm.ShowDialog(this);
         }
+
         private void toolStripMenuItem12_Click_2(object sender, EventArgs e)
         {
             dataPOForm displayedForm = new dataPOForm(globalConstants.PENERIMAAN_BARANG_DARI_PO);

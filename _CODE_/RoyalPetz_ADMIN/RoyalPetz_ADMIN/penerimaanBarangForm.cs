@@ -86,10 +86,10 @@ namespace RoyalPetz_ADMIN
                                 invoiceDtPicker.Value = rdr.GetDateTime("PM_DATETIME");
                                 selectedFromID = rdr.GetInt32("BRANCH_ID_FROM");
                                 selectedToID = rdr.GetInt32("BRANCH_ID_TO");
-                                labelTotalValue.Text = "Rp. " + rdr.GetString("PM_TOTAL");
-                                labelAcceptValue.Text = "Rp. " + rdr.GetString("PM_TOTAL");
 
                                 globalTotalValue = rdr.GetDouble("PM_TOTAL");
+                                labelTotalValue.Text = globalTotalValue.ToString("C", culture);
+                                labelAcceptValue.Text = globalTotalValue.ToString("C", culture);
                             }
                         }
                     }
@@ -107,10 +107,10 @@ namespace RoyalPetz_ADMIN
                                 invoiceDtPicker.Value = rdr.GetDateTime("PURCHASE_DATETIME");
                                 selectedFromID = rdr.GetInt32("SUPPLIER_ID");
                                 //selectedToID = rdr.GetInt32("BRANCH_ID_TO");
-                                labelTotalValue.Text = "Rp. " + rdr.GetString("PURCHASE_TOTAL");
-                                labelAcceptValue.Text = "Rp. " + rdr.GetString("PURCHASE_TOTAL");
-
                                 globalTotalValue = rdr.GetDouble("PURCHASE_TOTAL");
+
+                                labelTotalValue.Text = globalTotalValue.ToString("C", culture);
+                                labelAcceptValue.Text = globalTotalValue.ToString("C", culture);
                             }
                         }
                     }
@@ -165,7 +165,8 @@ namespace RoyalPetz_ADMIN
         {
             string result = "";
 
-            result = DS.getDataSingleValue("SELECT BRANCH_NAME FROM MASTER_BRANCH WHERE BRANCH_ID = " + branchID).ToString();
+            if (branchID != 0)
+                result = DS.getDataSingleValue("SELECT BRANCH_NAME FROM MASTER_BRANCH WHERE BRANCH_ID = " + branchID).ToString();
 
             return result;
         }
@@ -174,7 +175,8 @@ namespace RoyalPetz_ADMIN
         {
             string result = "";
 
-            result = DS.getDataSingleValue("SELECT SUPPLIER_FULL_NAME FROM MASTER_SUPPLIER WHERE SUPPLIER_ID = " + suppID).ToString();
+            if (suppID != 0)
+                result = DS.getDataSingleValue("SELECT SUPPLIER_FULL_NAME FROM MASTER_SUPPLIER WHERE SUPPLIER_ID = " + suppID).ToString();
 
             return result;
         }
@@ -211,7 +213,8 @@ namespace RoyalPetz_ADMIN
 
         private void detailGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            if ((detailGridView.CurrentCell.ColumnIndex == 2 || detailGridView.CurrentCell.ColumnIndex == 3) && e.Control is TextBox)
+            //if ((detailGridView.CurrentCell.ColumnIndex == 2 || detailGridView.CurrentCell.ColumnIndex == 3) && e.Control is TextBox)
+            if ((detailGridView.CurrentCell.OwningColumn.Name == "hpp" || detailGridView.CurrentCell.OwningColumn.Name == "qtyReceived") && e.Control is TextBox)
             {
                 TextBox textBox = e.Control as TextBox;
                 textBox.TextChanged += TextBox_TextChanged;
@@ -329,11 +332,31 @@ namespace RoyalPetz_ADMIN
 
         private bool dataValidated()
         {
+            bool dataExist = false;
+
             if (prInvoiceTextBox.Text.Length <=0)
             {
                 errorLabel.Text = "NO PENERIMAAN TIDAK BOLEH KOSONG";
                 return false;
             }
+
+            for (int i = 0; i < detailGridView.Rows.Count && !dataExist; i ++)
+            {
+                if (null != detailGridView.Rows[i].Cells["productID"].Value)
+                    dataExist = true;
+            }
+            if (!dataExist)
+            {
+                errorLabel.Text = "TIDAK ADA PRODUCT YANG DITERIMA";
+                return false;
+            }
+
+            if (globalTotalValue <= 0)
+            {
+                errorLabel.Text = "NILAI BARANG YANG DITERIMA TIDAK BOLEH NOL";
+                return false;
+            }
+
             return true;
         }
 

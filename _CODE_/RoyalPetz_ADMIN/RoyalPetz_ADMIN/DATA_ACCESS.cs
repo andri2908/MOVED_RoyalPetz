@@ -18,6 +18,7 @@ namespace RoyalPetz_ADMIN
         private MySqlCommand myTransCommand;
         public bool connectToLive = true;
         private static string configFileConnectionString = "";
+        private static string ipServer = "";
         //private string myConnectionString = "server=127.0.0.1;uid=SYS_POS_ADMIN;pwd=pass123;database=SYS_POS;";
         private string configFile = "pos.cfg";
 
@@ -36,6 +37,7 @@ namespace RoyalPetz_ADMIN
                         if ((s = sr.ReadLine()) != null)
                         {
                             configFileConnectionString = "server=" + s + ";uid=SYS_POS_ADMIN;pwd=pass123;database=SYS_POS;";
+                            ipServer = s;
                         }
                     }
                     return true;
@@ -47,9 +49,15 @@ namespace RoyalPetz_ADMIN
             return false;
         }
 
+        public string getIPServer()
+        {
+            return ipServer;
+        }
+
         public void setConfigFileConnectionString(string ipAddress)
         {            
             configFileConnectionString = "server=" + ipAddress + ";uid=SYS_POS_ADMIN;pwd=pass123;database=SYS_POS;";
+            ipServer = ipAddress;
         }
 
         public bool testConfigConnectionString(ref MySqlException returnEx)
