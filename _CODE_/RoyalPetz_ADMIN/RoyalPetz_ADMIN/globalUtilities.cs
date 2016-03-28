@@ -137,5 +137,28 @@ namespace RoyalPetz_ADMIN
 
             DialogResult res1 = MessageBox.Show(successmessage, successcaption, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+        public void showError()
+        {
+            String errorcaption = "IO Error Message";
+            /*if (options == 1)
+            {
+                errorcaption = "POS Error Message";
+            }
+            else
+            {
+                errorcaption = "IO Error Message";
+            }*/
+            String errormessage = "File Read/Write Error Message";
+            /*if (options == 1)
+            {
+                errormessage = "POS Error Message";
+            }
+            else
+            {
+                errormessage = "File Read/Write Error Message";
+            }*/
+
+            DialogResult res1 = MessageBox.Show(errormessage, errorcaption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

@@ -58,7 +58,7 @@ namespace RoyalPetz_ADMIN
             {
                 conn.ConnectionString = configFileConnectionString;
                 conn.Open();
-
+                conn.Close();
                 return true;
             }
             catch (MySql.Data.MySqlClient.MySqlException ex)

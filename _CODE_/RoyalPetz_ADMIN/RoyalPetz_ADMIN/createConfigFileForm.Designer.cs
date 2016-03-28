@@ -58,13 +58,13 @@
             // IPMasked_1
             // 
             this.IPMasked_1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.IPMasked_1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.IPMasked_1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IPMasked_1.Location = new System.Drawing.Point(142, 43);
             this.IPMasked_1.Mask = "000";
             this.IPMasked_1.Name = "IPMasked_1";
             this.IPMasked_1.Size = new System.Drawing.Size(38, 27);
             this.IPMasked_1.TabIndex = 65;
-            this.IPMasked_1.UseWaitCursor = true;
             this.IPMasked_1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IPMasked_1_KeyPress);
             // 
             // IPMasked_2
@@ -76,7 +76,6 @@
             this.IPMasked_2.Name = "IPMasked_2";
             this.IPMasked_2.Size = new System.Drawing.Size(38, 27);
             this.IPMasked_2.TabIndex = 66;
-            this.IPMasked_2.UseWaitCursor = true;
             this.IPMasked_2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IPMasked_2_KeyPress);
             // 
             // IPMasked_3
@@ -88,19 +87,18 @@
             this.IPMasked_3.Name = "IPMasked_3";
             this.IPMasked_3.Size = new System.Drawing.Size(38, 27);
             this.IPMasked_3.TabIndex = 67;
-            this.IPMasked_3.UseWaitCursor = true;
             this.IPMasked_3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IPMasked_3_KeyPress);
             // 
             // IPMasked_4
             // 
             this.IPMasked_4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.IPMasked_4.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.IPMasked_4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IPMasked_4.Location = new System.Drawing.Point(295, 42);
             this.IPMasked_4.Mask = "000";
             this.IPMasked_4.Name = "IPMasked_4";
             this.IPMasked_4.Size = new System.Drawing.Size(38, 27);
             this.IPMasked_4.TabIndex = 68;
-            this.IPMasked_4.UseWaitCursor = true;
             // 
             // saveButton
             // 
