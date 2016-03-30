@@ -77,5 +77,46 @@ namespace RoyalPetz_ADMIN
         public const int NEW_DJ = 503;
         public const int EDIT_DJ = 504;
 
+
+        // THESE CONSTANTS ARE USED TO CHECK GROUP ACCESS MODULE
+        // THE VALUES MUST BE TIED TO THE VALUES INSIDE THE DATABASE TABLE
+
+        // MAIN_MENU MANAJEMEN
+        public const int MENU_MANAJEMEN_SISTEM = 1;
+        public const int MENU_DATABASE = 2;
+        public const int MENU_MANAJEMEN_USER = 3;
+        public const int MENU_MANAJEMEN_CABANG = 4;
+        public const int MENU_SINKRONISASI_INFORMASI = 5;
+        public const int MENU_PENGATURAN_PRINTER = 6;
+        public const int MENU_PENGATURAN_GAMBAR_LATAR = 7;
+
+        // MAIN MENU GUDANG
+        public const int MENU_GUDANG = 8;
+        public const int MENU_PRODUK = 9;
+        public const int MENU_TAMBAH_PRODUK = 10;
+        public const int MENU_PENGATURAN_HARGA= 11;
+        public const int MENU_PENGATURAN_LIMIT_STOK= 12;
+        public const int MENU_PENGATURAN_KATEGORI_PRODUK = 13;
+        public const int MENU_PECAH_SATUAN_PRODUK= 14;
+        public const int MENU_PENGATURAN_NOMOR_RAK = 15;
+        public const int MENU_KATEGORI = 16;
+        public const int MENU_SATUAN = 17;
+        public const int MENU_TAMBAH_SATUAN = 18;
+        public const int MENU_PENGATURAN_KONVERSI = 19;
+        public const int MENU_STOK_OPNAME = 20;
+        public const int MENU_PENYESUAIAN_STOK = 21;
+        public const int MENU_MUTASI_BARANG = 22;
+        public const int MENU_TAMBAH_MUTASI_BARANG= 23;
+        public const int MENU_CEK_PERMINTAAN_BARANG = 24;
+        public const int MENU_PENERIMAAN_BARANG = 25;
+        public const int MENU_PENERIMAAN_BARANG_DARI_MUTASI = 26;
+        public const int MENU_PENERIMAAN_BARANG_DARI_PO = 27;
+
+
+
+
+
+
+
     }
 }

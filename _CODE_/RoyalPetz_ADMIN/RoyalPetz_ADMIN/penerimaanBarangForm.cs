@@ -87,7 +87,7 @@ namespace RoyalPetz_ADMIN
                                 selectedFromID = rdr.GetInt32("BRANCH_ID_FROM");
                                 selectedToID = rdr.GetInt32("BRANCH_ID_TO");
 
-                                globalTotalValue = rdr.GetDouble("PM_TOTAL");
+                                globalTotalValue = rdr.GetDouble("PURCHASE_TOTAL");
                                 labelTotalValue.Text = globalTotalValue.ToString("C", culture);
                                 labelAcceptValue.Text = globalTotalValue.ToString("C", culture);
                             }

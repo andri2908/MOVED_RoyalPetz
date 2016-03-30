@@ -114,5 +114,10 @@ namespace RoyalPetz_ADMIN
                 gutil.showSuccess(gutil.UPD);
             }
         }
+
+        private void noFakturTextBox_TextChanged(object sender, EventArgs e)
+        {
+            noFakturTextBox.Text = gutil.allTrim(noFakturTextBox.Text);
+        }
     }
 }

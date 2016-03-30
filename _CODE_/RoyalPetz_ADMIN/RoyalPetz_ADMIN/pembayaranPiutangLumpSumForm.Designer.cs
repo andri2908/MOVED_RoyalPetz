@@ -120,7 +120,7 @@
             this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 204F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 206F));
             this.tableLayoutPanel3.Controls.Add(this.cabangNameTextBox, 0, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(280, 45);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -347,7 +347,12 @@
             this.detailPMDataGridView.RowHeadersVisible = false;
             this.detailPMDataGridView.Size = new System.Drawing.Size(888, 141);
             this.detailPMDataGridView.TabIndex = 63;
+            this.detailPMDataGridView.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailPMDataGridView_CellEnter);
+            this.detailPMDataGridView.CurrentCellChanged += new System.EventHandler(this.detailPMDataGridView_CurrentCellChanged);
+            this.detailPMDataGridView.SelectionChanged += new System.EventHandler(this.detailPMDataGridView_SelectionChanged);
             this.detailPMDataGridView.Click += new System.EventHandler(this.detailPMDataGridView_Click);
+            this.detailPMDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.detailPMDataGridView_KeyDown);
+            this.detailPMDataGridView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.detailPMDataGridView_KeyPress);
             // 
             // saveButton
             // 

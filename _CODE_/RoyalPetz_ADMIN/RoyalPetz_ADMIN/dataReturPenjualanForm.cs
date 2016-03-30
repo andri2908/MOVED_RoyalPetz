@@ -24,6 +24,7 @@ namespace RoyalPetz_ADMIN
         private bool isLoading = false;
         private bool returnCash = false;
         private List<string> returnQty = new List<string>();
+        private List<string> SOreturnQty = new List<string>();
         string previousInput = "";
         double extraAmount = 0;
 
@@ -235,7 +236,7 @@ namespace RoyalPetz_ADMIN
             }
 
             globalTotalValue = total;
-            totalLabel.Text = "Rp. " + total.ToString();
+            totalLabel.Text = total.ToString("C", culture);//"Rp. " + total.ToString();
         }
 
         private void TextBox_TextChanged(object sender, EventArgs e)
@@ -244,6 +245,7 @@ namespace RoyalPetz_ADMIN
             double subTotal = 0;
             double productPrice = 0;
             string productID = "";
+            double soQTY = 0;
 
             DataGridViewTextBoxEditingControl dataGridViewTextBoxEditingControl = sender as DataGridViewTextBoxEditingControl;
 
@@ -253,24 +255,27 @@ namespace RoyalPetz_ADMIN
             if (null != selectedRow.Cells["productID"].Value)
                 productID = selectedRow.Cells["productID"].Value.ToString();
 
+            if (returnQty.Count > rowSelectedIndex)
+                previousInput = returnQty[rowSelectedIndex];
+            else
+                previousInput = "0";
+
+            if (null != selectedRow.Cells["SOqty"].Value)
+                soQTY = Convert.ToDouble(selectedRow.Cells["SOqty"].Value);
+
             if (gutil.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
                 && (dataGridViewTextBoxEditingControl.Text.Length > 0)
+                && soQTY >= Convert.ToDouble(dataGridViewTextBoxEditingControl.Text)
                 )
             {
                 if (returnQty.Count > rowSelectedIndex)
                     returnQty[rowSelectedIndex] = dataGridViewTextBoxEditingControl.Text;
                 else
                     returnQty.Add(dataGridViewTextBoxEditingControl.Text);
-
-                previousInput = dataGridViewTextBoxEditingControl.Text;
             }
             else
             {
-                if (returnQty.Count >= rowSelectedIndex)
-                    dataGridViewTextBoxEditingControl.Text = returnQty[rowSelectedIndex];
-                else
-                    dataGridViewTextBoxEditingControl.Text = previousInput;
-
+                dataGridViewTextBoxEditingControl.Text = previousInput;
             }
 
             productPrice = Convert.ToDouble(selectedRow.Cells["productPrice"].Value);
@@ -304,9 +309,11 @@ namespace RoyalPetz_ADMIN
         private string getInvoiceTotalValue()
         {
             string result = "";
+            double resultValue = 0;
 
             // GLOBAL SALES TOTAL VALUE WITHOUT ANY PAYMENT / RETURN
-            result = DS.getDataSingleValue("SELECT SALES_TOTAL FROM SALES_HEADER WHERE SALES_INVOICE = '" + selectedSalesInvoice + "'").ToString();
+            resultValue = Convert.ToDouble(DS.getDataSingleValue("SELECT SALES_TOTAL FROM SALES_HEADER WHERE SALES_INVOICE = '" + selectedSalesInvoice + "'"));
+            result = resultValue.ToString("C", culture);
 
             return result;
         }
@@ -315,7 +322,8 @@ namespace RoyalPetz_ADMIN
         {
             string result = "";
             
-            result = DS.getDataSingleValue("SELECT CUSTOMER_FULL_NAME FROM MASTER_CUSTOMER WHERE CUSTOMER_ID = "+selectedCustomerID).ToString();
+            if (selectedCustomerID > 0)
+                result = DS.getDataSingleValue("SELECT IFNULL(CUSTOMER_FULL_NAME, '') FROM MASTER_CUSTOMER WHERE CUSTOMER_ID = "+selectedCustomerID).ToString();
 
             return result;
         }
@@ -370,6 +378,12 @@ namespace RoyalPetz_ADMIN
             if (noReturTextBox.Text.Length <= 0)
             {
                 errorLabel.Text = "NO RETUR TIDAK BOLEH KOSONG";
+                return false;   
+            }
+
+            if (globalTotalValue <= 0)
+            {
+                errorLabel.Text = "NILAI RETUR 0";
                 return false;   
             }
 
@@ -652,6 +666,9 @@ namespace RoyalPetz_ADMIN
                 errorLabel.Text = "";
                 gutil.showSuccess(gutil.INS);
                 saveButton.Enabled = false;
+                detailReturDataGridView.ReadOnly = true;
+                noReturTextBox.Enabled = false;
+                rsDateTimePicker.Enabled = false;
             }
         }
         
@@ -665,7 +682,7 @@ namespace RoyalPetz_ADMIN
                 invoiceInfoTextBox.Text = getPelangganName();
             else
             {
-                invoiceTotalLabelValue.Text = "Rp. " + getInvoiceTotalValue();
+                invoiceTotalLabelValue.Text = getInvoiceTotalValue();
                 loadDataHeader();
             }
 
@@ -675,6 +692,11 @@ namespace RoyalPetz_ADMIN
 
             detailReturDataGridView.EditingControlShowing += detailReturDataGridView_EditingControlShowing;
             gutil.reArrangeTabOrder(this);
+        }
+
+        private void detailReturDataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            
         }
         
     }

@@ -135,6 +135,9 @@ namespace RoyalPetz_ADMIN
 
         private void dataPelangganForm_Load(object sender, EventArgs e)
         {
+            if (originModuleID != globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
+                unknownCustomerButton.Visible = false;
+
             gutil.reArrangeTabOrder(this);
         }
 
@@ -177,6 +180,12 @@ namespace RoyalPetz_ADMIN
                     displayedForm.ShowDialog(this);
                 }
             }
+        }
+
+        private void unknownCustomerButton_Click(object sender, EventArgs e)
+        {
+            dataReturPenjualanForm displayedReturForm = new dataReturPenjualanForm(originModuleID, "", 0);
+            displayedReturForm.ShowDialog(this);
         }
     }
 }

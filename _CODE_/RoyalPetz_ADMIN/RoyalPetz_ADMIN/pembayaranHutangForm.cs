@@ -26,6 +26,7 @@ namespace RoyalPetz_ADMIN
         private int selectedDebtID = 0;
         private bool isLoading = false;
         private bool isPaymentExceed = false;
+        private int purchasePaid = 0;
 
         public pembayaranHutangForm()
         {
@@ -58,6 +59,7 @@ namespace RoyalPetz_ADMIN
                         poDate = rdr.GetDateTime("PURCHASE_DATETIME");
                         poDateTextBox.Text = String.Format(culture, "{0:dd MMM yyyy}", poDate);
                         globalTotalValue = rdr.GetDouble("PURCHASE_TOTAL");
+                        purchasePaid = rdr.GetInt32("PURCHASE_PAID");
                     }
                 }
             }
@@ -111,6 +113,8 @@ namespace RoyalPetz_ADMIN
                     detailPaymentDataGridView.DataSource = dt;
 
                     detailPaymentDataGridView.Columns["PAYMENT_ID"].Visible = false;
+                    detailPaymentDataGridView.Columns["TIPE"].Visible = false;
+                    detailPaymentDataGridView.Columns["STATUS"].Visible = false;
                     detailPaymentDataGridView.Columns["TANGGAL"].Width = 200;
                     detailPaymentDataGridView.Columns["NOMINAL"].Width = 200;
                     detailPaymentDataGridView.Columns["DESKRIPSI"].Width = 300;

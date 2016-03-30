@@ -37,8 +37,8 @@
             this.MENU_logOut = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem33 = new System.Windows.Forms.ToolStripSeparator();
             this.MENU_database = new System.Windows.Forms.ToolStripMenuItem();
-            this.infoFolderDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backupRestoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MENU_lokasiDatabase = new System.Windows.Forms.ToolStripMenuItem();
+            this.MENU_backupRestoreDatabase = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_manajemenUser = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_tambahGroupUser = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_pengaturanGroupAkses = new System.Windows.Forms.ToolStripMenuItem();
@@ -215,30 +215,30 @@
             // 
             this.MENU_database.BackColor = System.Drawing.Color.SteelBlue;
             this.MENU_database.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.infoFolderDatabaseToolStripMenuItem,
-            this.backupRestoreToolStripMenuItem});
+            this.MENU_lokasiDatabase,
+            this.MENU_backupRestoreDatabase});
             this.MENU_database.ForeColor = System.Drawing.Color.FloralWhite;
             this.MENU_database.Name = "MENU_database";
             this.MENU_database.Size = new System.Drawing.Size(263, 22);
             this.MENU_database.Text = "DATABASE";
             // 
-            // infoFolderDatabaseToolStripMenuItem
+            // MENU_lokasiDatabase
             // 
-            this.infoFolderDatabaseToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
-            this.infoFolderDatabaseToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
-            this.infoFolderDatabaseToolStripMenuItem.Name = "infoFolderDatabaseToolStripMenuItem";
-            this.infoFolderDatabaseToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
-            this.infoFolderDatabaseToolStripMenuItem.Text = "Pengaturan Lokasi Database";
-            this.infoFolderDatabaseToolStripMenuItem.Click += new System.EventHandler(this.infoFolderDatabaseToolStripMenuItem_Click);
+            this.MENU_lokasiDatabase.BackColor = System.Drawing.Color.SteelBlue;
+            this.MENU_lokasiDatabase.ForeColor = System.Drawing.Color.FloralWhite;
+            this.MENU_lokasiDatabase.Name = "MENU_lokasiDatabase";
+            this.MENU_lokasiDatabase.Size = new System.Drawing.Size(283, 22);
+            this.MENU_lokasiDatabase.Text = "Pengaturan Lokasi Database";
+            this.MENU_lokasiDatabase.Click += new System.EventHandler(this.infoFolderDatabaseToolStripMenuItem_Click);
             // 
-            // backupRestoreToolStripMenuItem
+            // MENU_backupRestoreDatabase
             // 
-            this.backupRestoreToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
-            this.backupRestoreToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
-            this.backupRestoreToolStripMenuItem.Name = "backupRestoreToolStripMenuItem";
-            this.backupRestoreToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
-            this.backupRestoreToolStripMenuItem.Text = "Backup / Restore Database";
-            this.backupRestoreToolStripMenuItem.Click += new System.EventHandler(this.backupRestoreToolStripMenuItem_Click);
+            this.MENU_backupRestoreDatabase.BackColor = System.Drawing.Color.SteelBlue;
+            this.MENU_backupRestoreDatabase.ForeColor = System.Drawing.Color.FloralWhite;
+            this.MENU_backupRestoreDatabase.Name = "MENU_backupRestoreDatabase";
+            this.MENU_backupRestoreDatabase.Size = new System.Drawing.Size(283, 22);
+            this.MENU_backupRestoreDatabase.Text = "Backup / Restore Database";
+            this.MENU_backupRestoreDatabase.Click += new System.EventHandler(this.backupRestoreToolStripMenuItem_Click);
             // 
             // MENU_manajemenUser
             // 
@@ -872,7 +872,7 @@
             this.toolStripMenuItem26.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripMenuItem26.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripMenuItem26.Name = "toolStripMenuItem26";
-            this.toolStripMenuItem26.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem26.Size = new System.Drawing.Size(109, 22);
             this.toolStripMenuItem26.Text = "User";
             // 
             // toolStripMenuItem74
@@ -955,7 +955,7 @@
             this.developerToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
             this.developerToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.developerToolStripMenuItem.Name = "developerToolStripMenuItem";
-            this.developerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.developerToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.developerToolStripMenuItem.Text = "Developer";
             this.developerToolStripMenuItem.Click += new System.EventHandler(this.developerToolStripMenuItem_Click);
             // 
@@ -1195,8 +1195,8 @@
         private System.Windows.Forms.ToolStripMenuItem MENU_returPenjualan;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem25;
         private System.Windows.Forms.ToolStripMenuItem MENU_database;
-        private System.Windows.Forms.ToolStripMenuItem infoFolderDatabaseToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem backupRestoreToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MENU_lokasiDatabase;
+        private System.Windows.Forms.ToolStripMenuItem MENU_backupRestoreDatabase;
         private System.Windows.Forms.ToolStripMenuItem MENU_tambahCabang;
         private System.Windows.Forms.ToolStripMenuItem MENU_produk;
         private System.Windows.Forms.ToolStripMenuItem MENU_tambahProduk;

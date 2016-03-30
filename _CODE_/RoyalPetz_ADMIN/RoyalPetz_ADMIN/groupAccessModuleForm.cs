@@ -227,7 +227,7 @@ namespace RoyalPetz_ADMIN
                 else
                 {
                     // EDIT MODE
-                    sqlCommand = "UPDATE USER_ACCESS_MANAGEMENT SET USER_ACCESS_OPTION = " + userAccessValue + " WHERE GROUP_ID = " + selectedGroupID + " AND MODULE_ID = " + moduleIdValue + ")";
+                    sqlCommand = "UPDATE USER_ACCESS_MANAGEMENT SET USER_ACCESS_OPTION = " + userAccessValue + " WHERE GROUP_ID = " + selectedGroupID + " AND MODULE_ID = " + moduleIdValue;
 
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
@@ -268,7 +268,6 @@ namespace RoyalPetz_ADMIN
             {
                 //MessageBox.Show("SUCCESS");
                 gutil.showSuccess(gutil.UPD);
-                gutil.ResetAllControls(this);
             }
         }
 
@@ -277,6 +276,12 @@ namespace RoyalPetz_ADMIN
             //if need something
             loadGroupUserInformation();
             loadUserAccessInformation();
+        }
+
+        private void checkAll_CheckedChanged(object sender, EventArgs e)
+        {
+            for (int i=0;i<groupAccessDataGridView.Rows.Count;i++)
+                groupAccessDataGridView.Rows[i].Cells["hakAkses"].Value = checkAll.Checked;
         }
     }
 }

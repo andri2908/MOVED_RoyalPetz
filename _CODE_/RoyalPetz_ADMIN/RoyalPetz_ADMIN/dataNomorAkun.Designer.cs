@@ -50,6 +50,7 @@
             // 
             // namaAccountTextbox
             // 
+            this.namaAccountTextbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.namaAccountTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.namaAccountTextbox.Location = new System.Drawing.Point(100, 14);
             this.namaAccountTextbox.Name = "namaAccountTextbox";
@@ -73,6 +74,7 @@
             this.dataAccountGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataAccountGridView.Location = new System.Drawing.Point(0, 72);
             this.dataAccountGridView.Name = "dataAccountGridView";
+            this.dataAccountGridView.ReadOnly = true;
             this.dataAccountGridView.RowHeadersVisible = false;
             this.dataAccountGridView.Size = new System.Drawing.Size(505, 475);
             this.dataAccountGridView.TabIndex = 33;

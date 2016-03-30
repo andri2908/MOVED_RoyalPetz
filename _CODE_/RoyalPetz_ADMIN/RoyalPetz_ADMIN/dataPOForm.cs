@@ -78,7 +78,7 @@ namespace RoyalPetz_ADMIN
                                 "DATE_FORMAT(PURCHASE_TERM_OF_PAYMENT_DATE, '%d-%M-%Y') AS 'TANGGAL JATUH TEMPO', " +
                                 "M.SUPPLIER_FULL_NAME AS 'NAMA SUPPLIER', PURCHASE_TOTAL AS 'TOTAL', PURCHASE_SENT " +
                                 "FROM PURCHASE_HEADER P, MASTER_SUPPLIER M " +
-                                "WHERE P.SUPPLIER_ID = M.SUPPLIER_ID AND P.PURCHASE_PAID = 0";
+                                "WHERE P.SUPPLIER_ID = M.SUPPLIER_ID";
 
             if (originModuleID == globalConstants.PENERIMAAN_BARANG_DARI_PO)
             {
@@ -86,7 +86,7 @@ namespace RoyalPetz_ADMIN
             }
             else if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
             {
-                sqlCommand = sqlCommand + " AND PURCHASE_SENT = 1 AND PURCHASE_RECEIVED = 1";
+                sqlCommand = sqlCommand + "  AND P.PURCHASE_PAID = 0 AND PURCHASE_SENT = 1 AND PURCHASE_RECEIVED = 1";
             }
 
             if (!showAllCheckBox.Checked)
@@ -216,6 +216,7 @@ namespace RoyalPetz_ADMIN
 
             loadPOData();
         }
+
         private void dataPOForm_Activated(object sender, EventArgs e)
         {
             if (noPOInvoiceTextBox.Text.Length > 0)

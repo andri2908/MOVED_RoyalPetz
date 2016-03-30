@@ -118,6 +118,8 @@ namespace RoyalPetz_ADMIN
         private void ResetButton_Click(object sender, EventArgs e)
         {
             gUtil.ResetAllControls(this);
+            originModuleID = globalConstants.NEW_AKUN;
+            options = gUtil.INS;
         }
 
         private bool dataValidated()
@@ -221,6 +223,8 @@ namespace RoyalPetz_ADMIN
             {
                 gUtil.showSuccess(options);
                 gUtil.ResetAllControls(this);
+                originModuleID = globalConstants.NEW_AKUN;
+                options = gUtil.INS;
             }
         }
 

@@ -20,6 +20,7 @@ namespace RoyalPetz_ADMIN
         private int selectedCustomerID = 0;
         private double globalTotalValue = 0;
         private int originModuleID = 0;
+        private bool isLoading = false;
 
         private Data_Access DS = new Data_Access();
         private globalUtilities gutil = new globalUtilities();
@@ -95,6 +96,8 @@ namespace RoyalPetz_ADMIN
                 detailPMDataGridView.DataSource = null;
                 if (rdr.HasRows)
                 {
+                    isLoading = true;
+
                     dt.Load(rdr);
                     detailPMDataGridView.DataSource = dt;
 
@@ -103,6 +106,8 @@ namespace RoyalPetz_ADMIN
                     detailPMDataGridView.Columns["TGL MUTASI"].Width = 200;
                     detailPMDataGridView.Columns["TOTAL PIUTANG"].Width = 200;
                     detailPMDataGridView.Columns["SISA PIUTANG"].Width = 200;
+
+                    isLoading = false;
                 }
             }
         }
@@ -113,7 +118,7 @@ namespace RoyalPetz_ADMIN
             DataTable dt = new DataTable();
             string sqlCommand;
 
-            sqlCommand = "SELECT PM.PM_INVOICE AS 'NO_MUTASI', DATE_FORMAT(PAYMENT_DATE, '%d-%M-%Y') AS 'TGL PEMBAYARAN', PAYMENT_NOMINAL AS 'JUMLAH', PAYMENT_DESCRIPTION AS DESKRIPSI " +
+            sqlCommand = "SELECT PM.PM_INVOICE AS 'NO MUTASI', DATE_FORMAT(PAYMENT_DATE, '%d-%M-%Y') AS 'TGL PEMBAYARAN', PAYMENT_NOMINAL AS 'JUMLAH', PAYMENT_DESCRIPTION AS DESKRIPSI " +
                                 "FROM PAYMENT_CREDIT PC, PRODUCTS_MUTATION_HEADER PM, CREDIT C " +
                                 "WHERE PM.BRANCH_ID_TO = " + selectedBranchID + " AND PC.CREDIT_ID = C.CREDIT_ID AND PM.PM_INVOICE = C.PM_INVOICE AND C.CREDIT_ID = " + creditID;
 
@@ -125,10 +130,10 @@ namespace RoyalPetz_ADMIN
                     dt.Load(rdr);
                     detailPaymentInfoDataGrid.DataSource = dt;
 
-                    detailPMDataGridView.Columns["NO MUTASI"].Width = 200;
-                    detailPMDataGridView.Columns["TGL PEMBAYARAN"].Width = 200;
-                    detailPMDataGridView.Columns["JUMLAH"].Width = 200;
-                    detailPMDataGridView.Columns["DESKRIPSI"].Width = 300;
+                    detailPaymentInfoDataGrid.Columns["NO MUTASI"].Width = 200;
+                    detailPaymentInfoDataGrid.Columns["TGL PEMBAYARAN"].Width = 200;
+                    detailPaymentInfoDataGrid.Columns["JUMLAH"].Width = 200;
+                    detailPaymentInfoDataGrid.Columns["DESKRIPSI"].Width = 300;
                 }
             }
         }
@@ -318,9 +323,45 @@ namespace RoyalPetz_ADMIN
 
             loadDataBranch();
             loadDataPM();
+//            loadDataPayment();
+
             calculateGlobalOutstandingCredit();
             
             gutil.reArrangeTabOrder(this);
+        }
+
+        private void detailPMDataGridView_CurrentCellChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void detailPMDataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            int creditID = 0;
+            if (detailPMDataGridView.Rows.Count <= 0)
+                return;
+
+            if (isLoading)
+                return;
+
+            int rowSelectedIndex = detailPMDataGridView.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = detailPMDataGridView.Rows[rowSelectedIndex];
+            creditID = Convert.ToInt32(selectedRow.Cells["CREDIT_ID"].Value);
+
+            loadDataPayment(creditID);
+        }
+
+        private void detailPMDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void detailPMDataGridView_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
+
+        private void detailPMDataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
         }
 
         

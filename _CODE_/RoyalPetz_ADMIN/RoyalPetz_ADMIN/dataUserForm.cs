@@ -152,7 +152,6 @@ namespace RoyalPetz_ADMIN
                 loadUserData(namaUserTextbox.Text);
         }
 
-
         private void usernonactiveoption_CheckedChanged(object sender, EventArgs e)
         {
             dataUserGridView.DataSource = null;
@@ -166,16 +165,20 @@ namespace RoyalPetz_ADMIN
             if (!namaUserTextbox.Text.Equals(""))
                 loadUserData(namaUserTextbox.Text);
         }
+
         private void dataUserGridView_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 int selectedrowindex = dataUserGridView.SelectedCells[0].RowIndex;
+
                 DataGridViewRow selectedRow = dataUserGridView.Rows[selectedrowindex];
                 selectedUserID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+
                 displaySpecificForm();
             }
         }
+
         private void dataUserForm_Load(object sender, EventArgs e)
         {
             gutil.reArrangeTabOrder(this);

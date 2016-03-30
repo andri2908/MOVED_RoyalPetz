@@ -154,7 +154,7 @@ namespace RoyalPetz_ADMIN
             }
 
             globalTotalValue = total;
-            totalLabel.Text = "Rp. " + total.ToString();
+            totalLabel.Text = total.ToString("C", culture);//"Rp. " + total.ToString();
         }
 
         private void detailReturDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -257,7 +257,8 @@ namespace RoyalPetz_ADMIN
             {
                 //changes on qty
                 productQty = Convert.ToDouble(dataGridViewTextBoxEditingControl.Text);
-                hppValue = Convert.ToDouble(selectedRow.Cells["hpp"].Value);
+                if (null != selectedRow.Cells["hpp"].Value)
+                    hppValue = Convert.ToDouble(selectedRow.Cells["hpp"].Value);
 
                 subTotal = Math.Round((hppValue * productQty), 2);
 
@@ -323,6 +324,8 @@ namespace RoyalPetz_ADMIN
 
         private bool dataValidated()
         {
+            bool dataExist = false;
+
             if (noReturTextBox.Text.Length <= 0)
             {
                 errorLabel.Text = "NO RETUR TIDAK BOLEH KOSONG";
@@ -332,6 +335,23 @@ namespace RoyalPetz_ADMIN
             if (selectedSupplierID == 0 && originModuleID == globalConstants.RETUR_PEMBELIAN_KE_SUPPLIER)
             {
                 errorLabel.Text = "INPUT UNTUK SUPPLIER TIDAK VALID";
+                return false;
+            }
+
+            if (globalTotalValue <= 0)
+            {
+                errorLabel.Text = "NILAI RETUR KOSONG";
+                return false;
+            }
+
+            for (int i = 0; i < detailReturDataGridView.Rows.Count && !dataExist; i++)
+            {
+                if (null != detailReturDataGridView.Rows[i].Cells["productID"].Value)
+                    dataExist = true;
+            }
+            if (!dataExist)
+            {
+                errorLabel.Text = "TIDAK ADA PRODUK YANG DIPILIH";
                 return false;
             }
 
@@ -367,38 +387,42 @@ namespace RoyalPetz_ADMIN
             {
                 DS.mySqlConnect();
 
-                        // SAVE HEADER TABLE
-                        sqlCommand = "INSERT INTO RETURN_PURCHASE_HEADER (RP_ID, SUPPLIER_ID, RP_DATE, RP_TOTAL, RP_PROCESSED) VALUES " +
-                                            "('" + returID + "', " + supplierID + ", STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), " + returTotal + ", 1)";
+                // SAVE HEADER TABLE
+                sqlCommand = "INSERT INTO RETURN_PURCHASE_HEADER (RP_ID, SUPPLIER_ID, RP_DATE, RP_TOTAL, RP_PROCESSED) VALUES " +
+                                    "('" + returID + "', " + supplierID + ", STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), " + returTotal + ", 1)";
 
-                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                            throw internalEX;
+                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                      throw internalEX;
 
-                        // SAVE DETAIL TABLE
-                        for (int i = 0; i < detailReturDataGridView.Rows.Count - 1; i++)
-                        {
-                            hppValue = Convert.ToDouble(detailReturDataGridView.Rows[i].Cells["HPP"].Value);
-                            qtyValue = Convert.ToDouble(detailReturDataGridView.Rows[i].Cells["qty"].Value);
-                            try
-                            {
-                                descriptionValue = detailReturDataGridView.Rows[i].Cells["description"].Value.ToString();
-                            }
-                            catch(Exception ex)
-                            {
-                                descriptionValue = " ";
-                            }
-                            sqlCommand = "INSERT INTO RETURN_PURCHASE_DETAIL (RP_ID, PRODUCT_ID, PRODUCT_BASEPRICE, PRODUCT_QTY, RP_DESCRIPTION, RP_SUBTOTAL) VALUES " +
-                                                "('" + returID + "', '" + detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " +hppValue  + ", " + qtyValue + ", '" + descriptionValue + "', " + Convert.ToDouble(detailReturDataGridView.Rows[i].Cells["subTotal"].Value) + ")";
+                // SAVE DETAIL TABLE
+                for (int i = 0; i < detailReturDataGridView.Rows.Count; i++)
+                {
+                    if (null != detailReturDataGridView.Rows[i].Cells["productID"].Value)
+                    { 
+                       hppValue = Convert.ToDouble(detailReturDataGridView.Rows[i].Cells["HPP"].Value);
+                       qtyValue = Convert.ToDouble(detailReturDataGridView.Rows[i].Cells["qty"].Value);
+                      
+                       try
+                       {
+                            descriptionValue = detailReturDataGridView.Rows[i].Cells["description"].Value.ToString();
+                       }
+                       catch(Exception ex)
+                       {
+                            descriptionValue = " ";
+                       }
+                       sqlCommand = "INSERT INTO RETURN_PURCHASE_DETAIL (RP_ID, PRODUCT_ID, PRODUCT_BASEPRICE, PRODUCT_QTY, RP_DESCRIPTION, RP_SUBTOTAL) VALUES " +
+                                           "('" + returID + "', '" + detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " +hppValue  + ", " + qtyValue + ", '" + descriptionValue + "', " + Convert.ToDouble(detailReturDataGridView.Rows[i].Cells["subTotal"].Value) + ")";
 
-                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                                throw internalEX;
+                       if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                           throw internalEX;
 
-                            // UPDATE MASTER PRODUCT
-                            sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + qtyValue + " WHERE PRODUCT_ID = '" + detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString() + "'";
+                       // UPDATE MASTER PRODUCT
+                       sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + qtyValue + " WHERE PRODUCT_ID = '" + detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString() + "'";
 
-                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                                throw internalEX;
-                        }
+                       if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                          throw internalEX;
+                    }
+                }
               
                 DS.commit();
                 result = true;
@@ -443,6 +467,11 @@ namespace RoyalPetz_ADMIN
             if (saveData())
             {
                 GUTIL.showSuccess(GUTIL.INS);
+                GUTIL.ResetAllControls(this);
+                detailReturDataGridView.Rows.Clear();
+                globalTotalValue = 0;
+                totalLabel.Text = globalTotalValue.ToString("C", culture);
+                ReturDtPicker_1.Value = DateTime.Now;
             }
         }
 
@@ -450,6 +479,33 @@ namespace RoyalPetz_ADMIN
         {
             if (!supplierCombo.Items.Contains(supplierCombo.Text))
                 supplierCombo.Focus();
+        }
+
+        private void detailReturDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+        }
+
+        private void deleteCurrentRow()
+        {
+            if (detailReturDataGridView.SelectedCells.Count > 0)
+            {
+                int rowSelectedIndex = detailReturDataGridView.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = detailReturDataGridView.Rows[rowSelectedIndex];
+
+                detailReturDataGridView.Rows.Remove(selectedRow);
+            }
+        }
+
+        private void detailReturDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            { 
+                if (DialogResult.Yes == MessageBox.Show("HAPUS BARIS ? ", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                { 
+                    deleteCurrentRow();
+                    calculateTotal();
+                }
+            }
         }
     }
 }

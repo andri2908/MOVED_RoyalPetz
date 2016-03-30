@@ -55,7 +55,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(177, 24);
+            this.label4.Location = new System.Drawing.Point(176, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(8, 18);
             this.label4.TabIndex = 10;
@@ -89,7 +89,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 92.07317F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.926829F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 294F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 295F));
             this.tableLayoutPanel1.Controls.Add(this.noFakturTextBox, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label4, 1, 0);
@@ -105,11 +105,12 @@
             this.noFakturTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.noFakturTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.noFakturTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noFakturTextBox.Location = new System.Drawing.Point(191, 19);
+            this.noFakturTextBox.Location = new System.Drawing.Point(190, 19);
             this.noFakturTextBox.MaxLength = 20;
             this.noFakturTextBox.Name = "noFakturTextBox";
             this.noFakturTextBox.Size = new System.Drawing.Size(278, 27);
             this.noFakturTextBox.TabIndex = 27;
+            this.noFakturTextBox.TextChanged += new System.EventHandler(this.noFakturTextBox_TextChanged);
             // 
             // setNoFakturForm
             // 
