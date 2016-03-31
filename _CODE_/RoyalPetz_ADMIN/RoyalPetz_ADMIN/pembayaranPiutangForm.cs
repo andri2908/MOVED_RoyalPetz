@@ -125,6 +125,12 @@ namespace RoyalPetz_ADMIN
                     detailPaymentInfoDataGrid.Columns["TANGGAL"].Width = 200;
                     detailPaymentInfoDataGrid.Columns["NOMINAL"].Width = 200;                    
                     detailPaymentInfoDataGrid.Columns["DESKRIPSI"].Width = 300;
+
+                    for (int i = 0; i < detailPaymentInfoDataGrid.Rows.Count; i++)
+                    {
+                        if (detailPaymentInfoDataGrid.Rows[i].Cells["STATUS"].Value.ToString().Equals("N") && detailPaymentInfoDataGrid.Rows[i].Cells["PAYMENT_INVALID"].Value.ToString().Equals("0"))
+                            detailPaymentInfoDataGrid.Rows[i].DefaultCellStyle.BackColor = Color.LightBlue;
+                    }
                 }
             }
         }
