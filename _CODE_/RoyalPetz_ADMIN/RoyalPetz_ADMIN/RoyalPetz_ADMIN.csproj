@@ -33,9 +33,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -198,6 +205,11 @@
     </Compile>
     <Compile Include="dataSatuanForm.Designer.cs">
       <DependentUpon>dataSatuanForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="dataSupplierDetailForm.cs">
       <SubType>Form</SubType>
@@ -362,6 +374,18 @@
     </Compile>
     <Compile Include="purchaseOrderDetailForm.Designer.cs">
       <DependentUpon>purchaseOrderDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportUser.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportUser.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportUserForm.Designer.cs">
+      <DependentUpon>ReportUserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SetApplicationForm.cs">
       <SubType>Form</SubType>
@@ -573,6 +597,13 @@
     <EmbeddedResource Include="purchaseOrderDetailForm.resx">
       <DependentUpon>purchaseOrderDetailForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportUser.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportUser.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportUserForm.resx">
+      <DependentUpon>ReportUserForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SetApplicationForm.resx">
       <DependentUpon>SetApplicationForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -595,6 +626,17 @@
       <DependentUpon>dataKategoriProdukForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabSchemeProvider.resx" />
+    <None Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -607,6 +649,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

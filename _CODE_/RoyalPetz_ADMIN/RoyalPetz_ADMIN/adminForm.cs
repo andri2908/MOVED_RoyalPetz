@@ -755,5 +755,11 @@ namespace RoyalPetz_ADMIN
             setAccessibility(globalConstants.MENU_PENERIMAAN_BARANG_DARI_PO, MENU_dariPO);
 
         }
+
+        private void ReportUserToolstrip_Click(object sender, EventArgs e)
+        {
+            ReportUserForm displayedform = new ReportUserForm();
+            displayedform.ShowDialog(this);
+        }
     }
 }

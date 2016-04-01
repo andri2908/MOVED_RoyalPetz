@@ -318,7 +318,7 @@ namespace RoyalPetz_ADMIN
             MySqlException internalEX = null;
             string HQIP = HQIP1.Text.Trim() + "." + HQIP2.Text.Trim() + "." + HQIP3.Text.Trim() + "." + HQIP4.Text.Trim(); ;
             String branchID = BranchIDTextbox.Text;
-            String no_faktur = "";
+            //String no_faktur = "";
             String nama_toko = NamaTokoTextbox.Text;
             String alamat_toko = AlamatTextbox.Text;
             String telepon_toko = TeleponTextbox.Text;
@@ -428,7 +428,7 @@ namespace RoyalPetz_ADMIN
                 gutil.showSuccess(options);
             } else
             {
-                if (success1 = false)
+                if (success1 == false)
                 {
                     //error saving config
                     gutil.showError();

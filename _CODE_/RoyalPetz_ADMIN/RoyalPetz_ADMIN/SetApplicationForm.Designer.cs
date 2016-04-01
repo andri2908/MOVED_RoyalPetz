@@ -43,6 +43,14 @@
             this.errorLabel = new System.Windows.Forms.Label();
             this.saveButton = new System.Windows.Forms.Button();
             this.AppModeBox = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.EmailTextbox = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.TeleponTextbox = new System.Windows.Forms.MaskedTextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.AlamatTextbox = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.NamaTokoTextbox = new System.Windows.Forms.TextBox();
             this.HQIPBox = new System.Windows.Forms.GroupBox();
             this.HQIP3 = new System.Windows.Forms.MaskedTextBox();
             this.HQIP1 = new System.Windows.Forms.MaskedTextBox();
@@ -53,24 +61,16 @@
             this.label7 = new System.Windows.Forms.Label();
             this.branchIDBox = new System.Windows.Forms.GroupBox();
             this.BranchIDTextbox = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.NamaTokoTextbox = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.AlamatTextbox = new System.Windows.Forms.TextBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.EmailTextbox = new System.Windows.Forms.TextBox();
-            this.TeleponTextbox = new System.Windows.Forms.MaskedTextBox();
             this.ConModeBox.SuspendLayout();
             this.ipServerBox.SuspendLayout();
             this.panel1.SuspendLayout();
             this.AppModeBox.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.HQIPBox.SuspendLayout();
             this.branchIDBox.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // ip1Textbox
@@ -263,6 +263,85 @@
             this.AppModeBox.TabStop = false;
             this.AppModeBox.Text = "Pengaturan Aplikasi";
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.EmailTextbox);
+            this.groupBox4.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.Location = new System.Drawing.Point(9, 275);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(426, 54);
+            this.groupBox4.TabIndex = 29;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "EMail ";
+            // 
+            // EmailTextbox
+            // 
+            this.EmailTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmailTextbox.Location = new System.Drawing.Point(6, 19);
+            this.EmailTextbox.Name = "EmailTextbox";
+            this.EmailTextbox.Size = new System.Drawing.Size(414, 27);
+            this.EmailTextbox.TabIndex = 2;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.TeleponTextbox);
+            this.groupBox3.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Location = new System.Drawing.Point(9, 215);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(426, 54);
+            this.groupBox3.TabIndex = 28;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Telepon";
+            // 
+            // TeleponTextbox
+            // 
+            this.TeleponTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TeleponTextbox.Location = new System.Drawing.Point(6, 21);
+            this.TeleponTextbox.Mask = "999999999999999999";
+            this.TeleponTextbox.Name = "TeleponTextbox";
+            this.TeleponTextbox.Size = new System.Drawing.Size(414, 27);
+            this.TeleponTextbox.TabIndex = 3;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.AlamatTextbox);
+            this.groupBox2.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(9, 155);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(426, 54);
+            this.groupBox2.TabIndex = 27;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Alamat Toko";
+            // 
+            // AlamatTextbox
+            // 
+            this.AlamatTextbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.AlamatTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AlamatTextbox.Location = new System.Drawing.Point(6, 19);
+            this.AlamatTextbox.Name = "AlamatTextbox";
+            this.AlamatTextbox.Size = new System.Drawing.Size(414, 27);
+            this.AlamatTextbox.TabIndex = 2;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.NamaTokoTextbox);
+            this.groupBox1.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(9, 95);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(426, 54);
+            this.groupBox1.TabIndex = 26;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Nama Toko";
+            // 
+            // NamaTokoTextbox
+            // 
+            this.NamaTokoTextbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.NamaTokoTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NamaTokoTextbox.Location = new System.Drawing.Point(6, 19);
+            this.NamaTokoTextbox.Name = "NamaTokoTextbox";
+            this.NamaTokoTextbox.Size = new System.Drawing.Size(414, 27);
+            this.NamaTokoTextbox.TabIndex = 2;
+            // 
             // HQIPBox
             // 
             this.HQIPBox.Controls.Add(this.HQIP3);
@@ -374,85 +453,6 @@
             this.BranchIDTextbox.Size = new System.Drawing.Size(188, 27);
             this.BranchIDTextbox.TabIndex = 2;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.NamaTokoTextbox);
-            this.groupBox1.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(9, 95);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(426, 54);
-            this.groupBox1.TabIndex = 26;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Nama Toko";
-            // 
-            // NamaTokoTextbox
-            // 
-            this.NamaTokoTextbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.NamaTokoTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NamaTokoTextbox.Location = new System.Drawing.Point(6, 19);
-            this.NamaTokoTextbox.Name = "NamaTokoTextbox";
-            this.NamaTokoTextbox.Size = new System.Drawing.Size(414, 27);
-            this.NamaTokoTextbox.TabIndex = 2;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.AlamatTextbox);
-            this.groupBox2.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(9, 155);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(426, 54);
-            this.groupBox2.TabIndex = 27;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Alamat Toko";
-            // 
-            // AlamatTextbox
-            // 
-            this.AlamatTextbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.AlamatTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AlamatTextbox.Location = new System.Drawing.Point(6, 19);
-            this.AlamatTextbox.Name = "AlamatTextbox";
-            this.AlamatTextbox.Size = new System.Drawing.Size(414, 27);
-            this.AlamatTextbox.TabIndex = 2;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.TeleponTextbox);
-            this.groupBox3.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(9, 215);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(426, 54);
-            this.groupBox3.TabIndex = 28;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Telepon";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.EmailTextbox);
-            this.groupBox4.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(9, 275);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(426, 54);
-            this.groupBox4.TabIndex = 29;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "EMail ";
-            // 
-            // EmailTextbox
-            // 
-            this.EmailTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmailTextbox.Location = new System.Drawing.Point(6, 19);
-            this.EmailTextbox.Name = "EmailTextbox";
-            this.EmailTextbox.Size = new System.Drawing.Size(414, 27);
-            this.EmailTextbox.TabIndex = 2;
-            // 
-            // TeleponTextbox
-            // 
-            this.TeleponTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TeleponTextbox.Location = new System.Drawing.Point(6, 21);
-            this.TeleponTextbox.Mask = "999999999999999999";
-            this.TeleponTextbox.Name = "TeleponTextbox";
-            this.TeleponTextbox.Size = new System.Drawing.Size(414, 27);
-            this.TeleponTextbox.TabIndex = 3;
-            // 
             // SetApplicationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -477,18 +477,18 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.AppModeBox.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.HQIPBox.ResumeLayout(false);
             this.HQIPBox.PerformLayout();
             this.branchIDBox.ResumeLayout(false);
             this.branchIDBox.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }

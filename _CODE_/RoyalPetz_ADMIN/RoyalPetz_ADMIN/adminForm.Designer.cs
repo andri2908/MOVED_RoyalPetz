@@ -101,7 +101,7 @@
             this.MENU_pembayaranHutangKeSupplier = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem70 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem25 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem26 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ReportUserToolstrip = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem74 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem27 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem28 = new System.Windows.Forms.ToolStripMenuItem();
@@ -857,7 +857,7 @@
             // 
             this.toolStripMenuItem25.BackColor = System.Drawing.Color.SteelBlue;
             this.toolStripMenuItem25.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem26});
+            this.ReportUserToolstrip});
             this.toolStripMenuItem25.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripMenuItem25.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripMenuItem25.Name = "toolStripMenuItem25";
@@ -866,14 +866,15 @@
             this.toolStripMenuItem25.DropDownClosed += new System.EventHandler(this.toolStripMenuItem25_DropDownClosed);
             this.toolStripMenuItem25.DropDownOpened += new System.EventHandler(this.toolStripMenuItem25_DropDownOpened);
             // 
-            // toolStripMenuItem26
+            // ReportUserToolstrip
             // 
-            this.toolStripMenuItem26.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem26.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMenuItem26.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripMenuItem26.Name = "toolStripMenuItem26";
-            this.toolStripMenuItem26.Size = new System.Drawing.Size(109, 22);
-            this.toolStripMenuItem26.Text = "User";
+            this.ReportUserToolstrip.BackColor = System.Drawing.Color.SteelBlue;
+            this.ReportUserToolstrip.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReportUserToolstrip.ForeColor = System.Drawing.Color.FloralWhite;
+            this.ReportUserToolstrip.Name = "ReportUserToolstrip";
+            this.ReportUserToolstrip.Size = new System.Drawing.Size(152, 22);
+            this.ReportUserToolstrip.Text = "User";
+            this.ReportUserToolstrip.Click += new System.EventHandler(this.ReportUserToolstrip_Click);
             // 
             // toolStripMenuItem74
             // 
@@ -1073,7 +1074,7 @@
             this.SHORTCUT_piutang.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.SHORTCUT_piutang.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SHORTCUT_piutang.Name = "SHORTCUT_piutang";
-            this.SHORTCUT_piutang.Size = new System.Drawing.Size(66, 66);
+            this.SHORTCUT_piutang.Size = new System.Drawing.Size(65, 66);
             this.SHORTCUT_piutang.Text = "PIUTANG";
             this.SHORTCUT_piutang.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.SHORTCUT_piutang.Click += new System.EventHandler(this.toolStripButton2_Click);
@@ -1085,7 +1086,7 @@
             this.SHORTCUT_hutang.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.SHORTCUT_hutang.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SHORTCUT_hutang.Name = "SHORTCUT_hutang";
-            this.SHORTCUT_hutang.Size = new System.Drawing.Size(62, 66);
+            this.SHORTCUT_hutang.Size = new System.Drawing.Size(61, 66);
             this.SHORTCUT_hutang.Text = "HUTANG";
             this.SHORTCUT_hutang.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.SHORTCUT_hutang.Click += new System.EventHandler(this.toolStripButton5_Click);
@@ -1114,7 +1115,7 @@
             this.SHORTCUT_returBeli.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.SHORTCUT_returBeli.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SHORTCUT_returBeli.Name = "SHORTCUT_returBeli";
-            this.SHORTCUT_returBeli.Size = new System.Drawing.Size(70, 66);
+            this.SHORTCUT_returBeli.Size = new System.Drawing.Size(68, 66);
             this.SHORTCUT_returBeli.Text = "RET. BELI";
             this.SHORTCUT_returBeli.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.SHORTCUT_returBeli.Click += new System.EventHandler(this.toolStripButton7_Click);
@@ -1126,7 +1127,7 @@
             this.SHORTCUT_returJual.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.SHORTCUT_returJual.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SHORTCUT_returJual.Name = "SHORTCUT_returJual";
-            this.SHORTCUT_returJual.Size = new System.Drawing.Size(71, 66);
+            this.SHORTCUT_returJual.Size = new System.Drawing.Size(69, 66);
             this.SHORTCUT_returJual.Text = "RET. JUAL";
             this.SHORTCUT_returJual.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.SHORTCUT_returJual.Click += new System.EventHandler(this.toolStripButton6_Click);
@@ -1226,7 +1227,7 @@
         private System.Windows.Forms.ToolStripMenuItem MENU_tambahTransaksiHarian;
         private System.Windows.Forms.ToolStripMenuItem MENU_pembayaranPiutang;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem70;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem26;
+        private System.Windows.Forms.ToolStripMenuItem ReportUserToolstrip;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem74;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem27;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem28;

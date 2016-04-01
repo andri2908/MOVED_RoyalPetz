@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.Data;
 using System.IO;
 
 namespace RoyalPetz_ADMIN
@@ -21,7 +22,6 @@ namespace RoyalPetz_ADMIN
         private static string ipServer = "";
         //private string myConnectionString = "server=127.0.0.1;uid=SYS_POS_ADMIN;pwd=pass123;database=SYS_POS;";
         private string configFile = "pos.cfg";
-
         private MySqlConnection transConnection;
 
         public bool setIPServer()
@@ -122,6 +122,37 @@ namespace RoyalPetz_ADMIN
             { 
                 conn.Close();
             }
+        }
+
+        public Boolean writeXML(string sqlCommand)
+        {
+            Boolean rslt = false;
+            DataSet myData = new DataSet();
+            MySqlCommand cmd;
+            MySqlDataAdapter myAdapter;
+            
+            cmd = new MySqlCommand();
+            myAdapter = new MySqlDataAdapter();
+            if (conn.State.ToString() != "Open")
+                mySqlConnect();
+            //cmd = new MySqlCommand(sqlCommand, conn);
+
+            try
+            {
+                cmd.CommandText = sqlCommand;
+                cmd.Connection = conn;
+
+                myAdapter.SelectCommand = cmd;
+                myAdapter.Fill(myData);
+                string appPath = Directory.GetCurrentDirectory() + "\\dataset.xml";
+                myData.WriteXml(@appPath, XmlWriteMode.WriteSchema);
+                rslt = true;
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                rslt = false;
+            }
+            return rslt;
         }
 
         public MySqlDataReader getData(string sqlCommand)
