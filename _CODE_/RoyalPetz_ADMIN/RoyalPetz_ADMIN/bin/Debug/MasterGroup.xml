@@ -1,0 +1,67 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="NAMA_x0020_GROUP" type="xs:string" minOccurs="0" />
+                <xs:element name="DESKRIPSI" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <NAMA_x0020_GROUP>group 1</NAMA_x0020_GROUP>
+    <DESKRIPSI>group 1 test group</DESKRIPSI>
+  </Table>
+  <Table>
+    <NAMA_x0020_GROUP>GLOBAL_ADMIN</NAMA_x0020_GROUP>
+    <DESKRIPSI>GLOBAL ADMIN GROUP</DESKRIPSI>
+  </Table>
+  <Table>
+    <NAMA_x0020_GROUP>group test</NAMA_x0020_GROUP>
+    <DESKRIPSI>test group</DESKRIPSI>
+  </Table>
+  <Table>
+    <NAMA_x0020_GROUP>aaa</NAMA_x0020_GROUP>
+    <DESKRIPSI>aaaaa</DESKRIPSI>
+  </Table>
+  <Table>
+    <NAMA_x0020_GROUP>bbbb</NAMA_x0020_GROUP>
+    <DESKRIPSI>bbbbbb</DESKRIPSI>
+  </Table>
+  <Table>
+    <NAMA_x0020_GROUP>cccc</NAMA_x0020_GROUP>
+    <DESKRIPSI>ccccccc</DESKRIPSI>
+  </Table>
+  <Table>
+    <NAMA_x0020_GROUP>sdadsadas</NAMA_x0020_GROUP>
+    <DESKRIPSI>sadadsadasdas</DESKRIPSI>
+  </Table>
+  <Table>
+    <NAMA_x0020_GROUP>aaaaaaaaaaassssaaaaaa</NAMA_x0020_GROUP>
+    <DESKRIPSI>aaaaaaaa</DESKRIPSI>
+  </Table>
+  <Table>
+    <NAMA_x0020_GROUP>123</NAMA_x0020_GROUP>
+    <DESKRIPSI>123</DESKRIPSI>
+  </Table>
+  <Table>
+    <NAMA_x0020_GROUP>asdfg</NAMA_x0020_GROUP>
+    <DESKRIPSI>asdfgh</DESKRIPSI>
+  </Table>
+  <Table>
+    <NAMA_x0020_GROUP>asdfg</NAMA_x0020_GROUP>
+    <DESKRIPSI>asdfgh</DESKRIPSI>
+  </Table>
+  <Table>
+    <NAMA_x0020_GROUP>KASIR GROUP</NAMA_x0020_GROUP>
+    <DESKRIPSI />
+  </Table>
+</NewDataSet>

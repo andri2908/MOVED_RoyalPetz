@@ -1,0 +1,51 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="NAMA_x0020_SUPPLIER" type="xs:string" minOccurs="0" />
+                <xs:element name="ALAMAT_x0020_1" type="xs:string" minOccurs="0" />
+                <xs:element name="ALAMAT_x0020_2" type="xs:string" minOccurs="0" />
+                <xs:element name="KOTA" type="xs:string" minOccurs="0" />
+                <xs:element name="TELEPON" type="xs:string" minOccurs="0" />
+                <xs:element name="FAX" type="xs:string" minOccurs="0" />
+                <xs:element name="EMAIL" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <NAMA_x0020_SUPPLIER>SUPPLIER BARU</NAMA_x0020_SUPPLIER>
+    <ALAMAT_x0020_1>AAAANNNNN</ALAMAT_x0020_1>
+    <ALAMAT_x0020_2>AAAA</ALAMAT_x0020_2>
+    <KOTA>AAAA</KOTA>
+    <TELEPON xml:space="preserve"> </TELEPON>
+    <FAX xml:space="preserve"> </FAX>
+    <EMAIL>AAAA</EMAIL>
+  </Table>
+  <Table>
+    <NAMA_x0020_SUPPLIER>SUPPLIER 2</NAMA_x0020_SUPPLIER>
+    <ALAMAT_x0020_1>AAA</ALAMAT_x0020_1>
+    <ALAMAT_x0020_2>AAAA</ALAMAT_x0020_2>
+    <KOTA xml:space="preserve"> </KOTA>
+    <TELEPON xml:space="preserve"> </TELEPON>
+    <FAX xml:space="preserve"> </FAX>
+    <EMAIL xml:space="preserve"> </EMAIL>
+  </Table>
+  <Table>
+    <NAMA_x0020_SUPPLIER>SUPPLIER 3</NAMA_x0020_SUPPLIER>
+    <ALAMAT_x0020_1 xml:space="preserve"> </ALAMAT_x0020_1>
+    <ALAMAT_x0020_2 xml:space="preserve"> </ALAMAT_x0020_2>
+    <KOTA xml:space="preserve"> </KOTA>
+    <TELEPON xml:space="preserve"> </TELEPON>
+    <FAX xml:space="preserve"> </FAX>
+    <EMAIL xml:space="preserve"> </EMAIL>
+  </Table>
+</NewDataSet>

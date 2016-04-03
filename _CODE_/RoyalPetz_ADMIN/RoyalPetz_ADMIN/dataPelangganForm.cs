@@ -126,11 +126,6 @@ namespace RoyalPetz_ADMIN
                 dataReturPenjualanForm displayedReturForm = new dataReturPenjualanForm(originModuleID, "", selectedCustomerID);
                 displayedReturForm.ShowDialog(this);
             }
-            else if (originModuleID == globalConstants.PEMBAYARAN_PIUTANG)
-            {
-                pembayaranLumpSumForm pembayaranForm = new pembayaranLumpSumForm(originModuleID, selectedCustomerID);
-                pembayaranForm.ShowDialog(this);
-            }
             else
             {
                 dataPelangganDetailForm displayedForm = new dataPelangganDetailForm(globalConstants.EDIT_CUSTOMER, selectedCustomerID);
@@ -178,11 +173,6 @@ namespace RoyalPetz_ADMIN
                 {
                     dataReturPenjualanForm displayDataReturPenjualan = new dataReturPenjualanForm(originModuleID, "", selectedCustomerID);
                     displayDataReturPenjualan.ShowDialog(this);
-                }
-                else if (originModuleID == globalConstants.PEMBAYARAN_PIUTANG)
-                {
-                    pembayaranLumpSumForm pembayaranForm = new pembayaranLumpSumForm(originModuleID, selectedCustomerID);
-                    pembayaranForm.ShowDialog(this);
                 }
                 else 
                 {

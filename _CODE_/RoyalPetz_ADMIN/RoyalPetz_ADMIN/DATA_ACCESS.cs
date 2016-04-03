@@ -124,7 +124,7 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        public Boolean writeXML(string sqlCommand)
+        public Boolean writeXML(string sqlCommand, string filename = "")
         {
             Boolean rslt = false;
             DataSet myData = new DataSet();
@@ -144,7 +144,14 @@ namespace RoyalPetz_ADMIN
 
                 myAdapter.SelectCommand = cmd;
                 myAdapter.Fill(myData);
-                string appPath = Directory.GetCurrentDirectory() + "\\dataset.xml";
+                if (filename.Equals(""))
+                {
+                    filename = "\\dataset.xml";
+                } else
+                {
+                    filename = "\\" + filename;
+                }
+                string appPath = Directory.GetCurrentDirectory() + filename;
                 myData.WriteXml(@appPath, XmlWriteMode.WriteSchema);
                 rslt = true;
             }

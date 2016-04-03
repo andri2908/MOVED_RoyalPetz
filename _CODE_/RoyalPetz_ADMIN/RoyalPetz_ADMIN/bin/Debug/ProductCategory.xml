@@ -1,0 +1,87 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="KATEGORI" type="xs:string" minOccurs="0" />
+                <xs:element name="ID" type="xs:string" minOccurs="0" />
+                <xs:element name="BARCODE" type="xs:unsignedInt" minOccurs="0" />
+                <xs:element name="NAME" type="xs:string" minOccurs="0" />
+                <xs:element name="HPP" type="xs:double" minOccurs="0" />
+                <xs:element name="HARGA_x0020_RETAIL" type="xs:double" minOccurs="0" />
+                <xs:element name="HARGA_x0020_GROSIR" type="xs:double" minOccurs="0" />
+                <xs:element name="HARGA_x0020_PARTAI" type="xs:double" minOccurs="0" />
+                <xs:element name="STOK" type="xs:double" minOccurs="0" />
+                <xs:element name="SATUAN" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <KATEGORI>aaaa</KATEGORI>
+    <ID>123</ID>
+    <BARCODE>111</BARCODE>
+    <NAME>AAA</NAME>
+    <HPP>100</HPP>
+    <HARGA_x0020_RETAIL>101</HARGA_x0020_RETAIL>
+    <HARGA_x0020_GROSIR>99</HARGA_x0020_GROSIR>
+    <HARGA_x0020_PARTAI>98</HARGA_x0020_PARTAI>
+    <STOK>0</STOK>
+    <SATUAN>aa</SATUAN>
+  </Table>
+  <Table>
+    <KATEGORI>aaaa</KATEGORI>
+    <ID>KRG001</ID>
+    <BARCODE>123</BARCODE>
+    <NAME>KARUNG SAK</NAME>
+    <HPP>3</HPP>
+    <HARGA_x0020_RETAIL>3</HARGA_x0020_RETAIL>
+    <HARGA_x0020_GROSIR>1</HARGA_x0020_GROSIR>
+    <HARGA_x0020_PARTAI>1</HARGA_x0020_PARTAI>
+    <STOK>996</STOK>
+    <SATUAN>karung</SATUAN>
+  </Table>
+  <Table>
+    <KATEGORI>karung</KATEGORI>
+    <ID>KRG002</ID>
+    <BARCODE>0</BARCODE>
+    <NAME>KARUNG 2</NAME>
+    <HPP>1</HPP>
+    <HARGA_x0020_RETAIL>10</HARGA_x0020_RETAIL>
+    <HARGA_x0020_GROSIR>10</HARGA_x0020_GROSIR>
+    <HARGA_x0020_PARTAI>10</HARGA_x0020_PARTAI>
+    <STOK>31</STOK>
+    <SATUAN>KARUNG</SATUAN>
+  </Table>
+  <Table>
+    <KATEGORI>promo</KATEGORI>
+    <ID>123</ID>
+    <BARCODE>111</BARCODE>
+    <NAME>AAA</NAME>
+    <HPP>100</HPP>
+    <HARGA_x0020_RETAIL>101</HARGA_x0020_RETAIL>
+    <HARGA_x0020_GROSIR>99</HARGA_x0020_GROSIR>
+    <HARGA_x0020_PARTAI>98</HARGA_x0020_PARTAI>
+    <STOK>0</STOK>
+    <SATUAN>aa</SATUAN>
+  </Table>
+  <Table>
+    <KATEGORI>promo</KATEGORI>
+    <ID>SAK001</ID>
+    <BARCODE>1234</BARCODE>
+    <NAME>SAK</NAME>
+    <HPP>1</HPP>
+    <HARGA_x0020_RETAIL>3333</HARGA_x0020_RETAIL>
+    <HARGA_x0020_GROSIR>10</HARGA_x0020_GROSIR>
+    <HARGA_x0020_PARTAI>10</HARGA_x0020_PARTAI>
+    <STOK>0</STOK>
+    <SATUAN>SAK</SATUAN>
+  </Table>
+</NewDataSet>

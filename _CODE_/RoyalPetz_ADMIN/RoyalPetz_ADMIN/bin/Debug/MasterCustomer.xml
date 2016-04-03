@@ -1,0 +1,65 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="NAMA_x0020_CUSTOMER" type="xs:string" minOccurs="0" />
+                <xs:element name="ALAMAT_x0020_1" type="xs:string" minOccurs="0" />
+                <xs:element name="ALAMAT_x0020_2" type="xs:string" minOccurs="0" />
+                <xs:element name="KOTA" type="xs:string" minOccurs="0" />
+                <xs:element name="TELEPON" type="xs:string" minOccurs="0" />
+                <xs:element name="FAX" type="xs:string" minOccurs="0" />
+                <xs:element name="EMAIL" type="xs:string" minOccurs="0" />
+                <xs:element name="GROUP" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <NAMA_x0020_CUSTOMER>name 1</NAMA_x0020_CUSTOMER>
+    <ALAMAT_x0020_1>address 1</ALAMAT_x0020_1>
+    <ALAMAT_x0020_2>address 2</ALAMAT_x0020_2>
+    <KOTA>city</KOTA>
+    <TELEPON>phone</TELEPON>
+    <FAX>fax</FAX>
+    <EMAIL>aa.aa.aa</EMAIL>
+    <GROUP>RETAIL</GROUP>
+  </Table>
+  <Table>
+    <NAMA_x0020_CUSTOMER>name 1234</NAMA_x0020_CUSTOMER>
+    <ALAMAT_x0020_1>address 1</ALAMAT_x0020_1>
+    <ALAMAT_x0020_2>address 2</ALAMAT_x0020_2>
+    <KOTA>city</KOTA>
+    <TELEPON>123</TELEPON>
+    <FAX>123</FAX>
+    <EMAIL>aa.aa.aa</EMAIL>
+    <GROUP>RETAIL</GROUP>
+  </Table>
+  <Table>
+    <NAMA_x0020_CUSTOMER>andri111</NAMA_x0020_CUSTOMER>
+    <ALAMAT_x0020_1>andri</ALAMAT_x0020_1>
+    <ALAMAT_x0020_2>andri</ALAMAT_x0020_2>
+    <KOTA>andri</KOTA>
+    <TELEPON>123</TELEPON>
+    <FAX>123</FAX>
+    <EMAIL>aa.aa.aa</EMAIL>
+    <GROUP>GROSIR</GROUP>
+  </Table>
+  <Table>
+    <NAMA_x0020_CUSTOMER>andri 1234</NAMA_x0020_CUSTOMER>
+    <ALAMAT_x0020_1>andri 1</ALAMAT_x0020_1>
+    <ALAMAT_x0020_2>andri 1</ALAMAT_x0020_2>
+    <KOTA>andri 1234</KOTA>
+    <TELEPON>123</TELEPON>
+    <FAX>56</FAX>
+    <EMAIL>andri 1123</EMAIL>
+    <GROUP>PARTAI</GROUP>
+  </Table>
+</NewDataSet>

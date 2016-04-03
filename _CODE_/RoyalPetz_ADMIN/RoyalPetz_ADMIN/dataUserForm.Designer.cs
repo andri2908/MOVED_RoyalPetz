@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.namaUserTextbox = new System.Windows.Forms.TextBox();
             this.dataUserGridView = new System.Windows.Forms.DataGridView();
@@ -36,8 +36,10 @@
             this.usernonactiveoption = new System.Windows.Forms.CheckBox();
             this.groupcombobox = new System.Windows.Forms.ComboBox();
             this.searchlabel = new System.Windows.Forms.Label();
-            this.optionpanel = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.CetakButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataUserGridView)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -45,7 +47,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label1.Location = new System.Drawing.Point(4, 15);
+            this.label1.Location = new System.Drawing.Point(6, 21);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 18);
             this.label1.TabIndex = 5;
@@ -55,9 +57,9 @@
             // 
             this.namaUserTextbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.namaUserTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaUserTextbox.Location = new System.Drawing.Point(80, 11);
+            this.namaUserTextbox.Location = new System.Drawing.Point(9, 42);
             this.namaUserTextbox.Name = "namaUserTextbox";
-            this.namaUserTextbox.Size = new System.Drawing.Size(250, 27);
+            this.namaUserTextbox.Size = new System.Drawing.Size(214, 27);
             this.namaUserTextbox.TabIndex = 0;
             this.namaUserTextbox.TextChanged += new System.EventHandler(this.namaUserTextbox_TextChanged);
             // 
@@ -66,30 +68,31 @@
             this.dataUserGridView.AllowUserToAddRows = false;
             this.dataUserGridView.AllowUserToDeleteRows = false;
             this.dataUserGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataUserGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataUserGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataUserGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataUserGridView.Location = new System.Drawing.Point(2, 86);
+            this.dataUserGridView.Location = new System.Drawing.Point(1, 109);
             this.dataUserGridView.Name = "dataUserGridView";
             this.dataUserGridView.ReadOnly = true;
             this.dataUserGridView.RowHeadersVisible = false;
-            this.dataUserGridView.Size = new System.Drawing.Size(602, 458);
+            this.dataUserGridView.Size = new System.Drawing.Size(634, 438);
             this.dataUserGridView.TabIndex = 2;
             this.dataUserGridView.DoubleClick += new System.EventHandler(this.dataSalesDataGridView_DoubleClick);
             this.dataUserGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataUserGridView_KeyDown);
             // 
             // newButton
             // 
-            this.newButton.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newButton.Location = new System.Drawing.Point(4, 36);
+            this.newButton.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold);
+            this.newButton.ForeColor = System.Drawing.Color.Black;
+            this.newButton.Location = new System.Drawing.Point(229, 41);
             this.newButton.Name = "newButton";
-            this.newButton.Size = new System.Drawing.Size(56, 38);
+            this.newButton.Size = new System.Drawing.Size(73, 27);
             this.newButton.TabIndex = 4;
             this.newButton.Text = "NEW";
             this.newButton.UseVisualStyleBackColor = true;
@@ -99,7 +102,7 @@
             // 
             this.usernonactiveoption.AutoSize = true;
             this.usernonactiveoption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usernonactiveoption.Location = new System.Drawing.Point(80, 44);
+            this.usernonactiveoption.Location = new System.Drawing.Point(9, 70);
             this.usernonactiveoption.Name = "usernonactiveoption";
             this.usernonactiveoption.Size = new System.Drawing.Size(171, 19);
             this.usernonactiveoption.TabIndex = 1;
@@ -109,10 +112,11 @@
             // 
             // groupcombobox
             // 
+            this.groupcombobox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupcombobox.FormattingEnabled = true;
-            this.groupcombobox.Location = new System.Drawing.Point(362, 42);
+            this.groupcombobox.Location = new System.Drawing.Point(328, 42);
             this.groupcombobox.Name = "groupcombobox";
-            this.groupcombobox.Size = new System.Drawing.Size(217, 21);
+            this.groupcombobox.Size = new System.Drawing.Size(217, 28);
             this.groupcombobox.TabIndex = 3;
             this.groupcombobox.Text = "ALL";
             this.groupcombobox.SelectedIndexChanged += new System.EventHandler(this.groupcombobox_SelectedIndexChanged);
@@ -120,36 +124,53 @@
             // searchlabel
             // 
             this.searchlabel.AutoSize = true;
-            this.searchlabel.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchlabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold);
             this.searchlabel.ForeColor = System.Drawing.Color.FloralWhite;
-            this.searchlabel.Location = new System.Drawing.Point(368, 17);
+            this.searchlabel.Location = new System.Drawing.Point(325, 21);
             this.searchlabel.Name = "searchlabel";
-            this.searchlabel.Size = new System.Drawing.Size(203, 16);
+            this.searchlabel.Size = new System.Drawing.Size(188, 18);
             this.searchlabel.TabIndex = 7;
-            this.searchlabel.Text = "Filter Pencarian - By Group";
+            this.searchlabel.Text = "Cari Berdasar Group";
             // 
-            // optionpanel
+            // groupBox1
             // 
-            this.optionpanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.optionpanel.Location = new System.Drawing.Point(350, 11);
-            this.optionpanel.Name = "optionpanel";
-            this.optionpanel.Size = new System.Drawing.Size(245, 63);
-            this.optionpanel.TabIndex = 6;
+            this.groupBox1.Controls.Add(this.CetakButton);
+            this.groupBox1.Controls.Add(this.searchlabel);
+            this.groupBox1.Controls.Add(this.newButton);
+            this.groupBox1.Controls.Add(this.usernonactiveoption);
+            this.groupBox1.Controls.Add(this.groupcombobox);
+            this.groupBox1.Controls.Add(this.namaUserTextbox);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.ForeColor = System.Drawing.Color.FloralWhite;
+            this.groupBox1.Location = new System.Drawing.Point(1, 7);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(634, 96);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Pilihan Pencarian";
+            // 
+            // CetakButton
+            // 
+            this.CetakButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.CetakButton.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold);
+            this.CetakButton.ForeColor = System.Drawing.Color.Black;
+            this.CetakButton.Location = new System.Drawing.Point(551, 41);
+            this.CetakButton.Name = "CetakButton";
+            this.CetakButton.Size = new System.Drawing.Size(73, 27);
+            this.CetakButton.TabIndex = 8;
+            this.CetakButton.Text = "CETAK";
+            this.CetakButton.UseVisualStyleBackColor = true;
+            this.CetakButton.Click += new System.EventHandler(this.CetakButton_Click);
             // 
             // dataUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(607, 549);
+            this.ClientSize = new System.Drawing.Size(636, 549);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataUserGridView);
-            this.Controls.Add(this.groupcombobox);
-            this.Controls.Add(this.searchlabel);
-            this.Controls.Add(this.usernonactiveoption);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.namaUserTextbox);
-            this.Controls.Add(this.newButton);
-            this.Controls.Add(this.optionpanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "dataUserForm";
@@ -159,8 +180,9 @@
             this.Activated += new System.EventHandler(this.dataUserForm_Activated);
             this.Load += new System.EventHandler(this.dataUserForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataUserGridView)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -173,6 +195,7 @@
         private System.Windows.Forms.CheckBox usernonactiveoption;
         private System.Windows.Forms.Label searchlabel;
         private System.Windows.Forms.ComboBox groupcombobox;
-        private System.Windows.Forms.Panel optionpanel;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button CetakButton;
     }
 }

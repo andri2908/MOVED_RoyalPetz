@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Data;
+using MySql.Data;
+using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
 
 namespace RoyalPetz_ADMIN
@@ -16,6 +19,7 @@ namespace RoyalPetz_ADMIN
         public const string CUSTOM_DATE_FORMAT = "dd MMM yyyy";
         public int INS = 1;
         public int UPD = 2;
+        private Data_Access DS = new Data_Access();
 
         public string allTrim(string valueToTrim)
         {
@@ -32,6 +36,50 @@ namespace RoyalPetz_ADMIN
             Match m = r.Match(textToMatch);
 
             return m.Success;
+        }
+
+        public bool loadinfotoko(int opt, out string NamaToko, out string AlamatToko, out string TeleponToko, out string EmailToko)
+        {
+            MySqlDataReader rdr;
+            DataTable dt = new DataTable();
+            //string NamaToko, AlamatToko, TeleponToko, EmailToko;
+            DS.mySqlConnect();
+            NamaToko = "";
+            AlamatToko = "";
+            TeleponToko = "";
+            EmailToko = "";
+            bool rslt = false;
+            //1 load default 2 setting user
+            using (rdr = DS.getData("SELECT IFNULL(STORE_NAME,'') AS 'NAME', IFNULL(STORE_ADDRESS,'') AS 'ADDRESS', IFNULL(STORE_PHONE,'') AS 'PHONE', IFNULL(STORE_EMAIL,'') AS 'EMAIL' FROM SYS_CONFIG WHERE ID =  " + opt))
+            {
+                if (rdr.HasRows)
+                {
+                    rslt = true;
+                    while (rdr.Read())
+                    {
+                        if (!String.IsNullOrEmpty(rdr.GetString("NAME")))
+                        {
+                            NamaToko = rdr.GetString("NAME");
+                        }
+                        if (!String.IsNullOrEmpty(rdr.GetString("ADDRESS")))
+                        {
+                            AlamatToko = rdr.GetString("ADDRESS");
+                        }
+                        if (!String.IsNullOrEmpty(rdr.GetString("PHONE")))
+                        {
+                            TeleponToko = rdr.GetString("PHONE");
+                        }
+                        if (!String.IsNullOrEmpty(rdr.GetString("EMAIL")))
+                        {
+                            EmailToko = rdr.GetString("EMAIL");
+                        }
+                    }
+                } else
+                {
+                    rslt = false;
+                }
+            }
+            return rslt;
         }
 
         public void ClearControls(Control ctrl)

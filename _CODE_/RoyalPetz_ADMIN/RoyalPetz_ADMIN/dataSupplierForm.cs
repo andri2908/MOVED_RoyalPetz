@@ -16,8 +16,6 @@ namespace RoyalPetz_ADMIN
     public partial class dataSupplierForm : Form
     {
         private int selectedSupplierID = 0;
-        private int originModuleID = 0;
-
         private globalUtilities gutil = new globalUtilities();
 
         private Data_Access DS = new Data_Access();
@@ -25,14 +23,6 @@ namespace RoyalPetz_ADMIN
         public dataSupplierForm()
         {
             InitializeComponent();
-        }
-
-        public dataSupplierForm(int moduleID)
-        {
-            InitializeComponent();
-            originModuleID = moduleID;
-
-            newButton.Visible = false;
         }
 
         private void newButton_Click(object sender, EventArgs e)
@@ -108,16 +98,8 @@ namespace RoyalPetz_ADMIN
             DataGridViewRow selectedRow = dataSupplierDataGridView.Rows[selectedrowindex];
             selectedSupplierID = Convert.ToInt32(selectedRow.Cells["SUPPLIER_ID"].Value);
 
-            if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
-            {
-                pembayaranLumpSumForm pembayaranHutangForm = new pembayaranLumpSumForm(originModuleID, selectedSupplierID);
-                pembayaranHutangForm.ShowDialog(this);
-            }
-            else
-            {
-                dataSupplierDetailForm displayedForm = new dataSupplierDetailForm(globalConstants.EDIT_SUPPLIER, selectedSupplierID);
-                displayedForm.ShowDialog(this);
-            }
+            dataSupplierDetailForm displayedForm = new dataSupplierDetailForm(globalConstants.EDIT_SUPPLIER, selectedSupplierID);
+            displayedForm.ShowDialog(this);
         }
 
         private void dataSupplierForm_Load(object sender, EventArgs e)
@@ -145,16 +127,8 @@ namespace RoyalPetz_ADMIN
                 DataGridViewRow selectedRow = dataSupplierDataGridView.Rows[selectedrowindex];
                 selectedSupplierID = Convert.ToInt32(selectedRow.Cells["SUPPLIER_ID"].Value);
 
-                if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
-                {
-                    pembayaranLumpSumForm pembayaranHutangForm = new pembayaranLumpSumForm(originModuleID, selectedSupplierID);
-                    pembayaranHutangForm.ShowDialog(this);
-                }
-                else
-                {
-                    dataSupplierDetailForm displayedForm = new dataSupplierDetailForm(globalConstants.EDIT_SUPPLIER, selectedSupplierID);
-                    displayedForm.ShowDialog(this);
-                }
+                dataSupplierDetailForm displayedForm = new dataSupplierDetailForm(globalConstants.EDIT_SUPPLIER, selectedSupplierID);
+                displayedForm.ShowDialog(this);
             }
         }
     }

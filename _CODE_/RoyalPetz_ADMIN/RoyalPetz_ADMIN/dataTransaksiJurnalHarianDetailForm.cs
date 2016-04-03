@@ -220,7 +220,7 @@ namespace RoyalPetz_ADMIN
             String TglTrans = "";
             Double NominalAkun = 0;
             int branch_id = 0;
-            String deskripsi = "";
+            //String deskripsi = "";
             int user_id = 0;
             int pm_id = 0;
             String deskripsiakun = "";
@@ -432,7 +432,7 @@ namespace RoyalPetz_ADMIN
         {
             //mode update cell
             String TglTrans = "";
-            String deskripsi = "";
+            //String deskripsi = "";
             int pm_id = 0;
             Double NominalAkun = 0;
             String deskripsiakun = "";

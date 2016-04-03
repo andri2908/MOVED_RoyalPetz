@@ -112,32 +112,20 @@ namespace RoyalPetz_ADMIN
         public const int MENU_PENERIMAAN_BARANG_DARI_MUTASI = 26;
         public const int MENU_PENERIMAAN_BARANG_DARI_PO = 27;
 
-        // MAIN MENU PEMBELIAN
-        public const int MENU_PEMBELIAN = 28;
-        public const int MENU_SUPPLIER = 29;
-        public const int MENU_REQUEST_ORDER = 30;
-        public const int MENU_PURCHASE_ORDER = 31;
-        public const int MENU_REPRINT_REQUEST_ORDER= 32;
-        public const int MENU_RETUR_PEMBELIAN = 33;
-        public const int MENU_RETUR_PERMINTAAN = 34;
-        
-        // MAIN MENU PENJUALAN
-        public const int MENU_PENJUALAN = 35;
-        public const int MENU_PELANGGAN = 36;
-        public const int MENU_TRANSAKSI_PENJUALAN = 37;
-        public const int MENU_SET_NO_FAKTUR = 38;
-        public const int MENU_RETUR_PENJUALAN = 39;
-        public const int MENU_RETUR_PENJUALAN_INVOICE = 40;
-        public const int MENU_RETUR_PENJUALAN_STOK = 41;
+        //mode laporan
+        public const int MENU_REPORT_USER = 601;
 
-        // MAIN MENU KEUANGAN
-        public const int MENU_KEUANGAN = 42;
-        public const int MENU_PENGATURAN_NO_AKUN = 43;
-        public const int MENU_TRANSAKSI = 44;
-        public const int MENU_TRANSAKSI_HARIAN = 45;
-        public const int MENU_PEMBAYARAN_PIUTANG = 46;
-        public const int MENU_PEMBAYARAN_PIUTANG_MUTASI = 47;
-        public const int MENU_PEMBAYARAN_HUTANG_SUPPLIER = 48;
+        //XML file
+        public const string AccountXML = "MasterAccount.xml";
+        public const string BranchXML = "MasterBranch.xml";
+        public const string CategoryXML = "MasterCategory.xml";
+        public const string CustomerXML = "MasterCustomer.xml";
+        public const string GroupXML = "MasterGroup.xml";
+        public const string ProductXML = "MasterProduct.xml";
+        public const string SupplierXML = "MasterSupplier.xml";
+        public const string UnitXML = "MasterUnit.xml";
+        public const string UserXML = "MasterUser.xml";
+        public const string ProductCategoryXML = "ProductCategory.xml";
 
 
 

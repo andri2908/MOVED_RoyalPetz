@@ -1,0 +1,43 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="NAMA_x0020_UNIT" type="xs:string" minOccurs="0" />
+                <xs:element name="DESKRIPSI" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <NAMA_x0020_UNIT>aa</NAMA_x0020_UNIT>
+    <DESKRIPSI>aa</DESKRIPSI>
+  </Table>
+  <Table>
+    <NAMA_x0020_UNIT>vv</NAMA_x0020_UNIT>
+    <DESKRIPSI>vv</DESKRIPSI>
+  </Table>
+  <Table>
+    <NAMA_x0020_UNIT>aaa</NAMA_x0020_UNIT>
+    <DESKRIPSI>aaaa</DESKRIPSI>
+  </Table>
+  <Table>
+    <NAMA_x0020_UNIT>KARUNG</NAMA_x0020_UNIT>
+    <DESKRIPSI>KARUNG</DESKRIPSI>
+  </Table>
+  <Table>
+    <NAMA_x0020_UNIT>SAK</NAMA_x0020_UNIT>
+    <DESKRIPSI>SAK</DESKRIPSI>
+  </Table>
+  <Table>
+    <NAMA_x0020_UNIT>karung</NAMA_x0020_UNIT>
+    <DESKRIPSI>karung</DESKRIPSI>
+  </Table>
+</NewDataSet>

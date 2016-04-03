@@ -206,11 +206,6 @@
     <Compile Include="dataSatuanForm.Designer.cs">
       <DependentUpon>dataSatuanForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
     <Compile Include="dataSupplierDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -307,11 +302,11 @@
     <Compile Include="pembayaranPiutangForm.Designer.cs">
       <DependentUpon>pembayaranPiutangForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="pembayaranLumpSumForm.cs">
+    <Compile Include="pembayaranPiutangLumpSumForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="pembayaranLumpSumForm.Designer.cs">
-      <DependentUpon>pembayaranLumpSumForm.cs</DependentUpon>
+    <Compile Include="pembayaranPiutangLumpSumForm.Designer.cs">
+      <DependentUpon>pembayaranPiutangLumpSumForm.cs</DependentUpon>
     </Compile>
     <Compile Include="penerimaanBarangForm.cs">
       <SubType>Form</SubType>
@@ -375,6 +370,30 @@
     <Compile Include="purchaseOrderDetailForm.Designer.cs">
       <DependentUpon>purchaseOrderDetailForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportBranch.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportBranch.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportBranchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportBranchForm.Designer.cs">
+      <DependentUpon>ReportBranchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportProductCategory.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportProductCategory.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportProductCategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportProductCategoryForm.Designer.cs">
+      <DependentUpon>ReportProductCategoryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportUser.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -434,6 +453,12 @@
     </Compile>
     <Compile Include="TabSchemeProvider.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XMLGeneratorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="XMLGeneratorForm.Designer.cs">
+      <DependentUpon>XMLGeneratorForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="aboutusform.resx">
       <DependentUpon>aboutusform.cs</DependentUpon>
@@ -558,8 +583,8 @@
     <EmbeddedResource Include="pembayaranPiutangForm.resx">
       <DependentUpon>pembayaranPiutangForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="pembayaranLumpSumForm.resx">
-      <DependentUpon>pembayaranLumpSumForm.cs</DependentUpon>
+    <EmbeddedResource Include="pembayaranPiutangLumpSumForm.resx">
+      <DependentUpon>pembayaranPiutangLumpSumForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="penerimaanBarangForm.resx">
       <DependentUpon>penerimaanBarangForm.cs</DependentUpon>
@@ -597,6 +622,20 @@
     <EmbeddedResource Include="purchaseOrderDetailForm.resx">
       <DependentUpon>purchaseOrderDetailForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportBranch.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportBranch.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportBranchForm.resx">
+      <DependentUpon>ReportBranchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportProductCategory.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportProductCategory.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportProductCategoryForm.resx">
+      <DependentUpon>ReportProductCategoryForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportUser.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportUser.cs</LastGenOutput>
@@ -626,17 +665,9 @@
       <DependentUpon>dataKategoriProdukForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabSchemeProvider.resx" />
-    <None Include="DataSet1.xsc">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="DataSet1.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="DataSet1.xss">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
+    <EmbeddedResource Include="XMLGeneratorForm.resx">
+      <DependentUpon>XMLGeneratorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

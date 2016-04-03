@@ -17,6 +17,7 @@ namespace RoyalPetz_ADMIN
     {
         private int originModuleID = 0;
         private int selectedUserID = 0;
+        private string sqlCommandx = ""; 
 
         Data_Access DS = new Data_Access();
         private globalUtilities gutil = new globalUtilities();
@@ -48,21 +49,25 @@ namespace RoyalPetz_ADMIN
                 sqlfiltergroup = "";
             } else
             {
-                sqlfiltergroup = "AND MASTER_USER.GROUP_ID = '" + filtergroup + "' ";
+                sqlfiltergroup = "AND U.GROUP_ID = '" + filtergroup + "' ";
             }
             DS.mySqlConnect();
 
             if (usernonactiveoption.Checked)
             {
-                sqlCommand = "SELECT ID, USER_NAME AS 'USER NAME', USER_FULL_NAME AS 'USER FULL NAME', MASTER_GROUP.GROUP_USER_NAME AS 'NAMA GROUP' " +
-                                "FROM MASTER_USER, MASTER_GROUP " +
-                                "WHERE MASTER_USER.GROUP_ID = MASTER_GROUP.GROUP_ID " + sqlfiltergroup + "AND UPPER(MASTER_USER.USER_NAME) LIKE '%" + userName + "%'";
+                sqlCommand = "SELECT U.ID AS 'ID', U.USER_NAME AS 'USER NAME', U.USER_FULL_NAME AS 'USER FULL NAME', G.GROUP_USER_NAME AS 'NAMA GROUP' " +
+                                "FROM MASTER_USER U, MASTER_GROUP G " +
+                                "WHERE U.GROUP_ID = G.GROUP_ID " + sqlfiltergroup + "AND UPPER(U.USER_NAME) LIKE '%" + userName + "%'";
+                sqlCommandx = "SELECT U.USER_NAME AS 'USER', U.USER_FULL_NAME AS 'NAMA', U.USER_PHONE AS 'TELEPON', G.GROUP_USER_NAME AS 'GROUP' FROM MASTER_USER U, MASTER_GROUP G WHERE U.GROUP_ID = G.GROUP_ID " 
+                    + sqlfiltergroup + "AND UPPER(U.USER_NAME) LIKE '%" + userName + "%'";
             }
             else
             {
-                sqlCommand = "SELECT ID, USER_NAME AS 'USER NAME', USER_FULL_NAME AS 'USER FULL NAME', MASTER_GROUP.GROUP_USER_NAME AS 'NAMA GROUP' " +
-                                "FROM MASTER_USER, MASTER_GROUP " +
-                                "WHERE USER_ACTIVE = 1 AND MASTER_USER.GROUP_ID = MASTER_GROUP.GROUP_ID " + sqlfiltergroup + "AND UPPER(MASTER_USER.USER_NAME) LIKE '%" + userName + "%'";
+                sqlCommand = "SELECT U.ID AS 'ID', U.USER_NAME AS 'USER NAME', U.USER_FULL_NAME AS 'USER FULL NAME', G.GROUP_USER_NAME AS 'NAMA GROUP' " +
+                                "FROM MASTER_USER U, MASTER_GROUP G " +
+                                "WHERE U.USER_ACTIVE = 1 AND U.GROUP_ID = G.GROUP_ID " + sqlfiltergroup + "AND UPPER(U.USER_NAME) LIKE '%" + userName + "%'";
+                sqlCommandx = "SELECT U.USER_NAME AS 'USER', U.USER_FULL_NAME AS 'NAMA', U.USER_PHONE AS 'TELEPON', G.GROUP_USER_NAME AS 'GROUP' FROM MASTER_USER U, MASTER_GROUP G WHERE U.GROUP_ID = G.GROUP_ID "
+                    + "AND U.USER_ACTIVE = 1 " + sqlfiltergroup + "AND UPPER(U.USER_NAME) LIKE '%" + userName + "%'";
             }
             
 
@@ -182,6 +187,15 @@ namespace RoyalPetz_ADMIN
         private void dataUserForm_Load(object sender, EventArgs e)
         {
             gutil.reArrangeTabOrder(this);
+        }
+
+        private void CetakButton_Click(object sender, EventArgs e)
+        {
+            //preview laporan
+            DS.mySqlConnect();
+            DS.writeXML(sqlCommandx,globalConstants.UserXML);
+            ReportUserForm displayedform = new ReportUserForm();
+            displayedform.ShowDialog(this);
         }
     }
 }

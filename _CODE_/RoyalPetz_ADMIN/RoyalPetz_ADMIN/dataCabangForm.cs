@@ -95,7 +95,7 @@ namespace RoyalPetz_ADMIN
 
             if (originModuleID == globalConstants.DATA_PIUTANG_MUTASI)
             {
-                pembayaranLumpSumForm dataPiutangMutasi = new pembayaranLumpSumForm(originModuleID, selectedBranchID);
+                pembayaranPiutangLumpSumForm dataPiutangMutasi = new pembayaranPiutangLumpSumForm(originModuleID, selectedBranchID);
                 dataPiutangMutasi.ShowDialog(this);
             }
             else
@@ -129,7 +129,7 @@ namespace RoyalPetz_ADMIN
 
                 if (originModuleID == globalConstants.DATA_PIUTANG_MUTASI)
                 {
-                    pembayaranLumpSumForm dataPiutangMutasi = new pembayaranLumpSumForm(originModuleID , selectedBranchID);
+                    pembayaranPiutangLumpSumForm dataPiutangMutasi = new pembayaranPiutangLumpSumForm(originModuleID , selectedBranchID);
                     dataPiutangMutasi.ShowDialog(this);
                 }
                 else
