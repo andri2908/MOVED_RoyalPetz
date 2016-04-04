@@ -106,6 +106,7 @@
             this.importFromFileButton.TabIndex = 31;
             this.importFromFileButton.Text = "IMPORT FROM FILE";
             this.importFromFileButton.UseVisualStyleBackColor = true;
+            this.importFromFileButton.Click += new System.EventHandler(this.importFromFileButton_Click);
             // 
             // label2
             // 

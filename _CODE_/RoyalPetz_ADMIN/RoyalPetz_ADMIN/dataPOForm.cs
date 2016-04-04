@@ -136,6 +136,7 @@ namespace RoyalPetz_ADMIN
 
         private void dataPOForm_Load(object sender, EventArgs e)
         {
+            int userAccessOption = 0;
             PODtPicker_1.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
             PODtPicker_2.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
 
@@ -145,6 +146,13 @@ namespace RoyalPetz_ADMIN
             {
                 newButton.Visible = false;
             }
+
+            userAccessOption = DS.getUserAccessRight(globalConstants.MENU_PURCHASE_ORDER, gUtil.getUserGroupID());
+
+            if (userAccessOption == 2 || userAccessOption == 6)
+                newButton.Visible = true;
+            else
+                newButton.Visible = false;
             
             gUtil.reArrangeTabOrder(this);
         }

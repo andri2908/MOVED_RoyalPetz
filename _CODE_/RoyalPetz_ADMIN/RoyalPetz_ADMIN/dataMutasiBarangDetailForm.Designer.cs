@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.detailRequestOrderDataGridView = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -71,6 +71,7 @@
             this.errorLabel = new System.Windows.Forms.Label();
             this.productIDHiddenCombo = new System.Windows.Forms.ComboBox();
             this.rejectButton = new System.Windows.Forms.Button();
+            this.exportButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.detailRequestOrderDataGridView)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -86,14 +87,14 @@
             this.detailRequestOrderDataGridView.AllowUserToAddRows = false;
             this.detailRequestOrderDataGridView.AllowUserToDeleteRows = false;
             this.detailRequestOrderDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.detailRequestOrderDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.detailRequestOrderDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.detailRequestOrderDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.detailRequestOrderDataGridView.Location = new System.Drawing.Point(0, 308);
             this.detailRequestOrderDataGridView.Name = "detailRequestOrderDataGridView";
@@ -113,6 +114,7 @@
             this.label2.Size = new System.Drawing.Size(179, 18);
             this.label2.TabIndex = 7;
             this.label2.Text = "ASAL PERMINTAAN";
+            this.label2.Visible = false;
             // 
             // label6
             // 
@@ -212,6 +214,7 @@
             this.label8.Size = new System.Drawing.Size(11, 18);
             this.label8.TabIndex = 26;
             this.label8.Text = ":";
+            this.label8.Visible = false;
             // 
             // label1
             // 
@@ -303,9 +306,9 @@
             this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label3.Location = new System.Drawing.Point(3, 162);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(206, 18);
+            this.label3.Size = new System.Drawing.Size(179, 18);
             this.label3.TabIndex = 8;
-            this.label3.Text = "TUJUAN PERMINTAAN";
+            this.label3.Text = "ASAL PERMINTAAN";
             // 
             // tableLayoutPanel1
             // 
@@ -370,6 +373,7 @@
             // noMutasiTextBox
             // 
             this.noMutasiTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.noMutasiTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.noMutasiTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.noMutasiTextBox.Location = new System.Drawing.Point(3, 3);
             this.noMutasiTextBox.MaxLength = 30;
@@ -525,6 +529,7 @@
             this.branchFromCombo.Name = "branchFromCombo";
             this.branchFromCombo.Size = new System.Drawing.Size(321, 26);
             this.branchFromCombo.TabIndex = 0;
+            this.branchFromCombo.Visible = false;
             this.branchFromCombo.SelectedIndexChanged += new System.EventHandler(this.branchFromCombo_SelectedIndexChanged);
             // 
             // totalLabel
@@ -607,12 +612,25 @@
             this.rejectButton.UseVisualStyleBackColor = true;
             this.rejectButton.Click += new System.EventHandler(this.rejectButton_Click);
             // 
+            // exportButton
+            // 
+            this.exportButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.exportButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exportButton.Location = new System.Drawing.Point(330, 614);
+            this.exportButton.Name = "exportButton";
+            this.exportButton.Size = new System.Drawing.Size(248, 37);
+            this.exportButton.TabIndex = 46;
+            this.exportButton.Text = "EXPORT DATA MUTASI";
+            this.exportButton.UseVisualStyleBackColor = true;
+            this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
+            // 
             // dataMutasiBarangDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(896, 661);
+            this.Controls.Add(this.exportButton);
             this.Controls.Add(this.rejectButton);
             this.Controls.Add(this.productIDHiddenCombo);
             this.Controls.Add(this.approveButton);
@@ -689,5 +707,6 @@
         private System.Windows.Forms.ComboBox branchFromComboHidden;
         private System.Windows.Forms.ComboBox productIDHiddenCombo;
         private System.Windows.Forms.Button rejectButton;
+        private System.Windows.Forms.Button exportButton;
     }
 }

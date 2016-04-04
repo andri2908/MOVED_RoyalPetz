@@ -34,15 +34,15 @@
             this.errorLabel = new System.Windows.Forms.Label();
             this.ConModeBox = new System.Windows.Forms.GroupBox();
             this.ipServerBox = new System.Windows.Forms.GroupBox();
+            this.ip3Textbox = new System.Windows.Forms.MaskedTextBox();
+            this.ip1Textbox = new System.Windows.Forms.MaskedTextBox();
+            this.ip4Textbox = new System.Windows.Forms.MaskedTextBox();
+            this.ip2Textbox = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.serverIPRadioButton = new System.Windows.Forms.RadioButton();
             this.localhostRadioButton = new System.Windows.Forms.RadioButton();
-            this.ip3Textbox = new System.Windows.Forms.MaskedTextBox();
-            this.ip1Textbox = new System.Windows.Forms.MaskedTextBox();
-            this.ip4Textbox = new System.Windows.Forms.MaskedTextBox();
-            this.ip2Textbox = new System.Windows.Forms.MaskedTextBox();
             this.panel1.SuspendLayout();
             this.ConModeBox.SuspendLayout();
             this.ipServerBox.SuspendLayout();
@@ -124,6 +124,57 @@
             this.ipServerBox.TabStop = false;
             this.ipServerBox.Text = "IP Server";
             // 
+            // ip3Textbox
+            // 
+            this.ip3Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.ip3Textbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ip3Textbox.Location = new System.Drawing.Point(106, 20);
+            this.ip3Textbox.Mask = "000";
+            this.ip3Textbox.Name = "ip3Textbox";
+            this.ip3Textbox.Size = new System.Drawing.Size(38, 27);
+            this.ip3Textbox.TabIndex = 29;
+            this.ip3Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.ip3Textbox.Visible = false;
+            this.ip3Textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IPMasked_3_KeyPress);
+            // 
+            // ip1Textbox
+            // 
+            this.ip1Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.ip1Textbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ip1Textbox.Location = new System.Drawing.Point(6, 21);
+            this.ip1Textbox.Mask = "000";
+            this.ip1Textbox.Name = "ip1Textbox";
+            this.ip1Textbox.Size = new System.Drawing.Size(38, 27);
+            this.ip1Textbox.TabIndex = 27;
+            this.ip1Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.ip1Textbox.Visible = false;
+            this.ip1Textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IPMasked_1_KeyPress);
+            // 
+            // ip4Textbox
+            // 
+            this.ip4Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.ip4Textbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ip4Textbox.Location = new System.Drawing.Point(156, 20);
+            this.ip4Textbox.Mask = "000";
+            this.ip4Textbox.Name = "ip4Textbox";
+            this.ip4Textbox.Size = new System.Drawing.Size(38, 27);
+            this.ip4Textbox.TabIndex = 30;
+            this.ip4Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.ip4Textbox.Visible = false;
+            // 
+            // ip2Textbox
+            // 
+            this.ip2Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.ip2Textbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ip2Textbox.Location = new System.Drawing.Point(56, 20);
+            this.ip2Textbox.Mask = "000";
+            this.ip2Textbox.Name = "ip2Textbox";
+            this.ip2Textbox.Size = new System.Drawing.Size(38, 27);
+            this.ip2Textbox.TabIndex = 28;
+            this.ip2Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.ip2Textbox.Visible = false;
+            this.ip2Textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IPMasked_2_KeyPress);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -180,54 +231,6 @@
             this.localhostRadioButton.TabStop = true;
             this.localhostRadioButton.Text = "Local Connection";
             this.localhostRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // ip3Textbox
-            // 
-            this.ip3Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            this.ip3Textbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ip3Textbox.Location = new System.Drawing.Point(106, 20);
-            this.ip3Textbox.Mask = "000";
-            this.ip3Textbox.Name = "ip3Textbox";
-            this.ip3Textbox.Size = new System.Drawing.Size(38, 27);
-            this.ip3Textbox.TabIndex = 29;
-            this.ip3Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            this.ip3Textbox.Visible = false;
-            // 
-            // ip1Textbox
-            // 
-            this.ip1Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            this.ip1Textbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ip1Textbox.Location = new System.Drawing.Point(6, 21);
-            this.ip1Textbox.Mask = "000";
-            this.ip1Textbox.Name = "ip1Textbox";
-            this.ip1Textbox.Size = new System.Drawing.Size(38, 27);
-            this.ip1Textbox.TabIndex = 27;
-            this.ip1Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            this.ip1Textbox.Visible = false;
-            // 
-            // ip4Textbox
-            // 
-            this.ip4Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            this.ip4Textbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ip4Textbox.Location = new System.Drawing.Point(156, 20);
-            this.ip4Textbox.Mask = "000";
-            this.ip4Textbox.Name = "ip4Textbox";
-            this.ip4Textbox.Size = new System.Drawing.Size(38, 27);
-            this.ip4Textbox.TabIndex = 30;
-            this.ip4Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            this.ip4Textbox.Visible = false;
-            // 
-            // ip2Textbox
-            // 
-            this.ip2Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            this.ip2Textbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ip2Textbox.Location = new System.Drawing.Point(56, 20);
-            this.ip2Textbox.Mask = "000";
-            this.ip2Textbox.Name = "ip2Textbox";
-            this.ip2Textbox.Size = new System.Drawing.Size(38, 27);
-            this.ip2Textbox.TabIndex = 28;
-            this.ip2Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            this.ip2Textbox.Visible = false;
             // 
             // createConfigFileForm
             // 

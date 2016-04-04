@@ -126,6 +126,11 @@ namespace RoyalPetz_ADMIN
                 dataReturPenjualanForm displayedReturForm = new dataReturPenjualanForm(originModuleID, "", selectedCustomerID);
                 displayedReturForm.ShowDialog(this);
             }
+            else if (originModuleID == globalConstants.PEMBAYARAN_PIUTANG)
+            {
+                pembayaranLumpSumForm pembayaranForm = new pembayaranLumpSumForm(originModuleID, selectedCustomerID);
+                pembayaranForm.ShowDialog(this);
+            }
             else
             {
                 dataPelangganDetailForm displayedForm = new dataPelangganDetailForm(globalConstants.EDIT_CUSTOMER, selectedCustomerID);
@@ -135,8 +140,16 @@ namespace RoyalPetz_ADMIN
 
         private void dataPelangganForm_Load(object sender, EventArgs e)
         {
+            int userAccessOption = 0;
             if (originModuleID != globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
                 unknownCustomerButton.Visible = false;
+
+            userAccessOption = DS.getUserAccessRight(globalConstants.MENU_PELANGGAN, gutil.getUserGroupID());
+
+            if (userAccessOption == 2 || userAccessOption == 6)
+                newButton.Visible = true;
+            else
+                newButton.Visible = false;
 
             gutil.reArrangeTabOrder(this);
         }
@@ -173,6 +186,11 @@ namespace RoyalPetz_ADMIN
                 {
                     dataReturPenjualanForm displayDataReturPenjualan = new dataReturPenjualanForm(originModuleID, "", selectedCustomerID);
                     displayDataReturPenjualan.ShowDialog(this);
+                }
+                else if (originModuleID == globalConstants.PEMBAYARAN_PIUTANG)
+                {
+                    pembayaranLumpSumForm pembayaranForm = new pembayaranLumpSumForm(originModuleID, selectedCustomerID);
+                    pembayaranForm.ShowDialog(this);
                 }
                 else 
                 {

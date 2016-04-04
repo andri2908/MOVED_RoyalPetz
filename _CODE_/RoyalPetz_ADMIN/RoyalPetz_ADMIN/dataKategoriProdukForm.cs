@@ -135,7 +135,15 @@ namespace RoyalPetz_ADMIN
 
         private void dataKategoriProdukForm_Load(object sender, EventArgs e)
         {
+            int userAccessOption = 0;
             gutil.reArrangeTabOrder(this);
+
+            userAccessOption = DS.getUserAccessRight(globalConstants.MENU_KATEGORI, gutil.getUserGroupID());
+
+            if (userAccessOption == 2 || userAccessOption == 6)
+                newButton.Visible = true;
+            else
+                newButton.Visible = false;
         }
 
         private void groupnonactiveoption_CheckedChanged(object sender, EventArgs e)
@@ -145,6 +153,13 @@ namespace RoyalPetz_ADMIN
             {
                 loadKategoriData();
             }
+        }
+
+        private void kategoriProdukDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                if (kategoriProdukDataGridView.Rows.Count > 0)
+                    displaySpecificForm();
         }
     }
 }

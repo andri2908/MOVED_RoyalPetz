@@ -20,6 +20,28 @@ namespace RoyalPetz_ADMIN
         public int INS = 1;
         public int UPD = 2;
         private Data_Access DS = new Data_Access();
+        private static int userID = 0;
+        private static int userGroupID = 0;
+
+        public void setUserID(int selectedUserID)
+        {
+            userID = selectedUserID;
+        }
+
+        public int getUserID()
+        {
+            return userID;
+        }
+
+        public void setUserGroupID(int selectedUserGroupID)
+        {
+            userGroupID = selectedUserGroupID;
+        }
+
+        public int getUserGroupID()
+        {
+            return userGroupID;
+        }
 
         public string allTrim(string valueToTrim)
         {
@@ -139,8 +161,75 @@ namespace RoyalPetz_ADMIN
                    ResetAllControls(ctrl);
                 }
             }
-
         }
+
+        public void disableControls(Control ctrl)
+        {
+            foreach (Control control in ctrl.Controls)
+            {
+                if (control is TextBox)
+                {
+                    TextBox textBox = (TextBox)control;
+                    textBox.ReadOnly = true;
+                }
+
+                if (control is MaskedTextBox)
+                {
+                    MaskedTextBox maskedtextBox = (MaskedTextBox)control;
+                    maskedtextBox.ReadOnly = true;
+                }
+
+                if (control is ComboBox)
+                {
+                    ComboBox comboBox = (ComboBox)control;
+                    comboBox.Enabled = false;
+                }
+
+                if (control is CheckBox)
+                {
+                    CheckBox checkBox = (CheckBox)control;
+                    checkBox.Enabled = false;
+                }
+
+                if (control is ListBox)
+                {
+                    ListBox listBox = (ListBox)control;
+                    listBox.Enabled = false;
+                }
+
+                if (control is DataGridView)
+                {
+                    DataGridView dgView = (DataGridView)control;
+                    dgView.Enabled = false;
+                }
+
+                if (control is Button)
+                {
+                    Button button = (Button)control;
+                    button.Enabled = false;
+                }
+            }
+        }
+
+        public void setReadOnlyAllControls(Control form)
+        {
+            String typectrl = "";
+            disableControls(form); //if controls are not nested
+            for (int i = 0; i <= form.Controls.Count - 1; i++) //if controls are nested
+            {
+
+                typectrl = "" + form.Controls[i].GetType();
+                //MessageBox.Show(typectrl);
+                if ((typectrl.Equals("System.Windows.Forms.Panel")) || (typectrl.Equals("System.Windows.Forms.TableLayoutPanel")))
+                {
+                    Control ctrl = form.Controls[i];
+                    //MessageBox.Show("" + ctrl.Controls.Count);
+                    //ClearControls(ctrl);
+                    setReadOnlyAllControls(ctrl);
+                }
+            }
+        }
+
         public void reArrangeTabOrder(Control form)
         {
             TabOrderManager.TabScheme scheme;

@@ -89,8 +89,27 @@ namespace RoyalPetz_ADMIN
 
         private void dataPelangganDetailForm_Load(object sender, EventArgs e)
         {
+            int userAccessOption;
+
             dateJoinedDateTimePicked.Format = DateTimePickerFormat.Custom;
             dateJoinedDateTimePicked.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+
+            userAccessOption = DS.getUserAccessRight(globalConstants.MENU_PELANGGAN, gUtil.getUserGroupID());
+
+            if (originModuleID == globalConstants.NEW_CUSTOMER)
+            {
+                if (userAccessOption != 2 && userAccessOption != 6)
+                {
+                    gUtil.setReadOnlyAllControls(this);
+                }
+            }
+            else if (originModuleID == globalConstants.EDIT_CUSTOMER)
+            {
+                if (userAccessOption != 4 && userAccessOption != 6)
+                {
+                    gUtil.setReadOnlyAllControls(this);
+                }
+            }
 
             gUtil.reArrangeTabOrder(this);
         }

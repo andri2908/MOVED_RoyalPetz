@@ -179,14 +179,21 @@ namespace RoyalPetz_ADMIN
                 errorLabel.Text = "NOMINAL TIDAK BOLEH KOSONG";
                 return false;
             }
+
+            if (0 == getBranchID())
+            {
+                errorLabel.Text = "BRANCH ID BELUM DI SET";
+                return false;
+            }
+
             return true;
         }
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            //dataNomorAkun displayedForm = new dataNomorAkun(globalConstants.TAMBAH_HAPUS_JURNAL_HARIAN,this);
-            //displayedForm.ShowDialog(this);
-            //loadDeskripsi(selectedAccountID);
+            dataNomorAkun displayedForm = new dataNomorAkun(globalConstants.TAMBAH_HAPUS_JURNAL_HARIAN, this);
+            displayedForm.ShowDialog(this);
+            loadDeskripsi(selectedAccountID);
         }
 
         private void dataTransaksiJurnalHarianDetailForm_Load(object sender, EventArgs e)
@@ -220,10 +227,13 @@ namespace RoyalPetz_ADMIN
             String TglTrans = "";
             Double NominalAkun = 0;
             int branch_id = 0;
-            //String deskripsi = "";
+            String deskripsi = "";
             int user_id = 0;
             int pm_id = 0;
             String deskripsiakun = "";
+
+            branch_id = getBranchID();
+
             for (int rows = 0; rows < TransaksiAccountGridView.Rows.Count; rows++)
             {
                 TglTrans = String.Format(culture, "{0:dd-MM-yyyy}", TransaksiAccountGridView.Rows[rows].Cells[0].Value.ToString());
@@ -340,6 +350,15 @@ namespace RoyalPetz_ADMIN
             }
         }
 
+        private int getBranchID()
+        {
+            int result;
+
+            result = Convert.ToInt32(DS.getDataSingleValue("SELECT IFNULL(BRANCH_ID, 0) FROM SYS_CONFIG WHERE ID = 2"));
+
+            return result;
+        }
+
         private void loadTransaksi()
         {
             //if change check db if there any transaction 
@@ -432,7 +451,7 @@ namespace RoyalPetz_ADMIN
         {
             //mode update cell
             String TglTrans = "";
-            //String deskripsi = "";
+            String deskripsi = "";
             int pm_id = 0;
             Double NominalAkun = 0;
             String deskripsiakun = "";

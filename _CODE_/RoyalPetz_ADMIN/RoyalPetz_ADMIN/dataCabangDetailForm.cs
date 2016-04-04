@@ -181,7 +181,25 @@ namespace RoyalPetz_ADMIN
 
         private void dataCabangDetailForm_Load(object sender, EventArgs e)
         {
-            gUtil.reArrangeTabOrder(this);            
+            int userAccessOption = 0;
+            gUtil.reArrangeTabOrder(this);
+
+            userAccessOption = DS.getUserAccessRight(globalConstants.MENU_MANAJEMEN_CABANG, gUtil.getUserGroupID());
+
+            if (originModuleID == globalConstants.NEW_BRANCH)
+            {
+                if (userAccessOption != 2 && userAccessOption != 6)
+                {
+                    gUtil.setReadOnlyAllControls(this);
+                }
+            }
+            else if (originModuleID == globalConstants.EDIT_BRANCH)
+            {
+                if (userAccessOption != 4 && userAccessOption != 6)
+                {
+                    gUtil.setReadOnlyAllControls(this);
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

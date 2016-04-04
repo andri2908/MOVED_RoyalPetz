@@ -20,6 +20,7 @@ namespace RoyalPetz_ADMIN
         private string selectedROID;
         private int selectedBranchFromID = 0;
         private int selectedBranchToID = 0;
+        private string selectedPMID;
         private CultureInfo culture = new CultureInfo("id-ID");
         private globalUtilities gutil = new globalUtilities();
         private Data_Access DS = new Data_Access();
@@ -89,9 +90,12 @@ namespace RoyalPetz_ADMIN
 
             DS.mySqlConnect();
 
-            sqlCommand = "SELECT ID, PM_INVOICE AS 'NO MUTASI', DATE_FORMAT(PM_DATETIME,'%d-%M-%Y') AS 'TGL MUTASI', M1.BRANCH_NAME AS 'ASAL MUTASI', M2.BRANCH_NAME AS 'TUJUAN MUTASI', PM_TOTAL AS 'TOTAL', RO_INVOICE AS 'NO PERMINTAAN' " +
-                                "FROM PRODUCTS_MUTATION_HEADER LEFT OUTER JOIN MASTER_BRANCH M1 ON (BRANCH_ID_FROM = M1.BRANCH_ID) " +
-                                "LEFT OUTER JOIN MASTER_BRANCH M2 ON (BRANCH_ID_TO = M2.BRANCH_ID) " +
+            //sqlCommand = "SELECT ID, PM_INVOICE AS 'NO MUTASI', DATE_FORMAT(PM_DATETIME,'%d-%M-%Y') AS 'TGL MUTASI', M1.BRANCH_NAME AS 'ASAL MUTASI', M2.BRANCH_NAME AS 'TUJUAN MUTASI', PM_TOTAL AS 'TOTAL', RO_INVOICE AS 'NO PERMINTAAN' " +
+            //                    "FROM PRODUCTS_MUTATION_HEADER LEFT OUTER JOIN MASTER_BRANCH M1 ON (BRANCH_ID_FROM = M1.BRANCH_ID) " +
+            //                    "LEFT OUTER JOIN MASTER_BRANCH M2 ON (BRANCH_ID_TO = M2.BRANCH_ID) " +
+            //                    "WHERE 1 = 1 AND PM_RECEIVED = 0";
+            sqlCommand = "SELECT ID, PM_INVOICE AS 'NO MUTASI', DATE_FORMAT(PM_DATETIME,'%d-%M-%Y') AS 'TGL MUTASI', M2.BRANCH_NAME AS 'TUJUAN MUTASI', PM_TOTAL AS 'TOTAL', RO_INVOICE AS 'NO PERMINTAAN' " +
+                                "FROM PRODUCTS_MUTATION_HEADER LEFT OUTER JOIN MASTER_BRANCH M2 ON (BRANCH_ID_TO = M2.BRANCH_ID) " +
                                 "WHERE 1 = 1 AND PM_RECEIVED = 0";
 
             if (!showAllCheckBox.Checked)
@@ -105,10 +109,10 @@ namespace RoyalPetz_ADMIN
                 dateTo = String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(PMDtPicker_2.Value));
                 sqlCommand = sqlCommand + " AND DATE_FORMAT(PM_DATETIME, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(PM_DATETIME, '%Y%m%d')  <= '" + dateTo + "'";
 
-                if (branchFromCombo.Text.Length > 0)
-                {
-                    sqlCommand = sqlCommand + " AND BRANCH_ID_FROM = " + selectedBranchFromID;
-                }
+                //if (branchFromCombo.Text.Length > 0)
+                //{
+                //    sqlCommand = sqlCommand + " AND BRANCH_ID_FROM = " + selectedBranchFromID;
+                //}
 
                 if (branchToCombo.Text.Length > 0)
                 {
@@ -130,7 +134,7 @@ namespace RoyalPetz_ADMIN
 
                     dataRequestOrderGridView.Columns["NO MUTASI"].Width = 200;
                     dataRequestOrderGridView.Columns["TGL MUTASI"].Width = 200;
-                    dataRequestOrderGridView.Columns["ASAL MUTASI"].Width = 200;
+                    //dataRequestOrderGridView.Columns["ASAL MUTASI"].Width = 200;
                     dataRequestOrderGridView.Columns["TUJUAN MUTASI"].Width = 200;
                     dataRequestOrderGridView.Columns["TOTAL"].Width = 200;
                     dataRequestOrderGridView.Columns["NO PERMINTAAN"].Width = 200;
@@ -144,10 +148,24 @@ namespace RoyalPetz_ADMIN
 
         private void dataMutasiBarangForm_Load(object sender, EventArgs e)
         {
+            int userAccessOption = 0;
             PMDtPicker_1.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
             PMDtPicker_2.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
 
             gutil.reArrangeTabOrder(this);
+
+            userAccessOption = DS.getUserAccessRight(globalConstants.MENU_TAMBAH_MUTASI_BARANG, gutil.getUserGroupID());
+
+            if (userAccessOption == 2 || userAccessOption == 6)
+            { 
+                newButton.Visible = true;
+                importButton.Visible = true;
+            }
+            else
+            {
+                newButton.Visible = false;
+                importButton.Visible = false;
+            }
         }
 
         private void dataMutasiBarangForm_Deactivate(object sender, EventArgs e)
@@ -157,9 +175,9 @@ namespace RoyalPetz_ADMIN
 
         private void dataMutasiBarangForm_Activated(object sender, EventArgs e)
         {
-            //loadROdata();
-            fillInBranchCombo(branchFromCombo, branchFromComboHidden);
-            fillInBranchCombo(branchToCombo, branchToComboHidden);
+            loadROdata();
+            //fillInBranchCombo(branchFromCombo, branchFromComboHidden);
+            //fillInBranchCombo(branchToCombo, branchToComboHidden);
         }
 
         private void dataRequestOrderGridView_KeyPress(object sender, KeyPressEventArgs e)
@@ -216,6 +234,116 @@ namespace RoyalPetz_ADMIN
         private void branchToCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedBranchToID = Convert.ToInt32(branchToComboHidden.Items[branchToCombo.SelectedIndex]);
+        }
+
+        private bool noPMExist(string roInvoiceValue)
+        {
+            bool result = false;
+
+            if (0 < Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM PRODUCTS_MUTATION_HEADER WHERE PM_INVOICE = '" + roInvoiceValue + "'")))
+                result = true;
+
+            return result;
+        }
+
+        private bool loadImportedDataPM(string fileName)
+        {
+            bool result = false;
+            string sqlCommand = "";
+            string pmInvoice = "";
+            bool checkForRO = true;
+            int lastPos = 0;
+            int prevPos = 0;
+            string roInvoice = "";
+
+            DS.beginTransaction();
+            
+            try
+            {
+                DS.mySqlConnect();
+
+                System.IO.StreamReader file = new System.IO.StreamReader(fileName);
+
+                pmInvoice = file.ReadLine();
+
+                if (!noPMExist(pmInvoice))
+                {
+                    while ((sqlCommand = file.ReadLine()) != null)
+                    {
+                        if (checkForRO)
+                        {
+                            if (sqlCommand.LastIndexOf("RO_INVOICE") > 0)
+                            {
+                                lastPos = sqlCommand.LastIndexOf("',");
+                                prevPos = sqlCommand.LastIndexOf(", '", lastPos - 1);
+                                roInvoice = sqlCommand.Substring(prevPos+3, lastPos - prevPos-3);
+                            }
+                        }
+                        checkForRO = false;
+                        DS.executeNonQueryCommand(sqlCommand);
+                    }
+
+                    file.Close();
+
+                    if (roInvoice.Length > 0)
+                    {
+                        sqlCommand = "UPDATE REQUEST_ORDER_HEADER SET RO_ACTIVE = 0 WHERE RO_INVOICE = '" + roInvoice + "'";
+                        DS.executeNonQueryCommand(sqlCommand);
+                    }
+
+                    DS.commit();
+                }
+                else
+                    MessageBox.Show("NOMOR MUTASI SUDAH ADA");
+            }
+            catch (Exception e)
+            {
+                try
+                {
+                    //myTrans.Rollback();
+                }
+                catch (MySqlException ex)
+                {
+                    if (DS.getMyTransConnection() != null)
+                    {
+                        MessageBox.Show("An exception of type " + ex.GetType() +
+                                          " was encountered while attempting to roll back the transaction.");
+                    }
+                }
+
+                MessageBox.Show("An exception of type " + e.GetType() +
+                                  " was encountered while inserting the data.");
+                MessageBox.Show("Neither record was written to database.");
+            }
+            finally
+            {
+                DS.mySqlClose();
+                result = true;
+            }
+
+            return result;
+        }
+
+        private void importButton_Click(object sender, EventArgs e)
+        {
+            string importFileName = "";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    importFileName = openFileDialog1.FileName;
+                    if (loadImportedDataPM(importFileName))
+                    {
+                        loadROdata();
+                    }
+                    else
+                        MessageBox.Show("ERROR CAN'T LOAD FILE");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                }
+            }
         }
 
 

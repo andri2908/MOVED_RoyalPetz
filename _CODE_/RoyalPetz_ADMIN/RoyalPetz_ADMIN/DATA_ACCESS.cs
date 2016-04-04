@@ -301,5 +301,15 @@ namespace RoyalPetz_ADMIN
             myTrans.Commit();
         }
 
+        public int getUserAccessRight(int moduleID, int groupID)
+        {
+            int result = 0;
+
+            result = Convert.ToInt32(getDataSingleValue("SELECT IFNULL(USER_ACCESS_OPTION, 0) FROM USER_ACCESS_MANAGEMENT WHERE MODULE_ID = " + moduleID + " AND GROUP_ID = " + groupID));
+
+            return result;
+        }
+
+
     }
 }

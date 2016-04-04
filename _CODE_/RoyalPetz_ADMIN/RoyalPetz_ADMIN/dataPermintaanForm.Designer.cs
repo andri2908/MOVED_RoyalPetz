@@ -122,6 +122,7 @@
             this.label3.Size = new System.Drawing.Size(151, 18);
             this.label3.TabIndex = 39;
             this.label3.Text = "Asal Permintaan";
+            this.label3.Visible = false;
             // 
             // branchFromCombo
             // 
@@ -131,6 +132,7 @@
             this.branchFromCombo.Name = "branchFromCombo";
             this.branchFromCombo.Size = new System.Drawing.Size(311, 26);
             this.branchFromCombo.TabIndex = 40;
+            this.branchFromCombo.Visible = false;
             this.branchFromCombo.SelectedIndexChanged += new System.EventHandler(this.branchFromCombo_SelectedIndexChanged);
             // 
             // branchToCombo
@@ -151,9 +153,9 @@
             this.label4.ForeColor = System.Drawing.Color.FloralWhite;
             this.label4.Location = new System.Drawing.Point(3, 114);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(177, 18);
+            this.label4.Size = new System.Drawing.Size(151, 18);
             this.label4.TabIndex = 41;
-            this.label4.Text = "Tujuan Permintaan";
+            this.label4.Text = "Asal Permintaan";
             // 
             // RODtPicker_2
             // 

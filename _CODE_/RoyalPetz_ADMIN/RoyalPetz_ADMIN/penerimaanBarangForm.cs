@@ -51,8 +51,13 @@ namespace RoyalPetz_ADMIN
                 case globalConstants.PENERIMAAN_BARANG_DARI_MUTASI:
                     labelNo.Text = "NO MUTASI";
                     labelTanggal.Text = "TANGGAL MUTASI";
-                    labelAsal.Text = "ASAL MUTASI";
                     labelTujuan.Text = "TUJUAN MUTASI";
+
+                    labelAsal.Text = "ASAL MUTASI";
+                    labelAsal.Visible = false;
+                    labelAsal_1.Visible = false;
+                    branchFromTextBox.Visible = false;
+                    
                     break;
 
                 case globalConstants.PENERIMAAN_BARANG_DARI_PO:
@@ -87,7 +92,7 @@ namespace RoyalPetz_ADMIN
                                 selectedFromID = rdr.GetInt32("BRANCH_ID_FROM");
                                 selectedToID = rdr.GetInt32("BRANCH_ID_TO");
 
-                                globalTotalValue = rdr.GetDouble("PURCHASE_TOTAL");
+                                globalTotalValue = rdr.GetDouble("PM_TOTAL");
                                 labelTotalValue.Text = globalTotalValue.ToString("C", culture);
                                 labelAcceptValue.Text = globalTotalValue.ToString("C", culture);
                             }

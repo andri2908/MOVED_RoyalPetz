@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Globalization;
+using System.IO;
 
 namespace RoyalPetz_ADMIN
 {
@@ -64,6 +65,7 @@ namespace RoyalPetz_ADMIN
                 case globalConstants.VIEW_PRODUCT_MUTATION:
                     approveButton.Visible = false;
                     createPOButton.Visible = false;
+                    rejectButton.Visible = false;
                     //reprintButton.Text = "REPRINT DATA MUTASI";
                     detailRequestOrderDataGridView.ReadOnly = true;
                     break;
@@ -579,13 +581,17 @@ namespace RoyalPetz_ADMIN
 
         private void dataMutasiBarangDetailForm_Load(object sender, EventArgs e)
         {
+            int userAccessOption = 0;
+
             PMDateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
             RODateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
             ROExpiredDateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
 
             isLoading = true;
+            selectedBranchFromID = 0;
 
             addColumnToDetailDataGrid();
+            exportButton.Visible = false;
 
             if (!directMutasiBarang)
             {
@@ -623,24 +629,24 @@ namespace RoyalPetz_ADMIN
                     createPOButton.Visible = false;
                     //reprintButton.Visible = true;
 
-                    label1.Visible = false;
-                    label14.Visible = false;
-                    ROInvoiceTextBox.Visible = false;
+                    //label1.Visible = false;
+                    //label14.Visible = false;
+                    //ROInvoiceTextBox.Visible = false;
 
-                    label9.Visible = false;
-                    label6.Visible = false;
-                    RODateTimePicker.Visible = false;
+                    //label9.Visible = false;
+                    //label6.Visible = false;
+                    //RODateTimePicker.Visible = false;
 
-                    label7.Visible = false;
-                    label5.Visible = false;
-                    ROExpiredDateTimePicker.Visible = false;
+                    //label7.Visible = false;
+                    //label5.Visible = false;
+                    //ROExpiredDateTimePicker.Visible = false;
 
-                    totalApproved.Visible = false;
-                    totalApprovedLabel.Visible = false;
-                    label13.Visible = false;
+                    //totalApproved.Visible = false;
+                    //totalApprovedLabel.Visible = false;
+                    //label13.Visible = false;
                 }
 
-                branchFromCombo.Text = getBranchName(selectedBranchFromID);
+                //branchFromCombo.Text = getBranchName(selectedBranchFromID);
                 branchToCombo.Text = getBranchName(selectedBranchToID);
                 branchFromCombo.Enabled = false;
                 branchToCombo.Enabled = false;
@@ -651,13 +657,13 @@ namespace RoyalPetz_ADMIN
             {
                 subModuleID = globalConstants.NEW_PRODUCT_MUTATION;
 
-                branchFromCombo.Enabled = true;
+                //branchFromCombo.Enabled = true;
                 branchToCombo.Enabled = true;
 
-                fillInBranchCombo(branchFromCombo, branchFromComboHidden);
+                //fillInBranchCombo(branchFromCombo, branchFromComboHidden);
                 fillInBranchCombo(branchToCombo, branchToComboHidden);
 
-
+                label3.Text = "TUJUAN MUTASI";
                 detailRequestOrderDataGridView.AllowUserToAddRows = true;
 
             }
@@ -665,6 +671,19 @@ namespace RoyalPetz_ADMIN
             isLoading = false;
 
             detailRequestOrderDataGridView.EditingControlShowing += detailRequestOrderDataGridView_EditingControlShowing;
+
+            userAccessOption = DS.getUserAccessRight(globalConstants.MENU_MUTASI_BARANG, gUtil.getUserGroupID());
+            if (originModuleID == globalConstants.NEW_PRODUCT_MUTATION)
+            {
+                if (userAccessOption != 2 && userAccessOption != 6)
+                {
+                    gUtil.setReadOnlyAllControls(this);
+                }
+            }
+
+            userAccessOption = DS.getUserAccessRight(globalConstants.MENU_PURCHASE_ORDER, gUtil.getUserGroupID());
+            if (userAccessOption != 2 && userAccessOption != 6)
+                createPOButton.Visible = false;
 
             gUtil.reArrangeTabOrder(this);
         }
@@ -709,7 +728,7 @@ namespace RoyalPetz_ADMIN
                         DS.executeNonQueryCommand(sqlCommand);
 
                         // SAVE DETAIL TABLE
-                        for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count - 1; i++)
+                        for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count; i++)
                         {
                             if (null == detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value)
                                 continue;
@@ -831,7 +850,8 @@ namespace RoyalPetz_ADMIN
                 PMDateTimePicker.Enabled = false;
                 approveButton.Visible = false;
                 createPOButton.Visible = false;
-
+                rejectButton.Visible = false;
+                exportButton.Visible = true;
                 //reprintButton.Visible = true;
             }
         }
@@ -875,6 +895,7 @@ namespace RoyalPetz_ADMIN
                 PMDateTimePicker.Enabled = false;
                 detailRequestOrderDataGridView.ReadOnly = true;
                 approveButton.Visible = false;
+                createPOButton.Visible = false;
                 rejectButton.Visible = false;
                 //reprintButton.Visible = false;
             }
@@ -951,6 +972,125 @@ namespace RoyalPetz_ADMIN
         private void branchToCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedBranchToID = Convert.ToInt32(branchToComboHidden.Items[branchToCombo.SelectedIndex].ToString());
+        }
+
+        private bool exportDataMutasi()
+        {
+            bool result = false;
+
+            string exportedFileName = "";
+            string sqlCommand = "";
+
+            string roInvoice = "";
+            string noMutasi = "";
+            int branchIDFrom = 0;
+            int branchIDTo = 0;
+            string pmDateTime = "";
+            
+            double pmTotal = 0;
+            //string roDateExpired = "";
+            //DateTime selectedRODate;
+            
+            //string driveLetter = @"C:\";
+            string driveLetter = "";
+
+            string selectedDate = PMDateTimePicker.Value.ToShortDateString();
+            
+            noMutasi = noMutasiTextBox.Text;
+            roInvoice = ROInvoiceTextBox.Text;
+            branchIDFrom = 0;
+            branchIDTo = selectedBranchToID;
+
+            pmDateTime = String.Format(culture, "{0:dd-MM-yyyy}", Convert.ToDateTime(selectedDate));
+            pmTotal = globalTotalValue;
+
+            exportedFileName = driveLetter + "PM_" + noMutasi + "_" + String.Format(culture, "{0:ddMMyyyy}", Convert.ToDateTime(selectedDate)) + ".exp";
+
+            DS.beginTransaction();
+
+            try
+            {
+                DS.mySqlConnect();
+
+                //WRITE RO INVOICE
+                using (StreamWriter outputFile = new StreamWriter(exportedFileName))
+                {
+                    outputFile.WriteLine(noMutasi);
+                }
+
+                if (roInvoice.Length > 0)
+                    // WRITE HEADER TABLE SQL
+                    sqlCommand = "INSERT INTO PRODUCTS_MUTATION_HEADER (PM_INVOICE, BRANCH_ID_FROM, BRANCH_ID_TO, PM_DATETIME, PM_TOTAL, RO_INVOICE, PM_RECEIVED) VALUES " +
+                                        "('" + noMutasi + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + pmDateTime + "', '%d-%m-%Y'), " + pmTotal + ", '" + roInvoice + "', 0)";
+                else
+                    sqlCommand = "INSERT INTO PRODUCTS_MUTATION_HEADER (PM_INVOICE, BRANCH_ID_FROM, BRANCH_ID_TO, PM_DATETIME, PM_TOTAL, PM_RECEIVED) VALUES " +
+                                        "('" + noMutasi + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + pmDateTime + "', '%d-%m-%Y'), " + pmTotal + ", 0)";
+
+                using (StreamWriter outputFile = new StreamWriter(exportedFileName, true))
+                {
+                    outputFile.WriteLine(sqlCommand);
+                }
+
+                // WRITE DETAIL TABLE SQL
+                for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count; i++)
+                {
+                    if (null != detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value)
+                    {
+                        sqlCommand = "INSERT INTO PRODUCTS_MUTATION_DETAIL (PM_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, PRODUCT_QTY, PM_SUBTOTAL) VALUES " +
+                                            "('" + noMutasi + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["qty"].Value) + ", " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value) + ")";
+
+                        using (StreamWriter outputFile = new StreamWriter(exportedFileName, true))
+                        {
+                            outputFile.WriteLine(sqlCommand);
+                        }
+
+                    }
+                }
+
+                //sqlCommand = "UPDATE REQUEST_ORDER_HEADER SET RO_EXPORTED = 1 WHERE RO_INVOICE = '" + roInvoice + "'";
+                //DS.executeNonQueryCommand(sqlCommand);
+
+                result = true;
+
+                DS.commit();
+            }
+            catch (Exception e)
+            {
+                try
+                {
+                    if (System.IO.File.Exists(exportedFileName))
+                        System.IO.File.Delete(exportedFileName);
+
+                    //myTrans.Rollback();
+                }
+                catch (MySqlException ex)
+                {
+                    if (DS.getMyTransConnection() != null)
+                    {
+                        MessageBox.Show("An exception of type " + ex.GetType() +
+                                          " was encountered while attempting to roll back the transaction.");
+                    }
+                }
+
+                MessageBox.Show("An exception of type " + e.GetType() +
+                                  " was encountered while inserting the data.");
+                MessageBox.Show("Neither record was written to database.");
+            }
+            finally
+            {
+                DS.mySqlClose();
+                result = true;
+            }
+
+            return result;
+        }
+
+        private void exportButton_Click(object sender, EventArgs e)
+        {
+            if (exportDataMutasi())
+            {
+                MessageBox.Show("EXPORT SUCCESS");
+            }
         }
     }
 }

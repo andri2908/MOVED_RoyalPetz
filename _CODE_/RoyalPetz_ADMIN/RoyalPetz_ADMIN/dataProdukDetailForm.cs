@@ -673,6 +673,7 @@ namespace RoyalPetz_ADMIN
 
         private void dataProdukDetailForm_Load(object sender, EventArgs e)
         {
+            int userAccessOption = 0;
             errorLabel.Text = "";
 
             isLoading = true;
@@ -697,7 +698,24 @@ namespace RoyalPetz_ADMIN
             }
             isLoading = false;
 
-            gUtil.reArrangeTabOrder(this);            
+            gUtil.reArrangeTabOrder(this);
+
+            userAccessOption = DS.getUserAccessRight(globalConstants.MENU_TAMBAH_PRODUK, gUtil.getUserGroupID());
+
+            if (originModuleID == globalConstants.NEW_PRODUK)
+            {
+                if (userAccessOption != 2 && userAccessOption != 6)
+                {
+                    gUtil.setReadOnlyAllControls(this);
+                }
+            }
+            else if (originModuleID == globalConstants.EDIT_PRODUK)
+            {
+                if (userAccessOption != 4 && userAccessOption != 6)
+                {
+                    gUtil.setReadOnlyAllControls(this);
+                }
+            }
         }
 
     }

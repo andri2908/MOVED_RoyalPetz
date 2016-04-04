@@ -41,7 +41,27 @@ namespace RoyalPetz_ADMIN
 
         private void dataNomorAkunDetailForm_Load(object sender, EventArgs e)
         {
+            int userAccessOption = 0;
+
+            userAccessOption = DS.getUserAccessRight(globalConstants.MENU_PENGATURAN_NO_AKUN, gUtil.getUserGroupID());
+
+            if (originModuleID == globalConstants.NEW_AKUN)
+            {
+                if (userAccessOption != 2 && userAccessOption != 6)
+                {
+                    gUtil.setReadOnlyAllControls(this);
+                }
+            }
+            else if (originModuleID == globalConstants.EDIT_AKUN)
+            {
+                if (userAccessOption != 4 && userAccessOption != 6)
+                {
+                    gUtil.setReadOnlyAllControls(this);
+                }
+            }
+
             gUtil.reArrangeTabOrder(this);
+
         }
 
         private void loadAccountData()

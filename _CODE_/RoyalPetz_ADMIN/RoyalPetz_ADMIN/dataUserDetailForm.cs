@@ -242,8 +242,26 @@ namespace RoyalPetz_ADMIN
 
         private void dataUserDetailForm_Load(object sender, EventArgs e)
         {
+            int userAccessOption;
             errorLabel.Text = "";
             gutil.reArrangeTabOrder(this);
+
+            userAccessOption = DS.getUserAccessRight(globalConstants.MENU_MANAJEMEN_USER, gutil.getUserGroupID());
+
+            if (originModuleID == globalConstants.NEW_USER)
+            {
+                if (userAccessOption != 2 && userAccessOption != 6)
+                {
+                    gutil.setReadOnlyAllControls(this);
+                }
+            }
+            else if (originModuleID == globalConstants.EDIT_USER)
+            {
+                if (userAccessOption != 4 && userAccessOption != 6)
+                {
+                    gutil.setReadOnlyAllControls(this);
+                }
+            }
         }
 
         private void resetbutton_Click(object sender, EventArgs e)

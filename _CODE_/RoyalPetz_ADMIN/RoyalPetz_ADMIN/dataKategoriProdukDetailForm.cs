@@ -68,7 +68,25 @@ namespace RoyalPetz_ADMIN
 
         private void dataKategoriProdukDetailForm_Load(object sender, EventArgs e)
         {
-            gutil.reArrangeTabOrder(this);            
+            int userAccessOption = 0;
+            gutil.reArrangeTabOrder(this);
+
+            userAccessOption = DS.getUserAccessRight(globalConstants.MENU_KATEGORI, gutil.getUserGroupID());
+
+            if (originModuleID == globalConstants.NEW_CATEGORY)
+            {
+                if (userAccessOption != 2 && userAccessOption != 6)
+                {
+                    gutil.setReadOnlyAllControls(this);
+                }
+            }
+            else if (originModuleID == globalConstants.EDIT_CATEGORY)
+            {
+                if (userAccessOption != 4 && userAccessOption != 6)
+                {
+                    gutil.setReadOnlyAllControls(this);
+                }
+            }
         }
 
         private bool dataValidated()
