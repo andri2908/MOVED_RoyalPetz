@@ -30,6 +30,8 @@ namespace RoyalPetz_ADMIN
         private void searchButton_Click(object sender, EventArgs e)
         {
             string fileName = "";
+            openFileDialog1.Filter = "SQL File (.sql)|*.sql";
+            openFileDialog1.FileName = "";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -44,41 +46,69 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        private void backupDatabase()
+         private void ProcessExited(Object source, EventArgs e)
         {
-            string localDate = "";
-            string fileName = "";
-            string ipServer;
-            string strCmdText;
-            
-            localDate = String.Format(culture, "{0:ddMMyyyy}", DateTime.Now);
-            fileName = "EXPORT_" + localDate + ".sql";
+            MessageBox.Show("DONE");            
+        }
 
-            Directory.SetCurrentDirectory(Application.StartupPath);
+        private void backupDatabase(string fileName)
+        {
+            //string localDate = "";
+            //string fileName = "";
+            System.Diagnostics.Process proc = new System.Diagnostics.Process();
+            string ipServer;
+            //string strCmdText;
+            
+            //localDate = String.Format(culture, "{0:ddMMyyyy}", DateTime.Now);
+            //fileName = "EXPORT_" + localDate + ".sql";
+
+            //Directory.SetCurrentDirectory(Application.StartupPath);
             
             ipServer = DS.getIPServer();
-            strCmdText = "/C mysqldump -h " + ipServer + " -u SYS_POS_ADMIN -ppass123 sys_pos > " + fileName;
-            System.Diagnostics.Process.Start("CMD.exe", strCmdText);
+            //strCmdText = "/C mysqldump -h " + ipServer + " -u SYS_POS_ADMIN -ppass123 sys_pos > \"" + fileName+"\"";
+            //System.Diagnostics.Process.Start("CMD.exe", strCmdText);
+            proc.StartInfo.FileName = "CMD.exe";
+            proc.StartInfo.Arguments = "/C " + "mysqldump -h " + ipServer + " -u SYS_POS_ADMIN -ppass123 sys_pos > \"" + fileName + "\"";
+            proc.Exited += new EventHandler(ProcessExited);
+            proc.EnableRaisingEvents = true;
+            proc.Start();
+
         }
 
         private void backupButton_Click(object sender, EventArgs e)
         {
-            //saveFileDialog1.ShowDialog();
-            //MessageBox.Show(saveFileDialog1.FileName);
-            backupDatabase();
+            string localDate = "";
+            string fileName = "";
+            localDate = String.Format(culture, "{0:ddMMyyyy}", DateTime.Now);
+            fileName = "BACKUP_" + localDate + ".sql";
+
+            saveFileDialog1.FileName = fileName;
+            saveFileDialog1.AddExtension = true;
+            saveFileDialog1.DefaultExt = "sql";
+            saveFileDialog1.Filter = "SQL File (.sql)|*.sql";
+            saveFileDialog1.ShowDialog();
+
+            if (saveFileDialog1.FileName.Length > 0 )
+                backupDatabase(saveFileDialog1.FileName);
         }
 
         private void restoreDatabase(string fileName)
         {
             string ipServer = "";
-            string strCmdText = "";
+            //string strCmdText = "";
+            System.Diagnostics.Process proc = new System.Diagnostics.Process();
 
-            Directory.SetCurrentDirectory(Application.StartupPath);
+            //Directory.SetCurrentDirectory(Application.StartupPath);
             
             ipServer = DS.getIPServer();
-            strCmdText = "/C " + "mysql -h " + ipServer + " -u SYS_POS_ADMIN -ppass123 sys_pos < \"" + fileName + "\"";
+            //strCmdText = "/C " + "mysql -h " + ipServer + " -u SYS_POS_ADMIN -ppass123 sys_pos < \"" + fileName + "\"";
 
-            System.Diagnostics.Process.Start("CMD.exe", strCmdText);
+            proc.StartInfo.FileName = "CMD.exe";
+            proc.StartInfo.Arguments = "/C " + "mysql -h " + ipServer + " -u SYS_POS_ADMIN -ppass123 sys_pos < \"" + fileName + "\"";
+            proc.Exited += new EventHandler(ProcessExited);
+            proc.EnableRaisingEvents = true;
+            proc.Start();
+            //System.Diagnostics.Process.Start("CMD.exe", strCmdText);
         }
 
         private void restoreButton_Click(object sender, EventArgs e)

@@ -75,8 +75,9 @@ namespace RoyalPetz_ADMIN
 
             sqlCommand = "SELECT ID, PURCHASE_INVOICE AS 'NO PURCHASE', DATE_FORMAT(PURCHASE_DATETIME, '%d-%M-%Y')  AS 'TANGGAL PURCHASE', " +
                                 "IF(PURCHASE_TERM_OF_PAYMENT = 0, 'TUNAI', 'KREDIT') AS 'MODE PEMBAYARAN', " +
+                                "DATE_FORMAT(PURCHASE_DATE_RECEIVED, '%d-%M-%Y') AS 'TANGGAL DITERIMA', " +
                                 "DATE_FORMAT(PURCHASE_TERM_OF_PAYMENT_DATE, '%d-%M-%Y') AS 'TANGGAL JATUH TEMPO', " +
-                                "M.SUPPLIER_FULL_NAME AS 'NAMA SUPPLIER', PURCHASE_TOTAL AS 'TOTAL', PURCHASE_SENT " +
+                                "M.SUPPLIER_FULL_NAME AS 'NAMA SUPPLIER', P.PURCHASE_TOTAL AS 'TOTAL', PURCHASE_SENT " +
                                 "FROM PURCHASE_HEADER P, MASTER_SUPPLIER M " +
                                 "WHERE P.SUPPLIER_ID = M.SUPPLIER_ID";
 
@@ -87,6 +88,10 @@ namespace RoyalPetz_ADMIN
             else if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
             {
                 sqlCommand = sqlCommand + "  AND P.PURCHASE_PAID = 0 AND PURCHASE_SENT = 1 AND PURCHASE_RECEIVED = 1";
+            }
+            else
+            {
+                sqlCommand = sqlCommand + " AND PURCHASE_SENT = 0";
             }
 
             if (!showAllCheckBox.Checked)
@@ -117,8 +122,12 @@ namespace RoyalPetz_ADMIN
                     dataPurchaseOrder.Columns["ID"].Visible = false;
                     dataPurchaseOrder.Columns["PURCHASE_SENT"].Visible = false;
 
+                    if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
+                        dataPurchaseOrder.Columns["TANGGAL DITERIMA"].Visible = false;
+
                     dataPurchaseOrder.Columns["NO PURCHASE"].Width = 200;
                     dataPurchaseOrder.Columns["TANGGAL PURCHASE"].Width = 200;
+                    dataPurchaseOrder.Columns["TANGGAL DITERIMA"].Width = 200;
                     dataPurchaseOrder.Columns["TANGGAL JATUH TEMPO"].Width = 200;
                     dataPurchaseOrder.Columns["MODE PEMBAYARAN"].Width = 200;
                     dataPurchaseOrder.Columns["NAMA SUPPLIER"].Width = 200;

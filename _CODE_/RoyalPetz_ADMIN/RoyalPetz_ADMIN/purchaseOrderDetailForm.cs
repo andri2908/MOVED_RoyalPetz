@@ -358,6 +358,8 @@ namespace RoyalPetz_ADMIN
         {
             int userAccessOption = 0;
             errorLabel.Text = "";
+            durationTextBox.Enabled = false;
+
             fillInSupplierCombo();
             PODateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
 
@@ -394,7 +396,6 @@ namespace RoyalPetz_ADMIN
             }
 
             detailPODataGridView.EditingControlShowing += detailPODataGridView_EditingControlShowing;
-            durationTextBox.Enabled = false;
 
             userAccessOption = DS.getUserAccessRight(globalConstants.MENU_PURCHASE_ORDER, gUtil.getUserGroupID());
 
@@ -468,13 +469,13 @@ namespace RoyalPetz_ADMIN
             string roInvoice = "";
             int supplierID = 0;
             string PODateTime = "";
-            string PODueDateTime = "";
+            //string PODueDateTime = "";
             double POTotal = 0;
             int termOfPaymentDuration = 0;
             int termOfPayment;
             int purchasePaid = 0;
             DateTime selectedPODate;
-            DateTime PODueDate;
+            //DateTime PODueDate;
             MySqlException internalEX = null;
 
             roInvoice = selectedROInvoice; //ROInvoiceTextBox.Text;
@@ -486,8 +487,8 @@ namespace RoyalPetz_ADMIN
 
             termOfPayment = termOfPaymentCombo.SelectedIndex;
             termOfPaymentDuration = Convert.ToInt32(durationTextBox.Text);
-            PODueDate = selectedPODate.AddDays(termOfPaymentDuration);
-            PODueDateTime = String.Format(culture, "{0:dd-MM-yyyy}", PODueDate);
+            //PODueDate = selectedPODate.AddDays(termOfPaymentDuration);
+            //PODueDateTime = String.Format(culture, "{0:dd-MM-yyyy}", PODueDate);
 
             if (termOfPayment == 0)
                 purchasePaid = 1;
@@ -504,8 +505,8 @@ namespace RoyalPetz_ADMIN
                 {
                     case globalConstants.PURCHASE_ORDER_DARI_RO:
                         // SAVE HEADER TABLE
-                        sqlCommand = "INSERT INTO PURCHASE_HEADER (PURCHASE_INVOICE, SUPPLIER_ID, PURCHASE_DATETIME, PURCHASE_TOTAL, PURCHASE_TERM_OF_PAYMENT, PURCHASE_TERM_OF_PAYMENT_DATE, PURCHASE_PAID) VALUES " +
-                                            "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + POTotal + ", " + termOfPayment + ", STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), '" + purchasePaid + ")";
+                        sqlCommand = "INSERT INTO PURCHASE_HEADER (PURCHASE_INVOICE, SUPPLIER_ID, PURCHASE_DATETIME, PURCHASE_TOTAL, PURCHASE_TERM_OF_PAYMENT, PURCHASE_TERM_OF_PAYMENT_DURATION, PURCHASE_PAID) VALUES " +
+                                            "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + POTotal + ", " + termOfPayment + ", " + termOfPaymentDuration + ", '" + purchasePaid + ")";
 
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
@@ -528,20 +529,20 @@ namespace RoyalPetz_ADMIN
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
-                        if (termOfPaymentCombo.SelectedIndex == 1)
-                        {
-                            // SAVE TO DEBT TABLE
-                            sqlCommand = "INSERT INTO DEBT (PURCHASE_INVOICE, DEBT_DUE_DATE, DEBT_NOMINAL, DEBT_PAID) VALUES ('" + POInvoice + "', STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), " + POTotal + ", 0)";
-                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                                throw internalEX;
-                        }
+                        //if (termOfPaymentCombo.SelectedIndex == 1)
+                        //{
+                        //    // SAVE TO DEBT TABLE
+                        //    sqlCommand = "INSERT INTO DEBT (PURCHASE_INVOICE, DEBT_DUE_DATE, DEBT_NOMINAL, DEBT_PAID) VALUES ('" + POInvoice + "', STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), " + POTotal + ", 0)";
+                        //    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        //        throw internalEX;
+                        //}
 
                         break;
 
                     case globalConstants.NEW_PURCHASE_ORDER:
                         // SAVE HEADER TABLE
-                        sqlCommand = "INSERT INTO PURCHASE_HEADER (PURCHASE_INVOICE, SUPPLIER_ID, PURCHASE_DATETIME, PURCHASE_TOTAL, PURCHASE_TERM_OF_PAYMENT, PURCHASE_TERM_OF_PAYMENT_DATE, PURCHASE_PAID) VALUES " +
-                                            "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + POTotal + ", " + termOfPayment + ", STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), " + purchasePaid + ")";
+                        sqlCommand = "INSERT INTO PURCHASE_HEADER (PURCHASE_INVOICE, SUPPLIER_ID, PURCHASE_DATETIME, PURCHASE_TOTAL, PURCHASE_TERM_OF_PAYMENT, PURCHASE_TERM_OF_PAYMENT_DURATION, PURCHASE_PAID) VALUES " +
+                                            "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + POTotal + ", " + termOfPayment + ", " + termOfPaymentDuration + ", " + purchasePaid + ")";
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
@@ -558,13 +559,13 @@ namespace RoyalPetz_ADMIN
                             }
                         }
 
-                        if (termOfPaymentCombo.SelectedIndex == 1)
-                        {
-                            // SAVE TO DEBT TABLE
-                            sqlCommand = "INSERT INTO DEBT (PURCHASE_INVOICE, DEBT_DUE_DATE, DEBT_NOMINAL, DEBT_PAID) VALUES ('" + POInvoice + "', STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), " + POTotal + ", 0)";
-                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                                throw internalEX;
-                        }
+                        //if (termOfPaymentCombo.SelectedIndex == 1)
+                        //{
+                        //    // SAVE TO DEBT TABLE
+                        //    sqlCommand = "INSERT INTO DEBT (PURCHASE_INVOICE, DEBT_DUE_DATE, DEBT_NOMINAL, DEBT_PAID) VALUES ('" + POInvoice + "', STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), " + POTotal + ", 0)";
+                        //    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        //        throw internalEX;
+                        //}
 
                         break;
 
@@ -575,7 +576,7 @@ namespace RoyalPetz_ADMIN
                                             "PURCHASE_DATETIME = STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " +
                                             "PURCHASE_TOTAL = " + POTotal + ", " +
                                             "PURCHASE_TERM_OF_PAYMENT = " + termOfPayment + ", " + 
-                                            "PURCHASE_TERM_OF_PAYMENT_DATE = STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), " +
+                                            "PURCHASE_TERM_OF_PAYMENT_DURATION = " + termOfPaymentDuration + ", " +
                                             "PURCHASE_PAID = " + purchasePaid +" " +
                                             "WHERE PURCHASE_INVOICE = '" +POInvoice+ "'";
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
@@ -599,23 +600,23 @@ namespace RoyalPetz_ADMIN
                             }
                         }
 
-                        //DELETE DEBT TABLE
-                        sqlCommand = "DELETE FROM DEBT WHERE PURCHASE_INVOICE = '" + POInvoice + "'";
+                        ////DELETE DEBT TABLE
+                        //sqlCommand = "DELETE FROM DEBT WHERE PURCHASE_INVOICE = '" + POInvoice + "'";
 
-                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                            throw internalEX;
+                        //if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        //    throw internalEX;
 
-                        if (termOfPaymentCombo.SelectedIndex == 1)
-                        {
-                            // UPDATE DEBT TABLE
-                            sqlCommand = "UPDATE DEBT " +
-                                                "SET DEBT_DUE_DATE = STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), " +
-                                                "DEBT_NOMINAL = " + POTotal + " " +
-                                                "WHERE PURCHASE_INVOICE = '" + POInvoice + "'";
+                        //if (termOfPaymentCombo.SelectedIndex == 1)
+                        //{
+                        //    // UPDATE DEBT TABLE
+                        //    sqlCommand = "UPDATE DEBT " +
+                        //                        "SET DEBT_DUE_DATE = STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), " +
+                        //                        "DEBT_NOMINAL = " + POTotal + " " +
+                        //                        "WHERE PURCHASE_INVOICE = '" + POInvoice + "'";
 
-                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                                throw internalEX;
-                        }
+                        //    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        //        throw internalEX;
+                        //}
 
                         break;
 
@@ -693,7 +694,7 @@ namespace RoyalPetz_ADMIN
             
             sqlCommand = "SELECT ID, PURCHASE_INVOICE, PURCHASE_DATETIME, " +
                                 "PURCHASE_TERM_OF_PAYMENT, " +
-                                "PURCHASE_TERM_OF_PAYMENT_DATE, " +
+                                "PURCHASE_TERM_OF_PAYMENT_DURATION, " +
                                 "M.SUPPLIER_FULL_NAME, PURCHASE_TOTAL " + //IFNULL(RO_INVOICE,'') AS RO_INVOICE " +
                                 "FROM PURCHASE_HEADER P, MASTER_SUPPLIER M " +
                                 "WHERE P.SUPPLIER_ID = M.SUPPLIER_ID AND P.ID = " + selectedPOID;
@@ -711,9 +712,12 @@ namespace RoyalPetz_ADMIN
                         
                         supplierCombo.Text = rdr.GetString("SUPPLIER_FULL_NAME");
                         termOfPaymentCombo.SelectedIndex = rdr.GetInt32("PURCHASE_TERM_OF_PAYMENT");
-                        durationTextBox.Text = Convert.ToInt32((rdr.GetDateTime("PURCHASE_TERM_OF_PAYMENT_DATE") - rdr.GetDateTime("PURCHASE_DATETIME")).TotalDays).ToString();
+                        durationTextBox.Text = rdr.GetString("PURCHASE_TERM_OF_PAYMENT_DURATION");//Convert.ToInt32((rdr.GetDateTime("PURCHASE_TERM_OF_PAYMENT_DATE") - rdr.GetDateTime("PURCHASE_DATETIME")).TotalDays).ToString();
                         totalLabel.Text = rdr.GetString("PURCHASE_TOTAL");
                         globalTotalValue = rdr.GetDouble("PURCHASE_TOTAL");
+
+                        if (rdr.GetInt32("PURCHASE_TERM_OF_PAYMENT") == 1)
+                            durationTextBox.Enabled = true;
                     }
                 }
             }

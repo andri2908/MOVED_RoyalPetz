@@ -313,13 +313,40 @@ namespace RoyalPetz_ADMIN
         private void refreshProductPrice()
         {
             double productPrice = 0;
+            string productID = "";
+            MySqlDataReader rdr;
+
             for (int i =0;i<cashierDataGridView.Rows.Count;i++)
-            {
+            {              
                 if (null != cashierDataGridView.Rows[i].Cells["productID"].Value)
                 {
-                    productPrice = getProductPriceValue(cashierDataGridView.Rows[i].Cells["productID"].Value.ToString(), customerComboBox.SelectedIndex);
+                    productID = cashierDataGridView.Rows[i].Cells["productID"].Value.ToString();
+                    productPrice = getProductPriceValue(productID, customerComboBox.SelectedIndex);
 
                     cashierDataGridView.Rows[i].Cells["productPrice"].Value = productPrice;
+
+                    if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM CUSTOMER_PRODUCT_DISC WHERE CUSTOMER_ID = " + selectedPelangganID + " AND PRODUCT_ID = '" + productID + "'")) > 0)
+                    {
+                        // DATA EXIST, LOAD DISC VALUE
+                        using (rdr = DS.getData("SELECT * FROM CUSTOMER_PRODUCT_DISC CUSTOMER_ID = " + selectedPelangganID + " AND PRODUCT_ID = '" + productID + "'"))
+                        {
+                            if (rdr.HasRows)
+                            {
+                                rdr.Read();
+
+                                cashierDataGridView.Rows[i].Cells["disc1"].Value = rdr.GetString("DISC_1");
+                                disc1[i] = rdr.GetString("DISC_1");
+
+                                cashierDataGridView.Rows[i].Cells["disc2"].Value = rdr.GetString("DISC_2");
+                                disc2[i] = rdr.GetString("DISC_2");
+
+                                cashierDataGridView.Rows[i].Cells["discRP"].Value = rdr.GetString("DISC_RP");
+                                discRP[i] = rdr.GetString("DISC_RP");
+                            }
+                            rdr.Close();
+                        }
+                    }
+                    
                     cashierDataGridView.Rows[i].Cells["jumlah"].Value = calculateSubTotal(i, productPrice);
                 }
             }
@@ -344,9 +371,9 @@ namespace RoyalPetz_ADMIN
             for (int i = 0; i < cashierDataGridView.Rows.Count; i++ )
             {
                 if (
-                    (null == cashierDataGridView.Rows[i].Cells["qty"].Value) || 
+                    ((null == cashierDataGridView.Rows[i].Cells["qty"].Value) || 
                     (0 == Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value))
-                    )
+                    ) && null != cashierDataGridView.Rows[i].Cells["productID"].Value)
                 {
                     errorLabel.Text = "JUMLAH PRODUK 0";
                     return false;
@@ -375,6 +402,11 @@ namespace RoyalPetz_ADMIN
             int salesTop = 1;
             int salesPaid = 0;
             MySqlException internalEX = null;
+
+            double disc1 = 0;
+            double disc2 = 0;
+            double discRP = 0;
+            string productID = "";
 
             SODateTime = String.Format(culture, "{0:dd-MM-yyyy}", DateTime.Now);
 
@@ -416,14 +448,17 @@ namespace RoyalPetz_ADMIN
                 // SAVE DETAIL TABLE
                 for (int i = 0; i < cashierDataGridView.Rows.Count; i++)
                 {
-                    if (null != cashierDataGridView.Rows[i].Cells["qty"].Value)
+                    if (null != cashierDataGridView.Rows[i].Cells["productID"].Value)
                     {
+                        disc1 = Convert.ToDouble(cashierDataGridView.Rows[i].Cells["disc1"].Value);
+                        disc2 = Convert.ToDouble(cashierDataGridView.Rows[i].Cells["disc2"].Value);
+                        discRP = Convert.ToDouble(cashierDataGridView.Rows[i].Cells["discRP"].Value);
+                        productID = cashierDataGridView.Rows[i].Cells["productID"].Value.ToString();
+
                         sqlCommand = "INSERT INTO SALES_DETAIL (SALES_INVOICE, PRODUCT_ID, PRODUCT_SALES_PRICE, PRODUCT_QTY, PRODUCT_DISC1, PRODUCT_DISC2, PRODUCT_DISC_RP, SALES_SUBTOTAL) " +
                                             "VALUES " +
-                                            "('" + salesInvoice + "', '" + cashierDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(cashierDataGridView.Rows[i].Cells["productPrice"].Value) + ", " +
-                                            Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value) + ", " + Convert.ToDouble(cashierDataGridView.Rows[i].Cells["disc1"].Value) + ", " +
-                                            Convert.ToDouble(cashierDataGridView.Rows[i].Cells["disc2"].Value) + ", " + Convert.ToDouble(cashierDataGridView.Rows[i].Cells["discRP"].Value) + ", " +
-                                            Convert.ToDouble(cashierDataGridView.Rows[i].Cells["jumlah"].Value) + ")";
+                                            "('" + salesInvoice + "', '" + productID + "', " + Convert.ToDouble(cashierDataGridView.Rows[i].Cells["productPrice"].Value) + ", " +
+                                            Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value) + ", " + disc1 + ", " + disc2 + ", " + discRP + ", " + Convert.ToDouble(cashierDataGridView.Rows[i].Cells["jumlah"].Value) + ")";
 
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
@@ -434,6 +469,27 @@ namespace RoyalPetz_ADMIN
 
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
+
+                        // SAVE OR UPDATE TO CUSTOMER_PRODUCT_DISC
+                        if (selectedPelangganID != 0)
+                        {
+                            if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM CUSTOMER_PRODUCT_DISC WHERE CUSTOMER_ID = " + selectedPelangganID + " AND PRODUCT_ID = '" + cashierDataGridView.Rows[i].Cells["productID"].Value.ToString() + "'"))>0)
+                            {
+                                // UPDATE VALUE
+                                sqlCommand = "UPDATE CUSTOMER_PRODUCT_DISC SET DISC_1 = " + disc1 + ", DISC_2 = " + disc2 + ", DISC_RP = " + discRP + " WHERE CUSTOMER_ID = " + selectedPelangganID + " AND PRODUCT_ID = '" + productID + "'";
+                            }
+                            else
+                            {
+                                // INSERT VALUE
+                                sqlCommand = "INSERT INTO CUSTOMER_PRODUCT_DISC (CUSTOMER_ID, PRODUCT_ID, DISC_1, DISC_2 , DISC_RP) VALUES " +
+                                                    "(" + selectedPelangganID + ", '" + productID + "', " + disc1 + ", " + disc2 + ", " + discRP + ")";
+                            }
+
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+
+                        }
+
                     }
                 }
 
@@ -631,22 +687,25 @@ namespace RoyalPetz_ADMIN
             {
                 productQty = Convert.ToDouble(salesQty[rowSelectedIndex]);
 
-                hppValue = productPrice;
+                if (productQty > 0)
+                { 
+                    hppValue = productPrice;
 
-                disc1Value = Convert.ToDouble(disc1[rowSelectedIndex]);
-                disc2Value = Convert.ToDouble(disc2[rowSelectedIndex]);
-                discRPValue = Convert.ToDouble(discRP[rowSelectedIndex]);
+                    disc1Value = Convert.ToDouble(disc1[rowSelectedIndex]);
+                    disc2Value = Convert.ToDouble(disc2[rowSelectedIndex]);
+                    discRPValue = Convert.ToDouble(discRP[rowSelectedIndex]);
 
-                subTotal = Math.Round((hppValue * productQty), 2);
+                    subTotal = Math.Round((hppValue * productQty), 2);
 
-                if (disc1Value > 0)
-                    subTotal = Math.Round(subTotal - (subTotal * disc1Value / 100), 2);
+                    if (disc1Value > 0)
+                        subTotal = Math.Round(subTotal - (subTotal * disc1Value / 100), 2);
 
-                if (disc2Value > 0)
-                    subTotal = Math.Round(subTotal - (subTotal * disc2Value / 100), 2);
+                    if (disc2Value > 0)
+                        subTotal = Math.Round(subTotal - (subTotal * disc2Value / 100), 2);
 
-                if (discRPValue > 0)
-                    subTotal = Math.Round(subTotal - discRPValue, 2);
+                    if (discRPValue > 0)
+                        subTotal = Math.Round(subTotal - discRPValue, 2);
+                }
 
             }
             catch (Exception ex)
@@ -683,6 +742,7 @@ namespace RoyalPetz_ADMIN
             string selectedProductID = "";
             double hpp = 0;
             double subTotal = 0;
+            MySqlDataReader rdr;
 
             if (isLoading)
                 return;
@@ -702,6 +762,31 @@ namespace RoyalPetz_ADMIN
                 selectedRow.Cells["qty"].Value = 0;
 
             selectedRow.Cells["productId"].Value = selectedProductID;
+
+            if (selectedPelangganID != 0)
+            {
+                if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM CUSTOMER_PRODUCT_DISC WHERE CUSTOMER_ID = " + selectedPelangganID + " AND PRODUCT_ID = '" + selectedProductID + "'")) > 0)
+                {
+                    // DATA EXIST, LOAD DISC VALUE
+                    using (rdr = DS.getData("SELECT * FROM CUSTOMER_PRODUCT_DISC WHERE CUSTOMER_ID = " + selectedPelangganID + " AND PRODUCT_ID = '" + selectedProductID + "'"))
+                    {
+                        if (rdr.HasRows)
+                        {
+                            rdr.Read();
+
+                            selectedRow.Cells["disc1"].Value = rdr.GetString("DISC_1");
+                            disc1[rowSelectedIndex] = rdr.GetString("DISC_1");
+
+                            selectedRow.Cells["disc2"].Value = rdr.GetString("DISC_2");
+                            disc2[rowSelectedIndex] = rdr.GetString("DISC_2");
+
+                            selectedRow.Cells["discRP"].Value = rdr.GetString("DISC_RP");
+                            discRP[rowSelectedIndex] = rdr.GetString("DISC_RP");
+                        }
+                        rdr.Close();
+                    }
+                }
+            }
 
             subTotal = calculateSubTotal(rowSelectedIndex, hpp);
 

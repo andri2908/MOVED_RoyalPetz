@@ -82,7 +82,7 @@
             // displayButton
             // 
             this.displayButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.displayButton.Location = new System.Drawing.Point(351, 168);
+            this.displayButton.Location = new System.Drawing.Point(157, 168);
             this.displayButton.Name = "displayButton";
             this.displayButton.Size = new System.Drawing.Size(95, 37);
             this.displayButton.TabIndex = 34;
@@ -181,7 +181,7 @@
             // newButton
             // 
             this.newButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newButton.Location = new System.Drawing.Point(459, 168);
+            this.newButton.Location = new System.Drawing.Point(271, 168);
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(227, 37);
             this.newButton.TabIndex = 46;
@@ -315,7 +315,7 @@
             // importButton
             // 
             this.importButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.importButton.Location = new System.Drawing.Point(459, 168);
+            this.importButton.Location = new System.Drawing.Point(520, 168);
             this.importButton.Name = "importButton";
             this.importButton.Size = new System.Drawing.Size(265, 37);
             this.importButton.TabIndex = 51;

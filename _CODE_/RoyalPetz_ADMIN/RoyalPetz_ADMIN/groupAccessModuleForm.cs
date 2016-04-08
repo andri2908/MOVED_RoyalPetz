@@ -268,6 +268,7 @@ namespace RoyalPetz_ADMIN
             {
                 //MessageBox.Show("SUCCESS");
                 gutil.showSuccess(gutil.UPD);
+                MessageBox.Show("RE-LOGIN UNTUK MENGAKTIFKAN HAK AKSES YANG BARU", "INFORMASI",MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

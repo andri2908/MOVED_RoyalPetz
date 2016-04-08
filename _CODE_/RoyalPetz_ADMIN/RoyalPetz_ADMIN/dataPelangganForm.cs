@@ -33,7 +33,7 @@ namespace RoyalPetz_ADMIN
 
             originModuleID = moduleID;
 
-            if (originModuleID == globalConstants.CASHIER_MODULE)
+            if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT || originModuleID == globalConstants.PEMBAYARAN_PIUTANG)
                 newButton.Visible = false;
         }
 

@@ -78,6 +78,13 @@ namespace RoyalPetz_ADMIN
 
             selectedUserID = userID;
             loadBGimage();
+
+            selectedUserGroupID = getUserGroupID();
+
+            gutil.setUserID(selectedUserID);
+            gutil.setUserGroupID(selectedUserGroupID);
+
+            activateUserAccessRight();
         }
 
         private void updateLabel()
@@ -128,10 +135,9 @@ namespace RoyalPetz_ADMIN
             menuStrip1.Renderer = new MyRenderer();
             gutil.reArrangeTabOrder(this);
 
-            selectedUserGroupID = getUserGroupID();
 
-
-            activateUserAccessRight();
+            //activateUserAccessRight();
+            
             //loadBGimage();
         }
 
@@ -331,7 +337,7 @@ namespace RoyalPetz_ADMIN
         private void toolStripMenuItem63_Click(object sender, EventArgs e)
         {
             //dataMutasiBarangForm displayedForm = new dataMutasiBarangForm(globalConstants.CEK_DATA_MUTASI);
-            dataPermintaanForm displayedForm = new dataPermintaanForm(globalConstants.CEK_DATA_MUTASI);
+            dataPermintaanForm displayedForm = new dataPermintaanForm(globalConstants.PERMINTAAN_BARANG);
             displayedForm.ShowDialog(this);
         }
 
@@ -400,7 +406,7 @@ namespace RoyalPetz_ADMIN
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MENU_logOut.PerformClick();
-            Application.Exit();
+            //Application.Exit();
         }
 
         private void toolStripMenuItem23_Click(object sender, EventArgs e)
@@ -430,14 +436,7 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripMenuItem68_Click(object sender, EventArgs e)
         {
-            dataInvoiceForm displayedForm = new dataInvoiceForm(globalConstants.PEMBAYARAN_PIUTANG);
-            displayedForm.ShowDialog(this);
-        }
-
-        private void toolStripMenuItem69_Click(object sender, EventArgs e)
-        {
-            dataPermintaanForm displayedForm = new dataPermintaanForm(globalConstants.PEMBAYARAN_HUTANG);
-            displayedForm.ShowDialog(this);
+            
         }
 
         private void toolStripMenuItem70_Click(object sender, EventArgs e)
@@ -519,8 +518,10 @@ namespace RoyalPetz_ADMIN
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            logoutForm displayedForm = new logoutForm();
-            displayedForm.ShowDialog(this);
+            //logoutForm displayedForm = new logoutForm();
+            //displayedForm.ShowDialog(this);
+
+            this.Close();
         }
 
         private void toolStripMenuItem18_Click(object sender, EventArgs e)
@@ -666,8 +667,7 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripMenuItem38_Click(object sender, EventArgs e)
         {
-            dataPOForm displayedForm = new dataPOForm(globalConstants.PEMBAYARAN_HUTANG);
-            displayedForm.ShowDialog(this);
+            
         }
 
         private void toolStripMenuItem39_Click(object sender, EventArgs e)
@@ -698,21 +698,23 @@ namespace RoyalPetz_ADMIN
         {
             int userAccessRight = 0;
 
-            userAccessRight = getUserAccessRight(moduleID);
+            userAccessRight = DS.getUserAccessRight(moduleID, selectedUserGroupID);
 
             if (userAccessRight <= 0)
                 menuItem.Visible = false;
         }
 
-        private int getUserAccessRight(int moduleID)
+        private void setAccessibility(int moduleID, ToolStripButton menuItem)
         {
-            int result = 0;
+            int userAccessRight = 0;
 
-            result = Convert.ToInt32(DS.getDataSingleValue("SELECT IFNULL(USER_ACCESS_OPTION, 0) FROM USER_ACCESS_MANAGEMENT WHERE MODULE_ID = " + moduleID + " AND GROUP_ID = " + selectedUserGroupID));
+            userAccessRight = DS.getUserAccessRight(moduleID, selectedUserGroupID);
 
-            return result;
+            if (userAccessRight <= 0)
+                menuItem.Visible = false;
         }
 
+        
         private void activateUserAccessRight()
         {
             if (selectedUserGroupID == 0)
@@ -720,42 +722,130 @@ namespace RoyalPetz_ADMIN
 
             // SET ACCESSIBILITY FOR MANAJEMEN SISTEM MAIN MENU
             setAccessibility(globalConstants.MENU_MANAJEMEN_SISTEM, MAINMENU_manajemenSistem);
-            //setAccessibility(globalConstants.MENU_DATABASE, MENU_database);
-            setAccessibility(globalConstants.MENU_DATABASE, MENU_pengaturanSistemAplikasiToolStripMenuItem); //please review
-            setAccessibility(globalConstants.MENU_DATABASE, MENU_backUpRestoreDatabaseToolStripMenuItem); //please review
+            // SUB MENU DATABASE
+            setAccessibility(globalConstants.MENU_DATABASE, MENU_backUpRestoreDatabaseToolStripMenuItem);
+            setAccessibility(globalConstants.MENU_DATABASE, MENU_pengaturanSistemAplikasiToolStripMenuItem);
+            // SUB MENU USER
             setAccessibility(globalConstants.MENU_MANAJEMEN_USER, MENU_manajemenUser);
+            // SUB MENU CABANG
             setAccessibility(globalConstants.MENU_MANAJEMEN_CABANG, MENU_manajemenCabang);
+            // THE OTHER SUB MENU
             setAccessibility(globalConstants.MENU_SINKRONISASI_INFORMASI, MENU_sinkronisasiInformasi);
             setAccessibility(globalConstants.MENU_PENGATURAN_PRINTER, MENU_pengaturanPrinter);
             setAccessibility(globalConstants.MENU_PENGATURAN_GAMBAR_LATAR, MENU_pengaturanGambarLatar);
 
             // SET ACCESSIBILITY FOR GUDANG MAIN MENU
-            // SUB CATEGORY PRODUK
+            // SUB MENU PRODUK
             setAccessibility(globalConstants.MENU_GUDANG, MAINMENU_gudang);
+            setAccessibility(globalConstants.MENU_GUDANG, SHORTCUT_produk); 
             setAccessibility(globalConstants.MENU_PRODUK, MENU_produk);
+            setAccessibility(globalConstants.MENU_PRODUK, SHORTCUT_produk); 
             setAccessibility(globalConstants.MENU_TAMBAH_PRODUK, MENU_tambahProduk);
+            setAccessibility(globalConstants.MENU_TAMBAH_PRODUK, SHORTCUT_produk); 
             setAccessibility(globalConstants.MENU_PENGATURAN_HARGA, MENU_pengaturanHarga);
             setAccessibility(globalConstants.MENU_PENGATURAN_LIMIT_STOK, MENU_pengaturanLimitStok);
             setAccessibility(globalConstants.MENU_PENGATURAN_KATEGORI_PRODUK, MENU_pengaturanKategoriProduk);
             setAccessibility(globalConstants.MENU_PECAH_SATUAN_PRODUK, MENU_pecahSatuanProduk);
             setAccessibility(globalConstants.MENU_PENGATURAN_NOMOR_RAK, MENU_pengaturanNomorRak);
-            // SUB CATEGORY KATEGORI
+            // SUB MENU KATEGORI
             setAccessibility(globalConstants.MENU_KATEGORI, MENU_kategori);
+            // SUB MENU SATUAN
             setAccessibility(globalConstants.MENU_SATUAN, MENU_satuan);
             setAccessibility(globalConstants.MENU_TAMBAH_SATUAN, MENU_tambahSatuan);
-            setAccessibility(globalConstants.MENU_PENGATURAN_KONVERSI, MENU_pengaturanKonversiSatuan);           
+            setAccessibility(globalConstants.MENU_PENGATURAN_KONVERSI, MENU_pengaturanKonversiSatuan);
+            // SUB MENU STOK OPNAME            
             setAccessibility(globalConstants.MENU_STOK_OPNAME, MENU_exportDataCSV);
             setAccessibility(globalConstants.MENU_STOK_OPNAME, MENU_importDataCSV);
             setAccessibility(globalConstants.MENU_PENYESUAIAN_STOK, MENU_penyesuaianStok);
+            // SUB MENU MUTASI
             setAccessibility(globalConstants.MENU_MUTASI_BARANG, MENU_mutasiBarang);
             setAccessibility(globalConstants.MENU_TAMBAH_MUTASI_BARANG, MENU_tambahMutasiBarang);
             setAccessibility(globalConstants.MENU_CEK_PERMINTAAN_BARANG, MENU_cekPermintaanBarang);
+            // SUB MENU PENERIMAAN BARANG
             setAccessibility(globalConstants.MENU_PENERIMAAN_BARANG, MENU_penerimaanBarang);
             setAccessibility(globalConstants.MENU_PENERIMAAN_BARANG_DARI_MUTASI, MENU_dariMutasiBarang);
             setAccessibility(globalConstants.MENU_PENERIMAAN_BARANG_DARI_PO, MENU_dariPO);
 
+            // SET ACCESSIBILITY FOR PEMBELIAN MAIN MENU
+            setAccessibility(globalConstants.MENU_PEMBELIAN, MAINMENU_pembelian);
+            setAccessibility(globalConstants.MENU_PEMBELIAN, SHORTCUT_beli);
+            setAccessibility(globalConstants.MENU_PEMBELIAN, SHORTCUT_returBeli);
+            // SUB MENU SUPPLIER
+            setAccessibility(globalConstants.MENU_SUPPLIER, MENU_supplier);
+            // SUB MENU PERMINTAAN PRODUK
+            setAccessibility(globalConstants.MENU_REQUEST_ORDER, MENU_requestOrder);
+            setAccessibility(globalConstants.MENU_PURCHASE_ORDER, MENU_purchaseOrder);
+            setAccessibility(globalConstants.MENU_PURCHASE_ORDER, SHORTCUT_beli);
+            setAccessibility(globalConstants.MENU_REPRINT_REQUEST_ORDER, MENU_reprintRequestOrder);
+            // SUB MENU RETUR PRODUK
+            setAccessibility(globalConstants.MENU_RETUR_PEMBELIAN, MENU_returPembelianKeSupplier);
+            setAccessibility(globalConstants.MENU_RETUR_PEMBELIAN, SHORTCUT_returBeli);
+            setAccessibility(globalConstants.MENU_RETUR_PERMINTAAN, MENU_returPermintaanKePusat);
+
+            // SET ACCESSIBILITY FOR PENJUALAN MAIN MENU
+            setAccessibility(globalConstants.MENU_PENJUALAN, MAINMENU_penjualan);
+            setAccessibility(globalConstants.MENU_PENJUALAN, SHORTCUT_jual);
+            setAccessibility(globalConstants.MENU_PENJUALAN, SHORTCUT_returJual);
+            // SUB MENU PELANGGAN
+            setAccessibility(globalConstants.MENU_PELANGGAN, MENU_pelanggan);
+            // SUB MENU TRANSAKSI PENJUALAN
+            setAccessibility(globalConstants.MENU_TRANSAKSI_PENJUALAN, MENU_transaksiPenjualan);
+            setAccessibility(globalConstants.MENU_TRANSAKSI_PENJUALAN, SHORTCUT_jual);
+            setAccessibility(globalConstants.MENU_SET_NO_FAKTUR, MENU_setNoFaktur);
+            // SUB MENU RETUR PENJUALAN
+            setAccessibility(globalConstants.MENU_RETUR_PENJUALAN, MENU_returPenjualan);
+            setAccessibility(globalConstants.MENU_RETUR_PENJUALAN_INVOICE, MENU_returByInvoice);
+            setAccessibility(globalConstants.MENU_RETUR_PENJUALAN_INVOICE, SHORTCUT_returJual);
+            setAccessibility(globalConstants.MENU_RETUR_PENJUALAN_STOK, MENU_returByStokAdjustment);
+
+            // SET ACCESSIBILITY FOR KEUANGAN MAIN MENU
+            setAccessibility(globalConstants.MENU_KEUANGAN, MAINMENU_KEUANGAN);
+            setAccessibility(globalConstants.MENU_KEUANGAN, SHORTCUT_jurnal);
+            setAccessibility(globalConstants.MENU_KEUANGAN, SHORTCUT_piutang);
+            setAccessibility(globalConstants.MENU_KEUANGAN, SHORTCUT_hutang);
+            // SUB MENU NOMOR AKUN
+            setAccessibility(globalConstants.MENU_PENGATURAN_NO_AKUN, MENU_pengaturanNomorAkun);
+            // SUB MENU TRANSAKSI
+            setAccessibility(globalConstants.MENU_TRANSAKSI, MENU_transaksi);
+            setAccessibility(globalConstants.MENU_TRANSAKSI_HARIAN, MENU_tambahTransaksiHarian);
+            setAccessibility(globalConstants.MENU_TRANSAKSI_HARIAN, SHORTCUT_jurnal);
+            setAccessibility(globalConstants.MENU_PEMBAYARAN_PIUTANG, MENU_pembayaranPiutang);
+            setAccessibility(globalConstants.MENU_PEMBAYARAN_PIUTANG, SHORTCUT_piutang);
+            setAccessibility(globalConstants.MENU_PEMBAYARAN_PIUTANG_MUTASI, MENU_pembayaranPiutangMutasi);
+            setAccessibility(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, MENU_pembayaranHutangKeSupplier);
+            setAccessibility(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, SHORTCUT_hutang);
+
         }
 
+
+        private void toolStripMenuItem1_Click_1(object sender, EventArgs e)
+        {
+            dataPOForm displayedForm = new dataPOForm(globalConstants.PEMBAYARAN_HUTANG);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            dataSupplierForm displayedForm = new dataSupplierForm(globalConstants.PEMBAYARAN_HUTANG);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem3_Click_1(object sender, EventArgs e)
+        {
+            dataInvoiceForm displayedForm = new dataInvoiceForm(globalConstants.PEMBAYARAN_PIUTANG);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem4_Click_1(object sender, EventArgs e)
+        {
+            dataPelangganForm displayedForm = new dataPelangganForm(globalConstants.PEMBAYARAN_PIUTANG);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem30_Click(object sender, EventArgs e)
+        {
+
+        }
         private void generatorXMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             XMLGeneratorForm displayedform = new XMLGeneratorForm();

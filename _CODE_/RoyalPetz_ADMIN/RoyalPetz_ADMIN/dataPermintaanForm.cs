@@ -36,10 +36,10 @@ namespace RoyalPetz_ADMIN
             InitializeComponent();
             originModuleID = moduleID;
 
-            if (moduleID == globalConstants.CEK_DATA_MUTASI)
-                newButton.Visible = false;
-            else if (moduleID == globalConstants.PERMINTAAN_BARANG)
-                importButton.Visible = false;
+            //if (moduleID == globalConstants.CEK_DATA_MUTASI)
+            //    newButton.Visible = false;
+            //else if (moduleID == globalConstants.PERMINTAAN_BARANG)
+            //    importButton.Visible = false;
         }
         
         private void displaySpecificForm(int roID = 0)
@@ -59,25 +59,25 @@ namespace RoyalPetz_ADMIN
                     }
                     break;
 
-                case globalConstants.CEK_DATA_MUTASI:
-                    dataMutasiBarangDetailForm displayedForm = new dataMutasiBarangDetailForm(globalConstants.CEK_DATA_MUTASI, roID);
-                    displayedForm.ShowDialog(this);
-                    break;
+                //case globalConstants.CEK_DATA_MUTASI:
+                //    dataMutasiBarangDetailForm displayedForm = new dataMutasiBarangDetailForm(globalConstants.CEK_DATA_MUTASI, roID);
+                //    displayedForm.ShowDialog(this);
+                //    break;
 
-                case globalConstants.PEMBAYARAN_HUTANG:
-                    pembayaranHutangForm pembayaranForm = new pembayaranHutangForm();
-                    pembayaranForm.ShowDialog(this);
-                    break;
+                //case globalConstants.PEMBAYARAN_HUTANG:
+                //    pembayaranHutangForm pembayaranForm = new pembayaranHutangForm();
+                //    pembayaranForm.ShowDialog(this);
+                //    break;
 
-                case globalConstants.PENERIMAAN_BARANG:
-                    penerimaanBarangForm penerimaanBarangDisplayedForm = new penerimaanBarangForm();
-                    penerimaanBarangDisplayedForm.ShowDialog(this);
-                    break;
+                //case globalConstants.PENERIMAAN_BARANG:
+                //    penerimaanBarangForm penerimaanBarangDisplayedForm = new penerimaanBarangForm();
+                //    penerimaanBarangDisplayedForm.ShowDialog(this);
+                //    break;
 
-                default:
-                    dataReturPermintaanForm returPermintaanBarangDisplayedForm = new dataReturPermintaanForm();
-                    returPermintaanBarangDisplayedForm.ShowDialog(this);
-                    break;
+                //default:
+                //    dataReturPermintaanForm returPermintaanBarangDisplayedForm = new dataReturPermintaanForm();
+                //    returPermintaanBarangDisplayedForm.ShowDialog(this);
+                //    break;
 
             }
         }

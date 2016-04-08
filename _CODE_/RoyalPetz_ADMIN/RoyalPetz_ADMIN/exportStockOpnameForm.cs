@@ -21,25 +21,26 @@ namespace RoyalPetz_ADMIN
         private Data_Access DS = new Data_Access();
         private CultureInfo culture = new CultureInfo("id-ID");
 
-        string appPath = Application.StartupPath;
-
         public exportStockOpnameForm()
         {
             InitializeComponent();
         }
 
-        private bool saveToCSV()
+        private bool saveToCSV(string fileName)
         {
-            string fileName = "";
+            //string fileName = "";
             string localDate;
             string sqlCommand;
             string line = "";
             MySqlDataReader rdr;
             StreamWriter sw = null;
 
-            localDate = String.Format(culture, "{0:ddMMyyyy}", DateTime.Now);
+            if (fileName.Length <= 0)
+                return false;
 
-            fileName = "EXPORT_" + localDate + ".csv";
+            //localDate = String.Format(culture, "{0:ddMMyyyy}", DateTime.Now);
+
+            //fileName = "EXPORT_" + localDate + ".csv";
 
             localDate = String.Format(culture, "{0:dd-MMM-yyyy}", DateTime.Now);
 
@@ -50,11 +51,11 @@ namespace RoyalPetz_ADMIN
                 if (rdr.HasRows)
                 {
                     if (!File.Exists(fileName))
-                        sw = File.CreateText(appPath + "\\" + fileName);
+                        sw = File.CreateText(fileName);
                     else
                     { 
                         File.Delete(fileName);
-                        sw = File.CreateText(appPath + "\\" + fileName);
+                        sw = File.CreateText(fileName);
                     }
 
                     sw.WriteLine(localDate);
@@ -77,7 +78,18 @@ namespace RoyalPetz_ADMIN
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            if (saveToCSV())
+            string localDate = "";
+            string fileName = "";
+            localDate = String.Format(culture, "{0:ddMMyyyy}", DateTime.Now);
+            fileName = "STOCKOPNAME_" + localDate + ".csv";
+
+            saveFileDialog1.FileName = fileName;
+            saveFileDialog1.AddExtension = true;
+            saveFileDialog1.DefaultExt = "csv";
+            saveFileDialog1.Filter = "CSV File (.csv)|*.csv";
+            saveFileDialog1.ShowDialog();
+
+            if (saveToCSV(fileName))
             {
                 MessageBox.Show("SUCCESS");
             }        

@@ -132,7 +132,7 @@ namespace RoyalPetz_ADMIN
             return result;
         }
 
-        private void loadDataPM()
+        private void loadDataPM(bool displayFullyPaid = false)
         {
             MySqlDataReader rdr;
             DataTable dt = new DataTable();
@@ -142,6 +142,11 @@ namespace RoyalPetz_ADMIN
             sqlCommand = "SELECT C.CREDIT_ID, PM.PM_INVOICE AS 'NO MUTASI', DATE_FORMAT(PM.PM_DATETIME, '%d-%M-%Y') AS 'TGL MUTASI', CREDIT_NOMINAL AS 'TOTAL PIUTANG', (CREDIT_NOMINAL - IFNULL(PC.PAYMENT, 0)) AS 'SISA PIUTANG' " +
                                 "FROM PRODUCTS_MUTATION_HEADER PM, CREDIT C LEFT OUTER JOIN (SELECT CREDIT_ID, SUM(PAYMENT_NOMINAL) AS PAYMENT FROM PAYMENT_CREDIT WHERE PAYMENT_INVALID = 0 GROUP BY CREDIT_ID) PC ON PC.CREDIT_ID = C.CREDIT_ID  " +
                                 "WHERE PM.BRANCH_ID_TO = " + selectedBranchID + " AND PM.PM_INVOICE = C.PM_INVOICE";
+
+            if (!displayFullyPaid)
+            {
+                sqlCommand = sqlCommand + " AND C.CREDIT_PAID = 0";
+            }
 
             using (rdr = DS.getData(sqlCommand))
             {
@@ -165,7 +170,7 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        private void loadDataSO()
+        private void loadDataSO(bool displayFullyPaid = false)
         {
             MySqlDataReader rdr;
             DataTable dt = new DataTable();
@@ -175,6 +180,11 @@ namespace RoyalPetz_ADMIN
             sqlCommand = "SELECT C.CREDIT_ID, SH.SALES_INVOICE AS 'SALES INVOICE', DATE_FORMAT(SH.SALES_DATE, '%d-%M-%Y') AS 'TGL SALES', CREDIT_NOMINAL AS 'TOTAL PIUTANG', (CREDIT_NOMINAL - IFNULL(PC.PAYMENT, 0)) AS 'SISA PIUTANG' " +
                                 "FROM SALES_HEADER SH, CREDIT C LEFT OUTER JOIN (SELECT CREDIT_ID, SUM(PAYMENT_NOMINAL) AS PAYMENT FROM PAYMENT_CREDIT WHERE PAYMENT_INVALID = 0 GROUP BY CREDIT_ID) PC ON PC.CREDIT_ID = C.CREDIT_ID  " +
                                 "WHERE SH.CUSTOMER_ID = " + selectedCustomerID+ " AND SH.SALES_INVOICE = C.SALES_INVOICE";
+
+            if (!displayFullyPaid)
+            {
+                sqlCommand = sqlCommand + " AND SH.SALES_PAID = 0";
+            }
 
             using (rdr = DS.getData(sqlCommand))
             {
@@ -195,7 +205,7 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        private void loadDataPO()
+        private void loadDataPO(bool displayFullyPaid = false)
         {
             MySqlDataReader rdr;
             DataTable dt = new DataTable();
@@ -204,6 +214,11 @@ namespace RoyalPetz_ADMIN
             sqlCommand = "SELECT D.DEBT_ID, PH.PURCHASE_INVOICE AS 'PURCHASE INVOICE', DATE_FORMAT(PH.PURCHASE_DATETIME, '%d-%M-%Y') AS 'TGL PO', DEBT_NOMINAL AS 'TOTAL HUTANG', (DEBT_NOMINAL - IFNULL(PD.PAYMENT, 0)) AS 'SISA HUTANG' " +
                                 "FROM PURCHASE_HEADER PH, DEBT D LEFT OUTER JOIN (SELECT DEBT_ID, SUM(PAYMENT_NOMINAL) AS PAYMENT FROM PAYMENT_DEBT WHERE PAYMENT_INVALID = 0 GROUP BY DEBT_ID) PD ON PD.DEBT_ID = D.DEBT_ID  " +
                                 "WHERE PH.SUPPLIER_ID = " + selectedSupplierID + " AND PH.PURCHASE_INVOICE = D.PURCHASE_INVOICE";
+
+            if (!displayFullyPaid)
+            {
+                sqlCommand = sqlCommand + " AND PH.PURCHASE_PAID = 0";
+            }
 
             using (rdr = DS.getData(sqlCommand))
             {
@@ -922,6 +937,29 @@ namespace RoyalPetz_ADMIN
 
                     paymentCombo.Text = paymentCombo.Items[0].ToString();
                 }
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            detailPaymentInfoDataGrid.DataSource = null;
+            if (checkBox1.Checked)
+            {
+                if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
+                    loadDataPO(true);
+                else if (originModuleID == globalConstants.DATA_PIUTANG_MUTASI)
+                    loadDataPM(true);
+                else if (originModuleID == globalConstants.PEMBAYARAN_PIUTANG)
+                    loadDataSO(true);
+            }
+            else
+            {
+                if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
+                    loadDataPO();
+                else if (originModuleID == globalConstants.DATA_PIUTANG_MUTASI)
+                    loadDataPM();
+                else if (originModuleID == globalConstants.PEMBAYARAN_PIUTANG)
+                    loadDataSO();
             }
         }
     }

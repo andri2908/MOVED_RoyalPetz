@@ -82,6 +82,16 @@ namespace RoyalPetz_ADMIN
             return result;
         }
 
+        private int getBranchID()
+        {
+            int result;
+
+            result = Convert.ToInt32(DS.getDataSingleValue("SELECT IFNULL(BRANCH_ID, 0) FROM SYS_CONFIG WHERE ID = 2"));
+
+            return result;
+        }
+
+
         private void loadDataDetailSO()
         {
             MySqlDataReader rdr;
@@ -178,6 +188,12 @@ namespace RoyalPetz_ADMIN
         {
             double nominalPayment;
 
+            if ( 0 == getBranchID())
+            {
+                errorLabel.Text = "BRANCH ID BELUM DISET";
+                return false;
+            }
+
             nominalPayment = Convert.ToDouble(paymentMaskedTextBox.Text);
             if (nominalPayment > globalTotalValue)
             {
@@ -200,6 +216,7 @@ namespace RoyalPetz_ADMIN
             string paymentDateTime = "";
             DateTime selectedPaymentDate;
             double paymentNominal = 0;
+            int branchID = 0;
 
             string paymentDescription = "";
             int paymentConfirmed = 0;
@@ -218,6 +235,7 @@ namespace RoyalPetz_ADMIN
             if (paymentMethod <= 3)
                 paymentConfirmed = 1;
 
+            branchID = getBranchID();
 
             DS.beginTransaction();
 

@@ -59,6 +59,8 @@ namespace RoyalPetz_ADMIN
 
         private void searchKategoriButton_Click(object sender, EventArgs e)
         {
+            openFileDialog1.FileName = "";
+            openFileDialog1.Filter = "CSV File(.csv) | *.csv";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 selectedFileName = openFileDialog1.FileName;

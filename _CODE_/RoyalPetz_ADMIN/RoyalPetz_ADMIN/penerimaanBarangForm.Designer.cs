@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelAcceptValue = new System.Windows.Forms.Label();
             this.labelTotal_1 = new System.Windows.Forms.Label();
@@ -83,7 +83,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 93.47826F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.521739F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 638F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 639F));
             this.tableLayoutPanel1.Controls.Add(this.labelAcceptValue, 2, 6);
             this.tableLayoutPanel1.Controls.Add(this.labelTotal_1, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.labelTujuan_1, 1, 3);
@@ -290,7 +290,7 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 233F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 195F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 196F));
             this.tableLayoutPanel6.Controls.Add(this.prInvoiceTextBox, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.label11, 2, 0);
             this.tableLayoutPanel6.Controls.Add(this.PRDtPicker, 3, 0);
@@ -308,7 +308,7 @@
             this.prInvoiceTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.prInvoiceTextBox.Location = new System.Drawing.Point(3, 4);
             this.prInvoiceTextBox.Name = "prInvoiceTextBox";
-            this.prInvoiceTextBox.Size = new System.Drawing.Size(173, 27);
+            this.prInvoiceTextBox.Size = new System.Drawing.Size(172, 27);
             this.prInvoiceTextBox.TabIndex = 16;
             this.prInvoiceTextBox.TextChanged += new System.EventHandler(this.prInvoiceTextBox_TextChanged);
             // 
@@ -318,7 +318,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label11.Location = new System.Drawing.Point(198, 8);
+            this.label11.Location = new System.Drawing.Point(197, 8);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(224, 18);
             this.label11.TabIndex = 20;
@@ -328,7 +328,7 @@
             // 
             this.PRDtPicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PRDtPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.PRDtPicker.Location = new System.Drawing.Point(431, 3);
+            this.PRDtPicker.Location = new System.Drawing.Point(430, 3);
             this.PRDtPicker.Name = "PRDtPicker";
             this.PRDtPicker.Size = new System.Drawing.Size(147, 27);
             this.PRDtPicker.TabIndex = 39;
@@ -339,7 +339,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 233F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 195F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 196F));
             this.tableLayoutPanel2.Controls.Add(this.noInvoiceTextBox, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.labelTanggal, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.invoiceDtPicker, 3, 0);
@@ -358,7 +358,7 @@
             this.noInvoiceTextBox.Location = new System.Drawing.Point(3, 4);
             this.noInvoiceTextBox.Name = "noInvoiceTextBox";
             this.noInvoiceTextBox.ReadOnly = true;
-            this.noInvoiceTextBox.Size = new System.Drawing.Size(173, 27);
+            this.noInvoiceTextBox.Size = new System.Drawing.Size(172, 27);
             this.noInvoiceTextBox.TabIndex = 16;
             // 
             // labelTanggal
@@ -367,7 +367,7 @@
             this.labelTanggal.AutoSize = true;
             this.labelTanggal.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTanggal.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.labelTanggal.Location = new System.Drawing.Point(198, 8);
+            this.labelTanggal.Location = new System.Drawing.Point(197, 8);
             this.labelTanggal.Name = "labelTanggal";
             this.labelTanggal.Size = new System.Drawing.Size(225, 18);
             this.labelTanggal.TabIndex = 20;
@@ -378,7 +378,7 @@
             this.invoiceDtPicker.Enabled = false;
             this.invoiceDtPicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.invoiceDtPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.invoiceDtPicker.Location = new System.Drawing.Point(431, 3);
+            this.invoiceDtPicker.Location = new System.Drawing.Point(430, 3);
             this.invoiceDtPicker.Name = "invoiceDtPicker";
             this.invoiceDtPicker.Size = new System.Drawing.Size(147, 27);
             this.invoiceDtPicker.TabIndex = 40;
@@ -457,14 +457,14 @@
             // 
             this.detailGridView.AllowUserToAddRows = false;
             this.detailGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.detailGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.detailGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.detailGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.detailGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.productName,
@@ -478,6 +478,7 @@
             this.detailGridView.RowHeadersVisible = false;
             this.detailGridView.Size = new System.Drawing.Size(979, 299);
             this.detailGridView.TabIndex = 47;
+            this.detailGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.detailGridView_KeyDown);
             // 
             // productName
             // 
