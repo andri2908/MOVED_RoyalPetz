@@ -366,8 +366,10 @@ namespace RoyalPetz_ADMIN
 
         private void pengaturanPrinterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var cplPath = System.IO.Path.Combine(Environment.SystemDirectory, "control.exe");
-            System.Diagnostics.Process.Start(cplPath, "/name Microsoft.DevicesAndPrinters");
+            //var cplPath = System.IO.Path.Combine(Environment.SystemDirectory, "control.exe");
+            //System.Diagnostics.Process.Start(cplPath, "/name Microsoft.DevicesAndPrinters");
+            SetPrinterForm displayedForm = new SetPrinterForm();
+            displayedForm.ShowDialog(this);
         }
 
         private void pengaturanGambarLatarToolStripMenuItem_Click(object sender, EventArgs e)

@@ -508,6 +508,12 @@
     <Compile Include="setNoFakturForm.Designer.cs">
       <DependentUpon>setNoFakturForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SetPrinterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetPrinterForm.Designer.cs">
+      <DependentUpon>SetPrinterForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="sinkronisasiInformasiForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -790,6 +796,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="setNoFakturForm.resx">
       <DependentUpon>setNoFakturForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetPrinterForm.resx">
+      <DependentUpon>SetPrinterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sinkronisasiInformasiForm.resx">
       <DependentUpon>sinkronisasiInformasiForm.cs</DependentUpon>
