@@ -195,14 +195,10 @@ namespace RoyalPetz_ADMIN
 
         private void infoFolderDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetApplicationForm displayedForm = new SetApplicationForm(); 
-            displayedForm.ShowDialog(this);
         }
 
         private void backupRestoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            backupRestoreDatabaseForm displayedForm = new backupRestoreDatabaseForm();
-            displayedForm.ShowDialog(this);
         }
 
         private void toolStripMenuItem15_Click(object sender, EventArgs e)
@@ -722,7 +718,9 @@ namespace RoyalPetz_ADMIN
 
             // SET ACCESSIBILITY FOR MANAJEMEN SISTEM MAIN MENU
             setAccessibility(globalConstants.MENU_MANAJEMEN_SISTEM, MAINMENU_manajemenSistem);
-            setAccessibility(globalConstants.MENU_DATABASE, MENU_database);
+            //setAccessibility(globalConstants.MENU_DATABASE, MENU_database);
+            setAccessibility(globalConstants.MENU_DATABASE, MENU_pengaturanSistemAplikasiToolStripMenuItem); //please review
+            setAccessibility(globalConstants.MENU_DATABASE, MENU_backUpRestoreDatabaseToolStripMenuItem); //please review
             setAccessibility(globalConstants.MENU_MANAJEMEN_USER, MENU_manajemenUser);
             setAccessibility(globalConstants.MENU_MANAJEMEN_CABANG, MENU_manajemenCabang);
             setAccessibility(globalConstants.MENU_SINKRONISASI_INFORMASI, MENU_sinkronisasiInformasi);
@@ -822,6 +820,18 @@ namespace RoyalPetz_ADMIN
             ReportProductCategoryForm displayedform = new ReportProductCategoryForm();
             displayedform.ShowDialog(this);
 
+        }
+
+        private void pengaturanSistemAplikasiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetApplicationForm displayedForm = new SetApplicationForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void backUpRestoreDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backupRestoreDatabaseForm displayedForm = new backupRestoreDatabaseForm();
+            displayedForm.ShowDialog(this);
         }
     }
 }
