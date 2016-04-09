@@ -152,6 +152,8 @@ namespace RoyalPetz_ADMIN
             PMDtPicker_1.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
             PMDtPicker_2.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
 
+            fillInBranchCombo(branchToCombo, branchToComboHidden);
+
             gutil.reArrangeTabOrder(this);
 
             userAccessOption = DS.getUserAccessRight(globalConstants.MENU_TAMBAH_MUTASI_BARANG, gutil.getUserGroupID());
@@ -166,6 +168,9 @@ namespace RoyalPetz_ADMIN
                 newButton.Visible = false;
                 importButton.Visible = false;
             }
+
+            if (originModuleID == globalConstants.PENERIMAAN_BARANG)
+                newButton.Visible = false;
         }
 
         private void dataMutasiBarangForm_Deactivate(object sender, EventArgs e)
@@ -327,6 +332,10 @@ namespace RoyalPetz_ADMIN
         private void importButton_Click(object sender, EventArgs e)
         {
             string importFileName = "";
+
+            openFileDialog1.FileName = "";
+            openFileDialog1.Filter = "Export File (.exp)|*.exp";
+
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 try

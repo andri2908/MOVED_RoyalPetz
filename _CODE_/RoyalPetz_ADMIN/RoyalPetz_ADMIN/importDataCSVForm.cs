@@ -40,8 +40,8 @@ namespace RoyalPetz_ADMIN
             using (StreamReader sr = File.OpenText(selectedFileName))
             {
                 // skip the first and second line 
-                s = sr.ReadLine();
-                exportDate.Text = s;
+                //s = sr.ReadLine();
+                //exportDate.Text = s;
 
                 s = sr.ReadLine();
 

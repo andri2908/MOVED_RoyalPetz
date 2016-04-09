@@ -132,5 +132,12 @@ namespace RoyalPetz_ADMIN
         {
             gutil.reArrangeTabOrder(this);
         }
+
+        private void dataUnitGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (dataUnitGridView.Rows.Count > 0)
+                if (e.KeyCode == Keys.Enter)
+                    displaySpecificForm();
+        }
     }
 }

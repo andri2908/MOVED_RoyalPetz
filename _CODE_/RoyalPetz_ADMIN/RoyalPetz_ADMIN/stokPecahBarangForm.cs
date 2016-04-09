@@ -61,6 +61,7 @@ namespace RoyalPetz_ADMIN
             displayForm.ShowDialog(this);
 
             loadProductName();
+            numberOfProductTextBox.Text = "0";
         }
 
         private void loadProductName()
@@ -224,6 +225,18 @@ namespace RoyalPetz_ADMIN
 
         private bool dataValidated()
         {
+            if (numberOfProductTextBox.Text.Length<=0)
+            {
+                errorLabel.Text = "JUMLAH BARANG YG MAU DIPECAH TIDAK BOLEH NOL";
+                return false;
+            }
+
+            if (Convert.ToDouble(numberOfProductTextBox.Text) > currentStockQty)
+            {
+                errorLabel.Text = "JUMLAH STOK TIDAK CUKUP";
+                return false;
+            }
+
             return true;
         }
 

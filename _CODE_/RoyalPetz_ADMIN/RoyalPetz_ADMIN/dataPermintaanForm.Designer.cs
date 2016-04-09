@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataRequestOrderGridView = new System.Windows.Forms.DataGridView();
             this.displayButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -48,7 +48,6 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.showExpiredCheckBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.showApprovedROCheckbox = new System.Windows.Forms.CheckBox();
             this.importButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataRequestOrderGridView)).BeginInit();
@@ -61,14 +60,14 @@
             this.dataRequestOrderGridView.AllowUserToAddRows = false;
             this.dataRequestOrderGridView.AllowUserToDeleteRows = false;
             this.dataRequestOrderGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataRequestOrderGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataRequestOrderGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataRequestOrderGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataRequestOrderGridView.Location = new System.Drawing.Point(0, 211);
             this.dataRequestOrderGridView.Name = "dataRequestOrderGridView";
@@ -126,6 +125,7 @@
             // 
             // branchFromCombo
             // 
+            this.branchFromCombo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.branchFromCombo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.branchFromCombo.FormattingEnabled = true;
             this.branchFromCombo.Location = new System.Drawing.Point(195, 75);
@@ -137,9 +137,10 @@
             // 
             // branchToCombo
             // 
+            this.branchToCombo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.branchToCombo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.branchToCombo.FormattingEnabled = true;
-            this.branchToCombo.Location = new System.Drawing.Point(195, 107);
+            this.branchToCombo.Location = new System.Drawing.Point(195, 110);
             this.branchToCombo.Name = "branchToCombo";
             this.branchToCombo.Size = new System.Drawing.Size(311, 26);
             this.branchToCombo.TabIndex = 42;
@@ -238,7 +239,6 @@
             this.tableLayoutPanel1.Controls.Add(this.showExpiredCheckBox, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.showAllCheckBox, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.showApprovedROCheckbox, 2, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 20);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
@@ -298,19 +298,6 @@
             this.label1.Size = new System.Drawing.Size(139, 18);
             this.label1.TabIndex = 35;
             this.label1.Text = "No Permintaan";
-            // 
-            // showApprovedROCheckbox
-            // 
-            this.showApprovedROCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.showApprovedROCheckbox.AutoSize = true;
-            this.showApprovedROCheckbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showApprovedROCheckbox.ForeColor = System.Drawing.Color.FloralWhite;
-            this.showApprovedROCheckbox.Location = new System.Drawing.Point(555, 77);
-            this.showApprovedROCheckbox.Name = "showApprovedROCheckbox";
-            this.showApprovedROCheckbox.Size = new System.Drawing.Size(198, 22);
-            this.showApprovedROCheckbox.TabIndex = 49;
-            this.showApprovedROCheckbox.Text = "Show Approved RO";
-            this.showApprovedROCheckbox.UseVisualStyleBackColor = true;
             // 
             // importButton
             // 
@@ -378,7 +365,6 @@
         private System.Windows.Forms.TextBox noROInvoiceTextBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.CheckBox showExpiredCheckBox;
-        private System.Windows.Forms.CheckBox showApprovedROCheckbox;
         private System.Windows.Forms.Button importButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }

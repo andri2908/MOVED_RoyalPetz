@@ -154,9 +154,8 @@ namespace RoyalPetz_ADMIN
 
         private void groupAccessModuleForm_Load(object sender, EventArgs e)
         {
-            //loadGroupUserInformation();
-            //loadUserAccessInformation();
-            //fillInDummyData();
+            loadGroupUserInformation();
+            loadUserAccessInformation();
 
             gutil.reArrangeTabOrder(this);
         }
@@ -275,8 +274,6 @@ namespace RoyalPetz_ADMIN
         private void groupAccessModuleForm_Activated(object sender, EventArgs e)
         {
             //if need something
-            loadGroupUserInformation();
-            loadUserAccessInformation();
         }
 
         private void checkAll_CheckedChanged(object sender, EventArgs e)

@@ -59,6 +59,8 @@
             this.panel1.Size = new System.Drawing.Size(549, 29);
             this.panel1.TabIndex = 16;
             // 
+            // errorLabel
+            // 
             this.errorLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.errorLabel.AutoSize = true;
             this.errorLabel.BackColor = System.Drawing.Color.White;
@@ -69,6 +71,7 @@
             this.errorLabel.Size = new System.Drawing.Size(23, 18);
             this.errorLabel.TabIndex = 54;
             this.errorLabel.Text = "   ";
+            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -100,6 +103,9 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(547, 246);
             this.tableLayoutPanel1.TabIndex = 17;
+            // 
+            // namaProductTextBox
+            // 
             this.namaProductTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.namaProductTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.namaProductTextBox.Location = new System.Drawing.Point(196, 36);
@@ -107,6 +113,9 @@
             this.namaProductTextBox.ReadOnly = true;
             this.namaProductTextBox.Size = new System.Drawing.Size(347, 27);
             this.namaProductTextBox.TabIndex = 20;
+            // 
+            // kodeProductTextBox
+            // 
             this.kodeProductTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.kodeProductTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kodeProductTextBox.Location = new System.Drawing.Point(196, 3);
@@ -258,18 +267,6 @@
             this.saveButton.Text = "SAVE";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-            // 
-            // resetbutton
-            // 
-            // 
-            // namaProductTextBox
-            // 
-            // 
-            // kodeProductTextBox
-            // 
-            // 
-            // errorLabel
-            // 
             // 
             // penyesuaianStokForm
             // 

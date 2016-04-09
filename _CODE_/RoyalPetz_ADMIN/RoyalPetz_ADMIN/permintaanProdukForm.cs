@@ -257,11 +257,10 @@ namespace RoyalPetz_ADMIN
             calculateTotal();
         }
         
-        private bool exportDataRO()
+        private bool exportDataRO(string exportedFileName)
         {
             bool result = false;
 
-            string exportedFileName = "";
             string sqlCommand = "";
 
             string roInvoice = "";
@@ -272,8 +271,6 @@ namespace RoyalPetz_ADMIN
             string roDateExpired = "";
             DateTime selectedRODate;
             DateTime expiredRODate;
-            //string driveLetter = @"C:\";
-            string driveLetter = "";
 
             string selectedDate = RODateTimePicker.Value.ToShortDateString();
             selectedRODate = RODateTimePicker.Value;
@@ -287,7 +284,6 @@ namespace RoyalPetz_ADMIN
             roDateExpired = String.Format(culture, "{0:dd-MM-yyyy}", expiredRODate);
             roTotal = globalTotalValue;
 
-            exportedFileName = driveLetter + "RO_" + roInvoice + "_" + String.Format(culture, "{0:ddMMyyyy}", Convert.ToDateTime(selectedDate)) + ".exp";
 
             DS.beginTransaction();
 
@@ -329,12 +325,13 @@ namespace RoyalPetz_ADMIN
                 sqlCommand = "UPDATE REQUEST_ORDER_HEADER SET RO_EXPORTED = 1 WHERE RO_INVOICE = '" + roInvoice + "'";
                 DS.executeNonQueryCommand(sqlCommand);
 
-                result = true;
-
                 DS.commit();
+
+                result = true;
             }
             catch (Exception e)
             {
+                result = false;
                 try
                 {
                     if (System.IO.File.Exists(exportedFileName))
@@ -358,7 +355,6 @@ namespace RoyalPetz_ADMIN
             finally
             {
                 DS.mySqlClose();
-                result = true;
             }
 
             return result;
@@ -366,22 +362,34 @@ namespace RoyalPetz_ADMIN
 
         private void exportButton_Click(object sender, EventArgs e)
         {
+            string exportedFileName = "";
+            string roInvoice = "";
+
             if (saveData())
             {
-                exportDataRO();
+                string selectedDate = RODateTimePicker.Value.ToShortDateString();
+                roInvoice = ROinvoiceTextBox.Text;
 
-                gUtil.ResetAllControls(this);
-                originModuleID = globalConstants.NEW_REQUEST_ORDER;
-                detailRequestOrderDataGridView.Rows.Clear();
-                totalLabel.Text = "Rp. 0";
+                exportedFileName = "RO_" + roInvoice + "_" + String.Format(culture, "{0:ddMMyyyy}", Convert.ToDateTime(selectedDate)) + ".exp";
 
-                selectedBranchFromID = 0;
-                selectedBranchToID = 0;
+                saveFileDialog1.FileName = exportedFileName;
+                saveFileDialog1.Filter = "Export File (.exp)|*.exp";
+                saveFileDialog1.ShowDialog();
 
-                gUtil.showSuccess(gUtil.UPD);
+                if (exportDataRO(saveFileDialog1.FileName))
+                { 
+                    gUtil.ResetAllControls(this);
+                    originModuleID = globalConstants.NEW_REQUEST_ORDER;
+                    detailRequestOrderDataGridView.Rows.Clear();
+                    totalLabel.Text = "Rp. 0";
 
-                ROinvoiceTextBox.Focus();
-                //MessageBox.Show("SUCCESS");
+                    selectedBranchFromID = 0;
+                    selectedBranchToID = 0;
+
+                    gUtil.showSuccess(gUtil.UPD);
+
+                    ROinvoiceTextBox.Focus();
+                }
             }
         }
 
@@ -843,6 +851,7 @@ namespace RoyalPetz_ADMIN
         private void permintaanProdukForm_Activated(object sender, EventArgs e)
         {
             errorLabel.Text = "";
+            deactivateButton.Visible = false;
 
             if (originModuleID == globalConstants.EDIT_REQUEST_ORDER)
             {
@@ -851,7 +860,6 @@ namespace RoyalPetz_ADMIN
                 loadDataHeaderRO();
                 selectedROInvoice = ROinvoiceTextBox.Text;
                 ROinvoiceTextBox.ReadOnly = true;
-
                 //branchFromCombo.Text = getBranchName(selectedBranchFromID);
                 //branchToCombo.Text = getBranchName(selectedBranchToID);
 
@@ -874,8 +882,9 @@ namespace RoyalPetz_ADMIN
                     saveButton.Visible = false;
                     generateButton.Visible = false;
                     exportButton.Visible = false;
+                    deactivateButton.Visible = true;
                 }
-
+                
                 isLoading = false;
             }
         }
@@ -895,6 +904,63 @@ namespace RoyalPetz_ADMIN
         {
             if (!branchToCombo.Items.Contains(branchToCombo.Text))
                 branchToCombo.Focus();
+        }
+
+        private bool setNonActiveRO()
+        {
+            bool result = false;
+            string sqlCommand = "";
+            MySqlException internalEX = null;
+
+            string roInvoice = "";
+            roInvoice = ROinvoiceTextBox.Text;
+          
+            DS.beginTransaction();
+
+            try
+            {
+                DS.mySqlConnect();
+
+                sqlCommand = "UPDATE REQUEST_ORDER_HEADER SET RO_ACTIVE = 0 WHERE RO_INVOICE = '" + roInvoice + "'";
+
+                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                    throw internalEX;
+          
+                DS.commit();
+                result = true;
+            }
+            catch (Exception e)
+            {
+                try
+                {
+                    DS.rollBack();
+                }
+                catch (MySqlException ex)
+                {
+                    if (DS.getMyTransConnection() != null)
+                    {
+                        gUtil.showDBOPError(ex, "ROLLBACK");
+                    }
+                }
+
+                gUtil.showDBOPError(e, "INSERT");
+                result = false;
+            }
+            finally
+            {
+                DS.mySqlClose();
+            }
+
+            return result;
+        }
+
+        private void deactivateButton_Click(object sender, EventArgs e)
+        {
+            if (setNonActiveRO())
+            {
+                MessageBox.Show("SUCCESS");
+                deactivateButton.Visible = false;
+            }
         }
     }
 }

@@ -218,6 +218,7 @@ namespace RoyalPetz_ADMIN
             {
                 gutil.showSuccess(options);
                 gutil.ResetAllControls(this);
+                errorLabel.Text = "";
                 originModuleID = globalConstants.NEW_USER;
                 options = gutil.INS;
             }
@@ -269,6 +270,7 @@ namespace RoyalPetz_ADMIN
             originModuleID = globalConstants.NEW_USER;
             options = gutil.INS;
             gutil.ResetAllControls(this);
+            errorLabel.Text = "";
         }
     }
 }

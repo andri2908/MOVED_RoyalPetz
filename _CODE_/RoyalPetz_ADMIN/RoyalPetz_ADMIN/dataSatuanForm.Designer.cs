@@ -79,6 +79,7 @@
             this.dataUnitGridView.Size = new System.Drawing.Size(518, 479);
             this.dataUnitGridView.TabIndex = 28;
             this.dataUnitGridView.DoubleClick += new System.EventHandler(this.dataUnitGridView_DoubleClick);
+            this.dataUnitGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataUnitGridView_KeyDown);
             // 
             // newButton
             // 

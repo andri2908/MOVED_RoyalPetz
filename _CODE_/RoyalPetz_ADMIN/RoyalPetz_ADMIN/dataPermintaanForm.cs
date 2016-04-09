@@ -120,7 +120,7 @@ namespace RoyalPetz_ADMIN
 
             sqlCommand = "SELECT ID, RO_INVOICE AS 'NO PERMINTAAN', DATE_FORMAT(RO_DATETIME, '%d-%M-%Y')  AS 'TANGGAL PERMINTAAN', DATE_FORMAT(RO_EXPIRED, '%d-%M-%Y') AS 'TANGGAL EXPIRED', M1.BRANCH_NAME AS 'ASAL PERMINTAAN', RO_TOTAL AS 'TOTAL' " +
                                 "FROM REQUEST_ORDER_HEADER LEFT OUTER JOIN MASTER_BRANCH M1 ON (RO_BRANCH_ID_TO = M1.BRANCH_ID) " +
-                                "WHERE 1 = 1";
+                                "WHERE 1 = 1 AND RO_ACTIVE = 1";
 
             if (!showAll)
             {
@@ -129,10 +129,10 @@ namespace RoyalPetz_ADMIN
                     sqlCommand = sqlCommand + " AND RO_EXPIRED > '" + DateTime.Now + "'";
                 }
 
-                if (!showApprovedROCheckbox.Checked)
-                {
-                    sqlCommand = sqlCommand + " AND RO_ACTIVE = 1";
-                }
+                //if (!showApprovedROCheckbox.Checked)
+                //{
+                //    sqlCommand = sqlCommand + " AND RO_ACTIVE = 1";
+                //}
 
                 if (noROInvoiceTextBox.Text.Length > 0)
                 {
@@ -312,6 +312,10 @@ namespace RoyalPetz_ADMIN
         private void importButton_Click(object sender, EventArgs e)
         {
             string importFileName = "";
+
+            openFileDialog1.FileName = "";
+            openFileDialog1.Filter = "Export File (.exp)|*.exp";
+
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -339,7 +343,7 @@ namespace RoyalPetz_ADMIN
         private void dataPermintaanForm_Activated(object sender, EventArgs e)
         {
             //if need something
-            if (noROInvoiceTextBox.Text.Length > 0)
+            if (dataRequestOrderGridView.Rows.Count > 0)
                 displayButton.PerformClick();
         }
 

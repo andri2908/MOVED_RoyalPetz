@@ -44,29 +44,38 @@ namespace RoyalPetz_ADMIN
         {
             switch (originModuleID)
             {
-                case globalConstants.CEK_DATA_MUTASI:
-                    //reprintButton.Visible = false;
-                    break;
+                //case globalConstants.CEK_DATA_MUTASI:
+                //    //reprintButton.Visible = false;
+                //    exportButton.Visible = false;
+                //    break;
 
                 case globalConstants.REPRINT_PERMINTAAN_BARANG:
+
                     approveButton.Visible = false;
                     createPOButton.Visible = false;
+                    exportButton.Visible = false;
+                    acceptedButton.Visible = false;
+
                     detailRequestOrderDataGridView.ReadOnly = true;
                     break;
 
                 case globalConstants.MUTASI_BARANG:
                     approveButton.Text = "SAVE MUTASI";
-                    //reprintButton.Text = "REPRINT DATA MUTASI";
+
                     createPOButton.Visible = false;
+                    exportButton.Visible = false;
+                    acceptedButton.Visible = false;
+                    rejectButton.Visible = false;
 
                     directMutasiBarang = true;
                     break;
 
                 case globalConstants.VIEW_PRODUCT_MUTATION:
+
                     approveButton.Visible = false;
                     createPOButton.Visible = false;
                     rejectButton.Visible = false;
-                    //reprintButton.Text = "REPRINT DATA MUTASI";
+
                     detailRequestOrderDataGridView.ReadOnly = true;
                     break;
             }           
@@ -591,7 +600,7 @@ namespace RoyalPetz_ADMIN
             selectedBranchFromID = 0;
 
             addColumnToDetailDataGrid();
-            exportButton.Visible = false;
+            //exportButton.Visible = false;
 
             if (!directMutasiBarang)
             {
@@ -826,6 +835,12 @@ namespace RoyalPetz_ADMIN
                 return false;
             }
 
+            if (globalTotalValue == 0)
+            {
+                errorLabel.Text = "NILAI MUTASI 0";
+                return false;
+            }
+
             return true;
         }
 
@@ -974,11 +989,10 @@ namespace RoyalPetz_ADMIN
             selectedBranchToID = Convert.ToInt32(branchToComboHidden.Items[branchToCombo.SelectedIndex].ToString());
         }
 
-        private bool exportDataMutasi()
+        private bool exportDataMutasi(string exportedFileName)
         {
             bool result = false;
 
-            string exportedFileName = "";
             string sqlCommand = "";
 
             string roInvoice = "";
@@ -986,32 +1000,21 @@ namespace RoyalPetz_ADMIN
             int branchIDFrom = 0;
             int branchIDTo = 0;
             string pmDateTime = "";
-            
             double pmTotal = 0;
-            //string roDateExpired = "";
-            //DateTime selectedRODate;
-            
-            //string driveLetter = @"C:\";
-            string driveLetter = "";
-
             string selectedDate = PMDateTimePicker.Value.ToShortDateString();
-            
+
+            pmDateTime = String.Format(culture, "{0:dd-MM-yyyy}", Convert.ToDateTime(selectedDate));
             noMutasi = noMutasiTextBox.Text;
             roInvoice = ROInvoiceTextBox.Text;
             branchIDFrom = 0;
             branchIDTo = selectedBranchToID;
 
-            pmDateTime = String.Format(culture, "{0:dd-MM-yyyy}", Convert.ToDateTime(selectedDate));
             pmTotal = globalTotalValue;
 
-            exportedFileName = driveLetter + "PM_" + noMutasi + "_" + String.Format(culture, "{0:ddMMyyyy}", Convert.ToDateTime(selectedDate)) + ".exp";
-
-            DS.beginTransaction();
+            //exportedFileName = "PM_" + noMutasi + "_" + String.Format(culture, "{0:ddMMyyyy}", Convert.ToDateTime(selectedDate)) + ".exp";
 
             try
             {
-                DS.mySqlConnect();
-
                 //WRITE RO INVOICE
                 using (StreamWriter outputFile = new StreamWriter(exportedFileName))
                 {
@@ -1047,21 +1050,71 @@ namespace RoyalPetz_ADMIN
                     }
                 }
 
-                //sqlCommand = "UPDATE REQUEST_ORDER_HEADER SET RO_EXPORTED = 1 WHERE RO_INVOICE = '" + roInvoice + "'";
-                //DS.executeNonQueryCommand(sqlCommand);
-
                 result = true;
-
-                DS.commit();
             }
             catch (Exception e)
             {
+                result = false;
+            }
+            finally
+            {
+                DS.mySqlClose();
+            }
+
+            return result;
+        }
+
+        private void exportButton_Click(object sender, EventArgs e)
+        {
+            string exportedFileName = "";
+            string pmDateTime = "";
+            string noMutasi;
+            string selectedDate = PMDateTimePicker.Value.ToShortDateString();
+
+            noMutasi = noMutasiTextBox.Text;
+            pmDateTime = String.Format(culture, "{0:dd-MM-yyyy}", Convert.ToDateTime(selectedDate));
+            exportedFileName = "PM_" + noMutasi + "_" + String.Format(culture, "{0:ddMMyyyy}", Convert.ToDateTime(selectedDate)) + ".exp";
+            
+            saveFileDialog1.FileName = exportedFileName;
+            saveFileDialog1.Filter = "Export File (.exp)|*.exp";
+            saveFileDialog1.ShowDialog();
+            
+
+            if (exportDataMutasi(saveFileDialog1.FileName))
+            {
+                MessageBox.Show("EXPORT SUCCESS");
+            }
+        }
+
+        private bool setReceived()
+        {
+            bool result = false;
+
+            string sqlCommand = "";
+
+            string noMutasi = "";
+            
+            noMutasi = noMutasiTextBox.Text;
+
+            DS.beginTransaction();
+
+            try
+            {
+                DS.mySqlConnect();
+
+                sqlCommand = "UPDATE PRODUCTS_MUTATION_HEADER SET PM_RECEIVED = 1 WHERE PM_INVOICE = '" + noMutasi + "'";
+                DS.executeNonQueryCommand(sqlCommand);
+
+                DS.commit();
+                result = true;
+            }
+            catch (Exception e)
+            {
+                result = false;
                 try
                 {
-                    if (System.IO.File.Exists(exportedFileName))
-                        System.IO.File.Delete(exportedFileName);
-
                     //myTrans.Rollback();
+
                 }
                 catch (MySqlException ex)
                 {
@@ -1079,17 +1132,18 @@ namespace RoyalPetz_ADMIN
             finally
             {
                 DS.mySqlClose();
-                result = true;
             }
 
             return result;
         }
 
-        private void exportButton_Click(object sender, EventArgs e)
+        private void acceptedButton_Click(object sender, EventArgs e)
         {
-            if (exportDataMutasi())
+            if (setReceived())
             {
-                MessageBox.Show("EXPORT SUCCESS");
+                MessageBox.Show("MUTASI DITERIMA");
+                acceptedButton.Visible = false;
+                exportButton.Visible = false;
             }
         }
     }

@@ -121,7 +121,10 @@ namespace RoyalPetz_ADMIN
                         break;
                 }
                 if (!previousInput.Equals(dataGridViewTextBoxEditingControl.Text))
+                { 
                     selectedRow.DefaultCellStyle.BackColor = Color.LightBlue;
+                    selectedRow.Cells["CHANGED"].Value = true;
+                }
             }
         }
 

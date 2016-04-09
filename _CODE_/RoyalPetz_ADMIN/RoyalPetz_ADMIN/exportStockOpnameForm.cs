@@ -29,7 +29,7 @@ namespace RoyalPetz_ADMIN
         private bool saveToCSV(string fileName)
         {
             //string fileName = "";
-            string localDate;
+            //string localDate;
             string sqlCommand;
             string line = "";
             MySqlDataReader rdr;
@@ -42,7 +42,7 @@ namespace RoyalPetz_ADMIN
 
             //fileName = "EXPORT_" + localDate + ".csv";
 
-            localDate = String.Format(culture, "{0:dd-MMM-yyyy}", DateTime.Now);
+            //localDate = String.Format(culture, "{0:dd-MMM-yyyy}", DateTime.Now);
 
             sqlCommand = "SELECT * FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 ORDER BY ID";
 
@@ -58,7 +58,7 @@ namespace RoyalPetz_ADMIN
                         sw = File.CreateText(fileName);
                     }
 
-                    sw.WriteLine(localDate);
+                    //sw.WriteLine(localDate);
 
                     line = "KODE PRODUK, BARCODE PRODUK, NAMA PRODUK, QTY PRODUK, QTY RIIL, DESCRIPTION";
                     sw.WriteLine(line);
@@ -89,7 +89,7 @@ namespace RoyalPetz_ADMIN
             saveFileDialog1.Filter = "CSV File (.csv)|*.csv";
             saveFileDialog1.ShowDialog();
 
-            if (saveToCSV(fileName))
+            if (saveToCSV(saveFileDialog1.FileName))
             {
                 MessageBox.Show("SUCCESS");
             }        

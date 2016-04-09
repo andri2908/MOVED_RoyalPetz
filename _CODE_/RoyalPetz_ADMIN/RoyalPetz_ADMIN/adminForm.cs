@@ -381,6 +381,8 @@ namespace RoyalPetz_ADMIN
         private void pengaturanGambarLatarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string fileName = "";
+            openFileDialog1.FileName = "";
+            openFileDialog1.Filter = "(*.jpg)|*.jpg|(*.bmp)|*.bmp";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -809,12 +811,12 @@ namespace RoyalPetz_ADMIN
             setAccessibility(globalConstants.MENU_TRANSAKSI, MENU_transaksi);
             setAccessibility(globalConstants.MENU_TRANSAKSI_HARIAN, MENU_tambahTransaksiHarian);
             setAccessibility(globalConstants.MENU_TRANSAKSI_HARIAN, SHORTCUT_jurnal);
+            setAccessibility(globalConstants.MENU_TRANSAKSI_HARIAN, MENU_pengaturanLimitPajak);
             setAccessibility(globalConstants.MENU_PEMBAYARAN_PIUTANG, MENU_pembayaranPiutang);
             setAccessibility(globalConstants.MENU_PEMBAYARAN_PIUTANG, SHORTCUT_piutang);
             setAccessibility(globalConstants.MENU_PEMBAYARAN_PIUTANG_MUTASI, MENU_pembayaranPiutangMutasi);
             setAccessibility(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, MENU_pembayaranHutangKeSupplier);
             setAccessibility(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, SHORTCUT_hutang);
-
         }
 
 
