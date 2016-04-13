@@ -46,7 +46,6 @@
             this.POinvoiceTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.productNameComboHidden = new System.Windows.Forms.ComboBox();
             this.saveButton = new System.Windows.Forms.Button();
             this.detailPODataGridView = new System.Windows.Forms.DataGridView();
             this.label10 = new System.Windows.Forms.Label();
@@ -55,7 +54,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.productIDComboHidden = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.termOfPaymentCombo = new System.Windows.Forms.ComboBox();
@@ -97,7 +95,7 @@
             // 
             this.PODateTimePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PODateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.PODateTimePicker.Location = new System.Drawing.Point(410, 3);
+            this.PODateTimePicker.Location = new System.Drawing.Point(409, 3);
             this.PODateTimePicker.Name = "PODateTimePicker";
             this.PODateTimePicker.Size = new System.Drawing.Size(173, 27);
             this.PODateTimePicker.TabIndex = 21;
@@ -108,7 +106,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label9.Location = new System.Drawing.Point(263, 8);
+            this.label9.Location = new System.Drawing.Point(262, 8);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(135, 18);
             this.label9.TabIndex = 20;
@@ -229,7 +227,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 147F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 216F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 217F));
             this.tableLayoutPanel2.Controls.Add(this.PODateTimePicker, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.POinvoiceTextBox, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label9, 2, 0);
@@ -262,17 +260,6 @@
             this.label5.Size = new System.Drawing.Size(14, 18);
             this.label5.TabIndex = 20;
             this.label5.Text = ":";
-            // 
-            // productNameComboHidden
-            // 
-            this.productNameComboHidden.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.productNameComboHidden.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productNameComboHidden.FormattingEnabled = true;
-            this.productNameComboHidden.Location = new System.Drawing.Point(561, 351);
-            this.productNameComboHidden.Name = "productNameComboHidden";
-            this.productNameComboHidden.Size = new System.Drawing.Size(230, 26);
-            this.productNameComboHidden.TabIndex = 50;
-            this.productNameComboHidden.Visible = false;
             // 
             // saveButton
             // 
@@ -381,17 +368,6 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(624, 35);
             this.tableLayoutPanel3.TabIndex = 22;
             // 
-            // productIDComboHidden
-            // 
-            this.productIDComboHidden.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.productIDComboHidden.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productIDComboHidden.FormattingEnabled = true;
-            this.productIDComboHidden.Location = new System.Drawing.Point(561, 319);
-            this.productIDComboHidden.Name = "productIDComboHidden";
-            this.productIDComboHidden.Size = new System.Drawing.Size(230, 26);
-            this.productIDComboHidden.TabIndex = 49;
-            this.productIDComboHidden.Visible = false;
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -484,9 +460,7 @@
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(901, 661);
             this.Controls.Add(this.generateButton);
-            this.Controls.Add(this.productNameComboHidden);
             this.Controls.Add(this.saveButton);
-            this.Controls.Add(this.productIDComboHidden);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.detailPODataGridView);
@@ -530,7 +504,6 @@
         private System.Windows.Forms.TextBox POinvoiceTextBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.ComboBox productNameComboHidden;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.DataGridView detailPODataGridView;
         private System.Windows.Forms.Label label10;
@@ -539,7 +512,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.ComboBox productIDComboHidden;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label errorLabel;
         private System.Windows.Forms.Panel panel1;

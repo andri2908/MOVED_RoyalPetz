@@ -107,8 +107,8 @@ namespace RoyalPetz_ADMIN
             string sqlCommand = "";
             MySqlException internalEX = null;
 
-            string groupName = namaGroupTextBox.Text.Trim();
-            string groupDesc = deskripsiTextBox.Text.Trim();
+            string groupName = MySqlHelper.EscapeString(namaGroupTextBox.Text.Trim());
+            string groupDesc = MySqlHelper.EscapeString(deskripsiTextBox.Text.Trim());
             byte groupStatus= 0;
 
             if (nonAktifCheckbox.Checked)

@@ -78,6 +78,7 @@
             this.dataCabangGridView.RowHeadersVisible = false;
             this.dataCabangGridView.Size = new System.Drawing.Size(402, 472);
             this.dataCabangGridView.TabIndex = 28;
+            this.dataCabangGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataCabangGridView_CellContentClick);
             this.dataCabangGridView.DoubleClick += new System.EventHandler(this.dataCabangGridView_DoubleClick);
             this.dataCabangGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataCabangGridView_KeyDown);
             // 

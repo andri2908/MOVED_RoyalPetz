@@ -44,10 +44,11 @@ namespace RoyalPetz_ADMIN
         {
             switch (originModuleID)
             {
-                //case globalConstants.CEK_DATA_MUTASI:
-                //    //reprintButton.Visible = false;
-                //    exportButton.Visible = false;
-                //    break;
+                case globalConstants.CEK_DATA_MUTASI:
+                    //reprintButton.Visible = false;
+                    exportButton.Visible = false;
+                    acceptedButton.Visible = false;
+                    break;
 
                 case globalConstants.REPRINT_PERMINTAAN_BARANG:
 
@@ -133,20 +134,20 @@ namespace RoyalPetz_ADMIN
 
         private void detailRequestOrderDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            int qtyPosition;
+            //int qtyPosition;
 
-            if (!directMutasiBarang)
-                qtyPosition = 2;
-            else
-                qtyPosition = 1;
+            //if (!directMutasiBarang)
+            //    qtyPosition = 2;
+            //else
+            //    qtyPosition = 1;
 
-            if (detailRequestOrderDataGridView.CurrentCell.ColumnIndex == 0 && e.Control is ComboBox)
+            if ((detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name == "productID" || detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name == "productName")  && e.Control is ComboBox)
             {
                 ComboBox comboBox = e.Control as ComboBox;
                 comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
             }
 
-            if (detailRequestOrderDataGridView.CurrentCell.ColumnIndex == qtyPosition && e.Control is TextBox)
+            if (detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name == "qty" && e.Control is TextBox)
             {
                 TextBox textBox = e.Control as TextBox;
                 textBox.TextChanged += TextBox_TextChanged;
@@ -180,8 +181,12 @@ namespace RoyalPetz_ADMIN
             cmbSelectedIndex = dataGridViewComboBoxEditingControl.SelectedIndex;
 
             // get product id
-            productID = productIDHiddenCombo.Items[cmbSelectedIndex].ToString();
-            selectedRow.Cells["productID"].Value = productID;
+            DataGridViewComboBoxCell productIDComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productID"];
+            DataGridViewComboBoxCell productNameComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productName"];
+
+            productID = productIDComboCell.Items[cmbSelectedIndex].ToString();
+            productIDComboCell.Value = productIDComboCell.Items[cmbSelectedIndex];
+            productNameComboCell.Value = productNameComboCell.Items[cmbSelectedIndex];
 
             // get hpp
             hppValue = getHPP(productID);
@@ -328,7 +333,7 @@ namespace RoyalPetz_ADMIN
                 {
                     while (rdr.Read())
                     {
-                        noMutasiTextBox.Text = rdr.GetString("PM_INVOICE");
+                        //noMutasiTextBox.Text = rdr.GetString("PM_INVOICE");
                         PMDateTimePicker.Value = rdr.GetDateTime("PM_DATETIME");
                         ROInvoiceTextBox.Text = rdr.GetString("RO_INVOICE");
                         selectedBranchFromID = rdr.GetInt32("BRANCH_ID_FROM");
@@ -361,7 +366,7 @@ namespace RoyalPetz_ADMIN
                 sqlCommand = "SELECT R.*, M.PRODUCT_NAME, (M.PRODUCT_STOCK_QTY - M.PRODUCT_LIMIT_STOCK) AS PRODUCT_QTY FROM REQUEST_ORDER_DETAIL R, MASTER_PRODUCT M WHERE R.RO_INVOICE = '" + selectedROInvoice + "' AND R.PRODUCT_ID = M.PRODUCT_ID";
             else
                 // load all data from product mutation 
-                sqlCommand = "SELECT PM.*, M.PRODUCT_NAME FROM PRODUCTS_MUTATION_DETAIL PM, MASTER_PRODUCT M WHERE PM.PM_INVOICE = '" + noMutasiTextBox.Text + "' AND PM.PRODUCT_ID = M.PRODUCT_ID";
+                sqlCommand = "SELECT PM.*, M.PRODUCT_NAME FROM PRODUCTS_MUTATION_DETAIL PM, MASTER_PRODUCT M WHERE PM.PM_INVOICE = '" + selectedPMInvoice + "' AND PM.PRODUCT_ID = M.PRODUCT_ID";
 
             using (rdr = DS.getData(sqlCommand))
             {
@@ -426,22 +431,22 @@ namespace RoyalPetz_ADMIN
             return result;
         }
 
-        private string getNoMutasi()
-        {
-            MySqlDataReader rdr;
-            string retVal = "";
+        //private string getNoMutasi()
+        //{
+        //    MySqlDataReader rdr;
+        //    string retVal = "";
 
-            using (rdr = DS.getData("SELECT PM_INVOICE FROM PRODUCTS_MUTATION_HEADER WHERE RO_INVOICE = '" + selectedROInvoice + "'"))
-            {
-                if (rdr.HasRows)
-                {
-                    rdr.Read();
-                    retVal = rdr.GetString("PM_INVOICE");
-                }
-            }
+        //    using (rdr = DS.getData("SELECT PM_INVOICE FROM PRODUCTS_MUTATION_HEADER WHERE RO_INVOICE = '" + selectedROInvoice + "'"))
+        //    {
+        //        if (rdr.HasRows)
+        //        {
+        //            rdr.Read();
+        //            retVal = rdr.GetString("PM_INVOICE");
+        //        }
+        //    }
 
-            return retVal;
-        }
+        //    return retVal;
+        //}
 
         private DateTime getPMDateTimeValue()
         {
@@ -492,22 +497,22 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        private void addDataToProductNameCombo(DataGridViewComboBoxColumn comboColumn)
+        private void addDataToProductNameCombo(DataGridViewComboBoxColumn comboColumn, DataGridViewComboBoxColumn comboIDColumn)
         {
             MySqlDataReader rdr;
             string sqlCommand = "";
 
             sqlCommand = "SELECT PRODUCT_ID, PRODUCT_NAME FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 ORDER BY PRODUCT_NAME ASC";
 
-            productIDHiddenCombo.Items.Clear();
             comboColumn.Items.Clear();
+            comboIDColumn.Items.Clear();
 
             using (rdr = DS.getData(sqlCommand))
             {
                 while (rdr.Read())
                 {
                     comboColumn.Items.Add(rdr.GetString("PRODUCT_NAME"));
-                    productIDHiddenCombo.Items.Add(rdr.GetString("PRODUCT_ID"));
+                    comboIDColumn.Items.Add(rdr.GetString("PRODUCT_ID"));
                 }
             }
 
@@ -517,17 +522,24 @@ namespace RoyalPetz_ADMIN
 
         private void addColumnToDetailDataGrid()
         {
+            DataGridViewTextBoxColumn productIDColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn productNameColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn qtyReqColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn qtyColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn hppColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn subtotalColumn = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn productIDColumn = new DataGridViewTextBoxColumn();
-
+            
+            DataGridViewComboBoxColumn productIDComboColumn = new DataGridViewComboBoxColumn();
             DataGridViewComboBoxColumn productNameComboColumn = new DataGridViewComboBoxColumn();
 
             if (!directMutasiBarang)
             {
+                productIDColumn.Name = "productID";
+                productIDColumn.HeaderText = "KODE PRODUK";
+                productIDColumn.ReadOnly = true;
+                productIDColumn.Width = 100;
+                detailRequestOrderDataGridView.Columns.Add(productIDColumn);
+
                 productNameColumn.Name = "productName";
                 productNameColumn.HeaderText = "NAMA PRODUK";
                 productNameColumn.ReadOnly = true;
@@ -542,10 +554,17 @@ namespace RoyalPetz_ADMIN
             }
             else
             {
+                productIDComboColumn.Name = "productID";
+                productIDComboColumn.HeaderText = "KODE PRODUK";
+                productIDComboColumn.DefaultCellStyle.BackColor = Color.LightBlue;
+                productIDComboColumn.Width = 100;
+                detailRequestOrderDataGridView.Columns.Add(productIDComboColumn);
+
                 productNameComboColumn.Name = "productName";
                 productNameComboColumn.HeaderText = "NAMA PRODUK";
+                productNameComboColumn.DefaultCellStyle.BackColor = Color.LightBlue;
                 productNameComboColumn.Width = 300;
-                addDataToProductNameCombo(productNameComboColumn);
+                addDataToProductNameCombo(productNameComboColumn, productIDComboColumn);
 
                 detailRequestOrderDataGridView.Columns.Add(productNameComboColumn);
             }
@@ -553,6 +572,7 @@ namespace RoyalPetz_ADMIN
             qtyColumn.Name = "qty";
             qtyColumn.HeaderText = "QTY";
             qtyColumn.Width = 150;
+            qtyColumn.DefaultCellStyle.BackColor = Color.LightBlue;
             detailRequestOrderDataGridView.Columns.Add(qtyColumn);
 
             hppColumn.Name = "hpp";
@@ -567,11 +587,6 @@ namespace RoyalPetz_ADMIN
             subtotalColumn.ReadOnly = true;
             detailRequestOrderDataGridView.Columns.Add(subtotalColumn);
 
-            productIDColumn.Name = "productID";
-            productIDColumn.HeaderText = "productID";
-            productIDColumn.Width = 100;
-            productIDColumn.Visible = false;
-            detailRequestOrderDataGridView.Columns.Add(productIDColumn);
         }
 
         private bool roInvoiceAvailable()
@@ -617,18 +632,19 @@ namespace RoyalPetz_ADMIN
                     createPOButton.Visible = true;
                     //reprintButton.Visible = false;
 
-                    noMutasiTextBox.Focus();
+                    //noMutasiTextBox.Focus();
+                    PMDateTimePicker.Focus();
                 }
                 else
                 {
                     detailRequestOrderDataGridView.Columns["qtyRequest"].Visible = false;
 
-                    noMutasiTextBox.ReadOnly = true;
+                    //noMutasiTextBox.ReadOnly = true;
                     PMDateTimePicker.Enabled = false;
 
                     if (originModuleID != globalConstants.VIEW_PRODUCT_MUTATION)
                     {
-                        noMutasiTextBox.Text = getNoMutasi();
+                        //noMutasiTextBox.Text = getNoMutasi();
                         PMDateTimePicker.Value = getPMDateTimeValue();
                     }
 
@@ -697,6 +713,19 @@ namespace RoyalPetz_ADMIN
             gUtil.reArrangeTabOrder(this);
         }
 
+        private string getNewNoMutasi()
+        {
+            string result = "";
+            int lastNo;
+
+            lastNo = Convert.ToInt32(DS.getDataSingleValue("SELECT MAX(CONVERT(SUBSTRING(PM_INVOICE, 4), UNSIGNED INTEGER)) FROM PRODUCTS_MUTATION_HEADER"));
+            lastNo++;
+
+            result = "PM-" + lastNo.ToString();
+
+            return result;
+        }
+
         private bool saveDataTransaction()
         {
             bool result = false;
@@ -724,7 +753,9 @@ namespace RoyalPetz_ADMIN
                 {
                     case globalConstants.NEW_PRODUCT_MUTATION:
                         // GET THE DATA
-                        noMutasi = noMutasiTextBox.Text;
+                        //noMutasi = noMutasiTextBox.Text;
+                        noMutasi = getNewNoMutasi();
+                        selectedPMInvoice = noMutasi;
                         branchIDFrom = selectedBranchFromID;
                         branchIDTo = selectedBranchToID;
                         selectedPMDate = PMDateTimePicker.Value;
@@ -774,7 +805,8 @@ namespace RoyalPetz_ADMIN
                     case globalConstants.REJECT_PRODUCT_MUTATION:
                         // UPDATE REQUEST ORDER HEADER TABLE
                         sqlCommand = "UPDATE REQUEST_ORDER_HEADER SET RO_ACTIVE = 0 WHERE RO_INVOICE = '" + roInvoice + "'";
-                        DS.executeNonQueryCommand(sqlCommand);
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
                         break;
                 }
 
@@ -812,11 +844,11 @@ namespace RoyalPetz_ADMIN
             if (subModuleID == globalConstants.REJECT_PRODUCT_MUTATION)
                 return true;
 
-            if (noMutasiTextBox.Text.Length <= 0)
-            {
-                errorLabel.Text = "NO MUTASI TIDAK BOLEH KOSONG";
-                return false;
-            }
+            //if (noMutasiTextBox.Text.Length <= 0)
+            //{
+            //    errorLabel.Text = "NO MUTASI TIDAK BOLEH KOSONG";
+            //    return false;
+            //}
 
             while ( i < detailRequestOrderDataGridView.Rows.Count)
             { 
@@ -861,40 +893,41 @@ namespace RoyalPetz_ADMIN
 
                 detailRequestOrderDataGridView.ReadOnly = true;
 
-                noMutasiTextBox.ReadOnly = true;
+                //noMutasiTextBox.ReadOnly = true;
                 PMDateTimePicker.Enabled = false;
                 approveButton.Visible = false;
                 createPOButton.Visible = false;
                 rejectButton.Visible = false;
                 exportButton.Visible = true;
+                acceptedButton.Visible = true;
                 //reprintButton.Visible = true;
             }
         }
 
-        private bool noMutasiExist()
-        {
-            bool result = false;
+        //private bool noMutasiExist()
+        //{
+        //    //bool result = false;
 
-            if (0 < Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM PRODUCTS_MUTATION_HEADER WHERE PM_INVOICE = '" + noMutasiTextBox.Text + "'")))
-                result = true;
+        //    //if (0 < Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM PRODUCTS_MUTATION_HEADER WHERE PM_INVOICE = '" + noMutasiTextBox.Text + "'")))
+        //    //    result = true;
 
-            return result;
-        }
+        //    //return result;
+        //}
 
         private void noMutasiTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (isLoading)
-                return;
+            //if (isLoading)
+            //    return;
 
-            noMutasiTextBox.Text = noMutasiTextBox.Text.Trim();
+            //noMutasiTextBox.Text = noMutasiTextBox.Text.Trim();
 
-            if (noMutasiExist() && (subModuleID == globalConstants.NEW_PRODUCT_MUTATION))
-            {
-                errorLabel.Text = "NO MUTASI SUDAH ADA";
-                noMutasiTextBox.Focus();
-            }
-            else
-                errorLabel.Text = "";
+            //if (noMutasiExist() && (subModuleID == globalConstants.NEW_PRODUCT_MUTATION))
+            //{
+            //    errorLabel.Text = "NO MUTASI SUDAH ADA";
+            //    noMutasiTextBox.Focus();
+            //}
+            //else
+            //    errorLabel.Text = "";
         }
         
         private void rejectButton_Click(object sender, EventArgs e)
@@ -906,7 +939,7 @@ namespace RoyalPetz_ADMIN
 
                 MessageBox.Show("PERMINTAAN DITOLAK, SEGERA HUBUNGI CABANG");
 
-                noMutasiTextBox.ReadOnly = true;
+                //noMutasiTextBox.ReadOnly = true;
                 PMDateTimePicker.Enabled = false;
                 detailRequestOrderDataGridView.ReadOnly = true;
                 approveButton.Visible = false;
@@ -1004,7 +1037,7 @@ namespace RoyalPetz_ADMIN
             string selectedDate = PMDateTimePicker.Value.ToShortDateString();
 
             pmDateTime = String.Format(culture, "{0:dd-MM-yyyy}", Convert.ToDateTime(selectedDate));
-            noMutasi = noMutasiTextBox.Text;
+            noMutasi = selectedPMInvoice;//noMutasiTextBox.Text;
             roInvoice = ROInvoiceTextBox.Text;
             branchIDFrom = 0;
             branchIDTo = selectedBranchToID;
@@ -1015,11 +1048,24 @@ namespace RoyalPetz_ADMIN
 
             try
             {
-                //WRITE RO INVOICE
+                //WRITE PM INVOICE
                 using (StreamWriter outputFile = new StreamWriter(exportedFileName))
                 {
                     outputFile.WriteLine(noMutasi);
                 }
+
+                //WRITE PM INVOICE
+                using (StreamWriter outputFile = new StreamWriter(exportedFileName, true))
+                {
+                    outputFile.WriteLine(roInvoice);
+                }
+
+                //WRITE PM INVOICE
+                using (StreamWriter outputFile = new StreamWriter(exportedFileName, true))
+                {
+                    outputFile.WriteLine(branchIDTo);
+                }
+
 
                 if (roInvoice.Length > 0)
                     // WRITE HEADER TABLE SQL
@@ -1068,33 +1114,35 @@ namespace RoyalPetz_ADMIN
         {
             string exportedFileName = "";
             string pmDateTime = "";
-            string noMutasi;
+            //string noMutasi;
             string selectedDate = PMDateTimePicker.Value.ToShortDateString();
 
-            noMutasi = noMutasiTextBox.Text;
+            //noMutasi = noMutasiTextBox.Text;
             pmDateTime = String.Format(culture, "{0:dd-MM-yyyy}", Convert.ToDateTime(selectedDate));
-            exportedFileName = "PM_" + noMutasi + "_" + String.Format(culture, "{0:ddMMyyyy}", Convert.ToDateTime(selectedDate)) + ".exp";
+            exportedFileName = "PM_" + selectedPMInvoice + "_" + String.Format(culture, "{0:ddMMyyyy}", Convert.ToDateTime(selectedDate)) + ".exp";
             
             saveFileDialog1.FileName = exportedFileName;
             saveFileDialog1.Filter = "Export File (.exp)|*.exp";
-            saveFileDialog1.ShowDialog();
+            //saveFileDialog1.ShowDialog();
             
-
-            if (exportDataMutasi(saveFileDialog1.FileName))
-            {
-                MessageBox.Show("EXPORT SUCCESS");
+            if (DialogResult.OK == saveFileDialog1.ShowDialog())
+            { 
+                if (exportDataMutasi(saveFileDialog1.FileName))
+                {
+                    MessageBox.Show("EXPORT SUCCESS");
+                }
             }
         }
 
         private bool setReceived()
         {
             bool result = false;
-
+            MySqlException internalEX = null;
             string sqlCommand = "";
 
             string noMutasi = "";
-            
-            noMutasi = noMutasiTextBox.Text;
+
+            noMutasi = selectedPMInvoice;//noMutasiTextBox.Text;
 
             DS.beginTransaction();
 
@@ -1103,7 +1151,8 @@ namespace RoyalPetz_ADMIN
                 DS.mySqlConnect();
 
                 sqlCommand = "UPDATE PRODUCTS_MUTATION_HEADER SET PM_RECEIVED = 1 WHERE PM_INVOICE = '" + noMutasi + "'";
-                DS.executeNonQueryCommand(sqlCommand);
+                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                    throw internalEX;
 
                 DS.commit();
                 result = true;

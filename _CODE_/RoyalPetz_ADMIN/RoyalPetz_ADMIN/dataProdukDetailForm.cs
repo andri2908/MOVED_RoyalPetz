@@ -362,16 +362,18 @@ namespace RoyalPetz_ADMIN
             string noRakKolom = "";
             MySqlException internalEX = null;
 
-            productID = kodeProdukTextBox.Text;
+            productID = MySqlHelper.EscapeString(kodeProdukTextBox.Text);
             string produkBarcode = barcodeTextBox.Text;
             if (produkBarcode.Equals(""))
                 produkBarcode = "0";
 
-            string produkName = namaProdukTextBox.Text.Trim();
+            string produkName = MySqlHelper.EscapeString(namaProdukTextBox.Text.Trim());
 
             string produkDesc = produkDescTextBox.Text.Trim();
             if (produkDesc.Equals(""))
                 produkDesc = " ";
+            else
+                produkDesc = MySqlHelper.EscapeString(produkDesc);
 
             string produkHargaPokok = hppTextBox.Text;
             string produkHargaEcer = hargaEcerTextBox.Text;
@@ -381,6 +383,8 @@ namespace RoyalPetz_ADMIN
             string produkBrand = merkTextBox.Text.Trim();
             if (produkBrand.Equals(""))
                 produkBrand = " ";
+            else
+                produkBrand = MySqlHelper.EscapeString(produkBrand);
 
             string produkQty = stokAwalTextBox.Text;
             if (produkQty.Equals(""))
@@ -390,7 +394,7 @@ namespace RoyalPetz_ADMIN
             if (limitStock.Equals(""))
                 limitStock = "0";
 
-            noRakBaris = noRakBarisTextBox.Text;
+            noRakBaris = MySqlHelper.EscapeString(noRakBarisTextBox.Text);
             noRakKolom= noRakKolomTextBox.Text;
             
             while (noRakBaris.Length < 2)
@@ -614,18 +618,18 @@ namespace RoyalPetz_ADMIN
             if (isLoading)
                 return;
 
-            kodeProdukTextBox.Text = gUtil.allTrim(kodeProdukTextBox.Text);
+            kodeProdukTextBox.Text = MySqlHelper.EscapeString(gUtil.allTrim(kodeProdukTextBox.Text));
 
             if ((productIDExist()) && (originModuleID != globalConstants.EDIT_PRODUK))
             {
                 errorLabel.Text = "PRODUK ID SUDAH ADA";
                 kodeProdukTextBox.Focus();
-                kodeProdukTextBox.BackColor = Color.Red;
+                //kodeProdukTextBox.BackColor = Color.Red;
             }
             else
             {
                 errorLabel.Text = "";
-                kodeProdukTextBox.BackColor = Color.White;
+                //kodeProdukTextBox.BackColor = Color.White;
             }
         }
 

@@ -378,7 +378,16 @@ namespace RoyalPetz_ADMIN
                     (0 == Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value))
                     ) && null != cashierDataGridView.Rows[i].Cells["productID"].Value)
                 {
-                    errorLabel.Text = "JUMLAH PRODUK 0";
+                    errorLabel.Text = "JUMLAH PRODUK DI BARIS " + (i + 1) + " = 0";
+                    return false;
+                }
+
+                if (
+                    ((null == cashierDataGridView.Rows[i].Cells["jumlah"].Value) ||
+                    (0 >= Convert.ToDouble(cashierDataGridView.Rows[i].Cells["jumlah"].Value))
+                    ) && null != cashierDataGridView.Rows[i].Cells["productID"].Value)
+                {
+                    errorLabel.Text = "PEMBELIAN DI BARIS " + (i+1) + " TIDAK VALID";
                     return false;
                 }
             }
@@ -605,19 +614,20 @@ namespace RoyalPetz_ADMIN
 
             salesInvPrefix = getNoFaktur() + "-";//String.Format(culture, "{0:yyyyMMdd}", localDate);
 
-            sqlCommand = "SELECT IFNULL(MAX(SALES_INVOICE),'') AS SALES_INVOICE FROM SALES_HEADER WHERE SALES_INVOICE LIKE '" + salesInvPrefix + "%'";
+            sqlCommand = "SELECT IFNULL(MAX(CONVERT(SUBSTRING(SALES_INVOICE, INSTR(SALES_INVOICE,'-')+1), UNSIGNED INTEGER)),'') AS SALES_INVOICE FROM SALES_HEADER WHERE SALES_INVOICE LIKE '" + salesInvPrefix + "%'";
 
             maxSalesInvoice = DS.getDataSingleValue(sqlCommand).ToString();
-            if (maxSalesInvoice.Length > salesInvPrefix.Length)
-            {
-                maxSalesInvoice = maxSalesInvoice.Substring(salesInvPrefix.Length);
-                maxSalesInvoiceValue = Convert.ToInt32(maxSalesInvoice);
-            }
-            else
-            {
-                maxSalesInvoiceValue = 0;
-            }
+            //if (maxSalesInvoice.Length > salesInvPrefix.Length)
+            //{
+            //    maxSalesInvoice = maxSalesInvoice.Substring(salesInvPrefix.Length);
+            //    maxSalesInvoiceValue = Convert.ToInt32(maxSalesInvoice);
+            //}
+            //else
+            //{
+            //    maxSalesInvoiceValue = 0;
+            //}
 
+            maxSalesInvoiceValue = Convert.ToInt32(maxSalesInvoice);
             if (maxSalesInvoiceValue > 0)
             {
                 maxSalesInvoiceValue += 1;
@@ -634,13 +644,6 @@ namespace RoyalPetz_ADMIN
             salesInvoice = salesInvPrefix + maxSalesInvoice;
 
             return salesInvoice;
-        }
-
-        private string getProductID(int selectedIndex)
-        {
-            string productID = "";
-            productID = productComboHidden.Items[selectedIndex].ToString();
-            return productID;
         }
 
         private double getProductPriceValue(string productID, int customerType = 0)
@@ -664,13 +667,15 @@ namespace RoyalPetz_ADMIN
         
         private void cashierDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            if (cashierDataGridView.CurrentCell.ColumnIndex == 1 && e.Control is ComboBox)
+            if ((cashierDataGridView.CurrentCell.OwningColumn.Name == "productID" || cashierDataGridView.CurrentCell.OwningColumn.Name == "productName") 
+                && e.Control is ComboBox)
             {
                 ComboBox comboBox = e.Control as ComboBox;
                 comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
             }
 
-            if ((cashierDataGridView.CurrentCell.ColumnIndex == 3)
+            if (
+                (cashierDataGridView.CurrentCell.OwningColumn.Name == "qty" || cashierDataGridView.CurrentCell.OwningColumn.Name == "disc1" || cashierDataGridView.CurrentCell.OwningColumn.Name == "disc2" || cashierDataGridView.CurrentCell.OwningColumn.Name == "discRP")
                 && e.Control is TextBox)
             {
                 TextBox textBox = e.Control as TextBox;
@@ -748,17 +753,35 @@ namespace RoyalPetz_ADMIN
             double subTotal = 0;
             MySqlDataReader rdr;
 
-            if (isLoading)
+            if (isLoading)  
                 return;
 
             DataGridViewComboBoxEditingControl dataGridViewComboBoxEditingControl = sender as DataGridViewComboBoxEditingControl;
-
             selectedIndex = dataGridViewComboBoxEditingControl.SelectedIndex;
-            selectedProductID = getProductID(selectedIndex);
-            hpp = getProductPriceValue(selectedProductID, customerComboBox.SelectedIndex);
-
             rowSelectedIndex = cashierDataGridView.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = cashierDataGridView.Rows[rowSelectedIndex];
+
+            DataGridViewComboBoxCell productIDComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productID"];
+            DataGridViewComboBoxCell productNameComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productName"];
+
+            selectedProductID = productIDComboCell.Items[selectedIndex].ToString();
+            productIDComboCell.Value = productIDComboCell.Items[selectedIndex];
+            productNameComboCell.Value = productNameComboCell.Items[selectedIndex];
+
+
+            //selectedProductID = productComboHidden.Items[selectedIndex].ToString();//getProductID(selectedIndex);
+
+            //if(cashierDataGridView.CurrentCell.OwningColumn.Name == "productID")
+            //{
+            //    selectedRow.Cells["productName"].Value = productNameHidden.Items[selectedIndex].ToString();
+            //}
+            //else
+            //{
+            //    selectedRow.Cells["productID"].Value = productComboHidden.Items[selectedIndex].ToString();
+            //}
+
+            hpp = getProductPriceValue(selectedProductID, customerComboBox.SelectedIndex);
+            
 
             selectedRow.Cells["productPrice"].Value = hpp;
 
@@ -812,7 +835,8 @@ namespace RoyalPetz_ADMIN
             rowSelectedIndex = cashierDataGridView.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = cashierDataGridView.Rows[rowSelectedIndex];
 
-            if (cashierDataGridView.CurrentCell.ColumnIndex != 3 && cashierDataGridView.CurrentCell.ColumnIndex != 4 && cashierDataGridView.CurrentCell.ColumnIndex != 5 && cashierDataGridView.CurrentCell.ColumnIndex != 6)
+            //if (cashierDataGridView.CurrentCell.ColumnIndex != 3 && cashierDataGridView.CurrentCell.ColumnIndex != 4 && cashierDataGridView.CurrentCell.ColumnIndex != 5 && cashierDataGridView.CurrentCell.ColumnIndex != 6)
+            if (cashierDataGridView.CurrentCell.OwningColumn.Name == "qty" && cashierDataGridView.CurrentCell.OwningColumn.Name == "disc1" && cashierDataGridView.CurrentCell.OwningColumn.Name == "disc2" && cashierDataGridView.CurrentCell.OwningColumn.Name == "discRP")
                 return;
 
             if (null != selectedRow.Cells["productID"].Value)
@@ -822,39 +846,39 @@ namespace RoyalPetz_ADMIN
                     && (dataGridViewTextBoxEditingControl.Text.Length > 0)
                     )
                 {
-                    switch (cashierDataGridView.CurrentCell.ColumnIndex)
+                    switch (cashierDataGridView.CurrentCell.OwningColumn.Name)
                     {
-                        case 3:                            
+                        case "qty":                            
                             if (stockIsEnough(productID, Convert.ToDouble(dataGridViewTextBoxEditingControl.Text)))
                                 salesQty[rowSelectedIndex] = dataGridViewTextBoxEditingControl.Text;
                             else
                                 dataGridViewTextBoxEditingControl.Text = salesQty[rowSelectedIndex];
                             break;
-                        case 4:
+                        case "disc1":
                             disc1[rowSelectedIndex] = dataGridViewTextBoxEditingControl.Text;
                             break;
-                        case 5:
+                        case "disc2":
                             disc2[rowSelectedIndex] = dataGridViewTextBoxEditingControl.Text;
                             break;
-                        case 6:
+                        case "discRP":
                             discRP[rowSelectedIndex] = dataGridViewTextBoxEditingControl.Text;
                             break;
                     }
                 }
                 else
                 {
-                    switch (cashierDataGridView.CurrentCell.ColumnIndex)
+                    switch (cashierDataGridView.CurrentCell.OwningColumn.Name)
                     {
-                        case 3:
+                        case "qty":
                             dataGridViewTextBoxEditingControl.Text = salesQty[rowSelectedIndex];
                             break;
-                        case 4:
+                        case "disc1":
                             dataGridViewTextBoxEditingControl.Text = disc1[rowSelectedIndex];
                             break;
-                        case 5:
+                        case "disc2":
                             dataGridViewTextBoxEditingControl.Text = disc2[rowSelectedIndex];
                             break;
-                        case 6:
+                        case "discRP":
                             dataGridViewTextBoxEditingControl.Text = discRP[rowSelectedIndex];
                             break;
                     }                    
@@ -935,6 +959,7 @@ namespace RoyalPetz_ADMIN
             string sqlCommand = "";
 
             DataGridViewTextBoxColumn F8Column = new DataGridViewTextBoxColumn();
+            DataGridViewComboBoxColumn productIdColumn = new DataGridViewComboBoxColumn();
             DataGridViewComboBoxColumn productNameCmb = new DataGridViewComboBoxColumn();
             DataGridViewTextBoxColumn productPriceColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn stockQtyColumn = new DataGridViewTextBoxColumn();
@@ -942,18 +967,15 @@ namespace RoyalPetz_ADMIN
             DataGridViewTextBoxColumn disc2Column = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn discRPColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn subTotalColumn = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn productIdColumn = new DataGridViewTextBoxColumn();
-
+            
             sqlCommand = "SELECT PRODUCT_ID, PRODUCT_NAME FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 ORDER BY PRODUCT_NAME ASC";
-
-            productComboHidden.Items.Clear();
 
             using (rdr = DS.getData(sqlCommand))
             {
                 while (rdr.Read())
                 {
                     productNameCmb.Items.Add(rdr.GetString("PRODUCT_NAME"));
-                    productComboHidden.Items.Add(rdr.GetString("PRODUCT_ID"));
+                    productIdColumn.Items.Add(rdr.GetString("PRODUCT_ID"));
                 }
             }
 
@@ -965,6 +987,11 @@ namespace RoyalPetz_ADMIN
             F8Column.Width = 44;
             F8Column.ReadOnly = true;
             cashierDataGridView.Columns.Add(F8Column);
+
+            productIdColumn.HeaderText = "KODE PRODUK";
+            productIdColumn.Name = "productID";
+            productIdColumn.Width = 200;
+            cashierDataGridView.Columns.Add(productIdColumn);
 
             // PRODUCT NAME COLUMN
             productNameCmb.HeaderText = "NAMA PRODUK";
@@ -1006,11 +1033,6 @@ namespace RoyalPetz_ADMIN
             subTotalColumn.ReadOnly = true;
             cashierDataGridView.Columns.Add(subTotalColumn);
 
-            productIdColumn.HeaderText = "PRODUCT_ID";
-            productIdColumn.Name = "productID";
-            productIdColumn.Width = 200;
-            productIdColumn.Visible = false;
-            cashierDataGridView.Columns.Add(productIdColumn);
         }
 
         private void deleteCurrentRow()
@@ -1119,6 +1141,12 @@ namespace RoyalPetz_ADMIN
         private void paymentComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedPaymentMethod = paymentComboBox.SelectedIndex;
+        }
+
+        private void ChangePrinterButton_Click(object sender, EventArgs e)
+        {
+            SetPrinterForm displayedForm = new SetPrinterForm();
+            displayedForm.ShowDialog(this);
         }
 
         private void loadInfoToko(int opt, out string namatoko, out string almt, out string telepon, out string email)

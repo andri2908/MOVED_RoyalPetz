@@ -176,24 +176,6 @@
     <Compile Include="dataReturPermintaanForm.Designer.cs">
       <DependentUpon>dataReturPermintaanForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="dataReturPenjualanStokAdjustmentForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dataReturPenjualanStokAdjustmentForm.Designer.cs">
-      <DependentUpon>dataReturPenjualanStokAdjustmentForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="dataSalesDetailForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dataSalesDetailForm.Designer.cs">
-      <DependentUpon>dataSalesDetailForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="dataSalesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dataSalesForm.Designer.cs">
-      <DependentUpon>dataSalesForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="dataSatuanDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -260,18 +242,6 @@
     <Compile Include="importDataCSVForm.Designer.cs">
       <DependentUpon>importDataCSVForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="importDataMutasiForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="importDataMutasiForm.Designer.cs">
-      <DependentUpon>importDataMutasiForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="IPPusatForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="IPPusatForm.Designer.cs">
-      <DependentUpon>IPPusatForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="konversiSatuanForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -296,23 +266,17 @@
     <Compile Include="pembayaranHutangForm.Designer.cs">
       <DependentUpon>pembayaranHutangForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="pembayaranLumpSumForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="pembayaranLumpSumForm.Designer.cs">
-      <DependentUpon>pembayaranLumpSumForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="pembayaranPiutangForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="pembayaranPiutangForm.Designer.cs">
       <DependentUpon>pembayaranPiutangForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="pembayaranPiutangLumpSumForm.cs">
+    <Compile Include="pembayaranLumpSumForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="pembayaranPiutangLumpSumForm.Designer.cs">
-      <DependentUpon>pembayaranPiutangLumpSumForm.cs</DependentUpon>
+    <Compile Include="pembayaranLumpSumForm.Designer.cs">
+      <DependentUpon>pembayaranLumpSumForm.cs</DependentUpon>
     </Compile>
     <Compile Include="penerimaanBarangForm.cs">
       <SubType>Form</SubType>
@@ -337,12 +301,6 @@
     </Compile>
     <Compile Include="pengaturanLimitPajakForm.Designer.cs">
       <DependentUpon>pengaturanLimitPajakForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="pengaturanPotonganHargaForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="pengaturanPotonganHargaForm.Designer.cs">
-      <DependentUpon>pengaturanPotonganHargaForm.cs</DependentUpon>
     </Compile>
     <Compile Include="pengaturanProdukForm.cs">
       <SubType>Form</SubType>
@@ -619,15 +577,6 @@
     <EmbeddedResource Include="dataReturPermintaanForm.resx">
       <DependentUpon>dataReturPermintaanForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dataReturPenjualanStokAdjustmentForm.resx">
-      <DependentUpon>dataReturPenjualanStokAdjustmentForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dataSalesDetailForm.resx">
-      <DependentUpon>dataSalesDetailForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dataSalesForm.resx">
-      <DependentUpon>dataSalesForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dataSatuanDetailForm.resx">
       <DependentUpon>dataSatuanDetailForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -658,12 +607,6 @@
     <EmbeddedResource Include="importDataCSVForm.resx">
       <DependentUpon>importDataCSVForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="importDataMutasiForm.resx">
-      <DependentUpon>importDataMutasiForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="IPPusatForm.resx">
-      <DependentUpon>IPPusatForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="konversiSatuanForm.resx">
       <DependentUpon>konversiSatuanForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -676,14 +619,11 @@
     <EmbeddedResource Include="pembayaranHutangForm.resx">
       <DependentUpon>pembayaranHutangForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="pembayaranLumpSumForm.resx">
-      <DependentUpon>pembayaranLumpSumForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="pembayaranPiutangForm.resx">
       <DependentUpon>pembayaranPiutangForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="pembayaranPiutangLumpSumForm.resx">
-      <DependentUpon>pembayaranPiutangLumpSumForm.cs</DependentUpon>
+    <EmbeddedResource Include="pembayaranLumpSumForm.resx">
+      <DependentUpon>pembayaranLumpSumForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="penerimaanBarangForm.resx">
       <DependentUpon>penerimaanBarangForm.cs</DependentUpon>
@@ -693,9 +633,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pengaturanLimitPajakForm.resx">
       <DependentUpon>pengaturanLimitPajakForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="pengaturanPotonganHargaForm.resx">
-      <DependentUpon>pengaturanPotonganHargaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pengaturanProdukForm.resx">
       <DependentUpon>pengaturanProdukForm.cs</DependentUpon>

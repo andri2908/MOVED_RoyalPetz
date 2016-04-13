@@ -24,6 +24,7 @@ namespace RoyalPetz_ADMIN
         private CultureInfo culture = new CultureInfo("id-ID");
         private globalUtilities gutil = new globalUtilities();
         private Data_Access DS = new Data_Access();
+        private Form parentForm;
 
         public dataMutasiBarangForm()
         {
@@ -34,6 +35,16 @@ namespace RoyalPetz_ADMIN
         {
             InitializeComponent();
             originModuleID = moduleID;
+
+            if (moduleID != globalConstants.CEK_DATA_MUTASI)
+                newButton.Visible = false;
+        }
+
+        public dataMutasiBarangForm(int moduleID, Form originForm)
+        {
+            InitializeComponent();
+            originModuleID = moduleID;
+            parentForm = originForm;
 
             if (moduleID != globalConstants.CEK_DATA_MUTASI)
                 newButton.Visible = false;
@@ -55,8 +66,14 @@ namespace RoyalPetz_ADMIN
                     break;
 
                 case globalConstants.PENERIMAAN_BARANG:
-                        penerimaanBarangForm penerimaanBarangDisplayedForm = new penerimaanBarangForm(globalConstants.PENERIMAAN_BARANG_DARI_MUTASI, selectedROID);
-                        penerimaanBarangDisplayedForm.ShowDialog(this);
+                    if (null != parentForm)
+                    {
+                        penerimaanBarangForm originForm = (penerimaanBarangForm)parentForm;
+                        originForm.setSelectedMutasi(PMInvoice);
+                    }
+                    this.Close();
+                    //penerimaanBarangForm penerimaanBarangDisplayedForm = new penerimaanBarangForm(globalConstants.PENERIMAAN_BARANG_DARI_MUTASI, selectedROID);
+                    //penerimaanBarangDisplayedForm.ShowDialog(this);
                     break;
             }
 
@@ -87,6 +104,7 @@ namespace RoyalPetz_ADMIN
             string sqlCommand;
             string dateFrom;
             string dateTo;
+            string noMutasiParam = "";
 
             DS.mySqlConnect();
 
@@ -102,7 +120,8 @@ namespace RoyalPetz_ADMIN
             {
                 if (noMutasiTextBox.Text.Length > 0)
                 {
-                    sqlCommand = sqlCommand + " AND PM_INVOICE LIKE '%" + noMutasiTextBox.Text + "%'";
+                    noMutasiParam = MySqlHelper.EscapeString(noMutasiTextBox.Text);
+                    sqlCommand = sqlCommand + " AND PM_INVOICE LIKE '%" + noMutasiParam + "%'";
                 }
 
                 dateFrom = String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(PMDtPicker_1.Value));
@@ -170,7 +189,10 @@ namespace RoyalPetz_ADMIN
             }
 
             if (originModuleID == globalConstants.PENERIMAAN_BARANG)
+            { 
                 newButton.Visible = false;
+                showAllCheckBox.Visible = false;
+            }
         }
 
         private void dataMutasiBarangForm_Deactivate(object sender, EventArgs e)
@@ -251,15 +273,36 @@ namespace RoyalPetz_ADMIN
             return result;
         }
 
+        private int getBranchID()
+        {
+            int result = 0;
+            int dataCount = 0;
+
+            dataCount = Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM SYS_CONFIG"));
+            if (dataCount > 1)
+            {
+                result = Convert.ToInt32(DS.getDataSingleValue("SELECT IFNULL(BRANCH_ID, 0) FROM SYS_CONFIG WHERE ID = 2"));
+            }
+            else
+                MessageBox.Show("DATA CABANG BELUM DISET");
+
+            return result;
+        }
+
         private bool loadImportedDataPM(string fileName)
         {
             bool result = false;
             string sqlCommand = "";
             string pmInvoice = "";
-            bool checkForRO = true;
-            int lastPos = 0;
-            int prevPos = 0;
+            //bool checkForRO = true;
+            //int lastPos = 0;
+            //int prevPos = 0;
+            //int firstPos = 0;
             string roInvoice = "";
+            string tempString = "";
+            int importedBranchID = 0;
+            int storedBranchID = 0;
+            MySqlException internalEX = null;
 
             DS.beginTransaction();
             
@@ -270,22 +313,80 @@ namespace RoyalPetz_ADMIN
                 System.IO.StreamReader file = new System.IO.StreamReader(fileName);
 
                 pmInvoice = file.ReadLine();
+                roInvoice = file.ReadLine();
+                tempString = file.ReadLine(); ;
+                if (int.TryParse(tempString, out importedBranchID))
+                {
+                    storedBranchID = getBranchID();
+                    if (storedBranchID != importedBranchID)
+                    {
+                        file.Close();
+                        throw new Exception("INFORMASI BRANCH ID TIDAK SESUAI");
+                    }
+                }
+                else
+                {
+                    //MessageBox.Show("INFORMASI BRANCH ID TIDAK DITEMUKAN");
+
+                    file.Close();
+                    throw new Exception("INFORMASI BRANCH ID TIDAK DITEMUKAN");
+                }
 
                 if (!noPMExist(pmInvoice))
                 {
                     while ((sqlCommand = file.ReadLine()) != null)
                     {
-                        if (checkForRO)
-                        {
-                            if (sqlCommand.LastIndexOf("RO_INVOICE") > 0)
-                            {
-                                lastPos = sqlCommand.LastIndexOf("',");
-                                prevPos = sqlCommand.LastIndexOf(", '", lastPos - 1);
-                                roInvoice = sqlCommand.Substring(prevPos+3, lastPos - prevPos-3);
-                            }
-                        }
-                        checkForRO = false;
-                        DS.executeNonQueryCommand(sqlCommand);
+                        //if (checkForRO)
+                        //{
+                        //    tempString = sqlCommand;
+                        //    // GET RO_INVOICE
+                        //    if (sqlCommand.LastIndexOf("RO_INVOICE") > 0) 
+                        //    {
+                        //        lastPos = sqlCommand.LastIndexOf("',");
+                        //        prevPos = sqlCommand.LastIndexOf(", '", lastPos - 1);
+                        //        roInvoice = sqlCommand.Substring(prevPos+3, lastPos - prevPos-3);
+                        //    }
+
+                        //    // GET BRANCH_ID
+                        //    if (sqlCommand.IndexOf("BRANCH_ID_TO") > 0)
+                        //    {
+                        //        firstPos = tempString.IndexOf("('");
+                        //        tempString = tempString.Substring(firstPos);
+
+                        //        firstPos = tempString.IndexOf(",");
+                        //        tempString = tempString.Substring(firstPos+1);
+
+                        //        firstPos = tempString.IndexOf(",");
+                        //        tempString = tempString.Substring(firstPos + 1);
+
+                        //        firstPos = tempString.IndexOf(",");
+                        //        tempString = tempString.Substring(1, firstPos-1);
+
+                        //        if (int.TryParse(tempString, out importedBranchID))
+                        //        {
+                        //            storedBranchID = getBranchID();
+
+                        //            if (storedBranchID != importedBranchID)
+                        //            {
+                        //                //MessageBox.Show("INFORMASI BRANCH ID TIDAK SESUAI");
+
+                        //                file.Close();
+                        //                throw new Exception("INFORMASI BRANCH ID TIDAK SESUAI");
+                        //            }
+                        //        }
+                        //        else
+                        //        {
+                        //            //MessageBox.Show("INFORMASI BRANCH ID TIDAK DITEMUKAN");
+
+                        //            file.Close();
+                        //            throw new Exception("INFORMASI BRANCH ID TIDAK DITEMUKAN");
+                        //        }
+                        //    }
+
+                        //}
+                        //checkForRO = false;
+                        if (DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
                     }
 
                     file.Close();
@@ -293,16 +394,25 @@ namespace RoyalPetz_ADMIN
                     if (roInvoice.Length > 0)
                     {
                         sqlCommand = "UPDATE REQUEST_ORDER_HEADER SET RO_ACTIVE = 0 WHERE RO_INVOICE = '" + roInvoice + "'";
-                        DS.executeNonQueryCommand(sqlCommand);
+                        if (DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
                     }
 
                     DS.commit();
+
+                    result = true;
                 }
                 else
-                    MessageBox.Show("NOMOR MUTASI SUDAH ADA");
+                {
+                    file.Close();
+                    //MessageBox.Show("NOMOR MUTASI SUDAH ADA");
+                    throw new Exception("NOMOR MUTASI SUDAH ADA");    
+                }
+
             }
             catch (Exception e)
             {
+                result = false;
                 try
                 {
                     //myTrans.Rollback();
@@ -316,14 +426,11 @@ namespace RoyalPetz_ADMIN
                     }
                 }
 
-                MessageBox.Show("An exception of type " + e.GetType() +
-                                  " was encountered while inserting the data.");
-                MessageBox.Show("Neither record was written to database.");
+                MessageBox.Show(e.Message);
             }
             finally
             {
                 DS.mySqlClose();
-                result = true;
             }
 
             return result;
@@ -346,7 +453,7 @@ namespace RoyalPetz_ADMIN
                         loadROdata();
                     }
                     else
-                        MessageBox.Show("ERROR CAN'T LOAD FILE");
+                        MessageBox.Show("ERROR LOADING FILE");
                 }
                 catch (Exception ex)
                 {

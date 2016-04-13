@@ -36,12 +36,15 @@ namespace RoyalPetz_ADMIN
             newButton.Visible = false;
         }
 
-        private void loadUserData(string userName)
+        private void loadUserData(string userNameParam)
         {
             MySqlDataReader rdr;
             DataTable dt = new DataTable();
             string sqlCommand;
             string sqlfiltergroup, filtergroup;
+            string userName = "";
+
+            userName = MySqlHelper.EscapeString(userNameParam);
             
             filtergroup = groupcombobox.SelectedValue.ToString();
             if (filtergroup.Equals("0"))
@@ -49,7 +52,7 @@ namespace RoyalPetz_ADMIN
                 sqlfiltergroup = "";
             } else
             {
-                sqlfiltergroup = "AND U.GROUP_ID = '" + filtergroup + "' ";
+                sqlfiltergroup = "AND U.GROUP_ID = '" + MySqlHelper.EscapeString(filtergroup) + "' ";
             }
             DS.mySqlConnect();
 

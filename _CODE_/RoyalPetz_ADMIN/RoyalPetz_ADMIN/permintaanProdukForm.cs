@@ -126,13 +126,6 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        private string getProductID(int selectedIndex)
-        {
-            string productID = "";
-            productID = productIDComboHidden.Items[selectedIndex].ToString();
-            return productID;
-        }
-
         private void calculateTotal()
         {
             double total = 0;
@@ -148,13 +141,13 @@ namespace RoyalPetz_ADMIN
 
         private void detailRequestOrderDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            if (detailRequestOrderDataGridView.CurrentCell.ColumnIndex == 0 && e.Control is ComboBox)
+            if ((detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name == "productID" || detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name == "productName") && e.Control is ComboBox)
             {
                 ComboBox comboBox = e.Control as ComboBox;
                 comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
             }
 
-            if (detailRequestOrderDataGridView.CurrentCell.ColumnIndex == 1 && e.Control is TextBox)
+            if (detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name == "qty" && e.Control is TextBox)
             {
                 TextBox textBox = e.Control as TextBox;
                 textBox.TextChanged += TextBox_TextChanged;
@@ -235,16 +228,19 @@ namespace RoyalPetz_ADMIN
                 return;
 
             DataGridViewComboBoxEditingControl dataGridViewComboBoxEditingControl = sender as DataGridViewComboBoxEditingControl;
-
-            selectedIndex = dataGridViewComboBoxEditingControl.SelectedIndex;
-            selectedProductID = getProductID(selectedIndex);
-            hpp = getHPPValue(selectedProductID);
-
             rowSelectedIndex = detailRequestOrderDataGridView.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[rowSelectedIndex];
+            selectedIndex = dataGridViewComboBoxEditingControl.SelectedIndex;
 
+            DataGridViewComboBoxCell productIDComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productID"];
+            DataGridViewComboBoxCell productNameComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productName"];
+
+            selectedProductID = productIDComboCell.Items[selectedIndex].ToString();
+            productIDComboCell.Value = productIDComboCell.Items[selectedIndex];
+            productNameComboCell.Value = productNameComboCell.Items[selectedIndex];
+
+            hpp = getHPPValue(selectedProductID);
             selectedRow.Cells["hpp"].Value = hpp;
-            selectedRow.Cells["productId"].Value = selectedProductID;
 
             if (null != selectedRow.Cells["qty"].Value)
             {
@@ -262,7 +258,7 @@ namespace RoyalPetz_ADMIN
             bool result = false;
 
             string sqlCommand = "";
-
+            MySqlException internalEX = null;
             string roInvoice = "";
             int branchIDFrom = 0;
             int branchIDTo = 0;
@@ -323,7 +319,8 @@ namespace RoyalPetz_ADMIN
                 }
 
                 sqlCommand = "UPDATE REQUEST_ORDER_HEADER SET RO_EXPORTED = 1 WHERE RO_INVOICE = '" + roInvoice + "'";
-                DS.executeNonQueryCommand(sqlCommand);
+                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                    throw internalEX;
 
                 DS.commit();
 
@@ -374,22 +371,24 @@ namespace RoyalPetz_ADMIN
 
                 saveFileDialog1.FileName = exportedFileName;
                 saveFileDialog1.Filter = "Export File (.exp)|*.exp";
-                saveFileDialog1.ShowDialog();
 
-                if (exportDataRO(saveFileDialog1.FileName))
-                { 
-                    gUtil.ResetAllControls(this);
-                    originModuleID = globalConstants.NEW_REQUEST_ORDER;
-                    detailRequestOrderDataGridView.Rows.Clear();
-                    totalLabel.Text = "Rp. 0";
+                //saveFileDialog1.ShowDialog();
 
-                    selectedBranchFromID = 0;
-                    selectedBranchToID = 0;
+                if (DialogResult.OK == saveFileDialog1.ShowDialog())
+                    if (exportDataRO(saveFileDialog1.FileName))
+                    { 
+                        gUtil.ResetAllControls(this);
+                        originModuleID = globalConstants.NEW_REQUEST_ORDER;
+                        detailRequestOrderDataGridView.Rows.Clear();
+                        totalLabel.Text = "Rp. 0";
 
-                    gUtil.showSuccess(gUtil.UPD);
+                        selectedBranchFromID = 0;
+                        selectedBranchToID = 0;
 
-                    ROinvoiceTextBox.Focus();
-                }
+                        gUtil.showSuccess(gUtil.UPD);
+
+                        ROinvoiceTextBox.Focus();
+                    }
             }
         }
 
@@ -404,43 +403,51 @@ namespace RoyalPetz_ADMIN
             return result;
         }
 
-        private void fillInProductNameCombo()
+        private void addColumnToDataGrid()
         {
             MySqlDataReader rdr;
             string sqlCommand = "";
 
+            DataGridViewComboBoxColumn productIdCmb = new DataGridViewComboBoxColumn();
             DataGridViewComboBoxColumn productNameCmb = new DataGridViewComboBoxColumn();
             DataGridViewTextBoxColumn stockQtyColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn basePriceColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn subTotalColumn = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn productIdColumn = new DataGridViewTextBoxColumn();
-
+            
             sqlCommand = "SELECT PRODUCT_ID, PRODUCT_NAME FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 ORDER BY PRODUCT_NAME ASC";
 
-            productIDComboHidden.Items.Clear();
-            productNameComboHidden.Items.Clear();
+            //productIDComboHidden.Items.Clear();
+            //productNameComboHidden.Items.Clear();
 
             using (rdr = DS.getData(sqlCommand))
             {
                 while (rdr.Read())
                 {
                         productNameCmb.Items.Add(rdr.GetString("PRODUCT_NAME"));
-                        productIDComboHidden.Items.Add(rdr.GetString("PRODUCT_ID"));
-                        productNameComboHidden.Items.Add(rdr.GetString("PRODUCT_NAME"));
+                        productIdCmb.Items.Add(rdr.GetString("PRODUCT_ID"));
+                        //productIDComboHidden.Items.Add(rdr.GetString("PRODUCT_ID"));
+                        //productNameComboHidden.Items.Add(rdr.GetString("PRODUCT_NAME"));
                 }
             }
 
             rdr.Close();
 
-            // PRODUCT NAME COLUMN
+            productIdCmb.HeaderText = "KODE PRODUK";
+            productIdCmb.Name = "productID";
+            productIdCmb.Width = 200;
+            productIdCmb.DefaultCellStyle.BackColor = Color.LightBlue;
+            detailRequestOrderDataGridView.Columns.Add(productIdCmb);
+
             productNameCmb.HeaderText = "NAMA PRODUK";
             productNameCmb.Name = "productName";
             productNameCmb.Width = 300;
+            productNameCmb.DefaultCellStyle.BackColor = Color.LightBlue;
             detailRequestOrderDataGridView.Columns.Add(productNameCmb);
 
             stockQtyColumn.HeaderText = "QTY";
             stockQtyColumn.Name = "qty";
             stockQtyColumn.Width = 100;
+            stockQtyColumn.DefaultCellStyle.BackColor = Color.LightBlue;
             detailRequestOrderDataGridView.Columns.Add(stockQtyColumn);
 
             basePriceColumn.HeaderText = "HARGA POKOK";
@@ -455,11 +462,6 @@ namespace RoyalPetz_ADMIN
             subTotalColumn.ReadOnly = true;
             detailRequestOrderDataGridView.Columns.Add(subTotalColumn);
 
-            productIdColumn.HeaderText = "PRODUCT_ID";
-            productIdColumn.Name = "productID";
-            productIdColumn.Width = 200;
-            productIdColumn.Visible = false;
-            detailRequestOrderDataGridView.Columns.Add(productIdColumn);
 
         }
 
@@ -467,9 +469,10 @@ namespace RoyalPetz_ADMIN
         {
             int userAccessOption = 0;
             RODateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
-            
+
             //fillInBranchFromCombo();
-            fillInProductNameCombo();
+            //fillInProductNameCombo();
+            addColumnToDataGrid();
 
             // ALL REQUEST WILL GO TO PUSAT 
             selectedBranchFromID = 0; // SET BRANCH_FROM TO PUSAT 
@@ -518,13 +521,13 @@ namespace RoyalPetz_ADMIN
             if (invoiceExist())
             {
                 errorLabel.Text = "NO PERMINTAAN SUDAH ADA";
-                ROinvoiceTextBox.BackColor = Color.Red;
+                //ROinvoiceTextBox.BackColor = Color.Red;
                 ROinvoiceTextBox.Focus();
             }
             else
             {
                 errorLabel.Text = "";
-                ROinvoiceTextBox.BackColor = Color.White;
+               // ROinvoiceTextBox.BackColor = Color.White;
             }
         }
 
@@ -881,7 +884,7 @@ namespace RoyalPetz_ADMIN
 
                     saveButton.Visible = false;
                     generateButton.Visible = false;
-                    exportButton.Visible = false;
+                    //exportButton.Visible = false;
                     deactivateButton.Visible = true;
                 }
                 

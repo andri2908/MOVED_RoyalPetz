@@ -112,8 +112,8 @@ namespace RoyalPetz_ADMIN
             string sqlCommand = "";
             MySqlException internalEX = null;
 
-            string categoryName = categoryNameTextBox.Text.Trim();
-            string categoryDesc = categoryDescriptionTextBox.Text.Trim();           
+            string categoryName = MySqlHelper.EscapeString(categoryNameTextBox.Text.Trim());
+            string categoryDesc = MySqlHelper.EscapeString(categoryDescriptionTextBox.Text.Trim());           
 
             byte categoryStatus = 0;
 

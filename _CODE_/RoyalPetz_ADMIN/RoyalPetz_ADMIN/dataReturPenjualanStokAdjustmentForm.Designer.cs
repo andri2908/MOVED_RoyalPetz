@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.rsDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -39,12 +40,11 @@
             this.pelangganCombo = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.errorLabel = new System.Windows.Forms.Label();
             this.saveButton = new System.Windows.Forms.Button();
             this.dataProdukDataGridView = new System.Windows.Forms.DataGridView();
             this.productComboHidden = new System.Windows.Forms.ComboBox();
             this.pelangganComboHidden = new System.Windows.Forms.ComboBox();
-            this.errorLabel = new System.Windows.Forms.Label();
-            this.rsDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataProdukDataGridView)).BeginInit();
@@ -58,7 +58,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 83.58778F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.41221F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 349F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 66F));
             this.tableLayoutPanel1.Controls.Add(this.rsDateTimePicker, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
@@ -78,13 +78,23 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(639, 123);
             this.tableLayoutPanel1.TabIndex = 20;
             // 
+            // rsDateTimePicker
+            // 
+            this.rsDateTimePicker.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.rsDateTimePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rsDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.rsDateTimePicker.Location = new System.Drawing.Point(226, 46);
+            this.rsDateTimePicker.Name = "rsDateTimePicker";
+            this.rsDateTimePicker.Size = new System.Drawing.Size(173, 27);
+            this.rsDateTimePicker.TabIndex = 54;
+            // 
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Location = new System.Drawing.Point(191, 92);
+            this.label2.Location = new System.Drawing.Point(190, 92);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(14, 18);
             this.label2.TabIndex = 50;
@@ -108,7 +118,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label9.Location = new System.Drawing.Point(191, 11);
+            this.label9.Location = new System.Drawing.Point(190, 11);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(14, 18);
             this.label9.TabIndex = 46;
@@ -119,7 +129,7 @@
             this.noreturtextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tableLayoutPanel1.SetColumnSpan(this.noreturtextbox, 2);
             this.noreturtextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noreturtextbox.Location = new System.Drawing.Point(227, 7);
+            this.noreturtextbox.Location = new System.Drawing.Point(226, 7);
             this.noreturtextbox.Name = "noreturtextbox";
             this.noreturtextbox.Size = new System.Drawing.Size(185, 27);
             this.noreturtextbox.TabIndex = 22;
@@ -143,7 +153,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label10.Location = new System.Drawing.Point(191, 51);
+            this.label10.Location = new System.Drawing.Point(190, 51);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(14, 18);
             this.label10.TabIndex = 47;
@@ -154,7 +164,7 @@
             this.pelangganCombo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.pelangganCombo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pelangganCombo.FormattingEnabled = true;
-            this.pelangganCombo.Location = new System.Drawing.Point(227, 88);
+            this.pelangganCombo.Location = new System.Drawing.Point(226, 88);
             this.pelangganCombo.Name = "pelangganCombo";
             this.pelangganCombo.Size = new System.Drawing.Size(343, 26);
             this.pelangganCombo.TabIndex = 45;
@@ -182,6 +192,19 @@
             this.panel1.Size = new System.Drawing.Size(639, 29);
             this.panel1.TabIndex = 19;
             // 
+            // errorLabel
+            // 
+            this.errorLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.BackColor = System.Drawing.Color.White;
+            this.errorLabel.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(3, 5);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(23, 18);
+            this.errorLabel.TabIndex = 54;
+            this.errorLabel.Text = "   ";
+            // 
             // saveButton
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -207,7 +230,7 @@
             this.dataProdukDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataProdukDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataProdukDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataProdukDataGridView.Location = new System.Drawing.Point(3, 240);
+            this.dataProdukDataGridView.Location = new System.Drawing.Point(4, 240);
             this.dataProdukDataGridView.Name = "dataProdukDataGridView";
             this.dataProdukDataGridView.RowHeadersVisible = false;
             this.dataProdukDataGridView.Size = new System.Drawing.Size(639, 313);
@@ -235,29 +258,6 @@
             this.pelangganComboHidden.Size = new System.Drawing.Size(267, 26);
             this.pelangganComboHidden.TabIndex = 53;
             this.pelangganComboHidden.Visible = false;
-            // 
-            // errorLabel
-            // 
-            this.errorLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.errorLabel.AutoSize = true;
-            this.errorLabel.BackColor = System.Drawing.Color.White;
-            this.errorLabel.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(3, 5);
-            this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(23, 18);
-            this.errorLabel.TabIndex = 54;
-            this.errorLabel.Text = "   ";
-            // 
-            // rsDateTimePicker
-            // 
-            this.rsDateTimePicker.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.rsDateTimePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rsDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.rsDateTimePicker.Location = new System.Drawing.Point(227, 46);
-            this.rsDateTimePicker.Name = "rsDateTimePicker";
-            this.rsDateTimePicker.Size = new System.Drawing.Size(173, 27);
-            this.rsDateTimePicker.TabIndex = 54;
             // 
             // dataReturPenjualanStokAdjustmentForm
             // 

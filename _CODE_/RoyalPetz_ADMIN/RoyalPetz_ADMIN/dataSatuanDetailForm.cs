@@ -83,8 +83,8 @@ namespace RoyalPetz_ADMIN
             string sqlCommand = "";
             MySqlException internalEX = null;
 
-            string unitName = unitNameTextBox.Text.Trim();
-            string unitDesc = unitDescriptionTextBox.Text.Trim();
+            string unitName = MySqlHelper.EscapeString(unitNameTextBox.Text.Trim());
+            string unitDesc = MySqlHelper.EscapeString(unitDescriptionTextBox.Text.Trim());
             byte unitStatus = 0;
 
             if (nonAktifCheckbox.Checked)

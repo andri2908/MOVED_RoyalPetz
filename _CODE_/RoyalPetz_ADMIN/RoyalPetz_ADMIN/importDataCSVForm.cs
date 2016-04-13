@@ -96,9 +96,9 @@ namespace RoyalPetz_ADMIN
                 while (i<detailImportDataGrid.Rows.Count)
                 {
                     productQty = detailImportDataGrid.Rows[i].Cells["productRealQty"].Value.ToString();
-                    productID = detailImportDataGrid.Rows[i].Cells["productID"].Value.ToString();
+                    productID = MySqlHelper.EscapeString(detailImportDataGrid.Rows[i].Cells["productID"].Value.ToString());
                     productOldQty = detailImportDataGrid.Rows[i].Cells["productQty"].Value.ToString();
-                    productDescription =detailImportDataGrid.Rows[i].Cells["description"].Value.ToString();
+                    productDescription =MySqlHelper.EscapeString(detailImportDataGrid.Rows[i].Cells["description"].Value.ToString());
 
                     if (!productOldQty.Equals(productQty))
                     { 

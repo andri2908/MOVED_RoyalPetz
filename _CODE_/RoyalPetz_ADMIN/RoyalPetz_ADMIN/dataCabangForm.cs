@@ -44,11 +44,12 @@ namespace RoyalPetz_ADMIN
                 loadBranchData(namaBranchTextbox.Text);
         }
 
-        private void loadBranchData(string branchName)
+        private void loadBranchData(string branchNameParam)
         {
             MySqlDataReader rdr;
             DataTable dt = new DataTable();
             string sqlCommand;
+            string branchName = MySqlHelper.EscapeString(branchNameParam);
 
             DS.mySqlConnect();
             if (cabangnonactiveoption.Checked)
@@ -146,6 +147,11 @@ namespace RoyalPetz_ADMIN
                     displayedForm.ShowDialog(this);
                 }
             }
+        }
+
+        private void dataCabangGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

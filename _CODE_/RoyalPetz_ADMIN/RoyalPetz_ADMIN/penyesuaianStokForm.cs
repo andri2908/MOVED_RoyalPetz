@@ -92,6 +92,7 @@ namespace RoyalPetz_ADMIN
             string sqlCommand = "";
             double newStockQty = 0;
             string adjustmentDate;
+            string descriptionParam;
 
             MySqlException internalEX = null;
 
@@ -100,6 +101,8 @@ namespace RoyalPetz_ADMIN
 
             if (descriptionTextBox.Text.Length <= 0)
                 descriptionTextBox.Text = " ";
+
+            descriptionParam = MySqlHelper.EscapeString(descriptionTextBox.Text);
 
             DS.beginTransaction();
 
@@ -115,7 +118,7 @@ namespace RoyalPetz_ADMIN
 
                 // INSERT INTO PRODUCT ADJUSTMENT TABLE
                 sqlCommand = "INSERT INTO PRODUCT_ADJUSTMENT (PRODUCT_ID, PRODUCT_ADJUSTMENT_DATE, PRODUCT_OLD_STOCK_QTY, PRODUCT_NEW_STOCK_QTY, PRODUCT_ADJUSTMENT_DESCRIPTION) VALUES " +
-                                    "('" + kodeProductTextBox.Text + "', STR_TO_DATE('" + adjustmentDate + "', '%d-%m-%Y'), " + jumlahAwalMaskedTextBox.Text + ", " + jumlahBaruMaskedTextBox.Text + ", '" + descriptionTextBox.Text + "')";
+                                    "('" + kodeProductTextBox.Text + "', STR_TO_DATE('" + adjustmentDate + "', '%d-%m-%Y'), " + jumlahAwalMaskedTextBox.Text + ", " + jumlahBaruMaskedTextBox.Text + ", '" + descriptionParam + "')";
 
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;

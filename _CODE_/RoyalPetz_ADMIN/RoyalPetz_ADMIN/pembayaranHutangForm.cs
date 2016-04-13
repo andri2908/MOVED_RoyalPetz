@@ -63,9 +63,11 @@ namespace RoyalPetz_ADMIN
         {
             MySqlDataReader rdr;
             string sqlCommand;
-            DateTime poDate;
+            DateTime dueDate;
 
-            sqlCommand = "SELECT H.*, PR.*, M.SUPPLIER_FULL_NAME FROM PURCHASE_HEADER H, MASTER_SUPPLIER M, PRODUCTS_RECEIVED_HEADER PR WHERE H.PURCHASE_INVOICE = '" + selectedPOInvoice + "' AND H.SUPPLIER_ID = M.SUPPLIER_ID AND PR.PURCHASE_INVOICE = H.PURCHASE_INVOICE";
+            //sqlCommand = "SELECT H.*, PR.*, M.SUPPLIER_FULL_NAME FROM PURCHASE_HEADER H, MASTER_SUPPLIER M, PRODUCTS_RECEIVED_HEADER PR WHERE H.PURCHASE_INVOICE = '" + selectedPOInvoice + "' AND H.SUPPLIER_ID = M.SUPPLIER_ID AND PR.PURCHASE_INVOICE = H.PURCHASE_INVOICE";
+            sqlCommand = "SELECT D.*, M.SUPPLIER_FULL_NAME, M.SUPPLIER_ID FROM DEBT D, PURCHASE_HEADER H, MASTER_SUPPLIER M " +
+                                "WHERE H.PURCHASE_INVOICE = '" + selectedPOInvoice + "' AND H.SUPPLIER_ID = M.SUPPLIER_ID AND D.PURCHASE_INVOICE = H.PURCHASE_INVOICE";
 
             using (rdr = DS.getData(sqlCommand))
             {
@@ -76,10 +78,12 @@ namespace RoyalPetz_ADMIN
                         poInvoiceTextBox.Text = rdr.GetString("PURCHASE_INVOICE");
                         selectedSupplierID = rdr.GetInt32("SUPPLIER_ID");
                         supplierNameTextBox.Text = rdr.GetString("SUPPLIER_FULL_NAME");
-                        poDate = rdr.GetDateTime("PURCHASE_DATE_RECEIVED");
-                        poDateTextBox.Text = String.Format(culture, "{0:dd MMM yyyy}", poDate);
-                        globalTotalValue = rdr.GetDouble("PR_TOTAL");
-                        purchasePaid = rdr.GetInt32("PURCHASE_PAID");
+                        //poDate = rdr.GetDateTime("PURCHASE_DATE_RECEIVED");
+                        dueDate = rdr.GetDateTime("DEBT_DUE_DATE");
+                        poDateTextBox.Text = String.Format(culture, "{0:dd MMM yyyy}", dueDate);
+                        globalTotalValue = rdr.GetDouble("DEBT_NOMINAL");
+                        purchasePaid = rdr.GetInt32("DEBT_PAID");
+                        selectedDebtID = rdr.GetInt32("DEBT_ID");
                     }
                 }
             }
@@ -124,7 +128,7 @@ namespace RoyalPetz_ADMIN
             DataTable dt = new DataTable();
             string sqlCommand = "";
 
-            sqlCommand = "SELECT PAYMENT_INVALID, PAYMENT_ID, PM_NAME AS 'TIPE', IF(PAYMENT_CONFIRMED = 1, 'Y', 'N') AS STATUS, DATE_FORMAT(PAYMENT_DATE, '%d-%M-%Y') AS 'TANGGAL', PAYMENT_NOMINAL AS 'NOMINAL', PAYMENT_DESCRIPTION AS 'DESKRIPSI' FROM PAYMENT_DEBT PC, PAYMENT_METHOD PM WHERE PC.PM_ID = PM.PM_ID AND DEBT_ID = " + selectedDebtID;
+            sqlCommand = "SELECT PAYMENT_INVALID, PAYMENT_ID, PM_NAME AS 'TIPE', IF(PAYMENT_CONFIRMED = 1, 'Y', 'N') AS STATUS, DATE_FORMAT(PAYMENT_DUE_DATE, '%d-%M-%Y') AS 'TANGGAL', PAYMENT_NOMINAL AS 'NOMINAL', PAYMENT_DESCRIPTION AS 'DESKRIPSI' FROM PAYMENT_DEBT PC, PAYMENT_METHOD PM WHERE PC.PM_ID = PM.PM_ID AND DEBT_ID = " + selectedDebtID;
             using (rdr = DS.getData(sqlCommand))
             {
                 detailPaymentDataGridView.DataSource = null;
@@ -156,7 +160,8 @@ namespace RoyalPetz_ADMIN
 
             if (globalCalculation)
             {
-                globalTotalValue = Convert.ToDouble(DS.getDataSingleValue("SELECT PR_TOTAL FROM PRODUCTS_RECEIVED_HEADER WHERE PURCHASE_INVOICE = '" + selectedPOInvoice + "'"));
+                //globalTotalValue = Convert.ToDouble(DS.getDataSingleValue("SELECT PR_TOTAL FROM PRODUCTS_RECEIVED_HEADER WHERE PURCHASE_INVOICE = '" + selectedPOInvoice + "'"));
+                globalTotalValue = Convert.ToDouble(DS.getDataSingleValue("SELECT DEBT_NOMINAL FROM DEBT WHERE PURCHASE_INVOICE = '" + selectedPOInvoice + "'"));
             }
 
             totalPayment = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(SUM(PAYMENT_NOMINAL), 0) AS PAYMENT FROM PAYMENT_DEBT WHERE DEBT_ID = " + selectedDebtID + " AND PAYMENT_INVALID = 0"));
@@ -198,6 +203,8 @@ namespace RoyalPetz_ADMIN
             string sqlCommand = "";
             string paymentDateTime = "";
             DateTime selectedPaymentDate;
+            string paymentDueDateTime = "";
+            DateTime selectedPaymentDueDate;
             double paymentNominal = 0;
             int paymentMethod = 0;
 
@@ -209,14 +216,29 @@ namespace RoyalPetz_ADMIN
             selectedPaymentDate = paymentDateTimePicker.Value;
             paymentDateTime = String.Format(culture, "{0:dd-MM-yyyy}", selectedPaymentDate);
             paymentNominal = Convert.ToDouble(totalPaymentMaskedTextBox.Text);
-            paymentDescription = descriptionTextBox.Text;
+            paymentDescription = MySqlHelper.EscapeString(descriptionTextBox.Text);
             paymentMethod = paymentCombo.SelectedIndex;
 
             if (paymentNominal > globalTotalValue)
                 paymentNominal = globalTotalValue;
 
-            if (paymentMethod < 3)
+            if (paymentMethod < 3) //0, 1, 2
+            { 
+                // TUNAI, KARTU DEBIT, KARTU KREDIT
                 paymentConfirmed = 1;
+                paymentDueDateTime = paymentDateTime;
+            }
+            else if (paymentMethod == 3) //3
+            {
+                // TRANSFER
+                paymentDueDateTime = paymentDateTime;
+            }
+            else if (paymentMethod > 3) //4, 5
+            {
+                // CEK, BG
+                selectedPaymentDueDate = cairDTPicker.Value;
+                paymentDueDateTime = String.Format(culture, "{0:dd-MM-yyyy}", selectedPaymentDueDate);
+            }
 
             DS.beginTransaction();
 
@@ -225,8 +247,8 @@ namespace RoyalPetz_ADMIN
                 DS.mySqlConnect();
 
                 // SAVE HEADER TABLE
-                sqlCommand = "INSERT INTO PAYMENT_DEBT (DEBT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED) VALUES " +
-                                    "(" + selectedDebtID+ ", STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y'), 1, " + paymentNominal + ", '" + paymentDescription + "', " + paymentConfirmed + ")";
+                sqlCommand = "INSERT INTO PAYMENT_DEBT (DEBT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED, PAYMENT_DUE_DATE) VALUES " +
+                                    "(" + selectedDebtID+ ", STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y'), 1, " + paymentNominal + ", '" + paymentDescription + "', " + paymentConfirmed + ", STR_TO_DATE('" + paymentDueDateTime + "', '%d-%m-%Y'))";
 
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
@@ -304,6 +326,7 @@ namespace RoyalPetz_ADMIN
         {
             errorLabel.Text = "";
             paymentDateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+            cairDTPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
 
             fillInPaymentMethod();
 
@@ -312,7 +335,7 @@ namespace RoyalPetz_ADMIN
             loadDataHeaderPO();
             loadDataDetailPO();
 
-            selectedDebtID = getDebtID();
+            //selectedDebtID = getDebtID();
             loadDataDetailPayment();
 
             calculateTotalDebt();
@@ -483,7 +506,10 @@ namespace RoyalPetz_ADMIN
                 }
             }
 
-            selectedRow.DefaultCellStyle.BackColor = Color.White;
+            if (detailPaymentDataGridView.Rows[rowSelectedIndex].Cells["STATUS"].Value.ToString().Equals("Y"))
+                detailPaymentDataGridView.Rows[rowSelectedIndex].DefaultCellStyle.BackColor = Color.White;
+            else
+                detailPaymentDataGridView.Rows[rowSelectedIndex].DefaultCellStyle.BackColor = Color.LightBlue;
         }
 
         private bool confirmPembayaran(string paymentID)
@@ -566,7 +592,25 @@ namespace RoyalPetz_ADMIN
                         loadDataDetailPayment();
                     }
                 }
-                selectedRow.DefaultCellStyle.BackColor = Color.White;
+                if (detailPaymentDataGridView.Rows[rowSelectedIndex].Cells["STATUS"].Value.ToString().Equals("Y"))
+                    detailPaymentDataGridView.Rows[rowSelectedIndex].DefaultCellStyle.BackColor = Color.White;
+                else
+                    detailPaymentDataGridView.Rows[rowSelectedIndex].DefaultCellStyle.BackColor = Color.LightBlue;
+            }
+        }
+
+        private void paymentCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (paymentCombo.SelectedIndex > 3)
+            {
+                labelCair.Visible = true;
+                cairDTPicker.Visible = true;
+                cairDTPicker.Value = DateTime.Now;
+            }
+            else
+            {
+                labelCair.Visible = false;
+                cairDTPicker.Visible = false;
             }
         }
     }

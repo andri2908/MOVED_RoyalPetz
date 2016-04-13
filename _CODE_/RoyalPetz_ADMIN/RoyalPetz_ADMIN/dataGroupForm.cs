@@ -59,15 +59,16 @@ namespace RoyalPetz_ADMIN
             MySqlDataReader rdr;
             DataTable dt = new DataTable();
             string sqlCommand;
+            string namaGroupParam = MySqlHelper.EscapeString(namaGroupTextbox.Text);
 
             DS.mySqlConnect();
             if (groupnonactiveoption.Checked)
             {
-                sqlCommand = "SELECT GROUP_ID, GROUP_USER_NAME AS 'NAMA GROUP', GROUP_USER_DESCRIPTION AS 'DESKRIPSI GROUP' FROM MASTER_GROUP WHERE GROUP_USER_NAME LIKE '%" + namaGroupTextbox.Text + "%'";
+                sqlCommand = "SELECT GROUP_ID, GROUP_USER_NAME AS 'NAMA GROUP', GROUP_USER_DESCRIPTION AS 'DESKRIPSI GROUP' FROM MASTER_GROUP WHERE GROUP_USER_NAME LIKE '%" + namaGroupParam + "%'";
             }
             else
             {
-                sqlCommand = "SELECT GROUP_ID, GROUP_USER_NAME AS 'NAMA GROUP', GROUP_USER_DESCRIPTION AS 'DESKRIPSI GROUP' FROM MASTER_GROUP WHERE GROUP_USER_ACTIVE = 1 AND GROUP_USER_NAME LIKE '%" + namaGroupTextbox.Text + "%'";
+                sqlCommand = "SELECT GROUP_ID, GROUP_USER_NAME AS 'NAMA GROUP', GROUP_USER_DESCRIPTION AS 'DESKRIPSI GROUP' FROM MASTER_GROUP WHERE GROUP_USER_ACTIVE = 1 AND GROUP_USER_NAME LIKE '%" + namaGroupParam + "%'";
             }
 
             using (rdr = DS.getData(sqlCommand))
@@ -98,10 +99,10 @@ namespace RoyalPetz_ADMIN
                     groupAccessForm.ShowDialog(this);
                     break;
 
-                case globalConstants.PENGATURAN_POTONGAN_HARGA:
-                    pengaturanPotonganHargaForm pengaturanHargaForm = new pengaturanPotonganHargaForm();
-                    pengaturanHargaForm.ShowDialog(this);
-                    break;
+                //case globalConstants.PENGATURAN_POTONGAN_HARGA:
+                //    pengaturanPotonganHargaForm pengaturanHargaForm = new pengaturanPotonganHargaForm();
+                //    pengaturanHargaForm.ShowDialog(this);
+                //    break;
 
                 case globalConstants.TAMBAH_HAPUS_USER:
                     userDetailForm.setSelectedGroupID(selectedGroupID);
@@ -152,14 +153,18 @@ namespace RoyalPetz_ADMIN
             if (e.KeyCode == Keys.Enter)
             {
                 int selectedrowindex = dataUserGroupGridView.SelectedCells[0].RowIndex;
+
                 DataGridViewRow selectedRow = dataUserGroupGridView.Rows[selectedrowindex];
                 selectedGroupID = Convert.ToInt32(selectedRow.Cells["GROUP_ID"].Value);
+
                 displaySpecificForm();
             }
         }
+
         private void dataGroupForm_Load(object sender, EventArgs e)
         {
             gutil.reArrangeTabOrder(this);
         }
+
     }
 }

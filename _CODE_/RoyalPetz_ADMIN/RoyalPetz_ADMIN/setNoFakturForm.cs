@@ -26,6 +26,7 @@ namespace RoyalPetz_ADMIN
 
         private void setNoFakturForm_Load(object sender, EventArgs e)
         {
+            errorLabel.Text = "";
             gutil.reArrangeTabOrder(this);
         }
 
@@ -48,6 +49,12 @@ namespace RoyalPetz_ADMIN
 
         private bool dataValidated()
         {
+            if (!gutil.matchRegEx(noFakturTextBox.Text, globalUtilities.REGEX_ALPHANUMERIC_ONLY))
+            {
+                errorLabel.Text = "NO FAKTUR HARUS ALPHA NUMERIC";
+                return false;
+            }
+
             return true;
         }
 

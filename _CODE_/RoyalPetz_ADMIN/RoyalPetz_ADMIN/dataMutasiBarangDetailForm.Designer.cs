@@ -49,12 +49,9 @@
             this.createPOButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.noMutasiTextBox = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.PMDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.label11 = new System.Windows.Forms.Label();
             this.totalApproved = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.totalApprovedLabel = new System.Windows.Forms.Label();
@@ -69,7 +66,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.errorLabel = new System.Windows.Forms.Label();
-            this.productIDHiddenCombo = new System.Windows.Forms.ComboBox();
             this.rejectButton = new System.Windows.Forms.Button();
             this.exportButton = new System.Windows.Forms.Button();
             this.acceptedButton = new System.Windows.Forms.Button();
@@ -319,8 +315,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.92126F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2.024747F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.05399F));
+            this.tableLayoutPanel1.Controls.Add(this.label15, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel7, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label11, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.totalApproved, 2, 6);
             this.tableLayoutPanel1.Controls.Add(this.label13, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.totalApprovedLabel, 0, 6);
@@ -352,6 +348,18 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(888, 269);
             this.tableLayoutPanel1.TabIndex = 36;
             // 
+            // label15
+            // 
+            this.label15.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label15.Location = new System.Drawing.Point(3, 10);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(169, 18);
+            this.label15.TabIndex = 25;
+            this.label15.Text = "TANGGAL MUTASI";
+            // 
             // tableLayoutPanel7
             // 
             this.tableLayoutPanel7.ColumnCount = 5;
@@ -360,10 +368,7 @@
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 183F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 19F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 176F));
-            this.tableLayoutPanel7.Controls.Add(this.noMutasiTextBox, 0, 0);
-            this.tableLayoutPanel7.Controls.Add(this.label15, 2, 0);
-            this.tableLayoutPanel7.Controls.Add(this.label16, 3, 0);
-            this.tableLayoutPanel7.Controls.Add(this.PMDateTimePicker, 4, 0);
+            this.tableLayoutPanel7.Controls.Add(this.PMDateTimePicker, 0, 0);
             this.tableLayoutPanel7.Location = new System.Drawing.Point(285, 3);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
@@ -371,62 +376,14 @@
             this.tableLayoutPanel7.Size = new System.Drawing.Size(600, 32);
             this.tableLayoutPanel7.TabIndex = 49;
             // 
-            // noMutasiTextBox
-            // 
-            this.noMutasiTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.noMutasiTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.noMutasiTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noMutasiTextBox.Location = new System.Drawing.Point(3, 3);
-            this.noMutasiTextBox.MaxLength = 30;
-            this.noMutasiTextBox.Name = "noMutasiTextBox";
-            this.noMutasiTextBox.Size = new System.Drawing.Size(179, 27);
-            this.noMutasiTextBox.TabIndex = 16;
-            this.noMutasiTextBox.TextChanged += new System.EventHandler(this.noMutasiTextBox_TextChanged);
-            // 
-            // label15
-            // 
-            this.label15.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label15.Location = new System.Drawing.Point(225, 7);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(169, 18);
-            this.label15.TabIndex = 25;
-            this.label15.Text = "TANGGAL MUTASI";
-            // 
-            // label16
-            // 
-            this.label16.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label16.Location = new System.Drawing.Point(408, 7);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(13, 18);
-            this.label16.TabIndex = 26;
-            this.label16.Text = ":";
-            // 
             // PMDateTimePicker
             // 
             this.PMDateTimePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PMDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.PMDateTimePicker.Location = new System.Drawing.Point(427, 3);
+            this.PMDateTimePicker.Location = new System.Drawing.Point(3, 3);
             this.PMDateTimePicker.Name = "PMDateTimePicker";
             this.PMDateTimePicker.Size = new System.Drawing.Size(149, 27);
             this.PMDateTimePicker.TabIndex = 27;
-            // 
-            // label11
-            // 
-            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label11.Location = new System.Drawing.Point(3, 10);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(111, 18);
-            this.label11.TabIndex = 47;
-            this.label11.Text = "NO MUTASI";
             // 
             // totalApproved
             // 
@@ -591,16 +548,6 @@
             this.errorLabel.TabIndex = 36;
             this.errorLabel.Text = "   ";
             // 
-            // productIDHiddenCombo
-            // 
-            this.productIDHiddenCombo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productIDHiddenCombo.FormattingEnabled = true;
-            this.productIDHiddenCombo.Location = new System.Drawing.Point(571, 387);
-            this.productIDHiddenCombo.Name = "productIDHiddenCombo";
-            this.productIDHiddenCombo.Size = new System.Drawing.Size(256, 26);
-            this.productIDHiddenCombo.TabIndex = 44;
-            this.productIDHiddenCombo.Visible = false;
-            // 
             // rejectButton
             // 
             this.rejectButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -645,13 +592,12 @@
             this.ClientSize = new System.Drawing.Size(896, 661);
             this.Controls.Add(this.acceptedButton);
             this.Controls.Add(this.rejectButton);
-            this.Controls.Add(this.productIDHiddenCombo);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.detailRequestOrderDataGridView);
             this.Controls.Add(this.exportButton);
             this.Controls.Add(this.createPOButton);
             this.Controls.Add(this.approveButton);
+            this.Controls.Add(this.detailRequestOrderDataGridView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "dataMutasiBarangDetailForm";
@@ -668,7 +614,6 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel7.ResumeLayout(false);
-            this.tableLayoutPanel7.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -709,17 +654,13 @@
         private System.Windows.Forms.DateTimePicker ROExpiredDateTimePicker;
         private System.Windows.Forms.Label errorLabel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
-        private System.Windows.Forms.TextBox noMutasiTextBox;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.DateTimePicker PMDateTimePicker;
         private System.Windows.Forms.ComboBox branchToCombo;
         private System.Windows.Forms.ComboBox branchFromCombo;
         private System.Windows.Forms.ComboBox branchToComboHidden;
         private System.Windows.Forms.ComboBox branchFromComboHidden;
-        private System.Windows.Forms.ComboBox productIDHiddenCombo;
         private System.Windows.Forms.Button rejectButton;
         private System.Windows.Forms.Button exportButton;
         private System.Windows.Forms.Button acceptedButton;

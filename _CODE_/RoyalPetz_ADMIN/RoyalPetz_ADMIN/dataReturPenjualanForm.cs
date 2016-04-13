@@ -65,13 +65,13 @@ namespace RoyalPetz_ADMIN
             MySqlDataReader rdr;
             string sqlCommand = "";
 
+            DataGridViewComboBoxColumn productIdCmb = new DataGridViewComboBoxColumn();
             DataGridViewComboBoxColumn productNameCmb = new DataGridViewComboBoxColumn();
             DataGridViewTextBoxColumn stockQtyColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn purchaseQtyColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn retailPriceColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn subtotalColumn = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn productIdColumn = new DataGridViewTextBoxColumn();
-
+            
             if (originModuleID == globalConstants.RETUR_PENJUALAN)
                 sqlCommand = "SELECT M.PRODUCT_ID, M.PRODUCT_NAME FROM MASTER_PRODUCT M, SALES_DETAIL SD " +
                                     "WHERE SD.SALES_INVOICE = '" + selectedSalesInvoice + "' AND SD.PRODUCT_ID = M.PRODUCT_ID";
@@ -80,23 +80,29 @@ namespace RoyalPetz_ADMIN
                                     "WHERE PRODUCT_ACTIVE = 1 AND SH.SALES_INVOICE = SD.SALES_INVOICE AND SD.PRODUCT_ID = M.PRODUCT_ID AND SH.CUSTOMER_ID = " + selectedCustomerID + 
                                     " GROUP BY M.PRODUCT_ID";
 
-            productComboHidden.Items.Clear();
+            //productComboHidden.Items.Clear();
 
             using (rdr = DS.getData(sqlCommand))
             {
                 while (rdr.Read())
                 {
                     productNameCmb.Items.Add(rdr.GetString("PRODUCT_NAME"));
-                    productComboHidden.Items.Add(rdr.GetString("PRODUCT_ID"));
+                    productIdCmb.Items.Add(rdr.GetString("PRODUCT_ID"));
                 }
             }
 
             rdr.Close();
 
-            // PRODUCT NAME COLUMN
+            productIdCmb.HeaderText = "KODE PRODUK";
+            productIdCmb.Name = "productID";
+            productIdCmb.Width = 200;
+            productIdCmb.DefaultCellStyle.BackColor = Color.LightBlue;
+            detailReturDataGridView.Columns.Add(productIdCmb);
+
             productNameCmb.HeaderText = "NAMA PRODUK";
             productNameCmb.Name = "productName";
             productNameCmb.Width = 300;
+            productNameCmb.DefaultCellStyle.BackColor = Color.LightBlue;
             detailReturDataGridView.Columns.Add(productNameCmb);
 
             retailPriceColumn.HeaderText = "SALES PRICE";
@@ -117,6 +123,7 @@ namespace RoyalPetz_ADMIN
             stockQtyColumn.HeaderText = "QTY";
             stockQtyColumn.Name = "qty";
             stockQtyColumn.Width = 100;
+            stockQtyColumn.DefaultCellStyle.BackColor = Color.LightBlue;
             detailReturDataGridView.Columns.Add(stockQtyColumn);
 
             subtotalColumn.HeaderText = "SUBTOTAL";
@@ -125,18 +132,14 @@ namespace RoyalPetz_ADMIN
             subtotalColumn.ReadOnly = true;
             detailReturDataGridView.Columns.Add(subtotalColumn);
 
-            productIdColumn.HeaderText = "PRODUCT_ID";
-            productIdColumn.Name = "productID";
-            productIdColumn.Width = 200;
-            productIdColumn.Visible = false;
-            detailReturDataGridView.Columns.Add(productIdColumn);
         }
 
         private bool noReturExist()
         {
             bool result = false;
+            string noReturParam = MySqlHelper.EscapeString(noReturTextBox.Text);
 
-            if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM RETURN_SALES_HEADER WHERE RS_INVOICE = '" + noReturTextBox.Text + "'")) > 0)
+            if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM RETURN_SALES_HEADER WHERE RS_INVOICE = '" + noReturParam + "'")) > 0)
                 result = true;
 
             return result;
@@ -144,24 +147,17 @@ namespace RoyalPetz_ADMIN
 
         private void detailReturDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            if (detailReturDataGridView.CurrentCell.ColumnIndex == 0 && e.Control is ComboBox)
+            if ((detailReturDataGridView.CurrentCell.OwningColumn.Name == "productID" || detailReturDataGridView.CurrentCell.OwningColumn.Name == "productName") && e.Control is ComboBox)
             {
                 ComboBox comboBox = e.Control as ComboBox;
                 comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
             }
 
-            if ((detailReturDataGridView.CurrentCell.ColumnIndex == 2 || detailReturDataGridView.CurrentCell.ColumnIndex == 3) && e.Control is TextBox)
+            if (detailReturDataGridView.CurrentCell.OwningColumn.Name == "qty" && e.Control is TextBox)
             {
                 TextBox textBox = e.Control as TextBox;
                 textBox.TextChanged += TextBox_TextChanged;
             }
-        }
-
-        private string getProductID(int selectedIndex)
-        {
-            string productID = "";
-            productID = productComboHidden.Items[selectedIndex].ToString();
-            return productID;
         }
 
         private double getProductPriceValue(string productID)
@@ -201,13 +197,18 @@ namespace RoyalPetz_ADMIN
             double subTotal = 0;
 
             DataGridViewComboBoxEditingControl dataGridViewComboBoxEditingControl = sender as DataGridViewComboBoxEditingControl;
-
             selectedIndex = dataGridViewComboBoxEditingControl.SelectedIndex;
-            selectedProductID = getProductID(selectedIndex);
-            hpp = getProductPriceValue(selectedProductID);
-
             rowSelectedIndex = detailReturDataGridView.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = detailReturDataGridView.Rows[rowSelectedIndex];
+
+            DataGridViewComboBoxCell productIDComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productID"];
+            DataGridViewComboBoxCell productNameComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productName"];
+
+            selectedProductID = productIDComboCell.Items[selectedIndex].ToString();
+            productIDComboCell.Value = productIDComboCell.Items[selectedIndex];
+            productNameComboCell.Value = productNameComboCell.Items[selectedIndex];
+
+            hpp = getProductPriceValue(selectedProductID);
 
             selectedRow.Cells["productPrice"].Value = hpp;
 
@@ -216,8 +217,6 @@ namespace RoyalPetz_ADMIN
 
             if (originModuleID == globalConstants.RETUR_PENJUALAN)
                 selectedRow.Cells["SOqty"].Value = getSOQty(selectedProductID);
-
-            selectedRow.Cells["productId"].Value = selectedProductID;
 
             subTotal = Math.Round((hpp * Convert.ToDouble(Convert.ToDouble(selectedRow.Cells["qty"].Value))), 2);
             selectedRow.Cells["subtotal"].Value = subTotal;
@@ -419,7 +418,7 @@ namespace RoyalPetz_ADMIN
             
             int selectedCreditID;
 
-            returID = noReturTextBox.Text;
+            returID = MySqlHelper.EscapeString(noReturTextBox.Text);
             customerID = selectedCustomerID;
 
             selectedReturDate = rsDateTimePicker.Value;

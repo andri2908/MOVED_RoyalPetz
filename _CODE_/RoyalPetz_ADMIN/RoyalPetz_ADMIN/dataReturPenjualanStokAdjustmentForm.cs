@@ -22,7 +22,8 @@ namespace RoyalPetz_ADMIN
 
         private globalUtilities gutil = new globalUtilities();
         private List<string> returnQty = new List<string>();
-        
+        private List<string> returnPrice = new List<string>();
+
         public dataReturPenjualanStokAdjustmentForm()
         {
             InitializeComponent();
@@ -54,27 +55,32 @@ namespace RoyalPetz_ADMIN
             MySqlDataReader rdr;
             string sqlCommand = "";
 
+            DataGridViewComboBoxColumn productIdCmb = new DataGridViewComboBoxColumn();
             DataGridViewComboBoxColumn productNameCmb = new DataGridViewComboBoxColumn();
             DataGridViewTextBoxColumn stockQtyColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn retailPriceColumn = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn productIdColumn = new DataGridViewTextBoxColumn();
-
+            
             sqlCommand = "SELECT PRODUCT_ID, PRODUCT_NAME FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 ORDER BY PRODUCT_NAME ASC";
 
-            productComboHidden.Items.Clear();
+            //productComboHidden.Items.Clear();
 
             using (rdr = DS.getData(sqlCommand))
             {
                 while (rdr.Read())
                 {
+                    productIdCmb.Items.Add(rdr.GetString("PRODUCT_ID"));
                     productNameCmb.Items.Add(rdr.GetString("PRODUCT_NAME"));
-                    productComboHidden.Items.Add(rdr.GetString("PRODUCT_ID"));
+                    //productComboHidden.Items.Add(rdr.GetString("PRODUCT_ID"));
                 }
             }
 
             rdr.Close();
 
-            // PRODUCT NAME COLUMN
+            productIdCmb.HeaderText = "KODE PRODUK";
+            productIdCmb.Name = "productID";
+            productIdCmb.Width = 200;
+            dataProdukDataGridView.Columns.Add(productIdCmb);
+
             productNameCmb.HeaderText = "NAMA PRODUK";
             productNameCmb.Name = "productName";
             productNameCmb.Width = 300;
@@ -90,11 +96,6 @@ namespace RoyalPetz_ADMIN
             retailPriceColumn.Width = 100;
             dataProdukDataGridView.Columns.Add(retailPriceColumn);
 
-            productIdColumn.HeaderText = "PRODUCT_ID";
-            productIdColumn.Name = "productID";
-            productIdColumn.Width = 200;
-            productIdColumn.Visible = false;
-            dataProdukDataGridView.Columns.Add(productIdColumn);
         }
 
         private void dataReturPenjualanStokAdjustmentForm_Load(object sender, EventArgs e)
@@ -139,13 +140,13 @@ namespace RoyalPetz_ADMIN
 
         private void cashierDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            if (dataProdukDataGridView.CurrentCell.ColumnIndex == 0 && e.Control is ComboBox)
+            if ((dataProdukDataGridView.CurrentCell.OwningColumn.Name == "productID" || dataProdukDataGridView.CurrentCell.OwningColumn.Name == "productName")  && e.Control is ComboBox)
             {
                 ComboBox comboBox = e.Control as ComboBox;
                 comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
             }
 
-            if ((dataProdukDataGridView.CurrentCell.ColumnIndex == 1) && e.Control is TextBox)
+            if ((dataProdukDataGridView.CurrentCell.OwningColumn.Name == "qty" || dataProdukDataGridView.CurrentCell.OwningColumn.Name == "productPrice") && e.Control is TextBox)
             {
                 TextBox textBox = e.Control as TextBox;
                 textBox.TextChanged += TextBox_TextChanged;
@@ -183,18 +184,24 @@ namespace RoyalPetz_ADMIN
             DataGridViewComboBoxEditingControl dataGridViewComboBoxEditingControl = sender as DataGridViewComboBoxEditingControl;
 
             selectedIndex = dataGridViewComboBoxEditingControl.SelectedIndex;
-            selectedProductID = getProductID(selectedIndex);
-            hpp = getProductPriceValue(selectedProductID);
-
             rowSelectedIndex = dataProdukDataGridView.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dataProdukDataGridView.Rows[rowSelectedIndex];
 
+            DataGridViewComboBoxCell productIDComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productID"];
+            DataGridViewComboBoxCell productNameComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productName"];
+
+            selectedProductID = productIDComboCell.Items[selectedIndex].ToString();
+            productIDComboCell.Value = productIDComboCell.Items[selectedIndex];
+            productNameComboCell.Value = productNameComboCell.Items[selectedIndex];
+
+            hpp = getProductPriceValue(selectedProductID);
+            
             selectedRow.Cells["productPrice"].Value = hpp;
 
             if (null == selectedRow.Cells["qty"].Value)
                 selectedRow.Cells["qty"].Value = 0;
 
-            selectedRow.Cells["productId"].Value = selectedProductID;
+            
         }
 
         private void TextBox_TextChanged(object sender, EventArgs e)

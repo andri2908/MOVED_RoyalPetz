@@ -30,6 +30,7 @@ namespace RoyalPetz_ADMIN
         private bool validateOldPassword()
         {
             string oldPassword = oldPasswordTextBox.Text;
+            oldPassword = MySqlHelper.EscapeString(oldPassword);
             int result;
 
             result = Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_USER WHERE ID = " + selectedUserID + " AND USER_PASSWORD = '" + oldPassword + "'"));
@@ -59,6 +60,12 @@ namespace RoyalPetz_ADMIN
                 return false;
             }
 
+            if (!gutil.matchRegEx(newPasswordTextBox.Text, globalUtilities.REGEX_ALPHANUMERIC_ONLY))
+            {
+                errorLabel.Text = "PASSWORD HARUS ALPHANUMERIC";
+                return false;
+            }
+
             if (!newPasswordTextBox.Text.Equals(newPassword2TextBox.Text))
             {
                 errorLabel.Text = "NEW PASSWORD DAN RE-TYPE PASSWORD HARUS SAMA";
@@ -74,6 +81,8 @@ namespace RoyalPetz_ADMIN
             string sqlCommand = "";
 
             string newPassword = newPasswordTextBox.Text;
+            //newPassword = MySqlHelper.EscapeString(newPassword);
+
             MySqlException internalEX = null;
 
             DS.beginTransaction();

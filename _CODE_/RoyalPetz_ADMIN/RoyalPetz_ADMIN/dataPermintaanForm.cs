@@ -59,25 +59,25 @@ namespace RoyalPetz_ADMIN
                     }
                     break;
 
-                //case globalConstants.CEK_DATA_MUTASI:
-                //    dataMutasiBarangDetailForm displayedForm = new dataMutasiBarangDetailForm(globalConstants.CEK_DATA_MUTASI, roID);
-                //    displayedForm.ShowDialog(this);
-                //    break;
+                case globalConstants.CEK_DATA_MUTASI:
+                    dataMutasiBarangDetailForm displayedForm = new dataMutasiBarangDetailForm(globalConstants.CEK_DATA_MUTASI, roID);
+                    displayedForm.ShowDialog(this);
+                    break;
 
-                //case globalConstants.PEMBAYARAN_HUTANG:
-                //    pembayaranHutangForm pembayaranForm = new pembayaranHutangForm();
-                //    pembayaranForm.ShowDialog(this);
-                //    break;
+                    //case globalConstants.PEMBAYARAN_HUTANG:
+                    //    pembayaranHutangForm pembayaranForm = new pembayaranHutangForm();
+                    //    pembayaranForm.ShowDialog(this);
+                    //    break;
 
-                //case globalConstants.PENERIMAAN_BARANG:
-                //    penerimaanBarangForm penerimaanBarangDisplayedForm = new penerimaanBarangForm();
-                //    penerimaanBarangDisplayedForm.ShowDialog(this);
-                //    break;
+                    //case globalConstants.PENERIMAAN_BARANG:
+                    //    penerimaanBarangForm penerimaanBarangDisplayedForm = new penerimaanBarangForm();
+                    //    penerimaanBarangDisplayedForm.ShowDialog(this);
+                    //    break;
 
-                //default:
-                //    dataReturPermintaanForm returPermintaanBarangDisplayedForm = new dataReturPermintaanForm();
-                //    returPermintaanBarangDisplayedForm.ShowDialog(this);
-                //    break;
+                    //default:
+                    //    dataReturPermintaanForm returPermintaanBarangDisplayedForm = new dataReturPermintaanForm();
+                    //    returPermintaanBarangDisplayedForm.ShowDialog(this);
+                    //    break;
 
             }
         }
@@ -110,6 +110,7 @@ namespace RoyalPetz_ADMIN
             DataTable dt = new DataTable();
             string sqlCommand;
             string dateFrom, dateTo;
+            string noROInvoiceParam = "";
 
             DS.mySqlConnect();
 
@@ -136,7 +137,8 @@ namespace RoyalPetz_ADMIN
 
                 if (noROInvoiceTextBox.Text.Length > 0)
                 {
-                    sqlCommand = sqlCommand + " AND RO_INVOICE LIKE '%" + noROInvoiceTextBox.Text + "%'";
+                    noROInvoiceParam = MySqlHelper.EscapeString(noROInvoiceTextBox.Text);
+                    sqlCommand = sqlCommand + " AND RO_INVOICE LIKE '%" + noROInvoiceParam + "%'";
                 }
 
                 dateFrom = String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(RODtPicker_1.Value));

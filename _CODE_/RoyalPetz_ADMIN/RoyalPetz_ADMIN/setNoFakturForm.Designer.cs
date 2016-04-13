@@ -34,6 +34,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.noFakturTextBox = new System.Windows.Forms.TextBox();
+            this.errorLabel = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +57,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(176, 24);
+            this.label4.Location = new System.Drawing.Point(175, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(8, 18);
             this.label4.TabIndex = 10;
@@ -77,6 +79,7 @@
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.panel1.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel1.Controls.Add(this.errorLabel);
             this.panel1.Location = new System.Drawing.Point(0, 1);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(483, 29);
@@ -89,7 +92,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 92.07317F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.926829F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 295F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 296F));
             this.tableLayoutPanel1.Controls.Add(this.noFakturTextBox, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label4, 1, 0);
@@ -105,12 +108,25 @@
             this.noFakturTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.noFakturTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.noFakturTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noFakturTextBox.Location = new System.Drawing.Point(190, 19);
+            this.noFakturTextBox.Location = new System.Drawing.Point(189, 19);
             this.noFakturTextBox.MaxLength = 20;
             this.noFakturTextBox.Name = "noFakturTextBox";
             this.noFakturTextBox.Size = new System.Drawing.Size(278, 27);
             this.noFakturTextBox.TabIndex = 27;
             this.noFakturTextBox.TextChanged += new System.EventHandler(this.noFakturTextBox_TextChanged);
+            // 
+            // errorLabel
+            // 
+            this.errorLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.BackColor = System.Drawing.Color.White;
+            this.errorLabel.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(3, 6);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(23, 18);
+            this.errorLabel.TabIndex = 43;
+            this.errorLabel.Text = "   ";
             // 
             // setNoFakturForm
             // 
@@ -129,6 +145,8 @@
             this.Text = "SET NO FAKTUR";
             this.Activated += new System.EventHandler(this.setNoFakturForm_Activated);
             this.Load += new System.EventHandler(this.setNoFakturForm_Load);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -143,5 +161,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TextBox noFakturTextBox;
+        private System.Windows.Forms.Label errorLabel;
     }
 }

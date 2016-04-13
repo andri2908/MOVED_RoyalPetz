@@ -98,17 +98,17 @@ namespace RoyalPetz_ADMIN
             string sqlCommand = "";
             MySqlException internalEX = null;
 
-            string suppName = supplierNameTextBox.Text.Trim();
+            string suppName = MySqlHelper.EscapeString(supplierNameTextBox.Text.Trim());
 
-            string suppAddress1 = supplierAddress1TextBox.Text.Trim();
+            string suppAddress1 = MySqlHelper.EscapeString(supplierAddress1TextBox.Text.Trim());
             if (suppAddress1.Equals(""))
                 suppAddress1 = " ";
 
-            string suppAddress2 = supplierAddress2TextBox.Text.Trim();
+            string suppAddress2 = MySqlHelper.EscapeString(supplierAddress2TextBox.Text.Trim());
             if (suppAddress2.Equals(""))
                 suppAddress2 = " ";
 
-            string suppAddressCity = supplierAddressCityTextBox.Text.Trim();
+            string suppAddressCity = MySqlHelper.EscapeString(supplierAddressCityTextBox.Text.Trim());
             if (suppAddressCity.Equals(""))
                 suppAddressCity = " ";
 
@@ -120,7 +120,7 @@ namespace RoyalPetz_ADMIN
             if (suppFax.Equals(""))
                 suppFax = " ";
 
-            string suppEmail = supplierEmailTextBox.Text.Trim();
+            string suppEmail = MySqlHelper.EscapeString(supplierEmailTextBox.Text.Trim());
             if (suppEmail.Equals(""))
                 suppEmail = " ";
 

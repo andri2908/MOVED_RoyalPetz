@@ -49,10 +49,14 @@ namespace RoyalPetz_ADMIN
             string password;
             object result;
             
-            string sqlCommand;
+            string sqlCommand = "";
 
             userName = gutil.allTrim(userNameTextBox.Text);
+            userName = MySqlHelper.EscapeString(userName);
+
             password = gutil.allTrim(passwordTextBox.Text);
+            password = MySqlHelper.EscapeString(password);
+
 
             sqlCommand = "SELECT ID FROM MASTER_USER WHERE USER_NAME = '"+userName+"' AND USER_PASSWORD = '" + password + "'";
             result = DS.getDataSingleValue(sqlCommand);
@@ -75,6 +79,7 @@ namespace RoyalPetz_ADMIN
             string sqlCommand;
 
             userName = gutil.allTrim(userNameTextBox.Text);
+            userName = MySqlHelper.EscapeString(userName);
 
             sqlCommand = "SELECT ID FROM MASTER_USER WHERE USER_NAME = '" + userName + "' AND USER_ACTIVE = '1'";
             result = DS.getDataSingleValue(sqlCommand);
@@ -96,6 +101,7 @@ namespace RoyalPetz_ADMIN
             string sqlCommand;
 
             userName = gutil.allTrim(userNameTextBox.Text);
+            userName = MySqlHelper.EscapeString(userName);
 
             sqlCommand = "SELECT ID FROM MASTER_USER WHERE USER_NAME = '" + userName + "'";
             result = DS.getDataSingleValue(sqlCommand);
@@ -173,8 +179,6 @@ namespace RoyalPetz_ADMIN
 
                 createConfigFileForm displayedForm = new createConfigFileForm();
                 displayedForm.ShowDialog();
-
-                //this.Close();
             }
         }
         

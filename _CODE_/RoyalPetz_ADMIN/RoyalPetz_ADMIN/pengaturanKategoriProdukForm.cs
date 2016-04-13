@@ -77,9 +77,12 @@ namespace RoyalPetz_ADMIN
             bool valCheckBox = false;
             string sqlCommand = "";
             categoryProduct tempValue;
+            string namaProductParam = MySqlHelper.EscapeString(namaProdukTextbox.Text);
+            string kodeProductParam = MySqlHelper.EscapeString(textBox1.Text);
+
 
             DS.mySqlConnect();
-            sqlCommand = "SELECT M.PRODUCT_ID, M.PRODUCT_NAME, IFNULL(P.CATEGORY_ID, 0) AS CATEGORY_ID FROM MASTER_PRODUCT M LEFT OUTER JOIN PRODUCT_CATEGORY P ON (P.PRODUCT_ID = M.PRODUCT_ID AND P.CATEGORY_ID = " + selectedCategoryID + ") WHERE M.PRODUCT_NAME LIKE '%" + namaProdukTextbox.Text + "%'";
+            sqlCommand = "SELECT M.PRODUCT_ID, M.PRODUCT_NAME, IFNULL(P.CATEGORY_ID, 0) AS CATEGORY_ID FROM MASTER_PRODUCT M LEFT OUTER JOIN PRODUCT_CATEGORY P ON (P.PRODUCT_ID = M.PRODUCT_ID AND P.CATEGORY_ID = " + selectedCategoryID + ") WHERE M.PRODUCT_NAME LIKE '%" + namaProductParam + "%' AND M.PRODUCT_ID LIKE '%" + kodeProductParam + "%'";
 
             using (rdr = DS.getData(sqlCommand))
             {
@@ -253,6 +256,13 @@ namespace RoyalPetz_ADMIN
         private void pengaturanKategoriProdukForm_Activated(object sender, EventArgs e)
         {
             loadKategoriInformation();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            categoryProductValue.Clear();
+            pengaturanKategoriDataGridView.Rows.Clear();
+            loadProdukName();
         }
     }
 }

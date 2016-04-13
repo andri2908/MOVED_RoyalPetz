@@ -22,7 +22,8 @@ namespace RoyalPetz_ADMIN
 
         private Data_Access DS = new Data_Access();
         private globalUtilities gUtil = new globalUtilities();
-        private CultureInfo culture = new CultureInfo("id-ID");        
+        private CultureInfo culture = new CultureInfo("id-ID");
+        private Form parentForm;
 
         public dataPOForm()
         {
@@ -33,6 +34,13 @@ namespace RoyalPetz_ADMIN
         {
             InitializeComponent();
             originModuleID = moduleID;
+        }
+
+        public dataPOForm(int moduleID, Form originForm)
+        {
+            InitializeComponent();
+            originModuleID = moduleID;
+            parentForm = originForm;
         }
 
         private void newButton_Click(object sender, EventArgs e)
@@ -70,6 +78,7 @@ namespace RoyalPetz_ADMIN
             DataTable dt = new DataTable();
             string sqlCommand = "";
             string dateFrom, dateTo;
+            string noPOInvoiceParam = "";
 
             DS.mySqlConnect();
 
@@ -98,13 +107,18 @@ namespace RoyalPetz_ADMIN
             {
                 if (noPOInvoiceTextBox.Text.Length > 0)
                 {
-                    sqlCommand = sqlCommand + " AND PURCHASE_INVOICE LIKE '%" + noPOInvoiceTextBox.Text + "%'";
+                    noPOInvoiceParam = MySqlHelper.EscapeString(noPOInvoiceTextBox.Text);
+                    sqlCommand = sqlCommand + " AND PURCHASE_INVOICE LIKE '%" + noPOInvoiceParam + "%'";
                 }
 
                 dateFrom = String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(PODtPicker_1.Value));
                 dateTo = String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(PODtPicker_2.Value));
-                sqlCommand = sqlCommand + " AND DATE_FORMAT(PURCHASE_DATETIME, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(PURCHASE_DATETIME, '%Y%m%d')  <= '" + dateTo + "'";
-
+                if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
+                    // FILTER BY TANGGAL JATUH TEMPO
+                    sqlCommand = sqlCommand + " AND DATE_FORMAT(PURCHASE_TERM_OF_PAYMENT_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(PURCHASE_TERM_OF_PAYMENT_DATE, '%Y%m%d')  <= '" + dateTo + "'";
+                else
+                    sqlCommand = sqlCommand + " AND DATE_FORMAT(PURCHASE_DATETIME, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(PURCHASE_DATETIME, '%Y%m%d')  <= '" + dateTo + "'";
+                
                 if (supplierCombo.Text.Length > 0)
                 {
                     sqlCommand = sqlCommand + " AND P.SUPPLIER_ID = " + supplierID;
@@ -151,9 +165,13 @@ namespace RoyalPetz_ADMIN
 
             fillInSupplierCombo();
 
+            if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
+                label2.Text = "Jatuh Tempo";
+
             if (originModuleID == globalConstants.PENERIMAAN_BARANG_DARI_PO || originModuleID == globalConstants.PEMBAYARAN_HUTANG)
             {
                 newButton.Visible = false;
+                showAllCheckBox.Visible = false;
             }
 
             userAccessOption = DS.getUserAccessRight(globalConstants.MENU_PURCHASE_ORDER, gUtil.getUserGroupID());
@@ -187,9 +205,15 @@ namespace RoyalPetz_ADMIN
                 }
                 else if (originModuleID == globalConstants.PENERIMAAN_BARANG_DARI_PO)
                 {
-                    selectedPurchaseInvoice = selectedRow.Cells["NO PURCHASE"].Value.ToString();  
-                    penerimaanBarangForm displayedPenerimaanForm = new penerimaanBarangForm(originModuleID, selectedPurchaseInvoice);
-                    displayedPenerimaanForm.ShowDialog(this);
+                    selectedPurchaseInvoice = selectedRow.Cells["NO PURCHASE"].Value.ToString();
+                    if (null!= parentForm)
+                    { 
+                        penerimaanBarangForm originForm = (penerimaanBarangForm)parentForm;
+                        originForm.setSelectedInvoice(selectedPurchaseInvoice);
+                    }
+                    this.Close();
+                    //penerimaanBarangForm displayedPenerimaanForm = new penerimaanBarangForm(originModuleID, selectedPurchaseInvoice);
+                    //displayedPenerimaanForm.ShowDialog(this);
                 }
                 else if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
                 {
@@ -221,8 +245,14 @@ namespace RoyalPetz_ADMIN
             else if (originModuleID == globalConstants.PENERIMAAN_BARANG_DARI_PO)
             {
                 selectedPurchaseInvoice = selectedRow.Cells["NO PURCHASE"].Value.ToString();
-                penerimaanBarangForm displayedPenerimaanForm = new penerimaanBarangForm(originModuleID, selectedPurchaseInvoice);
-                displayedPenerimaanForm.ShowDialog(this);
+                if (null != parentForm)
+                {
+                    penerimaanBarangForm originForm = (penerimaanBarangForm)parentForm;
+                    originForm.setSelectedInvoice(selectedPurchaseInvoice);
+                }
+                this.Close();
+                //penerimaanBarangForm displayedPenerimaanForm = new penerimaanBarangForm(originModuleID, selectedPurchaseInvoice);
+                //displayedPenerimaanForm.ShowDialog(this);
             }
             else if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
             {
@@ -238,6 +268,11 @@ namespace RoyalPetz_ADMIN
         {
             if (noPOInvoiceTextBox.Text.Length > 0)
                 displayButton.PerformClick();
+        }
+
+        private void dataPurchaseOrder_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

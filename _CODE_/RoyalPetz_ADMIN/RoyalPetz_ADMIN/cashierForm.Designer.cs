@@ -41,11 +41,10 @@
             this.noFakturLabel = new System.Windows.Forms.Label();
             this.cashierDataGridView = new System.Windows.Forms.DataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.ChangePrinterButton = new System.Windows.Forms.Button();
             this.errorLabel = new System.Windows.Forms.Label();
             this.tempoMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
             this.pelangganTextBox = new System.Windows.Forms.TextBox();
-            this.sizeComboBox = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.printoutCheckBox = new System.Windows.Forms.CheckBox();
             this.paymentComboBox = new System.Windows.Forms.ComboBox();
             this.labelCaraBayar = new System.Windows.Forms.Label();
@@ -76,7 +75,6 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dateTimeStampLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.productComboHidden = new System.Windows.Forms.ComboBox();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.panel1.SuspendLayout();
@@ -199,11 +197,10 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel5.Controls.Add(this.ChangePrinterButton);
             this.panel5.Controls.Add(this.errorLabel);
             this.panel5.Controls.Add(this.tempoMaskedTextBox);
             this.panel5.Controls.Add(this.pelangganTextBox);
-            this.panel5.Controls.Add(this.sizeComboBox);
-            this.panel5.Controls.Add(this.label7);
             this.panel5.Controls.Add(this.printoutCheckBox);
             this.panel5.Controls.Add(this.paymentComboBox);
             this.panel5.Controls.Add(this.labelCaraBayar);
@@ -219,6 +216,18 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(982, 162);
             this.panel5.TabIndex = 9;
+            // 
+            // ChangePrinterButton
+            // 
+            this.ChangePrinterButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChangePrinterButton.ForeColor = System.Drawing.Color.Black;
+            this.ChangePrinterButton.Location = new System.Drawing.Point(343, 68);
+            this.ChangePrinterButton.Name = "ChangePrinterButton";
+            this.ChangePrinterButton.Size = new System.Drawing.Size(158, 34);
+            this.ChangePrinterButton.TabIndex = 37;
+            this.ChangePrinterButton.Text = "SET PRINTER";
+            this.ChangePrinterButton.UseVisualStyleBackColor = true;
+            this.ChangePrinterButton.Click += new System.EventHandler(this.ChangePrinterButton_Click);
             // 
             // errorLabel
             // 
@@ -253,30 +262,6 @@
             this.pelangganTextBox.ReadOnly = true;
             this.pelangganTextBox.Size = new System.Drawing.Size(181, 27);
             this.pelangganTextBox.TabIndex = 17;
-            // 
-            // sizeComboBox
-            // 
-            this.sizeComboBox.FormattingEnabled = true;
-            this.sizeComboBox.Items.AddRange(new object[] {
-            "Kecil",
-            "Sedang",
-            "Kwarto"});
-            this.sizeComboBox.Location = new System.Drawing.Point(342, 70);
-            this.sizeComboBox.Name = "sizeComboBox";
-            this.sizeComboBox.Size = new System.Drawing.Size(126, 26);
-            this.sizeComboBox.TabIndex = 11;
-            this.sizeComboBox.Text = "Kecil";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label7.Location = new System.Drawing.Point(340, 43);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(100, 18);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Size Kertas";
             // 
             // printoutCheckBox
             // 
@@ -626,15 +611,6 @@
             this.timer1.Interval = 60000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // productComboHidden
-            // 
-            this.productComboHidden.FormattingEnabled = true;
-            this.productComboHidden.Location = new System.Drawing.Point(570, 223);
-            this.productComboHidden.Name = "productComboHidden";
-            this.productComboHidden.Size = new System.Drawing.Size(121, 21);
-            this.productComboHidden.TabIndex = 13;
-            this.productComboHidden.Visible = false;
-            // 
             // printDocument1
             // 
             this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
@@ -656,7 +632,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(985, 661);
-            this.Controls.Add(this.productComboHidden);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.totalLabel);
@@ -708,8 +683,6 @@
         private System.Windows.Forms.Label labelCaraBayar;
         private System.Windows.Forms.ComboBox paymentComboBox;
         private System.Windows.Forms.CheckBox printoutCheckBox;
-        private System.Windows.Forms.ComboBox sizeComboBox;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label label13;
@@ -729,12 +702,12 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel dateTimeStampLabel;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.ComboBox productComboHidden;
         private System.Windows.Forms.MaskedTextBox discJualMaskedTextBox;
         private System.Windows.Forms.TextBox pelangganTextBox;
         private System.Windows.Forms.MaskedTextBox tempoMaskedTextBox;
         private System.Windows.Forms.Label errorLabel;
         private System.Windows.Forms.MaskedTextBox bayarTextBox;
+        private System.Windows.Forms.Button ChangePrinterButton;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
     }

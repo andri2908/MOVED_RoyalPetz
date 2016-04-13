@@ -150,6 +150,12 @@ namespace RoyalPetz_ADMIN
                 return false;
             }
 
+            if (!gUtil.matchRegEx(kodeTextbox.Text.Trim(), globalUtilities.REGEX_ALPHANUMERIC_ONLY))
+            {
+                errorLabel.Text = "KODE AKUN HARUS ALPHA NUMERIC";
+                return false;
+            }
+
             if (DeskripsiTextbox.Text.Trim().Equals(""))
             {
                 errorLabel.Text = "DESKRIPSI AKUN TIDAK BOLEH KOSONG";
@@ -166,7 +172,7 @@ namespace RoyalPetz_ADMIN
             MySqlException internalEX = null;
 
             string kodeakun = kodeTextbox.Text.Trim();
-            string deskripsiakun = DeskripsiTextbox.Text.Trim();
+            string deskripsiakun = MySqlHelper.EscapeString(DeskripsiTextbox.Text.Trim());
             int tipeakun = Int32.Parse(TipeComboBox.SelectedValue.ToString());
             int nonactive = 1;
             if (NonactiveCheckbox.Checked == true)

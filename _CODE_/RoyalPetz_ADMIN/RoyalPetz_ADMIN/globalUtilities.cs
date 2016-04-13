@@ -16,6 +16,7 @@ namespace RoyalPetz_ADMIN
     {
         public const string REGEX_NUMBER_WITH_2_DECIMAL = @"^[0-9]*\.?\d{0,2}$";
         public const string REGEX_NUMBER_ONLY = @"^[0-9]*$";
+        public const string REGEX_ALPHANUMERIC_ONLY = @"^[0-9A-Za-z]*$";
         public const string CUSTOM_DATE_FORMAT = "dd MMM yyyy";
         public int INS = 1;
         public int UPD = 2;
@@ -274,6 +275,7 @@ namespace RoyalPetz_ADMIN
 
             DialogResult res1 = MessageBox.Show(successmessage, successcaption, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
         public void showError()
         {
             String errorcaption = "IO Error Message";

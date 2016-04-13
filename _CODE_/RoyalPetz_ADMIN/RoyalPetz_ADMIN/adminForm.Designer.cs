@@ -71,8 +71,6 @@
             this.MENU_tambahMutasiBarang = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_cekPermintaanBarang = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_penerimaanBarang = new System.Windows.Forms.ToolStripMenuItem();
-            this.MENU_dariMutasiBarang = new System.Windows.Forms.ToolStripMenuItem();
-            this.MENU_dariPO = new System.Windows.Forms.ToolStripMenuItem();
             this.MAINMENU_pembelian = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_supplier = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_tambahSupplier = new System.Windows.Forms.ToolStripMenuItem();
@@ -599,34 +597,12 @@
             // MENU_penerimaanBarang
             // 
             this.MENU_penerimaanBarang.BackColor = System.Drawing.Color.SteelBlue;
-            this.MENU_penerimaanBarang.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MENU_dariMutasiBarang,
-            this.MENU_dariPO});
             this.MENU_penerimaanBarang.ForeColor = System.Drawing.Color.FloralWhite;
             this.MENU_penerimaanBarang.Name = "MENU_penerimaanBarang";
             this.MENU_penerimaanBarang.ShowShortcutKeys = false;
             this.MENU_penerimaanBarang.Size = new System.Drawing.Size(211, 22);
             this.MENU_penerimaanBarang.Text = "Penerimaan Barang";
-            // 
-            // MENU_dariMutasiBarang
-            // 
-            this.MENU_dariMutasiBarang.BackColor = System.Drawing.Color.SteelBlue;
-            this.MENU_dariMutasiBarang.ForeColor = System.Drawing.Color.FloralWhite;
-            this.MENU_dariMutasiBarang.Name = "MENU_dariMutasiBarang";
-            this.MENU_dariMutasiBarang.ShowShortcutKeys = false;
-            this.MENU_dariMutasiBarang.Size = new System.Drawing.Size(205, 22);
-            this.MENU_dariMutasiBarang.Text = "Dari Mutasi Barang";
-            this.MENU_dariMutasiBarang.Click += new System.EventHandler(this.toolStripMenuItem11_Click_2);
-            // 
-            // MENU_dariPO
-            // 
-            this.MENU_dariPO.BackColor = System.Drawing.Color.SteelBlue;
-            this.MENU_dariPO.ForeColor = System.Drawing.Color.FloralWhite;
-            this.MENU_dariPO.Name = "MENU_dariPO";
-            this.MENU_dariPO.ShowShortcutKeys = false;
-            this.MENU_dariPO.Size = new System.Drawing.Size(205, 22);
-            this.MENU_dariPO.Text = "Dari PO";
-            this.MENU_dariPO.Click += new System.EventHandler(this.toolStripMenuItem12_Click_2);
+            this.MENU_penerimaanBarang.Click += new System.EventHandler(this.MENU_penerimaanBarang_Click);
             // 
             // MAINMENU_pembelian
             // 
@@ -1826,8 +1802,6 @@
         private System.Windows.Forms.ToolStripMenuItem MENU_pembayaranPiutangMutasi;
         private System.Windows.Forms.ToolStripMenuItem MENU_importDataCSV;
         private System.Windows.Forms.ToolStripMenuItem MENU_penerimaanBarang;
-        private System.Windows.Forms.ToolStripMenuItem MENU_dariMutasiBarang;
-        private System.Windows.Forms.ToolStripMenuItem MENU_dariPO;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;

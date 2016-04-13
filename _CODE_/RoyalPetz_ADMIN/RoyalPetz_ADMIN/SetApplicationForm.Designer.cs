@@ -60,7 +60,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.branchIDBox = new System.Windows.Forms.GroupBox();
-            this.BranchIDTextbox = new System.Windows.Forms.TextBox();
+            this.BranchIDTextbox = new System.Windows.Forms.MaskedTextBox();
             this.ConModeBox.SuspendLayout();
             this.ipServerBox.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -446,12 +446,14 @@
             // 
             // BranchIDTextbox
             // 
-            this.BranchIDTextbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.BranchIDTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BranchIDTextbox.Location = new System.Drawing.Point(6, 19);
+            this.BranchIDTextbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.BranchIDTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BranchIDTextbox.Location = new System.Drawing.Point(6, 18);
+            this.BranchIDTextbox.Mask = "000";
             this.BranchIDTextbox.Name = "BranchIDTextbox";
-            this.BranchIDTextbox.Size = new System.Drawing.Size(188, 27);
-            this.BranchIDTextbox.TabIndex = 2;
+            this.BranchIDTextbox.Size = new System.Drawing.Size(38, 27);
+            this.BranchIDTextbox.TabIndex = 30;
+            this.BranchIDTextbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // SetApplicationForm
             // 
@@ -502,7 +504,6 @@
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Label errorLabel;
         private System.Windows.Forms.GroupBox AppModeBox;
-        private System.Windows.Forms.TextBox BranchIDTextbox;
         private System.Windows.Forms.GroupBox ipServerBox;
         private System.Windows.Forms.MaskedTextBox ip3Textbox;
         private System.Windows.Forms.MaskedTextBox ip4Textbox;
@@ -527,5 +528,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox NamaTokoTextbox;
         private System.Windows.Forms.MaskedTextBox TeleponTextbox;
+        private System.Windows.Forms.MaskedTextBox BranchIDTextbox;
     }
 }

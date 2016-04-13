@@ -139,31 +139,43 @@ namespace RoyalPetz_ADMIN
 
             string selectedDate = dateJoinedDateTimePicked.Value.ToShortDateString();
             string custJoinedDate = String.Format(culture, "{0:dd-MM-yyyy}", Convert.ToDateTime(selectedDate));
-            string custName = custNameTextBox.Text.Trim();
+            string custName = MySqlHelper.EscapeString(custNameTextBox.Text.Trim());
 
             string custAddress1 = custAddress1TextBox.Text.Trim();
             if (custAddress1.Equals(""))
                 custAddress1 = " ";
+            else
+                custAddress1 = MySqlHelper.EscapeString(custAddress1);
 
             string custAddress2 = custAddress2TextBox.Text.Trim();
             if (custAddress2.Equals(""))
                 custAddress2 = " ";
-            
+            else
+                custAddress2 = MySqlHelper.EscapeString(custAddress2);
+
             string custAddressCity = custAddressCityTextBox.Text.Trim();
             if (custAddressCity.Equals(""))
                 custAddressCity = " ";
+            else
+                custAddressCity = MySqlHelper.EscapeString(custAddressCity);
 
             string custPhone = custTelTextBox.Text.Trim();
             if (custPhone.Equals(""))
                 custPhone = " ";
+            else
+                custPhone = MySqlHelper.EscapeString(custPhone);
 
             string custFax = custFaxTextBox.Text.Trim();
             if (custFax.Equals(""))
                 custFax = " ";
+            else
+                custFax = MySqlHelper.EscapeString(custFax);
 
             string custEmail = custEmailTextBox.Text.Trim();
             if (custEmail.Equals(""))
                 custEmail = " ";
+            else
+                custEmail = MySqlHelper.EscapeString(custEmail);
 
             string custTotalSales = custTotalSalesTextBox.Text.Trim();
             if (custTotalSales.Equals(""))

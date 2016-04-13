@@ -116,6 +116,18 @@ namespace RoyalPetz_ADMIN
                 return false;
             }
 
+            if (!gutil.matchRegEx(userNameTextBox.Text, globalUtilities.REGEX_ALPHANUMERIC_ONLY))
+            {
+                errorLabel.Text = "USERNAME HARUS ALPHA NUMERIC";
+                return false;
+            }
+
+            if (!gutil.matchRegEx(passwordTextBox.Text, globalUtilities.REGEX_ALPHANUMERIC_ONLY))
+            {
+                errorLabel.Text = "PASSWORD HARUS ALPHA NUMERIC";
+                return false;
+            }
+
             if (selectedGroupID == 0)
             {
                 errorLabel.Text = "USER HARUS TERMASUK DI DALAM SALAH SATU GRUP";

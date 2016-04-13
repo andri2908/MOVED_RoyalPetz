@@ -88,6 +88,7 @@ namespace RoyalPetz_ADMIN
             MySqlDataReader rdr;
             DataTable dt = new DataTable();
             string sqlCommand = "";
+            string noInvoiceParam = "";
 
             if (originModuleID == globalConstants.RETUR_PENJUALAN)
                 sqlCommand = "SELECT SALES_INVOICE, CUSTOMER_FULL_NAME, SALES_PAID FROM SALES_HEADER H LEFT OUTER JOIN MASTER_CUSTOMER M ON " +
@@ -105,7 +106,8 @@ namespace RoyalPetz_ADMIN
 
                 if (noInvoiceTextBox.Text.Length > 0)
                 {
-                    sqlCommand = sqlCommand + "AND H.SALES_INVOICE like '%" + noInvoiceTextBox.Text + "%' ";
+                    noInvoiceParam = MySqlHelper.EscapeString(noInvoiceTextBox.Text);
+                    sqlCommand = sqlCommand + "AND H.SALES_INVOICE like '%" + noInvoiceParam + "%' ";
                 }
 
                 sqlCommand = sqlCommand + "AND SALES_PAID = 0";
@@ -120,6 +122,7 @@ namespace RoyalPetz_ADMIN
 
                     dataInvoiceDataGridView.Columns["SALES_INVOICE"].Width = 200;
                     dataInvoiceDataGridView.Columns["CUSTOMER_FULL_NAME"].Width = 300;
+                    //dataInvoiceDataGridView.Columns["SALES_PAID"].Visible = false;
                 }
             }
             rdr.Close();

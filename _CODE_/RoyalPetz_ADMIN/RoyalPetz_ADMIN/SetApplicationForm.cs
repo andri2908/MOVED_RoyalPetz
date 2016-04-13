@@ -319,10 +319,10 @@ namespace RoyalPetz_ADMIN
             string HQIP = HQIP1.Text.Trim() + "." + HQIP2.Text.Trim() + "." + HQIP3.Text.Trim() + "." + HQIP4.Text.Trim(); ;
             String branchID = BranchIDTextbox.Text;
             //String no_faktur = "";
-            String nama_toko = NamaTokoTextbox.Text;
-            String alamat_toko = AlamatTextbox.Text;
-            String telepon_toko = TeleponTextbox.Text;
-            String email_toko = EmailTextbox.Text;
+            String nama_toko = MySqlHelper.EscapeString(NamaTokoTextbox.Text);
+            String alamat_toko = MySqlHelper.EscapeString(AlamatTextbox.Text);
+            String telepon_toko = MySqlHelper.EscapeString(TeleponTextbox.Text);
+            String email_toko = MySqlHelper.EscapeString(EmailTextbox.Text);
             int id = 2;
             DS.beginTransaction();
 

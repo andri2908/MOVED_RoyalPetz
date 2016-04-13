@@ -17,11 +17,13 @@ namespace RoyalPetz_ADMIN
     public partial class penerimaanBarangForm : Form
     {
         string selectedInvoice;
+        string selectedMutasi;
         int originModuleId = 0;
         int selectedFromID = 0;
         int selectedToID = 0;
         double globalTotalValue = 0;
         bool isLoading = false;
+        double POduration = 0;
         
         private List<string> detailRequestQty = new List<string>();
         private List<string> detailHpp = new List<string>();
@@ -44,30 +46,94 @@ namespace RoyalPetz_ADMIN
             selectedInvoice = pmInvoice;
         }
 
+        public void setSelectedInvoice(string invoiceNo)
+        {
+            selectedInvoice = invoiceNo;
+            noInvoiceTextBox.Text = selectedInvoice;
+            noMutasiTextBox.Text = "";
+            selectedMutasi = "";
+            originModuleId = globalConstants.PENERIMAAN_BARANG_DARI_PO;
+
+            initializeScreen();
+
+            isLoading = true;
+
+            addDataGridColumn();
+            loadDataHeader();
+            loadDataDetail();
+
+            supplierCombo.Text = getSupplierName(selectedFromID);
+            durationTextBox.ReadOnly = true;
+            durationTextBox.Text = POduration.ToString();
+            durationTextBox.Visible = true;
+            label1.Visible = true;
+            isLoading = false;
+        }
+
+        public void setSelectedMutasi(string mutasiNo)
+        {
+            selectedMutasi = mutasiNo;
+            noInvoiceTextBox.Text = "";
+            selectedInvoice = "";
+            noMutasiTextBox.Text = selectedMutasi;
+            originModuleId = globalConstants.PENERIMAAN_BARANG_DARI_MUTASI;
+
+            initializeScreen();
+
+            isLoading = true;
+
+            addDataGridColumn();
+            loadDataHeader();
+            loadDataDetail();
+
+            //supplierCombo.Text = getBranchName(selectedFromID);
+            branchToTextBox.Text = getBranchName(selectedToID);
+            
+            //durationTextBox.ReadOnly = true;
+            durationTextBox.Visible = false;
+            label1.Visible = false;
+            isLoading = false;
+        }
+
         private void initializeScreen()
         {
             switch (originModuleId)
             {
                 case globalConstants.PENERIMAAN_BARANG_DARI_MUTASI:
                     labelNo.Text = "NO MUTASI";
-                    labelTanggal.Text = "TANGGAL MUTASI";
+                    //labelTanggal.Text = "TANGGAL MUTASI";
                     labelTujuan.Text = "TUJUAN MUTASI";
 
-                    labelAsal.Text = "ASAL MUTASI";
                     labelAsal.Visible = false;
                     labelAsal_1.Visible = false;
-                    branchFromTextBox.Visible = false;
+                    supplierCombo.Visible = false;
+
+                    labelTujuan.Visible = true;
+                    labelTujuan_1.Visible = true;
+                    branchToTextBox.Visible = true;
+
+                    durationTextBox.Visible = false;
+                    label1.Visible = false;
                     
                     break;
 
                 case globalConstants.PENERIMAAN_BARANG_DARI_PO:
                     labelNo.Text = "NO PO";
-                    labelTanggal.Text = "TANGGAL PO";
+                    //labelTanggal.Text = "TANGGAL PO";
                     labelAsal.Text = "SUPPLIER";
+                    labelAsal.Visible = true;
+                    labelAsal_1.Visible = true;
+                    supplierCombo.Visible = true;
+
                     //labelTujuan.Text = "TUJUAN MUTASI";
                     labelTujuan.Visible = false;
                     labelTujuan_1.Visible = false;
                     branchToTextBox.Visible = false;
+
+                    durationTextBox.Visible = true;
+                    label1.Visible = true;
+                    
+
                     break;
             }
         }
@@ -80,15 +146,15 @@ namespace RoyalPetz_ADMIN
             switch (originModuleId)
             {
                 case globalConstants.PENERIMAAN_BARANG_DARI_MUTASI:
-                    sqlCommand = "SELECT * FROM PRODUCTS_MUTATION_HEADER WHERE PM_INVOICE = '" + selectedInvoice + "'";
+                    sqlCommand = "SELECT * FROM PRODUCTS_MUTATION_HEADER WHERE PM_INVOICE = '" + selectedMutasi+ "'";
                     using (rdr = DS.getData(sqlCommand))
                     {
                         if (rdr.HasRows)
                         {
                             while (rdr.Read())
                             {
-                                noInvoiceTextBox.Text = rdr.GetString("PM_INVOICE");
-                                invoiceDtPicker.Value = rdr.GetDateTime("PM_DATETIME");
+                                //noInvoiceTextBox.Text = rdr.GetString("PM_INVOICE");
+                                //invoiceDtPicker.Value = rdr.GetDateTime("PM_DATETIME");
                                 selectedFromID = rdr.GetInt32("BRANCH_ID_FROM");
                                 selectedToID = rdr.GetInt32("BRANCH_ID_TO");
 
@@ -109,11 +175,11 @@ namespace RoyalPetz_ADMIN
                             while (rdr.Read())
                             {
                                 noInvoiceTextBox.Text = rdr.GetString("PURCHASE_INVOICE");
-                                invoiceDtPicker.Value = rdr.GetDateTime("PURCHASE_DATETIME");
+                                //invoiceDtPicker.Value = rdr.GetDateTime("PURCHASE_DATETIME");
                                 selectedFromID = rdr.GetInt32("SUPPLIER_ID");
                                 //selectedToID = rdr.GetInt32("BRANCH_ID_TO");
                                 globalTotalValue = rdr.GetDouble("PURCHASE_TOTAL");
-
+                                POduration = rdr.GetDouble("PURCHASE_TERM_OF_PAYMENT_DURATION");
                                 labelTotalValue.Text = globalTotalValue.ToString("C", culture);
                                 labelAcceptValue.Text = globalTotalValue.ToString("C", culture);
                             }
@@ -131,14 +197,15 @@ namespace RoyalPetz_ADMIN
             switch (originModuleId)
             {
                 case globalConstants.PENERIMAAN_BARANG_DARI_MUTASI:
-                    sqlCommand = "SELECT PM.*, M.PRODUCT_NAME FROM PRODUCTS_MUTATION_DETAIL PM, MASTER_PRODUCT M WHERE PM_INVOICE = '" + selectedInvoice + "' AND PM.PRODUCT_ID = M.PRODUCT_ID";
+                    sqlCommand = "SELECT PM.*, M.PRODUCT_ID, M.PRODUCT_NAME FROM PRODUCTS_MUTATION_DETAIL PM, MASTER_PRODUCT M WHERE PM_INVOICE = '" + selectedMutasi + "' AND PM.PRODUCT_ID = M.PRODUCT_ID";
                     using (rdr = DS.getData(sqlCommand))
                     {
+                        detailGridView.Rows.Clear();
                         if (rdr.HasRows)
                         {
                             while (rdr.Read())
                             {
-                                detailGridView.Rows.Add(rdr.GetString("PRODUCT_NAME"), rdr.GetString("PRODUCT_QTY"), rdr.GetString("PRODUCT_BASE_PRICE"), rdr.GetString("PRODUCT_QTY"), rdr.GetString("PM_SUBTOTAL"), rdr.GetString("PRODUCT_ID"));
+                                detailGridView.Rows.Add(rdr.GetString("PRODUCT_ID"), rdr.GetString("PRODUCT_NAME"), rdr.GetString("PRODUCT_QTY"), rdr.GetString("PRODUCT_BASE_PRICE"), rdr.GetString("PRODUCT_QTY"), rdr.GetString("PM_SUBTOTAL"));
 
                                 detailRequestQty.Add(rdr.GetString("PRODUCT_QTY"));
                                 detailHpp.Add(rdr.GetString("PRODUCT_BASE_PRICE"));
@@ -151,11 +218,12 @@ namespace RoyalPetz_ADMIN
                     sqlCommand = "SELECT PO.*, M.PRODUCT_NAME FROM PURCHASE_DETAIL PO, MASTER_PRODUCT M WHERE PURCHASE_INVOICE = '" + selectedInvoice + "' AND PO.PRODUCT_ID = M.PRODUCT_ID";
                     using (rdr = DS.getData(sqlCommand))
                     {
+                        detailGridView.Rows.Clear();
                         if (rdr.HasRows)
                         {
                             while (rdr.Read())
                             {
-                                detailGridView.Rows.Add(rdr.GetString("PRODUCT_NAME"), rdr.GetString("PRODUCT_QTY"), rdr.GetString("PRODUCT_PRICE"), rdr.GetString("PRODUCT_QTY"), rdr.GetString("PURCHASE_SUBTOTAL"), rdr.GetString("PRODUCT_ID"));
+                                detailGridView.Rows.Add(rdr.GetString("PRODUCT_ID"), rdr.GetString("PRODUCT_NAME"), rdr.GetString("PRODUCT_QTY"), rdr.GetString("PRODUCT_PRICE"), rdr.GetString("PRODUCT_QTY"), rdr.GetString("PURCHASE_SUBTOTAL"));
 
                                 detailRequestQty.Add(rdr.GetString("PRODUCT_QTY"));
                                 detailHpp.Add(rdr.GetString("PRODUCT_PRICE"));
@@ -186,44 +254,240 @@ namespace RoyalPetz_ADMIN
             return result;
         }
 
+        private void fillInSupplierCombo()
+        {
+            MySqlDataReader rdr;
+            string sqlCommand;
+
+            sqlCommand = "SELECT SUPPLIER_ID, SUPPLIER_FULL_NAME FROM MASTER_SUPPLIER WHERE SUPPLIER_ACTIVE = 1";
+
+            supplierCombo.Items.Clear();
+            supplierHiddenCombo.Items.Clear();
+
+            using (rdr = DS.getData(sqlCommand))
+            {
+                if (rdr.HasRows)
+                {
+                    while (rdr.Read())
+                    {
+                        supplierCombo.Items.Add(rdr.GetString("SUPPLIER_FULL_NAME"));
+                        supplierHiddenCombo.Items.Add(rdr.GetString("SUPPLIER_ID"));
+                    }
+                }
+            }
+        }
+
+        private void addDataGridColumn()
+        {
+            string sqlCommand = "";
+            MySqlDataReader rdr; 
+
+            DataGridViewTextBoxColumn productID_textBox = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn namaProduct_textBox = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn qtyRequested_textBox = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn hpp_textBox = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn qty_textBox = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn subtotal_textBox = new DataGridViewTextBoxColumn();
+
+            DataGridViewComboBoxColumn productID_comboBox = new DataGridViewComboBoxColumn();
+            DataGridViewComboBoxColumn namaProduct_comboBox = new DataGridViewComboBoxColumn();
+
+            detailGridView.Columns.Clear();
+            detailRequestQty.Clear();
+            detailHpp.Clear();
+
+            if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_PO || originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_MUTASI)
+            {
+                detailGridView.AllowUserToAddRows = false;
+
+                productID_textBox.Name = "productID";
+                productID_textBox.HeaderText = "KODE PRODUK";
+                productID_textBox.ReadOnly = true;
+                productID_textBox.Width = 150;
+                detailGridView.Columns.Add(productID_textBox);
+
+                namaProduct_textBox.Name = "productName";
+                namaProduct_textBox.HeaderText = "NAMA PRODUK";
+                namaProduct_textBox.ReadOnly = true;
+                namaProduct_textBox.Width = 200;
+                detailGridView.Columns.Add(namaProduct_textBox);
+
+                qtyRequested_textBox.Name = "qtyRequest";
+                qtyRequested_textBox.HeaderText = "QTY";
+                qtyRequested_textBox.ReadOnly = true;
+                qtyRequested_textBox.Width = 150;
+                detailGridView.Columns.Add(qtyRequested_textBox);
+            }
+            else
+            {
+                detailGridView.AllowUserToAddRows = true;
+                sqlCommand = "SELECT PRODUCT_ID, PRODUCT_NAME FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 ORDER BY PRODUCT_NAME ASC";
+                using (rdr = DS.getData(sqlCommand))
+                {
+                    if (rdr.HasRows)
+                    {
+                        while (rdr.Read())
+                        {
+                            productID_comboBox.Items.Add(rdr.GetString("PRODUCT_ID"));
+                            namaProduct_comboBox.Items.Add(rdr.GetString("PRODUCT_NAME"));
+                        }
+                    }
+                }
+
+                productID_comboBox.Name = "productID";
+                productID_comboBox.HeaderText = "KODE PRODUK";
+                productID_comboBox.Width = 150;
+                productID_comboBox.DefaultCellStyle.BackColor = Color.LightBlue;
+                detailGridView.Columns.Add(productID_comboBox);
+
+                namaProduct_comboBox.Name = "productName";
+                namaProduct_comboBox.HeaderText = "NAMA PRODUK";
+                namaProduct_comboBox.Width = 200;
+                namaProduct_comboBox.DefaultCellStyle.BackColor = Color.LightBlue;
+                detailGridView.Columns.Add(namaProduct_comboBox);
+
+                detailRequestQty.Add("0");
+                detailHpp.Add("0");
+            }
+
+            hpp_textBox.Name = "hpp";
+            hpp_textBox.HeaderText = "HARGA POKOK";
+            hpp_textBox.Width = 150;
+            hpp_textBox.DefaultCellStyle.BackColor = Color.LightBlue;
+            detailGridView.Columns.Add(hpp_textBox);
+
+            qty_textBox.Name = "qtyReceived";
+            qty_textBox.HeaderText = "QTY DITERIMA";
+            qty_textBox.Width = 150;
+            qty_textBox.DefaultCellStyle.BackColor = Color.LightBlue;
+            detailGridView.Columns.Add(qty_textBox);
+
+            subtotal_textBox.Name = "subtotal";
+            subtotal_textBox.HeaderText = "SUBTOTAL";
+            subtotal_textBox.ReadOnly = true;
+            subtotal_textBox.Width = 150;
+            detailGridView.Columns.Add(subtotal_textBox);
+        }
+
         private void penerimaanBarangForm_Load(object sender, EventArgs e)
         {
             errorLabel.Text = "";
             PRDtPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
-            invoiceDtPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+            int userAccessOption = 0;
+            // invoiceDtPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
 
-            initializeScreen();
+            //initializeScreen();
+            labelTotal.Visible = false;
+            labelTotal_1.Visible = false;
+            labelTotalValue.Visible = false;
 
+            //detailGridView.Columns["qtyRequest"].Visible = false;
+            addDataGridColumn();
             detailGridView.EditingControlShowing += detailGridView_EditingControlShowing;
-
-            isLoading = true;
             
-            loadDataHeader();
-            loadDataDetail();
+            fillInSupplierCombo();
 
-            if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_MUTASI)
-            { 
-                branchFromTextBox.Text = getBranchName(selectedFromID);
-                branchToTextBox.Text = getBranchName(selectedToID);
-            }
+            //isLoading = true;
+
+            //loadDataHeader();
+            //loadDataDetail();
+
+            //if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_MUTASI)
+            //{ 
+            //    branchFromTextBox.Text = getBranchName(selectedFromID);
+            //    branchToTextBox.Text = getBranchName(selectedToID);
+            //}
+            //else
+            //{
+            //    branchFromTextBox.Text = getSupplierName(selectedFromID);
+            //}
+
+            //isLoading = false;
+
+            userAccessOption = DS.getUserAccessRight(globalConstants.MENU_PENERIMAAN_BARANG_DARI_MUTASI, gUtil.getUserGroupID());
+            if (userAccessOption == 1)
+                searchMutasiButton.Visible = true;
             else
-            {
-                branchFromTextBox.Text = getSupplierName(selectedFromID);
-            }
+                searchMutasiButton.Visible = false;
 
-            isLoading = false;
+            userAccessOption = DS.getUserAccessRight(globalConstants.MENU_PENERIMAAN_BARANG_DARI_PO, gUtil.getUserGroupID());
+            if (userAccessOption == 1)
+                searchPOButton.Visible = true;
+            else
+                searchPOButton.Visible = false;
 
             gUtil.reArrangeTabOrder(this);
         }
 
+        private double getHPPValue(string productID)
+        {
+            double result = 0;
+
+            DS.mySqlConnect();
+
+            result = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(PRODUCT_BASE_PRICE, 0) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
+
+            return result;
+        }
+
         private void detailGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            //if ((detailGridView.CurrentCell.ColumnIndex == 2 || detailGridView.CurrentCell.ColumnIndex == 3) && e.Control is TextBox)
             if ((detailGridView.CurrentCell.OwningColumn.Name == "hpp" || detailGridView.CurrentCell.OwningColumn.Name == "qtyReceived") && e.Control is TextBox)
             {
                 TextBox textBox = e.Control as TextBox;
                 textBox.TextChanged += TextBox_TextChanged;
             }
+
+            if ((detailGridView.CurrentCell.OwningColumn.Name == "productID" || detailGridView.CurrentCell.OwningColumn.Name == "productName") && e.Control is ComboBox)
+            {
+                ComboBox comboBox = e.Control as ComboBox;
+                comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
+            }
+        }
+
+        private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectedIndex = 0;
+            int rowSelectedIndex = 0;
+            string selectedProductID = "";
+
+            double hpp = 0;
+            double productQty = 0;
+            double subTotal = 0;
+
+            if (isLoading)
+                return;
+
+            DataGridViewComboBoxEditingControl dataGridViewComboBoxEditingControl = sender as DataGridViewComboBoxEditingControl;
+
+            selectedIndex = dataGridViewComboBoxEditingControl.SelectedIndex;
+            rowSelectedIndex = detailGridView.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = detailGridView.Rows[rowSelectedIndex];
+
+            DataGridViewComboBoxCell productIDComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productID"];
+            DataGridViewComboBoxCell productNameComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productName"];
+
+            selectedProductID = productIDComboCell.Items[selectedIndex].ToString();
+            productIDComboCell.Value = productIDComboCell.Items[selectedIndex];
+            productNameComboCell.Value = productNameComboCell.Items[selectedIndex];
+
+            hpp = getHPPValue(selectedProductID);
+
+            selectedRow.Cells["hpp"].Value = hpp.ToString();
+            detailHpp[rowSelectedIndex] = hpp.ToString();
+
+            if (null == selectedRow.Cells["qtyReceived"].Value)
+                selectedRow.Cells["qtyReceived"].Value = 0;
+
+            if (null != selectedRow.Cells["qtyReceived"].Value)
+            {
+                productQty = Convert.ToDouble(selectedRow.Cells["qtyReceived"].Value);
+                subTotal = Math.Round((hpp * productQty), 2);
+
+                selectedRow.Cells["subtotal"].Value = subTotal;
+            }
+
+            calculateTotal();
         }
 
         private void TextBox_TextChanged(object sender, EventArgs e)
@@ -247,7 +511,7 @@ namespace RoyalPetz_ADMIN
                 if (gUtil.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
                     && (dataGridViewTextBoxEditingControl.Text.Length > 0))
                 {
-                    if (detailGridView.CurrentCell.ColumnIndex == 2 )
+                    if (detailGridView.CurrentCell.OwningColumn.Name == "hpp")
                         detailHpp.Add(dataGridViewTextBoxEditingControl.Text);
                     else
                         detailRequestQty.Add(dataGridViewTextBoxEditingControl.Text);
@@ -262,14 +526,14 @@ namespace RoyalPetz_ADMIN
                 if (gUtil.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
                     && (dataGridViewTextBoxEditingControl.Text.Length > 0))
                 {
-                    if (detailGridView.CurrentCell.ColumnIndex == 2)
+                    if (detailGridView.CurrentCell.OwningColumn.Name == "hpp")
                         detailHpp[rowSelectedIndex] = dataGridViewTextBoxEditingControl.Text;
                     else
                         detailRequestQty[rowSelectedIndex] = dataGridViewTextBoxEditingControl.Text;
                 }
                 else
                 {
-                    if (detailGridView.CurrentCell.ColumnIndex == 2)
+                    if (detailGridView.CurrentCell.OwningColumn.Name == "hpp")
                         dataGridViewTextBoxEditingControl.Text = detailHpp[rowSelectedIndex];
                     else
                         dataGridViewTextBoxEditingControl.Text = detailRequestQty[rowSelectedIndex];
@@ -278,7 +542,7 @@ namespace RoyalPetz_ADMIN
 
             try
             {
-                if (detailGridView.CurrentCell.ColumnIndex == 2)
+                if (detailGridView.CurrentCell.OwningColumn.Name == "hpp")
                 {
                     //changes on hpp
                     hppValue = Convert.ToDouble(dataGridViewTextBoxEditingControl.Text);
@@ -327,12 +591,13 @@ namespace RoyalPetz_ADMIN
 
         private void prInvoiceTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (isNoPRExist())
-            {
-                errorLabel.Text = "NO PENERIMAAN SUDAH ADA";
-            }
-            else
-                errorLabel.Text = "";
+            if (prInvoiceTextBox.Text.Length > 0)
+                if (isNoPRExist())
+                {
+                    errorLabel.Text = "NO PENERIMAAN SUDAH ADA";
+                }
+                else
+                    errorLabel.Text = "";
         }
 
         private bool dataValidated()
@@ -388,11 +653,12 @@ namespace RoyalPetz_ADMIN
             double currentHPP = 0;
             double newHPP = 0;
             int priceChange = 0;
+            double qtyRequest = 0;
 
             DateTime PODueDate;
-            string PODueDateTime;
-            double termOfPaymentDuration;
-            int termOfPayment;
+            string PODueDateTime = "";
+            double termOfPaymentDuration = 0;
+            int termOfPayment = 0;
 
             string selectedDate = PRDtPicker.Value.ToShortDateString();
             PRDateTime = String.Format(culture, "{0:dd-MM-yyyy}", Convert.ToDateTime(selectedDate));
@@ -401,7 +667,16 @@ namespace RoyalPetz_ADMIN
             branchIDFrom = selectedFromID;
             branchIDTo = selectedToID;
             PRTotal = globalTotalValue;
-            
+
+            if (originModuleId == 0) // direct penerimaan barang
+            { 
+                termOfPaymentDuration = Convert.ToDouble(durationTextBox.Text);
+                PODueDate = PRDtPicker.Value.AddDays(termOfPaymentDuration);
+                PODueDateTime = String.Format(culture, "{0:dd-MM-yyyy}", PODueDate);
+                termOfPayment = 1;
+                selectedInvoice = PRInvoice;
+            }
+
             DS.beginTransaction();
 
             try
@@ -411,53 +686,89 @@ namespace RoyalPetz_ADMIN
                 // SAVE HEADER TABLE
                 if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_MUTASI)
                     sqlCommand = "INSERT INTO PRODUCTS_RECEIVED_HEADER (PR_INVOICE, PR_FROM, PR_TO, PR_DATE, PR_TOTAL, PM_INVOICE) " +
-                                        "VALUES ('" + PRInvoice + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), " + PRTotal + ", '" + noInvoiceTextBox.Text + "')";
-                else
+                                        "VALUES ('" + PRInvoice + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), " + PRTotal + ", '" + selectedMutasi + "')";
+                else //if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_PO)
                     sqlCommand = "INSERT INTO PRODUCTS_RECEIVED_HEADER (PR_INVOICE, PR_FROM, PR_TO, PR_DATE, PR_TOTAL, PURCHASE_INVOICE) " +
-                                        "VALUES ('" + PRInvoice + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), " + PRTotal + ", '" + noInvoiceTextBox.Text + "')";
+                                        "VALUES ('" + PRInvoice + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), " + PRTotal + ", '" + selectedInvoice + "')";
+                //else
+                //    sqlCommand = "INSERT INTO PRODUCTS_RECEIVED_HEADER (PR_INVOICE, PR_FROM, PR_TO, PR_DATE, PR_TOTAL, PURCHASE_INVOICE) " +
+                //                        "VALUES ('" + PRInvoice + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), " + PRTotal + ")";
 
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
+
+                if (originModuleId == 0 ) // direct penerimaan barang
+                {
+                    selectedInvoice = PRInvoice;
+                    // CREATE ENTRY AT PO
+                    sqlCommand = "INSERT INTO PURCHASE_HEADER (PURCHASE_INVOICE, SUPPLIER_ID, PURCHASE_DATETIME, PURCHASE_TOTAL, PURCHASE_TERM_OF_PAYMENT, PURCHASE_TERM_OF_PAYMENT_DURATION, PURCHASE_DATE_RECEIVED, PURCHASE_TERM_OF_PAYMENT_DATE, PURCHASE_SENT, PURCHASE_RECEIVED) " +
+                                        "VALUES ('" + PRInvoice + "', " + branchIDFrom + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), " + PRTotal + ", 1, " + termOfPaymentDuration + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), 1, 1)";
+
+                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        throw internalEX;
+
+                }
 
                 // SAVE DETAIL TABLE
                 for (int i = 0; i < detailGridView.Rows.Count; i++)
                 {
                     if (null != detailGridView.Rows[i].Cells["productID"].Value)
                     {
-                        currentHPP = getCurrentHpp(detailGridView.Rows[i].Cells["productID"].Value.ToString());
                         newHPP = Convert.ToDouble(detailGridView.Rows[i].Cells["hpp"].Value);
+                        if (originModuleId != 0)
+                        { 
+                            currentHPP = getCurrentHpp(detailGridView.Rows[i].Cells["productID"].Value.ToString());
 
-                        if (currentHPP > newHPP)
-                            priceChange = -1;
-                        else if (currentHPP == newHPP)
+                            if (currentHPP > newHPP)
+                                priceChange = -1;
+                            else if (currentHPP == newHPP)
+                                priceChange = 0;
+                            else if (currentHPP < newHPP)
+                                priceChange = 1;
+                        }
+                        else
+                        {
                             priceChange = 0;
-                        else if (currentHPP < newHPP)
-                            priceChange = 1;
+                        }
+
+                        if (originModuleId != 0)
+                            qtyRequest = Convert.ToDouble(detailGridView.Rows[i].Cells["qtyRequest"].Value);
+                        else
+                            // DIRECT PENERIMAAN,  QTY REQUEST = QTY RECEIVED
+                            qtyRequest = Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value);
 
                         sqlCommand = "INSERT INTO PRODUCTS_RECEIVED_DETAIL (PR_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, PRODUCT_QTY, PRODUCT_ACTUAL_QTY, PR_SUBTOTAL, PRODUCT_PRICE_CHANGE) VALUES " +
-                                            "('" + PRInvoice + "', '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + newHPP + ", " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyRequest"].Value) + ", " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", " + Convert.ToDouble(detailGridView.Rows[i].Cells["subtotal"].Value) + ", " + priceChange + ")";
+                                            "('" + PRInvoice + "', '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + newHPP + ", " +  qtyRequest + ", " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", " + Convert.ToDouble(detailGridView.Rows[i].Cells["subtotal"].Value) + ", " + priceChange + ")";
 
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
-
+                        
                         // UPDATE TO MASTER PRODUCT
                         sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_BASE_PRICE = " + newHPP + ", PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY + " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + " WHERE PRODUCT_ID = '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "'";
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
+
+                        if (originModuleId == 0) // DIRECT PENERIMAAN BARANG
+                        {
+                            sqlCommand = "INSERT INTO PURCHASE_DETAIL (PURCHASE_INVOICE, PRODUCT_ID, PRODUCT_PRICE, PRODUCT_QTY, PURCHASE_SUBTOTAL) VALUES " +
+                                                "('" + PRInvoice + "', '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + newHPP + ", " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", " + Convert.ToDouble(detailGridView.Rows[i].Cells["subtotal"].Value) + ")";
+
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+                        }
                     }
                 }
-
+                
                 // UPDATE PRODUCT MUTATION / PO TABLE
-
                 if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_MUTASI)
                 {
-                    sqlCommand = "UPDATE PRODUCTS_MUTATION_HEADER SET PM_RECEIVED = 1 WHERE PM_INVOICE = '" + noInvoiceTextBox.Text + "'";
+                    sqlCommand = "UPDATE PRODUCTS_MUTATION_HEADER SET PM_RECEIVED = 1 WHERE PM_INVOICE = '" + selectedMutasi + "'";
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
                 }
-                else
+                else if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_PO)
                 {
-                    sqlCommand = "UPDATE PURCHASE_HEADER SET PURCHASE_RECEIVED = 1 WHERE PURCHASE_INVOICE = '" + noInvoiceTextBox.Text + "'";
+                    sqlCommand = "UPDATE PURCHASE_HEADER SET PURCHASE_RECEIVED = 1 WHERE PURCHASE_INVOICE = '" + selectedInvoice + "'";
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
                 }
@@ -465,24 +776,27 @@ namespace RoyalPetz_ADMIN
                 //INSERT INTO DEBT TABLE and UPDATE DUE DATE FOR PO
                 if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_PO)
                 {
-                    termOfPayment = Convert.ToInt32(DS.getDataSingleValue("SELECT PURCHASE_TERM_OF_PAYMENT FROM PURCHASE_HEADER WHERE PURCHASE_INVOICE = '" + noInvoiceTextBox.Text + "'"));
+                    termOfPayment = Convert.ToInt32(DS.getDataSingleValue("SELECT PURCHASE_TERM_OF_PAYMENT FROM PURCHASE_HEADER WHERE PURCHASE_INVOICE = '" + selectedInvoice + "'"));
 
                     if (termOfPayment == 1)
                     {
                         // UPDATE PURCHASE HEADER
-                        termOfPaymentDuration = Convert.ToInt32(DS.getDataSingleValue("SELECT PURCHASE_TERM_OF_PAYMENT_DURATION FROM PURCHASE_HEADER WHERE PURCHASE_INVOICE = '" + noInvoiceTextBox.Text + "'"));
+                        termOfPaymentDuration = Convert.ToInt32(DS.getDataSingleValue("SELECT PURCHASE_TERM_OF_PAYMENT_DURATION FROM PURCHASE_HEADER WHERE PURCHASE_INVOICE = '" + selectedInvoice + "'"));
                         PODueDate = PRDtPicker.Value.AddDays(termOfPaymentDuration);
                         PODueDateTime = String.Format(culture, "{0:dd-MM-yyyy}", PODueDate);
 
-                        sqlCommand = "UPDATE PURCHASE_HEADER SET PURCHASE_DATE_RECEIVED = STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), PURCHASE_TERM_OF_PAYMENT_DATE = STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y') WHERE PURCHASE_INVOICE = '" + noInvoiceTextBox.Text + "'";
-                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                            throw internalEX;
-
-                        // INSERT INTO DEBT TABLE
-                        sqlCommand = "INSERT INTO DEBT (PURCHASE_INVOICE, DEBT_DUE_DATE, DEBT_NOMINAL, DEBT_PAID) VALUES ('" + noInvoiceTextBox.Text + "', STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), " + PRTotal + ", 0)";
+                        sqlCommand = "UPDATE PURCHASE_HEADER SET PURCHASE_DATE_RECEIVED = STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), PURCHASE_TERM_OF_PAYMENT_DATE = STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y') WHERE PURCHASE_INVOICE = '" + selectedInvoice + "'";
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
                     }
+                }
+
+                if (originModuleId != globalConstants.PENERIMAAN_BARANG_DARI_MUTASI && termOfPayment == 1)
+                {
+                    // INSERT INTO DEBT TABLE
+                    sqlCommand = "INSERT INTO DEBT (PURCHASE_INVOICE, DEBT_DUE_DATE, DEBT_NOMINAL, DEBT_PAID) VALUES ('" + selectedInvoice + "', STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), " + PRTotal + ", 0)";
+                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        throw internalEX;
                 }
 
                 DS.commit();
@@ -556,6 +870,79 @@ namespace RoyalPetz_ADMIN
                     calculateTotal();
                 }
             }
+        }
+
+        private void searchPOButton_Click(object sender, EventArgs e)
+        {
+            dataPOForm displayedForm = new dataPOForm(globalConstants.PENERIMAAN_BARANG_DARI_PO, this);
+            displayedForm.ShowDialog(this);
+
+            if (selectedInvoice.Length > 0)
+                supplierCombo.Enabled = false;
+        }
+
+        private void searchMutasiButton_Click(object sender, EventArgs e)
+        {
+            dataMutasiBarangForm displayedForm = new dataMutasiBarangForm(globalConstants.PENERIMAAN_BARANG, this);
+            displayedForm.ShowDialog(this);
+
+            if (selectedMutasi.Length > 0)
+                supplierCombo.Enabled = false;
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            isLoading = true;
+
+            errorLabel.Text = "";
+
+            gUtil.ResetAllControls(this);
+
+            originModuleId = 0;
+            detailGridView.Rows.Clear();
+
+            addDataGridColumn();
+            detailGridView.ReadOnly = false;
+
+            labelTotal.Visible = false;
+            labelTotal_1.Visible = false;
+            labelTotalValue.Visible = false;
+
+            durationTextBox.ReadOnly = false;
+            durationTextBox.Text = "0";
+
+            selectedInvoice = "";
+            selectedMutasi = "";
+
+            globalTotalValue = 0;
+
+            labelAcceptValue.Text = "Rp.0";
+
+            labelAsal.Visible = false;
+            labelAsal_1.Visible = false;
+
+            supplierCombo.Enabled = true;
+            supplierCombo.Text = "";
+
+            saveButton.Visible = true;
+
+            prInvoiceTextBox.Focus();
+            prInvoiceTextBox.Enabled = true;
+
+            PRDtPicker.Enabled = true;
+
+            isLoading = false;
+        }
+
+        private void supplierCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedFromID = Convert.ToInt32(supplierHiddenCombo.Items[supplierCombo.SelectedIndex]);
+        }
+
+        private void detailGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            detailHpp.Add("0");
+            detailRequestQty.Add("0");
         }
     }
 }

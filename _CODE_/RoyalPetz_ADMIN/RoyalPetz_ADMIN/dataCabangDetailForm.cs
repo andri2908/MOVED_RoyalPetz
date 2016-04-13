@@ -86,12 +86,12 @@ namespace RoyalPetz_ADMIN
             string sqlCommand = "";
             MySqlException internalEX = null;
 
-            string branchName = branchNameTextBox.Text.Trim();
+            string branchName = MySqlHelper.EscapeString(branchNameTextBox.Text.Trim());
             string branchIPv4 = ipAddressMaskedTextbox.Text.Trim();
-            string branchAddress1 = branchAddress1TextBox.Text.Trim();
-            string branchAddress2 = branchAddress2TextBox.Text.Trim();
-            string branchAddressCity = branchAddressCityTextBox.Text.Trim();
-            string branchPhone = branchTelephoneTextBox.Text.Trim();
+            string branchAddress1 = MySqlHelper.EscapeString(branchAddress1TextBox.Text.Trim());
+            string branchAddress2 = MySqlHelper.EscapeString(branchAddress2TextBox.Text.Trim());
+            string branchAddressCity = MySqlHelper.EscapeString(branchAddressCityTextBox.Text.Trim());
+            string branchPhone = MySqlHelper.EscapeString(branchTelephoneTextBox.Text.Trim());
 
             byte branchStatus = 0;
 
