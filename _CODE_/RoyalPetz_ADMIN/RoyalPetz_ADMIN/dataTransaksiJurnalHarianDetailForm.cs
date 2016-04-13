@@ -25,7 +25,8 @@ namespace RoyalPetz_ADMIN
         private Data_Access DS = new Data_Access();
         private Data_Access DS_2 = new Data_Access();
         private int originModuleID = 0;
-
+        private bool upd_mode = false;
+        int selectedrowindex = -1;
         public dataTransaksiJurnalHarianDetailForm()
         {
             InitializeComponent();
@@ -59,11 +60,40 @@ namespace RoyalPetz_ADMIN
             carabayarcombobox.SelectedValue = 1;
         }
 
+        private void LoadBranchInfo()
+        {
+            branchCombobox.DataSource = null;
+            MySqlDataReader rdr;
+            DataTable dt = new DataTable();
+
+            DS.mySqlConnect();
+
+            using (rdr = DS.getData("SELECT BRANCH_ID AS 'ID', BRANCH_NAME AS 'NAME' FROM MASTER_BRANCH WHERE BRANCH_ACTIVE=1"))
+            {
+                if (rdr.HasRows)
+                {
+                    dt.Load(rdr);
+                    DataRow workRow = dt.NewRow();
+                    workRow["ID"] = "0";
+                    workRow["NAME"] = "PUSAT";
+                    dt.Rows.Add(workRow);
+                    branchCombobox.DataSource = dt;
+                    branchCombobox.ValueMember = "ID";
+                    branchCombobox.DisplayMember = "NAME";
+                }
+            }
+            //branchCombobox.Items.Add(new { Text = "PUSAT", Value = "0" });
+            branchCombobox.SelectedValue = branchCombobox.Items.Count;
+        }
         private void saveButton_Click(object sender, EventArgs e)
         {
             //addto datagridview
             if (dataValidated())
             {
+                if (selectedrowindex == -1)
+                {
+                    upd_mode = false;
+                }
                 String nmakun = NamaAkunTextbox.Text;
                 String deskripsiakun = DeskripsiAkunTextbox.Text;
                 Double nominalakun = 0;
@@ -71,7 +101,9 @@ namespace RoyalPetz_ADMIN
                 //selectedDJID = 0;
                 DateTime selectedDate = TanggalTransaksi.Value;
                 String pembayaran = carabayarcombobox.GetItemText(carabayarcombobox.SelectedItem);
+                String cabang = branchCombobox.GetItemText(branchCombobox.SelectedItem);
                 int pm_id = Int32.Parse(carabayarcombobox.SelectedValue.ToString());
+                int branch_id = Int32.Parse(branchCombobox.SelectedValue.ToString());
                 //tryparse
                 if (Double.TryParse(NominalTextbox.Text, out nominalakun))
                 {
@@ -96,30 +128,45 @@ namespace RoyalPetz_ADMIN
                 TglTrans = String.Format(culture, "{0:dd-MM-yyyy}", selectedDate);
 
                 //must add function to update content
-                bool newdata = true;
-                for (int rows = 0; rows < TransaksiAccountGridView.Rows.Count; rows++)
+                //bool newdata = true;
+                //for (int rows = 0; rows < transaksiaccountgridview.rows.count; rows++)
+                //{
+                //    int tmp = int32.parse(transaksiaccountgridview.rows[rows].cells[8].value.tostring());
+                //    if (tmp == selecteddjid)
+                //    {
+                //        //newdata = false;
+                //        //update content datagridview
+                //        transaksiaccountgridview.rows[rows].cells[7].value = deskripsiakun;
+                //        transaksiaccountgridview.rows[rows].cells[6].value = credit;
+                //        transaksiaccountgridview.rows[rows].cells[5].value = debet;
+                //        transaksiaccountgridview.rows[rows].cells[4].value = pembayaran;
+                //        transaksiaccountgridview.rows[rows].cells[3].value = pm_id;
+                //        transaksiaccountgridview.rows[rows].cells[2].value = nmakun;
+                //        transaksiaccountgridview.rows[rows].cells[1].value = selectedaccountid;
+                //        transaksiaccountgridview.rows[rows].cells[0].value = tgltrans;
+                //    }
+                //}
+
+                if (upd_mode == false)
                 {
-                    int tmp = Int32.Parse(TransaksiAccountGridView.Rows[rows].Cells[8].Value.ToString());
-                    if (tmp == selectedDJID)
-                    {
-                        newdata = false;
-                        //update content datagridview
-                        TransaksiAccountGridView.Rows[rows].Cells[7].Value = deskripsiakun;
-                        TransaksiAccountGridView.Rows[rows].Cells[6].Value = credit;
-                        TransaksiAccountGridView.Rows[rows].Cells[5].Value = debet;
-                        TransaksiAccountGridView.Rows[rows].Cells[4].Value = pembayaran;
-                        TransaksiAccountGridView.Rows[rows].Cells[3].Value = pm_id;
-                        TransaksiAccountGridView.Rows[rows].Cells[2].Value = nmakun;
-                        TransaksiAccountGridView.Rows[rows].Cells[1].Value = selectedAccountID;
-                        TransaksiAccountGridView.Rows[rows].Cells[0].Value = TglTrans;
-                    }
+                    TransaksiAccountGridView.Rows.Add(selectedDJID, TglTrans, selectedAccountID, nmakun, branch_id, cabang, pm_id, pembayaran, debet, credit, deskripsiakun);
+                } else
+                {
+                    TransaksiAccountGridView.Rows[selectedrowindex].Cells[10].Value = deskripsiakun;
+                    TransaksiAccountGridView.Rows[selectedrowindex].Cells[9].Value = credit;
+                    TransaksiAccountGridView.Rows[selectedrowindex].Cells[8].Value = debet;
+                    TransaksiAccountGridView.Rows[selectedrowindex].Cells[7].Value = pembayaran;
+                    TransaksiAccountGridView.Rows[selectedrowindex].Cells[6].Value = pm_id;
+                    TransaksiAccountGridView.Rows[selectedrowindex].Cells[5].Value = cabang;
+                    TransaksiAccountGridView.Rows[selectedrowindex].Cells[4].Value = branch_id;
+                    TransaksiAccountGridView.Rows[selectedrowindex].Cells[3].Value = nmakun;
+                    TransaksiAccountGridView.Rows[selectedrowindex].Cells[2].Value = selectedAccountID;
+                    TransaksiAccountGridView.Rows[selectedrowindex].Cells[1].Value = TglTrans;
                 }
 
-                if (newdata)
-                {
-                    TransaksiAccountGridView.Rows.Add(TglTrans, selectedAccountID, nmakun, pm_id, pembayaran, debet, credit, deskripsiakun, selectedDJID);
-                }
-                
+                selectedrowindex = -1;
+                saveButton.Text = "TAMBAH";
+
             }
         }
 
@@ -180,11 +227,11 @@ namespace RoyalPetz_ADMIN
                 return false;
             }
 
-            if (0 == getBranchID())
-            {
-                errorLabel.Text = "BRANCH ID BELUM DI SET";
-                return false;
-            }
+            //if (0 == getBranchID())
+            //{
+            //    errorLabel.Text = "BRANCH ID BELUM DI SET";
+            //    return false;
+            //}
 
             return true;
         }
@@ -201,6 +248,7 @@ namespace RoyalPetz_ADMIN
             gutil.reArrangeTabOrder(this);
             TanggalTransaksi.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
             loadtypeaccount();
+            LoadBranchInfo();
         }
 
         private void dataTransaksiJurnalHarianDetailForm_Activated(object sender, EventArgs e)
@@ -209,11 +257,6 @@ namespace RoyalPetz_ADMIN
             errorLabel.Text = "";
             //TransaksiAccountGridView.Rows.Clear();
             //loadTransaksi();
-        }
-
-        private void kodeAkunTextbox_TextChanged(object sender, EventArgs e)
-        {
-          
         }
 
         private bool saveDataTransaction()
@@ -232,18 +275,18 @@ namespace RoyalPetz_ADMIN
             int pm_id = 0;
             String deskripsiakun = "";
 
-            branch_id = getBranchID();
+            //branch_id = getBranchID();
 
             for (int rows = 0; rows < TransaksiAccountGridView.Rows.Count; rows++)
             {
-                TglTrans = String.Format(culture, "{0:dd-MM-yyyy}", TransaksiAccountGridView.Rows[rows].Cells[0].Value.ToString());
-                Account_ID = Int32.Parse(TransaksiAccountGridView.Rows[rows].Cells[1].Value.ToString());
-                pm_id = Int32.Parse(TransaksiAccountGridView.Rows[rows].Cells[3].Value.ToString());
+                TglTrans = String.Format(culture, "{0:dd-MM-yyyy}", TransaksiAccountGridView.Rows[rows].Cells[1].Value.ToString());
+                Account_ID = Int32.Parse(TransaksiAccountGridView.Rows[rows].Cells[2].Value.ToString());
+                pm_id = Int32.Parse(TransaksiAccountGridView.Rows[rows].Cells[6].Value.ToString());
                 Double debet, credit;
-                if (Double.TryParse(TransaksiAccountGridView.Rows[rows].Cells[5].Value.ToString(), out debet))
+                if (Double.TryParse(TransaksiAccountGridView.Rows[rows].Cells[8].Value.ToString(), out debet))
                 {
                 }
-                if (Double.TryParse(TransaksiAccountGridView.Rows[rows].Cells[6].Value.ToString(), out credit))
+                if (Double.TryParse(TransaksiAccountGridView.Rows[rows].Cells[9].Value.ToString(), out credit))
                 {
                 }
                 if (debet == 0)
@@ -255,10 +298,10 @@ namespace RoyalPetz_ADMIN
                 {
                     NominalAkun = debet;
                 }
-                deskripsiakun = TransaksiAccountGridView.Rows[rows].Cells[7].Value.ToString();
+                deskripsiakun = TransaksiAccountGridView.Rows[rows].Cells[10].Value.ToString();
                 user_id = selectedUserID;
                 selectedDJID = 0;
-                selectedDJID = Int32.Parse(TransaksiAccountGridView.Rows[rows].Cells[8].Value.ToString());
+                selectedDJID = Int32.Parse(TransaksiAccountGridView.Rows[rows].Cells[0].Value.ToString());
                 originModuleID = globalConstants.NEW_DJ;
                 if (selectedDJID > 0)
                 {
@@ -388,10 +431,13 @@ namespace RoyalPetz_ADMIN
                             String nmakun = NamaAkunTextbox.Text;
                             int pm_id = rdr.GetInt32("PM_ID");
                             carabayarcombobox.SelectedValue = pm_id;
+                            int branch_id = rdr.GetInt32("BRANCH_ID");
+                            branchCombobox.SelectedValue = branch_id;
                             String deskripsiakun = rdr.GetString("JOURNAL_DESCRIPTION");
                             DeskripsiAkunTextbox.Text = deskripsiakun;
                             Double nominalakun = 0;
                             String pembayaran = carabayarcombobox.GetItemText(carabayarcombobox.SelectedItem);
+                            String cabang = branchCombobox.GetItemText(branchCombobox.SelectedItem);
                             nominalakun = rdr.GetDouble("JOURNAL_NOMINAL");
                             //check debet/credit
                             Double debet = nominalakun;
@@ -409,7 +455,7 @@ namespace RoyalPetz_ADMIN
                                 nominalakun = -nominalakun;
                                 NominalTextbox.Text = nominalakun.ToString();
                             }
-                            TransaksiAccountGridView.Rows.Add(TglTrans, selectedAccountID, nmakun, pm_id, pembayaran, debet, credit, deskripsiakun, selectedDJID);
+                            TransaksiAccountGridView.Rows.Add(selectedDJID, TglTrans, selectedAccountID, nmakun, branch_id, cabang, pm_id, pembayaran, debet, credit, deskripsiakun);
                         }
                     }
                 }
@@ -450,31 +496,36 @@ namespace RoyalPetz_ADMIN
         private void TransaksiAccountGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             //mode update cell
+            saveButton.Text = "UBAH";
             String TglTrans = "";
             String deskripsi = "";
             int pm_id = 0;
+            int branch_id = 0;
             Double NominalAkun = 0;
             String deskripsiakun = "";
-
-            int selectedrowindex = TransaksiAccountGridView.SelectedCells[0].RowIndex;
+            upd_mode = true;
+            //selectedrowindex = TransaksiAccountGridView.SelectedCells[0].RowIndex;
+            selectedrowindex = TransaksiAccountGridView.CurrentCell.RowIndex;
 
             DataGridViewRow selectedRow = TransaksiAccountGridView.Rows[selectedrowindex];
-            selectedAccountID = Convert.ToInt32(selectedRow.Cells[1].Value);
+            selectedAccountID = Convert.ToInt32(selectedRow.Cells[2].Value);
 
-                TglTrans = selectedRow.Cells[0].Value.ToString();
-                selectedAccountID = Int32.Parse(selectedRow.Cells[1].Value.ToString());
+                TglTrans = selectedRow.Cells[1].Value.ToString();
+                selectedAccountID = Int32.Parse(selectedRow.Cells[2].Value.ToString());
                 loadDeskripsi(selectedAccountID);
-                if (Int32.TryParse(selectedRow.Cells[8].Value.ToString(), out selectedDJID))
+                if (Int32.TryParse(selectedRow.Cells[0].Value.ToString(), out selectedDJID))
                 {
                     //if from db then DJ-ID not 0
                 }
-                pm_id = Int32.Parse(selectedRow.Cells[3].Value.ToString());
+                pm_id = Int32.Parse(selectedRow.Cells[6].Value.ToString());
                 carabayarcombobox.SelectedValue = pm_id;
+                branch_id = Int32.Parse(selectedRow.Cells[4].Value.ToString());
+                branchCombobox.SelectedValue = branch_id;
                 Double debet, credit;
-                if (Double.TryParse(selectedRow.Cells[5].Value.ToString(), out debet))
+                if (Double.TryParse(selectedRow.Cells[8].Value.ToString(), out debet))
                 {
                 }
-                if (Double.TryParse(selectedRow.Cells[6].Value.ToString(), out credit))
+                if (Double.TryParse(selectedRow.Cells[9].Value.ToString(), out credit))
                 {
                 }
                 if (debet == 0)
@@ -487,9 +538,9 @@ namespace RoyalPetz_ADMIN
                     NominalAkun = debet;
                 }
                 NominalTextbox.Text = NominalAkun.ToString();
-                deskripsiakun = selectedRow.Cells[7].Value.ToString();
+                deskripsiakun = selectedRow.Cells[10].Value.ToString();
                 DeskripsiAkunTextbox.Text = deskripsiakun;
-                selectedDJID = Int32.Parse(selectedRow.Cells[8].Value.ToString());
+                //selectedDJID = Int32.Parse(selectedRow.Cells[0].Value.ToString());
             
        }
 
@@ -499,7 +550,19 @@ namespace RoyalPetz_ADMIN
             {
                 gutil.showSuccess(options);
                 gutil.ResetAllControls(this);
+                TransaksiAccountGridView.Rows.Clear();
+                TransaksiAccountGridView.Refresh();
             }
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
