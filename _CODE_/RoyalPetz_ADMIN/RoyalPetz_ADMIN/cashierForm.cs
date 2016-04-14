@@ -1229,7 +1229,7 @@ namespace RoyalPetz_ADMIN
                 DS.mySqlConnect();
                 string sqlCommandx = "select sh.sales_date AS 'DATE', sd.sales_invoice AS 'INVOICE', mc.customer_full_name as 'CUSTOMER', m.product_name AS 'PRODUCT', product_qty AS 'QTY', " + 
                     "product_sales_price AS 'PRICE', ROUND((product_qty * product_sales_price) - sales_subtotal, 2) as 'POTONGAN', sales_subtotal AS 'SUBTOTAL', sh.SALES_PAYMENT AS 'PAYMENT', sh.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
-                    "from sales_header sh, sales_detail sd, master_product m, master_customer mc where sd.product_id = m.product_id and sd.sales_invoice = sh.sales_invoice and sh.customer_id = mc.customer_id " +
+                    "from sales_header sh, sales_detail sd, master_product m, master_customer mc where sd.product_id = m.product_id and sd.sales_invoice = sh.sales_invoice and sh.customer_id = mc.customer_id and sh.sales_invoice='" + selectedsalesinvoice + "'" +
                     "union " +
                     "select sh.sales_date AS 'DATE', sd.sales_invoice AS 'INVOICE', '' as 'CUSTOMER', m.product_name AS 'PRODUCT', product_qty AS 'QTY', product_sales_price AS 'PRICE', " +
                     "ROUND((product_qty * product_sales_price) - sales_subtotal, 2) as 'POTONGAN', sales_subtotal AS 'SUBTOTAL', sh.SALES_PAYMENT AS 'PAYMENT', sh.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
