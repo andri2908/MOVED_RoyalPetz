@@ -454,6 +454,18 @@
     <Compile Include="ReportUserForm.Designer.cs">
       <DependentUpon>ReportUserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SalesReceipt.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SalesReceipt.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SalesReceiptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesReceiptForm.Designer.cs">
+      <DependentUpon>SalesReceiptForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SetApplicationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -727,6 +739,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportUserForm.resx">
       <DependentUpon>ReportUserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesReceipt.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SalesReceipt.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesReceiptForm.resx">
+      <DependentUpon>SalesReceiptForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SetApplicationForm.resx">
       <DependentUpon>SetApplicationForm.cs</DependentUpon>

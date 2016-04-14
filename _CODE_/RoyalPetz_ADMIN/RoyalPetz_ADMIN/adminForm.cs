@@ -135,6 +135,7 @@ namespace RoyalPetz_ADMIN
             menuStrip1.Renderer = new MyRenderer();
             gutil.reArrangeTabOrder(this);
 
+            //load last known paper size settings from DB
 
             //activateUserAccessRight();
             
@@ -144,6 +145,7 @@ namespace RoyalPetz_ADMIN
         private void adminForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             timer1.Stop();
+            //write paper size settings last change to DB
         }
 
         private void timer1_Tick(object sender, EventArgs e)

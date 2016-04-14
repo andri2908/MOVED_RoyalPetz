@@ -228,9 +228,6 @@ C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debu
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataPelangganDetailForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataPelangganForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataReturPermintaanForm.resources
-C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataReturPenjualanStokAdjustmentForm.resources
-C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataSalesDetailForm.resources
-C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataSalesForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataSatuanDetailForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataSatuanForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataSupplierDetailForm.resources
@@ -241,19 +238,15 @@ C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debu
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.exportStockOpnameForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.groupAccessModuleForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.importDataCSVForm.resources
-C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.importDataMutasiForm.resources
-C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.IPPusatForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.konversiSatuanForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.loginForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.logoutForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pembayaranHutangForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pembayaranLumpSumForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pembayaranPiutangForm.resources
-C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pembayaranPiutangLumpSumForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.penerimaanBarangForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pengaturanKategoriProdukForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pengaturanLimitPajakForm.resources
-C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pengaturanPotonganHargaForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pengaturanProdukForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.penyesuaianStokForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.permintaanProdukForm.resources
@@ -283,3 +276,4 @@ C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debu
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.csproj.GenerateResource.Cache
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.exe
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pdb
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.SalesReceiptForm.resources

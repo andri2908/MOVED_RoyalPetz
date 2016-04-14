@@ -23,6 +23,7 @@ namespace RoyalPetz_ADMIN
         private Data_Access DS = new Data_Access();
         private static int userID = 0;
         private static int userGroupID = 0;
+        private static int papermode = 0; //0 = cashier mode, 1 = 1/2 kwarto, 2 = kwarto
 
         public void setUserID(int selectedUserID)
         {
@@ -34,6 +35,15 @@ namespace RoyalPetz_ADMIN
             return userID;
         }
 
+        public void setPaper(int selectedpaper)
+        {
+            papermode = selectedpaper;
+        }
+
+        public int getPaper()
+        {
+            return papermode;
+        }
         public void setUserGroupID(int selectedUserGroupID)
         {
             userGroupID = selectedUserGroupID;
@@ -59,6 +69,37 @@ namespace RoyalPetz_ADMIN
             Match m = r.Match(textToMatch);
 
             return m.Success;
+        }
+
+        public int loadbranchID(int opt,out string namacabang)
+        {
+            MySqlDataReader rdr;
+            DataTable dt = new DataTable();
+            DS.mySqlConnect();
+            namacabang = "PUSAT";
+            int rslt = 0;
+            //1 load default 2 setting user
+            using (rdr = DS.getData("SELECT IFNULL(S.BRANCH_ID,0) AS 'ID', B.BRANCH_NAME AS 'NAME' FROM SYS_CONFIG S, MASTER_BRANCH B WHERE S.BRANCH_ID = B.BRANCH_ID AND ID =  " + opt))
+            {
+                if (rdr.HasRows)
+                {
+                    rdr.Read();
+                        if (!String.IsNullOrEmpty(rdr.GetString("NAME")))
+                        {
+                            namacabang = rdr.GetString("NAME");
+                        }
+                        if (!String.IsNullOrEmpty(rdr.GetString("ID")))
+                        {
+                            rslt = rdr.GetInt32("ID");
+                        }
+                    if (rslt == 0 )
+                    {
+                        namacabang = "PUSAT";
+                    }
+                    
+                }
+            }
+            return rslt;
         }
 
         public bool loadinfotoko(int opt, out string NamaToko, out string AlamatToko, out string TeleponToko, out string EmailToko)

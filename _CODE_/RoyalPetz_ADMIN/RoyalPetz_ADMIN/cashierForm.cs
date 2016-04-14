@@ -12,7 +12,6 @@ using Hotkeys;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Globalization;
-
 using System.Drawing.Printing;
 
 namespace RoyalPetz_ADMIN
@@ -27,6 +26,8 @@ namespace RoyalPetz_ADMIN
         private int selectedPelangganID = 0;
         private int selectedPaymentMethod = 0;
         private bool isLoading = false;
+        private double bayarAmount = 0;
+        private double sisaBayar = 0;
 
         private Data_Access DS = new Data_Access();
 
@@ -451,9 +452,9 @@ namespace RoyalPetz_ADMIN
                 //pass thru to receipt generator
                 selectedsalesinvoice = salesInvoice;
                 // SAVE HEADER TABLE
-                sqlCommand = "INSERT INTO SALES_HEADER (SALES_INVOICE, CUSTOMER_ID, SALES_DATE, SALES_TOTAL, SALES_DISCOUNT_FINAL, SALES_TOP, SALES_TOP_DATE, SALES_PAID) " +
+                sqlCommand = "INSERT INTO SALES_HEADER (SALES_INVOICE, CUSTOMER_ID, SALES_DATE, SALES_TOTAL, SALES_DISCOUNT_FINAL, SALES_TOP, SALES_TOP_DATE, SALES_PAID, SALES_PAYMENT, SALES_PAYMENT_CHANGE) " +
                                     "VALUES " +
-                                    "('" + salesInvoice + "', " + selectedPelangganID + ", STR_TO_DATE('" + SODateTime + "', '%d-%m-%Y'), " + globalTotalValue + ", " + salesDiscountFinal + ", " + salesTop + ", STR_TO_DATE('" + SODueDateTime + "', '%d-%m-%Y'), " + salesPaid + ")";
+                                    "('" + salesInvoice + "', " + selectedPelangganID + ", STR_TO_DATE('" + SODateTime + "', '%d-%m-%Y'), " + globalTotalValue + ", " + salesDiscountFinal + ", " + salesTop + ", STR_TO_DATE('" + SODueDateTime + "', '%d-%m-%Y'), " + salesPaid + ", " + bayarAmount + ", " + sisaBayar + ")";
                 
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
@@ -1122,8 +1123,6 @@ namespace RoyalPetz_ADMIN
 
         private void bayarTextBox_TextChanged(object sender, EventArgs e)
         {
-            double bayarAmount = 0;
-            double sisaBayar = 0;
             double totalAfterDisc = 0;
             if (bayarTextBox.Text.Length > 0)
             {
@@ -1207,18 +1206,37 @@ namespace RoyalPetz_ADMIN
             //pdoc.PrintPage += new PrintPageEventHandler(pdoc_PrintPage);
             //    PrintPreviewDialog pp = new PrintPreviewDialog();
             //Font font = new Font("Courier New", 15);
-           
-            //width, height
-            PaperSize psize = new PaperSize("Custom", 320, 820);
 
-            printDocument1.DefaultPageSettings.PaperSize = psize;
-            DialogResult result;
-            printPreviewDialog1.Width = 512;
-            printPreviewDialog1.Height = 768;
-            result = printPreviewDialog1.ShowDialog();
-            if (result == DialogResult.OK)
+            //cek paper mode
+            int papermode = gutil.getPaper();
+            if (papermode == 0) //kertas POS
             {
-                printDocument1.Print();
+                //width, height
+                PaperSize psize = new PaperSize("Custom", 320, 820);
+                printDocument1.DefaultPageSettings.PaperSize = psize;
+                DialogResult result;
+                printPreviewDialog1.Width = 512;
+                printPreviewDialog1.Height = 768;
+                result = printPreviewDialog1.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    printDocument1.Print();
+                }
+            } else
+            {
+                //kertas 1/2 kwarto atau kwarto using crystal report
+                //preview laporan
+                DS.mySqlConnect();
+                string sqlCommandx = "select sh.sales_date AS 'DATE', sd.sales_invoice AS 'INVOICE', mc.customer_full_name as 'CUSTOMER', m.product_name AS 'PRODUCT', product_qty AS 'QTY', " + 
+                    "product_sales_price AS 'PRICE', ROUND((product_qty * product_sales_price) - sales_subtotal, 2) as 'POTONGAN', sales_subtotal AS 'SUBTOTAL', sh.SALES_PAYMENT AS 'PAYMENT', sh.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
+                    "from sales_header sh, sales_detail sd, master_product m, master_customer mc where sd.product_id = m.product_id and sd.sales_invoice = sh.sales_invoice and sh.customer_id = mc.customer_id " +
+                    "union " +
+                    "select sh.sales_date AS 'DATE', sd.sales_invoice AS 'INVOICE', '' as 'CUSTOMER', m.product_name AS 'PRODUCT', product_qty AS 'QTY', product_sales_price AS 'PRICE', " +
+                    "ROUND((product_qty * product_sales_price) - sales_subtotal, 2) as 'POTONGAN', sales_subtotal AS 'SUBTOTAL', sh.SALES_PAYMENT AS 'PAYMENT', sh.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
+                    "from sales_header sh, sales_detail sd, master_product m where sd.product_id = m.product_id and sd.sales_invoice = sh.sales_invoice and sh.customer_id = 0 and sh.sales_invoice='" + selectedsalesinvoice + "'";
+                DS.writeXML(sqlCommandx, globalConstants.SalesReceiptXML);
+                SalesReceiptForm displayedform = new SalesReceiptForm();
+                displayedform.ShowDialog(this);
             }
 
            

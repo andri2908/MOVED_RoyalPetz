@@ -156,6 +156,7 @@ namespace RoyalPetz_ADMIN
         public const string UnitXML = "MasterUnit.xml";
         public const string UserXML = "MasterUser.xml";
         public const string ProductCategoryXML = "ProductCategory.xml";
+        public const string SalesReceiptXML = "SalesReceipt.xml";
 
 
 

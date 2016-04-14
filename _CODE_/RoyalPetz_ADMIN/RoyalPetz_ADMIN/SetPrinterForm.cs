@@ -16,6 +16,7 @@ namespace RoyalPetz_ADMIN
     {
         public PrinterSettings ps = new PrinterSettings();
         private PrintDocument printdoc = new PrintDocument();
+        private globalUtilities gutil = new globalUtilities();
 
         public SetPrinterForm()
         {
@@ -63,9 +64,10 @@ namespace RoyalPetz_ADMIN
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string pname = this.PrinterlistBox.SelectedItem.ToString();            
+            string pname = this.PrinterlistBox.SelectedItem.ToString();
+            gutil.setPaper(sizeComboBox.SelectedIndex);
             myPrinters.SetDefaultPrinter(pname);
-            MessageBox.Show("Default Printer changed!");
+            MessageBox.Show("Pengaturan printer telah diubah!");
         }
     }
 }
