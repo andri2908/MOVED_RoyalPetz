@@ -164,11 +164,11 @@ namespace RoyalPetz_ADMIN
         {
             double result = 0;
             string sqlCommand = "";
-            DS.mySqlConnect();
+            //DS.mySqlConnect();
 
             if (originModuleID == globalConstants.RETUR_PENJUALAN)
                 sqlCommand = "SELECT PRODUCT_SALES_PRICE FROM SALES_DETAIL WHERE SALES_INVOICE = '" + selectedSalesInvoice + "' AND PRODUCT_ID = '" + productID + "'";
-            if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
+            else if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
                 sqlCommand = "SELECT PRODUCT_RETAIL_PRICE FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "' AND PRODUCT_ACTIVE = 1";
 
             result = Convert.ToDouble(DS.getDataSingleValue(sqlCommand));
@@ -204,6 +204,9 @@ namespace RoyalPetz_ADMIN
             DataGridViewComboBoxCell productIDComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productID"];
             DataGridViewComboBoxCell productNameComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productName"];
 
+            if (selectedIndex < 0)
+                return;
+
             selectedProductID = productIDComboCell.Items[selectedIndex].ToString();
             productIDComboCell.Value = productIDComboCell.Items[selectedIndex];
             productNameComboCell.Value = productNameComboCell.Items[selectedIndex];
@@ -235,7 +238,7 @@ namespace RoyalPetz_ADMIN
             }
 
             globalTotalValue = total;
-            totalLabel.Text = total.ToString("C", culture);//"Rp. " + total.ToString();
+            totalLabel.Text = total.ToString("C2", culture);//"Rp. " + total.ToString();
         }
 
         private void TextBox_TextChanged(object sender, EventArgs e)

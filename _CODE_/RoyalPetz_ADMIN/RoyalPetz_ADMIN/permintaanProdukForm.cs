@@ -119,7 +119,7 @@ namespace RoyalPetz_ADMIN
                 while (rdr.Read())
                 {
                     productName = rdr.GetString("PRODUCT_NAME");
-                    detailRequestOrderDataGridView.Rows.Add(productName, rdr.GetString("RO_QTY"), rdr.GetString("PRODUCT_BASE_PRICE"), rdr.GetString("RO_SUBTOTAL"), rdr.GetString("PRODUCT_ID"));
+                    detailRequestOrderDataGridView.Rows.Add(rdr.GetString("PRODUCT_ID"), productName, rdr.GetString("RO_QTY"), rdr.GetString("PRODUCT_BASE_PRICE"), rdr.GetString("RO_SUBTOTAL"));
                 }
 
                 rdr.Close();
@@ -136,7 +136,7 @@ namespace RoyalPetz_ADMIN
             }
 
             globalTotalValue = total;
-            totalLabel.Text = total.ToString("C", culture);
+            totalLabel.Text = total.ToString("C2", culture);
         }
 
         private void detailRequestOrderDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -217,38 +217,42 @@ namespace RoyalPetz_ADMIN
 
         private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int selectedIndex = 0;
             int rowSelectedIndex = 0;
-            string selectedProductID = "";
-            double hpp = 0;
             double productQty = 0;
             double subTotal = 0;
+            double hppValue = 0;
+            int cmbSelectedIndex = 0;
+            string productID = "";
 
             if (isLoading)
                 return;
-
+            
             DataGridViewComboBoxEditingControl dataGridViewComboBoxEditingControl = sender as DataGridViewComboBoxEditingControl;
+
             rowSelectedIndex = detailRequestOrderDataGridView.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[rowSelectedIndex];
-            selectedIndex = dataGridViewComboBoxEditingControl.SelectedIndex;
+            cmbSelectedIndex = dataGridViewComboBoxEditingControl.SelectedIndex;
 
+            if (cmbSelectedIndex < 0)
+                return;
+
+            // get product id
             DataGridViewComboBoxCell productIDComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productID"];
             DataGridViewComboBoxCell productNameComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productName"];
 
-            selectedProductID = productIDComboCell.Items[selectedIndex].ToString();
-            productIDComboCell.Value = productIDComboCell.Items[selectedIndex];
-            productNameComboCell.Value = productNameComboCell.Items[selectedIndex];
+            productID = productIDComboCell.Items[cmbSelectedIndex].ToString();
+            productIDComboCell.Value = productIDComboCell.Items[cmbSelectedIndex];
+            productNameComboCell.Value = productNameComboCell.Items[cmbSelectedIndex];
 
-            hpp = getHPPValue(selectedProductID);
-            selectedRow.Cells["hpp"].Value = hpp;
+            // get hpp
+            hppValue = getHPPValue(productID);
+            selectedRow.Cells["hpp"].Value = hppValue;
 
-            if (null != selectedRow.Cells["qty"].Value)
-            {
-                productQty = Convert.ToDouble(selectedRow.Cells["qty"].Value);
-                subTotal = Math.Round((hpp * productQty),2);
- 
-                selectedRow.Cells["subTotal"].Value = subTotal;
-            }
+            productQty = Convert.ToDouble(selectedRow.Cells["qty"].Value);
+            hppValue = Convert.ToDouble(selectedRow.Cells["hpp"].Value);
+            subTotal = Math.Round((hppValue * productQty), 2);
+
+            selectedRow.Cells["subTotal"].Value = subTotal;
 
             calculateTotal();
         }
@@ -387,6 +391,7 @@ namespace RoyalPetz_ADMIN
 
                         gUtil.showSuccess(gUtil.UPD);
 
+                        ROinvoiceTextBox.ReadOnly = false;
                         ROinvoiceTextBox.Focus();
                     }
             }
@@ -395,10 +400,8 @@ namespace RoyalPetz_ADMIN
         private double getHPPValue(string productID)
         {
             double result = 0;
-
-            DS.mySqlConnect();
-
-            result = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(PRODUCT_BASE_PRICE, 0) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
+            
+            result = Convert.ToDouble(DS.getDataSingleValue("SELECT PRODUCT_BASE_PRICE FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
 
             return result;
         }
@@ -584,11 +587,6 @@ namespace RoyalPetz_ADMIN
                 selectedBranchFromID = Convert.ToInt32(branchFromComboHidden.Items[selectedIndex]);
 
             fillInBranchToCombo();
-        }
-
-        private void detailRequestOrderDataGridView_CellValidated(object sender, DataGridViewCellEventArgs e)
-        {
-            
         }
 
         private void branchToCombo_SelectedIndexChanged(object sender, EventArgs e)
@@ -811,10 +809,6 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        private void detailRequestOrderDataGridView_KeyPress(object sender, KeyPressEventArgs e)
-        {
-          //  if (e.GetHashCode() == Keys.Delete)
-        }
 
         private void deleteCurrentRow()
         {

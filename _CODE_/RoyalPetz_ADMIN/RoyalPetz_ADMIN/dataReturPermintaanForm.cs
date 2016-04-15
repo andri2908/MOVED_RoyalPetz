@@ -135,7 +135,7 @@ namespace RoyalPetz_ADMIN
         {
             double result = 0;
 
-            DS.mySqlConnect();
+            //DS.mySqlConnect();
 
             result = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(PRODUCT_BASE_PRICE, 0) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
 
@@ -152,7 +152,7 @@ namespace RoyalPetz_ADMIN
             }
 
             globalTotalValue = total;
-            totalLabel.Text = total.ToString("C", culture);//"Rp. " + total.ToString();
+            totalLabel.Text = total.ToString("C2", culture);//"Rp. " + total.ToString();
         }
 
         private void detailReturDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -188,6 +188,9 @@ namespace RoyalPetz_ADMIN
             DataGridViewComboBoxCell productIDComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productID"];
             DataGridViewComboBoxCell productNameComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productName"];
 
+            if (selectedIndex < 0)
+                return;
+
             selectedProductID = productIDComboCell.Items[selectedIndex].ToString();
             productIDComboCell.Value = productIDComboCell.Items[selectedIndex];
             productNameComboCell.Value = productNameComboCell.Items[selectedIndex];
@@ -216,6 +219,10 @@ namespace RoyalPetz_ADMIN
             double productQty = 0;
             double hppValue = 0;
             double subTotal = 0;
+
+
+            if (detailReturDataGridView.CurrentCell.OwningColumn.Name != "qty")
+                return;
 
             DataGridViewTextBoxEditingControl dataGridViewTextBoxEditingControl = sender as DataGridViewTextBoxEditingControl;
 
@@ -265,7 +272,7 @@ namespace RoyalPetz_ADMIN
 
                 subTotal = Math.Round((hppValue * productQty), 2);
 
-                selectedRow.Cells["subtotal"].Value = subTotal;
+                selectedRow.Cells["subTotal"].Value = subTotal;
 
                 calculateTotal();
             }
@@ -415,7 +422,7 @@ namespace RoyalPetz_ADMIN
                             descriptionValue = " ";
                        }
                        sqlCommand = "INSERT INTO RETURN_PURCHASE_DETAIL (RP_ID, PRODUCT_ID, PRODUCT_BASEPRICE, PRODUCT_QTY, RP_DESCRIPTION, RP_SUBTOTAL) VALUES " +
-                                           "('" + returID + "', '" + detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " +hppValue  + ", " + qtyValue + ", '" + descriptionValue + "', " + Convert.ToDouble(detailReturDataGridView.Rows[i].Cells["subTotal"].Value) + ")";
+                                           "('" + returID + "', '" + detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " +hppValue  + ", " + qtyValue + ", '" + MySqlHelper.EscapeString(descriptionValue) + "', " + Convert.ToDouble(detailReturDataGridView.Rows[i].Cells["subTotal"].Value) + ")";
 
                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                            throw internalEX;

@@ -107,7 +107,7 @@ namespace RoyalPetz_ADMIN
                     while (rdr.Read())
                     {
                         insertStatement = "INSERT INTO TEMP_MASTER_PRODUCT (PRODUCT_ID, PRODUCT_BARCODE, PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_BASE_PRICE, PRODUCT_RETAIL_PRICE, PRODUCT_BULK_PRICE, PRODUCT_WHOLESALE_PRICE, UNIT_ID, PRODUCT_IS_SERVICE) VALUES (" +
-                                                 "'" + rdr.GetString("PRODUCT_ID") + "', " + rdr.GetString("PRODUCT_BARCODE") + ", '" + rdr.GetString("PRODUCT_NAME") + "', '" + rdr.GetString("PRODUCT_DESCRIPTION") + "', " + rdr.GetString("PRODUCT_BASE_PRICE") + ", " + rdr.GetString("PRODUCT_RETAIL_PRICE") + ", " + rdr.GetString("PRODUCT_BULK_PRICE") + ", " + rdr.GetString("PRODUCT_WHOLESALE_PRICE") + ", " + rdr.GetString("UNIT_ID") + ", " + rdr.GetString("PRODUCT_IS_SERVICE") + ");";
+                                                 "'" + MySqlHelper.EscapeString(rdr.GetString("PRODUCT_ID")) + "', " + rdr.GetString("PRODUCT_BARCODE") + ", '" + MySqlHelper.EscapeString(rdr.GetString("PRODUCT_NAME")) + "', '" + MySqlHelper.EscapeString(rdr.GetString("PRODUCT_DESCRIPTION")) + "', " + rdr.GetString("PRODUCT_BASE_PRICE") + ", " + rdr.GetString("PRODUCT_RETAIL_PRICE") + ", " + rdr.GetString("PRODUCT_BULK_PRICE") + ", " + rdr.GetString("PRODUCT_WHOLESALE_PRICE") + ", " + rdr.GetString("UNIT_ID") + ", " + rdr.GetString("PRODUCT_IS_SERVICE") + ");";
                         sw.WriteLine(insertStatement);
                     }
                 }
@@ -126,7 +126,7 @@ namespace RoyalPetz_ADMIN
                     while (rdr.Read())
                     {
                         insertStatement = "INSERT INTO MASTER_CATEGORY (CATEGORY_ID, CATEGORY_NAME, CATEGORY_DESCRIPTION, CATEGORY_ACTIVE) VALUES (" +
-                                                 rdr.GetString("CATEGORY_ID") + ", '" + rdr.GetString("CATEGORY_NAME") + "', '" + rdr.GetString("CATEGORY_DESCRIPTION") + "', 1);";
+                                                 rdr.GetString("CATEGORY_ID") + ", '" + MySqlHelper.EscapeString(rdr.GetString("CATEGORY_NAME")) + "', '" + MySqlHelper.EscapeString(rdr.GetString("CATEGORY_DESCRIPTION")) + "', 1);";
                         sw.WriteLine(insertStatement);
                     }
                 }
@@ -145,7 +145,7 @@ namespace RoyalPetz_ADMIN
                     while (rdr.Read())
                     {
                         insertStatement = "INSERT INTO MASTER_UNIT (UNIT_ID, UNIT_NAME, UNIT_DESCRIPTION, UNIT_ACTIVE) VALUES (" +
-                                                 rdr.GetString("UNIT_ID") + ", '" + rdr.GetString("UNIT_NAME") + "', '" + rdr.GetString("UNIT_DESCRIPTION") + "', 1);";
+                                                 rdr.GetString("UNIT_ID") + ", '" + MySqlHelper.EscapeString(rdr.GetString("UNIT_NAME")) + "', '" + MySqlHelper.EscapeString(rdr.GetString("UNIT_DESCRIPTION")) + "', 1);";
                         sw.WriteLine(insertStatement);
                     }
                 }
@@ -373,10 +373,10 @@ namespace RoyalPetz_ADMIN
                                 i = 0;
                                 while (i < dataGridView1.Rows.Count)
                                 {
-                                    productID = dataGridView1.Rows[i].Cells["PRODUCT_ID"].Value.ToString();
+                                    productID = MySqlHelper.EscapeString(dataGridView1.Rows[i].Cells["PRODUCT_ID"].Value.ToString());
                                     productBarcode = dataGridView1.Rows[i].Cells["PRODUCT_BARCODE"].Value.ToString();
-                                    productName = dataGridView1.Rows[i].Cells["PRODUCT_NAME"].Value.ToString();
-                                    productDescription = dataGridView1.Rows[i].Cells["PRODUCT_DESCRIPTION"].Value.ToString();
+                                    productName = MySqlHelper.EscapeString(dataGridView1.Rows[i].Cells["PRODUCT_NAME"].Value.ToString());
+                                    productDescription = MySqlHelper.EscapeString(dataGridView1.Rows[i].Cells["PRODUCT_DESCRIPTION"].Value.ToString());
                                     productBasePrice = dataGridView1.Rows[i].Cells["PRODUCT_BASE_PRICE"].Value.ToString();
                                     productRetailPrice = dataGridView1.Rows[i].Cells["PRODUCT_RETAIL_PRICE"].Value.ToString();
                                     productBulkPrice = dataGridView1.Rows[i].Cells["PRODUCT_BULK_PRICE"].Value.ToString();

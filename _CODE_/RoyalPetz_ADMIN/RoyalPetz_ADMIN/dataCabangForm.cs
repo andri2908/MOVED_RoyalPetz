@@ -54,11 +54,11 @@ namespace RoyalPetz_ADMIN
             DS.mySqlConnect();
             if (cabangnonactiveoption.Checked)
             {
-                sqlCommand = "SELECT BRANCH_ID, BRANCH_NAME AS 'NAMA CABANG', CONCAT(trim(substring(branch_ip4,1,3)),'.',trim(substring(branch_ip4,4,3)),'.',trim(substring(branch_ip4,7,3)),'.', trim(substring(branch_ip4,10))) AS 'ALAMAT IP CABANG' FROM MASTER_BRANCH WHERE BRANCH_NAME LIKE '%" + branchName + "%'";
+                sqlCommand = "SELECT BRANCH_ID, BRANCH_NAME AS 'NAMA CABANG', branch_ip4 AS 'ALAMAT IP CABANG' FROM MASTER_BRANCH WHERE BRANCH_NAME LIKE '%" + branchName + "%'";
             }
             else
             {
-                sqlCommand = "SELECT BRANCH_ID, BRANCH_NAME AS 'NAMA CABANG', CONCAT(trim(substring(branch_ip4,1,3)),'.',trim(substring(branch_ip4,4,3)),'.',trim(substring(branch_ip4,7,3)),'.', trim(substring(branch_ip4,10))) AS 'ALAMAT IP CABANG' FROM MASTER_BRANCH WHERE BRANCH_ACTIVE = 1 AND BRANCH_NAME LIKE '%" + branchName + "%'";
+                sqlCommand = "SELECT BRANCH_ID, BRANCH_NAME AS 'NAMA CABANG', branch_ip4 AS 'ALAMAT IP CABANG' FROM MASTER_BRANCH WHERE BRANCH_ACTIVE = 1 AND BRANCH_NAME LIKE '%" + branchName + "%'";
             }
 
             using (rdr = DS.getData(sqlCommand))

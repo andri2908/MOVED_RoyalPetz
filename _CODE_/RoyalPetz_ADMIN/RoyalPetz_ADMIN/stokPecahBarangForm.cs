@@ -174,8 +174,15 @@ namespace RoyalPetz_ADMIN
 
         private double getNewUnitConverterValue()
         {
+            double convertValue = 0;
             DS.mySqlConnect();
-            return Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(CONVERT_MULTIPLIER , 0) FROM UNIT_CONVERT WHERE CONVERT_UNIT_ID_1 = " +currentUnitID+" AND CONVERT_UNIT_ID_2 = "+newUnitID));
+
+            if (currentUnitID != newUnitID)
+                convertValue = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(CONVERT_MULTIPLIER , 0) FROM UNIT_CONVERT WHERE CONVERT_UNIT_ID_1 = " + currentUnitID + " AND CONVERT_UNIT_ID_2 = " + newUnitID));
+            else
+                convertValue = 1;
+
+            return convertValue;
         }
 
         private void calculateResultForNewProduct()

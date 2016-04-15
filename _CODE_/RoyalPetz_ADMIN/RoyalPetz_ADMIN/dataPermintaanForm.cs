@@ -120,16 +120,17 @@ namespace RoyalPetz_ADMIN
             //                    "WHERE 1 = 1";
 
             sqlCommand = "SELECT ID, RO_INVOICE AS 'NO PERMINTAAN', DATE_FORMAT(RO_DATETIME, '%d-%M-%Y')  AS 'TANGGAL PERMINTAAN', DATE_FORMAT(RO_EXPIRED, '%d-%M-%Y') AS 'TANGGAL EXPIRED', M1.BRANCH_NAME AS 'ASAL PERMINTAAN', RO_TOTAL AS 'TOTAL' " +
-                                "FROM REQUEST_ORDER_HEADER LEFT OUTER JOIN MASTER_BRANCH M1 ON (RO_BRANCH_ID_TO = M1.BRANCH_ID) " +
-                                "WHERE 1 = 1 AND RO_ACTIVE = 1";
+                                "FROM REQUEST_ORDER_HEADER RH, MASTER_BRANCH M1 " + //LEFT OUTER JOIN MASTER_BRANCH M1 ON (RO_BRANCH_ID_TO = M1.BRANCH_ID) " +
+                                "WHERE 1 = 1 AND RO_BRANCH_ID_TO = M1.BRANCH_ID AND RO_ACTIVE = 1";
 
             if (!showAll)
             {
-                if (showExpiredCheckBox.Checked)
+                dateFrom = String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(DateTime.Now));
+                if (!showExpiredCheckBox.Checked)
                 {
-                    sqlCommand = sqlCommand + " AND RO_EXPIRED > '" + DateTime.Now + "'";
+                    sqlCommand = sqlCommand + " AND DATE_FORMAT(RO_EXPIRED, '%Y%m%d') > '" + dateFrom + "'";
                 }
-
+ 
                 //if (!showApprovedROCheckbox.Checked)
                 //{
                 //    sqlCommand = sqlCommand + " AND RO_ACTIVE = 1";

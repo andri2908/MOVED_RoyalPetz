@@ -113,8 +113,8 @@ namespace RoyalPetz_ADMIN
             //                    "LEFT OUTER JOIN MASTER_BRANCH M2 ON (BRANCH_ID_TO = M2.BRANCH_ID) " +
             //                    "WHERE 1 = 1 AND PM_RECEIVED = 0";
             sqlCommand = "SELECT ID, PM_INVOICE AS 'NO MUTASI', DATE_FORMAT(PM_DATETIME,'%d-%M-%Y') AS 'TGL MUTASI', M2.BRANCH_NAME AS 'TUJUAN MUTASI', PM_TOTAL AS 'TOTAL', RO_INVOICE AS 'NO PERMINTAAN' " +
-                                "FROM PRODUCTS_MUTATION_HEADER LEFT OUTER JOIN MASTER_BRANCH M2 ON (BRANCH_ID_TO = M2.BRANCH_ID) " +
-                                "WHERE 1 = 1 AND PM_RECEIVED = 0";
+                                "FROM PRODUCTS_MUTATION_HEADER PH,  MASTER_BRANCH M2 " +//LEFT OUTER JOIN MASTER_BRANCH M2 ON (BRANCH_ID_TO = M2.BRANCH_ID) " +
+                                "WHERE 1 = 1 AND PH.BRANCH_ID_TO = M2.BRANCH_ID AND PM_RECEIVED = 0";
 
             if (!showAllCheckBox.Checked)
             {

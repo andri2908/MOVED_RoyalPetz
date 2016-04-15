@@ -20,7 +20,7 @@ namespace RoyalPetz_ADMIN
         private globalUtilities gUtil = new globalUtilities();
         private int options = 0;
         private Data_Access DS = new Data_Access();
-
+        private string selectedIP = "";
         public dataCabangDetailForm()
         {
             InitializeComponent();
@@ -38,6 +38,7 @@ namespace RoyalPetz_ADMIN
         {
             MySqlDataReader rdr;
             DataTable dt = new DataTable();
+            string ip1, ip2, ip3, ip4;
 
             DS.mySqlConnect();
 
@@ -48,7 +49,7 @@ namespace RoyalPetz_ADMIN
                     while (rdr.Read())
                     {
                         branchNameTextBox.Text = rdr.GetString("BRANCH_NAME");
-                        ipAddressMaskedTextbox.Text = rdr.GetString("BRANCH_IP4");
+                        selectedIP = rdr.GetString("BRANCH_IP4");
                         branchAddress1TextBox.Text = rdr.GetString("BRANCH_ADDRESS_1");
                         branchAddress2TextBox.Text = rdr.GetString("BRANCH_ADDRESS_2");
                         branchAddressCityTextBox.Text = rdr.GetString("BRANCH_ADDRESS_CITY");
@@ -58,9 +59,42 @@ namespace RoyalPetz_ADMIN
                             nonAktifCheckbox.Checked = false;
                         else
                             nonAktifCheckbox.Checked = true;
+
+                        string tmp = selectedIP;
+                        int pos = tmp.IndexOf(".");
+                        string tmp2 = tmp.Substring(0, pos);
+                        ip1 = tmp2;
+                        ip1Textbox.Text = ip1;
+                        tmp = tmp.Substring(pos + 1);
+                        pos = tmp.IndexOf(".");
+                        tmp2 = tmp.Substring(0, pos);
+                        ip2 = tmp2;
+                        ip2Textbox.Text = ip2;
+                        tmp = tmp.Substring(pos + 1);
+                        pos = tmp.IndexOf(".");
+                        tmp2 = tmp.Substring(0, pos);
+                        ip3 = tmp2;
+                        ip3Textbox.Text = ip3;
+                        tmp = tmp.Substring(pos + 1);
+                        ip4 = tmp;
+                        ip4Textbox.Text = ip4;
                     }
                 }
             }
+        }
+
+        private bool ipAddressExist()
+        {
+            bool result = false;
+            int rowCount;
+            string ipAddress = ip1Textbox.Text.Trim() + "." + ip2Textbox.Text.Trim() + "." + ip3Textbox.Text.Trim() + "." + ip4Textbox.Text.Trim();
+
+            rowCount = Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_BRANCH WHERE BRANCH_IP4 = '" + ipAddress + "'"));
+
+            if (rowCount > 0)
+                result = true;
+
+            return result;
         }
 
         private bool dataValidated()
@@ -71,9 +105,15 @@ namespace RoyalPetz_ADMIN
                 return false;
             }
 
-            if (ipAddressMaskedTextbox.Text.Trim().Equals(""))
+            if (ip1Textbox.Text.Trim().Equals("") || ip2Textbox.Text.Trim().Equals("") || ip3Textbox.Text.Trim().Equals("") || ip4Textbox.Text.Trim().Equals(""))
             {
-                errorLabel.Text = "IP ADDRESS CABANG TIDAK BOLEH KOSONG";
+                errorLabel.Text = "IP ADDRESS TIDAK VALID";
+                return false;
+            }
+
+            if (ipAddressExist())
+            {
+                errorLabel.Text = "IP ADDRESS SUDAH TERDAFTAR";
                 return false;
             }
 
@@ -87,7 +127,7 @@ namespace RoyalPetz_ADMIN
             MySqlException internalEX = null;
 
             string branchName = MySqlHelper.EscapeString(branchNameTextBox.Text.Trim());
-            string branchIPv4 = ipAddressMaskedTextbox.Text.Trim();
+            string branchIPv4 = ip1Textbox.Text.Trim() + "." + ip2Textbox.Text.Trim() + "." + ip3Textbox.Text.Trim() + "." + ip4Textbox.Text.Trim();
             string branchAddress1 = MySqlHelper.EscapeString(branchAddress1TextBox.Text.Trim());
             string branchAddress2 = MySqlHelper.EscapeString(branchAddress2TextBox.Text.Trim());
             string branchAddressCity = MySqlHelper.EscapeString(branchAddressCityTextBox.Text.Trim());
@@ -225,6 +265,24 @@ namespace RoyalPetz_ADMIN
                     break;
             }
             errorLabel.Text = "";
+        }
+
+        private void ip1Textbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '.')
+                ip2Textbox.Focus();
+        }
+
+        private void ip2Textbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '.')
+                ip3Textbox.Focus();
+        }
+
+        private void ip3Textbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '.')
+                ip4Textbox.Focus();
         }
     }
 }

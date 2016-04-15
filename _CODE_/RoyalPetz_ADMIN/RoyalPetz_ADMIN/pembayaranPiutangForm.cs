@@ -178,7 +178,7 @@ namespace RoyalPetz_ADMIN
 
             globalTotalValue = globalTotalValue - totalPayment;
 
-            totalLabel.Text = globalTotalValue.ToString("C", culture);
+            totalLabel.Text = globalTotalValue.ToString("C2", culture);
 
             if (globalTotalValue <= 0)
                 saveButton.Enabled = false;
@@ -341,7 +341,7 @@ namespace RoyalPetz_ADMIN
 
                 if (isPaymentExceed)
                 {
-                    MessageBox.Show("UANG KEMBALI SEBESAR " + (Convert.ToDouble(paymentMaskedTextBox.Text) - globalTotalValue).ToString("C", culture));
+                    MessageBox.Show("UANG KEMBALI SEBESAR " + (Convert.ToDouble(paymentMaskedTextBox.Text) - globalTotalValue).ToString("C2", culture));
                 }
 
                 loadDataDetailPayment();

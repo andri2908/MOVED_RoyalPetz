@@ -345,7 +345,8 @@ namespace RoyalPetz_ADMIN
                 return false;
             }
 
-            if ((productIDExist()) && (originModuleID != globalConstants.EDIT_PRODUK))
+            string kodeProdukValue = MySqlHelper.EscapeString(kodeProdukTextBox.Text);
+            if ((productIDExist(kodeProdukValue)) && (originModuleID != globalConstants.EDIT_PRODUK))
             {
                 errorLabel.Text = "PRODUK ID SUDAH ADA";
                 return false;
@@ -589,11 +590,11 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        private bool productIDExist()
+        private bool productIDExist(string productID)
         {
             bool result = false;
 
-            if (!DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '"+kodeProdukTextBox.Text.Trim()+"'").ToString().Equals("0"))
+            if (!DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '"+ productID + "'").ToString().Equals("0"))
             {
                 result = true;
             }
@@ -615,12 +616,17 @@ namespace RoyalPetz_ADMIN
 
         private void kodeProdukTextBox_TextChanged(object sender, EventArgs e)
         {
+            string kodeProdukValue;
+
             if (isLoading)
                 return;
 
-            kodeProdukTextBox.Text = MySqlHelper.EscapeString(gUtil.allTrim(kodeProdukTextBox.Text));
+            if (kodeProdukTextBox.Text.IndexOf('\'') >= 0)
+                kodeProdukTextBox.Text = kodeProdukTextBox.Text.Remove(kodeProdukTextBox.Text.IndexOf('\''), 1);
 
-            if ((productIDExist()) && (originModuleID != globalConstants.EDIT_PRODUK))
+            kodeProdukValue = MySqlHelper.EscapeString(gUtil.allTrim(kodeProdukTextBox.Text));
+
+            if ((productIDExist(kodeProdukValue)) && (originModuleID != globalConstants.EDIT_PRODUK))
             {
                 errorLabel.Text = "PRODUK ID SUDAH ADA";
                 kodeProdukTextBox.Focus();
@@ -692,6 +698,7 @@ namespace RoyalPetz_ADMIN
             switch (originModuleID)
             {
                 case globalConstants.NEW_PRODUK:
+                case globalConstants.STOK_PECAH_BARANG:
                     options = gUtil.INS;
                     kodeProdukTextBox.Enabled = true;
                     break;
@@ -722,5 +729,16 @@ namespace RoyalPetz_ADMIN
             }
         }
 
+        private void namaProdukTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (namaProdukTextBox.Text.IndexOf('\'') >= 0)
+                namaProdukTextBox.Text = namaProdukTextBox.Text.Remove(namaProdukTextBox.Text.IndexOf('\''), 1);
+        }
+
+        private void produkDescTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (produkDescTextBox.Text.IndexOf('\'') >= 0)
+                produkDescTextBox.Text = produkDescTextBox.Text.Remove(produkDescTextBox.Text.IndexOf('\''), 1);
+        }
     }
 }

@@ -79,7 +79,7 @@ namespace RoyalPetz_ADMIN
         {
             bool result = false;
 
-            if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM PURCHASE_HEADER WHERE PURCHASE_INVOICE = '"+POinvoiceTextBox.Text+"'")) > 0)
+            if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM PURCHASE_HEADER WHERE PURCHASE_INVOICE = '"+ MySqlHelper.EscapeString(POinvoiceTextBox.Text)+"'")) > 0)
                 result = true;
 
             return result;
@@ -167,7 +167,7 @@ namespace RoyalPetz_ADMIN
         {
             double result = 0;
 
-            DS.mySqlConnect();
+            //DS.mySqlConnect();
 
             result = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(PRODUCT_BASE_PRICE, 0) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
 
@@ -184,7 +184,7 @@ namespace RoyalPetz_ADMIN
             }
 
             globalTotalValue = total;
-            totalLabel.Text = total.ToString("C", culture);
+            totalLabel.Text = total.ToString("C2", culture);
         }
 
         private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -206,6 +206,9 @@ namespace RoyalPetz_ADMIN
 
             DataGridViewComboBoxCell productIDComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productID"];
             DataGridViewComboBoxCell productNameComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productName"];
+
+            if (selectedIndex < 0)
+                return;
 
             selectedProductID = productIDComboCell.Items[selectedIndex].ToString();
             productIDComboCell.Value = productIDComboCell.Items[selectedIndex];
@@ -750,7 +753,7 @@ namespace RoyalPetz_ADMIN
                 {
                     while(rdr.Read())
                     {
-                        detailPODataGridView.Rows.Add(rdr.GetString("PRODUCT_NAME"), rdr.GetString("PRODUCT_BASE_PRICE"), rdr.GetString("RO_QTY"), rdr.GetString("RO_SUBTOTAL"), rdr.GetString("PRODUCT_ID"));
+                        detailPODataGridView.Rows.Add(rdr.GetString("PRODUCT_ID"), rdr.GetString("PRODUCT_NAME"), rdr.GetString("PRODUCT_BASE_PRICE"), rdr.GetString("RO_QTY"), rdr.GetString("RO_SUBTOTAL"));
                     }
 
                     calculateTotal();
@@ -772,7 +775,7 @@ namespace RoyalPetz_ADMIN
                 {
                     while (rdr.Read())
                     {
-                        detailPODataGridView.Rows.Add(rdr.GetString("PRODUCT_NAME"), rdr.GetString("PRODUCT_PRICE"), rdr.GetString("PRODUCT_QTY"), rdr.GetString("PURCHASE_SUBTOTAL"), rdr.GetString("PRODUCT_ID"));
+                        detailPODataGridView.Rows.Add(rdr.GetString("PRODUCT_ID"), rdr.GetString("PRODUCT_NAME"), rdr.GetString("PRODUCT_PRICE"), rdr.GetString("PRODUCT_QTY"), rdr.GetString("PURCHASE_SUBTOTAL"));
                     }
 
                     calculateTotal();

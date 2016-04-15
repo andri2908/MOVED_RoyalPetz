@@ -154,7 +154,13 @@ namespace RoyalPetz_ADMIN
                 selectedRow.Cells["changed"].Value = true;
 
                 namaProdukTextbox.ReadOnly = true;
-                namaProdukTextbox.BackColor = Color.Red;
+                textBox1.ReadOnly = true;
+                selectedRow.DefaultCellStyle.BackColor = Color.LightCoral;
+       //         namaProdukTextbox.BackColor = Color.Red;
+            }
+            else
+            {
+                selectedRow.DefaultCellStyle.BackColor = Color.White;
             }
 
         }
@@ -242,8 +248,7 @@ namespace RoyalPetz_ADMIN
                 pengaturanKategoriDataGridView.Rows.Clear();
                 categoryProductValue.Clear();
                 namaProdukTextbox.ReadOnly = false;
-                namaProdukTextbox.BackColor = Color.White;
-
+                textBox1.ReadOnly = false;
                 loadProdukName();
             }
         }

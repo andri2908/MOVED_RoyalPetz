@@ -150,9 +150,9 @@ namespace RoyalPetz_ADMIN
             MySqlException internalEX = null;
 
             string userName = userNameTextBox.Text.Trim();
-            string userFullName = userFullNameTextBox.Text.Trim();
+            string userFullName = MySqlHelper.EscapeString(userFullNameTextBox.Text.Trim());
             string password = passwordTextBox.Text.Trim();
-            string userPhone = userPhoneTextBox.Text.Trim();
+            string userPhone = MySqlHelper.EscapeString(userPhoneTextBox.Text.Trim());
             byte userStatus = 0;
 
             if (nonAktifCheckbox.Checked)

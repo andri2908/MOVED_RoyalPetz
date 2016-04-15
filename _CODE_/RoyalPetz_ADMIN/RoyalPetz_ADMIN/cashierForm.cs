@@ -115,6 +115,9 @@ namespace RoyalPetz_ADMIN
 
                 cashierDataGridView.Rows[cashierDataGridView.Rows.Count - 1].Cells["F8"].Value = prevValue + 1;
             }
+
+            cashierDataGridView.Focus();
+
         }
 
         private void captureAll(Keys key)
@@ -332,7 +335,7 @@ namespace RoyalPetz_ADMIN
                     if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM CUSTOMER_PRODUCT_DISC WHERE CUSTOMER_ID = " + selectedPelangganID + " AND PRODUCT_ID = '" + productID + "'")) > 0)
                     {
                         // DATA EXIST, LOAD DISC VALUE
-                        using (rdr = DS.getData("SELECT * FROM CUSTOMER_PRODUCT_DISC CUSTOMER_ID = " + selectedPelangganID + " AND PRODUCT_ID = '" + productID + "'"))
+                        using (rdr = DS.getData("SELECT * FROM CUSTOMER_PRODUCT_DISC WHERE CUSTOMER_ID = " + selectedPelangganID + " AND PRODUCT_ID = '" + productID + "'"))
                         {
                             if (rdr.HasRows)
                             {
@@ -347,10 +350,22 @@ namespace RoyalPetz_ADMIN
                                 cashierDataGridView.Rows[i].Cells["discRP"].Value = rdr.GetString("DISC_RP");
                                 discRP[i] = rdr.GetString("DISC_RP");
                             }
+                            
                             rdr.Close();
                         }
                     }
-                    
+                    else
+                    {
+                        cashierDataGridView.Rows[i].Cells["disc1"].Value = 0;
+                        disc1[i] = "0";
+
+                        cashierDataGridView.Rows[i].Cells["disc2"].Value = 0;
+                        disc2[i] = "0";
+
+                        cashierDataGridView.Rows[i].Cells["discRP"].Value = 0;
+                        discRP[i] = "0";
+                    }
+
                     cashierDataGridView.Rows[i].Cells["jumlah"].Value = calculateSubTotal(i, productPrice);
                 }
             }
@@ -396,6 +411,25 @@ namespace RoyalPetz_ADMIN
             if (selectedPelangganID == 0)
                 if (DialogResult.No == MessageBox.Show("PELANGGAN KOSONG, LANJUTKAN ?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     return false;
+
+            if (cashRadioButton.Checked)
+            {
+                // CHECK PAYMENT AMOUNT FOR CASH PAYMENT
+                if (bayarTextBox.Text.Length <= 0)
+                {
+                    errorLabel.Text = "JUMLAH PEMBAYARAN 0";
+                    return false;
+                }
+            }
+            else
+            {
+                // CHECK TEMPO
+                if (tempoMaskedTextBox.Text.Length <= 0)
+                {
+                    errorLabel.Text = "LAMA TEMPO TIDAK BOLEH NOL";
+                    return false;
+                }
+            }
 
             errorLabel.Text = "";
             return true;
@@ -454,7 +488,7 @@ namespace RoyalPetz_ADMIN
                 // SAVE HEADER TABLE
                 sqlCommand = "INSERT INTO SALES_HEADER (SALES_INVOICE, CUSTOMER_ID, SALES_DATE, SALES_TOTAL, SALES_DISCOUNT_FINAL, SALES_TOP, SALES_TOP_DATE, SALES_PAID, SALES_PAYMENT, SALES_PAYMENT_CHANGE) " +
                                     "VALUES " +
-                                    "('" + salesInvoice + "', " + selectedPelangganID + ", STR_TO_DATE('" + SODateTime + "', '%d-%m-%Y'), " + globalTotalValue + ", " + salesDiscountFinal + ", " + salesTop + ", STR_TO_DATE('" + SODueDateTime + "', '%d-%m-%Y'), " + salesPaid + ", " + bayarAmount + ", " + sisaBayar + ")";
+                                    "('" + salesInvoice + "', " + selectedPelangganID + ", STR_TO_DATE('" + SODateTime + "', '%d-%m-%Y'), " + gutil.validateDecimalNumericInput(globalTotalValue) + ", " + gutil.validateDecimalNumericInput(Convert.ToDouble(salesDiscountFinal)) + ", " + salesTop + ", STR_TO_DATE('" + SODueDateTime + "', '%d-%m-%Y'), " + salesPaid + ", " + gutil.validateDecimalNumericInput(bayarAmount) + ", " + gutil.validateDecimalNumericInput(sisaBayar) + ")";
                 
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
@@ -472,7 +506,7 @@ namespace RoyalPetz_ADMIN
                         sqlCommand = "INSERT INTO SALES_DETAIL (SALES_INVOICE, PRODUCT_ID, PRODUCT_SALES_PRICE, PRODUCT_QTY, PRODUCT_DISC1, PRODUCT_DISC2, PRODUCT_DISC_RP, SALES_SUBTOTAL) " +
                                             "VALUES " +
                                             "('" + salesInvoice + "', '" + productID + "', " + Convert.ToDouble(cashierDataGridView.Rows[i].Cells["productPrice"].Value) + ", " +
-                                            Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value) + ", " + disc1 + ", " + disc2 + ", " + discRP + ", " + Convert.ToDouble(cashierDataGridView.Rows[i].Cells["jumlah"].Value) + ")";
+                                            gutil.validateDecimalNumericInput(Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value)) + ", " + gutil.validateDecimalNumericInput(disc1) + ", " + gutil.validateDecimalNumericInput(disc2) + ", " + gutil.validateDecimalNumericInput(discRP) + ", " + gutil.validateDecimalNumericInput(Convert.ToDouble(cashierDataGridView.Rows[i].Cells["jumlah"].Value)) + ")";
 
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
@@ -490,13 +524,13 @@ namespace RoyalPetz_ADMIN
                             if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM CUSTOMER_PRODUCT_DISC WHERE CUSTOMER_ID = " + selectedPelangganID + " AND PRODUCT_ID = '" + cashierDataGridView.Rows[i].Cells["productID"].Value.ToString() + "'"))>0)
                             {
                                 // UPDATE VALUE
-                                sqlCommand = "UPDATE CUSTOMER_PRODUCT_DISC SET DISC_1 = " + disc1 + ", DISC_2 = " + disc2 + ", DISC_RP = " + discRP + " WHERE CUSTOMER_ID = " + selectedPelangganID + " AND PRODUCT_ID = '" + productID + "'";
+                                sqlCommand = "UPDATE CUSTOMER_PRODUCT_DISC SET DISC_1 = " + gutil.validateDecimalNumericInput(disc1) + ", DISC_2 = " + gutil.validateDecimalNumericInput(disc2) + ", DISC_RP = " + gutil.validateDecimalNumericInput(discRP) + " WHERE CUSTOMER_ID = " + selectedPelangganID + " AND PRODUCT_ID = '" + productID + "'";
                             }
                             else
                             {
                                 // INSERT VALUE
                                 sqlCommand = "INSERT INTO CUSTOMER_PRODUCT_DISC (CUSTOMER_ID, PRODUCT_ID, DISC_1, DISC_2 , DISC_RP) VALUES " +
-                                                    "(" + selectedPelangganID + ", '" + productID + "', " + disc1 + ", " + disc2 + ", " + discRP + ")";
+                                                    "(" + selectedPelangganID + ", '" + productID + "', " + gutil.validateDecimalNumericInput(disc1) + ", " + gutil.validateDecimalNumericInput(disc2) + ", " + gutil.validateDecimalNumericInput(discRP) + ")";
                             }
 
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
@@ -509,7 +543,7 @@ namespace RoyalPetz_ADMIN
 
                 // SAVE TO CREDIT TABLE
                 sqlCommand = "INSERT INTO CREDIT (SALES_INVOICE, CREDIT_DUE_DATE, CREDIT_NOMINAL, CREDIT_PAID) VALUES " +
-                                    "('" + salesInvoice + "', STR_TO_DATE('" + SODueDateTime + "', '%d-%m-%Y'), " + globalTotalValue + ", " + salesPaid + ")";
+                                    "('" + salesInvoice + "', STR_TO_DATE('" + SODueDateTime + "', '%d-%m-%Y'), " + gutil.validateDecimalNumericInput(globalTotalValue) + ", " + salesPaid + ")";
 
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
@@ -520,7 +554,7 @@ namespace RoyalPetz_ADMIN
                     // PAYMENT IN CASH THEREFORE ADDING THE AMOUNT OF CASH IN THE CASH REGISTER
                     // ADD A NEW ENTRY ON THE DAILY JOURNAL TO KEEP TRACK THE ADDITIONAL CASH AMOUNT 
                     sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
-                                                   "VALUES (1, STR_TO_DATE('" + SODateTime + "', '%d-%m-%Y')" + ", " + globalTotalValue + ", 'PEMBAYARAN " + salesInvoice + "', '" + gutil.getUserID() + "', 1)";
+                                                   "VALUES (1, STR_TO_DATE('" + SODateTime + "', '%d-%m-%Y')" + ", " + gutil.validateDecimalNumericInput(globalTotalValue) + ", 'PEMBAYARAN " + salesInvoice + "', '" + gutil.getUserID() + "', 1)";
 
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
@@ -572,6 +606,7 @@ namespace RoyalPetz_ADMIN
                 totalPenjualanTextBox.Focus();
                 if (saveData())
                 {
+                    PrintReceipt();
                     gutil.showSuccess(gutil.INS);
 
                     isLoading = true;
@@ -589,7 +624,6 @@ namespace RoyalPetz_ADMIN
                     globalTotalValue = 0;
                     discValue = 0;
                     totalLabel.Text = "Rp. 0";
-                    PrintReceipt();
                     gutil.ResetAllControls(this);
                 }
             }
@@ -615,7 +649,7 @@ namespace RoyalPetz_ADMIN
 
             salesInvPrefix = getNoFaktur() + "-";//String.Format(culture, "{0:yyyyMMdd}", localDate);
 
-            sqlCommand = "SELECT IFNULL(MAX(CONVERT(SUBSTRING(SALES_INVOICE, INSTR(SALES_INVOICE,'-')+1), UNSIGNED INTEGER)),'') AS SALES_INVOICE FROM SALES_HEADER WHERE SALES_INVOICE LIKE '" + salesInvPrefix + "%'";
+            sqlCommand = "SELECT IFNULL(MAX(CONVERT(SUBSTRING(SALES_INVOICE, INSTR(SALES_INVOICE,'-')+1), UNSIGNED INTEGER)),'0') AS SALES_INVOICE FROM SALES_HEADER WHERE SALES_INVOICE LIKE '" + salesInvPrefix + "%'";
 
             maxSalesInvoice = DS.getDataSingleValue(sqlCommand).ToString();
             //if (maxSalesInvoice.Length > salesInvPrefix.Length)
@@ -652,7 +686,7 @@ namespace RoyalPetz_ADMIN
             double result = 0;
             string priceType = "";
 
-            DS.mySqlConnect();
+            //DS.mySqlConnect();
 
             if (customerType == 0)
                 priceType = "PRODUCT_RETAIL_PRICE";
@@ -811,8 +845,20 @@ namespace RoyalPetz_ADMIN
                             selectedRow.Cells["discRP"].Value = rdr.GetString("DISC_RP");
                             discRP[rowSelectedIndex] = rdr.GetString("DISC_RP");
                         }
+                  
                         rdr.Close();
                     }
+                }
+                else
+                {
+                    selectedRow.Cells["disc1"].Value = 0;
+                    disc1[rowSelectedIndex] = "0";
+
+                    selectedRow.Cells["disc2"].Value = 0;
+                    disc2[rowSelectedIndex] = "0";
+
+                    selectedRow.Cells["discRP"].Value = 0;
+                    discRP[rowSelectedIndex] = "0";
                 }
             }
 
@@ -844,7 +890,7 @@ namespace RoyalPetz_ADMIN
                 productID = selectedRow.Cells["productID"].Value.ToString();
 
                 if (gutil.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
-                    && (dataGridViewTextBoxEditingControl.Text.Length > 0)
+                    && (dataGridViewTextBoxEditingControl.Text.Length > 0 && dataGridViewTextBoxEditingControl.Text != ".")
                     )
                 {
                     switch (cashierDataGridView.CurrentCell.OwningColumn.Name)
@@ -1063,7 +1109,9 @@ namespace RoyalPetz_ADMIN
         private void calculateTotal()
         {
             double total = 0;
-
+            double discJual = 0;
+            double totalAfterDisc = 0;
+            
             for (int i = 0; i < cashierDataGridView.Rows.Count; i++)
             {
                 if ( null != cashierDataGridView.Rows[i].Cells["jumlah"].Value )
@@ -1071,9 +1119,36 @@ namespace RoyalPetz_ADMIN
             }
 
             globalTotalValue = total;
-            totalLabel.Text = total.ToString("C", culture);
+            totalAfterDisc = total;
+            totalLabel.Text = total.ToString("c2", culture);
 
-            totalPenjualanTextBox.Text = total.ToString("C", culture);
+            totalPenjualanTextBox.Text = total.ToString("c2", culture);
+
+            if (discJualMaskedTextBox.Text.Length > 0)
+            {
+                discJual = Convert.ToDouble(discJualMaskedTextBox.Text);
+                totalAfterDisc = Math.Round(totalAfterDisc - discJual, 2);
+            }
+
+            totalAfterDiscTextBox.Text = totalAfterDisc.ToString("c2", culture);
+
+            calculateChangeValue();
+        }
+
+        private void calculateChangeValue()
+        {
+            double totalAfterDisc = 0;
+            if (bayarTextBox.Text.Length > 0)
+            {
+                bayarAmount = Convert.ToDouble(bayarTextBox.Text);
+                totalAfterDisc = globalTotalValue - discValue;
+                if (bayarAmount > totalAfterDisc)
+                    sisaBayar = bayarAmount - totalAfterDisc;
+                else
+                    sisaBayar = 0;
+
+                uangKembaliTextBox.Text = sisaBayar.ToString("C2", culture);
+            }
         }
 
         private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
@@ -1123,18 +1198,7 @@ namespace RoyalPetz_ADMIN
 
         private void bayarTextBox_TextChanged(object sender, EventArgs e)
         {
-            double totalAfterDisc = 0;
-            if (bayarTextBox.Text.Length > 0)
-            {
-                bayarAmount = Convert.ToDouble(bayarTextBox.Text);
-                totalAfterDisc = globalTotalValue - discValue;
-                if (bayarAmount > totalAfterDisc)
-                    sisaBayar = bayarAmount - totalAfterDisc;
-                else
-                    sisaBayar = 0;
-
-                uangKembaliTextBox.Text = sisaBayar.ToString("C", culture);
-            }
+            calculateChangeValue();
         }
 
         private void paymentComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -1227,13 +1291,13 @@ namespace RoyalPetz_ADMIN
                 //kertas 1/2 kwarto atau kwarto using crystal report
                 //preview laporan
                 DS.mySqlConnect();
-                string sqlCommandx = "select sh.sales_date AS 'DATE', sd.sales_invoice AS 'INVOICE', mc.customer_full_name as 'CUSTOMER', m.product_name AS 'PRODUCT', product_qty AS 'QTY', " + 
-                    "product_sales_price AS 'PRICE', ROUND((product_qty * product_sales_price) - sales_subtotal, 2) as 'POTONGAN', sales_subtotal AS 'SUBTOTAL', sh.SALES_PAYMENT AS 'PAYMENT', sh.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
-                    "from sales_header sh, sales_detail sd, master_product m, master_customer mc where sd.product_id = m.product_id and sd.sales_invoice = sh.sales_invoice and sh.customer_id = mc.customer_id and sh.sales_invoice='" + selectedsalesinvoice + "'" +
-                    "union " +
-                    "select sh.sales_date AS 'DATE', sd.sales_invoice AS 'INVOICE', '' as 'CUSTOMER', m.product_name AS 'PRODUCT', product_qty AS 'QTY', product_sales_price AS 'PRICE', " +
-                    "ROUND((product_qty * product_sales_price) - sales_subtotal, 2) as 'POTONGAN', sales_subtotal AS 'SUBTOTAL', sh.SALES_PAYMENT AS 'PAYMENT', sh.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
-                    "from sales_header sh, sales_detail sd, master_product m where sd.product_id = m.product_id and sd.sales_invoice = sh.sales_invoice and sh.customer_id = 0 and sh.sales_invoice='" + selectedsalesinvoice + "'";
+                string sqlCommandx = "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', MC.CUSTOMER_FULL_NAME AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', PRODUCT_QTY AS 'QTY', " +
+                    "PRODUCT_SALES_PRICE AS 'PRICE', ROUND((PRODUCT_QTY * PRODUCT_SALES_PRICE) - SALES_SUBTOTAL, 2) AS 'POTONGAN', SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
+                    "FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT M, MASTER_CUSTOMER MC WHERE SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND SH.CUSTOMER_ID = MC.CUSTOMER_ID AND SH.SALES_INVOICE='" + selectedsalesinvoice + "'" +
+                    "UNION " +
+                    "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', '' AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', PRODUCT_QTY AS 'QTY', PRODUCT_SALES_PRICE AS 'PRICE', " +
+                    "ROUND((PRODUCT_QTY * PRODUCT_SALES_PRICE) - SALES_SUBTOTAL, 2) AS 'POTONGAN', SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
+                    "FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT M WHERE SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND SH.CUSTOMER_ID = 0 AND SH.SALES_INVOICE='" + selectedsalesinvoice + "'";
                 DS.writeXML(sqlCommandx, globalConstants.SalesReceiptXML);
                 SalesReceiptForm displayedform = new SalesReceiptForm();
                 displayedform.ShowDialog(this);

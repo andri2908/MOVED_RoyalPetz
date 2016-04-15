@@ -16,8 +16,8 @@ namespace RoyalPetz_ADMIN
 {
     public partial class penerimaanBarangForm : Form
     {
-        string selectedInvoice;
-        string selectedMutasi;
+        string selectedInvoice = "";
+        string selectedMutasi = "";
         int originModuleId = 0;
         int selectedFromID = 0;
         int selectedToID = 0;
@@ -423,9 +423,9 @@ namespace RoyalPetz_ADMIN
         {
             double result = 0;
 
-            DS.mySqlConnect();
+            //DS.mySqlConnect();
 
-            result = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(PRODUCT_BASE_PRICE, 0) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
+            result = Convert.ToDouble(DS.getDataSingleValue("SELECT PRODUCT_BASE_PRICE FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
 
             return result;
         }
@@ -466,6 +466,9 @@ namespace RoyalPetz_ADMIN
 
             DataGridViewComboBoxCell productIDComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productID"];
             DataGridViewComboBoxCell productNameComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productName"];
+
+            if (selectedIndex < 0)
+                return;
 
             selectedProductID = productIDComboCell.Items[selectedIndex].ToString();
             productIDComboCell.Value = productIDComboCell.Items[selectedIndex];
@@ -583,7 +586,7 @@ namespace RoyalPetz_ADMIN
         {
             bool result = false;
 
-            if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM PRODUCTS_RECEIVED_HEADER WHERE PR_INVOICE = '" + prInvoiceTextBox.Text + "'")) > 0)
+            if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM PRODUCTS_RECEIVED_HEADER WHERE PR_INVOICE = '" + MySqlHelper.EscapeString(prInvoiceTextBox.Text) + "'")) > 0)
                 result = true;
 
             return result;

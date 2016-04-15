@@ -339,7 +339,7 @@ namespace RoyalPetz_ADMIN
         private void toolStripMenuItem63_Click(object sender, EventArgs e)
         {
             //dataMutasiBarangForm displayedForm = new dataMutasiBarangForm(globalConstants.CEK_DATA_MUTASI);
-            dataPermintaanForm displayedForm = new dataPermintaanForm(globalConstants.CEK_DATA_MUTASI);
+            dataPermintaanForm displayedForm = new dataPermintaanForm(globalConstants.PERMINTAAN_BARANG);
             displayedForm.ShowDialog(this);
         }
 
@@ -541,7 +541,7 @@ namespace RoyalPetz_ADMIN
 
         private void adminForm_Deactivate(object sender, EventArgs e)
         {
-            timer1.Stop();
+            //timer1.Stop();
         }
 
         private void adminForm_Activated(object sender, EventArgs e)
@@ -717,7 +717,6 @@ namespace RoyalPetz_ADMIN
             if (userAccessRight <= 0)
                 menuItem.Visible = false;
         }
-
         
         private void activateUserAccessRight()
         {

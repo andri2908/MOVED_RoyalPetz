@@ -286,26 +286,26 @@ namespace RoyalPetz_ADMIN
 
         private void custTelTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (gUtil.matchRegEx(custTelTextBox.Text, globalUtilities.REGEX_NUMBER_ONLY))
-            {
-                previousInputPhone = custTelTextBox.Text;
-            }
-            else
-            {
-                custTelTextBox.Text = previousInputPhone;
-            }
+            //if (gUtil.matchRegEx(custTelTextBox.Text, globalUtilities.REGEX_NUMBER_ONLY))
+            //{
+            //    previousInputPhone = custTelTextBox.Text;
+            //}
+            //else
+            //{
+            //    custTelTextBox.Text = previousInputPhone;
+            //}
         }
 
         private void custFaxTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (gUtil.matchRegEx(custFaxTextBox.Text, globalUtilities.REGEX_NUMBER_ONLY))
-            {
-                previousInputFax= custFaxTextBox.Text;
-            }
-            else
-            {
-                custFaxTextBox.Text = previousInputFax;
-            }
+            //if (gUtil.matchRegEx(custFaxTextBox.Text, globalUtilities.REGEX_NUMBER_ONLY))
+            //{
+            //    previousInputFax= custFaxTextBox.Text;
+            //}
+            //else
+            //{
+            //    custFaxTextBox.Text = previousInputFax;
+            //}
         }
 
         private void button1_Click(object sender, EventArgs e)

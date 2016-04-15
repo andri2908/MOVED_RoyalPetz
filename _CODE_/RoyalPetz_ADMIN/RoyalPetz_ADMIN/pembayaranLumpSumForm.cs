@@ -546,7 +546,7 @@ namespace RoyalPetz_ADMIN
             if (saveData())
             {
                 if (changeAmount > 0 && originModuleID != globalConstants.DATA_PIUTANG_MUTASI)
-                    MessageBox.Show("UANG KEMBALI SEBESAR " + changeAmount.ToString("C", culture));
+                    MessageBox.Show("UANG KEMBALI SEBESAR " + changeAmount.ToString("C2", culture));
 
                 gutil.showSuccess(gutil.INS);
 
@@ -570,7 +570,7 @@ namespace RoyalPetz_ADMIN
             totalCredit = getTotalCredit();
             totalPayment = getTotalPayment();
             globalTotalValue = totalCredit - totalPayment;
-            totalLabel.Text = (globalTotalValue).ToString("C", culture);
+            totalLabel.Text = (globalTotalValue).ToString("C2", culture);
 
             if (globalTotalValue <= 0)
                 saveButton.Enabled = false;

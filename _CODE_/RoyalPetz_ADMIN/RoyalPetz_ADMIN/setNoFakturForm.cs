@@ -119,6 +119,7 @@ namespace RoyalPetz_ADMIN
             if (saveData())
             {
                 gutil.showSuccess(gutil.UPD);
+                errorLabel.Text = "";
             }
         }
 

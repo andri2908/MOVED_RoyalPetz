@@ -272,6 +272,18 @@ namespace RoyalPetz_ADMIN
             }
         }
 
+        public string validateDecimalNumericInput(double inputNumeric)
+        {
+            char charToCheck = ',';
+            char replacementChar = '.';
+            string tempInputNumeric = "";
+            string inputNumericString = inputNumeric.ToString();
+
+            tempInputNumeric = inputNumericString.Replace(charToCheck, replacementChar);
+
+            return tempInputNumeric; 
+        }
+
         public void reArrangeTabOrder(Control form)
         {
             TabOrderManager.TabScheme scheme;

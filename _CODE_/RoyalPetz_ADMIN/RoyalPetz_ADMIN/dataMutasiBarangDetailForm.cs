@@ -180,6 +180,9 @@ namespace RoyalPetz_ADMIN
             DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[rowSelectedIndex];
             cmbSelectedIndex = dataGridViewComboBoxEditingControl.SelectedIndex;
 
+            if (cmbSelectedIndex < 0)
+                return;
+
             // get product id
             DataGridViewComboBoxCell productIDComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productID"];
             DataGridViewComboBoxCell productNameComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productName"];
@@ -870,6 +873,12 @@ namespace RoyalPetz_ADMIN
             if (globalTotalValue == 0)
             {
                 errorLabel.Text = "NILAI MUTASI 0";
+                return false;
+            }
+
+            if (selectedBranchToID == 0)
+            {
+                errorLabel.Text = "TUJUAN MUTASI KOSONG";
                 return false;
             }
 
