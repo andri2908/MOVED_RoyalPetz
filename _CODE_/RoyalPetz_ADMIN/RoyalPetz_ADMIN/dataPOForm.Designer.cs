@@ -203,6 +203,8 @@
             // 
             // supplierCombo
             // 
+            this.supplierCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.supplierCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.supplierCombo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.supplierCombo.FormattingEnabled = true;
             this.supplierCombo.Location = new System.Drawing.Point(185, 75);
@@ -236,6 +238,7 @@
             this.dataPurchaseOrder.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataPurchaseOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataPurchaseOrder.Location = new System.Drawing.Point(0, 211);
+            this.dataPurchaseOrder.MultiSelect = false;
             this.dataPurchaseOrder.Name = "dataPurchaseOrder";
             this.dataPurchaseOrder.RowHeadersVisible = false;
             this.dataPurchaseOrder.Size = new System.Drawing.Size(921, 427);

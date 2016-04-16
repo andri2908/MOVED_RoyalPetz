@@ -69,6 +69,7 @@
             this.dataRequestOrderGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataRequestOrderGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataRequestOrderGridView.Location = new System.Drawing.Point(-1, 221);
+            this.dataRequestOrderGridView.MultiSelect = false;
             this.dataRequestOrderGridView.Name = "dataRequestOrderGridView";
             this.dataRequestOrderGridView.RowHeadersVisible = false;
             this.dataRequestOrderGridView.Size = new System.Drawing.Size(940, 417);
@@ -161,6 +162,8 @@
             // branchToCombo
             // 
             this.branchToCombo.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.branchToCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.branchToCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.branchToCombo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.branchToCombo.FormattingEnabled = true;
             this.branchToCombo.Location = new System.Drawing.Point(150, 110);
@@ -171,6 +174,8 @@
             // 
             // branchFromCombo
             // 
+            this.branchFromCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.branchFromCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.branchFromCombo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.branchFromCombo.FormattingEnabled = true;
             this.branchFromCombo.Location = new System.Drawing.Point(150, 75);

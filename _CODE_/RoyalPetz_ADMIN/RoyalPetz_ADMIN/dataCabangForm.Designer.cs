@@ -73,6 +73,7 @@
             this.dataCabangGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataCabangGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataCabangGridView.Location = new System.Drawing.Point(0, 77);
+            this.dataCabangGridView.MultiSelect = false;
             this.dataCabangGridView.Name = "dataCabangGridView";
             this.dataCabangGridView.ReadOnly = true;
             this.dataCabangGridView.RowHeadersVisible = false;

@@ -97,6 +97,8 @@
             // 
             // sizeComboBox
             // 
+            this.sizeComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.sizeComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.sizeComboBox.FormattingEnabled = true;
             this.sizeComboBox.Items.AddRange(new object[] {
             "POS Receipt",

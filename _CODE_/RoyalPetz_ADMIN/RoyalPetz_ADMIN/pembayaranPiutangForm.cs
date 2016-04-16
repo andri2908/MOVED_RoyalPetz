@@ -91,7 +91,6 @@ namespace RoyalPetz_ADMIN
             return result;
         }
 
-
         private void loadDataDetailSO()
         {
             MySqlDataReader rdr;
@@ -188,12 +187,6 @@ namespace RoyalPetz_ADMIN
         {
             double nominalPayment;
 
-            if ( 0 == getBranchID())
-            {
-                errorLabel.Text = "BRANCH ID BELUM DISET";
-                return false;
-            }
-
             nominalPayment = Convert.ToDouble(paymentMaskedTextBox.Text);
             if (nominalPayment > globalTotalValue)
             {
@@ -288,8 +281,8 @@ namespace RoyalPetz_ADMIN
                 {
                     // PAYMENT IN CASH THEREFORE ADDING THE AMOUNT OF CASH IN THE CASH REGISTER
                     // ADD A NEW ENTRY ON THE DAILY JOURNAL TO KEEP TRACK THE ADDITIONAL CASH AMOUNT 
-                    sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
-                                                   "VALUES (1, STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y')" + ", " + paymentNominal + ", 'PEMBAYARAN PIUTANG " + selectedSOInvoice + "', '" + gutil.getUserID() + "', 1)";
+                    sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, BRANCH_ID, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
+                                                   "VALUES (1, STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y')" + ", " + paymentNominal + ", " + branchID + ", 'PEMBAYARAN PIUTANG " + selectedSOInvoice + "', '" + gutil.getUserID() + "', 1)";
 
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;

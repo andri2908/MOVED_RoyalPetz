@@ -95,6 +95,7 @@
             this.detailRequestOrderDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.detailRequestOrderDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.detailRequestOrderDataGridView.Location = new System.Drawing.Point(0, 308);
+            this.detailRequestOrderDataGridView.MultiSelect = false;
             this.detailRequestOrderDataGridView.Name = "detailRequestOrderDataGridView";
             this.detailRequestOrderDataGridView.RowHeadersVisible = false;
             this.detailRequestOrderDataGridView.Size = new System.Drawing.Size(894, 297);

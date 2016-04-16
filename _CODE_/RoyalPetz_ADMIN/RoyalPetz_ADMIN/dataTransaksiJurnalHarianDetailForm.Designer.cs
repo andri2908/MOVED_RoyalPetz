@@ -232,6 +232,8 @@
             // carabayarcombobox
             // 
             this.carabayarcombobox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.carabayarcombobox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.carabayarcombobox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.carabayarcombobox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.carabayarcombobox.FormattingEnabled = true;
             this.carabayarcombobox.Location = new System.Drawing.Point(216, 81);
@@ -352,6 +354,8 @@
             // branchCombobox
             // 
             this.branchCombobox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.branchCombobox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.branchCombobox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.branchCombobox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.branchCombobox.FormattingEnabled = true;
             this.branchCombobox.Location = new System.Drawing.Point(216, 150);

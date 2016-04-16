@@ -73,6 +73,7 @@
             this.dataUnitGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataUnitGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataUnitGridView.Location = new System.Drawing.Point(0, 70);
+            this.dataUnitGridView.MultiSelect = false;
             this.dataUnitGridView.Name = "dataUnitGridView";
             this.dataUnitGridView.ReadOnly = true;
             this.dataUnitGridView.RowHeadersVisible = false;

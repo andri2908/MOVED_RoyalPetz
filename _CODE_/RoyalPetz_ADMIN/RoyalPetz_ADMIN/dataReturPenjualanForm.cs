@@ -74,7 +74,8 @@ namespace RoyalPetz_ADMIN
             
             if (originModuleID == globalConstants.RETUR_PENJUALAN)
                 sqlCommand = "SELECT M.PRODUCT_ID, M.PRODUCT_NAME FROM MASTER_PRODUCT M, SALES_DETAIL SD " +
-                                    "WHERE SD.SALES_INVOICE = '" + selectedSalesInvoice + "' AND SD.PRODUCT_ID = M.PRODUCT_ID";
+                                    "WHERE SD.SALES_INVOICE = '" + selectedSalesInvoice + "' AND SD.PRODUCT_ID = M.PRODUCT_ID " + 
+                                    "GROUP BY M.PRODUCT_ID";
             else
                 sqlCommand = "SELECT M.PRODUCT_ID, M.PRODUCT_NAME FROM MASTER_PRODUCT M, SALES_DETAIL SD, SALES_HEADER SH " +
                                     "WHERE PRODUCT_ACTIVE = 1 AND SH.SALES_INVOICE = SD.SALES_INVOICE AND SD.PRODUCT_ID = M.PRODUCT_ID AND SH.CUSTOMER_ID = " + selectedCustomerID + 
@@ -182,7 +183,7 @@ namespace RoyalPetz_ADMIN
             string sqlCommand = "";
             DS.mySqlConnect();
 
-            sqlCommand = "SELECT PRODUCT_QTY FROM SALES_DETAIL WHERE SALES_INVOICE = '" + selectedSalesInvoice + "' AND PRODUCT_ID = '" + productID + "'";
+            sqlCommand = "SELECT SUM(PRODUCT_QTY) FROM SALES_DETAIL WHERE SALES_INVOICE = '" + selectedSalesInvoice + "' AND PRODUCT_ID = '" + productID + "'";
             result = Convert.ToDouble(DS.getDataSingleValue(sqlCommand));
 
             return result;
@@ -248,7 +249,7 @@ namespace RoyalPetz_ADMIN
             double productPrice = 0;
             string productID = "";
             double soQTY = 0;
-
+            bool validQty = false;
             DataGridViewTextBoxEditingControl dataGridViewTextBoxEditingControl = sender as DataGridViewTextBoxEditingControl;
 
             rowSelectedIndex = detailReturDataGridView.SelectedCells[0].RowIndex;
@@ -262,12 +263,21 @@ namespace RoyalPetz_ADMIN
             else
                 previousInput = "0";
 
-            if (null != selectedRow.Cells["SOqty"].Value)
-                soQTY = Convert.ToDouble(selectedRow.Cells["SOqty"].Value);
+            if (originModuleID == globalConstants.RETUR_PENJUALAN)
+            {
+                if (null != selectedRow.Cells["SOqty"].Value)
+                    soQTY = Convert.ToDouble(selectedRow.Cells["SOqty"].Value);
+
+                if (soQTY >= Convert.ToDouble(dataGridViewTextBoxEditingControl.Text))
+                    validQty = true;
+                else
+                    validQty = false;
+            }
+            else
+                validQty = true;
 
             if (gutil.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
-                && (dataGridViewTextBoxEditingControl.Text.Length > 0)
-                && soQTY >= Convert.ToDouble(dataGridViewTextBoxEditingControl.Text)
+                && (dataGridViewTextBoxEditingControl.Text.Length > 0) && validQty
                 )
             {
                 if (returnQty.Count > rowSelectedIndex)
@@ -315,7 +325,7 @@ namespace RoyalPetz_ADMIN
 
             // GLOBAL SALES TOTAL VALUE WITHOUT ANY PAYMENT / RETURN
             resultValue = Convert.ToDouble(DS.getDataSingleValue("SELECT SALES_TOTAL FROM SALES_HEADER WHERE SALES_INVOICE = '" + selectedSalesInvoice + "'"));
-            result = resultValue.ToString("C", culture);
+            result = resultValue.ToString("C2", culture);
 
             return result;
         }
@@ -491,8 +501,8 @@ namespace RoyalPetz_ADMIN
                         {
                             // RETUR VALUE LESS THAN OR EQUAL TOTAL CREDIT
                             // add retur as cash payment with description retur no
-                            sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED) VALUES " +
-                                                "(" + selectedCreditID + ", STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), 1, " + globalTotalValue + ", 'RETUR [" + returID + "]', 1)";
+                            sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED, PAYMENT_DUE_DATE, PAYMENT_CONFIRMED_DATE) VALUES " +
+                                                "(" + selectedCreditID + ", STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), 1, " + globalTotalValue + ", 'RETUR [" + returID + "]', 1, STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'))";
                 
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;
@@ -502,9 +512,9 @@ namespace RoyalPetz_ADMIN
                             // RETUR VALUE BIGGER THAN TOTAL CREDIT
                             // return the extra amount as cash
                             extraAmount = globalTotalValue - totalCredit;
-                            sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED) VALUES " +
-                                                "(" + selectedCreditID + ", STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), 1, " + totalCredit + ", 'RETUR [" + noReturTextBox.Text + "]', 1)";
-                        
+                            sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED, PAYMENT_DUE_DATE, PAYMENT_CONFIRMED_DATE) VALUES " +
+                                                "(" + selectedCreditID + ", STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), 1, " + totalCredit + ", 'RETUR [" + noReturTextBox.Text + "]', 1, STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'))";
+
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;
                         }
@@ -563,8 +573,8 @@ namespace RoyalPetz_ADMIN
                                 else
                                     actualReturAmount = returNominal;
 
-                                sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED) VALUES " +
-                                                    "(" + currentCreditID + ", STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), 1, " + actualReturAmount + ", 'RETUR [" + returID + "]', 1)";
+                                sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED, PAYMENT_DUE_DATE, PAYMENT_CONFIRMED_DATE) VALUES " +
+                                                    "(" + currentCreditID + ", STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), 1, " + actualReturAmount + ", 'RETUR [" + returID + "]', 1, STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'))";
 
                                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                     throw internalEX;

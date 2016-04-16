@@ -84,6 +84,7 @@
             this.dataSupplierDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataSupplierDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataSupplierDataGridView.Location = new System.Drawing.Point(0, 68);
+            this.dataSupplierDataGridView.MultiSelect = false;
             this.dataSupplierDataGridView.Name = "dataSupplierDataGridView";
             this.dataSupplierDataGridView.ReadOnly = true;
             this.dataSupplierDataGridView.RowHeadersVisible = false;

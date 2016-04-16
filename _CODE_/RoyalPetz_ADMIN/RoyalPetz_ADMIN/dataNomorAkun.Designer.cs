@@ -73,12 +73,15 @@
             this.dataAccountGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataAccountGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataAccountGridView.Location = new System.Drawing.Point(0, 72);
+            this.dataAccountGridView.MultiSelect = false;
             this.dataAccountGridView.Name = "dataAccountGridView";
             this.dataAccountGridView.ReadOnly = true;
             this.dataAccountGridView.RowHeadersVisible = false;
             this.dataAccountGridView.Size = new System.Drawing.Size(505, 475);
             this.dataAccountGridView.TabIndex = 33;
             this.dataAccountGridView.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataAccountGridView_CellContentDoubleClick);
+            this.dataAccountGridView.DoubleClick += new System.EventHandler(this.dataAccountGridView_DoubleClick);
+            this.dataAccountGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataAccountGridView_KeyDown);
             // 
             // newButton
             // 

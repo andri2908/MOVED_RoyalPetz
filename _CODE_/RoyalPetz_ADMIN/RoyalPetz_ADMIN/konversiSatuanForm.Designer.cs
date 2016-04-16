@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.convertValueTextBox = new System.Windows.Forms.TextBox();
             this.unit2Combo = new System.Windows.Forms.ComboBox();
@@ -53,7 +53,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 89.55823F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 192F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 224F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 225F));
             this.tableLayoutPanel1.Controls.Add(this.convertValueTextBox, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.unit2Combo, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 2, 0);
@@ -71,7 +71,7 @@
             // 
             this.convertValueTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.convertValueTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.convertValueTextBox.Location = new System.Drawing.Point(290, 11);
+            this.convertValueTextBox.Location = new System.Drawing.Point(289, 11);
             this.convertValueTextBox.MaxLength = 13;
             this.convertValueTextBox.Name = "convertValueTextBox";
             this.convertValueTextBox.Size = new System.Drawing.Size(180, 27);
@@ -82,9 +82,11 @@
             // unit2Combo
             // 
             this.unit2Combo.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.unit2Combo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.unit2Combo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.unit2Combo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unit2Combo.FormattingEnabled = true;
-            this.unit2Combo.Location = new System.Drawing.Point(479, 12);
+            this.unit2Combo.Location = new System.Drawing.Point(478, 12);
             this.unit2Combo.Name = "unit2Combo";
             this.unit2Combo.Size = new System.Drawing.Size(204, 26);
             this.unit2Combo.TabIndex = 35;
@@ -97,7 +99,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(259, 16);
+            this.label1.Location = new System.Drawing.Point(258, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(21, 18);
             this.label1.TabIndex = 10;
@@ -118,6 +120,8 @@
             // unit1Combo
             // 
             this.unit1Combo.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.unit1Combo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.unit1Combo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.unit1Combo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unit1Combo.FormattingEnabled = true;
             this.unit1Combo.Location = new System.Drawing.Point(29, 12);
@@ -166,14 +170,14 @@
             this.dataConvertGridView.AllowUserToAddRows = false;
             this.dataConvertGridView.AllowUserToDeleteRows = false;
             this.dataConvertGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataConvertGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataConvertGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataConvertGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataConvertGridView.Location = new System.Drawing.Point(1, 94);
             this.dataConvertGridView.Name = "dataConvertGridView";

@@ -309,6 +309,15 @@ namespace RoyalPetz_ADMIN
             //loadDataPayment(creditID);
         }
 
+        private int getBranchID()
+        {
+            int result;
+
+            result = Convert.ToInt32(DS.getDataSingleValue("SELECT IFNULL(BRANCH_ID, 0) FROM SYS_CONFIG WHERE ID = 2"));
+
+            return result;
+        }
+
         private bool dataValidated()
         {
             if (Convert.ToDouble(paymentMaskedTextBox.Text) <= 0)
@@ -374,6 +383,8 @@ namespace RoyalPetz_ADMIN
                 selectedPaymentDueDate = cairDTPicker.Value;
                 paymentDueDateTime = String.Format(culture, "{0:dd-MM-yyyy}", selectedPaymentDueDate);
             }
+
+            branchID = getBranchID();
 
             DS.beginTransaction();
 
@@ -480,8 +491,8 @@ namespace RoyalPetz_ADMIN
                             // PAYMENT IN CASH THEREFORE ADDING THE AMOUNT OF CASH IN THE CASH REGISTER
                             // ADD A NEW ENTRY ON THE DAILY JOURNAL TO KEEP TRACK THE ADDITIONAL CASH AMOUNT 
                             noInvoice = DS.getDataSingleValue("SELECT IFNULL(SALES_INVOICE, '') FROM CREDIT WHERE CREDIT_ID = " + currentCreditID).ToString();
-                            sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
-                                                               "VALUES (1, STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y')" + ", " + actualPaymentAmount + ", 'PEMBAYARAN PIUTANG " + noInvoice + "', '" + gutil.getUserID() + "', 1)";
+                            sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, BRANCH_ID, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
+                                                               "VALUES (1, STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y')" + ", " + actualPaymentAmount + ", " + branchID + ", 'PEMBAYARAN PIUTANG " + noInvoice + "', '" + gutil.getUserID() + "', 1)";
                             
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;

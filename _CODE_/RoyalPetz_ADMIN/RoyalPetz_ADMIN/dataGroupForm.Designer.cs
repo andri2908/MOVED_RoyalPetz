@@ -73,6 +73,7 @@
             this.dataUserGroupGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataUserGroupGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataUserGroupGridView.Location = new System.Drawing.Point(0, 74);
+            this.dataUserGroupGridView.MultiSelect = false;
             this.dataUserGroupGridView.Name = "dataUserGroupGridView";
             this.dataUserGroupGridView.ReadOnly = true;
             this.dataUserGroupGridView.RowHeadersVisible = false;

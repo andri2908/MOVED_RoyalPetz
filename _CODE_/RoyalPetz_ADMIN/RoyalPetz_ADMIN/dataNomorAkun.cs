@@ -155,6 +155,18 @@ namespace RoyalPetz_ADMIN
 
             */
         }
-    
+
+        private void dataAccountGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                if (dataAccountGridView.Rows.Count > 0)
+                    displaySpecificForm();
+        }
+
+        private void dataAccountGridView_DoubleClick(object sender, EventArgs e)
+        {
+            if (dataAccountGridView.Rows.Count > 0)
+                displaySpecificForm();
+        }
     }
 }
