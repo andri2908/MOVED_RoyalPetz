@@ -108,15 +108,15 @@ namespace RoyalPetz_ADMIN
 
             for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count; i++)
             {
-                total = total + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value);
+                total = total + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subtotal"].Value);
             }
 
             globalTotalValue = total;
 
             if (!directMutasiBarang)
-                totalApproved.Text = total.ToString("C", culture);
+                totalApproved.Text = total.ToString("C2", culture);
             else
-                totalLabel.Text = total.ToString("C", culture);
+                totalLabel.Text = total.ToString("C2", culture);
         }
 
         private bool stockIsEnough(string productID, double qtyRequested)
@@ -311,8 +311,8 @@ namespace RoyalPetz_ADMIN
 
                         selectedROInvoice = rdr.GetString("RO_INVOICE");
 
-                        totalLabel.Text = rdr.GetDouble("RO_TOTAL").ToString("C", culture);
-                        totalApproved.Text = rdr.GetDouble("RO_TOTAL").ToString("C", culture);
+                        totalLabel.Text = rdr.GetDouble("RO_TOTAL").ToString("C2", culture);
+                        totalApproved.Text = rdr.GetDouble("RO_TOTAL").ToString("C2", culture);
                         globalTotalValue = rdr.GetDouble("RO_TOTAL");
                     }
 
@@ -344,8 +344,8 @@ namespace RoyalPetz_ADMIN
 
                         selectedROInvoice = rdr.GetString("RO_INVOICE");
 
-                        totalLabel.Text = rdr.GetDouble("PM_TOTAL").ToString("C", culture);
-                        totalApproved.Text = rdr.GetDouble("PM_TOTAL").ToString("C", culture);
+                        totalLabel.Text = rdr.GetDouble("PM_TOTAL").ToString("C2", culture);
+                        totalApproved.Text = rdr.GetDouble("PM_TOTAL").ToString("C2", culture);
                         globalTotalValue = rdr.GetDouble("PM_TOTAL");
                     }
 
@@ -391,12 +391,12 @@ namespace RoyalPetz_ADMIN
 
                         subTotal = Math.Round((hpp*qtyApproved),2);
 
-                        detailRequestOrderDataGridView.Rows.Add(productName, rdr.GetString("RO_QTY"), qtyApproved.ToString(), hpp.ToString(), subTotal.ToString(), rdr.GetString("PRODUCT_ID"));
+                        detailRequestOrderDataGridView.Rows.Add(rdr.GetString("PRODUCT_ID"), productName, rdr.GetString("RO_QTY"), qtyApproved.ToString(), hpp.ToString(), subTotal.ToString());
                         detailRequestQtyApproved.Add(qtyApproved.ToString());
                     }
                     else
                     {
-                        detailRequestOrderDataGridView.Rows.Add(productName, "0", rdr.GetString("PRODUCT_QTY"), rdr.GetString("PRODUCT_BASE_PRICE"), rdr.GetString("PM_SUBTOTAL"), rdr.GetString("PRODUCT_ID"));
+                        detailRequestOrderDataGridView.Rows.Add(rdr.GetString("PRODUCT_ID"), productName, "0", rdr.GetString("PRODUCT_QTY"), rdr.GetString("PRODUCT_BASE_PRICE"), rdr.GetString("PM_SUBTOTAL"));
                         detailRequestQtyApproved.Add(rdr.GetString("PRODUCT_QTY"));
                     }
                 }
@@ -767,7 +767,7 @@ namespace RoyalPetz_ADMIN
 
                         // SAVE HEADER TABLE
                         sqlCommand = "INSERT INTO PRODUCTS_MUTATION_HEADER (PM_INVOICE, BRANCH_ID_FROM, BRANCH_ID_TO, PM_DATETIME, PM_TOTAL, RO_INVOICE) VALUES " +
-                                            "('" + noMutasi + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + PMDateTime + "', '%d-%m-%Y'), " + PMTotal + ", '" + roInvoice + "')";
+                                            "('" + noMutasi + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + PMDateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(PMTotal) + ", '" + roInvoice + "')";
                         DS.executeNonQueryCommand(sqlCommand);
 
                         // SAVE DETAIL TABLE
@@ -782,7 +782,7 @@ namespace RoyalPetz_ADMIN
                                 qtyApproved = 0;
 
                             sqlCommand = "INSERT INTO PRODUCTS_MUTATION_DETAIL (PM_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, PRODUCT_QTY, PM_SUBTOTAL) VALUES " +
-                                                "('" + noMutasi + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["hpp"].Value) + ", " + qtyApproved + ", " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value) + ")";
+                                                "('" + noMutasi + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["hpp"].Value) + ", " + qtyApproved + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value)) + ")";
 
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;
@@ -798,7 +798,7 @@ namespace RoyalPetz_ADMIN
 
                         // INSERT CREDIT TABLE FOR THAT PARTICULAR BRANCH
                         sqlCommand = "INSERT INTO CREDIT (PM_INVOICE, CREDIT_DUE_DATE, CREDIT_NOMINAL, CREDIT_PAID) VALUES " +
-                                            "('" + noMutasi + "', STR_TO_DATE('" + PMDateTime + "', '%d-%m-%Y'), " + PMTotal + ", 0)"; 
+                                            "('" + noMutasi + "', STR_TO_DATE('" + PMDateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(PMTotal) + ", 0)"; 
                     
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;

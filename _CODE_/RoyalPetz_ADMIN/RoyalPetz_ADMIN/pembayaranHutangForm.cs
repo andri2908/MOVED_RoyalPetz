@@ -248,7 +248,7 @@ namespace RoyalPetz_ADMIN
 
                 // SAVE HEADER TABLE
                 sqlCommand = "INSERT INTO PAYMENT_DEBT (DEBT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED, PAYMENT_DUE_DATE) VALUES " +
-                                    "(" + selectedDebtID+ ", STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y'), 1, " + paymentNominal + ", '" + paymentDescription + "', " + paymentConfirmed + ", STR_TO_DATE('" + paymentDueDateTime + "', '%d-%m-%Y'))";
+                                    "(" + selectedDebtID+ ", STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y'), 1, " + gutil.validateDecimalNumericInput(paymentNominal) + ", '" + paymentDescription + "', " + paymentConfirmed + ", STR_TO_DATE('" + paymentDueDateTime + "', '%d-%m-%Y'))";
 
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;

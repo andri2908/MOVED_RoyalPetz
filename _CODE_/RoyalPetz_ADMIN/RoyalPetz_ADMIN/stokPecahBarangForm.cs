@@ -271,7 +271,7 @@ namespace RoyalPetz_ADMIN
                 DS.mySqlConnect();
 
                 //REDUCE CURRENT STOCK QTY
-                sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + Convert.ToDouble(numberOfProductTextBox.Text) + " WHERE ID = " + selectedInternalProductID;
+                sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + gUtil.validateDecimalNumericInput(Convert.ToDouble(numberOfProductTextBox.Text)) + " WHERE ID = " + selectedInternalProductID;
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
 
@@ -284,7 +284,7 @@ namespace RoyalPetz_ADMIN
                 {
                     // INSERT INTO PRODUCT LOSS TABLE
                     sqlCommand = "INSERT INTO PRODUCT_LOSS (PL_DATETIME, PRODUCT_ID, PRODUCT_QTY, NEW_PRODUCT_ID, NEW_PRODUCT_QTY, TOTAL_LOSS) " +
-                                        "VALUES (STR_TO_DATE('" + pl_Date + "', '%d-%m-%Y'), " + selectedInternalProductID + ", " + Convert.ToDouble(numberOfProductTextBox.Text) + ", " + newSelectedInternalProductID + ", " + Convert.ToDouble(resultTextBox.Text) + ", " + productLoss + ")";
+                                        "VALUES (STR_TO_DATE('" + pl_Date + "', '%d-%m-%Y'), " + selectedInternalProductID + ", " + Convert.ToDouble(numberOfProductTextBox.Text) + ", " + newSelectedInternalProductID + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(resultTextBox.Text)) + ", " + gUtil.validateDecimalNumericInput(productLoss) + ")";
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
                 }

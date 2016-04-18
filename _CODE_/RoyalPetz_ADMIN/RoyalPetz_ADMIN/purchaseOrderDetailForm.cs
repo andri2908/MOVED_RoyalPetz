@@ -509,7 +509,7 @@ namespace RoyalPetz_ADMIN
                     case globalConstants.PURCHASE_ORDER_DARI_RO:
                         // SAVE HEADER TABLE
                         sqlCommand = "INSERT INTO PURCHASE_HEADER (PURCHASE_INVOICE, SUPPLIER_ID, PURCHASE_DATETIME, PURCHASE_TOTAL, PURCHASE_TERM_OF_PAYMENT, PURCHASE_TERM_OF_PAYMENT_DURATION, PURCHASE_PAID) VALUES " +
-                                            "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + POTotal + ", " + termOfPayment + ", " + termOfPaymentDuration + ", '" + purchasePaid + ")";
+                                            "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(POTotal) + ", " + termOfPayment + ", " + termOfPaymentDuration + ", '" + purchasePaid + ")";
 
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
@@ -520,7 +520,7 @@ namespace RoyalPetz_ADMIN
                             if (null != detailPODataGridView.Rows[i].Cells["productID"].Value)
                             { 
                                 sqlCommand = "INSERT INTO PURCHASE_DETAIL (PURCHASE_INVOICE, PRODUCT_ID, PRODUCT_PRICE, PRODUCT_QTY, PURCHASE_SUBTOTAL) VALUES " +
-                                                    "('" + POInvoice + "', '" + detailPODataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["qty"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["subTotal"].Value) + ")";
+                                                    "('" + POInvoice + "', '" + detailPODataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["qty"].Value) + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailPODataGridView.Rows[i].Cells["subTotal"].Value)) + ")";
 
                                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                     throw internalEX;
@@ -545,7 +545,7 @@ namespace RoyalPetz_ADMIN
                     case globalConstants.NEW_PURCHASE_ORDER:
                         // SAVE HEADER TABLE
                         sqlCommand = "INSERT INTO PURCHASE_HEADER (PURCHASE_INVOICE, SUPPLIER_ID, PURCHASE_DATETIME, PURCHASE_TOTAL, PURCHASE_TERM_OF_PAYMENT, PURCHASE_TERM_OF_PAYMENT_DURATION, PURCHASE_PAID) VALUES " +
-                                            "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + POTotal + ", " + termOfPayment + ", " + termOfPaymentDuration + ", " + purchasePaid + ")";
+                                            "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(POTotal) + ", " + termOfPayment + ", " + termOfPaymentDuration + ", " + purchasePaid + ")";
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
@@ -555,7 +555,7 @@ namespace RoyalPetz_ADMIN
                             if (null != detailPODataGridView.Rows[i].Cells["productID"].Value)
                             {
                                 sqlCommand = "INSERT INTO PURCHASE_DETAIL (PURCHASE_INVOICE, PRODUCT_ID, PRODUCT_PRICE, PRODUCT_QTY, PURCHASE_SUBTOTAL) VALUES " +
-                                                    "('" + POInvoice + "', '" + detailPODataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["qty"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["subTotal"].Value) + ")";
+                                                    "('" + POInvoice + "', '" + detailPODataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["qty"].Value) + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailPODataGridView.Rows[i].Cells["subTotal"].Value)) + ")";
 
                                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                     throw internalEX;
@@ -577,7 +577,7 @@ namespace RoyalPetz_ADMIN
                         sqlCommand = "UPDATE PURCHASE_HEADER " +
                                             "SET SUPPLIER_ID = " + supplierID + ", " +
                                             "PURCHASE_DATETIME = STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " +
-                                            "PURCHASE_TOTAL = " + POTotal + ", " +
+                                            "PURCHASE_TOTAL = " + gUtil.validateDecimalNumericInput(POTotal) + ", " +
                                             "PURCHASE_TERM_OF_PAYMENT = " + termOfPayment + ", " + 
                                             "PURCHASE_TERM_OF_PAYMENT_DURATION = " + termOfPaymentDuration + ", " +
                                             "PURCHASE_PAID = " + purchasePaid +" " +
@@ -596,7 +596,7 @@ namespace RoyalPetz_ADMIN
                             if (null != detailPODataGridView.Rows[i].Cells["productID"].Value)
                             {
                                 sqlCommand = "INSERT INTO PURCHASE_DETAIL (PURCHASE_INVOICE, PRODUCT_ID, PRODUCT_PRICE, PRODUCT_QTY, PURCHASE_SUBTOTAL) VALUES " +
-                                                    "('" + POInvoice + "', '" + detailPODataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["qty"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["subTotal"].Value) + ")";
+                                                    "('" + POInvoice + "', '" + detailPODataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["qty"].Value) + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailPODataGridView.Rows[i].Cells["subTotal"].Value)) + ")";
 
                                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                     throw internalEX;

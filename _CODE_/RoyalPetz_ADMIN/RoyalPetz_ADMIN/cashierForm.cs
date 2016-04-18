@@ -414,10 +414,19 @@ namespace RoyalPetz_ADMIN
 
             if (cashRadioButton.Checked)
             {
+                double paymentAmount = 0;
                 // CHECK PAYMENT AMOUNT FOR CASH PAYMENT
                 if (bayarTextBox.Text.Length <= 0)
                 {
                     errorLabel.Text = "JUMLAH PEMBAYARAN 0";
+                    return false;
+                }
+
+                // CHECK PAYMENT AMOUNT MUST BE MORE OR EQUALS THAN THE BILL
+                paymentAmount = Convert.ToDouble(bayarTextBox.Text);
+                if (paymentAmount < globalTotalValue)
+                {
+                    errorLabel.Text = "JUMLAH PEMBAYARAN LEBIH KECIL DARI NOTA";
                     return false;
                 }
             }
@@ -454,6 +463,8 @@ namespace RoyalPetz_ADMIN
             double disc2 = 0;
             double discRP = 0;
             string productID = "";
+            int paymentMethod = 0;
+            int creditID = 0;
 
             SODateTime = String.Format(culture, "{0:dd-MM-yyyy}", DateTime.Now);
 
@@ -465,6 +476,7 @@ namespace RoyalPetz_ADMIN
                 salesTop = 1;
                 salesPaid = 1;
                 SODueDateTime = SODateTime;
+                paymentMethod = paymentComboBox.SelectedIndex + 1;
             }
             else
             { 
@@ -1171,7 +1183,7 @@ namespace RoyalPetz_ADMIN
                 discValue = 0;
             }
 
-            totalAfterDiscTextBox.Text = totalAfterDisc.ToString("C", culture);
+            totalAfterDiscTextBox.Text = totalAfterDisc.ToString("C2", culture);
         }
 
         private void customerComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -1475,15 +1487,14 @@ namespace RoyalPetz_ADMIN
             double total_qty = 0;
             double product_qty = 0;
             double product_price = 0;
-            using (rdr = DS.getData("SELECT SUM(S.PRODUCT_QTY) AS 'TOTAL', S.PRODUCT_ID AS 'P-ID', P.PRODUCT_NAME AS 'NAME', S.PRODUCT_QTY AS 'QTY',ROUND(S.SALES_SUBTOTAL/S.PRODUCT_QTY) AS 'PRICE' FROM sales_detail S, master_product P WHERE S.PRODUCT_ID=P.PRODUCT_ID AND S.SALES_INVOICE='"+selectedsalesinvoice+"'"+ "group by s.product_id"))
+            using (rdr = DS.getData("SELECT S.ID, S.PRODUCT_ID AS 'P-ID', P.PRODUCT_NAME AS 'NAME', S.PRODUCT_QTY AS 'QTY',ROUND(S.SALES_SUBTOTAL/S.PRODUCT_QTY) AS 'PRICE' FROM sales_detail S, master_product P WHERE S.PRODUCT_ID=P.PRODUCT_ID AND S.SALES_INVOICE='" + selectedsalesinvoice + "'"))//+ "group by s.product_id") )
             {
                 if (rdr.HasRows)
                 {
-                    while(rdr.Read())
+                    while (rdr.Read())
                     {
                         product_id = rdr.GetString("P-ID");
                         product_name = rdr.GetString("NAME");
-                        total_qty = rdr.GetDouble("TOTAL");
                         product_qty = rdr.GetDouble("QTY");
                         product_price = rdr.GetDouble("PRICE");
                         Offset = Offset + 15;
@@ -1532,6 +1543,8 @@ namespace RoyalPetz_ADMIN
             ucapan = "               KEMBALI : " + uangKembaliTextBox.Text;
             graphics.DrawString(ucapan, new Font("Courier New", 7),
                      new SolidBrush(Color.Black), rect, sf);
+
+            total_qty = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(SUM(PRODUCT_QTY), 0) FROM SALES_DETAIL S, MASTER_PRODUCT P WHERE S.PRODUCT_ID = P.PRODUCT_ID AND S.SALES_INVOICE = '" + selectedsalesinvoice + "'"));
 
             Offset = Offset + 25;
             rect.Y = startY + Offset;

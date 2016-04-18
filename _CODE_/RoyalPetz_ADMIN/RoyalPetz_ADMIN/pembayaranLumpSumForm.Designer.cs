@@ -137,7 +137,7 @@
             this.tableLayoutPanel4.ColumnCount = 3;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.93733F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.06267F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 234F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 237F));
             this.tableLayoutPanel4.Controls.Add(this.paymentCombo, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.cairDTPicker, 2, 0);
             this.tableLayoutPanel4.Controls.Add(this.labelCair, 1, 0);
@@ -166,7 +166,7 @@
             this.cairDTPicker.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cairDTPicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cairDTPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.cairDTPicker.Location = new System.Drawing.Point(373, 3);
+            this.cairDTPicker.Location = new System.Drawing.Point(370, 3);
             this.cairDTPicker.Name = "cairDTPicker";
             this.cairDTPicker.Size = new System.Drawing.Size(173, 27);
             this.cairDTPicker.TabIndex = 59;
@@ -178,7 +178,7 @@
             this.labelCair.AutoSize = true;
             this.labelCair.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCair.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.labelCair.Location = new System.Drawing.Point(258, 6);
+            this.labelCair.Location = new System.Drawing.Point(256, 6);
             this.labelCair.Name = "labelCair";
             this.labelCair.Size = new System.Drawing.Size(104, 18);
             this.labelCair.TabIndex = 58;
@@ -202,7 +202,7 @@
             this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 219F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 222F));
             this.tableLayoutPanel3.Controls.Add(this.cabangNameTextBox, 0, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(280, 40);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -356,6 +356,7 @@
             // descriptionTextBox
             // 
             this.descriptionTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.descriptionTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.descriptionTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.descriptionTextBox.Location = new System.Drawing.Point(280, 192);
             this.descriptionTextBox.Name = "descriptionTextBox";

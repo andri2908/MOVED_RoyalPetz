@@ -689,10 +689,10 @@ namespace RoyalPetz_ADMIN
                 // SAVE HEADER TABLE
                 if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_MUTASI)
                     sqlCommand = "INSERT INTO PRODUCTS_RECEIVED_HEADER (PR_INVOICE, PR_FROM, PR_TO, PR_DATE, PR_TOTAL, PM_INVOICE) " +
-                                        "VALUES ('" + PRInvoice + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), " + PRTotal + ", '" + selectedMutasi + "')";
+                                        "VALUES ('" + PRInvoice + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(PRTotal) + ", '" + selectedMutasi + "')";
                 else //if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_PO)
                     sqlCommand = "INSERT INTO PRODUCTS_RECEIVED_HEADER (PR_INVOICE, PR_FROM, PR_TO, PR_DATE, PR_TOTAL, PURCHASE_INVOICE) " +
-                                        "VALUES ('" + PRInvoice + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), " + PRTotal + ", '" + selectedInvoice + "')";
+                                        "VALUES ('" + PRInvoice + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(PRTotal) + ", '" + selectedInvoice + "')";
                 //else
                 //    sqlCommand = "INSERT INTO PRODUCTS_RECEIVED_HEADER (PR_INVOICE, PR_FROM, PR_TO, PR_DATE, PR_TOTAL, PURCHASE_INVOICE) " +
                 //                        "VALUES ('" + PRInvoice + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), " + PRTotal + ")";
@@ -705,7 +705,7 @@ namespace RoyalPetz_ADMIN
                     selectedInvoice = PRInvoice;
                     // CREATE ENTRY AT PO
                     sqlCommand = "INSERT INTO PURCHASE_HEADER (PURCHASE_INVOICE, SUPPLIER_ID, PURCHASE_DATETIME, PURCHASE_TOTAL, PURCHASE_TERM_OF_PAYMENT, PURCHASE_TERM_OF_PAYMENT_DURATION, PURCHASE_DATE_RECEIVED, PURCHASE_TERM_OF_PAYMENT_DATE, PURCHASE_SENT, PURCHASE_RECEIVED) " +
-                                        "VALUES ('" + PRInvoice + "', " + branchIDFrom + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), " + PRTotal + ", 1, " + termOfPaymentDuration + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), 1, 1)";
+                                        "VALUES ('" + PRInvoice + "', " + branchIDFrom + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(PRTotal) + ", 1, " + termOfPaymentDuration + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), 1, 1)";
 
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
@@ -741,7 +741,7 @@ namespace RoyalPetz_ADMIN
                             qtyRequest = Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value);
 
                         sqlCommand = "INSERT INTO PRODUCTS_RECEIVED_DETAIL (PR_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, PRODUCT_QTY, PRODUCT_ACTUAL_QTY, PR_SUBTOTAL, PRODUCT_PRICE_CHANGE) VALUES " +
-                                            "('" + PRInvoice + "', '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + newHPP + ", " +  qtyRequest + ", " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", " + Convert.ToDouble(detailGridView.Rows[i].Cells["subtotal"].Value) + ", " + priceChange + ")";
+                                            "('" + PRInvoice + "', '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + newHPP + ", " +  qtyRequest + ", " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailGridView.Rows[i].Cells["subtotal"].Value)) + ", " + priceChange + ")";
 
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
@@ -754,7 +754,7 @@ namespace RoyalPetz_ADMIN
                         if (originModuleId == 0) // DIRECT PENERIMAAN BARANG
                         {
                             sqlCommand = "INSERT INTO PURCHASE_DETAIL (PURCHASE_INVOICE, PRODUCT_ID, PRODUCT_PRICE, PRODUCT_QTY, PURCHASE_SUBTOTAL) VALUES " +
-                                                "('" + PRInvoice + "', '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + newHPP + ", " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", " + Convert.ToDouble(detailGridView.Rows[i].Cells["subtotal"].Value) + ")";
+                                                "('" + PRInvoice + "', '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + newHPP + ", " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailGridView.Rows[i].Cells["subtotal"].Value)) + ")";
 
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;
@@ -779,9 +779,9 @@ namespace RoyalPetz_ADMIN
                 //INSERT INTO DEBT TABLE and UPDATE DUE DATE FOR PO
                 if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_PO)
                 {
-                    termOfPayment = Convert.ToInt32(DS.getDataSingleValue("SELECT PURCHASE_TERM_OF_PAYMENT FROM PURCHASE_HEADER WHERE PURCHASE_INVOICE = '" + selectedInvoice + "'"));
+                    //termOfPayment = Convert.ToInt32(DS.getDataSingleValue("SELECT PURCHASE_TERM_OF_PAYMENT FROM PURCHASE_HEADER WHERE PURCHASE_INVOICE = '" + selectedInvoice + "'"));
 
-                    if (termOfPayment == 1)
+                    //if (termOfPayment == 1)
                     {
                         // UPDATE PURCHASE HEADER
                         termOfPaymentDuration = Convert.ToInt32(DS.getDataSingleValue("SELECT PURCHASE_TERM_OF_PAYMENT_DURATION FROM PURCHASE_HEADER WHERE PURCHASE_INVOICE = '" + selectedInvoice + "'"));
@@ -794,10 +794,14 @@ namespace RoyalPetz_ADMIN
                     }
                 }
 
-                if (originModuleId != globalConstants.PENERIMAAN_BARANG_DARI_MUTASI && termOfPayment == 1)
+                if (originModuleId != globalConstants.PENERIMAAN_BARANG_DARI_MUTASI)// && termOfPayment == 1)
                 {
+                    int purchasePaid = 0;
+
+                    purchasePaid = Convert.ToInt32(DS.getDataSingleValue("SELECT PURCHASE_PAID FROM PURCHASE_HEADER WHERE PURCHASE_INVOICE = '" + selectedInvoice + "'"));
+
                     // INSERT INTO DEBT TABLE
-                    sqlCommand = "INSERT INTO DEBT (PURCHASE_INVOICE, DEBT_DUE_DATE, DEBT_NOMINAL, DEBT_PAID) VALUES ('" + selectedInvoice + "', STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), " + PRTotal + ", 0)";
+                    sqlCommand = "INSERT INTO DEBT (PURCHASE_INVOICE, DEBT_DUE_DATE, DEBT_NOMINAL, DEBT_PAID) VALUES ('" + selectedInvoice + "', STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(PRTotal) + ", " + purchasePaid + ")";
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
                 }

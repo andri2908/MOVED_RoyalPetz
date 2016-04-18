@@ -119,13 +119,13 @@ namespace RoyalPetz_ADMIN
 
             if (originModuleID == globalConstants.DATA_PIUTANG_MUTASI)
                 sqlCommand = "SELECT IFNULL(SUM(CREDIT_NOMINAL), 0) FROM PRODUCTS_MUTATION_HEADER PM, CREDIT C " +
-                                    "WHERE C.PM_INVOICE = PM.PM_INVOICE AND PM.BRANCH_ID_TO = " + selectedBranchID;
+                                    "WHERE C.PM_INVOICE = PM.PM_INVOICE AND C.CREDIT_PAID = 0 AND PM.BRANCH_ID_TO = " + selectedBranchID;
             else if (originModuleID == globalConstants.PEMBAYARAN_PIUTANG)
                 sqlCommand = "SELECT IFNULL(SUM(CREDIT_NOMINAL), 0) FROM SALES_HEADER SH, CREDIT C " +
-                                    "WHERE C.SALES_INVOICE = SH.SALES_INVOICE AND SH.CUSTOMER_ID = " + selectedCustomerID;
+                                    "WHERE C.SALES_INVOICE = SH.SALES_INVOICE AND C.CREDIT_PAID = 0 AND SH.CUSTOMER_ID = " + selectedCustomerID;
             else if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
                 sqlCommand = "SELECT IFNULL(SUM(DEBT_NOMINAL), 0) FROM PURCHASE_HEADER PH, DEBT D " +
-                                    "WHERE D.PURCHASE_INVOICE = PH.PURCHASE_INVOICE AND PH.SUPPLIER_ID = " + selectedSupplierID;
+                                    "WHERE D.PURCHASE_INVOICE = PH.PURCHASE_INVOICE AND D.DEBT_PAID = 0 AND PH.SUPPLIER_ID = " + selectedSupplierID;
 
             result = Convert.ToDouble(DS.getDataSingleValue(sqlCommand));
 
@@ -177,7 +177,7 @@ namespace RoyalPetz_ADMIN
             string sqlCommand;
 
             //sqlCommand = "SELECT C.CREDIT_ID, PM.PM_INVOICE AS 'NO MUTASI', DATE_FORMAT(PM.PM_DATETIME, '%d-%M-%Y') AS 'TGL MUTASI', CREDIT_NOMINAL AS TOTAL FROM PRODUCTS_MUTATION_HEADER PM, CREDIT C WHERE PM.BRANCH_ID_TO = " + selectedBranchID + " AND PM.PM_INVOICE = C.PM_INVOICE";
-            sqlCommand = "SELECT C.CREDIT_ID, SH.SALES_INVOICE AS 'SALES INVOICE', DATE_FORMAT(SH.SALES_DATE, '%d-%M-%Y') AS 'TGL SALES', CREDIT_NOMINAL AS 'TOTAL PIUTANG', (CREDIT_NOMINAL - IFNULL(PC.PAYMENT, 0)) AS 'SISA PIUTANG' " +
+            sqlCommand = "SELECT C.CREDIT_ID, SH.SALES_INVOICE AS 'SALES INVOICE', DATE_FORMAT(SH.SALES_DATE, '%d-%M-%Y') AS 'TGL SALES', CREDIT_NOMINAL AS 'TOTAL PIUTANG', IF(C.CREDIT_PAID = 0, (CREDIT_NOMINAL - IFNULL(PC.PAYMENT, 0)), 0) AS 'SISA PIUTANG' " +
                                 "FROM SALES_HEADER SH, CREDIT C LEFT OUTER JOIN (SELECT CREDIT_ID, SUM(PAYMENT_NOMINAL) AS PAYMENT FROM PAYMENT_CREDIT WHERE PAYMENT_INVALID = 0 GROUP BY CREDIT_ID) PC ON PC.CREDIT_ID = C.CREDIT_ID  " +
                                 "WHERE SH.CUSTOMER_ID = " + selectedCustomerID+ " AND SH.SALES_INVOICE = C.SALES_INVOICE";
 
@@ -215,7 +215,7 @@ namespace RoyalPetz_ADMIN
             //                    "FROM PURCHASE_HEADER PH, DEBT D LEFT OUTER JOIN (SELECT DEBT_ID, SUM(PAYMENT_NOMINAL) AS PAYMENT FROM PAYMENT_DEBT WHERE PAYMENT_INVALID = 0 GROUP BY DEBT_ID) PD ON PD.DEBT_ID = D.DEBT_ID  " +
             //                    "WHERE PH.SUPPLIER_ID = " + selectedSupplierID + " AND PH.PURCHASE_INVOICE = D.PURCHASE_INVOICE";
 
-            sqlCommand = "SELECT D.DEBT_ID, D.PURCHASE_INVOICE AS 'PURCHASE INVOICE', DATE_FORMAT(D.DEBT_DUE_DATE, '%d-%M-%Y') AS 'TGL JATUH TEMPO', DEBT_NOMINAL AS 'TOTAL HUTANG', (DEBT_NOMINAL - IFNULL(PD.PAYMENT, 0)) AS 'SISA HUTANG' " +
+            sqlCommand = "SELECT D.DEBT_ID, D.PURCHASE_INVOICE AS 'PURCHASE INVOICE', DATE_FORMAT(D.DEBT_DUE_DATE, '%d-%M-%Y') AS 'TGL JATUH TEMPO', DEBT_NOMINAL AS 'TOTAL HUTANG', IF(D.DEBT_PAID = 0, (DEBT_NOMINAL - IFNULL(PD.PAYMENT, 0)), 0) AS 'SISA HUTANG' " +
                                 "FROM PURCHASE_HEADER PH, DEBT D LEFT OUTER JOIN (SELECT DEBT_ID, SUM(PAYMENT_NOMINAL) AS PAYMENT FROM PAYMENT_DEBT WHERE PAYMENT_INVALID = 0 GROUP BY DEBT_ID) PD ON PD.DEBT_ID = D.DEBT_ID  " +
                                 "WHERE PH.SUPPLIER_ID = " + selectedSupplierID + " AND PH.PURCHASE_INVOICE = D.PURCHASE_INVOICE";
 
@@ -440,10 +440,10 @@ namespace RoyalPetz_ADMIN
 
                         if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
                             sqlCommand = "INSERT INTO PAYMENT_DEBT (DEBT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED, PAYMENT_DUE_DATE) VALUES " +
-                                                "(" + currentCreditID + ", STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y'), 1, " + actualPaymentAmount + ", '" + paymentDescription + "', " + paymentConfirmed + ", STR_TO_DATE('" + paymentDueDateTime + "', '%d-%m-%Y'))";
+                                                "(" + currentCreditID + ", STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y'), 1, " + gutil.validateDecimalNumericInput(actualPaymentAmount) + ", '" + paymentDescription + "', " + paymentConfirmed + ", STR_TO_DATE('" + paymentDueDateTime + "', '%d-%m-%Y'))";
                         else
                             sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED, PAYMENT_DUE_DATE) VALUES " +
-                                            "(" + currentCreditID + ", STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y'), 1, " + actualPaymentAmount + ", '" + paymentDescription + "', " + paymentConfirmed + ", STR_TO_DATE('" + paymentDueDateTime + "', '%d-%m-%Y'))";
+                                            "(" + currentCreditID + ", STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y'), 1, " + gutil.validateDecimalNumericInput(actualPaymentAmount) + ", '" + paymentDescription + "', " + paymentConfirmed + ", STR_TO_DATE('" + paymentDueDateTime + "', '%d-%m-%Y'))";
                         
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
@@ -508,7 +508,7 @@ namespace RoyalPetz_ADMIN
                     // PAYMENT IN CASH THEREFORE ADDING THE AMOUNT OF CASH IN THE CASH REGISTER
                     // ADD A NEW ENTRY ON THE DAILY JOURNAL TO KEEP TRACK THE ADDITIONAL CASH AMOUNT 
                     sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, BRANCH_ID, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
-                                        "VALUES (1, STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y')" + ", " + changeAmount + ", " + selectedBranchID + ", 'SISA PIUTANG MUTASI" + noInvoice + "', '" + gutil.getUserID() + "', 1)";
+                                        "VALUES (1, STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y')" + ", " + gutil.validateDecimalNumericInput(changeAmount) + ", " + selectedBranchID + ", 'SISA PIUTANG MUTASI" + noInvoice + "', '" + gutil.getUserID() + "', 1)";
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
                 }
@@ -840,10 +840,10 @@ namespace RoyalPetz_ADMIN
                     }
                 }
 
-                if (selectedRow.Cells["STATUS"].Value.ToString().Equals("Y"))
-                    selectedRow.DefaultCellStyle.BackColor = Color.White;
+                if (detailPaymentInfoDataGrid.Rows[rowSelectedIndex].Cells["STATUS"].Value.ToString().Equals("Y"))
+                    detailPaymentInfoDataGrid.Rows[rowSelectedIndex].DefaultCellStyle.BackColor = Color.White;
                 else
-                    selectedRow.DefaultCellStyle.BackColor = Color.LightBlue;
+                    detailPaymentInfoDataGrid.Rows[rowSelectedIndex].DefaultCellStyle.BackColor = Color.LightBlue;
             }
 
         }
@@ -932,10 +932,11 @@ namespace RoyalPetz_ADMIN
                         loadDataPO();
                 }
             }
-            if (selectedRow.Cells["STATUS"].Value.ToString().Equals("Y"))
-                selectedRow.DefaultCellStyle.BackColor = Color.White;
+
+            if (detailPaymentInfoDataGrid.Rows[rowSelectedIndex].Cells["STATUS"].Value.ToString().Equals("Y"))
+                detailPaymentInfoDataGrid.Rows[rowSelectedIndex].DefaultCellStyle.BackColor = Color.White;
             else
-                selectedRow.DefaultCellStyle.BackColor = Color.LightBlue;
+                detailPaymentInfoDataGrid.Rows[rowSelectedIndex].DefaultCellStyle.BackColor = Color.LightBlue;
         }
 
         private void fillInPaymentMethod()
