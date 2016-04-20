@@ -1080,5 +1080,13 @@ namespace RoyalPetz_ADMIN
                 }
             }
         }
+
+        private void paymentMaskedTextBox_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                paymentMaskedTextBox.SelectAll();
+            });
+        }
     }
 }

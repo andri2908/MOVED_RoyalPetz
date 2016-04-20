@@ -25,7 +25,8 @@ namespace RoyalPetz_ADMIN
         private string previousInput = "";
 
         private int currentMode = NEW_CONVERSION;
-
+        private bool isLoading = false;
+        
         private globalUtilities gUtil = new globalUtilities();
 
         Data_Access DS = new Data_Access();
@@ -240,13 +241,30 @@ namespace RoyalPetz_ADMIN
 
         private void convertValueTextBox_TextChanged(object sender, EventArgs e)
         {
-            //string regExValue = "";
+            string tempString = "";
 
-            //regExValue = @"^[0-9]*\.?\d{0,2}$";
-            //Regex r = new Regex(regExValue); // This is the main part, can be altered to match any desired form or limitations
-            //Match m = r.Match(convertValueTextBox.Text);
+            if (isLoading)
+                return;
 
-            //if (m.Success)
+            isLoading = true;
+            if (convertValueTextBox.Text.Length == 0)
+            {
+                // IF TEXTBOX IS EMPTY, SET THE VALUE TO 0 AND EXIT THE CHECKING
+                previousInput = "0";
+                convertValueTextBox.Text = "0";
+
+                convertValueTextBox.SelectionStart = convertValueTextBox.Text.Length;
+                isLoading = false;
+
+                return;
+            }
+            // CHECKING TO PREVENT PREFIX "0" IN A NUMERIC INPUT WHILE ALLOWING A DECIMAL VALUE STARTED WITH "0"
+            else if (convertValueTextBox.Text.IndexOf('0') == 0 && convertValueTextBox.Text.Length > 1 && convertValueTextBox.Text.IndexOf("0.") < 0)
+            {
+                tempString = convertValueTextBox.Text;
+                convertValueTextBox.Text = tempString.Remove(0, 1);
+            }
+
             if (gUtil.matchRegEx(convertValueTextBox.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL))
             {
                 previousInput = convertValueTextBox.Text;
@@ -256,6 +274,9 @@ namespace RoyalPetz_ADMIN
                 convertValueTextBox.Text = previousInput;
             }
 
+            convertValueTextBox.SelectionStart = convertValueTextBox.Text.Length;
+
+            isLoading = false;
         }
 
         private void konversiSatuanForm_Activated(object sender, EventArgs e)

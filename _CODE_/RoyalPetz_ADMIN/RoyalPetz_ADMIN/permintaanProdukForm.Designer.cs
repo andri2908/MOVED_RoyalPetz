@@ -390,6 +390,7 @@
             this.durationTextBox.Size = new System.Drawing.Size(54, 27);
             this.durationTextBox.TabIndex = 43;
             this.durationTextBox.Text = "0";
+            this.durationTextBox.Enter += new System.EventHandler(this.durationTextBox_Enter);
             // 
             // label3
             // 

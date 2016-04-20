@@ -84,6 +84,7 @@
             this.ip1Textbox.TabIndex = 20;
             this.ip1Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.ip1Textbox.Visible = false;
+            this.ip1Textbox.Enter += new System.EventHandler(this.ip1Textbox_Enter);
             this.ip1Textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ip1Textbox_KeyPress);
             // 
             // serverIPRadioButton
@@ -155,6 +156,7 @@
             this.ip3Textbox.TabIndex = 24;
             this.ip3Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.ip3Textbox.Visible = false;
+            this.ip3Textbox.Enter += new System.EventHandler(this.ip3Textbox_Enter);
             this.ip3Textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ip3Textbox_KeyPress);
             // 
             // ip4Textbox
@@ -168,6 +170,7 @@
             this.ip4Textbox.TabIndex = 26;
             this.ip4Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.ip4Textbox.Visible = false;
+            this.ip4Textbox.Enter += new System.EventHandler(this.ip4Textbox_Enter);
             // 
             // ip2Textbox
             // 
@@ -180,6 +183,7 @@
             this.ip2Textbox.TabIndex = 22;
             this.ip2Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.ip2Textbox.Visible = false;
+            this.ip2Textbox.Enter += new System.EventHandler(this.ip2Textbox_Enter);
             this.ip2Textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ip2Textbox_KeyPress);
             // 
             // label1
@@ -301,6 +305,7 @@
             this.TeleponTextbox.Name = "TeleponTextbox";
             this.TeleponTextbox.Size = new System.Drawing.Size(414, 27);
             this.TeleponTextbox.TabIndex = 3;
+            this.TeleponTextbox.Enter += new System.EventHandler(this.TeleponTextbox_Enter);
             // 
             // groupBox2
             // 
@@ -369,6 +374,7 @@
             this.HQIP3.Size = new System.Drawing.Size(38, 27);
             this.HQIP3.TabIndex = 24;
             this.HQIP3.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.HQIP3.Enter += new System.EventHandler(this.HQIP3_Enter);
             // 
             // HQIP1
             // 
@@ -380,6 +386,7 @@
             this.HQIP1.Size = new System.Drawing.Size(38, 27);
             this.HQIP1.TabIndex = 20;
             this.HQIP1.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.HQIP1.Enter += new System.EventHandler(this.HQIP1_Enter);
             // 
             // HQIP4
             // 
@@ -391,6 +398,7 @@
             this.HQIP4.Size = new System.Drawing.Size(38, 27);
             this.HQIP4.TabIndex = 26;
             this.HQIP4.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.HQIP4.Enter += new System.EventHandler(this.HQIP4_Enter);
             // 
             // HQIP2
             // 
@@ -402,6 +410,7 @@
             this.HQIP2.Size = new System.Drawing.Size(38, 27);
             this.HQIP2.TabIndex = 22;
             this.HQIP2.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.HQIP2.Enter += new System.EventHandler(this.HQIP2_Enter);
             // 
             // label5
             // 
@@ -454,6 +463,7 @@
             this.BranchIDTextbox.Size = new System.Drawing.Size(38, 27);
             this.BranchIDTextbox.TabIndex = 30;
             this.BranchIDTextbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.BranchIDTextbox.Enter += new System.EventHandler(this.BranchIDTextbox_Enter);
             // 
             // SetApplicationForm
             // 

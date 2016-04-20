@@ -212,6 +212,11 @@ namespace RoyalPetz_ADMIN
                 newButton.Visible = false;
                 importButton.Visible = false;
             }
+
+            if (originModuleID == globalConstants.CEK_DATA_MUTASI)
+            {
+                newButton.Visible = false;
+            }
         }
 
         private void dataRequestOrderGridView_DoubleClick(object sender, EventArgs e)

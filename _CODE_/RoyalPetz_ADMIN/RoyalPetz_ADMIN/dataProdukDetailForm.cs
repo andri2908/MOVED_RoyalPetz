@@ -94,50 +94,215 @@ namespace RoyalPetz_ADMIN
 
         private void stokAwalTextBox_TextChanged(object sender, EventArgs e)
         {
+            string tempString = "";
+
+            if (isLoading)
+                return;
+            
+            isLoading = true;
+            if (stokAwalTextBox.Text.Length == 0)
+            {
+                // IF TEXTBOX IS EMPTY, SET THE VALUE TO 0 AND EXIT THE CHECKING
+                stokAwalText = "0";
+                stokAwalTextBox.Text = "0";
+
+                stokAwalTextBox.SelectionStart = stokAwalTextBox.Text.Length;
+                isLoading = false;
+
+                return;
+            }
+            // CHECKING TO PREVENT PREFIX "0" IN A NUMERIC INPUT WHILE ALLOWING A DECIMAL VALUE STARTED WITH "0"
+            else if (stokAwalTextBox.Text.IndexOf('0') == 0 && stokAwalTextBox.Text.Length > 1 && stokAwalTextBox.Text.IndexOf("0.") < 0 )
+            {
+                tempString = stokAwalTextBox.Text;
+                stokAwalTextBox.Text = tempString.Remove(0, 1);
+            }
+
             if (checkRegEx(stokAwalTextBox.Text))
                 stokAwalText = stokAwalTextBox.Text;
             else
                 stokAwalTextBox.Text = stokAwalText;
+
+            stokAwalTextBox.SelectionStart = stokAwalTextBox.Text.Length;
+
+            isLoading = false;
         }
 
         private void limitStokTextBox_TextChanged(object sender, EventArgs e)
         {
+            string tempString;
+
+            if (isLoading)
+                return;
+
+            isLoading = true;
+            if (limitStokTextBox.Text.Length == 0)
+            {
+                // IF TEXTBOX IS EMPTY, SET THE VALUE TO 0 AND EXIT THE CHECKING
+                limitStokText = "0";
+                limitStokTextBox.Text = "0";
+
+                limitStokTextBox.SelectionStart = limitStokTextBox.Text.Length;
+
+                isLoading = false;
+
+                return;
+            }
+            // CHECKING TO PREVENT PREFIX "0" IN A NUMERIC INPUT WHILE ALLOWING A DECIMAL VALUE STARTED WITH "0"
+            else if (limitStokTextBox.Text.IndexOf('0') == 0 && limitStokTextBox.Text.Length > 1 && limitStokTextBox.Text.IndexOf("0.") < 0)
+            {
+                tempString = limitStokTextBox.Text;
+                limitStokTextBox.Text = tempString.Remove(0, 1);
+            }
+
             if (checkRegEx(limitStokTextBox.Text))
                 limitStokText = limitStokTextBox.Text;
             else
                 limitStokTextBox.Text = limitStokText;
+
+            limitStokTextBox.SelectionStart = limitStokTextBox.Text.Length;
+
+            isLoading = false;
         }
 
         private void hppTextBox_TextChanged(object sender, EventArgs e)
         {
+            string tempString;
+
+            if (isLoading)
+                return;
+
+            isLoading = true;
+            if (hppTextBox.Text.Length == 0)
+            {
+                // IF TEXTBOX IS EMPTY, SET THE VALUE TO 0 AND EXIT THE CHECKING
+                hppValueText = "0";
+                hppTextBox.Text = "0";
+
+                hppTextBox.SelectionStart = hppTextBox.Text.Length;
+                isLoading = false;
+
+                return;
+            }
+            // CHECKING TO PREVENT PREFIX "0" IN A NUMERIC INPUT WHILE ALLOWING A DECIMAL VALUE STARTED WITH "0"
+            else if (hppTextBox.Text.IndexOf('0') == 0 && hppTextBox.Text.Length > 1 && hppTextBox.Text.IndexOf("0.") < 0)
+            {
+                tempString = hppTextBox.Text;
+                hppTextBox.Text = tempString.Remove(0, 1);
+            }
+
             if (checkRegEx(hppTextBox.Text))
                 hppValueText = hppTextBox.Text;
             else
                 hppTextBox.Text = hppValueText;
+
+            hppTextBox.SelectionStart = hppTextBox.Text.Length;
+            isLoading = false;
         }
 
         private void hargaEcerTextBox_TextChanged(object sender, EventArgs e)
         {
+            string tempString;
+
+            if (isLoading)
+                return;
+
+            isLoading = true;
+            if (hargaEcerTextBox.Text.Length == 0)
+            {
+                // IF TEXTBOX IS EMPTY, SET THE VALUE TO 0 AND EXIT THE CHECKING
+                hargaEcerValueText = "0";
+                hargaEcerTextBox.Text = "0";
+
+                hargaEcerTextBox.SelectionStart = hargaEcerTextBox.Text.Length;
+                isLoading = false;
+
+                return;
+            }
+            // CHECKING TO PREVENT PREFIX "0" IN A NUMERIC INPUT WHILE ALLOWING A DECIMAL VALUE STARTED WITH "0"
+            else if (hargaEcerTextBox.Text.IndexOf('0') == 0 && hargaEcerTextBox.Text.Length > 1 && hargaEcerTextBox.Text.IndexOf("0.") < 0)
+            {
+                tempString = hargaEcerTextBox.Text;
+                hargaEcerTextBox.Text = tempString.Remove(0, 1);
+            }
+
             if (checkRegEx(hargaEcerTextBox.Text))
                 hargaEcerValueText = hargaEcerTextBox.Text;
             else
                 hargaEcerTextBox.Text = hargaEcerValueText;
+
+            hargaEcerTextBox.SelectionStart = hargaEcerTextBox.Text.Length;
+            isLoading = false;
         }
 
         private void hargaPartaiTextBox_TextChanged(object sender, EventArgs e)
         {
+            string tempString;
+
+            if (isLoading)
+                return;
+
+            isLoading = true;
+            if (hargaPartaiTextBox.Text.Length == 0)
+            {
+                // IF TEXTBOX IS EMPTY, SET THE VALUE TO 0 AND EXIT THE CHECKING
+                hargaPartaiText = "0";
+                hargaPartaiTextBox.Text = "0";
+
+                hargaPartaiTextBox.SelectionStart = hargaPartaiTextBox.Text.Length;
+                isLoading = false;
+
+                return;
+            }
+            // CHECKING TO PREVENT PREFIX "0" IN A NUMERIC INPUT WHILE ALLOWING A DECIMAL VALUE STARTED WITH "0"
+            else if (hargaPartaiTextBox.Text.IndexOf('0') == 0 && hargaPartaiTextBox.Text.Length > 1 && hargaPartaiTextBox.Text.IndexOf("0.") < 0)
+            {
+                tempString = hargaPartaiTextBox.Text;
+                hargaPartaiTextBox.Text = tempString.Remove(0, 1);
+            }
+
             if (checkRegEx(hargaPartaiTextBox.Text))
                 hargaPartaiText = hargaPartaiTextBox.Text;
             else
                 hargaPartaiTextBox.Text = hargaPartaiText;
+
+            hargaPartaiTextBox.SelectionStart = hargaPartaiTextBox.Text.Length;
+            isLoading = false;
         }
 
         private void hargaGrosirTextBox_TextChanged(object sender, EventArgs e)
         {
+            string tempString;
+
+            if (isLoading)
+                return;
+
+            isLoading = true;
+            if (hargaGrosirTextBox.Text.Length == 0)
+            {
+                // IF TEXTBOX IS EMPTY, SET THE VALUE TO 0 AND EXIT THE CHECKING
+                hargaGrosirValueText = "0";
+                hargaGrosirTextBox.Text = "0";
+
+                hargaGrosirTextBox.SelectionStart = hargaGrosirTextBox.Text.Length;
+                isLoading = false;
+
+                return;
+            }
+            // CHECKING TO PREVENT PREFIX "0" IN A NUMERIC INPUT WHILE ALLOWING A DECIMAL VALUE STARTED WITH "0"
+            else if (hargaGrosirTextBox.Text.IndexOf('0') == 0 && hargaGrosirTextBox.Text.Length > 1 && hargaGrosirTextBox.Text.IndexOf("0.") < 0)
+            {
+                tempString = hargaGrosirTextBox.Text;
+                hargaGrosirTextBox.Text = tempString.Remove(0, 1);
+            }
+
             if (checkRegEx(hargaGrosirTextBox.Text))
                 hargaGrosirValueText = hargaGrosirTextBox.Text;
             else
                 hargaGrosirTextBox.Text = hargaGrosirValueText;
+
+            hargaGrosirTextBox.SelectionStart = hargaGrosirTextBox.Text.Length;
+            isLoading = false;
         }
 
         private void loadProdukData()
@@ -739,6 +904,15 @@ namespace RoyalPetz_ADMIN
         {
             if (produkDescTextBox.Text.IndexOf('\'') >= 0)
                 produkDescTextBox.Text = produkDescTextBox.Text.Remove(produkDescTextBox.Text.IndexOf('\''), 1);
+        }
+
+        private void noRakKolomTextBox_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                noRakKolomTextBox.SelectAll();
+            });
+            //noRakKolomTextBox.Focus();
         }
     }
 }

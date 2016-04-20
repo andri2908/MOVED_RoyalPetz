@@ -456,6 +456,86 @@ namespace RoyalPetz_ADMIN
             ip4Textbox.Visible = true;
         }
 
+        private void HQIP1_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                HQIP1.SelectAll();
+            });
+        }
+
+        private void HQIP2_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                HQIP2.SelectAll();
+            });
+        }
+
+        private void HQIP3_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                HQIP3.SelectAll();
+            });
+        }
+
+        private void HQIP4_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                HQIP4.SelectAll();
+            });
+        }
+
+        private void BranchIDTextbox_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                BranchIDTextbox.SelectAll();
+            });
+        }
+
+        private void TeleponTextbox_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                TeleponTextbox.SelectAll();
+            });
+        }
+
+        private void ip1Textbox_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                ip1Textbox.SelectAll();
+            });
+        }
+
+        private void ip2Textbox_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                ip2Textbox.SelectAll();
+            });
+        }
+
+        private void ip3Textbox_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                ip3Textbox.SelectAll();
+            });
+        }
+
+        private void ip4Textbox_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                ip4Textbox.SelectAll();
+            });
+        }
+
         private void ip1Textbox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == '.')

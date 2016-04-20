@@ -57,7 +57,11 @@ namespace RoyalPetz_ADMIN
             parentForm = originForm;
 
             if (originModuleID == globalConstants.CASHIER_MODULE)
+            { 
                 newButton.Visible = false;
+                unknownCustomerButton.Visible = false;
+                pelanggangnonactiveoption.Visible = false;
+            }
         }
 
         private void newButton_Click(object sender, EventArgs e)

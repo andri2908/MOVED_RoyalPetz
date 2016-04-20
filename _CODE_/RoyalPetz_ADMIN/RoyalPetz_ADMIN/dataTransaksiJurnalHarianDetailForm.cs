@@ -564,5 +564,13 @@ namespace RoyalPetz_ADMIN
         {
 
         }
+
+        private void NominalTextbox_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                NominalTextbox.SelectAll();
+            });
+        }
     }
 }

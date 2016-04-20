@@ -181,5 +181,12 @@ namespace RoyalPetz_ADMIN
             //if need something
         }
 
+        private void jumlahBaruMaskedTextBox_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                jumlahBaruMaskedTextBox.SelectAll();
+            });
+        }
     }
 }

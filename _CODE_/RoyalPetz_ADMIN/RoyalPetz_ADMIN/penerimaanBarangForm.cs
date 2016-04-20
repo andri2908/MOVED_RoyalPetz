@@ -499,6 +499,7 @@ namespace RoyalPetz_ADMIN
             double productQty = 0;
             double hppValue = 0;
             double subTotal = 0;
+            string tempString = "";
 
             if (isLoading)
                 return;
@@ -508,7 +509,45 @@ namespace RoyalPetz_ADMIN
             rowSelectedIndex = detailGridView.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = detailGridView.Rows[rowSelectedIndex];
 
-            previousInput = "";
+            if (dataGridViewTextBoxEditingControl.Text.Length <= 0)
+            {
+                // IF TEXTBOX IS EMPTY, DEFAULT THE VALUE TO 0 AND EXIT THE CHECKING
+                isLoading = true;
+                // reset subTotal Value and recalculate total
+                selectedRow.Cells["subTotal"].Value = 0;
+
+                if (detailRequestQty.Count >= rowSelectedIndex + 1)
+                    if (detailGridView.CurrentCell.OwningColumn.Name == "hpp")
+                        detailHpp[rowSelectedIndex] = "0";
+                    else
+                        detailRequestQty[rowSelectedIndex] = "0";
+                
+                dataGridViewTextBoxEditingControl.Text = "0";
+
+                calculateTotal();
+
+                dataGridViewTextBoxEditingControl.SelectionStart = dataGridViewTextBoxEditingControl.Text.Length;
+
+                isLoading = false;
+                return;
+            }
+
+            if (detailRequestQty.Count >= rowSelectedIndex + 1)
+                if (detailGridView.CurrentCell.OwningColumn.Name == "hpp")
+                    previousInput = detailHpp[rowSelectedIndex];
+                else
+                    previousInput = detailRequestQty[rowSelectedIndex];
+            else
+                previousInput = "0";
+
+            isLoading = true;
+            if (previousInput == "0")
+            {
+                tempString = dataGridViewTextBoxEditingControl.Text;
+                if (tempString.IndexOf('0') == 0 && tempString.Length > 1 && tempString.IndexOf("0.") < 0)
+                    dataGridViewTextBoxEditingControl.Text = tempString.Remove(tempString.IndexOf('0'), 1);
+            }
+
             if (detailRequestQty.Count < rowSelectedIndex + 1)
             {
                 if (gUtil.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
@@ -568,6 +607,9 @@ namespace RoyalPetz_ADMIN
             {
                 //dataGridViewTextBoxEditingControl.Text = previousInput;
             }
+
+            dataGridViewTextBoxEditingControl.SelectionStart = dataGridViewTextBoxEditingControl.Text.Length;
+            isLoading = false;
         }
 
         private void calculateTotal()
@@ -950,6 +992,14 @@ namespace RoyalPetz_ADMIN
         {
             detailHpp.Add("0");
             detailRequestQty.Add("0");
+        }
+
+        private void durationTextBox_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                durationTextBox.SelectAll();
+            });
         }
     }
 }

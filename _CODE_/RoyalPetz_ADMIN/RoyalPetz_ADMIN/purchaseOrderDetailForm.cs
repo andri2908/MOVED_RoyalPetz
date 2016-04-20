@@ -240,6 +240,7 @@ namespace RoyalPetz_ADMIN
             double productQty = 0;
             double hppValue = 0;
             double subTotal = 0;
+            string tempString = "";
 
             if (isLoading)
                 return;
@@ -249,10 +250,40 @@ namespace RoyalPetz_ADMIN
             rowSelectedIndex = detailPODataGridView.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = detailPODataGridView.Rows[rowSelectedIndex];
 
+            if (dataGridViewTextBoxEditingControl.Text.Length <= 0)
+            {
+                // IF TEXTBOX IS EMPTY, DEFAULT THE VALUE TO 0 AND EXIT THE CHECKING
+                isLoading = true;
+                // reset subTotal Value and recalculate total
+                selectedRow.Cells["subtotal"].Value = 0;
+
+                if (detailPODataGridView.CurrentCell.OwningColumn.Name == "qty")
+                    detailQty[rowSelectedIndex] = "0";
+                else
+                    detailHpp[rowSelectedIndex] = "0";
+
+                dataGridViewTextBoxEditingControl.Text = "0";
+
+                calculateTotal();
+
+                dataGridViewTextBoxEditingControl.SelectionStart = dataGridViewTextBoxEditingControl.Text.Length;
+
+                isLoading = false;
+                return;
+            }
+
             if (detailPODataGridView.CurrentCell.OwningColumn.Name == "qty")
                 previousInput = detailQty[rowSelectedIndex];
             else
                 previousInput = detailHpp[rowSelectedIndex];
+
+            isLoading = true;
+            if (previousInput == "0")
+            {
+                tempString = dataGridViewTextBoxEditingControl.Text;
+                if (tempString.IndexOf('0') == 0 && tempString.Length > 1 && tempString.IndexOf("0.") < 0)
+                    dataGridViewTextBoxEditingControl.Text = tempString.Remove(tempString.IndexOf('0'), 1);
+            }
 
             if (gUtil.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
                 && (dataGridViewTextBoxEditingControl.Text.Length > 0))
@@ -278,6 +309,9 @@ namespace RoyalPetz_ADMIN
             selectedRow.Cells["subtotal"].Value = subTotal;
 
             calculateTotal();
+
+            dataGridViewTextBoxEditingControl.SelectionStart = dataGridViewTextBoxEditingControl.Text.Length;
+            isLoading = false;
 
             //previousInput = "0";
             //if (detailQty.Count < rowSelectedIndex + 1)
@@ -862,6 +896,14 @@ namespace RoyalPetz_ADMIN
         {
             detailQty.Add("0");
             detailHpp.Add("0");
+        }
+
+        private void durationTextBox_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                durationTextBox.SelectAll();
+            });
         }
     }
 }

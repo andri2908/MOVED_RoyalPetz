@@ -14,7 +14,7 @@ namespace RoyalPetz_ADMIN
 {
     class globalUtilities
     {
-        public const string REGEX_NUMBER_WITH_2_DECIMAL = @"^[0-9]*\.?\d{0,2}$";
+        public const string REGEX_NUMBER_WITH_2_DECIMAL = @"^[0-9]+\.?\d{0,2}$";
         public const string REGEX_NUMBER_ONLY = @"^[0-9]*$";
         public const string REGEX_ALPHANUMERIC_ONLY = @"^[0-9A-Za-z]*$";
         public const string CUSTOM_DATE_FORMAT = "dd MMM yyyy";

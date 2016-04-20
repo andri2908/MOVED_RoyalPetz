@@ -20,6 +20,7 @@ namespace RoyalPetz_ADMIN
         private double globalTotalValue = 0;
         private string previousInput = "";
         private int originModuleID = 0;
+        private bool isLoading = false;
 
         private List<string> detailQty = new List<string>();
         private CultureInfo culture = new CultureInfo("id-ID");
@@ -219,7 +220,7 @@ namespace RoyalPetz_ADMIN
             double productQty = 0;
             double hppValue = 0;
             double subTotal = 0;
-
+            string tempString = "";
 
             if (detailReturDataGridView.CurrentCell.OwningColumn.Name != "qty")
                 return;
@@ -229,7 +230,41 @@ namespace RoyalPetz_ADMIN
             rowSelectedIndex = detailReturDataGridView.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = detailReturDataGridView.Rows[rowSelectedIndex];
 
-            previousInput = "";
+            if (isLoading)
+                return;
+
+            if (dataGridViewTextBoxEditingControl.Text.Length <= 0)
+            {
+                // IF TEXTBOX IS EMPTY, DEFAULT THE VALUE TO 0 AND EXIT THE CHECKING
+                isLoading = true;
+                // reset subTotal Value and recalculate total
+                selectedRow.Cells["subTotal"].Value = 0;
+
+                if (detailQty.Count > rowSelectedIndex)
+                    detailQty[rowSelectedIndex] = "0";
+                dataGridViewTextBoxEditingControl.Text = "0";
+
+                calculateTotal();
+
+                dataGridViewTextBoxEditingControl.SelectionStart = dataGridViewTextBoxEditingControl.Text.Length;
+                isLoading = false;
+
+                return;
+            }
+
+            isLoading = true;
+            if (detailQty.Count > rowSelectedIndex)
+                previousInput = detailQty[rowSelectedIndex];
+            else
+                previousInput = "0";
+
+            if (previousInput == "0")
+            {
+                tempString = dataGridViewTextBoxEditingControl.Text;
+                if (tempString.IndexOf('0') == 0 && tempString.Length > 1 && tempString.IndexOf("0.") < 0)
+                    dataGridViewTextBoxEditingControl.Text = tempString.Remove(tempString.IndexOf('0'), 1);
+            }
+
             if (detailQty.Count < rowSelectedIndex + 1)
             {
                 if (GUTIL.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
@@ -280,6 +315,9 @@ namespace RoyalPetz_ADMIN
             {
                 //dataGridViewTextBoxEditingControl.Text = previousInput;
             }
+
+            dataGridViewTextBoxEditingControl.SelectionStart = dataGridViewTextBoxEditingControl.Text.Length;
+            isLoading = false;
         }
 
         private void dataReturPermintaanForm_Load(object sender, EventArgs e)

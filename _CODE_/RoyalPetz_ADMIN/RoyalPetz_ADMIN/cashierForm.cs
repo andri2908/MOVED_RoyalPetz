@@ -885,6 +885,8 @@ namespace RoyalPetz_ADMIN
             double subTotal = 0;
             double productPrice = 0;
             string productID = "";
+            string previousInput = "";
+            string tempString = "";
 
             if (isLoading)
                 return;
@@ -898,9 +900,68 @@ namespace RoyalPetz_ADMIN
             if (cashierDataGridView.CurrentCell.OwningColumn.Name == "qty" && cashierDataGridView.CurrentCell.OwningColumn.Name == "disc1" && cashierDataGridView.CurrentCell.OwningColumn.Name == "disc2" && cashierDataGridView.CurrentCell.OwningColumn.Name == "discRP")
                 return;
 
+            if (dataGridViewTextBoxEditingControl.Text.Length <= 0)
+            {
+                // IF TEXTBOX IS EMPTY, DEFAULT THE VALUE TO 0 AND EXIT THE CHECKING
+
+                isLoading = true;
+                // reset subTotal Value and recalculate total
+                selectedRow.Cells["jumlah"].Value = 0;
+
+                //if (detailRequestQtyApproved.Count >= rowSelectedIndex + 1)
+                //    detailRequestQtyApproved[rowSelectedIndex] = "0";
+                switch (cashierDataGridView.CurrentCell.OwningColumn.Name)
+                {
+                    case "qty":
+                        salesQty[rowSelectedIndex] = "0";
+                        break;
+                    case "disc1":
+                        disc1[rowSelectedIndex] = "0";
+                        break;
+                    case "disc2":
+                        disc2[rowSelectedIndex] = "0";
+                        break;
+                    case "discRP":
+                        discRP[rowSelectedIndex] = "0";
+                        break;
+                }
+
+                dataGridViewTextBoxEditingControl.Text = "0";
+
+                calculateTotal();
+
+                dataGridViewTextBoxEditingControl.SelectionStart = dataGridViewTextBoxEditingControl.Text.Length;
+                isLoading = false;
+                return;
+            }
+
             if (null != selectedRow.Cells["productID"].Value)
                 productID = selectedRow.Cells["productID"].Value.ToString();
 
+            switch (cashierDataGridView.CurrentCell.OwningColumn.Name)
+            {
+                case "qty":
+                    previousInput = salesQty[rowSelectedIndex];
+                    break;
+                case "disc1":
+                    previousInput = disc1[rowSelectedIndex];
+                    break;
+                case "disc2":
+                    previousInput = disc2[rowSelectedIndex];
+                    break;
+                case "discRP":
+                    previousInput = discRP[rowSelectedIndex];
+                    break;
+            }
+
+            isLoading = true;
+            if (previousInput == "0")
+            {
+                tempString = dataGridViewTextBoxEditingControl.Text;
+                if (tempString.IndexOf('0') == 0 && tempString.Length > 1 && tempString.IndexOf("0.") < 0)
+                    dataGridViewTextBoxEditingControl.Text = tempString.Remove(tempString.IndexOf('0'), 1);
+            }
+            
                 if (gutil.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
                     && (dataGridViewTextBoxEditingControl.Text.Length > 0 && dataGridViewTextBoxEditingControl.Text != ".")
                     )
@@ -923,32 +984,21 @@ namespace RoyalPetz_ADMIN
                             discRP[rowSelectedIndex] = dataGridViewTextBoxEditingControl.Text;
                             break;
                     }
-                }
-                else
-                {
-                    switch (cashierDataGridView.CurrentCell.OwningColumn.Name)
-                    {
-                        case "qty":
-                            dataGridViewTextBoxEditingControl.Text = salesQty[rowSelectedIndex];
-                            break;
-                        case "disc1":
-                            dataGridViewTextBoxEditingControl.Text = disc1[rowSelectedIndex];
-                            break;
-                        case "disc2":
-                            dataGridViewTextBoxEditingControl.Text = disc2[rowSelectedIndex];
-                            break;
-                        case "discRP":
-                            dataGridViewTextBoxEditingControl.Text = discRP[rowSelectedIndex];
-                            break;
-                    }                    
-                }
+            }
+            else
+            {
+                dataGridViewTextBoxEditingControl.Text = previousInput;
+            }
 
-                productPrice = Convert.ToDouble(selectedRow.Cells["productPrice"].Value);
+            productPrice = Convert.ToDouble(selectedRow.Cells["productPrice"].Value);
 
-                subTotal = calculateSubTotal(rowSelectedIndex, productPrice);
-                selectedRow.Cells["jumlah"].Value = subTotal;
+            subTotal = calculateSubTotal(rowSelectedIndex, productPrice);
+            selectedRow.Cells["jumlah"].Value = subTotal;
 
-                calculateTotal();
+            calculateTotal();
+            dataGridViewTextBoxEditingControl.SelectionStart = dataGridViewTextBoxEditingControl.Text.Length;
+
+            isLoading = false;
         }
 
         private void cashierForm_Shown(object sender, EventArgs e)
@@ -1587,6 +1637,30 @@ namespace RoyalPetz_ADMIN
                      new SolidBrush(Color.Black), rect, sf);
             //end of footer
 
+        }
+
+        private void tempoMaskedTextBox_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                tempoMaskedTextBox.SelectAll();
+            });
+        }
+
+        private void discJualMaskedTextBox_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                discJualMaskedTextBox.SelectAll();
+            });
+        }
+
+        private void bayarTextBox_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                bayarTextBox.SelectAll();
+            });
         }
     }
 }

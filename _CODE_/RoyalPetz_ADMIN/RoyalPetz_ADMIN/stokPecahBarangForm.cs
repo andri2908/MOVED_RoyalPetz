@@ -30,6 +30,7 @@ namespace RoyalPetz_ADMIN
         private string previousInputActual = "";
         private globalUtilities gUtil = new globalUtilities();
         private CultureInfo culture = new CultureInfo("id-ID");
+        private bool isLoading = false;
 
         public stokPecahBarangForm()
         {
@@ -219,6 +220,30 @@ namespace RoyalPetz_ADMIN
 
         private void numberOfProductTextBox_TextChanged(object sender, EventArgs e)
         {
+            string tempString = "";
+
+            if (isLoading)
+                return;
+
+            isLoading = true;
+            if (numberOfProductTextBox.Text.Length == 0)
+            {
+                // IF TEXTBOX IS EMPTY, SET THE VALUE TO 0 AND EXIT THE CHECKING
+                previousInput = "0";
+                numberOfProductTextBox.Text = "0";
+
+                numberOfProductTextBox.SelectionStart = numberOfProductTextBox.Text.Length;
+                isLoading = false;
+
+                return;
+            }
+            // CHECKING TO PREVENT PREFIX "0" IN A NUMERIC INPUT WHILE ALLOWING A DECIMAL VALUE STARTED WITH "0"
+            else if (numberOfProductTextBox.Text.IndexOf('0') == 0 && numberOfProductTextBox.Text.Length > 1 && numberOfProductTextBox.Text.IndexOf("0.") < 0)
+            {
+                tempString = numberOfProductTextBox.Text;
+                numberOfProductTextBox.Text = tempString.Remove(0, 1);
+            }
+            
             if (isValidQtyInput(numberOfProductTextBox.Text))
             {
                 previousInput = numberOfProductTextBox.Text;
@@ -228,6 +253,10 @@ namespace RoyalPetz_ADMIN
             {
                 numberOfProductTextBox.Text = previousInput;
             }
+
+            numberOfProductTextBox.SelectionStart = numberOfProductTextBox.Text.Length;
+
+            isLoading = false;
         }
 
         private bool dataValidated()
@@ -340,16 +369,43 @@ namespace RoyalPetz_ADMIN
 
         private void actualQtyTextBox_TextChanged(object sender, EventArgs e)
         {
+            string tempString = "";
+
+            if (isLoading)
+                return;
+
+            isLoading = true;
+            if (actualQtyTextBox.Text.Length == 0)
+            {
+                // IF TEXTBOX IS EMPTY, SET THE VALUE TO 0 AND EXIT THE CHECKING
+                previousInputActual = "0";
+                actualQtyTextBox.Text = "0";
+
+                actualQtyTextBox.SelectionStart = actualQtyTextBox.Text.Length;
+                isLoading = false;
+
+                return;
+            }
+            // CHECKING TO PREVENT PREFIX "0" IN A NUMERIC INPUT WHILE ALLOWING A DECIMAL VALUE STARTED WITH "0"
+            else if (actualQtyTextBox.Text.IndexOf('0') == 0 && actualQtyTextBox.Text.Length > 1 && actualQtyTextBox.Text.IndexOf("0.") < 0)
+            {
+                tempString = actualQtyTextBox.Text;
+                actualQtyTextBox.Text = tempString.Remove(0, 1);
+            }
+
             if ( (isValidQtyInput(actualQtyTextBox.Text)) 
                 && (Convert.ToDouble(actualQtyTextBox.Text) <= Convert.ToDouble(resultTextBox.Text))
                )
             {
-                previousInput = actualQtyTextBox.Text;
+                previousInputActual = actualQtyTextBox.Text;
             }
             else
             {
-                actualQtyTextBox.Text = previousInput;
+                actualQtyTextBox.Text = previousInputActual;
             }
+
+            actualQtyTextBox.SelectionStart = actualQtyTextBox.Text.Length;
+            isLoading = false;
         }
 
         private void stokPecahBarangForm_Activated(object sender, EventArgs e)

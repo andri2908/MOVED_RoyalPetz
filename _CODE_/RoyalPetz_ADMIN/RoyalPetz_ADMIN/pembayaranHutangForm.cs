@@ -613,5 +613,13 @@ namespace RoyalPetz_ADMIN
                 cairDTPicker.Visible = false;
             }
         }
+
+        private void totalPaymentMaskedTextBox_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                totalPaymentMaskedTextBox.SelectAll();
+            });
+        }
     }
 }
