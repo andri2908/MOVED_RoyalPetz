@@ -127,6 +127,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.Name = "SetPrinterForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pengaturan Printer";
             this.Load += new System.EventHandler(this.SetPrinterForm_Load);
             this.groupBox1.ResumeLayout(false);

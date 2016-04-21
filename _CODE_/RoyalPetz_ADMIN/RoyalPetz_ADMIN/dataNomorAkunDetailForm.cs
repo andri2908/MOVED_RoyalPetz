@@ -42,6 +42,7 @@ namespace RoyalPetz_ADMIN
         private void dataNomorAkunDetailForm_Load(object sender, EventArgs e)
         {
             int userAccessOption = 0;
+            Button[] arrButton = new Button[2];
 
             userAccessOption = DS.getUserAccessRight(globalConstants.MENU_PENGATURAN_NO_AKUN, gUtil.getUserGroupID());
 
@@ -60,8 +61,11 @@ namespace RoyalPetz_ADMIN
                 }
             }
 
-            gUtil.reArrangeTabOrder(this);
+            arrButton[0] = saveButton;
+            arrButton[1] = ResetButton;
+            gUtil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
 
+            gUtil.reArrangeTabOrder(this);
         }
 
         private void loadAccountData()

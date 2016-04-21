@@ -256,7 +256,14 @@ namespace RoyalPetz_ADMIN
         private void dataUserDetailForm_Load(object sender, EventArgs e)
         {
             int userAccessOption;
+            Button[] arrButton = new Button[2];
+
             errorLabel.Text = "";
+
+            arrButton[0] = saveButton;
+            arrButton[1] = resetbutton;
+            gutil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
+
             gutil.reArrangeTabOrder(this);
 
             userAccessOption = DS.getUserAccessRight(globalConstants.MENU_MANAJEMEN_USER, gutil.getUserGroupID());

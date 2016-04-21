@@ -168,12 +168,12 @@ namespace RoyalPetz_ADMIN
         private void dataMutasiBarangForm_Load(object sender, EventArgs e)
         {
             int userAccessOption = 0;
+            Button[] arrButton = new Button[3];
+
             PMDtPicker_1.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
             PMDtPicker_2.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
 
             fillInBranchCombo(branchToCombo, branchToComboHidden);
-
-            gutil.reArrangeTabOrder(this);
 
             userAccessOption = DS.getUserAccessRight(globalConstants.MENU_TAMBAH_MUTASI_BARANG, gutil.getUserGroupID());
 
@@ -193,6 +193,13 @@ namespace RoyalPetz_ADMIN
                 newButton.Visible = false;
                 showAllCheckBox.Visible = false;
             }
+
+            arrButton[0] = displayButton;
+            arrButton[1] = newButton;
+            arrButton[2] = importButton;
+            gutil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
+
+            gutil.reArrangeTabOrder(this);
         }
 
         private void dataMutasiBarangForm_Deactivate(object sender, EventArgs e)

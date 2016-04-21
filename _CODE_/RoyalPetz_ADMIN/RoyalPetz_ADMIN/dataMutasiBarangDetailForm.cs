@@ -640,7 +640,7 @@ namespace RoyalPetz_ADMIN
         private void dataMutasiBarangDetailForm_Load(object sender, EventArgs e)
         {
             int userAccessOption = 0;
-
+            Button[] arrButton = new Button[5];
             PMDateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
             RODateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
             ROExpiredDateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
@@ -743,6 +743,13 @@ namespace RoyalPetz_ADMIN
             userAccessOption = DS.getUserAccessRight(globalConstants.MENU_PURCHASE_ORDER, gUtil.getUserGroupID());
             if (userAccessOption != 2 && userAccessOption != 6)
                 createPOButton.Visible = false;
+
+            arrButton[0] = approveButton;
+            arrButton[1] = createPOButton;
+            arrButton[2] = exportButton;
+            arrButton[3] = acceptedButton;
+            arrButton[4] = rejectButton;
+            gUtil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
 
             gUtil.reArrangeTabOrder(this);
         }

@@ -461,7 +461,7 @@
             // 
             this.generateButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.generateButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.generateButton.Location = new System.Drawing.Point(287, 618);
+            this.generateButton.Location = new System.Drawing.Point(288, 618);
             this.generateButton.Name = "generateButton";
             this.generateButton.Size = new System.Drawing.Size(248, 37);
             this.generateButton.TabIndex = 31;
@@ -493,7 +493,7 @@
             // 
             this.exportButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.exportButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exportButton.Location = new System.Drawing.Point(562, 618);
+            this.exportButton.Location = new System.Drawing.Point(569, 618);
             this.exportButton.Name = "exportButton";
             this.exportButton.Size = new System.Drawing.Size(305, 37);
             this.exportButton.TabIndex = 33;
@@ -505,7 +505,7 @@
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(34, 618);
+            this.saveButton.Location = new System.Drawing.Point(32, 618);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(226, 37);
             this.saveButton.TabIndex = 34;

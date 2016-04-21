@@ -222,8 +222,8 @@ namespace RoyalPetz_ADMIN
         private void dataCabangDetailForm_Load(object sender, EventArgs e)
         {
             int userAccessOption = 0;
-            gUtil.reArrangeTabOrder(this);
-
+            Button[] arrButton = new Button[2];
+                        
             userAccessOption = DS.getUserAccessRight(globalConstants.MENU_MANAJEMEN_CABANG, gUtil.getUserGroupID());
 
             if (originModuleID == globalConstants.NEW_BRANCH)
@@ -240,6 +240,12 @@ namespace RoyalPetz_ADMIN
                     gUtil.setReadOnlyAllControls(this);
                 }
             }
+
+            arrButton[0] = saveButton;
+            arrButton[1] = resetbutton;
+            gUtil.reArrangeButtonPosition(arrButton, 343, this.Width);
+
+            gUtil.reArrangeTabOrder(this);
         }
 
         private void button1_Click(object sender, EventArgs e)

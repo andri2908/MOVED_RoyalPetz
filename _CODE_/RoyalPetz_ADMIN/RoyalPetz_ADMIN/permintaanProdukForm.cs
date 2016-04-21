@@ -506,6 +506,7 @@ namespace RoyalPetz_ADMIN
 
         private void permintaanProdukForm_Load(object sender, EventArgs e)
         {
+            Button[] arrButton = new Button[3];
             int userAccessOption = 0;
             RODateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
 
@@ -535,6 +536,11 @@ namespace RoyalPetz_ADMIN
                     gUtil.setReadOnlyAllControls(this);
                 }
             }
+
+            arrButton[0] = saveButton;
+            arrButton[1] = generateButton;
+            arrButton[2] = exportButton;
+            gUtil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
 
             gUtil.reArrangeTabOrder(this);            
         }

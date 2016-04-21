@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
 
+using Hotkeys;
 using System.Globalization;
 
 namespace RoyalPetz_ADMIN
@@ -26,6 +27,8 @@ namespace RoyalPetz_ADMIN
         private int selectedUserID = 0;
         private int selectedUserGroupID = 0;
         private globalUtilities gutil = new globalUtilities();
+
+        private Hotkeys.GlobalHotkey ghk_F1;
 
         private class MyRenderer : ToolStripProfessionalRenderer
         {
@@ -71,7 +74,47 @@ namespace RoyalPetz_ADMIN
                 get { return Color.Black; }
             }
         }
-       
+
+        private void captureAll(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.F1:
+                    messagingForm displayForm = new messagingForm();
+                    displayForm.ShowDialog(this);
+                    break;
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == Constants.WM_HOTKEY_MSG_ID)
+            {
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                int modifier = (int)m.LParam & 0xFFFF;
+
+                if (modifier == Constants.NOMOD)
+                    captureAll(key);
+                //else if (modifier == Constants.ALT)
+                //    captureAltModifier(key);
+                //else if (modifier == Constants.CTRL)
+                //    captureCtrlModifier(key);
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void registerGlobalHotkey()
+        {
+            ghk_F1 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F1, this);
+            ghk_F1.Register();
+        }
+
+        private void unregisterGlobalHotkey()
+        {
+            ghk_F1.Unregister();
+        }
+
         public adminForm(int userID)
         {
             InitializeComponent();
@@ -85,6 +128,7 @@ namespace RoyalPetz_ADMIN
             gutil.setUserGroupID(selectedUserGroupID);
 
             activateUserAccessRight();
+            registerGlobalHotkey();
         }
 
         private void updateLabel()
@@ -145,6 +189,8 @@ namespace RoyalPetz_ADMIN
         private void adminForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             timer1.Stop();
+            unregisterGlobalHotkey();
+
             //write paper size settings last change to DB
         }
 

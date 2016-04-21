@@ -849,6 +849,8 @@ namespace RoyalPetz_ADMIN
         private void dataProdukDetailForm_Load(object sender, EventArgs e)
         {
             int userAccessOption = 0;
+            Button[] arrButton = new Button[2];
+
             errorLabel.Text = "";
 
             isLoading = true;
@@ -874,8 +876,6 @@ namespace RoyalPetz_ADMIN
             }
             isLoading = false;
 
-            gUtil.reArrangeTabOrder(this);
-
             userAccessOption = DS.getUserAccessRight(globalConstants.MENU_TAMBAH_PRODUK, gUtil.getUserGroupID());
 
             if (originModuleID == globalConstants.NEW_PRODUK)
@@ -892,6 +892,12 @@ namespace RoyalPetz_ADMIN
                     gUtil.setReadOnlyAllControls(this);
                 }
             }
+
+            arrButton[0] = saveButton;
+            arrButton[1] = resetbutton;
+            gUtil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
+
+            gUtil.reArrangeTabOrder(this);
         }
 
         private void namaProdukTextBox_TextChanged(object sender, EventArgs e)

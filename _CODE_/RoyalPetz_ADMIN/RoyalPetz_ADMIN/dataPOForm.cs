@@ -160,9 +160,10 @@ namespace RoyalPetz_ADMIN
         private void dataPOForm_Load(object sender, EventArgs e)
         {
             int userAccessOption = 0;
+            Button[] arrButton =new Button[2];
+
             PODtPicker_1.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
             PODtPicker_2.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
-
             fillInSupplierCombo();
 
             if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
@@ -181,6 +182,10 @@ namespace RoyalPetz_ADMIN
             else
                 newButton.Visible = false;
             
+            arrButton[0] = displayButton;
+            arrButton[1] = newButton;
+            gUtil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
+
             gUtil.reArrangeTabOrder(this);
         }
 

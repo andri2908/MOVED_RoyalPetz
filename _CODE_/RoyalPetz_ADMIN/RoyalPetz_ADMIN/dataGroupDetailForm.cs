@@ -77,6 +77,12 @@ namespace RoyalPetz_ADMIN
 
         private void dataGroupDetailForm_Load(object sender, EventArgs e)
         {
+            Button[] arrButton = new Button[2];
+
+            arrButton[0] = saveButton;
+            arrButton[1] = button1;
+            gutil.reArrangeButtonPosition(arrButton, 184, this.Width);
+
             gutil.reArrangeTabOrder(this);
         }
 

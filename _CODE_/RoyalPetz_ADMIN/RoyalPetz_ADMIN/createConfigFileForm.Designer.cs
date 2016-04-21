@@ -135,6 +135,7 @@
             this.ip3Textbox.TabIndex = 29;
             this.ip3Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.ip3Textbox.Visible = false;
+            this.ip3Textbox.Enter += new System.EventHandler(this.ip3Textbox_Enter);
             this.ip3Textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IPMasked_3_KeyPress);
             // 
             // ip1Textbox
@@ -148,6 +149,7 @@
             this.ip1Textbox.TabIndex = 27;
             this.ip1Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.ip1Textbox.Visible = false;
+            this.ip1Textbox.Enter += new System.EventHandler(this.ip1Textbox_Enter);
             this.ip1Textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IPMasked_1_KeyPress);
             // 
             // ip4Textbox
@@ -161,6 +163,7 @@
             this.ip4Textbox.TabIndex = 30;
             this.ip4Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.ip4Textbox.Visible = false;
+            this.ip4Textbox.Enter += new System.EventHandler(this.ip4Textbox_Enter);
             // 
             // ip2Textbox
             // 
@@ -173,6 +176,7 @@
             this.ip2Textbox.TabIndex = 28;
             this.ip2Textbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.ip2Textbox.Visible = false;
+            this.ip2Textbox.Enter += new System.EventHandler(this.ip2Textbox_Enter);
             this.ip2Textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IPMasked_2_KeyPress);
             // 
             // label1

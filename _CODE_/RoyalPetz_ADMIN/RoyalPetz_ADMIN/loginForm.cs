@@ -171,6 +171,12 @@ namespace RoyalPetz_ADMIN
 
         private void loginForm_Load(object sender, EventArgs e)
         {
+            Button[] arrButton = new Button[2];
+
+            arrButton[0] = loginButton;
+            arrButton[1] = resetbutton;
+            gutil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
+
             gutil.reArrangeTabOrder(this);
 
             if (!DS.firstMySqlConnect()) //one time checked at load application

@@ -225,6 +225,12 @@
     <Compile Include="exportStockOpnameForm.Designer.cs">
       <DependentUpon>exportStockOpnameForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="messagingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="messagingForm.Designer.cs">
+      <DependentUpon>messagingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="globalConstants.cs" />
     <Compile Include="GlobalHotkey.cs">
       <SubType>Code</SubType>
@@ -319,6 +325,12 @@
     </Compile>
     <Compile Include="permintaanProdukForm.Designer.cs">
       <DependentUpon>permintaanProdukForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pleaseWaitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pleaseWaitForm.Designer.cs">
+      <DependentUpon>pleaseWaitForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -613,6 +625,9 @@
     <EmbeddedResource Include="exportStockOpnameForm.resx">
       <DependentUpon>exportStockOpnameForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="messagingForm.resx">
+      <DependentUpon>messagingForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="groupAccessModuleForm.resx">
       <DependentUpon>groupAccessModuleForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -654,6 +669,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="permintaanProdukForm.resx">
       <DependentUpon>permintaanProdukForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pleaseWaitForm.resx">
+      <DependentUpon>pleaseWaitForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -32,6 +32,7 @@ namespace RoyalPetz_ADMIN
         private int selectedSupplierID = 0;
         private int selectedPOID = 0;
         private string selectedPOInvoice = "";
+        Button[] arrButton = new Button[2];
 
         public purchaseOrderDetailForm()
         {
@@ -392,8 +393,9 @@ namespace RoyalPetz_ADMIN
         }
 
         private void purchaseOrderDetailForm_Load(object sender, EventArgs e)
-        {
+        {           
             int userAccessOption = 0;
+
             errorLabel.Text = "";
             durationTextBox.Enabled = false;
 
@@ -450,6 +452,10 @@ namespace RoyalPetz_ADMIN
                     gUtil.setReadOnlyAllControls(this);
                 }
             }
+
+            arrButton[0] = saveButton;
+            arrButton[1] = generateButton;
+            gUtil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
 
             gUtil.reArrangeTabOrder(this);
         }
@@ -720,6 +726,7 @@ namespace RoyalPetz_ADMIN
                 detailPODataGridView.AllowUserToAddRows = false;
 
                 gUtil.showSuccess(gUtil.INS);
+                gUtil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
             }
         }
 

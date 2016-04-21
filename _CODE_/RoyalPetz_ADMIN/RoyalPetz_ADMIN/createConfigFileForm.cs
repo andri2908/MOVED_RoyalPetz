@@ -73,7 +73,13 @@ namespace RoyalPetz_ADMIN
 
         private void createConfigFileForm_Load(object sender, EventArgs e)
         {
+            Button[] arrButton = new Button[2];
             errorLabel.Text = "";
+
+            arrButton[0] = button1;
+            arrButton[1] = saveButton;
+            gUtil.reArrangeButtonPosition(arrButton, 193, this.Width);
+
             gUtil.reArrangeTabOrder(this);
         }
 
@@ -133,6 +139,38 @@ namespace RoyalPetz_ADMIN
                 ip3Textbox.Visible = false;
                 ip4Textbox.Visible = false;
             }
+        }
+
+        private void ip1Textbox_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                ip1Textbox.SelectAll();
+            });
+        }
+
+        private void ip2Textbox_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                ip2Textbox.SelectAll();
+            });
+        }
+
+        private void ip3Textbox_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                ip3Textbox.SelectAll();
+            });
+        }
+
+        private void ip4Textbox_Enter(object sender, EventArgs e)
+        {
+            BeginInvoke((Action)delegate
+            {
+                ip4Textbox.SelectAll();
+            });
         }
     }
 }

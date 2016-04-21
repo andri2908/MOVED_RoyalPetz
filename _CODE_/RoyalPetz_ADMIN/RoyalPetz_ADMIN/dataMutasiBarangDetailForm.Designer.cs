@@ -194,7 +194,7 @@
             // 
             this.approveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.approveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.approveButton.Location = new System.Drawing.Point(32, 614);
+            this.approveButton.Location = new System.Drawing.Point(30, 612);
             this.approveButton.Name = "approveButton";
             this.approveButton.Size = new System.Drawing.Size(271, 37);
             this.approveButton.TabIndex = 41;
@@ -289,7 +289,7 @@
             // 
             this.createPOButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.createPOButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.createPOButton.Location = new System.Drawing.Point(330, 614);
+            this.createPOButton.Location = new System.Drawing.Point(330, 568);
             this.createPOButton.Name = "createPOButton";
             this.createPOButton.Size = new System.Drawing.Size(248, 37);
             this.createPOButton.TabIndex = 38;
@@ -578,7 +578,7 @@
             // 
             this.acceptedButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.acceptedButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.acceptedButton.Location = new System.Drawing.Point(607, 614);
+            this.acceptedButton.Location = new System.Drawing.Point(607, 568);
             this.acceptedButton.Name = "acceptedButton";
             this.acceptedButton.Size = new System.Drawing.Size(248, 37);
             this.acceptedButton.TabIndex = 47;

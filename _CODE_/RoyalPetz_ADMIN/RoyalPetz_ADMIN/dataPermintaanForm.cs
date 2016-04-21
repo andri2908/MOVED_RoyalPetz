@@ -192,13 +192,13 @@ namespace RoyalPetz_ADMIN
         private void dataPermintaanForm_Load(object sender, EventArgs e)
         {
             int userAccessOption = 0;
+            Button[] arrButton = new Button[3];
+
             RODtPicker_1.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
             RODtPicker_2.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
 
             fillInBranchCombo(branchFromCombo, branchFromHiddenCombo);
             fillInBranchCombo(branchToCombo, branchToHiddenCombo);
-
-            gUtil.reArrangeTabOrder(this);
 
             userAccessOption = DS.getUserAccessRight(globalConstants.MENU_REQUEST_ORDER, gUtil.getUserGroupID());
 
@@ -217,6 +217,13 @@ namespace RoyalPetz_ADMIN
             {
                 newButton.Visible = false;
             }
+
+            arrButton[0] = displayButton;
+            arrButton[1] = newButton;
+            arrButton[2] = importButton;
+            gUtil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
+
+            gUtil.reArrangeTabOrder(this);
         }
 
         private void dataRequestOrderGridView_DoubleClick(object sender, EventArgs e)

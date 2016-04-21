@@ -371,6 +371,8 @@ namespace RoyalPetz_ADMIN
 
         private void penerimaanBarangForm_Load(object sender, EventArgs e)
         {
+            Button[] arrButton = new Button[2];
+
             errorLabel.Text = "";
             PRDtPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
             int userAccessOption = 0;
@@ -416,6 +418,10 @@ namespace RoyalPetz_ADMIN
             else
                 searchPOButton.Visible = false;
 
+            arrButton[0] = saveButton;
+            arrButton[1] = resetButton;
+            gUtil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
+            
             gUtil.reArrangeTabOrder(this);
         }
 

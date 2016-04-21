@@ -69,8 +69,7 @@ namespace RoyalPetz_ADMIN
         private void dataKategoriProdukDetailForm_Load(object sender, EventArgs e)
         {
             int userAccessOption = 0;
-            gutil.reArrangeTabOrder(this);
-
+            Button[] arrButton = new Button[2];
             userAccessOption = DS.getUserAccessRight(globalConstants.MENU_KATEGORI, gutil.getUserGroupID());
 
             if (originModuleID == globalConstants.NEW_CATEGORY)
@@ -87,6 +86,12 @@ namespace RoyalPetz_ADMIN
                     gutil.setReadOnlyAllControls(this);
                 }
             }
+
+            arrButton[0] = saveButton;
+            arrButton[1] = button1;
+            gutil.reArrangeButtonPosition(arrButton, 167, this.Width);
+
+            gutil.reArrangeTabOrder(this);
         }
 
         private bool dataValidated()

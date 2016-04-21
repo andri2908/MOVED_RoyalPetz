@@ -293,6 +293,46 @@ namespace RoyalPetz_ADMIN
 
         }
 
+        public void reArrangeButtonPosition(Button []buttonArr, int startPositionY, int formWidth)
+        {
+            int buttonCount = 0;
+            int buttonTotalWidth = 0;
+            int buttonDistancePixel = 5;
+            int startPositionX = 0;
+            double startingPoint = 0;
+            int i = 0;
+
+            for (i =0;i<buttonArr.GetLength(0); i++)
+            {
+                if (buttonArr[i].Visible == true)
+                { 
+                    buttonCount++;
+                    buttonTotalWidth += buttonArr[i].Width;
+                    buttonTotalWidth += buttonDistancePixel;
+                }
+            }
+
+            if (buttonTotalWidth > 0)
+                buttonTotalWidth -= buttonDistancePixel;
+
+            startingPoint = (formWidth / 2) - (buttonTotalWidth / 2);
+            startPositionX = Convert.ToInt32(Math.Round(startingPoint)); 
+
+            if (startPositionX > 0)
+            {
+                for (i = 0; i < buttonArr.Count(); i++)
+                {
+                    if (buttonArr[i].Visible == true)
+                    {
+                        buttonArr[i].Left = startPositionX;
+                        buttonArr[i].Top = startPositionY;
+                        startPositionX += buttonArr[i].Width;
+                        startPositionX += buttonDistancePixel;
+                    }
+                }
+            }
+        }
+
         public void showError(string errormessage)
         {
             String errorcaption = "POS Error Message";
