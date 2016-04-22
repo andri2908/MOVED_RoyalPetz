@@ -25,12 +25,12 @@ namespace RoyalPetz_ADMIN
             InitializeComponent();
         }
 
-        private void pullDetailMessageAndSaveToTable(int moduleID, string sqlCommand)
+        private bool pullDetailMessageAndSaveToTable(int moduleID, string sqlCommand)
         {
             MySqlDataReader rdr;
             string param1;
             string param2;
-
+            bool newData = false;
             double jumlahPembayaran;
             string deskripsiPembayaran;
 
@@ -48,6 +48,7 @@ namespace RoyalPetz_ADMIN
                 {
                     if (rdr.HasRows)
                     {
+                        newData = true;
                         while (rdr.Read())
                         {
                             param1 = rdr.GetString("PARAM_1");
@@ -117,44 +118,55 @@ namespace RoyalPetz_ADMIN
             {
                 DS.mySqlClose();
             }
+            return newData;
         }
 
-        private void pullMessageData()
+        public bool pullMessageData()
         {
             int moduleID = 0;
             string sqlCommand = "";
             string dateToday = String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(DateTime.Now));
             string roExpiredDate = String.Format(culture, "{0:dd-MM-yyyy}", DateTime.Now.AddDays(7));
+            bool newData = false;
 
             // PULL SALES INVOICE THAT'S DUE TODAY
             moduleID = globalConstants.MENU_TRANSAKSI_PENJUALAN;
             sqlCommand = "SELECT SALES_INVOICE AS 'PARAM_1', DATE_FORMAT(SALES_TOP_DATE, '%d-%M-%Y') AS 'PARAM_2' FROM SALES_HEADER WHERE SALES_PAID = 0 AND DATE_FORMAT(SALES_TOP_DATE, '%Y%m%d')  <= '" + dateToday + "' AND SALES_INVOICE NOT IN (SELECT IDENTIFIER_NO FROM MASTER_MESSAGE WHERE MODULE_ID = " + moduleID + " AND STATUS = 0)";
-            pullDetailMessageAndSaveToTable(moduleID, sqlCommand);
+            newData  |= pullDetailMessageAndSaveToTable(moduleID, sqlCommand);
 
             // PULL PURCHASE INVOICE THAT'S DUE TODAY
             moduleID = globalConstants.MENU_PURCHASE_ORDER;
             sqlCommand = "SELECT PURCHASE_INVOICE AS 'PARAM_1', DATE_FORMAT(PURCHASE_TERM_OF_PAYMENT_DATE, '%d-%M-%Y') AS 'PARAM_2' FROM PURCHASE_HEADER WHERE PURCHASE_PAID = 0 AND PURCHASE_RECEIVED = 1 AND DATE_FORMAT(PURCHASE_TERM_OF_PAYMENT_DATE, '%Y%m%d')  <= '" + dateToday + "'  AND PURCHASE_INVOICE NOT IN (SELECT IDENTIFIER_NO FROM MASTER_MESSAGE WHERE MODULE_ID = " + moduleID + " AND STATUS = 0)";
-            pullDetailMessageAndSaveToTable(moduleID, sqlCommand);
+            newData |= pullDetailMessageAndSaveToTable(moduleID, sqlCommand);
 
             // PULL PAYMENT CREDIT THAT'S DUE TODAY
             moduleID = globalConstants.MENU_PEMBAYARAN_PIUTANG;
             sqlCommand = "SELECT SH.SALES_INVOICE AS 'PARAM_1', DATE_FORMAT(PC.PAYMENT_DUE_DATE, '%d-%M-%Y') AS 'PARAM_2', PC.PAYMENT_NOMINAL AS 'JUMLAH', PC.PAYMENT_DESCRIPTION AS 'DESCRIPTION' FROM SALES_HEADER SH, CREDIT C, PAYMENT_CREDIT PC WHERE C.CREDIT_PAID = 0 AND PC.CREDIT_ID = C.CREDIT_ID AND C.SALES_INVOICE = SH.SALES_INVOICE AND PC.PAYMENT_CONFIRMED = 0 AND PC.PAYMENT_INVALID = 0 AND DATE_FORMAT(PC.PAYMENT_DUE_DATE, '%Y%m%d')  <= '" + dateToday + "'  AND SH.SALES_INVOICE NOT IN (SELECT IDENTIFIER_NO FROM MASTER_MESSAGE WHERE MODULE_ID = " + moduleID + " AND STATUS = 0)";
-            pullDetailMessageAndSaveToTable(moduleID, sqlCommand);
+            newData |= pullDetailMessageAndSaveToTable(moduleID, sqlCommand);
 
             // PULL PAYMENT DEBT THAT'S DUE TODAY
             moduleID = globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER;
             sqlCommand = "SELECT PH.PURCHASE_INVOICE AS 'PARAM_1', DATE_FORMAT(PD.PAYMENT_DUE_DATE, '%d-%M-%Y') AS 'PARAM_2', PD.PAYMENT_NOMINAL AS 'JUMLAH', PD.PAYMENT_DESCRIPTION AS 'DESCRIPTION' FROM PURCHASE_HEADER PH, DEBT D, PAYMENT_DEBT PD WHERE D.DEBT_PAID = 0 AND PD.DEBT_ID = D.DEBT_ID AND D.PURCHASE_INVOICE = PH.PURCHASE_INVOICE AND PD.PAYMENT_CONFIRMED = 0 AND PD.PAYMENT_INVALID = 0 AND DATE_FORMAT(PD.PAYMENT_DUE_DATE, '%Y%m%d')  <= '" + dateToday + "'   AND PH.PURCHASE_INVOICE NOT IN (SELECT IDENTIFIER_NO FROM MASTER_MESSAGE WHERE MODULE_ID = " + moduleID + " AND STATUS = 0)";
-            pullDetailMessageAndSaveToTable(moduleID, sqlCommand);
+            newData |= pullDetailMessageAndSaveToTable(moduleID, sqlCommand);
 
             // PULL REQUEST ORDER THAT'LL EXPIRE NEXT WEEK OR EARLIER
             moduleID = globalConstants.MENU_REQUEST_ORDER;
             sqlCommand = "SELECT RO_INVOICE AS 'PARAM_1', DATE_FORMAT(RO_EXPIRED, '%d-%M-%Y') AS 'PARAM_2' FROM REQUEST_ORDER_HEADER WHERE RO_ACTIVE = 1 AND DATE_FORMAT(RO_EXPIRED, '%Y%m%d')  <= '" + roExpiredDate + "'  AND RO_INVOICE NOT IN (SELECT IDENTIFIER_NO FROM MASTER_MESSAGE WHERE MODULE_ID = " + moduleID + " AND STATUS = 0)";
-            pullDetailMessageAndSaveToTable(moduleID, sqlCommand);
+            newData |= pullDetailMessageAndSaveToTable(moduleID, sqlCommand);
 
             // PULL PRODUCT_ID THAT ALREADY HIT LIMIT STOCK
             moduleID = globalConstants.MENU_PRODUK;
             sqlCommand = "SELECT PRODUCT_ID AS 'PARAM_1', PRODUCT_LIMIT_STOCK AS 'PARAM_2' FROM  MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 AND PRODUCT_IS_SERVICE = 0 AND PRODUCT_STOCK_QTY <= PRODUCT_LIMIT_STOCK AND PRODUCT_ID NOT IN (SELECT IDENTIFIER_NO FROM MASTER_MESSAGE WHERE MODULE_ID = " + moduleID + " AND STATUS = 0)";
-            pullDetailMessageAndSaveToTable(moduleID, sqlCommand);
+            newData |= pullDetailMessageAndSaveToTable(moduleID, sqlCommand);
+
+            return newData;                
+        }
+
+        private bool checkNewData()
+        {
+            bool newData = false;
+
+            return newData;
         }
 
         private void loadMessageData()
@@ -235,6 +247,7 @@ namespace RoyalPetz_ADMIN
         {
             string selectedID= "";
             string sqlCommand;
+            string todayDate = String.Format(culture, "{0:dd-MM-yyyy}", DateTime.Now);
 
             if (messageDataGridView.Rows.Count <= 0)
                 return;
@@ -253,7 +266,7 @@ namespace RoyalPetz_ADMIN
                 try
                 {
                     DS.mySqlConnect();
-                    sqlCommand = "UPDATE MASTER_MESSAGE SET STATUS = 1 WHERE ID = " + selectedID;
+                    sqlCommand = "UPDATE MASTER_MESSAGE SET STATUS = 1, MSG_DATETIME_READ = STR_TO_DATE('" + todayDate + "', '%d-%m-%Y'), MSG_READ_USER_ID = " + gutil.getUserID() + " WHERE ID = " + selectedID;
 
                     DS.executeNonQueryCommand(sqlCommand);
                     DS.commit();
@@ -273,6 +286,7 @@ namespace RoyalPetz_ADMIN
         {
             string selectedID = "";
             string sqlCommand;
+            string todayDate = String.Format(culture, "{0:dd-MM-yyyy}", DateTime.Now);
 
             if (messageDataGridView.Rows.Count <= 0)
                 return;
@@ -289,7 +303,7 @@ namespace RoyalPetz_ADMIN
                     {
                         selectedID = messageDataGridView.Rows[i].Cells["ID"].Value.ToString();
 
-                        sqlCommand = "UPDATE MASTER_MESSAGE SET STATUS = 1 WHERE ID = " + selectedID;
+                        sqlCommand = "UPDATE MASTER_MESSAGE SET STATUS = 1, MSG_DATETIME_READ = STR_TO_DATE('" + todayDate + "', '%d-%m-%Y'), MSG_READ_USER_ID = " + gutil.getUserID() + " WHERE ID = " + selectedID;
                         DS.executeNonQueryCommand(sqlCommand);
                     }
                     DS.commit();
@@ -309,7 +323,7 @@ namespace RoyalPetz_ADMIN
             string selectedIdentifier = "";
             int selectedModuleID = 0;
             string sqlCommand;
-            bool result = false;
+            string todayDate = String.Format(culture, "{0:dd-MM-yyyy}", DateTime.Now);
 
             if (messageDataGridView.Rows.Count <= 0)
                 return;
@@ -325,33 +339,30 @@ namespace RoyalPetz_ADMIN
                 selectedIdentifier = selectedRow.Cells["IDENTIFIER_NO"].Value.ToString();
                 selectedModuleID = Convert.ToInt32(selectedRow.Cells["MODULE_ID"].Value);
 
+                displaySpecificForm(selectedModuleID, selectedIdentifier);
+
                 DS.beginTransaction();
 
                 try
                 {
                     DS.mySqlConnect();
-                    sqlCommand = "UPDATE MASTER_MESSAGE SET STATUS = 1 WHERE ID = " + selectedID;
+                    sqlCommand = "UPDATE MASTER_MESSAGE SET STATUS = 1, MSG_DATETIME_READ = STR_TO_DATE('" + todayDate + "', '%d-%m-%Y'), MSG_READ_USER_ID = " + gutil.getUserID() + " WHERE ID = " + selectedID;
 
                     DS.executeNonQueryCommand(sqlCommand);
                     DS.commit();
-
-                    result = true;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("UPDATE FAILED [" + ex.Message + "]");
                 }
-            }
-            else
-                selectedRow.DefaultCellStyle.BackColor = Color.White;
-
-            if (result)
-            { 
-                displaySpecificForm(selectedModuleID, selectedIdentifier);
 
                 selectedRow.DefaultCellStyle.BackColor = Color.White;
                 loadMessageData();
             }
+            else
+                selectedRow.DefaultCellStyle.BackColor = Color.White;
+
+            
         }
 
         private void messageDataGridView_KeyDown(object sender, KeyEventArgs e)
@@ -360,7 +371,7 @@ namespace RoyalPetz_ADMIN
             string selectedIdentifier = "";
             int selectedModuleID = 0;
             string sqlCommand;
-            bool result = false;
+            string todayDate = String.Format(culture, "{0:dd-MM-yyyy}", DateTime.Now);
 
             if (messageDataGridView.Rows.Count <= 0)
                 return;
@@ -378,33 +389,27 @@ namespace RoyalPetz_ADMIN
                     selectedIdentifier = selectedRow.Cells["IDENTIFIER_NO"].Value.ToString();
                     selectedModuleID = Convert.ToInt32(selectedRow.Cells["MODULE_ID"].Value);
 
+                    displaySpecificForm(selectedModuleID, selectedIdentifier);
+
                     DS.beginTransaction();
 
                     try
                     {
                         DS.mySqlConnect();
-                        sqlCommand = "UPDATE MASTER_MESSAGE SET STATUS = 1 WHERE ID = " + selectedID;
+                        sqlCommand = "UPDATE MASTER_MESSAGE SET STATUS = 1, MSG_DATETIME_READ = STR_TO_DATE('" + todayDate + "', '%d-%m-%Y'), MSG_READ_USER_ID = " + gutil.getUserID() + " WHERE ID = " + selectedID;
 
                         DS.executeNonQueryCommand(sqlCommand);
                         DS.commit();
-
-                        result = true;
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show("UPDATE FAILED [" + ex.Message + "]");
                     }
-                }
-                else
-                    selectedRow.DefaultCellStyle.BackColor = Color.White;
-
-                if (result)
-                {
-                    displaySpecificForm(selectedModuleID, selectedIdentifier);
-
                     selectedRow.DefaultCellStyle.BackColor = Color.White;
                     loadMessageData();
                 }
+                else
+                    selectedRow.DefaultCellStyle.BackColor = Color.White;
             }
         }
     }

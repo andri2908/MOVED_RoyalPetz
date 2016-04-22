@@ -266,6 +266,12 @@
     <Compile Include="logoutForm.Designer.cs">
       <DependentUpon>logoutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="newMessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="newMessageForm.Designer.cs">
+      <DependentUpon>newMessageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="pembayaranHutangForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -642,6 +648,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="logoutForm.resx">
       <DependentUpon>logoutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="newMessageForm.resx">
+      <DependentUpon>newMessageForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pembayaranHutangForm.resx">
       <DependentUpon>pembayaranHutangForm.cs</DependentUpon>

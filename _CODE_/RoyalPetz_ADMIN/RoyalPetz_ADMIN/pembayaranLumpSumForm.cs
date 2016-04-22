@@ -200,6 +200,8 @@ namespace RoyalPetz_ADMIN
                     detailPMDataGridView.Columns["TGL SALES"].Width = 200;
                     detailPMDataGridView.Columns["TOTAL PIUTANG"].Width = 200;
                     detailPMDataGridView.Columns["SISA PIUTANG"].Width = 200;
+
+                    detailPMDataGridView.AutoResizeColumns();
                 }
                 isLoading = false;
             }
@@ -239,6 +241,8 @@ namespace RoyalPetz_ADMIN
                     detailPMDataGridView.Columns["TGL JATUH TEMPO"].Width = 200;
                     detailPMDataGridView.Columns["TOTAL HUTANG"].Width = 200;
                     detailPMDataGridView.Columns["SISA HUTANG"].Width = 200;
+
+                    detailPMDataGridView.AutoResizeColumns();
                 }
                 isLoading = false;
             }
@@ -277,6 +281,8 @@ namespace RoyalPetz_ADMIN
                     detailPaymentInfoDataGrid.Columns["TGL PEMBAYARAN"].Width = 200;
                     detailPaymentInfoDataGrid.Columns["JUMLAH"].Width = 200;
                     detailPaymentInfoDataGrid.Columns["DESKRIPSI"].Width = 300;
+
+                    detailPaymentInfoDataGrid.AutoResizeColumns();
 
                     for (int i =0;i<detailPaymentInfoDataGrid.Rows.Count;i++)
                     {

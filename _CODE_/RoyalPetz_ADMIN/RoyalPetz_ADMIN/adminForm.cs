@@ -27,7 +27,7 @@ namespace RoyalPetz_ADMIN
         private int selectedUserID = 0;
         private int selectedUserGroupID = 0;
         private globalUtilities gutil = new globalUtilities();
-
+        private bool newMessageFormExist = false;
         private Hotkeys.GlobalHotkey ghk_F1;
 
         private class MyRenderer : ToolStripProfessionalRenderer
@@ -131,12 +131,17 @@ namespace RoyalPetz_ADMIN
             registerGlobalHotkey();
         }
 
+        public void setNewMessageFormExist(bool value)
+        {
+            newMessageFormExist = value;
+        }
+
         private void updateLabel()
         {
             localDate = DateTime.Now;
             timeStampStatusLabel.Text = String.Format(culture, "{0:dddd, dd-MM-yyyy - HH:mm}", localDate);
         }
-
+        
         private void loadBGimage()
         {
 
@@ -179,10 +184,11 @@ namespace RoyalPetz_ADMIN
             menuStrip1.Renderer = new MyRenderer();
             gutil.reArrangeTabOrder(this);
 
+
             //load last known paper size settings from DB
 
             //activateUserAccessRight();
-            
+
             //loadBGimage();
         }
 
@@ -865,8 +871,7 @@ namespace RoyalPetz_ADMIN
             setAccessibility(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, MENU_pembayaranHutangKeSupplier);
             setAccessibility(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, SHORTCUT_hutang);
         }
-
-
+        
         private void toolStripMenuItem1_Click_1(object sender, EventArgs e)
         {
             dataPOForm displayedForm = new dataPOForm(globalConstants.PEMBAYARAN_HUTANG);
@@ -895,6 +900,7 @@ namespace RoyalPetz_ADMIN
         {
 
         }
+
         private void generatorXMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             XMLGeneratorForm displayedform = new XMLGeneratorForm();
@@ -979,6 +985,23 @@ namespace RoyalPetz_ADMIN
         {
             penerimaanBarangForm displayedForm = new penerimaanBarangForm();
             displayedForm.ShowDialog(this);
+        }
+
+        private void timerMessage_Tick(object sender, EventArgs e)
+        {
+            if (gutil.checkNewMessageData() && !newMessageFormExist)
+            {
+                newMessageFormExist = true;
+                newMessageForm newMsgForm = new newMessageForm((Form) this);
+                newMsgForm.Top = Screen.PrimaryScreen.Bounds.Height - newMsgForm.Height;
+                newMsgForm.Left = Screen.PrimaryScreen.Bounds.Width- newMsgForm.Width;
+
+                newMsgForm.Show();
+
+                //  ALlow main UI thread to properly display please wait form.
+                Application.DoEvents();
+
+            }
         }
     }
 }

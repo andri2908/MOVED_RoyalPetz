@@ -9,6 +9,7 @@ using System.Data;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace RoyalPetz_ADMIN
 {
@@ -24,6 +25,7 @@ namespace RoyalPetz_ADMIN
         private static int userID = 0;
         private static int userGroupID = 0;
         private static int papermode = 0; //0 = cashier mode, 1 = 1/2 kwarto, 2 = kwarto
+        private CultureInfo culture = new CultureInfo("id-ID");
 
         public void setUserID(int selectedUserID)
         {
@@ -44,6 +46,7 @@ namespace RoyalPetz_ADMIN
         {
             return papermode;
         }
+
         public void setUserGroupID(int selectedUserGroupID)
         {
             userGroupID = selectedUserGroupID;
@@ -282,6 +285,52 @@ namespace RoyalPetz_ADMIN
             tempInputNumeric = inputNumericString.Replace(charToCheck, replacementChar);
 
             return tempInputNumeric; 
+        }
+
+        public bool checkNewMessageData()
+        {
+            int moduleID = 0;
+            string sqlCommand = "";
+            string dateToday = String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(DateTime.Now));
+            string roExpiredDate = String.Format(culture, "{0:dd-MM-yyyy}", DateTime.Now.AddDays(7));
+
+            // PULL SALES INVOICE THAT'S DUE TODAY
+            moduleID = globalConstants.MENU_TRANSAKSI_PENJUALAN;
+            sqlCommand = "SELECT COUNT(1) FROM SALES_HEADER WHERE SALES_PAID = 0 AND DATE_FORMAT(SALES_TOP_DATE, '%Y%m%d')  <= '" + dateToday + "' AND SALES_INVOICE NOT IN (SELECT IDENTIFIER_NO FROM MASTER_MESSAGE WHERE MODULE_ID = " + moduleID + " AND STATUS = 0)";
+            if (Convert.ToInt32(DS.getDataSingleValue(sqlCommand)) > 0)
+                return true;
+
+            // PULL PURCHASE INVOICE THAT'S DUE TODAY
+            moduleID = globalConstants.MENU_PURCHASE_ORDER;
+            sqlCommand = "SELECT COUNT(1) FROM PURCHASE_HEADER WHERE PURCHASE_PAID = 0 AND PURCHASE_RECEIVED = 1 AND DATE_FORMAT(PURCHASE_TERM_OF_PAYMENT_DATE, '%Y%m%d')  <= '" + dateToday + "'  AND PURCHASE_INVOICE NOT IN (SELECT IDENTIFIER_NO FROM MASTER_MESSAGE WHERE MODULE_ID = " + moduleID + " AND STATUS = 0)";
+            if (Convert.ToInt32(DS.getDataSingleValue(sqlCommand)) > 0)
+                return true;
+
+            // PULL PAYMENT CREDIT THAT'S DUE TODAY
+            moduleID = globalConstants.MENU_PEMBAYARAN_PIUTANG;
+            sqlCommand = "SELECT COUNT(1) FROM SALES_HEADER SH, CREDIT C, PAYMENT_CREDIT PC WHERE C.CREDIT_PAID = 0 AND PC.CREDIT_ID = C.CREDIT_ID AND C.SALES_INVOICE = SH.SALES_INVOICE AND PC.PAYMENT_CONFIRMED = 0 AND PC.PAYMENT_INVALID = 0 AND DATE_FORMAT(PC.PAYMENT_DUE_DATE, '%Y%m%d')  <= '" + dateToday + "'  AND SH.SALES_INVOICE NOT IN (SELECT IDENTIFIER_NO FROM MASTER_MESSAGE WHERE MODULE_ID = " + moduleID + " AND STATUS = 0)";
+            if (Convert.ToInt32(DS.getDataSingleValue(sqlCommand)) > 0)
+                return true;
+
+            // PULL PAYMENT DEBT THAT'S DUE TODAY
+            moduleID = globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER;
+            sqlCommand = "SELECT COUNT(1) FROM PURCHASE_HEADER PH, DEBT D, PAYMENT_DEBT PD WHERE D.DEBT_PAID = 0 AND PD.DEBT_ID = D.DEBT_ID AND D.PURCHASE_INVOICE = PH.PURCHASE_INVOICE AND PD.PAYMENT_CONFIRMED = 0 AND PD.PAYMENT_INVALID = 0 AND DATE_FORMAT(PD.PAYMENT_DUE_DATE, '%Y%m%d')  <= '" + dateToday + "'   AND PH.PURCHASE_INVOICE NOT IN (SELECT IDENTIFIER_NO FROM MASTER_MESSAGE WHERE MODULE_ID = " + moduleID + " AND STATUS = 0)";
+            if (Convert.ToInt32(DS.getDataSingleValue(sqlCommand)) > 0)
+                return true;
+
+            // PULL REQUEST ORDER THAT'LL EXPIRE NEXT WEEK OR EARLIER
+            moduleID = globalConstants.MENU_REQUEST_ORDER;
+            sqlCommand = "SELECT COUNT(1) FROM REQUEST_ORDER_HEADER WHERE RO_ACTIVE = 1 AND DATE_FORMAT(RO_EXPIRED, '%Y%m%d')  <= '" + roExpiredDate + "'  AND RO_INVOICE NOT IN (SELECT IDENTIFIER_NO FROM MASTER_MESSAGE WHERE MODULE_ID = " + moduleID + " AND STATUS = 0)";
+            if (Convert.ToInt32(DS.getDataSingleValue(sqlCommand)) > 0)
+                return true;
+
+            // PULL PRODUCT_ID THAT ALREADY HIT LIMIT STOCK
+            moduleID = globalConstants.MENU_PRODUK;
+            sqlCommand = "SELECT COUNT(1) FROM  MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 AND PRODUCT_IS_SERVICE = 0 AND PRODUCT_STOCK_QTY <= PRODUCT_LIMIT_STOCK AND PRODUCT_ID NOT IN (SELECT IDENTIFIER_NO FROM MASTER_MESSAGE WHERE MODULE_ID = " + moduleID + " AND STATUS = 0)";
+            if (Convert.ToInt32(DS.getDataSingleValue(sqlCommand)) > 0)
+                return true;
+
+            return false;
         }
 
         public void reArrangeTabOrder(Control form)

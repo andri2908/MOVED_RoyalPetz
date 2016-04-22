@@ -42,6 +42,7 @@
             this.messageDataGridView.AllowUserToAddRows = false;
             this.messageDataGridView.AllowUserToDeleteRows = false;
             this.messageDataGridView.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.messageDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.messageDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.messageDataGridView.ContextMenuStrip = this.contextMenuStrip1;
             this.messageDataGridView.Location = new System.Drawing.Point(2, 3);
