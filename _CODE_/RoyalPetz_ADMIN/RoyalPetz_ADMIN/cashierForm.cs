@@ -1335,10 +1335,12 @@ namespace RoyalPetz_ADMIN
 
             //cek paper mode
             int papermode = gutil.getPaper();
+            int paperLength = 0;
             if (papermode == 0) //kertas POS
             {
                 //width, height
-                PaperSize psize = new PaperSize("Custom", 320, 820);
+                paperLength = calculatePageLength();
+                PaperSize psize = new PaperSize("Custom", 320, paperLength);//820);
                 printDocument1.DefaultPageSettings.PaperSize = psize;
                 DialogResult result;
                 printPreviewDialog1.Width = 512;
@@ -1368,6 +1370,86 @@ namespace RoyalPetz_ADMIN
            
         }
        
+        private int calculatePageLength()
+        {
+            int startY = 10;
+            int Offset = 15;
+            int totalLengthPage = startY + Offset;
+            string nm, almt, tlpn, email;
+
+            loadInfoToko(2, out nm, out almt, out tlpn, out email);
+
+            //set printing area
+            Offset = Offset + 12;
+
+            Offset = Offset + 10;
+
+            if (!email.Equals(""))
+                Offset = Offset + 10;
+
+            Offset = Offset + 15;
+            //end of header
+
+            //start of content
+
+            //1. PAYMENT METHOD
+            Offset = Offset + 15;
+
+            //2. CUSTOMER NAME
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+
+            //DETAIL PENJUALAN
+            
+            DS.mySqlConnect();
+            MySqlDataReader rdr;
+            using (rdr = DS.getData("SELECT S.ID, S.PRODUCT_ID AS 'P-ID', P.PRODUCT_NAME AS 'NAME', S.PRODUCT_QTY AS 'QTY',ROUND(S.SALES_SUBTOTAL/S.PRODUCT_QTY) AS 'PRICE' FROM sales_detail S, master_product P WHERE S.PRODUCT_ID=P.PRODUCT_ID AND S.SALES_INVOICE='" + selectedsalesinvoice + "'"))//+ "group by s.product_id") )
+            {
+                if (rdr.HasRows)
+                {
+                    while (rdr.Read())
+                        Offset = Offset + 15;
+                }
+            }
+            DS.mySqlClose();
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 25;
+            //eNd of content
+
+            //FOOTER
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+            //end of footer
+
+            totalLengthPage = totalLengthPage + Offset + 15;
+            
+            return totalLengthPage;
+        }
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
@@ -1382,7 +1464,6 @@ namespace RoyalPetz_ADMIN
             int startX = 10;
             int startY = 10;
             int Offset = 15;
-
             //HEADER
 
             //set allignemnt
