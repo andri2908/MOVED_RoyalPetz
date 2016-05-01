@@ -1,6 +1,6 @@
 ﻿namespace RoyalPetz_ADMIN
 {
-    partial class SalesReceiptForm
+    partial class SalesReceiptKuartoForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,8 +29,7 @@
         private void InitializeComponent()
         {
             this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
-            this.ReportAccount1 = new RoyalPetz_ADMIN.ReportAccount();
-            this.SalesReceipt1 = new RoyalPetz_ADMIN.SalesReceipt();
+            this.SalesReceiptKuarto1 = new RoyalPetz_ADMIN.SalesReceiptKuarto();
             this.SuspendLayout();
             // 
             // crystalReportViewer1
@@ -41,25 +40,25 @@
             this.crystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.crystalReportViewer1.Location = new System.Drawing.Point(0, 0);
             this.crystalReportViewer1.Name = "crystalReportViewer1";
-            this.crystalReportViewer1.ReportSource = this.SalesReceipt1;
+            this.crystalReportViewer1.ReportSource = this.SalesReceiptKuarto1;
             this.crystalReportViewer1.ShowCloseButton = false;
             this.crystalReportViewer1.ShowCopyButton = false;
             this.crystalReportViewer1.ShowGroupTreeButton = false;
             this.crystalReportViewer1.ShowParameterPanelButton = false;
-            this.crystalReportViewer1.Size = new System.Drawing.Size(1516, 654);
+            this.crystalReportViewer1.Size = new System.Drawing.Size(1383, 634);
             this.crystalReportViewer1.TabIndex = 0;
             this.crystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
-            // SalesReceiptForm
+            // SalesReceiptKuartoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1516, 654);
+            this.ClientSize = new System.Drawing.Size(1383, 634);
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "SalesReceiptForm";
-            this.Text = "SalesReceiptForm";
-            this.Load += new System.EventHandler(this.SalesReceiptForm_Load);
+            this.Name = "SalesReceiptKuartoForm";
+            this.Text = "SalesReceiptKuartoForm";
+            this.Load += new System.EventHandler(this.SalesReceiptKuartoForm_Load);
             this.ResumeLayout(false);
 
         }
@@ -67,7 +66,6 @@
         #endregion
 
         private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
-        private ReportAccount ReportAccount1;
-        private SalesReceipt SalesReceipt1;
+        private SalesReceiptKuarto SalesReceiptKuarto1;
     }
 }

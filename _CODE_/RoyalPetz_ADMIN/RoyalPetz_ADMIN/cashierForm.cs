@@ -1359,12 +1359,19 @@ namespace RoyalPetz_ADMIN
                     "PRODUCT_SALES_PRICE AS 'PRICE', ROUND((PRODUCT_QTY * PRODUCT_SALES_PRICE) - SALES_SUBTOTAL, 2) AS 'POTONGAN', SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
                     "FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT M, MASTER_CUSTOMER MC WHERE SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND SH.CUSTOMER_ID = MC.CUSTOMER_ID AND SH.SALES_INVOICE='" + selectedsalesinvoice + "'" +
                     "UNION " +
-                    "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', '' AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', PRODUCT_QTY AS 'QTY', PRODUCT_SALES_PRICE AS 'PRICE', " +
+                    "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', PRODUCT_QTY AS 'QTY', PRODUCT_SALES_PRICE AS 'PRICE', " +
                     "ROUND((PRODUCT_QTY * PRODUCT_SALES_PRICE) - SALES_SUBTOTAL, 2) AS 'POTONGAN', SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
                     "FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT M WHERE SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND SH.CUSTOMER_ID = 0 AND SH.SALES_INVOICE='" + selectedsalesinvoice + "'";
                 DS.writeXML(sqlCommandx, globalConstants.SalesReceiptXML);
-                SalesReceiptForm displayedform = new SalesReceiptForm();
-                displayedform.ShowDialog(this);
+                if (gutil.getPaper() == 2) // kuarto
+                {
+                    SalesReceiptKuartoForm displayedform = new SalesReceiptKuartoForm();
+                    displayedform.ShowDialog(this); ;
+                } else
+                {
+                    SalesReceiptForm displayedform = new SalesReceiptForm();
+                    displayedform.ShowDialog(this);
+                }
             }
 
            
@@ -1374,6 +1381,7 @@ namespace RoyalPetz_ADMIN
         {
             int startY = 10;
             int Offset = 15;
+            int Offsetplus = 3;
             int totalLengthPage = startY + Offset;
             string nm, almt, tlpn, email;
 
@@ -1402,7 +1410,7 @@ namespace RoyalPetz_ADMIN
 
             Offset = Offset + 15;
 
-            Offset = Offset + 15;
+            Offset = Offset + 15 + Offsetplus;
 
             Offset = Offset + 15;
 
@@ -1433,11 +1441,11 @@ namespace RoyalPetz_ADMIN
             Offset = Offset + 15;
 
             Offset = Offset + 25;
-            //eNd of content
+            //end of content
 
             //FOOTER
 
-            Offset = Offset + 15;
+            Offset = Offset + 15 + Offsetplus;
 
             Offset = Offset + 15;
 
@@ -1461,9 +1469,15 @@ namespace RoyalPetz_ADMIN
             Graphics graphics = e.Graphics;
             Font font = new Font("Courier New", 10);
             float fontHeight = font.GetHeight();
-            int startX = 10;
-            int startY = 10;
+            int startX = 5;
+            int colxwidth = 93; //31x3
+            int totrowwidth = 310; //310/10=31
+            int totrowheight = 20;
+            int inlineheader = 12;
+            int inlinetext = 10;
+            int startY = 5;
             int Offset = 15;
+            int offset_plus = 3;
             //HEADER
 
             //set allignemnt
@@ -1471,8 +1485,12 @@ namespace RoyalPetz_ADMIN
             sf.LineAlignment = StringAlignment.Center;
             sf.Alignment = StringAlignment.Center;
 
-            //set printing area
-            System.Drawing.RectangleF rect = new System.Drawing.RectangleF(startX, startY + Offset, 300, 20);
+            //set whole printing area
+            System.Drawing.RectangleF rect = new System.Drawing.RectangleF(startX, startY + Offset, totrowwidth, totrowheight);
+            //set right print area
+            System.Drawing.RectangleF rectright = new System.Drawing.RectangleF(totrowwidth-colxwidth-startX, startY + Offset, colxwidth, totrowheight);
+            //set middle print area
+            System.Drawing.RectangleF rectcenter = new System.Drawing.RectangleF((startX + (totrowwidth / 2) - colxwidth - startX), startY + Offset, (totrowwidth / 2) - startX, totrowheight);
 
             loadInfoToko(2,out nm, out almt, out tlpn, out email);
 
@@ -1500,9 +1518,9 @@ namespace RoyalPetz_ADMIN
                      new SolidBrush(Color.Black), rect, sf);
             }
 
-            Offset = Offset + 15;
+            Offset = Offset + 13;
             rect.Y = startY + Offset;
-            String underLine = "-----------------------------------";
+            String underLine = "-------------------------------------";  //37 character
             graphics.DrawString(underLine, new Font("Courier New", 9),
                      new SolidBrush(Color.Black), rect, sf);
             //end of header
@@ -1519,7 +1537,7 @@ namespace RoyalPetz_ADMIN
             double total = 0;
             using (rdr = DS.getData("SELECT S.SALES_INVOICE AS 'INVOICE', C.CUSTOMER_FULL_NAME AS 'CUSTOMER',DATE_FORMAT(S.SALES_DATE, '%d-%M-%Y') AS 'DATE',S.SALES_TOTAL AS 'TOTAL', IF(C.CUSTOMER_GROUP=1,'RETAIL',IF(C.CUSTOMER_GROUP=2,'GROSIR','PARTAI')) AS 'GROUP' FROM SALES_HEADER S,MASTER_CUSTOMER C WHERE S.CUSTOMER_ID = C.CUSTOMER_ID AND S.SALES_INVOICE = '" + selectedsalesinvoice + "'" +
                 " UNION " +
-                "SELECT S.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', DATE_FORMAT(S.SALES_DATE, '%d-%M-%Y') AS 'DATE', S.SALES_TOTAL AS 'TOTAL', 'RETAIL' AS 'GROUP' FROM SALES_HEADER S, MASTER_CUSTOMER C WHERE S.CUSTOMER_ID = 0 AND S.SALES_INVOICE = '" + selectedsalesinvoice + "'" +
+                "SELECT S.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', DATE_FORMAT(S.SALES_DATE, '%d-%M-%Y') AS 'DATE', S.SALES_TOTAL AS 'TOTAL', 'RETAIL' AS 'GROUP' FROM SALES_HEADER S WHERE S.CUSTOMER_ID = 0 AND S.SALES_INVOICE = '" + selectedsalesinvoice + "'" +
                 "ORDER BY DATE ASC"))
             {
                 if (rdr.HasRows) 
@@ -1534,7 +1552,7 @@ namespace RoyalPetz_ADMIN
             DS.mySqlClose();
 
             //1. PAYMENT METHOD
-            Offset = Offset + 15;
+            Offset = Offset + 12;
             rect.Y = startY + Offset;
             rect.X = startX + 15;
             rect.Width = 280;
@@ -1552,29 +1570,29 @@ namespace RoyalPetz_ADMIN
                      new SolidBrush(Color.Black), rect, sf);
 
             //2. CUSTOMER NAME
-            Offset = Offset + 15;
+            Offset = Offset + 12;
             rect.Y = startY + Offset;
             ucapan = "PELANGGAN : " + customer + " [" + group + "]";
             graphics.DrawString(ucapan, new Font("Courier New", 7),
                      new SolidBrush(Color.Black), rect, sf);
 
-            Offset = Offset + 15;
+            Offset = Offset + 13;
             rect.Y = startY + Offset;
             rect.X = startX;
-            rect.Width = 300;
+            rect.Width = totrowwidth;
             sf.LineAlignment = StringAlignment.Center;
             sf.Alignment = StringAlignment.Center;
             graphics.DrawString(underLine, new Font("Courier New", 9),
                      new SolidBrush(Color.Black), rect, sf);
 
-            Offset = Offset + 15;
+            Offset = Offset + 12;
             rect.Y = startY + Offset;
-            rect.Width = 300;
+            rect.Width = totrowwidth;
             ucapan = "BUKTI PEMBAYARAN";
             graphics.DrawString(ucapan, new Font("Courier New", 7),
                      new SolidBrush(Color.Black), rect, sf);
             
-            Offset = Offset + 15;
+            Offset = Offset + 15 + offset_plus;
             rect.Y = startY + Offset;
             rect.X = startX + 15;
             rect.Width = 280;
@@ -1584,13 +1602,13 @@ namespace RoyalPetz_ADMIN
             graphics.DrawString(ucapan, new Font("Courier New", 7),
                      new SolidBrush(Color.Black), rect, sf);
 
-            Offset = Offset + 15;
+            Offset = Offset + 12;
             rect.Y = startY + Offset;
             ucapan = "TANGGAL  : "+ tgl;
             graphics.DrawString(ucapan, new Font("Courier New", 7),
                      new SolidBrush(Color.Black), rect, sf);
 
-            Offset = Offset + 15;
+            Offset = Offset + 12;
             rect.Y = startY + Offset;
             string nama = "";
             loadNamaUser(gutil.getUserID(), out nama);
@@ -1598,10 +1616,10 @@ namespace RoyalPetz_ADMIN
             graphics.DrawString(ucapan, new Font("Courier New", 7),
                      new SolidBrush(Color.Black), rect, sf);
 
-            Offset = Offset + 15;
+            Offset = Offset + 13;
             rect.Y = startY + Offset;
             rect.X = startX;
-            rect.Width = 300;
+            rect.Width = totrowwidth;
             sf.LineAlignment = StringAlignment.Center;
             sf.Alignment = StringAlignment.Center;
             graphics.DrawString(underLine, new Font("Courier New", 9),
@@ -1632,18 +1650,32 @@ namespace RoyalPetz_ADMIN
                         rect.Y = startY + Offset;
                         rect.X = startX + 15;
                         rect.Width = 280;
-                        ucapan = product_id + " " + product_name + " X" + product_qty + " Rp." + product_price;
+                        sf.LineAlignment = StringAlignment.Near;
+                        sf.Alignment = StringAlignment.Near;
+                        ucapan = product_qty + " X [" + product_id + "] " + product_name;
+                        if (ucapan.Length > 30 )
+                        {
+                            ucapan = ucapan.Substring(0, 30); //maximum 30 character
+                        }
+                        //
                         graphics.DrawString(ucapan, new Font("Courier New", 7),
                                  new SolidBrush(Color.Black), rect, sf);
+
+                        rectright.Y = Offset-startY;
+                        sf.LineAlignment = StringAlignment.Far;
+                        sf.Alignment = StringAlignment.Far;
+                        ucapan = " Rp." + product_price;
+                        graphics.DrawString(ucapan, new Font("Courier New", 7),
+                                 new SolidBrush(Color.Black), rectright, sf);
                     }
                 }
             }
             DS.mySqlClose();
 
-            Offset = Offset + 15;
+            Offset = Offset + 13;
             rect.Y = startY + Offset;
             rect.X = startX;
-            rect.Width = 300;
+            rect.Width = totrowwidth;
             sf.LineAlignment = StringAlignment.Center;
             sf.Alignment = StringAlignment.Center;
             graphics.DrawString(underLine, new Font("Courier New", 9),
@@ -1655,30 +1687,55 @@ namespace RoyalPetz_ADMIN
             rect.Width = 260;
             sf.LineAlignment = StringAlignment.Near;
             sf.Alignment = StringAlignment.Near;
-            ucapan = "               JUMLAH  : Rp." + total;
+            ucapan = "               JUMLAH  :";
+            rectcenter.Y = rect.Y;
             graphics.DrawString(ucapan, new Font("Courier New", 7),
-                     new SolidBrush(Color.Black), rect, sf);
+                     new SolidBrush(Color.Black), rectcenter, sf);
+            sf.LineAlignment = StringAlignment.Far;
+            sf.Alignment = StringAlignment.Far;
+            ucapan = "Rp." + total;
+            rectright.Y = Offset - startY + 1;
+            graphics.DrawString(ucapan, new Font("Courier New", 7),
+                     new SolidBrush(Color.Black), rectright, sf);
 
             Offset = Offset + 15;
             rect.Y = startY + Offset;
             rect.X = startX + 15;
             rect.Width = 260;
-            ucapan = "               TUNAI   : Rp." + bayarTextBox.Text;
+            sf.LineAlignment = StringAlignment.Near;
+            sf.Alignment = StringAlignment.Near;
+            ucapan = "               TUNAI   :";
+            rectcenter.Y = rect.Y;
             graphics.DrawString(ucapan, new Font("Courier New", 7),
-                     new SolidBrush(Color.Black), rect, sf);
+                     new SolidBrush(Color.Black), rectcenter, sf);
+            sf.LineAlignment = StringAlignment.Far;
+            sf.Alignment = StringAlignment.Far;
+            ucapan = "Rp." + bayarTextBox.Text;
+            rectright.Y = Offset - startY + 1;
+            graphics.DrawString(ucapan, new Font("Courier New", 7),
+                     new SolidBrush(Color.Black), rectright, sf);
 
             Offset = Offset + 15;
             rect.Y = startY + Offset;
             rect.X = startX + 15;
             rect.Width = 260;
-            ucapan = "               KEMBALI : " + uangKembaliTextBox.Text;
+            sf.LineAlignment = StringAlignment.Near;
+            sf.Alignment = StringAlignment.Near;
+            ucapan = "               KEMBALI :";
+            rectcenter.Y = rect.Y;
             graphics.DrawString(ucapan, new Font("Courier New", 7),
-                     new SolidBrush(Color.Black), rect, sf);
+                     new SolidBrush(Color.Black), rectcenter, sf);
+            sf.LineAlignment = StringAlignment.Far;
+            sf.Alignment = StringAlignment.Far;
+            ucapan = uangKembaliTextBox.Text;
+            rectright.Y = Offset - startY + 1;
+            graphics.DrawString(ucapan, new Font("Courier New", 7),
+                     new SolidBrush(Color.Black), rectright, sf);
 
             total_qty = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(SUM(PRODUCT_QTY), 0) FROM SALES_DETAIL S, MASTER_PRODUCT P WHERE S.PRODUCT_ID = P.PRODUCT_ID AND S.SALES_INVOICE = '" + selectedsalesinvoice + "'"));
 
-            Offset = Offset + 25;
-            rect.Y = startY + Offset;
+            Offset = Offset + 25 + offset_plus;
+            rect.Y = startY + Offset ;
             rect.X = startX + 15;
             rect.Width = 280;
             sf.LineAlignment = StringAlignment.Near;
@@ -1690,10 +1747,10 @@ namespace RoyalPetz_ADMIN
 
             //FOOTER
 
-            Offset = Offset + 15;
+            Offset = Offset + 13;
             rect.Y = startY + Offset;
             rect.X = startX;
-            rect.Width = 300;
+            rect.Width = totrowwidth;
             sf.LineAlignment = StringAlignment.Center;
             sf.Alignment = StringAlignment.Center;
             graphics.DrawString(underLine, new Font("Courier New", 9),

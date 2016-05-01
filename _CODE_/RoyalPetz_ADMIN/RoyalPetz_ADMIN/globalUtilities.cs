@@ -24,7 +24,7 @@ namespace RoyalPetz_ADMIN
         private Data_Access DS = new Data_Access();
         private static int userID = 0;
         private static int userGroupID = 0;
-        private static int papermode = 0; //0 = cashier mode, 1 = 1/2 kwarto, 2 = kwarto
+        private static int papermode = 0; //0 = POS Receipt, 1 = 1/2 kwarto, 2 = kwarto
         private CultureInfo culture = new CultureInfo("id-ID");
 
         public void setUserID(int selectedUserID)

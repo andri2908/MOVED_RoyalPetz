@@ -54,7 +54,7 @@ namespace RoyalPetz_ADMIN
 
         private void SetPrinterForm_Load(object sender, EventArgs e)
         {
-
+            sizeComboBox.SelectedIndex = gutil.getPaper();
         }
 
         private void PrinterlistBox_SelectedValueChanged(object sender, EventArgs e)

@@ -15,11 +15,11 @@ using MySql.Data.MySqlClient;
 
 namespace RoyalPetz_ADMIN
 {
-    public partial class SalesReceiptForm : Form
+    public partial class SalesReceiptKuartoForm : Form
     {
         private globalUtilities gutil = new globalUtilities();
         private Data_Access DS = new Data_Access();
-        public SalesReceiptForm()
+        public SalesReceiptKuartoForm()
         {
             InitializeComponent();
         }
@@ -41,14 +41,9 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        private void SalesReceiptForm_Load(object sender, EventArgs e)
+        private void SalesReceiptKuartoForm_Load(object sender, EventArgs e)
         {
-            /*
-            if (gutil.getPaper() == 2) // kuarto
-            {
-                SalesReceipt1.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;                
-            }
-            */
+
             DataSet dsTempReport = new DataSet();
             try
             {
@@ -56,7 +51,7 @@ namespace RoyalPetz_ADMIN
                 dsTempReport.ReadXml(@appPath);
 
                 //prepare report for preview
-                SalesReceipt rptXMLReport = new SalesReceipt();
+                SalesReceiptKuarto rptXMLReport = new SalesReceiptKuarto();
                 CrystalDecisions.CrystalReports.Engine.TextObject txtReportHeader1, txtReportHeader2, txtReportHeader3, txtReportHeader4;
                 txtReportHeader1 = rptXMLReport.ReportDefinition.ReportObjects["NamaTokoLabel"] as TextObject;
                 txtReportHeader2 = rptXMLReport.ReportDefinition.ReportObjects["InfoTokoLabel"] as TextObject;

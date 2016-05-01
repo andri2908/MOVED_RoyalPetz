@@ -108,7 +108,7 @@
             this.sizeComboBox.Name = "sizeComboBox";
             this.sizeComboBox.Size = new System.Drawing.Size(146, 26);
             this.sizeComboBox.TabIndex = 13;
-            this.sizeComboBox.Text = "Kecil";
+            this.sizeComboBox.Text = "POS Receipt";
             // 
             // panel1
             // 
