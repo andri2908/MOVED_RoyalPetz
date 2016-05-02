@@ -436,6 +436,35 @@
     <Compile Include="ReportProductForm.Designer.cs">
       <DependentUpon>ReportProductForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportSalesDetailed.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportSalesDetailed.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportSalesDetailedForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportSalesDetailedForm.Designer.cs">
+      <DependentUpon>ReportSalesDetailedForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportSalesSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportSalesSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportSalesSummaryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportSalesSummaryForm.Designer.cs">
+      <DependentUpon>ReportSalesSummaryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportSalesSummarySearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportSalesSummarySearchForm.Designer.cs">
+      <DependentUpon>ReportSalesSummarySearchForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportSupplier.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -757,6 +786,23 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportProductForm.resx">
       <DependentUpon>ReportProductForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportSalesDetailed.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportSalesDetailed.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportSalesDetailedForm.resx">
+      <DependentUpon>ReportSalesDetailedForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportSalesSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportSalesSummary.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportSalesSummaryForm.resx">
+      <DependentUpon>ReportSalesSummaryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportSalesSummarySearchForm.resx">
+      <DependentUpon>ReportSalesSummarySearchForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportSupplier.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

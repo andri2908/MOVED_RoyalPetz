@@ -1019,12 +1019,14 @@
             this.detailedToolStripMenuItem.Name = "detailedToolStripMenuItem";
             this.detailedToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.detailedToolStripMenuItem.Text = "Detailed";
+            this.detailedToolStripMenuItem.Click += new System.EventHandler(this.detailedToolStripMenuItem_Click);
             // 
             // summaryToolStripMenuItem
             // 
             this.summaryToolStripMenuItem.Name = "summaryToolStripMenuItem";
             this.summaryToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.summaryToolStripMenuItem.Text = "Summary ";
+            this.summaryToolStripMenuItem.Click += new System.EventHandler(this.summaryToolStripMenuItem_Click);
             // 
             // perProdukBarangToolStripMenuItem
             // 

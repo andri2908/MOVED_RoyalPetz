@@ -1003,5 +1003,17 @@ namespace RoyalPetz_ADMIN
 
             }
         }
+
+        private void summaryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportSalesSummarySearchForm displayedForm = new ReportSalesSummarySearchForm(globalConstants.REPORT_SALES_SUMMARY);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void detailedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportSalesSummarySearchForm displayedForm = new ReportSalesSummarySearchForm(globalConstants.REPORT_SALES_DETAILED);
+            displayedForm.ShowDialog(this);
+        }
     }
 }
