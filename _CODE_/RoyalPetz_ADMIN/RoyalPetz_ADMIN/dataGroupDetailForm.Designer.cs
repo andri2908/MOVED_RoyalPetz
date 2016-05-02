@@ -40,6 +40,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.nonAktifCheckbox = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.cashierCheckBox = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -62,7 +63,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label3.Location = new System.Drawing.Point(3, 47);
+            this.label3.Location = new System.Drawing.Point(3, 40);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(107, 18);
             this.label3.TabIndex = 8;
@@ -74,7 +75,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(151, 7);
+            this.label4.Location = new System.Drawing.Point(150, 7);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(13, 18);
             this.label4.TabIndex = 10;
@@ -86,7 +87,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(151, 47);
+            this.label6.Location = new System.Drawing.Point(150, 40);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(13, 18);
             this.label6.TabIndex = 12;
@@ -97,7 +98,7 @@
             this.namaGroupTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.namaGroupTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.namaGroupTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaGroupTextBox.Location = new System.Drawing.Point(170, 3);
+            this.namaGroupTextBox.Location = new System.Drawing.Point(169, 3);
             this.namaGroupTextBox.MaxLength = 30;
             this.namaGroupTextBox.Name = "namaGroupTextBox";
             this.namaGroupTextBox.Size = new System.Drawing.Size(377, 27);
@@ -107,7 +108,7 @@
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(158, 184);
+            this.saveButton.Location = new System.Drawing.Point(158, 193);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(95, 37);
             this.saveButton.TabIndex = 20;
@@ -120,7 +121,7 @@
             this.deskripsiTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.deskripsiTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.deskripsiTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deskripsiTextBox.Location = new System.Drawing.Point(170, 42);
+            this.deskripsiTextBox.Location = new System.Drawing.Point(169, 36);
             this.deskripsiTextBox.MaxLength = 100;
             this.deskripsiTextBox.Name = "deskripsiTextBox";
             this.deskripsiTextBox.Size = new System.Drawing.Size(377, 27);
@@ -156,7 +157,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.41463F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.58537F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 387F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 388F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label4, 1, 0);
@@ -164,13 +165,15 @@
             this.tableLayoutPanel1.Controls.Add(this.namaGroupTextBox, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.deskripsiTextBox, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.nonAktifCheckbox, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.cashierCheckBox, 2, 3);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 36);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(555, 119);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(555, 135);
             this.tableLayoutPanel1.TabIndex = 19;
             // 
             // nonAktifCheckbox
@@ -178,7 +181,7 @@
             this.nonAktifCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.nonAktifCheckbox.AutoSize = true;
             this.nonAktifCheckbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nonAktifCheckbox.Location = new System.Drawing.Point(170, 88);
+            this.nonAktifCheckbox.Location = new System.Drawing.Point(169, 69);
             this.nonAktifCheckbox.Name = "nonAktifCheckbox";
             this.nonAktifCheckbox.Size = new System.Drawing.Size(157, 22);
             this.nonAktifCheckbox.TabIndex = 51;
@@ -189,13 +192,25 @@
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.button1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(303, 184);
+            this.button1.Location = new System.Drawing.Point(303, 193);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(95, 37);
             this.button1.TabIndex = 23;
             this.button1.Text = "RESET";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // cashierCheckBox
+            // 
+            this.cashierCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cashierCheckBox.AutoSize = true;
+            this.cashierCheckBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cashierCheckBox.Location = new System.Drawing.Point(169, 103);
+            this.cashierCheckBox.Name = "cashierCheckBox";
+            this.cashierCheckBox.Size = new System.Drawing.Size(122, 22);
+            this.cashierCheckBox.TabIndex = 52;
+            this.cashierCheckBox.Text = "Group Kasir";
+            this.cashierCheckBox.UseVisualStyleBackColor = true;
             // 
             // dataGroupDetailForm
             // 
@@ -237,5 +252,6 @@
         private System.Windows.Forms.CheckBox nonAktifCheckbox;
         private System.Windows.Forms.Label errorLabel;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox cashierCheckBox;
     }
 }

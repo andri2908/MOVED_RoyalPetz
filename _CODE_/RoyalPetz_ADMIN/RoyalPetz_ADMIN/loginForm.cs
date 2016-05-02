@@ -18,7 +18,8 @@ namespace RoyalPetz_ADMIN
         private Data_Access DS = new Data_Access();
         private globalUtilities gutil = new globalUtilities();
 
-        private int selectedUserID;
+        private int selectedUserID = 0;
+        private int selectedUserGroupID = 0;
         private int originModuleID = 0;
 
         //private globalUtilities gUtil = new globalUtilities();
@@ -130,6 +131,16 @@ namespace RoyalPetz_ADMIN
 
             return retVal;
         }
+
+        private int getUserGroupID()
+        {
+            int result;
+
+            result = Convert.ToInt32(DS.getDataSingleValue("SELECT IFNULL(GROUP_ID, 0) FROM MASTER_USER WHERE ID = " + selectedUserID));
+
+            return result;
+        }
+
         private void loginButton_Click(object sender, EventArgs e)
         {
             if (checkTextBox())
@@ -140,18 +151,32 @@ namespace RoyalPetz_ADMIN
                     {
                         this.Hide();
 
-                        adminForm displayAdminForm = new adminForm(selectedUserID);
-                        displayAdminForm.ShowDialog(this);
+                        selectedUserGroupID = getUserGroupID();
 
-                        logoutForm displayLogOutForm = new logoutForm();
-                        displayLogOutForm.ShowDialog(this);
+                        gutil.setUserID(selectedUserID);
+                        gutil.setUserGroupID(selectedUserGroupID);
+
+                        if (gutil.userIsCashier() == 1)
+                        {
+                            cashierLoginForm newCashierForm = new cashierLoginForm(0);
+                            newCashierForm.ShowDialog(this);
+                        }
+                        else
+                        { 
+                            adminForm displayAdminForm = new adminForm(selectedUserID, selectedUserGroupID);
+                            displayAdminForm.ShowDialog(this);
+                        }
+
+                        //logoutForm displayLogOutForm = new logoutForm();
+                        //displayLogOutForm.ShowDialog(this);
 
                         userNameTextBox.Text = "";
                         passwordTextBox.Text = "";
                         errorLabel.Text = "";
-                        userNameTextBox.Focus();
-
+                        
                         this.Show();
+
+                        userNameTextBox.Focus();
                     }
                     else
                     {

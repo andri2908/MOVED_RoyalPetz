@@ -74,9 +74,9 @@
             // newButton
             // 
             this.newButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newButton.Location = new System.Drawing.Point(390, 16);
+            this.newButton.Location = new System.Drawing.Point(521, 10);
             this.newButton.Name = "newButton";
-            this.newButton.Size = new System.Drawing.Size(65, 27);
+            this.newButton.Size = new System.Drawing.Size(95, 37);
             this.newButton.TabIndex = 7;
             this.newButton.Text = "NEW";
             this.newButton.UseVisualStyleBackColor = true;

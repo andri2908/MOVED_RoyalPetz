@@ -59,11 +59,23 @@
     <Compile Include="aboutusform.Designer.cs">
       <DependentUpon>aboutusform.cs</DependentUpon>
     </Compile>
+    <Compile Include="barcodeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="barcodeForm.Designer.cs">
+      <DependentUpon>barcodeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="cashierForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="cashierForm.designer.cs">
       <DependentUpon>cashierForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cashierLoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cashierLoginForm.Designer.cs">
+      <DependentUpon>cashierLoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="changePasswordForm.cs">
       <SubType>Form</SubType>
@@ -588,8 +600,14 @@
     <EmbeddedResource Include="aboutusform.resx">
       <DependentUpon>aboutusform.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="barcodeForm.resx">
+      <DependentUpon>barcodeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="cashierForm.resx">
       <DependentUpon>cashierForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cashierLoginForm.resx">
+      <DependentUpon>cashierLoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="changePasswordForm.resx">
       <DependentUpon>changePasswordForm.cs</DependentUpon>

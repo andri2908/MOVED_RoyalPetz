@@ -57,6 +57,15 @@ namespace RoyalPetz_ADMIN
             return userGroupID;
         }
 
+        public int userIsCashier()
+        {
+            int result = 0;
+
+            result = Convert.ToInt32(DS.getDataSingleValue("SELECT GROUP_IS_CASHIER FROM MASTER_GROUP WHERE GROUP_ID = " + getUserGroupID()));
+
+            return result;
+        }
+
         public string allTrim(string valueToTrim)
         {
             string temp = "";

@@ -521,6 +521,14 @@ namespace RoyalPetz_ADMIN
             //DateTime PODueDate;
             MySqlException internalEX = null;
 
+            double currentTaxTotal = 0;
+            double currentPurchaseTotal = 0;
+            double taxLimitValue = 0;
+            double parameterCalculation = 0;
+            int taxLimitType = 0; // 0 - percentage, 1 - amount
+            string purchaseDateValue = "";
+            bool addToTaxTable = false;
+
             roInvoice = selectedROInvoice; //ROInvoiceTextBox.Text;
             POInvoice = POinvoiceTextBox.Text;
             supplierID = selectedSupplierID;
@@ -538,6 +546,43 @@ namespace RoyalPetz_ADMIN
 
             POTotal = globalTotalValue;
 
+
+            // TAX LIMIT CALCULATION
+            // ----------------------------------------------------------------------
+            purchaseDateValue = String.Format(culture, "{0:yyyyMMdd}", DateTime.Now);
+            currentTaxTotal = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(SUM(PURCHASE_TOTAL), 0) AS TOTAL FROM PURCHASE_HEADER_TAX WHERE DATE_FORMAT(PURCHASE_DATETIME, '%Y%m%d') = '" + purchaseDateValue + "'"));
+            currentPurchaseTotal = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(SUM(PURCHASE_TOTAL), 0) AS TOTAL FROM PURCHASE_HEADER WHERE DATE_FORMAT(PURCHASE_DATETIME, '%Y%m%d') = '" + purchaseDateValue + "'"));
+
+            // CHECK WHETHER THE PARAMETER FOR TAX CALCULATION HAS BEEN SET
+            taxLimitValue = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(PERSENTASE_PEMBELIAN, 0) FROM SYS_CONFIG_TAX WHERE ID = 1"));
+            if (taxLimitValue == 0)
+            {
+                taxLimitType = 1;
+                taxLimitValue = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(AVERAGE_PEMBELIAN_HARIAN, 0) FROM SYS_CONFIG_TAX WHERE ID = 1"));
+
+                if (taxLimitValue != 0)
+                    addToTaxTable = true;
+            }
+            else
+                addToTaxTable = true;
+
+            // CHECK WHETHER THE PARAMETER HAS BEEN FULFILLED
+            if (addToTaxTable)
+            {
+                if (taxLimitType == 0) // PERCENTAGE CALCULATION
+                {
+                    parameterCalculation = currentPurchaseTotal * taxLimitValue / 100;
+                    if (currentTaxTotal > parameterCalculation)
+                        addToTaxTable = false;
+                }
+                else // AMOUNT CALCULATION
+                {
+                    if (currentTaxTotal > taxLimitValue)
+                        addToTaxTable = false;
+                }
+            }
+            // ----------------------------------------------------------------------
+
             DS.beginTransaction();
 
             try
@@ -554,6 +599,15 @@ namespace RoyalPetz_ADMIN
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
+                        if (addToTaxTable)
+                        {
+                            sqlCommand = "INSERT INTO PURCHASE_HEADER_TAX (PURCHASE_INVOICE, SUPPLIER_ID, PURCHASE_DATETIME, PURCHASE_TOTAL, PURCHASE_TERM_OF_PAYMENT, PURCHASE_TERM_OF_PAYMENT_DURATION, PURCHASE_PAID) VALUES " +
+                                                "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(POTotal) + ", " + termOfPayment + ", " + termOfPaymentDuration + ", '" + purchasePaid + ")";
+
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+                        }
+
                         // SAVE DETAIL TABLE
                         for (int i = 0; i < detailPODataGridView.Rows.Count - 1; i++)
                         {
@@ -564,6 +618,16 @@ namespace RoyalPetz_ADMIN
 
                                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                     throw internalEX;
+
+                                if (addToTaxTable)
+                                {
+                                    sqlCommand = "INSERT INTO PURCHASE_DETAIL_TAX (PURCHASE_INVOICE, PRODUCT_ID, PRODUCT_PRICE, PRODUCT_QTY, PURCHASE_SUBTOTAL) VALUES " +
+                                                        "('" + POInvoice + "', '" + detailPODataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["qty"].Value) + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailPODataGridView.Rows[i].Cells["subTotal"].Value)) + ")";
+
+                                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                        throw internalEX;
+                                }
+
                             }
                         }
 
@@ -571,14 +635,6 @@ namespace RoyalPetz_ADMIN
                         sqlCommand = "UPDATE REQUEST_ORDER_HEADER SET RO_ACTIVE = 0 WHERE RO_INVOICE = '" + roInvoice + "'";
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
-
-                        //if (termOfPaymentCombo.SelectedIndex == 1)
-                        //{
-                        //    // SAVE TO DEBT TABLE
-                        //    sqlCommand = "INSERT INTO DEBT (PURCHASE_INVOICE, DEBT_DUE_DATE, DEBT_NOMINAL, DEBT_PAID) VALUES ('" + POInvoice + "', STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), " + POTotal + ", 0)";
-                        //    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                        //        throw internalEX;
-                        //}
 
                         break;
 
@@ -588,6 +644,14 @@ namespace RoyalPetz_ADMIN
                                             "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(POTotal) + ", " + termOfPayment + ", " + termOfPaymentDuration + ", " + purchasePaid + ")";
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
+
+                        if (addToTaxTable)
+                        {
+                            sqlCommand = "INSERT INTO PURCHASE_HEADER_TAX (PURCHASE_INVOICE, SUPPLIER_ID, PURCHASE_DATETIME, PURCHASE_TOTAL, PURCHASE_TERM_OF_PAYMENT, PURCHASE_TERM_OF_PAYMENT_DURATION, PURCHASE_PAID) VALUES " +
+                                                "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(POTotal) + ", " + termOfPayment + ", " + termOfPaymentDuration + ", " + purchasePaid + ")";
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+                        }
 
                         // SAVE DETAIL TABLE
                         for (int i = 0; i < detailPODataGridView.Rows.Count - 1; i++)
@@ -599,16 +663,17 @@ namespace RoyalPetz_ADMIN
 
                                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                     throw internalEX;
+
+                                if (addToTaxTable)
+                                {
+                                    sqlCommand = "INSERT INTO PURCHASE_DETAIL_TAX (PURCHASE_INVOICE, PRODUCT_ID, PRODUCT_PRICE, PRODUCT_QTY, PURCHASE_SUBTOTAL) VALUES " +
+                                                        "('" + POInvoice + "', '" + detailPODataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["qty"].Value) + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailPODataGridView.Rows[i].Cells["subTotal"].Value)) + ")";
+
+                                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                        throw internalEX;
+                                }
                             }
                         }
-
-                        //if (termOfPaymentCombo.SelectedIndex == 1)
-                        //{
-                        //    // SAVE TO DEBT TABLE
-                        //    sqlCommand = "INSERT INTO DEBT (PURCHASE_INVOICE, DEBT_DUE_DATE, DEBT_NOMINAL, DEBT_PAID) VALUES ('" + POInvoice + "', STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), " + POTotal + ", 0)";
-                        //    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                        //        throw internalEX;
-                        //}
 
                         break;
 
@@ -643,24 +708,6 @@ namespace RoyalPetz_ADMIN
                             }
                         }
 
-                        ////DELETE DEBT TABLE
-                        //sqlCommand = "DELETE FROM DEBT WHERE PURCHASE_INVOICE = '" + POInvoice + "'";
-
-                        //if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                        //    throw internalEX;
-
-                        //if (termOfPaymentCombo.SelectedIndex == 1)
-                        //{
-                        //    // UPDATE DEBT TABLE
-                        //    sqlCommand = "UPDATE DEBT " +
-                        //                        "SET DEBT_DUE_DATE = STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), " +
-                        //                        "DEBT_NOMINAL = " + POTotal + " " +
-                        //                        "WHERE PURCHASE_INVOICE = '" + POInvoice + "'";
-
-                        //    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                        //        throw internalEX;
-                        //}
-
                         break;
 
                     case globalConstants.PRINTOUT_PURCHASE_ORDER:
@@ -668,7 +715,13 @@ namespace RoyalPetz_ADMIN
                         sqlCommand = "UPDATE PURCHASE_HEADER SET PURCHASE_SENT = 1 WHERE PURCHASE_INVOICE = '" + POInvoice + "'";
 
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                            throw internalEX;                        
+                            throw internalEX;
+
+                        //ATTEMPT TO UPDATE TAX TABLE
+                        sqlCommand = "UPDATE PURCHASE_HEADER_TAX SET PURCHASE_SENT = 1 WHERE PURCHASE_INVOICE = '" + POInvoice + "'";
+
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
                         break;
                 }
 

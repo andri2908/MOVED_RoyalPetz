@@ -80,8 +80,11 @@ namespace RoyalPetz_ADMIN
             switch (key)
             {
                 case Keys.F1:
-                    messagingForm displayForm = new messagingForm();
-                    displayForm.ShowDialog(this);
+                    if (!newMessageFormExist)
+                    { 
+                        messagingForm displayForm = new messagingForm();
+                        displayForm.ShowDialog(this);
+                    }
                     break;
             }
         }
@@ -115,18 +118,15 @@ namespace RoyalPetz_ADMIN
             ghk_F1.Unregister();
         }
 
-        public adminForm(int userID)
+        public adminForm(int userID, int groupID)
         {
             InitializeComponent();
 
             selectedUserID = userID;
+            selectedUserGroupID = groupID;
             loadBGimage();
 
-            selectedUserGroupID = getUserGroupID();
-
-            gutil.setUserID(selectedUserID);
-            gutil.setUserGroupID(selectedUserGroupID);
-
+            
             activateUserAccessRight();
             registerGlobalHotkey();
         }
@@ -160,15 +160,6 @@ namespace RoyalPetz_ADMIN
 
             }
         }
-
-        private int getUserGroupID()
-        {
-            int result;
-
-            result = Convert.ToInt32(DS.getDataSingleValue("SELECT IFNULL(GROUP_ID, 0) FROM MASTER_USER WHERE ID = " + selectedUserID));
-
-            return result;
-        }
         
         private void adminForm_Load(object sender, EventArgs e)
         {
@@ -177,8 +168,8 @@ namespace RoyalPetz_ADMIN
                 System.IO.Directory.CreateDirectory(appPath + "\\PRODUCT_PHOTO");
             }
 
-            updateLabel();
-            timer1.Start();
+            //updateLabel();
+            //timer1.Start();
 
             welcomeLabel.Text = "WELCOME " + DS.getDataSingleValue("SELECT IFNULL(USER_FULL_NAME, 0) FROM MASTER_USER WHERE ID = " + selectedUserID).ToString();
             menuStrip1.Renderer = new MyRenderer();
@@ -443,14 +434,17 @@ namespace RoyalPetz_ADMIN
                 {
                     fileName = openFileDialog1.FileName;
 
-                    this.BackgroundImage.Dispose();
+                    if (openFileDialog1.FileName != appPath + "\\bg.jpg")
+                    { 
+                        if (null!= this.BackgroundImage)
+                            this.BackgroundImage.Dispose();
                     
-                    System.IO.File.Delete(appPath + "\\bg.jpg");
-                    System.IO.File.Copy(openFileDialog1.FileName, appPath + "\\bg.jpg");
+                        System.IO.File.Delete(appPath + "\\bg.jpg");
+                        System.IO.File.Copy(openFileDialog1.FileName, appPath + "\\bg.jpg");
 
-                    this.BackgroundImage = Image.FromFile(BG_IMAGE);
-                    this.BackgroundImageLayout = ImageLayout.Stretch;
-
+                        this.BackgroundImage = Image.FromFile(BG_IMAGE);
+                        this.BackgroundImageLayout = ImageLayout.Stretch;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -870,8 +864,11 @@ namespace RoyalPetz_ADMIN
             setAccessibility(globalConstants.MENU_PEMBAYARAN_PIUTANG_MUTASI, MENU_pembayaranPiutangMutasi);
             setAccessibility(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, MENU_pembayaranHutangKeSupplier);
             setAccessibility(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, SHORTCUT_hutang);
+            // SUB MENU PENGATURAN LIMIT PAJAK
+            setAccessibility(globalConstants.MENU_PENGATURAN_LIMIT_PAJAK, MENU_pengaturanLimitPajak);
+
         }
-        
+
         private void toolStripMenuItem1_Click_1(object sender, EventArgs e)
         {
             dataPOForm displayedForm = new dataPOForm(globalConstants.PEMBAYARAN_HUTANG);
@@ -989,7 +986,7 @@ namespace RoyalPetz_ADMIN
 
         private void timerMessage_Tick(object sender, EventArgs e)
         {
-            if (gutil.checkNewMessageData() && !newMessageFormExist)
+            if (!newMessageFormExist && gutil.checkNewMessageData())
             {
                 newMessageFormExist = true;
                 newMessageForm newMsgForm = new newMessageForm((Form) this);

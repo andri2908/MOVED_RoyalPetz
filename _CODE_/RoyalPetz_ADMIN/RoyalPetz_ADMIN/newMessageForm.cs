@@ -23,13 +23,15 @@ namespace RoyalPetz_ADMIN
         private void closeForm()
         {
             adminForm originForm;
-            this.Close();
+            this.Hide();
+
+            messagingForm newMessagingForm = new messagingForm();
+            newMessagingForm.ShowDialog(this);
 
             originForm = (adminForm)parentForm;
             originForm.setNewMessageFormExist(false);
 
-            messagingForm newMessagingForm = new messagingForm();
-            newMessagingForm.Show();
+            this.Close();
         }
 
         private void newMessageForm_Click(object sender, EventArgs e)

@@ -85,6 +85,7 @@ namespace RoyalPetz_ADMIN
             //branchCombobox.Items.Add(new { Text = "PUSAT", Value = "0" });
             branchCombobox.SelectedValue = branchCombobox.Items.Count;
         }
+
         private void saveButton_Click(object sender, EventArgs e)
         {
             //addto datagridview
@@ -98,6 +99,7 @@ namespace RoyalPetz_ADMIN
                 String deskripsiakun = DeskripsiAkunTextbox.Text;
                 Double nominalakun = 0;
                 String TglTrans = "";
+                string jamTrans = "";
                 //selectedDJID = 0;
                 DateTime selectedDate = TanggalTransaksi.Value;
                 String pembayaran = carabayarcombobox.GetItemText(carabayarcombobox.SelectedItem);
@@ -105,7 +107,7 @@ namespace RoyalPetz_ADMIN
                 int pm_id = Int32.Parse(carabayarcombobox.SelectedValue.ToString());
                 int branch_id = Int32.Parse(branchCombobox.SelectedValue.ToString());
                 //tryparse
-                if (Double.TryParse(NominalTextbox.Text, out nominalakun))
+                if (Double.TryParse(gutil.allTrim(NominalTextbox.Text), out nominalakun))
                 {
                 }
                 else
@@ -126,7 +128,9 @@ namespace RoyalPetz_ADMIN
                 }
                
                 TglTrans = String.Format(culture, "{0:dd-MM-yyyy}", selectedDate);
+                jamTrans = String.Format(culture, "{0:HH:mm}", DateTime.Now);
 
+                TglTrans = TglTrans + " " + jamTrans;
                 //must add function to update content
                 //bool newdata = true;
                 //for (int rows = 0; rows < transaksiaccountgridview.rows.count; rows++)
@@ -279,7 +283,7 @@ namespace RoyalPetz_ADMIN
 
             for (int rows = 0; rows < TransaksiAccountGridView.Rows.Count; rows++)
             {
-                TglTrans = String.Format(culture, "{0:dd-MM-yyyy}", TransaksiAccountGridView.Rows[rows].Cells[1].Value.ToString());
+                TglTrans = String.Format(culture, "{0:dd-MM-yyyy HH:mm}", TransaksiAccountGridView.Rows[rows].Cells[1].Value.ToString());
                 Account_ID = Int32.Parse(TransaksiAccountGridView.Rows[rows].Cells[2].Value.ToString());
                 pm_id = Int32.Parse(TransaksiAccountGridView.Rows[rows].Cells[6].Value.ToString());
                 Double debet, credit;
@@ -323,13 +327,13 @@ namespace RoyalPetz_ADMIN
                     {
                         case globalConstants.NEW_DJ:
                             sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, BRANCH_ID, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
-                                                "VALUES (" + Account_ID + ", STR_TO_DATE('" + TglTrans + "', '%d-%m-%Y')" + ", '" + NominalAkun + "', '" + branch_id + "', '" + deskripsiakun + "', '" + user_id + "', " + pm_id + ")";
+                                                "VALUES (" + Account_ID + ", STR_TO_DATE('" + TglTrans + "', '%d-%m-%Y %H:%i')" + ", '" + NominalAkun + "', '" + branch_id + "', '" + deskripsiakun + "', '" + user_id + "', " + pm_id + ")";
                             options = gutil.INS;
                             break;
                         case globalConstants.EDIT_DJ:
                             sqlCommand = "UPDATE DAILY_JOURNAL SET " +
                                                 "ACCOUNT_ID = " + Account_ID + ", " +
-                                                "JOURNAL_DATETIME = " + "STR_TO_DATE('" + TglTrans + "', '%d-%m-%Y')" + ", " +
+                                                "JOURNAL_DATETIME = " + "STR_TO_DATE('" + TglTrans + "', '%d-%m-%Y %H:%i')" + ", " +
                                                 "JOURNAL_NOMINAL = '" + NominalAkun + "', " +
                                                 "BRANCH_ID = '" + branch_id + "', " +
                                                 "JOURNAL_DESCRIPTION = '" + deskripsiakun + "', " +
@@ -407,6 +411,9 @@ namespace RoyalPetz_ADMIN
             //if change check db if there any transaction 
             DateTime selectedDate = TanggalTransaksi.Value;
             String TglTrans = String.Format(culture, "{0:dd-MM-yyyy}", selectedDate);
+            int branch_id = 0;
+            String cabang = "";
+
             if (checkDataTransaksi(TglTrans))
             {
                 //modeupdate
@@ -416,9 +423,9 @@ namespace RoyalPetz_ADMIN
                 TanggalTransaksi.Value = selectedDate;
                 MySqlDataReader rdr;
 
-                DS.mySqlConnect();
+                //DS.mySqlConnect();
 
-                using (rdr = DS.getData("SELECT JOURNAL_ID, ACCOUNT_ID, JOURNAL_NOMINAL, BRANCH_ID, JOURNAL_DESCRIPTION, USER_ID, PM_ID FROM DAILY_JOURNAL WHERE JOURNAL_DATETIME = " + "STR_TO_DATE('" + TglTrans + "', '%d-%m-%Y')"))
+                using (rdr = DS.getData("SELECT JOURNAL_ID, ACCOUNT_ID, JOURNAL_NOMINAL, IFNULL(BRANCH_ID, 0) AS BRANCH_ID, JOURNAL_DESCRIPTION, USER_ID, PM_ID FROM DAILY_JOURNAL WHERE JOURNAL_DATETIME = " + "STR_TO_DATE('" + TglTrans + "', '%d-%m-%Y')"))
                 {
                     if (rdr.HasRows)
                     {
@@ -431,14 +438,20 @@ namespace RoyalPetz_ADMIN
                             String nmakun = NamaAkunTextbox.Text;
                             int pm_id = rdr.GetInt32("PM_ID");
                             carabayarcombobox.SelectedValue = pm_id;
-                            int branch_id = rdr.GetInt32("BRANCH_ID");
-                            branchCombobox.SelectedValue = branch_id;
                             String deskripsiakun = rdr.GetString("JOURNAL_DESCRIPTION");
                             DeskripsiAkunTextbox.Text = deskripsiakun;
                             Double nominalakun = 0;
                             String pembayaran = carabayarcombobox.GetItemText(carabayarcombobox.SelectedItem);
-                            String cabang = branchCombobox.GetItemText(branchCombobox.SelectedItem);
+
+                            branch_id = rdr.GetInt32("BRANCH_ID");
+                            if (branch_id != 0)
+                            {
+                                branchCombobox.SelectedValue = branch_id;
+                                cabang = branchCombobox.GetItemText(branchCombobox.SelectedItem);
+                            }
+
                             nominalakun = rdr.GetDouble("JOURNAL_NOMINAL");
+
                             //check debet/credit
                             Double debet = nominalakun;
                             Double credit = 0;

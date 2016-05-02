@@ -116,11 +116,17 @@ namespace RoyalPetz_ADMIN
             string groupName = MySqlHelper.EscapeString(namaGroupTextBox.Text.Trim());
             string groupDesc = MySqlHelper.EscapeString(deskripsiTextBox.Text.Trim());
             byte groupStatus= 0;
+            byte groupCashier = 0;
 
             if (nonAktifCheckbox.Checked)
                 groupStatus = 0;
             else
                 groupStatus = 1;
+
+            if (cashierCheckBox.Checked)
+                groupCashier = 1;
+            else
+                groupCashier = 0;
 
             DS.beginTransaction();
 
@@ -132,10 +138,10 @@ namespace RoyalPetz_ADMIN
                 {
                     case globalConstants.NEW_GROUP_USER:
                     case globalConstants.PENGATURAN_GRUP_AKSES:
-                        sqlCommand = "INSERT INTO MASTER_GROUP (GROUP_USER_NAME, GROUP_USER_DESCRIPTION, GROUP_USER_ACTIVE) VALUES ('" + groupName + "', '" + groupDesc + "', " + groupStatus + ")";
+                        sqlCommand = "INSERT INTO MASTER_GROUP (GROUP_USER_NAME, GROUP_USER_DESCRIPTION, GROUP_USER_ACTIVE, GROUP_IS_CASHIER) VALUES ('" + groupName + "', '" + groupDesc + "', " + groupStatus + ", " + groupCashier + ")";
                         break;
                     case globalConstants.EDIT_GROUP_USER:
-                        sqlCommand = "UPDATE MASTER_GROUP SET GROUP_USER_NAME = '" + groupName + "', GROUP_USER_DESCRIPTION = '" + groupDesc + "', GROUP_USER_ACTIVE = " + groupStatus + " WHERE GROUP_ID = "+selectedGroupID;
+                        sqlCommand = "UPDATE MASTER_GROUP SET GROUP_USER_NAME = '" + groupName + "', GROUP_USER_DESCRIPTION = '" + groupDesc + "', GROUP_USER_ACTIVE = " + groupStatus + ", GROUP_IS_CASHIER = " + groupCashier + " WHERE GROUP_ID = " + selectedGroupID;
                         break;
                 }
 

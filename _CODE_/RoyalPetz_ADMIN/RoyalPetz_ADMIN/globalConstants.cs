@@ -140,6 +140,7 @@ namespace RoyalPetz_ADMIN
         public const int MENU_PEMBAYARAN_PIUTANG = 46;
         public const int MENU_PEMBAYARAN_PIUTANG_MUTASI = 47;
         public const int MENU_PEMBAYARAN_HUTANG_SUPPLIER = 48;
+        public const int MENU_PENGATURAN_LIMIT_PAJAK = 49;
 
 
         //mode laporan

@@ -49,6 +49,12 @@ namespace RoyalPetz_ADMIN
 
         private bool dataValidated()
         {
+            if (noFakturTextBox.Text.Length<=0)
+            {
+                errorLabel.Text = "NO FAKTUR TIDAK BOLEH KOSONG";
+                return false;
+            }
+
             if (!gutil.matchRegEx(noFakturTextBox.Text, globalUtilities.REGEX_ALPHANUMERIC_ONLY))
             {
                 errorLabel.Text = "NO FAKTUR HARUS ALPHA NUMERIC";

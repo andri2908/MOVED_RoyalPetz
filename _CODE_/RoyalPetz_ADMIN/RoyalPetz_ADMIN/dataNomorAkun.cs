@@ -47,7 +47,7 @@ namespace RoyalPetz_ADMIN
             int selectedrowindex = dataAccountGridView.SelectedCells[0].RowIndex;
 
             DataGridViewRow selectedRow = dataAccountGridView.Rows[selectedrowindex];
-            selectedAccountID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+            selectedAccountID = Convert.ToInt32(selectedRow.Cells["KODE AKUN"].Value);
 
             switch (originModuleID)
             {
