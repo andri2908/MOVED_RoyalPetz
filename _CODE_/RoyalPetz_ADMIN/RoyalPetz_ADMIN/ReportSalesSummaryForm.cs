@@ -52,11 +52,12 @@ namespace RoyalPetz_ADMIN
 
                 //prepare report for preview
                 ReportSalesSummary rptXMLReport = new ReportSalesSummary();
-                CrystalDecisions.CrystalReports.Engine.TextObject txtReportHeader1, txtReportHeader2, txtReportHeader3, txtReportHeader4;
+                //CrystalDecisions.CrystalReports.Engine.TextObject txtReportHeader1, txtReportHeader2, txtReportHeader3, txtReportHeader4;
+                CrystalDecisions.CrystalReports.Engine.TextObject txtReportHeader1, txtReportHeader2;
                 txtReportHeader1 = rptXMLReport.ReportDefinition.ReportObjects["NamaTokoLabel"] as TextObject;
                 txtReportHeader2 = rptXMLReport.ReportDefinition.ReportObjects["InfoTokoLabel"] as TextObject;
-                txtReportHeader3 = rptXMLReport.ReportDefinition.ReportObjects["UserLabel"] as TextObject;
-                txtReportHeader4 = rptXMLReport.ReportDefinition.ReportObjects["BranchLabel"] as TextObject;
+                //txtReportHeader3 = rptXMLReport.ReportDefinition.ReportObjects["UserLabel"] as TextObject;
+                //txtReportHeader4 = rptXMLReport.ReportDefinition.ReportObjects["BranchLabel"] as TextObject;
                 //baca database untuk nama toko
                 String nama, alamat, telepon, email, namauser;
                 loadNamaUser(gutil.getUserID(), out namauser);
@@ -73,10 +74,10 @@ namespace RoyalPetz_ADMIN
                 }
                 txtReportHeader1.Text = nama;
                 txtReportHeader2.Text = alamat + Environment.NewLine + telepon + Environment.NewLine + email;
-                txtReportHeader3.Text = namauser;
-                string namacabang = "";
-                int branch_id = gutil.loadbranchID(2, out namacabang);
-                txtReportHeader4.Text = namacabang;
+                //txtReportHeader3.Text = namauser;
+                //string namacabang = "";
+                //int branch_id = gutil.loadbranchID(2, out namacabang);
+                //txtReportHeader4.Text = namacabang;
                 rptXMLReport.Database.Tables[0].SetDataSource(dsTempReport.Tables[0]);
                 crystalReportViewer1.ReportSource = rptXMLReport;
                 crystalReportViewer1.Refresh();

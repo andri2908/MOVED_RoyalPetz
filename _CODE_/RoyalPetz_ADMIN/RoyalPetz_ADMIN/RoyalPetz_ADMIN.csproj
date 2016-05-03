@@ -449,9 +449,10 @@
       <DependentUpon>ReportProductForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ReportSalesDetailed.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>ReportSalesDetailed.rpt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportSalesDetailedForm.cs">
       <SubType>Form</SubType>
