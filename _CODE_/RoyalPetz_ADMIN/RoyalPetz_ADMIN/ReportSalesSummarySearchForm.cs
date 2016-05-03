@@ -55,10 +55,12 @@ namespace RoyalPetz_ADMIN
             {
                 if (rdr.HasRows)
                 {
+                    dt.Load(rdr);
+
                     DataRow workRow = dt.NewRow();
                     workRow["ID"] = "0";
                     workRow["NAME"] = "P-UMUM";
-                    dt.Load(rdr);
+
                     dt.Rows.Add(workRow);
                     CustNameCombobox.DataSource = dt;
                     CustNameCombobox.ValueMember = "ID";
