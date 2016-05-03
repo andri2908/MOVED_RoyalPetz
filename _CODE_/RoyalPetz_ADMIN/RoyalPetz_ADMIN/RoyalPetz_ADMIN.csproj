@@ -350,6 +350,18 @@
     <Compile Include="pleaseWaitForm.Designer.cs">
       <DependentUpon>pleaseWaitForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrintBarcode.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintBarcode.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintBarcodeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintBarcodeForm.designer.cs">
+      <DependentUpon>PrintBarcodeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="dataProdukDetailForm.cs">
@@ -741,6 +753,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pleaseWaitForm.resx">
       <DependentUpon>pleaseWaitForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintBarcode.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintBarcode.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintBarcodeForm.resx">
+      <DependentUpon>PrintBarcodeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

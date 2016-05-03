@@ -164,9 +164,7 @@ namespace RoyalPetz_ADMIN
 
         public const string SalesSummaryXML = "SalesSummary.xml";
         public const string SalesDetailedXML = "SalesDetailed.xml";
-
-
-
+        public const string PrintBarcodeXML = "PrintBarcode.xml";
 
     }
 }

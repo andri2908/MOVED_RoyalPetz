@@ -243,7 +243,9 @@ C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\bin\Debu
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\bin\Debug\stdole.dll
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.csprojResolveAssemblyReference.cache
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.AboutUsForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.barcodeForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.cashierForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.cashierLoginForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.changePasswordForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.createConfigFileForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataNomorAkun.resources
@@ -288,6 +290,7 @@ C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debu
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.penyesuaianStokForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.permintaanProdukForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pleaseWaitForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.PrintBarcodeForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.Properties.Resources.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataProdukDetailForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.purchaseOrderDetailForm.resources
@@ -298,6 +301,7 @@ C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debu
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportGroupUserForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportProductCategoryForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportProductForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportSalesDetailedForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportSalesSummaryForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportSalesSummarySearchForm.resources
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportSupplierForm.resources
@@ -318,4 +322,3 @@ C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debu
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.csproj.GenerateResource.Cache
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.exe
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pdb
-C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportSalesDetailedForm.resources

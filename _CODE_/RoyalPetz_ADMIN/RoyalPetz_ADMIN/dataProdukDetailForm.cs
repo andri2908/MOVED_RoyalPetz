@@ -920,5 +920,16 @@ namespace RoyalPetz_ADMIN
             });
             //noRakKolomTextBox.Focus();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //PRINT BARCODE
+            string sqlCommandx = "SELECT PRODUCT_ID AS 'ID', CONCAT('*',PRODUCT_BARCODE,'*') AS 'BARCODE1', PRODUCT_BARCODE AS 'BARCODE2', PRODUCT_NAME AS 'NAME', PRODUCT_BRAND AS ' BRAND', PRODUCT_RETAIL_PRICE AS 'PRICE'" +
+                                    " FROM master_product" +
+                                    " WHERE PRODUCT_ID = '" + kodeProdukTextBox.Text + "'";
+            DS.writeXML(sqlCommandx, globalConstants.PrintBarcodeXML);
+            PrintBarcodeForm displayedForm = new PrintBarcodeForm();
+            displayedForm.ShowDialog(this);
+        }
     }
 }
