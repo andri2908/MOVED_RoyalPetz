@@ -1012,5 +1012,17 @@ namespace RoyalPetz_ADMIN
             ReportSalesSummarySearchForm displayedForm = new ReportSalesSummarySearchForm(globalConstants.REPORT_SALES_DETAILED);
             displayedForm.ShowDialog(this);
         }
+
+        private void pembelianBarangToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void perProdukBarangToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportSalesSummarySearchForm displayedForm = new ReportSalesSummarySearchForm(globalConstants.REPORT_SALES_PRODUCT);
+            displayedForm.ShowDialog(this);
+
+        }
     }
 }

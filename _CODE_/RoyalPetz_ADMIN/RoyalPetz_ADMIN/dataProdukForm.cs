@@ -129,14 +129,13 @@ namespace RoyalPetz_ADMIN
         private void tagProdukDataGridView_DoubleClick(object sender, EventArgs e)
         {
             if (dataProdukGridView.Rows.Count <= 0)
-                return;
+                    return;
 
             int selectedrowindex = dataProdukGridView.SelectedCells[0].RowIndex;
-
             DataGridViewRow selectedRow = dataProdukGridView.Rows[selectedrowindex];
             selectedProductID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
-
             displaySpecificForm();
+            
         }
 
         private void tagProdukDataGridView_KeyPress(object sender, KeyPressEventArgs e)

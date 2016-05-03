@@ -1,0 +1,33 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="ID" type="xs:unsignedInt" minOccurs="0" />
+                <xs:element name="DATE" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="INVOICE" type="xs:string" minOccurs="0" />
+                <xs:element name="CUSTOMER" type="xs:string" minOccurs="0" />
+                <xs:element name="PRODUCT" type="xs:string" minOccurs="0" />
+                <xs:element name="QTY" type="xs:double" minOccurs="0" />
+                <xs:element name="PRICE" type="xs:double" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <ID>19</ID>
+    <DATE>2016-05-02T12:19:00+07:00</DATE>
+    <INVOICE>SLO001-2</INVOICE>
+    <CUSTOMER>P-UMUM</CUSTOMER>
+    <PRODUCT>LIDI</PRODUCT>
+    <QTY>1</QTY>
+    <PRICE>1000</PRICE>
+  </Table>
+</NewDataSet>

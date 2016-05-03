@@ -148,6 +148,7 @@ namespace RoyalPetz_ADMIN
 
         public const int REPORT_SALES_SUMMARY = 701;
         public const int REPORT_SALES_DETAILED = 702;
+        public const int REPORT_SALES_PRODUCT = 703;
 
         //XML file
         public const string AccountXML = "MasterAccount.xml";
@@ -164,6 +165,7 @@ namespace RoyalPetz_ADMIN
 
         public const string SalesSummaryXML = "SalesSummary.xml";
         public const string SalesDetailedXML = "SalesDetailed.xml";
+        public const string SalesbyProductXML = "SalesbyProduct.xml";
         public const string PrintBarcodeXML = "PrintBarcode.xml";
 
     }

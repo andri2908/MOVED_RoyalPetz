@@ -965,6 +965,7 @@
             this.pembelianBarangToolStripMenuItem.Name = "pembelianBarangToolStripMenuItem";
             this.pembelianBarangToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.pembelianBarangToolStripMenuItem.Text = "Pembelian Barang";
+            this.pembelianBarangToolStripMenuItem.Click += new System.EventHandler(this.pembelianBarangToolStripMenuItem_Click);
             // 
             // toolStripSeparator16
             // 
@@ -1033,6 +1034,7 @@
             this.perProdukBarangToolStripMenuItem.Name = "perProdukBarangToolStripMenuItem";
             this.perProdukBarangToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.perProdukBarangToolStripMenuItem.Text = "Per Produk-Barang";
+            this.perProdukBarangToolStripMenuItem.Click += new System.EventHandler(this.perProdukBarangToolStripMenuItem_Click);
             // 
             // omzetPenjualanToolStripMenuItem
             // 

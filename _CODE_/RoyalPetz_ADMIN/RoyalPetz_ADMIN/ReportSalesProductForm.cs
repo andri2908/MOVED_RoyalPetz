@@ -16,42 +16,25 @@ using System.Globalization;
 
 namespace RoyalPetz_ADMIN
 {
-    public partial class ReportSalesSummaryForm : Form
+    public partial class ReportSalesProductForm : Form
     {
         private globalUtilities gutil = new globalUtilities();
         private Data_Access DS = new Data_Access();
-        public ReportSalesSummaryForm()
+        public ReportSalesProductForm()
         {
             InitializeComponent();
         }
 
-        private void loadNamaUser(int user_id, out string nama)
-        {
-            nama = "";
-            MySqlDataReader rdr;
-            DataTable dt = new DataTable();
-            DS.mySqlConnect();
-            //1 load default 2 setting user
-            using (rdr = DS.getData("SELECT USER_NAME AS 'NAME' FROM MASTER_USER WHERE ID=" + user_id))
-            {
-                if (rdr.HasRows)
-                {
-                    rdr.Read();
-                    nama = rdr.GetString("NAME");
-                }
-            }
-        }
-
-        private void ReportSalesSummaryForm_Load(object sender, EventArgs e)
+        private void crystalReportViewer1_Load(object sender, EventArgs e)
         {
             DataSet dsTempReport = new DataSet();
             try
             {
-                string appPath = Directory.GetCurrentDirectory() + "\\" + globalConstants.SalesSummaryXML;
+                string appPath = Directory.GetCurrentDirectory() + "\\" + globalConstants.SalesbyProductXML;
                 dsTempReport.ReadXml(@appPath);
 
                 //prepare report for preview
-                ReportSalesSummary rptXMLReport = new ReportSalesSummary();
+                ReportSalesProduct rptXMLReport = new ReportSalesProduct();
                 CrystalDecisions.CrystalReports.Engine.TextObject txtReportHeader1, txtReportHeader2;
                 txtReportHeader1 = rptXMLReport.ReportDefinition.ReportObjects["NamaTokoLabel"] as TextObject;
                 txtReportHeader2 = rptXMLReport.ReportDefinition.ReportObjects["InfoTokoLabel"] as TextObject;

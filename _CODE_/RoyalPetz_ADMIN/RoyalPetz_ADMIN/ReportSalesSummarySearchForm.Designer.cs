@@ -32,20 +32,22 @@
             this.nonactivecheckbox = new System.Windows.Forms.CheckBox();
             this.CariButton = new System.Windows.Forms.Button();
             this.CustNameCombobox = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.LabelOptions = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.datetoPicker = new System.Windows.Forms.DateTimePicker();
             this.datefromPicker = new System.Windows.Forms.DateTimePicker();
+            this.ProductcomboBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ProductcomboBox);
             this.groupBox1.Controls.Add(this.nonactivecheckbox);
             this.groupBox1.Controls.Add(this.CariButton);
             this.groupBox1.Controls.Add(this.CustNameCombobox);
-            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.LabelOptions);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.datetoPicker);
@@ -81,28 +83,31 @@
             // 
             // CustNameCombobox
             // 
+            this.CustNameCombobox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.CustNameCombobox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.CustNameCombobox.FormattingEnabled = true;
             this.CustNameCombobox.Location = new System.Drawing.Point(204, 58);
             this.CustNameCombobox.Name = "CustNameCombobox";
             this.CustNameCombobox.Size = new System.Drawing.Size(200, 26);
             this.CustNameCombobox.TabIndex = 1;
             this.CustNameCombobox.Text = "P-UMUM";
+            this.CustNameCombobox.Visible = false;
             // 
-            // label3
+            // LabelOptions
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 61);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 18);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Pelanggan";
+            this.LabelOptions.AutoSize = true;
+            this.LabelOptions.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelOptions.Location = new System.Drawing.Point(6, 63);
+            this.LabelOptions.Name = "LabelOptions";
+            this.LabelOptions.Size = new System.Drawing.Size(101, 18);
+            this.LabelOptions.TabIndex = 3;
+            this.LabelOptions.Text = "Pelanggan";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial Black", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(410, 14);
+            this.label2.Location = new System.Drawing.Point(411, 14);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(28, 41);
             this.label2.TabIndex = 2;
@@ -131,14 +136,26 @@
             this.datefromPicker.Size = new System.Drawing.Size(200, 27);
             this.datefromPicker.TabIndex = 0;
             // 
+            // ProductcomboBox
+            // 
+            this.ProductcomboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.ProductcomboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.ProductcomboBox.FormattingEnabled = true;
+            this.ProductcomboBox.Location = new System.Drawing.Point(204, 58);
+            this.ProductcomboBox.Name = "ProductcomboBox";
+            this.ProductcomboBox.Size = new System.Drawing.Size(200, 26);
+            this.ProductcomboBox.TabIndex = 6;
+            this.ProductcomboBox.Text = "SEMUA";
+            this.ProductcomboBox.Visible = false;
+            // 
             // ReportSalesSummarySearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(695, 168);
+            this.ClientSize = new System.Drawing.Size(686, 168);
             this.Controls.Add(this.groupBox1);
             this.Name = "ReportSalesSummarySearchForm";
-            this.Text = "ReportSalesSummarySearchForm";
+            this.Text = "Laporan Penjualan";
             this.Load += new System.EventHandler(this.ReportSalesSummarySearchForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -155,7 +172,8 @@
         private System.Windows.Forms.DateTimePicker datefromPicker;
         private System.Windows.Forms.Button CariButton;
         private System.Windows.Forms.ComboBox CustNameCombobox;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label LabelOptions;
         private System.Windows.Forms.CheckBox nonactivecheckbox;
+        private System.Windows.Forms.ComboBox ProductcomboBox;
     }
 }

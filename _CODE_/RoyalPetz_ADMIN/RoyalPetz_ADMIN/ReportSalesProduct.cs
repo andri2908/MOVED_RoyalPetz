@@ -16,14 +16,14 @@ namespace RoyalPetz_ADMIN {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class ReportSalesDetailed : ReportClass {
+    public class ReportSalesProduct : ReportClass {
         
-        public ReportSalesDetailed() {
+        public ReportSalesProduct() {
         }
         
         public override string ResourceName {
             get {
-                return "ReportSalesDetailed.rpt";
+                return "ReportSalesProduct.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace RoyalPetz_ADMIN {
         
         public override string FullResourceName {
             get {
-                return "RoyalPetz_ADMIN.ReportSalesDetailed.rpt";
+                return "RoyalPetz_ADMIN.ReportSalesProduct.rpt";
             }
             set {
                 // Do nothing
@@ -106,9 +106,9 @@ namespace RoyalPetz_ADMIN {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedReportSalesDetailed : Component, ICachedReport {
+    public class CachedReportSalesProduct : Component, ICachedReport {
         
-        public CachedReportSalesDetailed() {
+        public CachedReportSalesProduct() {
         }
         
         [Browsable(false)]
@@ -145,7 +145,7 @@ namespace RoyalPetz_ADMIN {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            ReportSalesDetailed rpt = new ReportSalesDetailed();
+            ReportSalesProduct rpt = new ReportSalesProduct();
             rpt.Site = this.Site;
             return rpt;
         }
