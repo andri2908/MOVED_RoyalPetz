@@ -323,3 +323,6 @@ C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debu
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.exe
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pdb
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportSalesProductForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportTopSalesFormSearchForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportTopSalesGlobalForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportTopSalesbyTagsForm.resources

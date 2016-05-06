@@ -1024,5 +1024,23 @@ namespace RoyalPetz_ADMIN
             displayedForm.ShowDialog(this);
 
         }
+
+        private void globalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportTopSalesFormSearchForm displayedForm = new ReportTopSalesFormSearchForm(globalConstants.REPORT_TOPSALES_GLOBAL);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void perJenisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportTopSalesFormSearchForm displayedForm = new ReportTopSalesFormSearchForm(globalConstants.REPORT_TOPSALES_byTAGS);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void penjualanPertanggalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportTopSalesFormSearchForm displayedForm = new ReportTopSalesFormSearchForm(globalConstants.REPORT_TOPSALES_byDATE);
+            displayedForm.ShowDialog(this);
+        }
     }
 }
