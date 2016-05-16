@@ -60,6 +60,13 @@ namespace RoyalPetz_ADMIN
                     nonactivecheckbox.Enabled = true;
                     loadTags();
                     break;
+                case globalConstants.REPORT_TOPSALES_ByMARGIN:
+                    datetoPicker.Enabled = true;
+                    datefromPicker.Enabled = true;
+                    TagscomboBox.Enabled = false;
+                    nonactivecheckbox.Enabled = false;
+                    TagscomboBox.Text = "SEMUA";
+                    break;
             }
         }
 
@@ -120,7 +127,7 @@ namespace RoyalPetz_ADMIN
                 case globalConstants.REPORT_TOPSALES_byDATE:
                     sqlCommandx = "SELECT MP.PRODUCT_NAME AS 'PRODUCT', SUM(SD.PRODUCT_QTY) AS 'QTY' " +
                                     "FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT MP " +
-                                    "WHERE SD.PRODUCT_ID = MP.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "' " +
+                                    "WHERE SD.PRODUCT_ID = MP.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d') >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d') <= '" + dateTo + "' " +
                                     "GROUP BY SD.PRODUCT_ID " +
                                     "ORDER BY QTY DESC " +
                                     "LIMIT " + LimitTextBox.Text;
@@ -139,6 +146,17 @@ namespace RoyalPetz_ADMIN
                     ReportTopSalesbyTagsForm displayedForm3 = new ReportTopSalesbyTagsForm();
                     //displayedForm3.setTags(TagscomboBox.GetItemText(TagscomboBox.SelectedItem));
                     displayedForm3.ShowDialog(this);
+                    break;
+                case globalConstants.REPORT_TOPSALES_ByMARGIN:
+                    sqlCommandx = "SELECT MP.PRODUCT_NAME AS 'PRODUCT', SUM(SD.PRODUCT_QTY) AS 'QTY', SUM(SD.SALES_SUBTOTAL-(SD.PRODUCT_QTY*MP.PRODUCT_BASE_PRICE)) AS 'LABA' " +
+                                        "FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT MP " +
+                                        "WHERE SD.PRODUCT_ID = MP.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d') >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "' " +
+                                        "GROUP BY SD.PRODUCT_ID " +
+                                        "ORDER BY LABA DESC " +
+                                        "LIMIT " + LimitTextBox.Text;
+                    DS.writeXML(sqlCommandx, globalConstants.TopSalesbyMarginXML);
+                    ReportTopSalesbyMarginForm displayedForm4 = new ReportTopSalesbyMarginForm();
+                    displayedForm4.ShowDialog(this);
                     break;
             }
 

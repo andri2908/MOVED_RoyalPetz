@@ -1,0 +1,135 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="USERID" type="xs:string" minOccurs="0" />
+                <xs:element name="LOGIN" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="LOGOUT" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="START" type="xs:double" minOccurs="0" />
+                <xs:element name="END" type="xs:double" minOccurs="0" />
+                <xs:element name="COMMENT" type="xs:string" minOccurs="0" />
+                <xs:element name="CASH" type="xs:double" minOccurs="0" />
+                <xs:element name="NONCASH" type="xs:double" minOccurs="0" />
+                <xs:element name="OTHER" type="xs:double" minOccurs="0" />
+                <xs:element name="INVOICE" type="xs:string" minOccurs="0" />
+                <xs:element name="TGLTRANS" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="TOP" type="xs:string" minOccurs="0" />
+                <xs:element name="TOTAL" type="xs:double" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <USERID>KASIR</USERID>
+    <LOGIN>2016-04-30T18:53:00+07:00</LOGIN>
+    <LOGOUT>2016-05-02T12:15:00+07:00</LOGOUT>
+    <START>10000</START>
+    <END>10000</END>
+    <COMMENT />
+    <CASH>20000</CASH>
+    <NONCASH>0</NONCASH>
+    <OTHER>0</OTHER>
+    <INVOICE>SLO001-1</INVOICE>
+    <TGLTRANS>2016-04-30T23:30:00+07:00</TGLTRANS>
+    <TOP>TUNAI</TOP>
+    <TOTAL>20000</TOTAL>
+  </Table>
+  <Table>
+    <USERID>KASIR</USERID>
+    <LOGIN>2016-05-02T12:17:00+07:00</LOGIN>
+    <LOGOUT>2016-05-02T12:25:00+07:00</LOGOUT>
+    <START>10000</START>
+    <END>20000</END>
+    <COMMENT />
+    <CASH>1200</CASH>
+    <NONCASH>200</NONCASH>
+    <OTHER>0</OTHER>
+    <INVOICE>SLO001-2</INVOICE>
+    <TGLTRANS>2016-05-02T12:19:00+07:00</TGLTRANS>
+    <TOP>TUNAI</TOP>
+    <TOTAL>1200</TOTAL>
+  </Table>
+  <Table>
+    <USERID>KASIR</USERID>
+    <LOGIN>2016-05-02T12:17:00+07:00</LOGIN>
+    <LOGOUT>2016-05-02T12:25:00+07:00</LOGOUT>
+    <START>10000</START>
+    <END>20000</END>
+    <COMMENT />
+    <CASH>1200</CASH>
+    <NONCASH>200</NONCASH>
+    <OTHER>0</OTHER>
+    <INVOICE>SLO001-3</INVOICE>
+    <TGLTRANS>2016-05-02T12:20:00+07:00</TGLTRANS>
+    <TOP>TUNAI</TOP>
+    <TOTAL>200</TOTAL>
+  </Table>
+  <Table>
+    <USERID>KASIR</USERID>
+    <LOGIN>2016-04-30T18:53:00+07:00</LOGIN>
+    <LOGOUT>2016-05-02T12:15:00+07:00</LOGOUT>
+    <START>10000</START>
+    <END>10000</END>
+    <COMMENT />
+    <CASH>20000</CASH>
+    <NONCASH>0</NONCASH>
+    <OTHER>0</OTHER>
+    <INVOICE>SLO001-4</INVOICE>
+    <TGLTRANS>2016-05-02T00:00:00+07:00</TGLTRANS>
+    <TOP>TUNAI</TOP>
+    <TOTAL>100</TOTAL>
+  </Table>
+  <Table>
+    <USERID>KASIR</USERID>
+    <LOGIN>2016-04-30T18:53:00+07:00</LOGIN>
+    <LOGOUT>2016-05-02T12:15:00+07:00</LOGOUT>
+    <START>10000</START>
+    <END>10000</END>
+    <COMMENT />
+    <CASH>20000</CASH>
+    <NONCASH>0</NONCASH>
+    <OTHER>0</OTHER>
+    <INVOICE>SLO001-5</INVOICE>
+    <TGLTRANS>2016-05-02T00:00:00+07:00</TGLTRANS>
+    <TOP>TUNAI</TOP>
+    <TOTAL>100</TOTAL>
+  </Table>
+  <Table>
+    <USERID>KASIR</USERID>
+    <LOGIN>2016-04-30T18:53:00+07:00</LOGIN>
+    <LOGOUT>2016-05-02T12:15:00+07:00</LOGOUT>
+    <START>10000</START>
+    <END>10000</END>
+    <COMMENT />
+    <CASH>20000</CASH>
+    <NONCASH>0</NONCASH>
+    <OTHER>0</OTHER>
+    <INVOICE>SLO001-6</INVOICE>
+    <TGLTRANS>2016-05-02T00:00:00+07:00</TGLTRANS>
+    <TOP>TUNAI</TOP>
+    <TOTAL>200</TOTAL>
+  </Table>
+  <Table>
+    <USERID>KASIR</USERID>
+    <LOGIN>2016-04-30T18:53:00+07:00</LOGIN>
+    <LOGOUT>2016-05-02T12:15:00+07:00</LOGOUT>
+    <START>10000</START>
+    <END>10000</END>
+    <COMMENT />
+    <CASH>20000</CASH>
+    <NONCASH>0</NONCASH>
+    <OTHER>0</OTHER>
+    <INVOICE>SLO001-7</INVOICE>
+    <TGLTRANS>2016-05-02T00:00:00+07:00</TGLTRANS>
+    <TOP>TUNAI</TOP>
+    <TOTAL>200</TOTAL>
+  </Table>
+</NewDataSet>

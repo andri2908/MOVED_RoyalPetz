@@ -1,0 +1,40 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="PRODUCT" type="xs:string" minOccurs="0" />
+                <xs:element name="QTY" type="xs:double" minOccurs="0" />
+                <xs:element name="LABA" type="xs:double" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <PRODUCT>KAIN PEL</PRODUCT>
+    <QTY>10</QTY>
+    <LABA>179000</LABA>
+  </Table>
+  <Table>
+    <PRODUCT>KEMUCING SUPER</PRODUCT>
+    <QTY>16</QTY>
+    <LABA>0</LABA>
+  </Table>
+  <Table>
+    <PRODUCT>LIDI</PRODUCT>
+    <QTY>25</QTY>
+    <LABA>-3762.75</LABA>
+  </Table>
+  <Table>
+    <PRODUCT>SAPU LIDI</PRODUCT>
+    <QTY>30</QTY>
+    <LABA>-27137.5</LABA>
+  </Table>
+</NewDataSet>

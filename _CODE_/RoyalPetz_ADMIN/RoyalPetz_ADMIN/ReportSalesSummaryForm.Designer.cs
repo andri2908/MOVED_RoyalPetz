@@ -30,6 +30,7 @@
         {
             this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.ReportSalesSummary1 = new RoyalPetz_ADMIN.ReportSalesSummary();
+            this.ReportSalesSummary2 = new RoyalPetz_ADMIN.ReportSalesSummary();
             this.SuspendLayout();
             // 
             // crystalReportViewer1
@@ -40,12 +41,12 @@
             this.crystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.crystalReportViewer1.Location = new System.Drawing.Point(0, 0);
             this.crystalReportViewer1.Name = "crystalReportViewer1";
-            this.crystalReportViewer1.ReportSource = this.ReportSalesSummary1;
+            this.crystalReportViewer1.ReportSource = this.ReportSalesSummary2;
             this.crystalReportViewer1.ShowCloseButton = false;
             this.crystalReportViewer1.ShowCopyButton = false;
             this.crystalReportViewer1.ShowGroupTreeButton = false;
             this.crystalReportViewer1.ShowParameterPanelButton = false;
-            this.crystalReportViewer1.Size = new System.Drawing.Size(1010, 261);
+            this.crystalReportViewer1.Size = new System.Drawing.Size(949, 261);
             this.crystalReportViewer1.TabIndex = 0;
             this.crystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
@@ -53,7 +54,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1010, 261);
+            this.ClientSize = new System.Drawing.Size(949, 261);
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ReportSalesSummaryForm";
@@ -67,5 +68,6 @@
 
         private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
         private ReportSalesSummary ReportSalesSummary1;
+        private ReportSalesSummary ReportSalesSummary2;
     }
 }

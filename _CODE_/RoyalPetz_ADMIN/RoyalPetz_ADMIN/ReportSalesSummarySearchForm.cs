@@ -110,19 +110,27 @@ namespace RoyalPetz_ADMIN
 
         private void ReportSalesSummarySearchForm_Load(object sender, EventArgs e)
         {
-            if (originModuleID != globalConstants.REPORT_SALES_PRODUCT)
+            switch (originModuleID)
             {
-                LabelOptions.Text = "Pelanggan";
-                CustNameCombobox.Visible = true;
-                ProductcomboBox.Visible = false;
-                loadcustomer();
-            } else
-            {
-                LabelOptions.Text = "Produk";
-                CustNameCombobox.Visible = false;
-                ProductcomboBox.Visible = true;
-                loadProduct();
-                //loadproduct
+                case globalConstants.REPORT_SALES_OMZET:
+                    LabelOptions.Visible = false;
+                    CustNameCombobox.Visible = false;
+                    ProductcomboBox.Visible = false;
+                    nonactivecheckbox.Visible = false;
+                    break;
+                case globalConstants.REPORT_SALES_PRODUCT:
+                    LabelOptions.Text = "Produk";
+                    CustNameCombobox.Visible = false;
+                    ProductcomboBox.Visible = true;
+                    loadProduct();
+                    break;
+                default:
+                    LabelOptions.Text = "Pelanggan";
+                    CustNameCombobox.Visible = true;
+                    ProductcomboBox.Visible = false;
+                    loadcustomer();
+                    break;
+                
             }
             gutil.reArrangeTabOrder(this);
         }
@@ -178,8 +186,8 @@ namespace RoyalPetz_ADMIN
                                     "ROUND((PRODUCT_QTY * PRODUCT_SALES_PRICE) - SALES_SUBTOTAL, 2) AS 'POTONGAN', SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
                                     "FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT M WHERE SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND SH.CUSTOMER_ID = 0 AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "'";
                         DS.writeXML(sqlCommandx, globalConstants.SalesDetailedXML);
-                        ReportSalesDetailedForm displayedForm2 = new ReportSalesDetailedForm();
-                        displayedForm2.ShowDialog(this);
+                        //ReportSalesDetailedForm displayedForm2 = new ReportSalesDetailedForm();
+                        //displayedForm2.ShowDialog(this);
                         break;
                 case globalConstants.REPORT_SALES_PRODUCT:
                     prod_id = ProductcomboBox.SelectedValue.ToString();
@@ -193,6 +201,16 @@ namespace RoyalPetz_ADMIN
                     DS.writeXML(sqlCommandx, globalConstants.SalesbyProductXML);
                     ReportSalesProductForm displayedForm3 = new ReportSalesProductForm();
                     displayedForm3.ShowDialog(this);
+                    break;
+                case globalConstants.REPORT_SALES_OMZET:
+                    sqlCommandx = "SELECT SH.SALES_INVOICE AS 'INVOICE', SH.SALES_DATE AS 'DATE', EXTRACT(YEAR_MONTH FROM SH.SALES_DATE) AS 'BULAN', SUM(SH.SALES_TOTAL) AS 'TOTAL', IF(SH.SALES_PAID>0,'LUNAS','BELUM LUNAS') AS 'PAID' " +
+                                        "FROM SALES_HEADER AS SH " +
+                                        "WHERE DATE_FORMAT(SH.SALES_DATE, '%Y%m%d') >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "' " +
+                                        "GROUP BY INVOICE " +
+                                        "ORDER BY PAID,BULAN,DATE ASC";
+                    DS.writeXML(sqlCommandx, globalConstants.SalesOmzetXML);
+                    //ReportSalesOmzetForm displayedForm4 = new ReportSalesOmzetForm();
+                    //displayedForm4.ShowDialog(this);
                     break;
             }
                
@@ -209,6 +227,46 @@ namespace RoyalPetz_ADMIN
             {
                 loadProduct();
             }
+        }
+
+        private void ProductcomboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CustNameCombobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LabelOptions_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void datetoPicker_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void datefromPicker_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

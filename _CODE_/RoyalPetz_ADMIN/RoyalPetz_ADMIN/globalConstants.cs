@@ -152,6 +152,12 @@ namespace RoyalPetz_ADMIN
         public const int REPORT_TOPSALES_byTAGS = 704;
         public const int REPORT_TOPSALES_byDATE = 705;
         public const int REPORT_TOPSALES_GLOBAL = 706;
+        public const int REPORT_TOPSALES_ByMARGIN = 707;
+        public const int REPORT_SALES_OMZET = 708;
+
+        public const int REPORT_PURCHASE_SUMMARY = 710;
+        public const int REPORT_PURCHASE_DETAILED = 711;
+        public const int REPORT_PURCHASE_ByPRODUCT = 712;
 
         //XML file
         public const string AccountXML = "MasterAccount.xml";
@@ -172,7 +178,14 @@ namespace RoyalPetz_ADMIN
         public const string TopSalesGlobalXML = "TopSalesGlobal.xml";
         public const string TopSalesbyTagsXML = "TopSalesbyTags.xml";
         public const string TopSalesbyDateXML = "TopSalesbyDate.xml";
+        public const string TopSalesbyMarginXML = "TopSalesbyMargin.xml";
+        public const string SalesOmzetXML = "SalesOmzet.xml";
         public const string PrintBarcodeXML = "PrintBarcode.xml";
+        public const string CashierLogXML = "CashierLog.xml";
+
+        public const string PurchaseSummaryXML = "PurchaseSummary.xml";
+        public const string PurchaseDetailedXML = "PurchaseDetailed.xml";
+        public const string PurchasebyProductXML = "PurchasebyProduct.xml";
 
     }
 }

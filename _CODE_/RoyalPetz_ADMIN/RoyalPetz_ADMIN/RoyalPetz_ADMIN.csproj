@@ -400,6 +400,18 @@
     <Compile Include="ReportBranchForm.Designer.cs">
       <DependentUpon>ReportBranchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportCashierLogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportCashierLogForm.Designer.cs">
+      <DependentUpon>ReportCashierLogForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportCashierLogSearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportCashierLogSearchForm.Designer.cs">
+      <DependentUpon>ReportCashierLogSearchForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportCategory.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -460,10 +472,52 @@
     <Compile Include="ReportProductForm.Designer.cs">
       <DependentUpon>ReportProductForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ReportSalesDetailed.cs">
-      <DependentUpon>ReportSalesDetailed.rpt</DependentUpon>
-      <DesignTime>True</DesignTime>
+    <Compile Include="ReportPurchasebyProduct.cs">
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportPurchasebyProduct.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportPurchasebyProductForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportPurchasebyProductForm.Designer.cs">
+      <DependentUpon>ReportPurchasebyProductForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportPurchaseDetailed.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportPurchaseDetailed.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportPurchaseDetailedForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportPurchaseDetailedForm.Designer.cs">
+      <DependentUpon>ReportPurchaseDetailedForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportPurchaseSearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportPurchaseSearchForm.Designer.cs">
+      <DependentUpon>ReportPurchaseSearchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportPurchaseSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportPurchaseSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportPurchaseSummaryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportPurchaseSummaryForm.Designer.cs">
+      <DependentUpon>ReportPurchaseSummaryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportSalesDetailed.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportSalesDetailed.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportSalesDetailedForm.cs">
@@ -471,6 +525,18 @@
     </Compile>
     <Compile Include="ReportSalesDetailedForm.Designer.cs">
       <DependentUpon>ReportSalesDetailedForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportSalesOmzet.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportSalesOmzet.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportSalesOmzetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportSalesOmzetForm.Designer.cs">
+      <DependentUpon>ReportSalesOmzetForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ReportSalesProduct.cs">
       <AutoGen>True</AutoGen>
@@ -513,6 +579,18 @@
     </Compile>
     <Compile Include="ReportSupplierForm.Designer.cs">
       <DependentUpon>ReportSupplierForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportTopSalesbyMargin.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportTopSalesbyMargin.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportTopSalesbyMarginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportTopSalesbyMarginForm.Designer.cs">
+      <DependentUpon>ReportTopSalesbyMarginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ReportTopSalesbyTags.cs">
       <AutoGen>True</AutoGen>
@@ -832,6 +910,12 @@
     <EmbeddedResource Include="ReportBranchForm.resx">
       <DependentUpon>ReportBranchForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportCashierLogForm.resx">
+      <DependentUpon>ReportCashierLogForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportCashierLogSearchForm.resx">
+      <DependentUpon>ReportCashierLogSearchForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportCategory.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportCategory.cs</LastGenOutput>
@@ -867,12 +951,43 @@
     <EmbeddedResource Include="ReportProductForm.resx">
       <DependentUpon>ReportProductForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportPurchasebyProduct.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportPurchasebyProduct.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportPurchasebyProductForm.resx">
+      <DependentUpon>ReportPurchasebyProductForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportPurchaseDetailed.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportPurchaseDetailed.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportPurchaseDetailedForm.resx">
+      <DependentUpon>ReportPurchaseDetailedForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportPurchaseSearchForm.resx">
+      <DependentUpon>ReportPurchaseSearchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportPurchaseSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportPurchaseSummary.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportPurchaseSummaryForm.resx">
+      <DependentUpon>ReportPurchaseSummaryForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportSalesDetailed.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportSalesDetailed.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportSalesDetailedForm.resx">
       <DependentUpon>ReportSalesDetailedForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportSalesOmzet.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportSalesOmzet.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportSalesOmzetForm.resx">
+      <DependentUpon>ReportSalesOmzetForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportSalesProduct.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -897,6 +1012,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportSupplierForm.resx">
       <DependentUpon>ReportSupplierForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTopSalesbyMargin.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportTopSalesbyMargin.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportTopSalesbyMarginForm.resx">
+      <DependentUpon>ReportTopSalesbyMarginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportTopSalesbyTags.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

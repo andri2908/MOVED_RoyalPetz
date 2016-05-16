@@ -1022,7 +1022,6 @@ namespace RoyalPetz_ADMIN
         {
             ReportSalesSummarySearchForm displayedForm = new ReportSalesSummarySearchForm(globalConstants.REPORT_SALES_PRODUCT);
             displayedForm.ShowDialog(this);
-
         }
 
         private void globalToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1040,6 +1039,42 @@ namespace RoyalPetz_ADMIN
         private void penjualanPertanggalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ReportTopSalesFormSearchForm displayedForm = new ReportTopSalesFormSearchForm(globalConstants.REPORT_TOPSALES_byDATE);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void penjualanLabaPertanggalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportTopSalesFormSearchForm displayedForm = new ReportTopSalesFormSearchForm(globalConstants.REPORT_TOPSALES_ByMARGIN);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void detailedToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            ReportPurchaseSearchForm displayedForm = new ReportPurchaseSearchForm(globalConstants.REPORT_PURCHASE_DETAILED);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void summaryToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            ReportPurchaseSearchForm displayedForm = new ReportPurchaseSearchForm(globalConstants.REPORT_PURCHASE_SUMMARY);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void perProdukBarangToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ReportPurchaseSearchForm displayedForm = new ReportPurchaseSearchForm(globalConstants.REPORT_PURCHASE_ByPRODUCT);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void omzetPenjualanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportSalesSummarySearchForm displayedForm = new ReportSalesSummarySearchForm(globalConstants.REPORT_SALES_OMZET);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void penjualanKasirPerShiftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportCashierLogSearchForm displayedForm = new ReportCashierLogSearchForm();
             displayedForm.ShowDialog(this);
         }
     }

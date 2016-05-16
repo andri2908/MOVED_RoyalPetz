@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ProductcomboBox = new System.Windows.Forms.ComboBox();
             this.nonactivecheckbox = new System.Windows.Forms.CheckBox();
             this.CariButton = new System.Windows.Forms.Button();
             this.CustNameCombobox = new System.Windows.Forms.ComboBox();
@@ -37,7 +38,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.datetoPicker = new System.Windows.Forms.DateTimePicker();
             this.datefromPicker = new System.Windows.Forms.DateTimePicker();
-            this.ProductcomboBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,6 +59,20 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Kriteria Pencarian Data Penjualan";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // ProductcomboBox
+            // 
+            this.ProductcomboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.ProductcomboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.ProductcomboBox.FormattingEnabled = true;
+            this.ProductcomboBox.Location = new System.Drawing.Point(204, 58);
+            this.ProductcomboBox.Name = "ProductcomboBox";
+            this.ProductcomboBox.Size = new System.Drawing.Size(200, 26);
+            this.ProductcomboBox.TabIndex = 6;
+            this.ProductcomboBox.Text = "SEMUA";
+            this.ProductcomboBox.Visible = false;
+            this.ProductcomboBox.SelectedIndexChanged += new System.EventHandler(this.ProductcomboBox_SelectedIndexChanged);
             // 
             // nonactivecheckbox
             // 
@@ -92,6 +106,7 @@
             this.CustNameCombobox.TabIndex = 1;
             this.CustNameCombobox.Text = "P-UMUM";
             this.CustNameCombobox.Visible = false;
+            this.CustNameCombobox.SelectedIndexChanged += new System.EventHandler(this.CustNameCombobox_SelectedIndexChanged);
             // 
             // LabelOptions
             // 
@@ -102,6 +117,7 @@
             this.LabelOptions.Size = new System.Drawing.Size(101, 18);
             this.LabelOptions.TabIndex = 3;
             this.LabelOptions.Text = "Pelanggan";
+            this.LabelOptions.Click += new System.EventHandler(this.LabelOptions_Click);
             // 
             // label2
             // 
@@ -112,6 +128,7 @@
             this.label2.Size = new System.Drawing.Size(28, 41);
             this.label2.TabIndex = 2;
             this.label2.Text = "-";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label1
             // 
@@ -121,6 +138,7 @@
             this.label1.Size = new System.Drawing.Size(172, 18);
             this.label1.TabIndex = 1;
             this.label1.Text = "Tanggal Penjualan";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // datetoPicker
             // 
@@ -128,6 +146,7 @@
             this.datetoPicker.Name = "datetoPicker";
             this.datetoPicker.Size = new System.Drawing.Size(200, 27);
             this.datetoPicker.TabIndex = 1;
+            this.datetoPicker.ValueChanged += new System.EventHandler(this.datetoPicker_ValueChanged);
             // 
             // datefromPicker
             // 
@@ -135,18 +154,7 @@
             this.datefromPicker.Name = "datefromPicker";
             this.datefromPicker.Size = new System.Drawing.Size(200, 27);
             this.datefromPicker.TabIndex = 0;
-            // 
-            // ProductcomboBox
-            // 
-            this.ProductcomboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.ProductcomboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.ProductcomboBox.FormattingEnabled = true;
-            this.ProductcomboBox.Location = new System.Drawing.Point(204, 58);
-            this.ProductcomboBox.Name = "ProductcomboBox";
-            this.ProductcomboBox.Size = new System.Drawing.Size(200, 26);
-            this.ProductcomboBox.TabIndex = 6;
-            this.ProductcomboBox.Text = "SEMUA";
-            this.ProductcomboBox.Visible = false;
+            this.datefromPicker.ValueChanged += new System.EventHandler(this.datefromPicker_ValueChanged);
             // 
             // ReportSalesSummarySearchForm
             // 

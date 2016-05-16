@@ -1,0 +1,111 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="TGL" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="TERIMA" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="INVOICE" type="xs:string" minOccurs="0" />
+                <xs:element name="SUPPLIER" type="xs:string" minOccurs="0" />
+                <xs:element name="TOTAL" type="xs:double" minOccurs="0" />
+                <xs:element name="TOP" type="xs:string" minOccurs="0" />
+                <xs:element name="HARI" type="xs:double" minOccurs="0" />
+                <xs:element name="STATUS" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <TGL>2016-04-10T00:00:00+07:00</TGL>
+    <INVOICE>PO-1</INVOICE>
+    <SUPPLIER>SAPU LIDI PERMAI</SUPPLIER>
+    <TOTAL>1000</TOTAL>
+    <TOP>KREDIT</TOP>
+    <HARI>10</HARI>
+    <STATUS>BELUM LUNAS</STATUS>
+  </Table>
+  <Table>
+    <TGL>2016-04-18T00:00:00+07:00</TGL>
+    <TERIMA>2016-04-18T00:00:00+07:00</TERIMA>
+    <INVOICE>PO-2</INVOICE>
+    <SUPPLIER>SAPU LIDI PERMAI</SUPPLIER>
+    <TOTAL>2000</TOTAL>
+    <TOP>KREDIT</TOP>
+    <HARI>10</HARI>
+    <STATUS>BELUM LUNAS</STATUS>
+  </Table>
+  <Table>
+    <TGL>2016-04-18T00:00:00+07:00</TGL>
+    <INVOICE>PO-3</INVOICE>
+    <SUPPLIER>SAPU LIDI PERMAI</SUPPLIER>
+    <TOTAL>11000</TOTAL>
+    <TOP>TUNAI</TOP>
+    <HARI>0</HARI>
+    <STATUS>LUNAS</STATUS>
+  </Table>
+  <Table>
+    <TGL>2016-04-18T00:00:00+07:00</TGL>
+    <TERIMA>2016-04-18T00:00:00+07:00</TERIMA>
+    <INVOICE>PO-4</INVOICE>
+    <SUPPLIER>SAPU LIDI PERMAI</SUPPLIER>
+    <TOTAL>10000</TOTAL>
+    <TOP>TUNAI</TOP>
+    <HARI>0</HARI>
+    <STATUS>LUNAS</STATUS>
+  </Table>
+  <Table>
+    <TGL>2016-04-18T00:00:00+07:00</TGL>
+    <TERIMA>2016-04-18T00:00:00+07:00</TERIMA>
+    <INVOICE>PR-2</INVOICE>
+    <SUPPLIER>SAPU LIDI PERMAI</SUPPLIER>
+    <TOTAL>20000</TOTAL>
+    <TOP>KREDIT</TOP>
+    <HARI>10</HARI>
+    <STATUS>BELUM LUNAS</STATUS>
+  </Table>
+  <Table>
+    <TGL>2016-04-21T00:00:00+07:00</TGL>
+    <TERIMA>2016-04-21T00:00:00+07:00</TERIMA>
+    <INVOICE>PO-5</INVOICE>
+    <SUPPLIER>SAPU LIDI PERMAI</SUPPLIER>
+    <TOTAL>20000</TOTAL>
+    <TOP>KREDIT</TOP>
+    <HARI>0</HARI>
+    <STATUS>BELUM LUNAS</STATUS>
+  </Table>
+  <Table>
+    <TGL>2016-04-25T00:00:00+07:00</TGL>
+    <INVOICE>PO-6</INVOICE>
+    <SUPPLIER>SAPU LIDI PERMAI</SUPPLIER>
+    <TOTAL>2100</TOTAL>
+    <TOP>KREDIT</TOP>
+    <HARI>2</HARI>
+    <STATUS>BELUM LUNAS</STATUS>
+  </Table>
+  <Table>
+    <TGL>2016-04-25T00:00:00+07:00</TGL>
+    <INVOICE>PO-7</INVOICE>
+    <SUPPLIER>SAPU LIDI PERMAI</SUPPLIER>
+    <TOTAL>1000</TOTAL>
+    <TOP>KREDIT</TOP>
+    <HARI>1</HARI>
+    <STATUS>BELUM LUNAS</STATUS>
+  </Table>
+  <Table>
+    <TGL>2016-04-25T00:00:00+07:00</TGL>
+    <TERIMA>2016-04-25T00:00:00+07:00</TERIMA>
+    <INVOICE>PO-8</INVOICE>
+    <SUPPLIER>SAPU LIDI PERMAI</SUPPLIER>
+    <TOTAL>3000</TOTAL>
+    <TOP>KREDIT</TOP>
+    <HARI>1</HARI>
+    <STATUS>BELUM LUNAS</STATUS>
+  </Table>
+</NewDataSet>
