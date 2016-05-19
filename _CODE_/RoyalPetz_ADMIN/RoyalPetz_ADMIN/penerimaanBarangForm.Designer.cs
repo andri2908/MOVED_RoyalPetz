@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(penerimaanBarangForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelAcceptValue = new System.Windows.Forms.Label();
             this.labelTotal_1 = new System.Windows.Forms.Label();
@@ -195,7 +195,7 @@
             this.tableLayoutPanel4.ColumnCount = 3;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 79.32584F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.67416F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 145F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 146F));
             this.tableLayoutPanel4.Controls.Add(this.durationTextBox, 2, 0);
             this.tableLayoutPanel4.Controls.Add(this.label1, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.supplierCombo, 0, 0);
@@ -210,7 +210,7 @@
             // 
             this.durationTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.durationTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.durationTextBox.Location = new System.Drawing.Point(481, 5);
+            this.durationTextBox.Location = new System.Drawing.Point(480, 5);
             this.durationTextBox.Mask = "000";
             this.durationTextBox.Name = "durationTextBox";
             this.durationTextBox.Size = new System.Drawing.Size(54, 27);
@@ -323,7 +323,7 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 233F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 202F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 203F));
             this.tableLayoutPanel6.Controls.Add(this.prInvoiceTextBox, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.label11, 2, 0);
             this.tableLayoutPanel6.Controls.Add(this.PRDtPicker, 3, 0);
@@ -341,7 +341,7 @@
             this.prInvoiceTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.prInvoiceTextBox.Location = new System.Drawing.Point(3, 4);
             this.prInvoiceTextBox.Name = "prInvoiceTextBox";
-            this.prInvoiceTextBox.Size = new System.Drawing.Size(166, 27);
+            this.prInvoiceTextBox.Size = new System.Drawing.Size(165, 27);
             this.prInvoiceTextBox.TabIndex = 16;
             this.prInvoiceTextBox.TextChanged += new System.EventHandler(this.prInvoiceTextBox_TextChanged);
             // 
@@ -351,7 +351,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label11.Location = new System.Drawing.Point(191, 8);
+            this.label11.Location = new System.Drawing.Point(190, 8);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(224, 18);
             this.label11.TabIndex = 20;
@@ -361,7 +361,7 @@
             // 
             this.PRDtPicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PRDtPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.PRDtPicker.Location = new System.Drawing.Point(424, 3);
+            this.PRDtPicker.Location = new System.Drawing.Point(423, 3);
             this.PRDtPicker.Name = "PRDtPicker";
             this.PRDtPicker.Size = new System.Drawing.Size(147, 27);
             this.PRDtPicker.TabIndex = 39;
@@ -373,7 +373,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.54545F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 132F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 186F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 91F));
             this.tableLayoutPanel2.Controls.Add(this.searchMutasiButton, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.searchPOButton, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.noInvoiceTextBox, 0, 0);
@@ -391,7 +391,7 @@
             this.searchMutasiButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.searchMutasiButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("searchMutasiButton.BackgroundImage")));
             this.searchMutasiButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.searchMutasiButton.Location = new System.Drawing.Point(536, 5);
+            this.searchMutasiButton.Location = new System.Drawing.Point(535, 5);
             this.searchMutasiButton.Name = "searchMutasiButton";
             this.searchMutasiButton.Size = new System.Drawing.Size(24, 24);
             this.searchMutasiButton.TabIndex = 49;
@@ -403,7 +403,7 @@
             this.searchPOButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.searchPOButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("searchPOButton.BackgroundImage")));
             this.searchPOButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.searchPOButton.Location = new System.Drawing.Point(176, 5);
+            this.searchPOButton.Location = new System.Drawing.Point(175, 5);
             this.searchPOButton.Name = "searchPOButton";
             this.searchPOButton.Size = new System.Drawing.Size(24, 24);
             this.searchPOButton.TabIndex = 49;
@@ -418,7 +418,7 @@
             this.noInvoiceTextBox.Location = new System.Drawing.Point(3, 4);
             this.noInvoiceTextBox.Name = "noInvoiceTextBox";
             this.noInvoiceTextBox.ReadOnly = true;
-            this.noInvoiceTextBox.Size = new System.Drawing.Size(167, 27);
+            this.noInvoiceTextBox.Size = new System.Drawing.Size(166, 27);
             this.noInvoiceTextBox.TabIndex = 16;
             // 
             // labelTanggal
@@ -427,7 +427,7 @@
             this.labelTanggal.AutoSize = true;
             this.labelTanggal.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTanggal.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.labelTanggal.Location = new System.Drawing.Point(218, 8);
+            this.labelTanggal.Location = new System.Drawing.Point(217, 8);
             this.labelTanggal.Name = "labelTanggal";
             this.labelTanggal.Size = new System.Drawing.Size(122, 18);
             this.labelTanggal.TabIndex = 20;
@@ -438,7 +438,7 @@
             this.noMutasiTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.noMutasiTextBox.Enabled = false;
             this.noMutasiTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noMutasiTextBox.Location = new System.Drawing.Point(350, 4);
+            this.noMutasiTextBox.Location = new System.Drawing.Point(349, 4);
             this.noMutasiTextBox.Name = "noMutasiTextBox";
             this.noMutasiTextBox.ReadOnly = true;
             this.noMutasiTextBox.Size = new System.Drawing.Size(172, 27);
@@ -518,14 +518,14 @@
             // 
             this.detailGridView.AllowUserToDeleteRows = false;
             this.detailGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.detailGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.detailGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.detailGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.detailGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.detailGridView.Location = new System.Drawing.Point(2, 305);
@@ -588,6 +588,8 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PENERIMAAN BARANG";
+            this.Activated += new System.EventHandler(this.penerimaanBarangForm_Activated);
+            this.Deactivate += new System.EventHandler(this.penerimaanBarangForm_Deactivate);
             this.Load += new System.EventHandler(this.penerimaanBarangForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

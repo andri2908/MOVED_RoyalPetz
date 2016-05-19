@@ -34,7 +34,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.kodeProdukTextBox = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.barcodeTextBox = new System.Windows.Forms.MaskedTextBox();
             this.produkJasaCheckbox = new System.Windows.Forms.CheckBox();
             this.namaProdukTextBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -67,13 +66,14 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.resetbutton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.barcodeTextBox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -138,17 +138,6 @@
             this.label16.Size = new System.Drawing.Size(89, 18);
             this.label16.TabIndex = 16;
             this.label16.Text = "BARCODE";
-            // 
-            // barcodeTextBox
-            // 
-            this.barcodeTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.barcodeTextBox.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.barcodeTextBox.Location = new System.Drawing.Point(471, 25);
-            this.barcodeTextBox.Mask = "0000000000000000";
-            this.barcodeTextBox.Name = "barcodeTextBox";
-            this.barcodeTextBox.Size = new System.Drawing.Size(176, 26);
-            this.barcodeTextBox.TabIndex = 41;
-            this.barcodeTextBox.TextChanged += new System.EventHandler(this.barcodeTextBox_TextChanged);
             // 
             // produkJasaCheckbox
             // 
@@ -505,6 +494,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.barcodeTextBox);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.merkTextBox);
             this.groupBox1.Controls.Add(this.produkKategoriTextBox);
@@ -516,7 +506,6 @@
             this.groupBox1.Controls.Add(this.noRakKolomTextBox);
             this.groupBox1.Controls.Add(this.kodeProdukTextBox);
             this.groupBox1.Controls.Add(this.noRakBarisTextBox);
-            this.groupBox1.Controls.Add(this.barcodeTextBox);
             this.groupBox1.Controls.Add(this.label19);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
@@ -533,6 +522,17 @@
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ID PRODUK";
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(653, 25);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(85, 26);
+            this.button2.TabIndex = 78;
+            this.button2.Text = "PRINT";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // groupBox2
             // 
@@ -614,16 +614,17 @@
             this.label25.TabIndex = 76;
             this.label25.Text = "HARGA JUAL PARTAI";
             // 
-            // button2
+            // barcodeTextBox
             // 
-            this.button2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(653, 25);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(85, 26);
-            this.button2.TabIndex = 78;
-            this.button2.Text = "PRINT";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.barcodeTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.barcodeTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.barcodeTextBox.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.barcodeTextBox.Location = new System.Drawing.Point(468, 25);
+            this.barcodeTextBox.MaxLength = 15;
+            this.barcodeTextBox.Name = "barcodeTextBox";
+            this.barcodeTextBox.Size = new System.Drawing.Size(174, 26);
+            this.barcodeTextBox.TabIndex = 79;
+            this.barcodeTextBox.TextChanged += new System.EventHandler(this.barcodeTextBox_TextChanged);
             // 
             // dataProdukDetailForm
             // 
@@ -699,7 +700,6 @@
         private System.Windows.Forms.CheckBox nonAktifCheckbox;
         private System.Windows.Forms.Label errorLabel;
         private System.Windows.Forms.Button resetbutton;
-        private System.Windows.Forms.MaskedTextBox barcodeTextBox;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -708,5 +708,6 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox barcodeTextBox;
     }
 }

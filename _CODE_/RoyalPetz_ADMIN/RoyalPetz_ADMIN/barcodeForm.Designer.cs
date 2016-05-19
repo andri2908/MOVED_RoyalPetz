@@ -31,7 +31,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.productNameTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.barcodeTextBox = new System.Windows.Forms.MaskedTextBox();
+            this.barcodeTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label5
@@ -73,12 +73,13 @@
             // barcodeTextBox
             // 
             this.barcodeTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.barcodeTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.barcodeTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.barcodeTextBox.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.barcodeTextBox.Location = new System.Drawing.Point(35, 52);
-            this.barcodeTextBox.Mask = "0000000000";
+            this.barcodeTextBox.MaxLength = 15;
             this.barcodeTextBox.Name = "barcodeTextBox";
-            this.barcodeTextBox.Size = new System.Drawing.Size(176, 27);
-            this.barcodeTextBox.TabIndex = 72;
+            this.barcodeTextBox.Size = new System.Drawing.Size(174, 26);
+            this.barcodeTextBox.TabIndex = 80;
             this.barcodeTextBox.TextChanged += new System.EventHandler(this.barcodeTextBox_TextChanged);
             this.barcodeTextBox.Enter += new System.EventHandler(this.barcodeTextBox_Enter);
             this.barcodeTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.barcodeTextBox_KeyPress);
@@ -113,6 +114,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox productNameTextBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.MaskedTextBox barcodeTextBox;
+        private System.Windows.Forms.TextBox barcodeTextBox;
     }
 }

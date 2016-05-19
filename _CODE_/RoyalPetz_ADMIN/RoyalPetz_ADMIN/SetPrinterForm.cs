@@ -65,8 +65,13 @@ namespace RoyalPetz_ADMIN
         private void button1_Click(object sender, EventArgs e)
         {
             string pname = this.PrinterlistBox.SelectedItem.ToString();
+
             gutil.setPaper(sizeComboBox.SelectedIndex);
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENGATURAN_PRINTER, "PAPER SIZE CHANGED [" + sizeComboBox.SelectedIndex + "]");
+
             myPrinters.SetDefaultPrinter(pname);
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENGATURAN_PRINTER, "DEFAULT PRINTER CHANGED [" + pname + "]");
+
             MessageBox.Show("Pengaturan printer telah diubah!");
         }
     }

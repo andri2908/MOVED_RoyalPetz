@@ -186,6 +186,19 @@ namespace RoyalPetz_ADMIN
         {           
             if (saveData())
             {
+                switch (originModuleID)
+                {
+                    case globalConstants.NEW_GROUP_USER:
+                        gutil.saveUserChangeLog(globalConstants.MENU_MANAJEMEN_USER, globalConstants.CHANGE_LOG_INSERT, "ADD NEW GROUP USER ["+namaGroupTextBox.Text+"]");
+                        break;
+                    case globalConstants.EDIT_GROUP_USER:
+                        if (nonAktifCheckbox.Checked)
+                            gutil.saveUserChangeLog(globalConstants.MENU_MANAJEMEN_USER, globalConstants.CHANGE_LOG_UPDATE, "UPDATE GROUP USER [" + namaGroupTextBox.Text + "] GROUP STATUS NON-AKTIF");
+                        else
+                            gutil.saveUserChangeLog(globalConstants.MENU_MANAJEMEN_USER, globalConstants.CHANGE_LOG_UPDATE, "UPDATE GROUP USER [" + namaGroupTextBox.Text + "] GROUP STATUS AKTIF");
+                        break;
+                }
+
                 if (originModuleID != globalConstants.PENGATURAN_GRUP_AKSES)
                 { 
                     gutil.showSuccess(options);

@@ -124,6 +124,7 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
+                gutil.saveUserChangeLog(globalConstants.MENU_SET_NO_FAKTUR, globalConstants.CHANGE_LOG_UPDATE, "SET NO FAKTUR [" + noFakturTextBox.Text + "]");
                 gutil.showSuccess(gutil.UPD);
                 errorLabel.Text = "";
             }

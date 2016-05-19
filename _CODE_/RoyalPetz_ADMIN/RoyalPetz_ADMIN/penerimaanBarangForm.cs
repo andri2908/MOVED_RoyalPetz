@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Globalization;
+using Hotkeys;
 
 namespace RoyalPetz_ADMIN
 {
@@ -24,7 +25,8 @@ namespace RoyalPetz_ADMIN
         double globalTotalValue = 0;
         bool isLoading = false;
         double POduration = 0;
-        
+        private Hotkeys.GlobalHotkey ghk_F2;
+
         private List<string> detailRequestQty = new List<string>();
         private List<string> detailHpp = new List<string>();
         string previousInput = "";
@@ -44,6 +46,141 @@ namespace RoyalPetz_ADMIN
 
             originModuleId = moduleID;
             selectedInvoice = pmInvoice;
+        }
+
+        private void captureAll(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.F2:
+                    barcodeForm displayBarcodeForm = new barcodeForm(this, globalConstants.PENERIMAAN_BARANG);
+
+                    displayBarcodeForm.Top = 10;
+                    displayBarcodeForm.Left = (Screen.PrimaryScreen.Bounds.Width / 2) - (displayBarcodeForm.Width / 2);
+
+                    displayBarcodeForm.ShowDialog(this);
+                    break;
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == Constants.WM_HOTKEY_MSG_ID)
+            {
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                int modifier = (int)m.LParam & 0xFFFF;
+
+                if (modifier == Constants.NOMOD)
+                    captureAll(key);
+                //else if (modifier == Constants.ALT)
+                //    captureAltModifier(key);
+                //else if (modifier == Constants.CTRL)
+                //    captureCtrlModifier(key);
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void registerGlobalHotkey()
+        {
+            ghk_F2 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F2, this);
+            ghk_F2.Register();
+        }
+
+        private void unregisterGlobalHotkey()
+        {
+            ghk_F2.Unregister();
+        }
+
+        public void addNewRowFromBarcode(string productName)
+        {
+            int i = 0;
+            bool found = false;
+            int rowSelectedIndex = 0;
+            double currQty;
+
+            // CHECK FOR EXISTING SELECTED ITEM
+            for (i = 0; i < detailGridView.Rows.Count && !found; i++)
+            {
+                if (null != detailGridView.Rows[i].Cells["productName"].Value)
+                    if (detailGridView.Rows[i].Cells["productName"].Value.ToString() == productName)
+                    {
+                        found = true;
+                        rowSelectedIndex = i;
+                    }
+            }
+
+            if (!found)
+            {
+                //addNewRow(false);
+                detailGridView.Rows.Add();
+                detailRequestQty.Add("0");
+                rowSelectedIndex = detailGridView.Rows.Count - 2; // point to row before last row, as last row will always exist
+            }
+
+            DataGridViewComboBoxCell productNameComboCell = (DataGridViewComboBoxCell)detailGridView.Rows[rowSelectedIndex].Cells["productName"];
+            DataGridViewRow selectedRow = detailGridView.Rows[rowSelectedIndex];
+
+            for (i = 0; i < productNameComboCell.Items.Count; i++)
+            {
+                if (productName == productNameComboCell.Items[i].ToString())
+                {
+                    productNameComboCell.Value = productNameComboCell.Items[i];
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                detailGridView.Rows[rowSelectedIndex].Cells["qtyReceived"].Value = 1;
+                detailRequestQty[rowSelectedIndex] = "1";
+            }
+            else
+            {
+                currQty = Convert.ToDouble(detailRequestQty[rowSelectedIndex]) + 1;
+
+                detailGridView.Rows[rowSelectedIndex].Cells["qtyReceived"].Value = currQty;
+                detailRequestQty[rowSelectedIndex] = currQty.ToString();
+            }
+
+            comboSelectedIndexChangeMethod(rowSelectedIndex, i, selectedRow);
+        }
+
+        private void comboSelectedIndexChangeMethod(int rowSelectedIndex, int selectedIndex, DataGridViewRow selectedRow)
+        {
+            string selectedProductID = "";
+
+            double hpp = 0;
+            double productQty = 0;
+            double subTotal = 0;
+
+            DataGridViewComboBoxCell productIDComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productID"];
+            DataGridViewComboBoxCell productNameComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productName"];
+
+            if (selectedIndex < 0)
+                return;
+
+            selectedProductID = productIDComboCell.Items[selectedIndex].ToString();
+            productIDComboCell.Value = productIDComboCell.Items[selectedIndex];
+            productNameComboCell.Value = productNameComboCell.Items[selectedIndex];
+
+            hpp = getHPPValue(selectedProductID);
+
+            selectedRow.Cells["hpp"].Value = hpp.ToString();
+            detailHpp[rowSelectedIndex] = hpp.ToString();
+
+            if (null == selectedRow.Cells["qtyReceived"].Value)
+                selectedRow.Cells["qtyReceived"].Value = 0;
+
+            if (null != selectedRow.Cells["qtyReceived"].Value)
+            {
+                productQty = Convert.ToDouble(selectedRow.Cells["qtyReceived"].Value);
+                subTotal = Math.Round((hpp * productQty), 2);
+
+                selectedRow.Cells["subtotal"].Value = subTotal;
+            }
+
+            calculateTotal();
         }
 
         public void setSelectedInvoice(string invoiceNo)
@@ -964,10 +1101,99 @@ namespace RoyalPetz_ADMIN
             return false;
         }
 
+        private bool updateDataToHQ(Data_Access DAccess)
+        {
+            bool result = false;
+            string sqlCommand = "";
+            MySqlException internalEX = null;
+
+            string pmInvoice = "";
+            pmInvoice = noMutasiTextBox.Text;
+
+            DAccess.beginTransaction(Data_Access.HQ_SERVER);
+
+            try
+            {
+                // UPDATE PM DATA AT HQ
+                sqlCommand = "UPDATE PRODUCTS_MUTATION_HEADER SET PM_RECEIVED = 1 WHERE PM_INVOICE = '" + pmInvoice + "'";
+                if (!DAccess.executeNonQueryCommand(sqlCommand, ref internalEX))
+                    throw internalEX;
+                
+                DAccess.commit();
+                result = true;
+            }
+            catch (Exception e)
+            {
+                try
+                {
+                    DAccess.rollBack();
+                }
+                catch (MySqlException ex)
+                {
+                    if (DAccess.getMyTransConnection() != null)
+                    {
+                        gUtil.showDBOPError(ex, "ROLLBACK");
+                    }
+                }
+
+                gUtil.showDBOPError(e, "INSERT");
+                result = false;
+            }
+            finally
+            {
+                DAccess.mySqlClose();
+            }
+
+            return result;
+        }
+
+        private bool sendUpdateToHQ()
+        {
+            bool result = false;
+            //Data_Access DS_HQ = new Data_Access();
+
+            //if (saveData()) // SAVE TO LOCAL DATABASE FIRST
+            {
+                // CREATE CONNECTION TO CENTRAL HQ DATABASE SERVER
+                if (DS.HQ_mySQLConnect())
+                {
+                    // SEND REQUEST DATA TO HQ
+                    if (updateDataToHQ(DS))
+                        result = true;
+                    else
+                    {
+                        MessageBox.Show("FAIL TO UPDATE DATA TO HQ");
+                        result = false;
+                    }
+                    // CLOSE CONNECTION TO CENTRAL HQ DATABASE SERVER
+                    DS.HQ_mySqlClose();
+                }
+                else
+                {
+                    MessageBox.Show("FAIL TO CONNECT");
+                    result = false;
+                }
+            }
+
+            return result;
+        }
+
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (saveData())
             {
+                if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_MUTASI)
+                {
+                    // UPDATE DATA AT HQ
+                    if (!sendUpdateToHQ())
+                        MessageBox.Show("KONEKSI KE PUSAT GAGAL");
+
+                    gUtil.saveUserChangeLog(globalConstants.MENU_MUTASI_BARANG, globalConstants.CHANGE_LOG_INSERT, "PENERIMAAN BARANG [" + prInvoiceTextBox.Text + "] DARI MUTASI[" + noMutasiTextBox.Text + "]");
+                }
+                else
+                    gUtil.saveUserChangeLog(globalConstants.MENU_MUTASI_BARANG, globalConstants.CHANGE_LOG_INSERT, "PENERIMAAN BARANG [" + prInvoiceTextBox.Text + "] NO PO [" + selectedInvoice + "]");
+
+
                 saveButton.Visible = false;
                 prInvoiceTextBox.Enabled = false;
                 PRDtPicker.Enabled = false;
@@ -1078,6 +1304,16 @@ namespace RoyalPetz_ADMIN
             {
                 durationTextBox.SelectAll();
             });
+        }
+
+        private void penerimaanBarangForm_Activated(object sender, EventArgs e)
+        {
+            registerGlobalHotkey();
+        }
+
+        private void penerimaanBarangForm_Deactivate(object sender, EventArgs e)
+        {
+            unregisterGlobalHotkey();
         }
     }
 }

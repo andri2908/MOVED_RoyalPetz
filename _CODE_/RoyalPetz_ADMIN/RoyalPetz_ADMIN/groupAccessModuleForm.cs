@@ -272,6 +272,8 @@ namespace RoyalPetz_ADMIN
             if (saveData())
             {
                 //MessageBox.Show("SUCCESS");
+
+                gutil.saveUserChangeLog(globalConstants.MENU_MANAJEMEN_USER, globalConstants.CHANGE_LOG_UPDATE, "UPDATE GROUP ACCESS VALUE");
                 gutil.showSuccess(gutil.UPD);
                 MessageBox.Show("RE-LOGIN UNTUK MENGAKTIFKAN HAK AKSES YANG BARU", "INFORMASI",MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

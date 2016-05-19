@@ -189,10 +189,12 @@ namespace RoyalPetz_ADMIN
                         if ((categoryProductValue[i].hasCategoryID))
                         {
                             sqlCommand = "DELETE FROM PRODUCT_CATEGORY WHERE PRODUCT_ID = '" + pengaturanKategoriDataGridView.Rows[i].Cells["PRODUCT_ID"].Value.ToString() + "' AND CATEGORY_ID = " + selectedCategoryID;
+                            gutil.saveSystemDebugLog(globalConstants.MENU_PENGATURAN_KATEGORI_PRODUK, "REMOVE CATEGORY ["+ selectedCategoryID+"] FOR PRODUCT ["+ pengaturanKategoriDataGridView.Rows[i].Cells["PRODUCT_ID"].Value.ToString()+"]");
                         }
                         else 
                         {
                             sqlCommand = "INSERT INTO PRODUCT_CATEGORY (PRODUCT_ID, CATEGORY_ID) VALUES ('" + pengaturanKategoriDataGridView.Rows[i].Cells["PRODUCT_ID"].Value.ToString() + "', " + selectedCategoryID + ")";
+                            gutil.saveSystemDebugLog(globalConstants.MENU_PENGATURAN_KATEGORI_PRODUK, "ADD CATEGORY [" + selectedCategoryID + "] FOR PRODUCT [" + pengaturanKategoriDataGridView.Rows[i].Cells["PRODUCT_ID"].Value.ToString() + "]");
                         }
 
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
@@ -205,6 +207,8 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENGATURAN_KATEGORI_PRODUK, "EXCEPTION THROWN [" + e.Message + "]");
+
                 try
                 {
                     DS.rollBack();
@@ -242,6 +246,7 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
+                gutil.saveUserChangeLog(globalConstants.MENU_PENGATURAN_KATEGORI_PRODUK, globalConstants.CHANGE_LOG_UPDATE, "PENGATURAN KATEGORI PRODUK [" + namaKategoriTextbox.Text + "]");
                 //MessageBox.Show("SUCCESS");
                 gutil.showSuccess(gutil.UPD);
                 //gutil.ResetAllControls(this); //notneeded?

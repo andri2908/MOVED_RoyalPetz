@@ -272,6 +272,15 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
+                if (originModuleID == globalConstants.NEW_CUSTOMER)
+                    gUtil.saveUserChangeLog(globalConstants.MENU_PELANGGAN, globalConstants.CHANGE_LOG_INSERT, "INSERT NEW PELANGGAN [" + custNameTextBox.Text + "]");
+                else
+                {
+                    if (nonAktifCheckbox.Checked == true) 
+                        gUtil.saveUserChangeLog(globalConstants.MENU_PELANGGAN, globalConstants.CHANGE_LOG_UPDATE, "UPDATE PELANGGAN [" + custNameTextBox.Text + "] STATUS NON-AKTIF");
+                    else
+                        gUtil.saveUserChangeLog(globalConstants.MENU_PELANGGAN, globalConstants.CHANGE_LOG_UPDATE, "UPDATE PELANGGAN [" + custNameTextBox.Text + "] STATUS AKTIF");
+                }
                 gUtil.showSuccess(options);
                 gUtil.ResetAllControls(this);
             }

@@ -424,7 +424,9 @@ namespace RoyalPetz_ADMIN
                                                         "PRODUCT_WHOLESALE_PRICE = " + Convert.ToInt32(dataProdukDataGridView.Rows[i].Cells["HARGA_GROSIR"].Value) + " " +
                                                         "WHERE ID = " + Convert.ToInt32(dataProdukDataGridView.Rows[i].Cells["ID"].Value);
 
-                                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                gutil.saveSystemDebugLog(globalConstants.MENU_PENGATURAN_HARGA, "UPDATE HARGA FOR ["+Convert.ToString(dataProdukDataGridView.Rows[i].Cells["kodeProduk"].Value) +"]");
+
+                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                         throw internalEX;
                                 }
                             }
@@ -438,7 +440,9 @@ namespace RoyalPetz_ADMIN
                                                         "PRODUCT_LIMIT_STOCK = " + Convert.ToInt32(dataProdukDataGridView.Rows[i].Cells["LIMIT_STOK"].Value) + " " +
                                                         "WHERE ID = " + Convert.ToInt32(dataProdukDataGridView.Rows[i].Cells["ID"].Value);
 
-                                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                gutil.saveSystemDebugLog(globalConstants.MENU_PENGATURAN_LIMIT_STOK, "UPDATE LIMIT STOK FOR [" + Convert.ToString(dataProdukDataGridView.Rows[i].Cells["kodeProduk"].Value) + "]");
+
+                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                         throw internalEX;
                                 }
                             }
@@ -460,7 +464,9 @@ namespace RoyalPetz_ADMIN
                                                         "PRODUCT_SHELVES = '" + kodeRakValue + nomorRakValue + "' " +
                                                         "WHERE ID = " + Convert.ToInt32(dataProdukDataGridView.Rows[i].Cells["ID"].Value);
 
-                                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                gutil.saveSystemDebugLog(globalConstants.MENU_PENGATURAN_NOMOR_RAK, "UPDATE NOMOR RAK FOR [" + Convert.ToString(dataProdukDataGridView.Rows[i].Cells["kodeProduk"].Value) + "]");
+
+                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                         throw internalEX;
                                 }
                             }
@@ -472,6 +478,8 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENGATURAN_HARGA, "EXCEPTION THROWN [" + e.Message + "]");
+
                 try
                 {
                     DS.rollBack();
@@ -513,6 +521,19 @@ namespace RoyalPetz_ADMIN
                 namaProdukTextBox.BackColor = Color.White;
 
                 loadData();
+
+                switch (originModuleID)
+                {
+                    case globalConstants.PENGATURAN_HARGA_JUAL:
+                        gutil.saveUserChangeLog(globalConstants.MENU_PENGATURAN_HARGA, globalConstants.CHANGE_LOG_UPDATE, "PENGATURAN HARGA JUAL, SEARCH TERM [" + namaProdukTextBox.Text + "]");
+                        break;
+                    case globalConstants.PENGATURAN_LIMIT_STOK:
+                        gutil.saveUserChangeLog(globalConstants.MENU_PENGATURAN_LIMIT_STOK, globalConstants.CHANGE_LOG_UPDATE, "PENGATURAN LIMIT STOK, SEARCH TERM [" + namaProdukTextBox.Text + "]");
+                        break;
+                    case globalConstants.PENGATURAN_NOMOR_RAK:
+                        gutil.saveUserChangeLog(globalConstants.MENU_PENGATURAN_NOMOR_RAK, globalConstants.CHANGE_LOG_UPDATE, "PENGATURAN NOMOR RAK, SEARCH TERM [" + namaProdukTextBox.Text + "]");
+                        break;
+                }
 
                 //MessageBox.Show("SUCCESS");
                 gutil.showSuccess(gutil.UPD);

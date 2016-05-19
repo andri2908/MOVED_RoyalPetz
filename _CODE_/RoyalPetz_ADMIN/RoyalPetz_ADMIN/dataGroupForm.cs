@@ -25,16 +25,21 @@ namespace RoyalPetz_ADMIN
         public dataGroupForm()
         {
             InitializeComponent();
+            gutil.saveSystemDebugLog(0, "CREATE DATA GROUP FORM NO MODULE_ID");
+
         }
 
         public dataGroupForm(int moduleID)
         {
             InitializeComponent();
-            
+
             if (moduleID > 50)
                 newButton.Visible = false;
-            
+
             originModuleID = moduleID;
+
+            gutil.saveSystemDebugLog(0, "CREATE DATA GROUP FORM MODULE_ID ["+moduleID+"]");
+
         }
 
         public dataGroupForm(int moduleID, dataUserDetailForm parentForm)
@@ -46,6 +51,8 @@ namespace RoyalPetz_ADMIN
 
             originModuleID = moduleID;
             userDetailForm = parentForm;
+            gutil.saveSystemDebugLog(0, "CREATE DATA GROUP FORM MODULE_ID [" + moduleID + "] FROM DATA USER DETAIL FORM");
+
         }
 
         private void newButton_Click(object sender, EventArgs e)
@@ -90,11 +97,15 @@ namespace RoyalPetz_ADMIN
             switch (originModuleID)
             {
                 case globalConstants.TAMBAH_HAPUS_GROUP_USER:
+                    gutil.saveSystemDebugLog(0, "CREATE DATA GROUP DETAIL FORM, GROUP USER ID ["+selectedGroupID+"]");
+
                     dataGroupDetailForm displayNewGroupForm = new dataGroupDetailForm(globalConstants.EDIT_GROUP_USER, selectedGroupID);
                     displayNewGroupForm.ShowDialog(this);
                     break;
                 
                 case globalConstants.PENGATURAN_GRUP_AKSES:
+                    gutil.saveSystemDebugLog(0, "CREATE DATA GROUP ACCESS MODULE FORM, GROUP USER ID [" + selectedGroupID + "]");
+
                     groupAccessModuleForm groupAccessForm = new groupAccessModuleForm(selectedGroupID);
                     groupAccessForm.ShowDialog(this);
                     break;
@@ -105,6 +116,8 @@ namespace RoyalPetz_ADMIN
                 //    break;
 
                 case globalConstants.TAMBAH_HAPUS_USER:
+                    gutil.saveSystemDebugLog(0, "SET USER DETAIL SELECTED GROUP ID ["+selectedGroupID+"]");
+
                     userDetailForm.setSelectedGroupID(selectedGroupID);
                     this.Close();
                     break;

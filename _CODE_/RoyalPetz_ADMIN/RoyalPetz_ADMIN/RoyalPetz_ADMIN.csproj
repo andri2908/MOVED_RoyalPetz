@@ -694,6 +694,12 @@
     <Compile Include="sinkronisasiInformasiForm.Designer.cs">
       <DependentUpon>sinkronisasiInformasiForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="smallPleaseWait.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="smallPleaseWait.Designer.cs">
+      <DependentUpon>smallPleaseWait.cs</DependentUpon>
+    </Compile>
     <Compile Include="stokPecahBarangForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1076,6 +1082,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sinkronisasiInformasiForm.resx">
       <DependentUpon>sinkronisasiInformasiForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="smallPleaseWait.resx">
+      <DependentUpon>smallPleaseWait.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="stokPecahBarangForm.resx">
       <DependentUpon>stokPecahBarangForm.cs</DependentUpon>

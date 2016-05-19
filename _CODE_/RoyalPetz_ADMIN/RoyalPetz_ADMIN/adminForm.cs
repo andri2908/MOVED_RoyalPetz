@@ -77,10 +77,12 @@ namespace RoyalPetz_ADMIN
 
         private void captureAll(Keys key)
         {
+            int userAccessOptions = 0;
             switch (key)
             {
                 case Keys.F1:
-                    if (!newMessageFormExist)
+                    userAccessOptions = DS.getUserAccessRight(globalConstants.MENU_MODULE_MESSAGING, gutil.getUserGroupID());
+                    if (!newMessageFormExist  && userAccessOptions == 1)
                     { 
                         messagingForm displayForm = new messagingForm();
                         displayForm.ShowDialog(this);
@@ -128,7 +130,6 @@ namespace RoyalPetz_ADMIN
 
             
             activateUserAccessRight();
-            registerGlobalHotkey();
         }
 
         public void setNewMessageFormExist(bool value)
@@ -163,9 +164,12 @@ namespace RoyalPetz_ADMIN
         
         private void adminForm_Load(object sender, EventArgs e)
         {
+            gutil.saveSystemDebugLog(0, "adminForm Load");
+
             if (!System.IO.Directory.Exists(appPath + "\\PRODUCT_PHOTO"))
             {
                 System.IO.Directory.CreateDirectory(appPath + "\\PRODUCT_PHOTO");
+                gutil.saveSystemDebugLog(0, "CREATE PRODUCT_PHOTO FOLDER");
             }
 
             //updateLabel();
@@ -186,8 +190,6 @@ namespace RoyalPetz_ADMIN
         private void adminForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             timer1.Stop();
-            unregisterGlobalHotkey();
-
             //write paper size settings last change to DB
         }
 
@@ -433,21 +435,30 @@ namespace RoyalPetz_ADMIN
                 try
                 {
                     fileName = openFileDialog1.FileName;
+                    gutil.saveSystemDebugLog(0, "SELECTED PICTURE [" + fileName + "]");
 
                     if (openFileDialog1.FileName != appPath + "\\bg.jpg")
                     { 
                         if (null!= this.BackgroundImage)
+                        {
+                            gutil.saveSystemDebugLog(0, "REMOVE CURRENT BACKGROUND IMAGE");
                             this.BackgroundImage.Dispose();
-                    
+                        }
+
+                        gutil.saveSystemDebugLog(0, "REMOVE CURRENT BACKGROUND IMAGE FILE");
                         System.IO.File.Delete(appPath + "\\bg.jpg");
+
+                        gutil.saveSystemDebugLog(0, "CREATE A COPY OF NEW BACKGROUND IMAGE");
                         System.IO.File.Copy(openFileDialog1.FileName, appPath + "\\bg.jpg");
 
+                        gutil.saveSystemDebugLog(0, "CHANGE BACKGROUND IMAGE");
                         this.BackgroundImage = Image.FromFile(BG_IMAGE);
                         this.BackgroundImageLayout = ImageLayout.Stretch;
                     }
                 }
                 catch (Exception ex)
                 {
+                    gutil.saveSystemDebugLog(0, "CAN'T READ FILE");
                     MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
                 }
             }
@@ -588,12 +599,15 @@ namespace RoyalPetz_ADMIN
         private void adminForm_Deactivate(object sender, EventArgs e)
         {
             //timer1.Stop();
+            unregisterGlobalHotkey();
         }
 
         private void adminForm_Activated(object sender, EventArgs e)
         {
             updateLabel();
             timer1.Start();
+
+            registerGlobalHotkey();
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
@@ -768,6 +782,8 @@ namespace RoyalPetz_ADMIN
         {
             if (selectedUserGroupID == 0)
                 return;
+
+            gutil.saveSystemDebugLog(0, "ACTIVATE USER ACCESS RIGHT");
 
             // SET ACCESSIBILITY FOR MANAJEMEN SISTEM MAIN MENU
             setAccessibility(globalConstants.MENU_MANAJEMEN_SISTEM, MAINMENU_manajemenSistem);
@@ -986,7 +1002,10 @@ namespace RoyalPetz_ADMIN
 
         private void timerMessage_Tick(object sender, EventArgs e)
         {
-            if (!newMessageFormExist && gutil.checkNewMessageData())
+            int userAccessOptions;
+
+            userAccessOptions = DS.getUserAccessRight(globalConstants.MENU_MODULE_MESSAGING, gutil.getUserGroupID());
+            if (userAccessOptions == 1 && !newMessageFormExist && gutil.checkNewMessageData())
             {
                 newMessageFormExist = true;
                 newMessageForm newMsgForm = new newMessageForm((Form) this);

@@ -1680,7 +1680,7 @@
             // timerMessage
             // 
             this.timerMessage.Enabled = true;
-            this.timerMessage.Interval = 1000;
+            this.timerMessage.Interval = 3600000;
             this.timerMessage.Tick += new System.EventHandler(this.timerMessage_Tick);
             // 
             // adminForm

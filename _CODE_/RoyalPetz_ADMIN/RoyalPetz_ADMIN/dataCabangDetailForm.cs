@@ -211,6 +211,20 @@ namespace RoyalPetz_ADMIN
             if (saveData())
             {                
                 //MessageBox.Show("SUCCESS");
+
+                switch(originModuleID)
+                {
+                    case globalConstants.NEW_BRANCH:
+                        gUtil.saveUserChangeLog(globalConstants.MENU_MANAJEMEN_CABANG, globalConstants.CHANGE_LOG_INSERT, "ADD NEW CABANG [" + branchNameTextBox.Text + "]");
+                        break;
+                    case globalConstants.EDIT_BRANCH:
+                        if (nonAktifCheckbox.Checked == true)
+                            gUtil.saveUserChangeLog(globalConstants.MENU_MANAJEMEN_CABANG, globalConstants.CHANGE_LOG_UPDATE, "UPDATE NEW CABANG [" + branchNameTextBox.Text + "] CABANG STATUS = AKTIF");
+                        else
+                            gUtil.saveUserChangeLog(globalConstants.MENU_MANAJEMEN_CABANG, globalConstants.CHANGE_LOG_UPDATE, "UPDATE NEW CABANG [" + branchNameTextBox.Text + "] CABANG STATUS = NON AKTIF");
+                        break;
+                }
+
                 gUtil.showSuccess(options);
                 gUtil.ResetAllControls(this);
 

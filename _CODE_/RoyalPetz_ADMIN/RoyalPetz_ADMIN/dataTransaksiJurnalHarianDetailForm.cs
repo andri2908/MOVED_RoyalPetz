@@ -561,6 +561,8 @@ namespace RoyalPetz_ADMIN
         {
             if (saveDataTransaction())
             {
+                gutil.saveUserChangeLog(globalConstants.MENU_TRANSAKSI_HARIAN, globalConstants.CHANGE_LOG_INSERT, "NEW DATA TRANSAKSI HARIAN");
+
                 gutil.showSuccess(options);
                 gutil.ResetAllControls(this);
                 TransaksiAccountGridView.Rows.Clear();

@@ -138,6 +138,7 @@ namespace RoyalPetz_ADMIN
                     case globalConstants.NEW_CATEGORY:
                         sqlCommand = "INSERT INTO MASTER_CATEGORY (CATEGORY_NAME, CATEGORY_DESCRIPTION, CATEGORY_ACTIVE) " +
                                             "VALUES ('" + categoryName + "', '" + categoryDesc + "', " + categoryStatus + ")";
+                        gutil.saveSystemDebugLog(globalConstants.MENU_KATEGORI, "ADD NEW CATEGORY [" + categoryName + "]");
                         break;
                     case globalConstants.EDIT_CATEGORY:
                         sqlCommand = "UPDATE MASTER_CATEGORY SET " +
@@ -145,6 +146,7 @@ namespace RoyalPetz_ADMIN
                                             "CATEGORY_DESCRIPTION = '" + categoryDesc + "', " +
                                             "CATEGORY_ACTIVE = " + categoryStatus + " " +
                                             "WHERE CATEGORY_ID = " + selectedCategoryID;
+                        gutil.saveSystemDebugLog(globalConstants.MENU_KATEGORI, "UPDATE CATEGORY [" + selectedCategoryID + "]");
                         break;
                 }
 
@@ -156,6 +158,7 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_KATEGORI, "EXCEPTION THROWN [" + e.Message + "]");
                 try
                 {
                     DS.rollBack();
@@ -193,6 +196,18 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
+                switch (originModuleID)
+                {
+                    case globalConstants.NEW_CATEGORY:
+                        gutil.saveUserChangeLog(globalConstants.MENU_KATEGORI, globalConstants.CHANGE_LOG_INSERT, "INSERT NEW CATEGORY [" + categoryNameTextBox.Text + "]");
+                        break;
+                    case globalConstants.EDIT_CATEGORY:
+                        if (nonAktifCheckbox.Checked == true)
+                            gutil.saveUserChangeLog(globalConstants.MENU_KATEGORI, globalConstants.CHANGE_LOG_UPDATE, "UPDATE CATEGORY [" + categoryNameTextBox.Text + "] STATUS CATEGORY NON-AKTIF");
+                        else
+                            gutil.saveUserChangeLog(globalConstants.MENU_KATEGORI, globalConstants.CHANGE_LOG_UPDATE, "UPDATE CATEGORY [" + categoryNameTextBox.Text + "] STATUS CATEGORY AKTIF");
+                        break;
+                }
                 gutil.showSuccess(options);
                 gutil.ResetAllControls(this);
             }

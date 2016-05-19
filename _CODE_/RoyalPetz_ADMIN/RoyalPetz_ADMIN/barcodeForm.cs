@@ -17,12 +17,17 @@ namespace RoyalPetz_ADMIN
     {
         private globalUtilities gUtil = new globalUtilities();
         private Data_Access DS = new Data_Access();
-        cashierForm parentForm;
+        Form parentForm;
+        cashierForm originCashierForm;
+        penerimaanBarangForm originPenerimaanForm;
+        int originModuleID = 0;
 
-        public barcodeForm(cashierForm originForm)
+        public barcodeForm(Form originForm, int moduleID)
         {
             InitializeComponent();
+
             parentForm = originForm;
+            originModuleID = moduleID;
         }
 
         private string getProductName(string barcodeValue)
@@ -32,7 +37,7 @@ namespace RoyalPetz_ADMIN
             if (barcodeValue.Length > 0)
                 try
                 { 
-                    productName = DS.getDataSingleValue("SELECT IFNULL(PRODUCT_NAME, '') FROM MASTER_PRODUCT WHERE PRODUCT_BARCODE = " + barcodeValue).ToString();
+                    productName = DS.getDataSingleValue("SELECT IFNULL(PRODUCT_NAME, '') FROM MASTER_PRODUCT WHERE PRODUCT_BARCODE = '" + barcodeValue + "'").ToString();
                 }
                 catch (Exception e)
                 {}
@@ -57,7 +62,18 @@ namespace RoyalPetz_ADMIN
                 productNameTextBox.Text = getProductName(barcodeTextBox.Text);
 
                 if (productNameTextBox.Text.Length > 0)
-                    parentForm.addNewRowFromBarcode(productNameTextBox.Text);
+                {
+                    if (originModuleID == globalConstants.CASHIER_MODULE)
+                    {
+                        originCashierForm = (cashierForm)parentForm;
+                        originCashierForm.addNewRowFromBarcode(productNameTextBox.Text);
+                    }
+                    else if (originModuleID == globalConstants.PENERIMAAN_BARANG)
+                    {
+                        originPenerimaanForm = (penerimaanBarangForm)parentForm;
+                        originPenerimaanForm.addNewRowFromBarcode(productNameTextBox.Text);
+                    }
+                }
 
                 barcodeTextBox.SelectAll();
             }

@@ -185,10 +185,13 @@ namespace RoyalPetz_ADMIN
             if (inp1.Equals("localhost"))
             {
                 rslt = inp1;
-            } else
+                gutil.saveSystemDebugLog(0, "SERVER IP IS LOCALHOST");
+            }
+            else
             {
                 //check per input for trailing 0
                 rslt = inp1.Trim() + "." + inp2.Trim() + "." + inp3.Trim() + "." + inp4.Trim();
+                gutil.saveSystemDebugLog(0, "SERVER IP IS NOT LOCALHOST [" + rslt + "]");
             }
             File.WriteAllText(path, rslt);
             //gutil.showSuccess(gutil.UPD);
@@ -336,6 +339,8 @@ namespace RoyalPetz_ADMIN
                         sqlCommand = "INSERT INTO SYS_CONFIG (ID, NO_FAKTUR, BRANCH_ID, HQ_IP4, STORE_NAME, STORE_ADDRESS, STORE_PHONE, STORE_EMAIL) " +
                                             "VALUES (2, '', '" + branchID + "', '" + HQIP + "', '" + nama_toko + "', '" + alamat_toko + "', '" + telepon_toko + "', '" + email_toko + "')";
                         options = gutil.INS;
+                        gutil.saveSystemDebugLog(0, "INSERT DATA ID 2 TO SYS_CONFIG");
+
                         break;
                     case 2:
                         sqlCommand = "UPDATE SYS_CONFIG SET " +
@@ -347,6 +352,8 @@ namespace RoyalPetz_ADMIN
                                             "STORE_EMAIL = '" + email_toko + "' " +                                        
                                             "WHERE ID = " + id;
                         options = gutil.UPD;
+                        gutil.saveSystemDebugLog(0, "UPDATE DATA ID 2");
+
                         break;
                 }
 
@@ -358,6 +365,8 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gutil.saveSystemDebugLog(0, "UPDATE / INSERT FAILED");
+
                 try
                 {
                     DS.rollBack();
@@ -425,6 +434,7 @@ namespace RoyalPetz_ADMIN
             }
             if (success1 && success2)
             {
+                gutil.saveUserChangeLog(globalConstants.MENU_SINKRONISASI_INFORMASI, globalConstants.CHANGE_LOG_UPDATE, "UPDATE DATA APLIKASI");
                 gutil.showSuccess(options);
             } else
             {

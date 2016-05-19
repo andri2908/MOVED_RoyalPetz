@@ -108,9 +108,11 @@ namespace RoyalPetz_ADMIN
                 {
                     case globalConstants.NEW_UNIT:
                         sqlCommand = "INSERT INTO MASTER_UNIT (UNIT_NAME, UNIT_DESCRIPTION, UNIT_ACTIVE) VALUES ('" + unitName+ "', '" + unitDesc+ "', " + unitStatus+ ")";
+                        gutil.saveSystemDebugLog(globalConstants.MENU_SATUAN, "ADD NEW UNIT [" + unitName + "]");
                         break;
                     case globalConstants.EDIT_UNIT:
                         sqlCommand = "UPDATE MASTER_UNIT SET UNIT_NAME = '" + unitName + "', UNIT_DESCRIPTION = '" + unitDesc + "', UNIT_ACTIVE = " + unitStatus + " WHERE UNIT_ID = " + selectedUnitID;
+                        gutil.saveSystemDebugLog(globalConstants.MENU_SATUAN, "UPDATE UNIT [" + selectedUnitID + "] [" + unitName + ", " + unitDesc + ", " + unitStatus + "]");
                         break;
                 }
 
@@ -122,6 +124,7 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_SATUAN, "EXCEPTION THROWN [" + e.Message + "]");
                 try
                 {
                     DS.rollBack();
@@ -159,6 +162,19 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
+                switch(originModuleID)
+                {
+                    case globalConstants.NEW_UNIT:
+                        gutil.saveUserChangeLog(globalConstants.MENU_SATUAN, globalConstants.CHANGE_LOG_INSERT, "INSERT NEW SATUAN [" + unitNameTextBox.Text + "]");
+                        break;
+                    case globalConstants.EDIT_UNIT:
+                        if (nonAktifCheckbox.Checked == true)
+                            gutil.saveUserChangeLog(globalConstants.MENU_SATUAN, globalConstants.CHANGE_LOG_UPDATE, "UPDATE SATUAN [" + unitNameTextBox.Text + "] STATUS UNIT NON-AKTIF");
+                        else
+                            gutil.saveUserChangeLog(globalConstants.MENU_SATUAN, globalConstants.CHANGE_LOG_UPDATE, "UPDATE SATUAN [" + unitNameTextBox.Text + "] STATUS UNIT AKTIF");
+                        break;
+                }
+
                 gutil.showSuccess(options);
                 gutil.ResetAllControls(this);
             }

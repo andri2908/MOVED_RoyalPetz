@@ -568,11 +568,20 @@ namespace RoyalPetz_ADMIN
                 gutil.showSuccess(gutil.INS);
 
                 if (originModuleID == globalConstants.DATA_PIUTANG_MUTASI)
+                {
+                    gutil.saveUserChangeLog(globalConstants.MENU_PEMBAYARAN_PIUTANG_MUTASI, globalConstants.CHANGE_LOG_INSERT, "PEMBAYARAN PIUTANG MUTASI SEBESAR " + paymentMaskedTextBox.Text); 
                     loadDataPM();
+                }
                 else if (originModuleID == globalConstants.PEMBAYARAN_PIUTANG)
+                {
+                    gutil.saveUserChangeLog(globalConstants.MENU_PEMBAYARAN_PIUTANG, globalConstants.CHANGE_LOG_PAYMENT_CREDIT, "PEMBAYARAN PIUTANG SEBESAR " + paymentMaskedTextBox.Text);
                     loadDataSO();
+                }
                 else if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
+                {
+                    gutil.saveUserChangeLog(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, globalConstants.CHANGE_LOG_PAYMENT_DEBT, "PEMBAYARAN HUTANG SEBESAR " + paymentMaskedTextBox.Text);
                     loadDataPO();
+                }
 
                 calculateGlobalOutstandingCredit();
                 detailPaymentInfoDataGrid.DataSource = null;

@@ -310,6 +310,7 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
+                gutil.saveUserChangeLog(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, globalConstants.CHANGE_LOG_PAYMENT_DEBT, "PEMBAYARAN HUTANG SUPPLIER [" + supplierNameTextBox.Text + "] SEBESAR " + totalPaymentMaskedTextBox.Text);
                 gutil.showSuccess(gutil.INS);
 
                 if (isPaymentExceed)

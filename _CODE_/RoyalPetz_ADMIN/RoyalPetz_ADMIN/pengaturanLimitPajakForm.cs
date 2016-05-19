@@ -227,7 +227,10 @@ namespace RoyalPetz_ADMIN
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (saveDataTransaction())
+            { 
                 gutil.showSuccess(gutil.INS);
+                gutil.saveUserChangeLog(globalConstants.MENU_PENGATURAN_LIMIT_PAJAK, globalConstants.CHANGE_LOG_UPDATE, "PENGATURAN LIMIT PAJAK");
+            }
         }
 
         private void persentasePenjualan_TextChanged(object sender, EventArgs e)

@@ -211,6 +211,18 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
+                switch (originModuleID)
+                {
+                    case globalConstants.NEW_SUPPLIER:
+                        gUtil.saveUserChangeLog(globalConstants.MENU_SUPPLIER, globalConstants.CHANGE_LOG_INSERT, "INSERT NEW SUPPLIER [" + supplierNameTextBox.Text + "]");
+                        break;
+                    case globalConstants.EDIT_SUPPLIER:
+                        if (nonAktifCheckbox.Checked == true)
+                            gUtil.saveUserChangeLog(globalConstants.MENU_SUPPLIER, globalConstants.CHANGE_LOG_UPDATE, "UPDATE SUPPLIER [" + supplierNameTextBox.Text + "] STATUS NON-AKTIF");
+                        else
+                            gUtil.saveUserChangeLog(globalConstants.MENU_SUPPLIER, globalConstants.CHANGE_LOG_UPDATE, "UPDATE SUPPLIER [" + supplierNameTextBox.Text + "] STATUS AKTIF");
+                        break;
+                }
                 gUtil.showSuccess(options);
                 gUtil.ResetAllControls(this);
                 originModuleID = globalConstants.NEW_SUPPLIER;

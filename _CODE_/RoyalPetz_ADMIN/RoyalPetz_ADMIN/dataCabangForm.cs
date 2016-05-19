@@ -138,11 +138,13 @@ namespace RoyalPetz_ADMIN
 
                 if (originModuleID == globalConstants.DATA_PIUTANG_MUTASI)
                 {
+                    gutil.saveSystemDebugLog(0, "CREATE PEMBAYARAN PIUTANG MUTASI, BRANCH ID [" + selectedBranchID + "]");
                     pembayaranLumpSumForm dataPiutangMutasi = new pembayaranLumpSumForm(originModuleID , selectedBranchID);
                     dataPiutangMutasi.ShowDialog(this);
                 }
                 else
                 {
+                    gutil.saveSystemDebugLog(0, "CREATE DATA BRANCH DETAIL, BRANCH ID [" + selectedBranchID + "]");
                     dataCabangDetailForm displayedForm = new dataCabangDetailForm(globalConstants.EDIT_BRANCH, selectedBranchID);
                     displayedForm.ShowDialog(this);
                 }

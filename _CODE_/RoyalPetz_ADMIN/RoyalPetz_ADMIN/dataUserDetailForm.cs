@@ -228,6 +228,19 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
+                switch (originModuleID)
+                {
+                    case globalConstants.NEW_USER:
+                        gutil.saveUserChangeLog(globalConstants.MENU_MANAJEMEN_USER, globalConstants.CHANGE_LOG_INSERT, "ADD NEW USER [" + userNameTextBox.Text + "]");
+                        break;
+                    case globalConstants.EDIT_USER:
+                        if (nonAktifCheckbox.Checked == true)
+                            gutil.saveUserChangeLog(globalConstants.MENU_MANAJEMEN_USER, globalConstants.CHANGE_LOG_UPDATE, "UPDATE NEW USER [" + userNameTextBox.Text + "] USER STATUS = AKTIF");
+                        else
+                            gutil.saveUserChangeLog(globalConstants.MENU_MANAJEMEN_USER, globalConstants.CHANGE_LOG_UPDATE, "UPDATE NEW USER [" + userNameTextBox.Text + "] USER STATUS = NON AKTIF");
+                        break;
+                }
+
                 gutil.showSuccess(options);
                 gutil.ResetAllControls(this);
                 errorLabel.Text = "";

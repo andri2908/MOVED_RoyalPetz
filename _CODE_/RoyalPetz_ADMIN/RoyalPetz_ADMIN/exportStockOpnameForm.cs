@@ -89,8 +89,11 @@ namespace RoyalPetz_ADMIN
             saveFileDialog1.Filter = "CSV File (.csv)|*.csv";
             saveFileDialog1.ShowDialog();
 
+            gutil.saveSystemDebugLog(globalConstants.MENU_SATUAN, "TRY TO EXPORT STOCK OPNAME TO CSV");
+
             if (saveToCSV(saveFileDialog1.FileName))
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_SATUAN, "STOCK OPNAME EXPORTED TO CSV[" + saveFileDialog1.FileName + "]");
                 MessageBox.Show("SUCCESS");
             }        
         }

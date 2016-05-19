@@ -767,6 +767,16 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
+                switch(originModuleID)
+                {
+                    case globalConstants.NEW_PURCHASE_ORDER:
+                        gUtil.saveUserChangeLog(globalConstants.MENU_PURCHASE_ORDER, globalConstants.CHANGE_LOG_INSERT, "CREATE NEW PURCHASE ORDER [" + POinvoiceTextBox.Text + "]");
+                        break;
+                    case globalConstants.EDIT_PURCHASE_ORDER:
+                        gUtil.saveUserChangeLog(globalConstants.MENU_PURCHASE_ORDER, globalConstants.CHANGE_LOG_UPDATE, "UPDATE PURCHASE ORDER [" + POinvoiceTextBox.Text + "]");
+                        break;
+                }
+
                 errorLabel.Text = "";
                 generateButton.Visible = true;
 
@@ -925,6 +935,8 @@ namespace RoyalPetz_ADMIN
 
             if (saveData())
             {
+                gUtil.saveUserChangeLog(globalConstants.MENU_PURCHASE_ORDER, globalConstants.CHANGE_LOG_INSERT, "PRINT OUT PURCHASE ORDER [" + POinvoiceTextBox.Text + "]");
+
                 saveButton.Visible = false;
                 POinvoiceTextBox.ReadOnly = true;
                 PODateTimePicker.Enabled = false;

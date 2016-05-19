@@ -105,7 +105,8 @@ namespace RoyalPetz_ADMIN
                         sqlCommand = "UPDATE MASTER_PRODUCT SET " +
                                             "PRODUCT_STOCK_QTY = " + productQty + " " +
                                             "WHERE PRODUCT_ID = '" + productID + "'";
-                    
+
+                        gutil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "UPDATE STOCK QTY [" + productID + "]");
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
@@ -113,6 +114,7 @@ namespace RoyalPetz_ADMIN
                                             "VALUES " +
                                             "('" + productID + "', STR_TO_DATE('" + adjusmentDate + "', '%d-%m-%Y'), " + productOldQty + ", " + productQty + ", '" + productDescription + "')";
 
+                        gutil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "INSERT INTO PRODUCT ADJUSTMENT [" + productID + ", " + productOldQty + ", " + productQty + "]");
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
                     }
@@ -125,6 +127,7 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "EXCEPTION THROWN [" + e.Message + "]");
                 try
                 {
                     DS.rollBack();
@@ -151,13 +154,17 @@ namespace RoyalPetz_ADMIN
         private void importButton_Click(object sender, EventArgs e)
         {
             if (DialogResult.Yes == MessageBox.Show("IMPORT DATA ?", "WARNING", MessageBoxButtons.YesNo,MessageBoxIcon.Warning))
+            {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "TRY TO IMPORT DATA FROM CSV FILE"); 
                 if (saveDataTransaction())
                 {
+                    gutil.saveUserChangeLog(globalConstants.MENU_PENYESUAIAN_STOK, globalConstants.CHANGE_LOG_UPDATE, "IMPORT DATA CSV [" + importFileNameTextBox.Text + "]");
                     gutil.showSuccess(gutil.UPD);
                     searchKategoriButton.Enabled = false;
                     importButton.Enabled = false;
                     detailImportDataGrid.ReadOnly = true;
                 }
+            }
         }
 
         private void importDataCSVForm_Load(object sender, EventArgs e)

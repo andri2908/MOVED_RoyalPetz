@@ -515,6 +515,11 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
+                if (originModuleID == globalConstants.RETUR_PEMBELIAN_KE_SUPPLIER)
+                    GUTIL.saveUserChangeLog(globalConstants.MENU_RETUR_PERMINTAAN, globalConstants.CHANGE_LOG_INSERT, "CREATE NEW RETUR PEMBELIAN [" + noReturTextBox.Text + "] KE SUPPLIER [" + supplierCombo.Text + "]");
+                else
+                    GUTIL.saveUserChangeLog(globalConstants.MENU_RETUR_PERMINTAAN, globalConstants.CHANGE_LOG_INSERT, "CREATE NEW RETUR PERMINTAAN [" + noReturTextBox.Text + "]");
+
                 GUTIL.showSuccess(GUTIL.INS);
                 GUTIL.ResetAllControls(this);
                 detailReturDataGridView.Rows.Clear();

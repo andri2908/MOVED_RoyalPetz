@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.IO;
 
 namespace RoyalPetz_ADMIN
 {
@@ -147,6 +148,7 @@ namespace RoyalPetz_ADMIN
             {
                 if (checkUserActive())
                 {
+                    gutil.saveSystemDebugLog(0, "USER = " + gutil.allTrim(userNameTextBox.Text) + " IS ACTIVE");
                     if (checkUserNamePassword())
                     {
                         this.Hide();
@@ -156,16 +158,24 @@ namespace RoyalPetz_ADMIN
                         gutil.setUserID(selectedUserID);
                         gutil.setUserGroupID(selectedUserGroupID);
 
+                        gutil.saveSystemDebugLog(0, "USER ID = " + selectedUserID + " LOGIN SUCCESSFULLY");
+                        gutil.saveUserChangeLog(0, globalConstants.CHANGE_LOG_LOGIN, "USER LOGIN FROM LOGIN FORM");
+
                         if (gutil.userIsCashier() == 1)
                         {
                             cashierLoginForm newCashierForm = new cashierLoginForm(0);
+                            gutil.saveSystemDebugLog(0, "DISPLAY CASHIER LOGIN FORM");
                             newCashierForm.ShowDialog(this);
                         }
                         else
                         { 
                             adminForm displayAdminForm = new adminForm(selectedUserID, selectedUserGroupID);
+                            gutil.saveSystemDebugLog(0, "DISPLAY ADMIN FORM");
                             displayAdminForm.ShowDialog(this);
                         }
+
+                        gutil.saveSystemDebugLog(0, "USER ID = " + selectedUserID + "LOGOUT");
+                        gutil.saveUserChangeLog(0, globalConstants.CHANGE_LOG_LOGOUT, "USER LOGOUT");
 
                         //logoutForm displayLogOutForm = new logoutForm();
                         //displayLogOutForm.ShowDialog(this);
@@ -247,6 +257,11 @@ namespace RoyalPetz_ADMIN
         {
             errorLabel.Text = "";
 
+        }
+
+        private void loginForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            gutil.renameLogFile();
         }
     }
 }

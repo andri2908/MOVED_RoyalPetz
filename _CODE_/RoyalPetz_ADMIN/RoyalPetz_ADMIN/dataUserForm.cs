@@ -122,6 +122,7 @@ namespace RoyalPetz_ADMIN
             switch (originModuleID)
             {
                 default:
+                    gutil.saveSystemDebugLog(0, "CREATE DATA USER DETAIL FORM, UID [" + selectedUserID + "]");
                     dataUserDetailForm displayForm = new dataUserDetailForm(globalConstants.EDIT_USER, selectedUserID);
                     displayForm.ShowDialog(this);
                     break;

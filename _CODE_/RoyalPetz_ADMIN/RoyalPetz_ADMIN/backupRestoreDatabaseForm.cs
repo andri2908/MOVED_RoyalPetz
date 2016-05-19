@@ -48,29 +48,21 @@ namespace RoyalPetz_ADMIN
 
          private void ProcessExited(Object source, EventArgs e)
         {
+            gUtil.saveSystemDebugLog(0, "PROCESS FINISHED");
             MessageBox.Show("DONE");            
         }
 
         private void backupDatabase(string fileName)
         {
-            //string localDate = "";
-            //string fileName = "";
             System.Diagnostics.Process proc = new System.Diagnostics.Process();
             string ipServer;
-            //string strCmdText;
-            
-            //localDate = String.Format(culture, "{0:ddMMyyyy}", DateTime.Now);
-            //fileName = "EXPORT_" + localDate + ".sql";
-
-            //Directory.SetCurrentDirectory(Application.StartupPath);
             
             ipServer = DS.getIPServer();
-            //strCmdText = "/C mysqldump -h " + ipServer + " -u SYS_POS_ADMIN -ppass123 sys_pos > \"" + fileName+"\"";
-            //System.Diagnostics.Process.Start("CMD.exe", strCmdText);
             proc.StartInfo.FileName = "CMD.exe";
             proc.StartInfo.Arguments = "/C " + "mysqldump -h " + ipServer + " -u SYS_POS_ADMIN -ppass123 sys_pos > \"" + fileName + "\"";
             proc.Exited += new EventHandler(ProcessExited);
             proc.EnableRaisingEvents = true;
+            gUtil.saveSystemDebugLog(0, "BACKUP DATABASE PROCESS STARTED [" + fileName + "]");
             proc.Start();
 
         }
@@ -95,20 +87,16 @@ namespace RoyalPetz_ADMIN
         private void restoreDatabase(string fileName)
         {
             string ipServer = "";
-            //string strCmdText = "";
             System.Diagnostics.Process proc = new System.Diagnostics.Process();
-
-            //Directory.SetCurrentDirectory(Application.StartupPath);
             
             ipServer = DS.getIPServer();
-            //strCmdText = "/C " + "mysql -h " + ipServer + " -u SYS_POS_ADMIN -ppass123 sys_pos < \"" + fileName + "\"";
 
             proc.StartInfo.FileName = "CMD.exe";
             proc.StartInfo.Arguments = "/C " + "mysql -h " + ipServer + " -u SYS_POS_ADMIN -ppass123 sys_pos < \"" + fileName + "\"";
             proc.Exited += new EventHandler(ProcessExited);
             proc.EnableRaisingEvents = true;
+            gUtil.saveSystemDebugLog(0, "RESTORE DATABASE PROCESS STARTED [" + fileName + "]");
             proc.Start();
-            //System.Diagnostics.Process.Start("CMD.exe", strCmdText);
         }
 
         private void restoreButton_Click(object sender, EventArgs e)
@@ -117,6 +105,7 @@ namespace RoyalPetz_ADMIN
             {
                 //restore database from file
                 restoreDatabase(fileNameTextbox.Text);
+                gUtil.saveUserChangeLog(globalConstants.MENU_SINKRONISASI_INFORMASI, globalConstants.CHANGE_LOG_UPDATE, "RESTORE DATABASE FROM LOCAL BACKUP");
             }
             else
             {

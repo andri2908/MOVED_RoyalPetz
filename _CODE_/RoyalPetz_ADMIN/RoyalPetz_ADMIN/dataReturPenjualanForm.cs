@@ -709,6 +709,7 @@ namespace RoyalPetz_ADMIN
                 if (extraAmount > 0)
                     MessageBox.Show("JUMLAH YANG DIKEMBALIKAN SEBESAR " + extraAmount.ToString("C", culture));
 
+                gutil.saveUserChangeLog(globalConstants.MENU_RETUR_PENJUALAN, globalConstants.CHANGE_LOG_INSERT, "RETUR PENJUALAN [" + noReturTextBox.Text + "]");
                 errorLabel.Text = "";
                 gutil.showSuccess(gutil.INS);
                 saveButton.Enabled = false;

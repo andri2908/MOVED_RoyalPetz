@@ -171,10 +171,11 @@ namespace RoyalPetz_ADMIN
                 {
                     case NEW_CONVERSION:
                         sqlCommand = "INSERT INTO UNIT_CONVERT (CONVERT_UNIT_ID_1, CONVERT_UNIT_ID_2, CONVERT_MULTIPLIER) VALUES (" + selectedUnit1_ID + ", " + selectedUnit2_ID + ", " + unitConversion + ")";
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_SATUAN, "ADD NEW UNIT CONVERT [" + selectedUnit1_ID + "/" + selectedUnit2_ID + "/" + unitConversion + "]");
                         break;
                     case EDIT_CONVERSION:
                         sqlCommand = "UPDATE UNIT_CONVERT SET CONVERT_MULTIPLIER = " + unitConversion + " WHERE CONVERT_UNIT_ID_1 = " + selectedUnit1_ID + " AND CONVERT_UNIT_ID_2 = "+selectedUnit2_ID;
-                        break;
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_SATUAN, "UPDATE UNIT CONVERT [" + selectedUnit1_ID + "/" + selectedUnit2_ID + "/" + unitConversion + "]"); break;
                 }
 
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
@@ -185,6 +186,7 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_SATUAN, "EXCEPTION THROWN [" + e.Message + "]");
                 try
                 {
                     DS.rollBack();
@@ -220,6 +222,7 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
+                gUtil.saveUserChangeLog(globalConstants.MENU_SATUAN, globalConstants.CHANGE_LOG_UPDATE, "SET KONVERSI SATUAN [" + unit1Combo.Text + " = " + convertValueTextBox.Text + " " + unit2Combo.Text + "]");
                 //MessageBox.Show("SUCCESS");
                 gUtil.showSuccess(gUtil.UPD);
                 displayCurrentSavedConversion(selectedUnit1_ID);

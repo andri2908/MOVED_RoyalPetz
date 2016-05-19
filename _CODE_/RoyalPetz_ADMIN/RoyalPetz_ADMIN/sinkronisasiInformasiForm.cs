@@ -21,6 +21,7 @@ namespace RoyalPetz_ADMIN
         private globalUtilities gutil = new globalUtilities();
         private Data_Access DS = new Data_Access();
         private CultureInfo culture = new CultureInfo("id-ID");
+        private string syncFileName = Application.StartupPath + "\\syncFile.sync";
 
         public sinkronisasiInformasiForm()
         {
@@ -46,7 +47,7 @@ namespace RoyalPetz_ADMIN
             }
         }
        
-        private void exportData(string fileName)
+        private void exportData(string fileName, Data_Access DAccess, bool isHQConnection = false)
         {
             //string localDate = "";
             //string strCmdText = "";
@@ -64,7 +65,7 @@ namespace RoyalPetz_ADMIN
                                         "CREATE TABLE `temp_master_product` (" + "\n" +
                                         "`ID` int(10) unsigned NOT NULL AUTO_INCREMENT," + "\n" +
                                         "`PRODUCT_ID` varchar(50) DEFAULT NULL," + "\n" +
-                                        "`PRODUCT_BARCODE` int(10) unsigned DEFAULT NULL," + "\n" +
+                                        "`PRODUCT_BARCODE` varchar(15) DEFAULT NULL," + "\n" +
                                         "`PRODUCT_NAME` varchar(50) DEFAULT NULL," + "\n" +
                                         "`PRODUCT_DESCRIPTION` varchar(100) DEFAULT NULL," + "\n" +
                                         "`PRODUCT_BASE_PRICE` double DEFAULT NULL," + "\n" +
@@ -90,7 +91,7 @@ namespace RoyalPetz_ADMIN
             //fileName = "SYNCINFO_PRODUCT_" + localDate + ".sql";
 
             sqlCommand = "SELECT PRODUCT_ID, PRODUCT_BARCODE, PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_BASE_PRICE, PRODUCT_RETAIL_PRICE, PRODUCT_BULK_PRICE, PRODUCT_WHOLESALE_PRICE, UNIT_ID, PRODUCT_IS_SERVICE FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1";
-            using (rdr = DS.getData(sqlCommand))
+            using (rdr = DAccess.getData(sqlCommand, isHQConnection))
             {
                 if (rdr.HasRows)
                 {
@@ -107,7 +108,7 @@ namespace RoyalPetz_ADMIN
                     while (rdr.Read())
                     {
                         insertStatement = "INSERT INTO TEMP_MASTER_PRODUCT (PRODUCT_ID, PRODUCT_BARCODE, PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_BASE_PRICE, PRODUCT_RETAIL_PRICE, PRODUCT_BULK_PRICE, PRODUCT_WHOLESALE_PRICE, UNIT_ID, PRODUCT_IS_SERVICE) VALUES (" +
-                                                 "'" + MySqlHelper.EscapeString(rdr.GetString("PRODUCT_ID")) + "', " + rdr.GetString("PRODUCT_BARCODE") + ", '" + MySqlHelper.EscapeString(rdr.GetString("PRODUCT_NAME")) + "', '" + MySqlHelper.EscapeString(rdr.GetString("PRODUCT_DESCRIPTION")) + "', " + rdr.GetString("PRODUCT_BASE_PRICE") + ", " + rdr.GetString("PRODUCT_RETAIL_PRICE") + ", " + rdr.GetString("PRODUCT_BULK_PRICE") + ", " + rdr.GetString("PRODUCT_WHOLESALE_PRICE") + ", " + rdr.GetString("UNIT_ID") + ", " + rdr.GetString("PRODUCT_IS_SERVICE") + ");";
+                                                 "'" + MySqlHelper.EscapeString(rdr.GetString("PRODUCT_ID")) + "', '" + MySqlHelper.EscapeString(rdr.GetString("PRODUCT_BARCODE")) + "', '" + MySqlHelper.EscapeString(rdr.GetString("PRODUCT_NAME")) + "', '" + MySqlHelper.EscapeString(rdr.GetString("PRODUCT_DESCRIPTION")) + "', " + rdr.GetString("PRODUCT_BASE_PRICE") + ", " + rdr.GetString("PRODUCT_RETAIL_PRICE") + ", " + rdr.GetString("PRODUCT_BULK_PRICE") + ", " + rdr.GetString("PRODUCT_WHOLESALE_PRICE") + ", " + rdr.GetString("UNIT_ID") + ", " + rdr.GetString("PRODUCT_IS_SERVICE") + ");";
                         sw.WriteLine(insertStatement);
                     }
                 }
@@ -119,7 +120,7 @@ namespace RoyalPetz_ADMIN
             sw.WriteLine("");
             sw.WriteLine("DELETE FROM MASTER_CATEGORY;");
             sqlCommand = "SELECT CATEGORY_ID, CATEGORY_NAME, CATEGORY_DESCRIPTION FROM MASTER_CATEGORY WHERE CATEGORY_ACTIVE = 1";
-            using (rdr = DS.getData(sqlCommand))
+            using (rdr = DAccess.getData(sqlCommand, isHQConnection))
             {
                 if (rdr.HasRows)
                 {
@@ -138,7 +139,7 @@ namespace RoyalPetz_ADMIN
             sw.WriteLine("");
             sw.WriteLine("DELETE FROM MASTER_UNIT;");
             sqlCommand = "SELECT UNIT_ID, UNIT_NAME, UNIT_DESCRIPTION FROM MASTER_UNIT WHERE UNIT_ACTIVE = 1";
-            using (rdr = DS.getData(sqlCommand))
+            using (rdr = DAccess.getData(sqlCommand, isHQConnection))
             {
                 if (rdr.HasRows)
                 {
@@ -157,7 +158,7 @@ namespace RoyalPetz_ADMIN
             sw.WriteLine("");
             sw.WriteLine("DELETE FROM UNIT_CONVERT;");
             sqlCommand = "SELECT CONVERT_UNIT_ID_1, CONVERT_UNIT_ID_2, CONVERT_MULTIPLIER FROM UNIT_CONVERT";
-            using (rdr = DS.getData(sqlCommand))
+            using (rdr = DAccess.getData(sqlCommand, isHQConnection))
             {
                 if (rdr.HasRows)
                 {
@@ -175,7 +176,7 @@ namespace RoyalPetz_ADMIN
             // EXPORT PRODUCT CATEGORY DATA
             sw.WriteLine("");
             sqlCommand = "SELECT PRODUCT_ID, CATEGORY_ID FROM PRODUCT_CATEGORY";
-            using (rdr = DS.getData(sqlCommand))
+            using (rdr = DAccess.getData(sqlCommand, isHQConnection))
             {
                 if (rdr.HasRows)
                 {
@@ -217,8 +218,8 @@ namespace RoyalPetz_ADMIN
             saveFileDialog1.Filter = "SQL File (.sql)|*.sql";
             saveFileDialog1.ShowDialog();
            
-            exportData(saveFileDialog1.FileName);
-
+            exportData(saveFileDialog1.FileName, DS);
+            gutil.saveSystemDebugLog(globalConstants.MENU_SINKRONISASI_INFORMASI, "EXPORTED FILE NAME = " + saveFileDialog1.FileName);
             MessageBox.Show("DONE");
         }
 
@@ -235,6 +236,7 @@ namespace RoyalPetz_ADMIN
         private void ProcessExited(Object source, EventArgs e)
         {
             var proc = (System.Diagnostics.Process)source;
+            gutil.saveSystemDebugLog(globalConstants.MENU_SINKRONISASI_INFORMASI, "PROCESS EXITED");
             if (updateLocalData())
             {
                 MessageBox.Show("DONE");
@@ -257,6 +259,7 @@ namespace RoyalPetz_ADMIN
             proc.StartInfo.Arguments = "/C " + "mysql -h " + ipServer + " -u SYS_POS_ADMIN -ppass123 sys_pos < \"" + fileName + "\"";
             proc.Exited += new EventHandler(ProcessExited);
             proc.EnableRaisingEvents = true;
+            gutil.saveSystemDebugLog(globalConstants.MENU_SINKRONISASI_INFORMASI, "SYNC INFORMATION PROCESS START");
             proc.Start();
             
 
@@ -289,7 +292,7 @@ namespace RoyalPetz_ADMIN
             int i = 0;
             DS.beginTransaction();
 
-
+            gutil.saveSystemDebugLog(globalConstants.MENU_SINKRONISASI_INFORMASI, "UPDATE LOCAL DATA");
             sqlCommand = "SELECT PRODUCT_ID FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1";
             try
             {
@@ -305,6 +308,7 @@ namespace RoyalPetz_ADMIN
                         dataGridView1.DataSource = dt;
                         i = 0;
                         // UPDATE CURRENT DATA IN LOCAL DATABASE    
+                        gutil.saveSystemDebugLog(globalConstants.MENU_SINKRONISASI_INFORMASI, "UPDATE CURRENT DATA IN LOCAL DATABASE");
                         while (i < dataGridView1.Rows.Count)
                         {
                             productID = dataGridView1.Rows[i].Cells["PRODUCT_ID"].Value.ToString();
@@ -329,17 +333,20 @@ namespace RoyalPetz_ADMIN
 
                             i++;
                         }
+                        gutil.saveSystemDebugLog(globalConstants.MENU_SINKRONISASI_INFORMASI, "FINISHED UPDATE CURRENT DATA IN LOCAL DATABASE");
 
                         dataGridView1.DataSource = null;
                         // INSERT NEW PRODUCT CATEGORY
-                        sqlCommand = "SELECT * FROM TEMP_PRODUCT_CATEGORY WHERE PRODUCT_ID NOT IN (SELECT PRODUCT_ID FROM MASTER_PRODUCT)";
+                        sqlCommand = "SELECT * FROM TEMP_PRODUCT_CATEGORY WHERE CONCAT(PRODUCT_ID, '-', CATEGORY_ID) NOT IN (SELECT CONCAT(PRODUCT_ID, '-', CATEGORY_ID) FROM PRODUCT_CATEGORY)";
                         using (rdr = DS.getData(sqlCommand))
                         {
+                            gutil.saveSystemDebugLog(globalConstants.MENU_SINKRONISASI_INFORMASI, "INSERT NEW PRODUCT CATEGORY ["+Convert.ToInt32(rdr.HasRows)+"]");
+
                             if (rdr.HasRows)
                             {
                                 dt2.Load(rdr);
                                 rdr.Close();
-
+                            
                                 dataGridView1.DataSource = dt2;
                                 i = 0;
                                 while (i < dataGridView1.Rows.Count)
@@ -364,6 +371,7 @@ namespace RoyalPetz_ADMIN
 
                         using (rdr = DS.getData(sqlCommand))
                         {
+                            gutil.saveSystemDebugLog(globalConstants.MENU_SINKRONISASI_INFORMASI, "INSERT NEW PRODUCT DATA [" + Convert.ToInt32(rdr.HasRows) + "]");
                             if (rdr.HasRows)
                             {
                                 dt3.Load(rdr);
@@ -374,7 +382,7 @@ namespace RoyalPetz_ADMIN
                                 while (i < dataGridView1.Rows.Count)
                                 {
                                     productID = MySqlHelper.EscapeString(dataGridView1.Rows[i].Cells["PRODUCT_ID"].Value.ToString());
-                                    productBarcode = dataGridView1.Rows[i].Cells["PRODUCT_BARCODE"].Value.ToString();
+                                    productBarcode = MySqlHelper.EscapeString(dataGridView1.Rows[i].Cells["PRODUCT_BARCODE"].Value.ToString());
                                     productName = MySqlHelper.EscapeString(dataGridView1.Rows[i].Cells["PRODUCT_NAME"].Value.ToString());
                                     productDescription = MySqlHelper.EscapeString(dataGridView1.Rows[i].Cells["PRODUCT_DESCRIPTION"].Value.ToString());
                                     productBasePrice = dataGridView1.Rows[i].Cells["PRODUCT_BASE_PRICE"].Value.ToString();
@@ -402,6 +410,8 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_SINKRONISASI_INFORMASI, "EXCEPTION THROWN ["+e.Message+"]");
+
                 try
                 {
                     DS.rollBack();
@@ -430,9 +440,11 @@ namespace RoyalPetz_ADMIN
             if (fileNameTextbox.Text != "")
             {
                 //this.Cursor = Cursors.WaitCursor;
-                
+
                 //restore database from file
+                gutil.saveSystemDebugLog(globalConstants.MENU_SINKRONISASI_INFORMASI, "SINKRONISASI INFORMASI, FILENAME [" + fileNameTextbox.Text + "]");
                 syncInformation(fileNameTextbox.Text);
+                gutil.saveUserChangeLog(globalConstants.MENU_SINKRONISASI_INFORMASI, globalConstants.CHANGE_LOG_UPDATE, "SINKRONISASI INFORMASI DENGAN SERVER VIA USB EXPORT");
                 
             }
             else
@@ -440,6 +452,52 @@ namespace RoyalPetz_ADMIN
                 String errormessage = "Filename is blank." + Environment.NewLine + "Please find the appropriate file!";
                 gutil.showError(errormessage);
             }
+        }
+
+        private bool syncToCentralHQ()
+        {
+            bool result = false;
+            Data_Access DS_HQ = new Data_Access();
+
+            // CREATE CONNECTION TO CENTRAL HQ DATABASE SERVER
+            gutil.saveSystemDebugLog(globalConstants.MENU_SINKRONISASI_INFORMASI, "TRY TO CREATE CONNECTION TO CENTRAL HQ");
+            if (DS_HQ.HQ_mySQLConnect())
+            {
+                gutil.saveSystemDebugLog(globalConstants.MENU_SINKRONISASI_INFORMASI, "CONNECTION TO CENTRAL HQ CREATED");
+
+                // DUMP NECESSARY DATA TO LOCAL COPY
+                exportData(syncFileName, DS_HQ, true);
+                gutil.saveSystemDebugLog(globalConstants.MENU_SINKRONISASI_INFORMASI, "CENTRAL HQ DATA EXPORTED");
+
+                // CLOSE CONNECTION TO CENTRAL HQ DATABASE SERVER
+                DS_HQ.mySqlClose();
+                gutil.saveSystemDebugLog(globalConstants.MENU_SINKRONISASI_INFORMASI, "CLOSE CONNECTION TO CENTRAL HQ");
+
+                // INSERT TO LOCAL DATA
+                gutil.saveSystemDebugLog(globalConstants.MENU_SINKRONISASI_INFORMASI, "SYNC LOCAL INFORMATION WITH DATA FROM CENTRAL HQ [" + syncFileName + "]");
+                syncInformation(syncFileName);
+                gutil.saveSystemDebugLog(globalConstants.MENU_SINKRONISASI_INFORMASI, "SYNC LOCAL INFORMATION FINISHED");
+
+                result = true;
+            }
+            else
+            {
+                MessageBox.Show("KONEKSI KE PUSAT GAGAL");
+                gutil.saveSystemDebugLog(globalConstants.MENU_SINKRONISASI_INFORMASI, "FAILED TO CONNECT TO CENTRAL HQ");
+
+                result = false;
+            }
+
+            return result;
+        }
+
+        private void importFromServerButton_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.Yes == MessageBox.Show("PASTIKAN TIDAK ADA KONEKSI AKTIF KE DATABASE LOKAL, SEMUA USER DIPASTIKAN LOG OUT", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                if (syncToCentralHQ())
+                { 
+                    gutil.saveUserChangeLog(globalConstants.MENU_SINKRONISASI_INFORMASI, globalConstants.CHANGE_LOG_UPDATE, "SINKRONISASI INFORMASI DENGAN SERVER VIA ONLINE CONNECTION");
+                }
         }
     }
 }

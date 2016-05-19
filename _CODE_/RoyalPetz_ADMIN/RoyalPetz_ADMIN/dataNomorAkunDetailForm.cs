@@ -251,6 +251,16 @@ namespace RoyalPetz_ADMIN
             //save data
             if (saveData())
             {
+                if (originModuleID == globalConstants.NEW_AKUN)
+                    gUtil.saveUserChangeLog(globalConstants.MENU_PENGATURAN_NO_AKUN, globalConstants.CHANGE_LOG_INSERT, "NEW NOMOR AKUN [" + kodeTextbox.Text + "]");
+                else
+                {
+                    if (NonactiveCheckbox.Checked == true)
+                        gUtil.saveUserChangeLog(globalConstants.MENU_PENGATURAN_NO_AKUN, globalConstants.CHANGE_LOG_UPDATE, "UPDATE NOMOR AKUN [" + kodeTextbox.Text + "] STATUS NON-AKTIF");
+                    else
+                        gUtil.saveUserChangeLog(globalConstants.MENU_PENGATURAN_NO_AKUN, globalConstants.CHANGE_LOG_UPDATE, "UPDATE NOMOR AKUN [" + kodeTextbox.Text + "] STATUS AKTIF");
+                }
+
                 gUtil.showSuccess(options);
                 gUtil.ResetAllControls(this);
                 originModuleID = globalConstants.NEW_AKUN;

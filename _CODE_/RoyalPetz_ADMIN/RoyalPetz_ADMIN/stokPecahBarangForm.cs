@@ -301,11 +301,14 @@ namespace RoyalPetz_ADMIN
 
                 //REDUCE CURRENT STOCK QTY
                 sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + gUtil.validateDecimalNumericInput(Convert.ToDouble(numberOfProductTextBox.Text)) + " WHERE ID = " + selectedInternalProductID;
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PECAH_SATUAN_PRODUK, "REDUCE QTY [" + productIDTextBox.Text + "] AMT [" + gUtil.validateDecimalNumericInput(Convert.ToDouble(numberOfProductTextBox.Text)) + "]");
+
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
 
                 //INCREASE NEW STOCK QTY
                 sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY + " + actualResult + " WHERE ID = " + newSelectedInternalProductID;
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PECAH_SATUAN_PRODUK, "ADD QTY [" + newProductIDTextBox.Text + "] AMT [" + actualResult + "]");
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
 
@@ -314,6 +317,8 @@ namespace RoyalPetz_ADMIN
                     // INSERT INTO PRODUCT LOSS TABLE
                     sqlCommand = "INSERT INTO PRODUCT_LOSS (PL_DATETIME, PRODUCT_ID, PRODUCT_QTY, NEW_PRODUCT_ID, NEW_PRODUCT_QTY, TOTAL_LOSS) " +
                                         "VALUES (STR_TO_DATE('" + pl_Date + "', '%d-%m-%Y'), " + selectedInternalProductID + ", " + Convert.ToDouble(numberOfProductTextBox.Text) + ", " + newSelectedInternalProductID + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(resultTextBox.Text)) + ", " + gUtil.validateDecimalNumericInput(productLoss) + ")";
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_PECAH_SATUAN_PRODUK, "ADD PRODUCT LOSS QTY [" + productIDTextBox.Text + "] AMT [" + gUtil.validateDecimalNumericInput(productLoss) + "]");
+
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
                 }
@@ -323,6 +328,7 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PECAH_SATUAN_PRODUK, "EXCEPTION THROWN [" + e.Message + "]");
                 try
                 {
                     DS.rollBack();
@@ -360,6 +366,8 @@ namespace RoyalPetz_ADMIN
         {
             if (saveData())
             {
+                gUtil.saveUserChangeLog(globalConstants.MENU_PECAH_SATUAN_PRODUK, globalConstants.CHANGE_LOG_UPDATE, "PECAH SATUAN PRODUK [" + productIDTextBox.Text + "/" + numberOfProductTextBox.Text + "] -> [" + newProductIDTextBox.Text + "/" + actualQtyTextBox.Text + "]");
+
                 //MessageBox.Show("SUCCESS");
                 gUtil.showSuccess(gUtil.UPD);
                 stockTextBox.Text = currentStockQty.ToString();
