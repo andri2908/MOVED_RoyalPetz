@@ -227,17 +227,21 @@ namespace RoyalPetz_ADMIN
                 // TUNAI, KARTU DEBIT, KARTU KREDIT
                 paymentConfirmed = 1;
                 paymentDueDateTime = paymentDateTime;
+
+                gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, "PAYMENT DEBT BY CASH");
             }
             else if (paymentMethod == 3) //3
             {
                 // TRANSFER
                 paymentDueDateTime = paymentDateTime;
+                gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, "PAYMENT DEBT BY TRANSFER");
             }
             else if (paymentMethod > 3) //4, 5
             {
                 // CEK, BG
                 selectedPaymentDueDate = cairDTPicker.Value;
                 paymentDueDateTime = String.Format(culture, "{0:dd-MM-yyyy}", selectedPaymentDueDate);
+                gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, "PAYMENT DEBT BY CHEQUE OR BG");
             }
 
             DS.beginTransaction();
@@ -249,7 +253,7 @@ namespace RoyalPetz_ADMIN
                 // SAVE HEADER TABLE
                 sqlCommand = "INSERT INTO PAYMENT_DEBT (DEBT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED, PAYMENT_DUE_DATE) VALUES " +
                                     "(" + selectedDebtID+ ", STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y'), 1, " + gutil.validateDecimalNumericInput(paymentNominal) + ", '" + paymentDescription + "', " + paymentConfirmed + ", STR_TO_DATE('" + paymentDueDateTime + "', '%d-%m-%Y'))";
-
+                gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, "INSERT INTO PAYMENT DEBT [" + selectedDebtID + ", " + gutil.validateDecimalNumericInput(paymentNominal) + "]");
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
 
@@ -257,12 +261,14 @@ namespace RoyalPetz_ADMIN
                 {
                     // UPDATE CREDIT TABLE
                     sqlCommand = "UPDATE DEBT SET DEBT_PAID = 1 WHERE DEBT_ID = " + selectedDebtID;
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, "UPDATE DEBT, SET TO FULLY PAID [" + selectedDebtID + "]");
 
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
 
                     // UPDATE SALES HEADER TABLE
                     sqlCommand = "UPDATE PURCHASE_HEADER SET PURCHASE_PAID = 1 WHERE PURCHASE_INVOICE = '" + selectedPOInvoice + "'";
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, "UPDATE PURCHASE HEADER SET TO FULLY PAID [" + selectedPOInvoice + "]");
 
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
@@ -273,6 +279,7 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, "EXCEPTION THROWN [" + e.Message + "]");
                 try
                 {
                     DS.rollBack();
@@ -308,8 +315,11 @@ namespace RoyalPetz_ADMIN
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, "ATTEMPT TO SAVE DATA PAYMENT DEBT");
+
             if (saveData())
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, "DATA PAYMENT DEBT SAVED");
                 gutil.saveUserChangeLog(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, globalConstants.CHANGE_LOG_PAYMENT_DEBT, "PEMBAYARAN HUTANG SUPPLIER [" + supplierNameTextBox.Text + "] SEBESAR " + totalPaymentMaskedTextBox.Text);
                 gutil.showSuccess(gutil.INS);
 

@@ -340,12 +340,14 @@ namespace RoyalPetz_ADMIN
                     sqlCommand = "INSERT INTO REQUEST_ORDER_HEADER (RO_INVOICE, RO_BRANCH_ID_FROM, RO_BRANCH_ID_TO, RO_DATETIME, RO_TOTAL, RO_EXPIRED, RO_ACTIVE) VALUES " +
                                         "('" + roInvoice + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + roDateTime + "', '%d-%m-%Y'), " + roTotal + ", STR_TO_DATE('" + roDateExpired + "', '%d-%m-%Y'), 1)";
 
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "EXPORT DATA : ATTEMPT TO WRITE HEADER DATA TO FILE");
                     using (StreamWriter outputFile = new StreamWriter(exportedFileName, true))
                     {
                         outputFile.WriteLine(sqlCommand);
                     }
 
                     // WRITE DETAIL TABLE SQL
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "EXPORT DATA : ATTEMPT TO WRITE DETAIL DATA TO FILE");
                     for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count; i++)
                     {
                         if (null != detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value)
@@ -363,6 +365,7 @@ namespace RoyalPetz_ADMIN
                 }
 
                 sqlCommand = "UPDATE REQUEST_ORDER_HEADER SET RO_EXPORTED = 1 WHERE RO_INVOICE = '" + roInvoice + "'";
+                gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "EXPORT DATA : UPDATE FLAG FOR REQUEST ORDER");
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
 
@@ -373,6 +376,7 @@ namespace RoyalPetz_ADMIN
             catch (Exception e)
             {
                 result = false;
+                gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "EXPORT DATA : EXCEPTION THROWN ["+e.Message+"]");
                 try
                 {
                     if (System.IO.File.Exists(exportedFileName))
@@ -406,8 +410,10 @@ namespace RoyalPetz_ADMIN
             string exportedFileName = "";
             string roInvoice = "";
 
+            gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "EXPORT DATA : ATTEMPT TO SAVE TO LOCAL DATA");
             if (saveData())
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "EXPORT DATA : REQUEST ORDER SAVED TO LOCAL DATA");
                 string selectedDate = RODateTimePicker.Value.ToShortDateString();
                 roInvoice = ROinvoiceTextBox.Text;
 
@@ -419,8 +425,11 @@ namespace RoyalPetz_ADMIN
                 //saveFileDialog1.ShowDialog();
 
                 if (DialogResult.OK == saveFileDialog1.ShowDialog())
+                {
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "EXPORT DATA : ATTEMPT TO EXPORT DATA TO ["+ saveFileDialog1.FileName + "]");
                     if (exportDataRO(saveFileDialog1.FileName))
                     {
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "EXPORT DATA : REQUEST ORDER EXPORTED");
                         gUtil.saveUserChangeLog(globalConstants.MENU_REQUEST_ORDER, globalConstants.CHANGE_LOG_INSERT, "EXPORT REQUEST ORDER [" + ROinvoiceTextBox.Text + "] TO FILE");
                         gUtil.ResetAllControls(this);
                         originModuleID = globalConstants.NEW_REQUEST_ORDER;
@@ -435,6 +444,7 @@ namespace RoyalPetz_ADMIN
                         ROinvoiceTextBox.ReadOnly = false;
                         ROinvoiceTextBox.Focus();
                     }
+                }
             }
         }
 
@@ -728,7 +738,7 @@ namespace RoyalPetz_ADMIN
                         // SAVE HEADER TABLE
                         sqlCommand = "INSERT INTO REQUEST_ORDER_HEADER (RO_INVOICE, RO_BRANCH_ID_FROM, RO_BRANCH_ID_TO, RO_DATETIME, RO_TOTAL, RO_EXPIRED, RO_ACTIVE) VALUES " +
                                             "('" + roInvoice + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + roDateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(roTotal) + ", STR_TO_DATE('" + roDateExpired + "', '%d-%m-%Y'), 1)";
-
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "INSERT NEW REQUEST ORDER [" + roInvoice + "]");
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
@@ -740,6 +750,7 @@ namespace RoyalPetz_ADMIN
                                 sqlCommand = "INSERT INTO REQUEST_ORDER_DETAIL (RO_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, RO_QTY, RO_SUBTOTAL) VALUES " +
                                                     "('" + roInvoice + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["qty"].Value) + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value)) + ")";
 
+                                gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "INSERT DETAIL REQUEST ORDER [" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "]");
                                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                     throw internalEX;
                             }
@@ -756,11 +767,14 @@ namespace RoyalPetz_ADMIN
                                             "RO_EXPIRED = STR_TO_DATE('" + roDateExpired + "', '%d-%m-%Y') " +
                                             "WHERE RO_INVOICE = '" + roInvoice + "'";
 
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "EDIT REQUEST ORDER [" + roInvoice + "]");
+
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
                         // DELETE DETAIL TABLE
                         sqlCommand = "DELETE FROM REQUEST_ORDER_DETAIL WHERE RO_INVOICE = '" + roInvoice + "'";
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "DELETE DETAIL REQUEST ORDER [" + roInvoice + "]");
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
@@ -772,6 +786,7 @@ namespace RoyalPetz_ADMIN
                                 sqlCommand = "INSERT INTO REQUEST_ORDER_DETAIL (RO_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, RO_QTY, RO_SUBTOTAL) VALUES " +
                                                     "('" + roInvoice + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["qty"].Value) + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value)) + ")";
 
+                                gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "INSERT NEW DETAIL REQUEST ORDER [" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "]");
                                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                     throw internalEX;
                             }
@@ -784,6 +799,7 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "EXCEPTION THROWN [" + e.Message + "]");
                 try
                 {
                     DS.rollBack();
@@ -819,8 +835,11 @@ namespace RoyalPetz_ADMIN
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "ATTEMPT TO SAVE");
             if (saveData())
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "DATA SAVED SUCCESSFULLY");
+
                 switch (originModuleID)
                 {
                     case globalConstants.NEW_REQUEST_ORDER:
@@ -981,6 +1000,7 @@ namespace RoyalPetz_ADMIN
                 sqlCommand = "INSERT INTO REQUEST_ORDER_HEADER (RO_INVOICE, RO_BRANCH_ID_FROM, RO_BRANCH_ID_TO, RO_DATETIME, RO_TOTAL, RO_EXPIRED, RO_ACTIVE) VALUES " +
                                     "('" + roInvoice + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + roDateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(roTotal) + ", STR_TO_DATE('" + roDateExpired + "', '%d-%m-%Y'), 1)";
 
+                gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "INSERT REQUEST ORDER ["+roInvoice+"] TO HQ");
                 if (!DAccess.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
 
@@ -992,6 +1012,7 @@ namespace RoyalPetz_ADMIN
                         sqlCommand = "INSERT INTO REQUEST_ORDER_DETAIL (RO_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, RO_QTY, RO_SUBTOTAL) VALUES " +
                                             "('" + roInvoice + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["qty"].Value) + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value)) + ")";
 
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "INSERT DETAIL REQUEST ORDER [" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + ", " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["qty"].Value) + "] TO HQ");
                         if (!DAccess.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
                     }
@@ -1004,6 +1025,7 @@ namespace RoyalPetz_ADMIN
                                         "VALUES " +
                                         "(0, " + globalConstants.MENU_REQUEST_ORDER + ", '" + roInvoice + "', STR_TO_DATE('" + roDateTime + "', '%d-%m-%Y'), '" + messageContent + "')";
 
+                gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "INSERT TO HQ MESSAGING TABLE");
                 if (!DAccess.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
 
@@ -1012,6 +1034,7 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "EXCEPTION THROWN ["+e.Message+"]");
                 try
                 {
                     DAccess.rollBack();
@@ -1040,24 +1063,34 @@ namespace RoyalPetz_ADMIN
             bool result = false;
             //Data_Access DS_HQ = new Data_Access();
 
+            gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "ATTEMPT TO SAVE TO LOCAL DATABASE");
             if (saveData()) // SAVE TO LOCAL DATABASE FIRST
             {
-                 // CREATE CONNECTION TO CENTRAL HQ DATABASE SERVER
-                 if (DS.HQ_mySQLConnect())
+                gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "REQUEST ORDER SAVED TO LOCAL DATABASE");
+                // CREATE CONNECTION TO CENTRAL HQ DATABASE SERVER
+                gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "ATTEMPT TO CONNECT TO HQ");
+                if (DS.HQ_mySQLConnect())
                 {
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "CONNECTION TO HQ CREATED");
                     // SEND REQUEST DATA TO HQ
-                        if (insertDataToHQ(DS))
-                            result = true;
-                        else
-                        {
-                            MessageBox.Show("FAIL TO INSERT DATA TO HQ"); 
-                            result = false;
-                        }
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "ATTEMPT TO INSERT DATA TO HQ");
+                    if (insertDataToHQ(DS))
+                    {
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "REQUEST ORDER SENT TO HQ SUCCESSFULLY");
+                        result = true;
+                    }
+                    else
+                    {
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "REQUEST ORDER FAILED TO SENT TO HQ");
+                        MessageBox.Show("FAIL TO INSERT DATA TO HQ");
+                        result = false;
+                    }
                     // CLOSE CONNECTION TO CENTRAL HQ DATABASE SERVER
                     DS.HQ_mySqlClose();
                 }
                 else
                 {
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "FAILED TO CREATE CONNECTION TO HQ");
                     MessageBox.Show("FAIL TO CONNECT");
                     result = false;
                 }
@@ -1068,8 +1101,10 @@ namespace RoyalPetz_ADMIN
 
         private void generateButton_Click(object sender, EventArgs e)
         {
+            gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "ATTEMPT TO SAVE AND SEND DATA TO HQ");
             if (sendRequestToHQ())
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "REQUEST ORDER SENT TO HQ");
                 gUtil.showSuccess(gUtil.INS);
                 exportDataRO();
                 gUtil.saveUserChangeLog(globalConstants.MENU_REQUEST_ORDER, globalConstants.CHANGE_LOG_INSERT, "SEND REQUEST ORDER [" + ROinvoiceTextBox.Text + "] TO GUDANG PUSAT");

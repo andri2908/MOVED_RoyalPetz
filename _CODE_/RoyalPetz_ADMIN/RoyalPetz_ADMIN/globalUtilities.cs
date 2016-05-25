@@ -485,22 +485,26 @@ namespace RoyalPetz_ADMIN
             string dateTimeLog = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
             string moduleName = "";
 
+            try
+            {
+                if (moduleID > 0)
+                    moduleName = DS.getDataSingleValue("SELECT IFNULL(MODULE_NAME, '') FROM MASTER_MODULE WHERE MODULE_ID = " + moduleID).ToString();
 
-            if (moduleID > 0)
-                moduleName = DS.getDataSingleValue("SELECT IFNULL(MODULE_NAME, '') FROM MASTER_MODULE WHERE MODULE_ID = " + moduleID).ToString();
+                messageToWrite = "[" + userName + "] [" + dateTimeLog + "] [" + moduleName + "] " + logMessage;
 
-            messageToWrite = "["+userName+"] [" + dateTimeLog + "] [" + moduleName + "] " + logMessage;
+                // if (sw == null)
+                {
+                    if (!File.Exists(Application.StartupPath + "\\" + logFileName))
+                        sw = File.CreateText(Application.StartupPath + "\\" + logFileName);
+                    else
+                        sw = File.AppendText(Application.StartupPath + "\\" + logFileName);
+                }
 
-           // if (sw == null)
-            { 
-                if (!File.Exists(Application.StartupPath + "\\" +  logFileName))
-                    sw = File.CreateText(Application.StartupPath + "\\" + logFileName);
-                else
-                    sw = File.AppendText(Application.StartupPath + "\\" + logFileName);
+                sw.WriteLine(messageToWrite);
+                sw.Close();
             }
-
-            sw.WriteLine(messageToWrite);
-            sw.Close();
+            catch (Exception e)
+            { }
         }
 
         public void renameLogFile()

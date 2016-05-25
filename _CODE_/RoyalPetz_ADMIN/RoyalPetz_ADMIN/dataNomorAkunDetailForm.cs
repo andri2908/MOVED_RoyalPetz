@@ -195,6 +195,7 @@ namespace RoyalPetz_ADMIN
                     case globalConstants.NEW_AKUN:
                         sqlCommand = "INSERT INTO MASTER_ACCOUNT (ACCOUNT_ID, ACCOUNT_NAME, ACCOUNT_TYPE_ID, ACCOUNT_ACTIVE) " +
                                             "VALUES ('" + kodeakun + "', '" + deskripsiakun + "', '" + tipeakun + "', " + nonactive + ")";
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PENGATURAN_NO_AKUN, "INSERT DATA TO MASTER ACCOUNT [" + kodeakun + "]");
                         break;
                     case globalConstants.EDIT_AKUN:
                         sqlCommand = "UPDATE MASTER_ACCOUNT SET " +
@@ -203,6 +204,7 @@ namespace RoyalPetz_ADMIN
                                             "ACCOUNT_TYPE_ID = '" + tipeakun + "', " +
                                             "ACCOUNT_ACTIVE = '" + nonactive + "' " +
                                             "WHERE ID = '" + selectedAccountID + "'";
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PENGATURAN_NO_AKUN, "UPDATE DATA ON MASTER ACCOUNT [" + selectedAccountID + "]");
                         break;
                 }
 
@@ -214,6 +216,7 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PENGATURAN_NO_AKUN, "EXCEPTION THROWN [" + e.Message + "]");
                 try
                 {
                     DS.rollBack();
@@ -249,8 +252,10 @@ namespace RoyalPetz_ADMIN
         private void saveButton_Click(object sender, EventArgs e)
         {
             //save data
+            gUtil.saveSystemDebugLog(globalConstants.MENU_PENGATURAN_NO_AKUN, "ATTEMPT TO SAVE DATA");
             if (saveData())
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PENGATURAN_NO_AKUN, "DATA SAVED");
                 if (originModuleID == globalConstants.NEW_AKUN)
                     gUtil.saveUserChangeLog(globalConstants.MENU_PENGATURAN_NO_AKUN, globalConstants.CHANGE_LOG_INSERT, "NEW NOMOR AKUN [" + kodeTextbox.Text + "]");
                 else

@@ -149,6 +149,7 @@ namespace RoyalPetz_ADMIN
                         sqlCommand = "INSERT INTO MASTER_SUPPLIER " +
                                             "(SUPPLIER_FULL_NAME, SUPPLIER_ADDRESS1, SUPPLIER_ADDRESS2, SUPPLIER_ADDRESS_CITY, SUPPLIER_PHONE, SUPPLIER_FAX, SUPPLIER_EMAIL, SUPPLIER_ACTIVE) " +
                                             "VALUES ('" + suppName + "', '" + suppAddress1 + "', '" + suppAddress2 + "', '" + suppAddressCity + "', '" + suppPhone + "', '" + suppFax + "', '" + suppEmail + "', " + suppStatus + ")";
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_SUPPLIER, "INSERT NEW SUPPLIER [" + suppName + "]");
                         break;
                     case globalConstants.EDIT_SUPPLIER:
 
@@ -162,6 +163,7 @@ namespace RoyalPetz_ADMIN
                                             "SUPPLIER_EMAIL = '" + suppEmail + "', " +
                                             "SUPPLIER_ACTIVE = " + suppStatus + " " +
                                             "WHERE SUPPLIER_ID = " + selectedSupplierID;
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_SUPPLIER, "UPDATE SUPPLIER [" + selectedSupplierID+ "]");
                         break;
                 }
 
@@ -173,6 +175,7 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_SUPPLIER, "EXCEPTION THROWN [" + e.Message + "]");
                 try
                 {
                     DS.rollBack();
@@ -209,6 +212,7 @@ namespace RoyalPetz_ADMIN
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            gUtil.saveSystemDebugLog(globalConstants.MENU_SUPPLIER, "ATTEMPT TO SAVE");
             if (saveData())
             {
                 switch (originModuleID)

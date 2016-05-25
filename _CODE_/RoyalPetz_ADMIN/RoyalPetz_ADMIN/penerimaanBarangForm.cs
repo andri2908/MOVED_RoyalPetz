@@ -560,6 +560,7 @@ namespace RoyalPetz_ADMIN
             gUtil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
             
             gUtil.reArrangeTabOrder(this);
+
         }
 
         private double getHPPValue(string productID)
@@ -865,7 +866,9 @@ namespace RoyalPetz_ADMIN
             PRTotal = globalTotalValue;
 
             if (originModuleId == 0) // direct penerimaan barang
-            { 
+            {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "DIRECT PENERIMAAN BARANG, THEREFORE CALCULATE TAX LIMIT");
+
                 termOfPaymentDuration = Convert.ToDouble(durationTextBox.Text);
                 PODueDate = PRDtPicker.Value.AddDays(termOfPaymentDuration);
                 PODueDateTime = String.Format(culture, "{0:dd-MM-yyyy}", PODueDate);
@@ -880,10 +883,13 @@ namespace RoyalPetz_ADMIN
 
                 // CHECK WHETHER THE PARAMETER FOR TAX CALCULATION HAS BEEN SET
                 taxLimitValue = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(PERSENTASE_PEMBELIAN, 0) FROM SYS_CONFIG_TAX WHERE ID = 1"));
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "CHECK IF TAX LIMIT SET FOR PERCENTAGE PURCHASE [" + taxLimitValue + "]");
+
                 if (taxLimitValue == 0)
                 {
                     taxLimitType = 1;
                     taxLimitValue = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(AVERAGE_PEMBELIAN_HARIAN, 0) FROM SYS_CONFIG_TAX WHERE ID = 1"));
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "CHECK IF TAX LIMIT SET FOR AVERAGE DAILY PURCHASE [" + taxLimitValue + "]");
 
                     if (taxLimitValue != 0)
                         addToTaxTable = true;
@@ -897,13 +903,22 @@ namespace RoyalPetz_ADMIN
                     if (taxLimitType == 0) // PERCENTAGE CALCULATION
                     {
                         parameterCalculation = currentPurchaseTotal * taxLimitValue / 100;
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "PERCENTAGE CALCULATION [" + parameterCalculation + "]");
+
                         if (currentTaxTotal > parameterCalculation)
+                        {
                             addToTaxTable = false;
+                            gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "CURRENT TAX TOTAL IS BIGGER THAN PARAMETER CALCULATION");
+                        }
                     }
                     else // AMOUNT CALCULATION
                     {
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "AMOUNT CALCULATION [" + taxLimitValue + "]");
                         if (currentTaxTotal > taxLimitValue)
+                        { 
                             addToTaxTable = false;
+                            gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "CURRENT TAX TOTAL IS BIGGER THAN AMOUNT CALCULATION");
+                        }
                     }
                 }
                 // ----------------------------------------------------------------------
@@ -917,11 +932,17 @@ namespace RoyalPetz_ADMIN
 
                 // SAVE HEADER TABLE
                 if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_MUTASI)
+                {
                     sqlCommand = "INSERT INTO PRODUCTS_RECEIVED_HEADER (PR_INVOICE, PR_FROM, PR_TO, PR_DATE, PR_TOTAL, PM_INVOICE) " +
                                         "VALUES ('" + PRInvoice + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(PRTotal) + ", '" + selectedMutasi + "')";
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "INSERT PENERIMAAN BARANG DARI MUTASI [" + PRInvoice + "]");
+                }
                 else //if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_PO)
+                {
                     sqlCommand = "INSERT INTO PRODUCTS_RECEIVED_HEADER (PR_INVOICE, PR_FROM, PR_TO, PR_DATE, PR_TOTAL, PURCHASE_INVOICE) " +
                                         "VALUES ('" + PRInvoice + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(PRTotal) + ", '" + selectedInvoice + "')";
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "INSERT PENERIMAAN BARANG [" + PRInvoice + "]");
+                }
                 //else
                 //    sqlCommand = "INSERT INTO PRODUCTS_RECEIVED_HEADER (PR_INVOICE, PR_FROM, PR_TO, PR_DATE, PR_TOTAL, PURCHASE_INVOICE) " +
                 //                        "VALUES ('" + PRInvoice + "', " + branchIDFrom + ", " + branchIDTo + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), " + PRTotal + ")";
@@ -936,6 +957,7 @@ namespace RoyalPetz_ADMIN
                     sqlCommand = "INSERT INTO PURCHASE_HEADER (PURCHASE_INVOICE, SUPPLIER_ID, PURCHASE_DATETIME, PURCHASE_TOTAL, PURCHASE_TERM_OF_PAYMENT, PURCHASE_TERM_OF_PAYMENT_DURATION, PURCHASE_DATE_RECEIVED, PURCHASE_TERM_OF_PAYMENT_DATE, PURCHASE_SENT, PURCHASE_RECEIVED) " +
                                         "VALUES ('" + PRInvoice + "', " + branchIDFrom + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(PRTotal) + ", 1, " + termOfPaymentDuration + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), 1, 1)";
 
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "INSERT PO DATA BECAUSE OF DIRECT PENERIMAAN [" + PRInvoice + "]");
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
 
@@ -944,6 +966,7 @@ namespace RoyalPetz_ADMIN
                         sqlCommand = "INSERT INTO PURCHASE_HEADER_TAX (PURCHASE_INVOICE, SUPPLIER_ID, PURCHASE_DATETIME, PURCHASE_TOTAL, PURCHASE_TERM_OF_PAYMENT, PURCHASE_TERM_OF_PAYMENT_DURATION, PURCHASE_DATE_RECEIVED, PURCHASE_TERM_OF_PAYMENT_DATE, PURCHASE_SENT, PURCHASE_RECEIVED) " +
                                             "VALUES ('" + PRInvoice + "', " + branchIDFrom + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(PRTotal) + ", 1, " + termOfPaymentDuration + ", STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), 1, 1)";
 
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "ADD TO TAX TABLE [" + PRInvoice + "]");
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
                     }
@@ -965,6 +988,8 @@ namespace RoyalPetz_ADMIN
                                 priceChange = 0;
                             else if (currentHPP < newHPP)
                                 priceChange = 1;
+
+                            gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "PRICE CHANGE PARAM [" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "] [" + priceChange + "]");
                         }
                         else
                         {
@@ -980,11 +1005,13 @@ namespace RoyalPetz_ADMIN
                         sqlCommand = "INSERT INTO PRODUCTS_RECEIVED_DETAIL (PR_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, PRODUCT_QTY, PRODUCT_ACTUAL_QTY, PR_SUBTOTAL, PRODUCT_PRICE_CHANGE) VALUES " +
                                             "('" + PRInvoice + "', '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + newHPP + ", " +  qtyRequest + ", " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailGridView.Rows[i].Cells["subtotal"].Value)) + ", " + priceChange + ")";
 
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "SAVE DETAIL PENERIMAAN [" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + ", "+newHPP+", " +qtyRequest+"]");
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
                         
                         // UPDATE TO MASTER PRODUCT
                         sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_BASE_PRICE = " + newHPP + ", PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY + " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + " WHERE PRODUCT_ID = '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "'";
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "UPDATE MASTER PRODUCT DATA [" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "]");
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
@@ -993,6 +1020,7 @@ namespace RoyalPetz_ADMIN
                             sqlCommand = "INSERT INTO PURCHASE_DETAIL (PURCHASE_INVOICE, PRODUCT_ID, PRODUCT_PRICE, PRODUCT_QTY, PURCHASE_SUBTOTAL) VALUES " +
                                                 "('" + PRInvoice + "', '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + newHPP + ", " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailGridView.Rows[i].Cells["subtotal"].Value)) + ")";
 
+                            gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "INSERT TO PURCHASE DETAIL [" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "]");
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;
 
@@ -1000,6 +1028,8 @@ namespace RoyalPetz_ADMIN
                             {
                                 sqlCommand = "INSERT INTO PURCHASE_DETAIL_TAX (PURCHASE_INVOICE, PRODUCT_ID, PRODUCT_PRICE, PRODUCT_QTY, PURCHASE_SUBTOTAL) VALUES " +
                                                     "('" + PRInvoice + "', '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + newHPP + ", " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailGridView.Rows[i].Cells["subtotal"].Value)) + ")";
+
+                                gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "INSERT TO TAX DETAIL [" + PRInvoice + ", " + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "]");
 
                                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                     throw internalEX;
@@ -1012,17 +1042,21 @@ namespace RoyalPetz_ADMIN
                 if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_MUTASI)
                 {
                     sqlCommand = "UPDATE PRODUCTS_MUTATION_HEADER SET PM_RECEIVED = 1 WHERE PM_INVOICE = '" + selectedMutasi + "'";
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "UPDATE PRODUCT MUTATION HEADER [" + selectedMutasi + "]");
+
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
                 }
                 else if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_PO)
                 {
                     sqlCommand = "UPDATE PURCHASE_HEADER SET PURCHASE_RECEIVED = 1 WHERE PURCHASE_INVOICE = '" + selectedInvoice + "'";
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "UPDATE PURCHASE HEADER [" + selectedInvoice + "]");
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
 
                     // ATTEMPT UPDATE AT TAX TABLE
                     sqlCommand = "UPDATE PURCHASE_HEADER_TAX SET PURCHASE_RECEIVED = 1 WHERE PURCHASE_INVOICE = '" + selectedInvoice + "'";
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "UPDATE PURCHASE HEADER TAX [" + selectedInvoice + "]");
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
                 }
@@ -1040,11 +1074,14 @@ namespace RoyalPetz_ADMIN
                         PODueDateTime = String.Format(culture, "{0:dd-MM-yyyy}", PODueDate);
 
                         sqlCommand = "UPDATE PURCHASE_HEADER SET PURCHASE_DATE_RECEIVED = STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), PURCHASE_TERM_OF_PAYMENT_DATE = STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y') WHERE PURCHASE_INVOICE = '" + selectedInvoice + "'";
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "UPDATE PURCHASE HEADER DUE DATE [" + selectedInvoice + "]");
+
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
                         // ATTEMPT UPDATE AT TAX TABLE
                         sqlCommand = "UPDATE PURCHASE_HEADER_TAX SET PURCHASE_DATE_RECEIVED = STR_TO_DATE('" + PRDateTime + "', '%d-%m-%Y'), PURCHASE_TERM_OF_PAYMENT_DATE = STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y') WHERE PURCHASE_INVOICE = '" + selectedInvoice + "'";
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "UPDATE PURCHASE HEADER TAX DUE DATE [" + selectedInvoice + "]");
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
@@ -1059,6 +1096,8 @@ namespace RoyalPetz_ADMIN
 
                     // INSERT INTO DEBT TABLE
                     sqlCommand = "INSERT INTO DEBT (PURCHASE_INVOICE, DEBT_DUE_DATE, DEBT_NOMINAL, DEBT_PAID) VALUES ('" + selectedInvoice + "', STR_TO_DATE('" + PODueDateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(PRTotal) + ", " + purchasePaid + ")";
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "INSERT INTO DEBT [" + selectedInvoice + "]");
+
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
                 }
@@ -1068,6 +1107,8 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "EXCEPTION THROWN [" + e.Message + "]");
+
                 try
                 {
                     DS.rollBack();
@@ -1116,6 +1157,7 @@ namespace RoyalPetz_ADMIN
             {
                 // UPDATE PM DATA AT HQ
                 sqlCommand = "UPDATE PRODUCTS_MUTATION_HEADER SET PM_RECEIVED = 1 WHERE PM_INVOICE = '" + pmInvoice + "'";
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "ATTEMPT TO UPDATE PRODUCTS MUTATION HEADER TO INDICATE RECEIVED [" + pmInvoice + "]");
                 if (!DAccess.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
                 
@@ -1124,6 +1166,7 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "EXCEPTION THROWN ["+e.Message+"]");
                 try
                 {
                     DAccess.rollBack();
@@ -1154,14 +1197,17 @@ namespace RoyalPetz_ADMIN
 
             //if (saveData()) // SAVE TO LOCAL DATABASE FIRST
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "ATTEMPT TO CREATE CONNECTION TO HQ");
                 // CREATE CONNECTION TO CENTRAL HQ DATABASE SERVER
                 if (DS.HQ_mySQLConnect())
                 {
                     // SEND REQUEST DATA TO HQ
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "CONNECTION CREATED, ATTEMPT TO UPDATE DATA AT HQ");
                     if (updateDataToHQ(DS))
                         result = true;
                     else
                     {
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "FAIL TO UPDATE DATA AT HQ");
                         MessageBox.Show("FAIL TO UPDATE DATA TO HQ");
                         result = false;
                     }
@@ -1170,6 +1216,8 @@ namespace RoyalPetz_ADMIN
                 }
                 else
                 {
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "FAIL TO CREATE CONNECTION");
+
                     MessageBox.Show("FAIL TO CONNECT");
                     result = false;
                 }
@@ -1180,14 +1228,22 @@ namespace RoyalPetz_ADMIN
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "SAVE PENERIMAAN BARANG");
+
             if (saveData())
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "PENERIMAAN BARANG SAVED");
+
                 if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_MUTASI)
                 {
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "PENERIMAAN BARANG FROM MUTASI, UPDATE HQ DATA");
+
                     // UPDATE DATA AT HQ
                     if (!sendUpdateToHQ())
+                    {
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "FAILED TO UPDATE HQ DATA");
                         MessageBox.Show("KONEKSI KE PUSAT GAGAL");
-
+                    }
                     gUtil.saveUserChangeLog(globalConstants.MENU_MUTASI_BARANG, globalConstants.CHANGE_LOG_INSERT, "PENERIMAAN BARANG [" + prInvoiceTextBox.Text + "] DARI MUTASI[" + noMutasiTextBox.Text + "]");
                 }
                 else
@@ -1227,20 +1283,30 @@ namespace RoyalPetz_ADMIN
 
         private void searchPOButton_Click(object sender, EventArgs e)
         {
+            gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "GET PO INVOICE TO RECEIVE");
+
             dataPOForm displayedForm = new dataPOForm(globalConstants.PENERIMAAN_BARANG_DARI_PO, this);
             displayedForm.ShowDialog(this);
 
             if (selectedInvoice.Length > 0)
+            {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "PO INVOICE TO RECEIVE [" + selectedInvoice + "]");
                 supplierCombo.Enabled = false;
+            }
         }
 
         private void searchMutasiButton_Click(object sender, EventArgs e)
         {
+            gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "GET NO MUTASI TO RECEIVE");
+
             dataMutasiBarangForm displayedForm = new dataMutasiBarangForm(globalConstants.PENERIMAAN_BARANG, this);
             displayedForm.ShowDialog(this);
 
             if (selectedMutasi.Length > 0)
+            {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "NO MUTASI TO RECEIVE [" + selectedMutasi + "]");
                 supplierCombo.Enabled = false;
+            }
         }
 
         private void resetButton_Click(object sender, EventArgs e)

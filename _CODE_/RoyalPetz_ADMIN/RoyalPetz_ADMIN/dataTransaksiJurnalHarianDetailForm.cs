@@ -329,6 +329,7 @@ namespace RoyalPetz_ADMIN
                             sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, BRANCH_ID, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
                                                 "VALUES (" + Account_ID + ", STR_TO_DATE('" + TglTrans + "', '%d-%m-%Y %H:%i')" + ", '" + NominalAkun + "', '" + branch_id + "', '" + deskripsiakun + "', '" + user_id + "', " + pm_id + ")";
                             options = gutil.INS;
+                            gutil.saveSystemDebugLog(globalConstants.MENU_TRANSAKSI_HARIAN, "INSERT NEW DATA TO DAILY JOURNAL TABLE ["+ Account_ID +", " + NominalAkun + "]");
                             break;
                         case globalConstants.EDIT_DJ:
                             sqlCommand = "UPDATE DAILY_JOURNAL SET " +
@@ -341,6 +342,7 @@ namespace RoyalPetz_ADMIN
                                                 "PM_ID = '" + pm_id + "' " +
                                                 "WHERE JOURNAL_ID = '" + selectedDJID + "'";
                             options = gutil.UPD;
+                            gutil.saveSystemDebugLog(globalConstants.MENU_TRANSAKSI_HARIAN, "UPDATE DATA ON DAILY JOURNAL TABLE [" + selectedDJID + "]");
                             break;
                     }
 
@@ -352,6 +354,7 @@ namespace RoyalPetz_ADMIN
                 }
                 catch (Exception e)
                 {
+                    gutil.saveSystemDebugLog(globalConstants.MENU_TRANSAKSI_HARIAN, "EXCEPTION THROWN [" + e.Message + "]");
                     try
                     {
                         DS.rollBack();
@@ -429,6 +432,8 @@ namespace RoyalPetz_ADMIN
                 {
                     if (rdr.HasRows)
                     {
+                        gutil.saveSystemDebugLog(globalConstants.MENU_TRANSAKSI_HARIAN, "LOAD DATA TRANSAKSI");
+
                         while (rdr.Read())
                         {
                             //pasang ke datagridview
@@ -559,8 +564,10 @@ namespace RoyalPetz_ADMIN
 
         private void commitButton_Click(object sender, EventArgs e)
         {
+            gutil.saveSystemDebugLog(globalConstants.MENU_TRANSAKSI_HARIAN, "ATTEMPT TO SAVE DATA TRANSAKSI JURNAL HARIAN");
             if (saveDataTransaction())
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_TRANSAKSI_HARIAN, "DATA TRANSAKSI JURNAL HARIAN SAVED");
                 gutil.saveUserChangeLog(globalConstants.MENU_TRANSAKSI_HARIAN, globalConstants.CHANGE_LOG_INSERT, "NEW DATA TRANSAKSI HARIAN");
 
                 gutil.showSuccess(options);

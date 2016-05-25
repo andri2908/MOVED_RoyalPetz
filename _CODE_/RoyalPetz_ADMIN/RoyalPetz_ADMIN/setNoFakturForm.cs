@@ -78,7 +78,7 @@ namespace RoyalPetz_ADMIN
                 DS.mySqlConnect();
 
                 sqlCommand = "UPDATE SYS_CONFIG SET NO_FAKTUR = '" + noFakturValue + "' WHERE ID = 1";
-
+                gutil.saveSystemDebugLog(globalConstants.MENU_SET_NO_FAKTUR, "UPDATE SYS CONFIG VALUE [" + noFakturValue + "]");
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
 
@@ -87,6 +87,7 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_SET_NO_FAKTUR, "EXCEPTION THROWN [" + e.Message + "]");
                 try
                 {
                     DS.rollBack();
@@ -122,8 +123,10 @@ namespace RoyalPetz_ADMIN
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            gutil.saveSystemDebugLog(globalConstants.MENU_SET_NO_FAKTUR, "ATTEMPT TO SAVE NO FAKTUR");
             if (saveData())
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_SET_NO_FAKTUR, "NO FAKTUR SAVED");
                 gutil.saveUserChangeLog(globalConstants.MENU_SET_NO_FAKTUR, globalConstants.CHANGE_LOG_UPDATE, "SET NO FAKTUR [" + noFakturTextBox.Text + "]");
                 gutil.showSuccess(gutil.UPD);
                 errorLabel.Text = "";

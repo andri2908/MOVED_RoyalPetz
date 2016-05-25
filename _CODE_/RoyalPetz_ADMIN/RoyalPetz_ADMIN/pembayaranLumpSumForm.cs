@@ -377,17 +377,22 @@ namespace RoyalPetz_ADMIN
                 // TUNAI, KARTU KREDIT, KARTU DEBIT
                 paymentConfirmed = 1;
                 paymentDueDateTime = paymentDateTime;
+
+                gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : PAYMENT BY CASH");
             }
             else if (paymentCombo.SelectedIndex == 3) //3
             {
                 // TRANSFER
                 paymentDueDateTime = paymentDateTime;
+
+                gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : PAYMENT BY TRANSFER");
             }
             else if (paymentCombo.SelectedIndex > 3) // 4, 5
             {
                 // CEK, BG
                 selectedPaymentDueDate = cairDTPicker.Value;
                 paymentDueDateTime = String.Format(culture, "{0:dd-MM-yyyy}", selectedPaymentDueDate);
+                gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : PAYMENT BY CHEQUE OR BG");
             }
 
             branchID = getBranchID();
@@ -400,21 +405,30 @@ namespace RoyalPetz_ADMIN
 
                 // GET A LIST OF OUTSTANDING MUTATION CREDIT
                 if (originModuleID == globalConstants.DATA_PIUTANG_MUTASI)
+                { 
                     sqlCommand = "SELECT C.CREDIT_ID AS NO_ID, C.PM_INVOICE, C.SALES_INVOICE, (CREDIT_NOMINAL - IFNULL(PC.PAYMENT, 0)) AS 'SISA' " +
                                         "FROM PRODUCTS_MUTATION_HEADER PM, CREDIT C LEFT OUTER JOIN (SELECT CREDIT_ID, SUM(PAYMENT_NOMINAL) AS PAYMENT FROM PAYMENT_CREDIT WHERE PAYMENT_INVALID = 0 GROUP BY CREDIT_ID) PC ON PC.CREDIT_ID = C.CREDIT_ID  " +
                                         "WHERE PM.BRANCH_ID_TO = " + selectedBranchID + " AND C.CREDIT_PAID = 0 " +
                                         "AND PM.PM_INVOICE = C.PM_INVOICE ORDER BY C.CREDIT_ID ASC";
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_PIUTANG_MUTASI, "PEMBAYARAN LUMPSUM : GET A LIST OF OUTSTANDING MUTASI CREDIT");
+                }
                 else if (originModuleID == globalConstants.PEMBAYARAN_PIUTANG)
+                {
                     sqlCommand = "SELECT C.CREDIT_ID AS NO_ID, C.PM_INVOICE, C.SALES_INVOICE, (CREDIT_NOMINAL - IFNULL(PC.PAYMENT, 0)) AS 'SISA' " +
                                         "FROM SALES_HEADER SH, CREDIT C LEFT OUTER JOIN (SELECT CREDIT_ID, SUM(PAYMENT_NOMINAL) AS PAYMENT FROM PAYMENT_CREDIT WHERE PAYMENT_INVALID = 0 GROUP BY CREDIT_ID) PC ON PC.CREDIT_ID = C.CREDIT_ID  " +
                                         "WHERE SH.CUSTOMER_ID = " + selectedCustomerID + " AND C.CREDIT_PAID = 0 " +
                                         "AND SH.SALES_INVOICE = C.SALES_INVOICE ORDER BY C.CREDIT_ID ASC";
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_PIUTANG, "PEMBAYARAN LUMPSUM : GET A LIST OF OUTSTANDING CREDIT");
+                }
                 else if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
-                    sqlCommand = "SELECT D.DEBT_ID AS NO_ID, D.PURCHASE_INVOICE, (DEBT_NOMINAL - IFNULL(PD.PAYMENT, 0)) AS 'SISA' " +
+                {
+                        sqlCommand = "SELECT D.DEBT_ID AS NO_ID, D.PURCHASE_INVOICE, (DEBT_NOMINAL - IFNULL(PD.PAYMENT, 0)) AS 'SISA' " +
                                         "FROM PURCHASE_HEADER PH, DEBT D LEFT OUTER JOIN (SELECT DEBT_ID, SUM(PAYMENT_NOMINAL) AS PAYMENT FROM PAYMENT_DEBT WHERE PAYMENT_INVALID = 0 GROUP BY DEBT_ID) PD ON PD.DEBT_ID = D.DEBT_ID  " +
                                         "WHERE PH.SUPPLIER_ID = " + selectedSupplierID + " AND D.DEBT_PAID = 0 " +
                                         "AND PH.PURCHASE_INVOICE = D.PURCHASE_INVOICE ORDER BY D.DEBT_ID ASC";
-                
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, "PEMBAYARAN LUMPSUM : GET A LIST OF OUTSTANDING DEBT");
+                }
+
                 using (rdr = DS.getData(sqlCommand))
                 {
                     if (rdr.HasRows)
@@ -423,13 +437,17 @@ namespace RoyalPetz_ADMIN
 
                 if (dt.Rows.Count > 0)
                 {
+                    gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : NUM OF OUTSTANDING DATA [" + dt.Rows.Count + "]");
                     rowCounter = 0;
                     while (paymentNominal > 0 && rowCounter < dt.Rows.Count)
                     {
                         fullyPaid = false;
+                        gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : rowCounter ["+ rowCounter + "] paymentNominal  [" + paymentNominal + "]");
 
                         currentCreditID = Convert.ToInt32(dt.Rows[rowCounter]["NO_ID"].ToString());
                         outstandingCreditAmount = Convert.ToDouble(dt.Rows[rowCounter]["SISA"].ToString());
+
+                        gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : currentCreditID [" + currentCreditID + "] outstandingCreditAmount [" + outstandingCreditAmount + "]");
 
                         if (outstandingCreditAmount <= 0)
                         {
@@ -445,23 +463,35 @@ namespace RoyalPetz_ADMIN
                             actualPaymentAmount = paymentNominal;
 
                         if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
+                        { 
                             sqlCommand = "INSERT INTO PAYMENT_DEBT (DEBT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED, PAYMENT_DUE_DATE) VALUES " +
                                                 "(" + currentCreditID + ", STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y'), 1, " + gutil.validateDecimalNumericInput(actualPaymentAmount) + ", '" + paymentDescription + "', " + paymentConfirmed + ", STR_TO_DATE('" + paymentDueDateTime + "', '%d-%m-%Y'))";
+                            gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : INSERT INTO PAYMENT DEBT ["+ currentCreditID + ", "+ gutil.validateDecimalNumericInput(actualPaymentAmount) + "]");
+                        }
                         else
+                        {
                             sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED, PAYMENT_DUE_DATE) VALUES " +
                                             "(" + currentCreditID + ", STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y'), 1, " + gutil.validateDecimalNumericInput(actualPaymentAmount) + ", '" + paymentDescription + "', " + paymentConfirmed + ", STR_TO_DATE('" + paymentDueDateTime + "', '%d-%m-%Y'))";
-                        
+                            gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : INSERT INTO PAYMENT CREDIT [" + currentCreditID + ", " + gutil.validateDecimalNumericInput(actualPaymentAmount) + "]");
+                        }
+
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
                         if (fullyPaid && (paymentConfirmed == 1)) // for cash payment
                         {
                             if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
+                            {
                                 // UPDATE DEBT TABLE
                                 sqlCommand = "UPDATE DEBT SET DEBT_PAID = 1 WHERE DEBT_ID = " + currentCreditID;
+                                gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : UPDATE DEBT SET FULLY PAID [" + currentCreditID + "]");
+                            }
                             else
+                            {
                                 // UPDATE CREDIT TABLE
                                 sqlCommand = "UPDATE CREDIT SET CREDIT_PAID = 1 WHERE CREDIT_ID = " + currentCreditID;
+                                gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : UPDATE CREDIT SET FULLY PAID [" + currentCreditID + "]");
+                            }
 
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;
@@ -474,6 +504,7 @@ namespace RoyalPetz_ADMIN
                                     // UPDATE SALES HEADER TABLE
                                     sqlCommand = "UPDATE SALES_HEADER SET SALES_PAID = 1 WHERE SALES_INVOICE = '" + noInvoice + "'";
 
+                                    gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : UPDATE SALES HEADER SET FULLY PAID [" + noInvoice + "]");
                                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                         throw internalEX;
                                 }
@@ -486,6 +517,7 @@ namespace RoyalPetz_ADMIN
                                     // UPDATE PURCHASE HEADER TABLE
                                     sqlCommand = "UPDATE PURCHASE_HEADER SET PURCHASE_PAID = 1 WHERE PURCHASE_INVOICE = '" + noInvoice + "'";
 
+                                    gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : UPDATE PURCHASE HEADER SET FULLY PAID [" + noInvoice + "]");
                                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                         throw internalEX;
                                 }
@@ -499,12 +531,14 @@ namespace RoyalPetz_ADMIN
                             noInvoice = DS.getDataSingleValue("SELECT IFNULL(SALES_INVOICE, '') FROM CREDIT WHERE CREDIT_ID = " + currentCreditID).ToString();
                             sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, BRANCH_ID, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
                                                                "VALUES (1, STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y')" + ", " + actualPaymentAmount + ", " + branchID + ", 'PEMBAYARAN PIUTANG " + noInvoice + "', '" + gutil.getUserID() + "', 1)";
-                            
+
+                            gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : INSERT INTO DAILY JOURNAL [" + actualPaymentAmount + "]");
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;
                         }
 
                         paymentNominal = paymentNominal - actualPaymentAmount;
+
                         rowCounter += 1;
                     }
                 }
@@ -515,6 +549,8 @@ namespace RoyalPetz_ADMIN
                     // ADD A NEW ENTRY ON THE DAILY JOURNAL TO KEEP TRACK THE ADDITIONAL CASH AMOUNT 
                     sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, BRANCH_ID, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
                                         "VALUES (1, STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y')" + ", " + gutil.validateDecimalNumericInput(changeAmount) + ", " + selectedBranchID + ", 'SISA PIUTANG MUTASI" + noInvoice + "', '" + gutil.getUserID() + "', 1)";
+
+                    gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : INSERT INTO DAILY JOURNAL [" + actualPaymentAmount + "]");
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
                 }
@@ -524,6 +560,8 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : EXCEPTION THROWN [" + e.Message + "]");
+
                 try
                 {
                     DS.rollBack();
@@ -560,8 +598,12 @@ namespace RoyalPetz_ADMIN
         
         private void saveButton_Click(object sender, EventArgs e)
         {
+            gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : ATTEMPT TO SAVE DATA PAYMENT");
+
             if (saveData())
             {
+                gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : DATA PAYMENT SAVED");
+
                 if (changeAmount > 0 && originModuleID != globalConstants.DATA_PIUTANG_MUTASI)
                     MessageBox.Show("UANG KEMBALI SEBESAR " + changeAmount.ToString("C2", culture));
 

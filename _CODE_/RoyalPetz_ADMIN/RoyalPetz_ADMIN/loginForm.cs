@@ -18,6 +18,8 @@ namespace RoyalPetz_ADMIN
     {
         private Data_Access DS = new Data_Access();
         private globalUtilities gutil = new globalUtilities();
+        private globalCryptographyMethod gCrypto = new globalCryptographyMethod();
+        private string licenseFilePath = Application.StartupPath + "\\license.lic";
 
         private int selectedUserID = 0;
         private int selectedUserGroupID = 0;
@@ -213,6 +215,12 @@ namespace RoyalPetz_ADMIN
             gutil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
 
             gutil.reArrangeTabOrder(this);
+
+            if (!gCrypto.checkLicenseFile(licenseFilePath))
+            {
+                gutil.showError("LICENSE FILE NOT FOUND");
+                Application.Exit();
+            }
 
             if (!DS.firstMySqlConnect()) //one time checked at load application
             {

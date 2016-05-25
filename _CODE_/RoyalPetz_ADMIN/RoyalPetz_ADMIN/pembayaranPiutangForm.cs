@@ -243,20 +243,28 @@ namespace RoyalPetz_ADMIN
                 // TUNAI, KARTU KREDIT, KARTU DEBIT
                 paymentConfirmed = 1;
                 paymentDueDateTime = paymentDateTime;
+
+                gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_PIUTANG, "PAYMENT CREDIT BY CASH");
             }
             else if (paymentMethod == 4)
             {
                 // TRANSFER
                 paymentDueDateTime = paymentDateTime;
+
+                gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_PIUTANG, "PAYMENT CREDIT BY TRANSFER");
             }
             else if (paymentMethod > 4) // 5, 6
             {
                 // CEK, BG
                 selectedPaymentDueDate = cairDTPicker.Value;
                 paymentDueDateTime = String.Format(culture, "{0:dd-MM-yyyy}", selectedPaymentDueDate);
+
+                gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_PIUTANG, "PAYMENT CREDIT BY CHEQUE OR BG");
             }
 
             branchID = getBranchID();
+
+            gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_PIUTANG, "BRANCH ID [" + branchID + "]");
 
             DS.beginTransaction();
 
@@ -268,6 +276,7 @@ namespace RoyalPetz_ADMIN
                 sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED, PAYMENT_DUE_DATE) VALUES " +
                                     "(" + selectedCreditID + ", STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y'), " + paymentMethod + ", " + gutil.validateDecimalNumericInput(paymentNominal) + ", '" + paymentDescription + "', " + paymentConfirmed + ", STR_TO_DATE('" + paymentDueDateTime + "', '%d-%m-%Y'))";
 
+                gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_PIUTANG, "INSERT INTO PAYMENT CREDIT [" + selectedCreditID + ", " + gutil.validateDecimalNumericInput(paymentNominal) + "]");
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
 
@@ -278,12 +287,14 @@ namespace RoyalPetz_ADMIN
                     // UPDATE CREDIT TABLE
                     sqlCommand = "UPDATE CREDIT SET CREDIT_PAID = 1 WHERE CREDIT_ID = " + selectedCreditID;
 
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_PIUTANG, "UPDATE CREDIT SET TO FULLY PAID [" + selectedCreditID + "]");
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
 
                     // UPDATE SALES HEADER TABLE
                     sqlCommand = "UPDATE SALES_HEADER SET SALES_PAID = 1 WHERE SALES_INVOICE = '" + selectedSOInvoice + "'";
 
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_PIUTANG, "UPDATE SALES HEADER SET TO FULLY PAID [" + selectedSOInvoice + "]");
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
                 }
@@ -295,6 +306,7 @@ namespace RoyalPetz_ADMIN
                     sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, BRANCH_ID, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
                                                    "VALUES (1, STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y')" + ", " + gutil.validateDecimalNumericInput(paymentNominal) + ", " + branchID + ", 'PEMBAYARAN PIUTANG " + selectedSOInvoice + "', '" + gutil.getUserID() + "', 1)";
 
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_PIUTANG, "CASH TRANSACTION, INSERT INTO DAILY JOURNAL [" + gutil.validateDecimalNumericInput(paymentNominal) + "]");
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
                 }
@@ -304,6 +316,7 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_PIUTANG, "EXCEPTION THROWN [" + e.Message + "]");
                 try
                 {
                     DS.rollBack();
@@ -339,8 +352,11 @@ namespace RoyalPetz_ADMIN
         
         private void saveButton_Click(object sender, EventArgs e)
         {
+            gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_PIUTANG, "ATTEMPT TO SAVE PAYMENT CREDIT");
+
             if (saveData())
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_PIUTANG, "PAYMENT CREDIT DATA SAVED");
                 gutil.saveUserChangeLog(globalConstants.MENU_PEMBAYARAN_PIUTANG, globalConstants.CHANGE_LOG_PAYMENT_CREDIT, "PEMBAYARAN PIUTANG [" + invoiceNoTextBox.Text + "]");
                 gutil.showSuccess(gutil.INS);
 

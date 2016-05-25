@@ -198,14 +198,19 @@ namespace RoyalPetz_ADMIN
 
                 dataCount = Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM SYS_CONFIG_TAX"));
                 if (dataCount > 0)
+                { 
                     // UPDATE
                     sqlCommand = "UPDATE SYS_CONFIG_TAX SET PERSENTASE_PENJUALAN = " + gutil.allTrim(persentasePenjualan.Text) + ", PERSENTASE_PEMBELIAN = " + gutil.allTrim(persentasePembelian.Text) + ", " +
                                         "AVERAGE_PENJUALAN_HARIAN = " + omsetPenjualan.Text + ", AVERAGE_PEMBELIAN_HARIAN = " + omsetPembelian.Text + ", RASIO_TOLERANSI = " + rasioToleransi.Text;
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENGATURAN_LIMIT_PAJAK, "UPDATE SYS CONFIG WITH NEW DATA");
+                }
                 else
+                { 
                     // INSERT
                     sqlCommand = "INSERT INTO SYS_CONFIG_TAX (PERSENTASE_PENJUALAN, PERSENTASE_PEMBELIAN, AVERAGE_PENJUALAN_HARIAN, AVERAGE_PEMBELIAN_HARIAN, RASIO_TOLERANSI) " +
                                         "VALUES (" + gutil.allTrim(persentasePenjualan.Text) + ", " + gutil.allTrim(persentasePembelian.Text) + ", " + omsetPenjualan.Text + ", " + omsetPembelian.Text + ", " + rasioToleransi.Text + ")";
-
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENGATURAN_LIMIT_PAJAK, "INSERT SYS CONFIG WITH NEW DATA");
+                }
                 DS.executeNonQueryCommand(sqlCommand);
                 DS.commit();
 
@@ -213,6 +218,8 @@ namespace RoyalPetz_ADMIN
             }
             catch(Exception e)
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENGATURAN_LIMIT_PAJAK, "EXCEPTION THROWN [" + e.Message + "]");
+
                 result = false;
                 MessageBox.Show(e.Message);
             }
@@ -226,8 +233,11 @@ namespace RoyalPetz_ADMIN
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENGATURAN_LIMIT_PAJAK, "ATTEMPT TO SAVE DATA LIMIT PAJAK");
+
             if (saveDataTransaction())
-            { 
+            {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENGATURAN_LIMIT_PAJAK, "DATA LIMIT PAJAK SAVED");
                 gutil.showSuccess(gutil.INS);
                 gutil.saveUserChangeLog(globalConstants.MENU_PENGATURAN_LIMIT_PAJAK, globalConstants.CHANGE_LOG_UPDATE, "PENGATURAN LIMIT PAJAK");
             }

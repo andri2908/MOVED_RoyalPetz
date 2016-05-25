@@ -555,10 +555,13 @@ namespace RoyalPetz_ADMIN
 
             // CHECK WHETHER THE PARAMETER FOR TAX CALCULATION HAS BEEN SET
             taxLimitValue = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(PERSENTASE_PEMBELIAN, 0) FROM SYS_CONFIG_TAX WHERE ID = 1"));
+            gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "CHECK IF TAX LIMIT SET FOR PERCENTAGE PURCHASE [" + taxLimitValue + "]");
+
             if (taxLimitValue == 0)
             {
                 taxLimitType = 1;
                 taxLimitValue = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(AVERAGE_PEMBELIAN_HARIAN, 0) FROM SYS_CONFIG_TAX WHERE ID = 1"));
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "CHECK IF TAX LIMIT SET FOR AVERAGE DAILY PURCHASE [" + taxLimitValue + "]");
 
                 if (taxLimitValue != 0)
                     addToTaxTable = true;
@@ -572,13 +575,22 @@ namespace RoyalPetz_ADMIN
                 if (taxLimitType == 0) // PERCENTAGE CALCULATION
                 {
                     parameterCalculation = currentPurchaseTotal * taxLimitValue / 100;
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "PERCENTAGE CALCULATION [" + parameterCalculation + "]");
+
                     if (currentTaxTotal > parameterCalculation)
+                    { 
                         addToTaxTable = false;
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "CURRENT TAX TOTAL IS BIGGER THAN PARAMETER CALCULATION");
+                    }
                 }
                 else // AMOUNT CALCULATION
                 {
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "AMOUNT CALCULATION [" + taxLimitValue + "]");
                     if (currentTaxTotal > taxLimitValue)
+                    { 
                         addToTaxTable = false;
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "CURRENT TAX TOTAL IS BIGGER THAN AMOUNT CALCULATION");
+                    }
                 }
             }
             // ----------------------------------------------------------------------
@@ -592,10 +604,12 @@ namespace RoyalPetz_ADMIN
                 switch (originModuleID)
                 {
                     case globalConstants.PURCHASE_ORDER_DARI_RO:
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "PURCHASE HEADER FROM REQUEST ORDER");
                         // SAVE HEADER TABLE
                         sqlCommand = "INSERT INTO PURCHASE_HEADER (PURCHASE_INVOICE, SUPPLIER_ID, PURCHASE_DATETIME, PURCHASE_TOTAL, PURCHASE_TERM_OF_PAYMENT, PURCHASE_TERM_OF_PAYMENT_DURATION, PURCHASE_PAID) VALUES " +
                                             "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(POTotal) + ", " + termOfPayment + ", " + termOfPaymentDuration + ", '" + purchasePaid + ")";
 
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "INSERT PURCHASE HEADER DATA ["+ POInvoice + "]");
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
@@ -604,6 +618,7 @@ namespace RoyalPetz_ADMIN
                             sqlCommand = "INSERT INTO PURCHASE_HEADER_TAX (PURCHASE_INVOICE, SUPPLIER_ID, PURCHASE_DATETIME, PURCHASE_TOTAL, PURCHASE_TERM_OF_PAYMENT, PURCHASE_TERM_OF_PAYMENT_DURATION, PURCHASE_PAID) VALUES " +
                                                 "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(POTotal) + ", " + termOfPayment + ", " + termOfPaymentDuration + ", '" + purchasePaid + ")";
 
+                            gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "INSERT PURCHASE HEADER TAX DATA [" + POInvoice + "]");
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;
                         }
@@ -616,6 +631,7 @@ namespace RoyalPetz_ADMIN
                                 sqlCommand = "INSERT INTO PURCHASE_DETAIL (PURCHASE_INVOICE, PRODUCT_ID, PRODUCT_PRICE, PRODUCT_QTY, PURCHASE_SUBTOTAL) VALUES " +
                                                     "('" + POInvoice + "', '" + detailPODataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["qty"].Value) + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailPODataGridView.Rows[i].Cells["subTotal"].Value)) + ")";
 
+                                gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "INSERT DETAIL PURCHASE DATA [" + detailPODataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["qty"].Value) + "]");
                                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                     throw internalEX;
 
@@ -624,6 +640,7 @@ namespace RoyalPetz_ADMIN
                                     sqlCommand = "INSERT INTO PURCHASE_DETAIL_TAX (PURCHASE_INVOICE, PRODUCT_ID, PRODUCT_PRICE, PRODUCT_QTY, PURCHASE_SUBTOTAL) VALUES " +
                                                         "('" + POInvoice + "', '" + detailPODataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["qty"].Value) + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailPODataGridView.Rows[i].Cells["subTotal"].Value)) + ")";
 
+                                    gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "INSERT DETAIL PURCHASE DATA TAX");
                                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                         throw internalEX;
                                 }
@@ -633,15 +650,19 @@ namespace RoyalPetz_ADMIN
 
                         // UPDATE REQUEST ORDER TABLE
                         sqlCommand = "UPDATE REQUEST_ORDER_HEADER SET RO_ACTIVE = 0 WHERE RO_INVOICE = '" + roInvoice + "'";
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "UPDATE REQUEST ORDER DATA IF COMES FROM REQUEST ORDER");
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
                         break;
 
                     case globalConstants.NEW_PURCHASE_ORDER:
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "NEW PURCHASE HEADER");
                         // SAVE HEADER TABLE
                         sqlCommand = "INSERT INTO PURCHASE_HEADER (PURCHASE_INVOICE, SUPPLIER_ID, PURCHASE_DATETIME, PURCHASE_TOTAL, PURCHASE_TERM_OF_PAYMENT, PURCHASE_TERM_OF_PAYMENT_DURATION, PURCHASE_PAID) VALUES " +
                                             "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(POTotal) + ", " + termOfPayment + ", " + termOfPaymentDuration + ", " + purchasePaid + ")";
+
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "INSERT PURCHASE HEADER DATA ["+ POInvoice + "]");
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
@@ -649,6 +670,7 @@ namespace RoyalPetz_ADMIN
                         {
                             sqlCommand = "INSERT INTO PURCHASE_HEADER_TAX (PURCHASE_INVOICE, SUPPLIER_ID, PURCHASE_DATETIME, PURCHASE_TOTAL, PURCHASE_TERM_OF_PAYMENT, PURCHASE_TERM_OF_PAYMENT_DURATION, PURCHASE_PAID) VALUES " +
                                                 "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(POTotal) + ", " + termOfPayment + ", " + termOfPaymentDuration + ", " + purchasePaid + ")";
+                            gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "INSERT PURCHASE HEADER TAX DATA [" + POInvoice + "]");
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;
                         }
@@ -661,6 +683,7 @@ namespace RoyalPetz_ADMIN
                                 sqlCommand = "INSERT INTO PURCHASE_DETAIL (PURCHASE_INVOICE, PRODUCT_ID, PRODUCT_PRICE, PRODUCT_QTY, PURCHASE_SUBTOTAL) VALUES " +
                                                     "('" + POInvoice + "', '" + detailPODataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["qty"].Value) + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailPODataGridView.Rows[i].Cells["subTotal"].Value)) + ")";
 
+                                gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "INSERT DETAIL PURCHASE DATA [" + detailPODataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["qty"].Value) + "]");
                                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                     throw internalEX;
 
@@ -669,6 +692,7 @@ namespace RoyalPetz_ADMIN
                                     sqlCommand = "INSERT INTO PURCHASE_DETAIL_TAX (PURCHASE_INVOICE, PRODUCT_ID, PRODUCT_PRICE, PRODUCT_QTY, PURCHASE_SUBTOTAL) VALUES " +
                                                         "('" + POInvoice + "', '" + detailPODataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["qty"].Value) + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailPODataGridView.Rows[i].Cells["subTotal"].Value)) + ")";
 
+                                    gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "INSERT DETAIL PURCHASE TAX DATA");
                                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                         throw internalEX;
                                 }
@@ -687,11 +711,14 @@ namespace RoyalPetz_ADMIN
                                             "PURCHASE_TERM_OF_PAYMENT_DURATION = " + termOfPaymentDuration + ", " +
                                             "PURCHASE_PAID = " + purchasePaid +" " +
                                             "WHERE PURCHASE_INVOICE = '" +POInvoice+ "'";
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "UPDATE PURCHASE HEADER DATA [" + POInvoice + "]");
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
                         // DELETE DETAIL TABLE
                         sqlCommand = "DELETE FROM PURCHASE_DETAIL WHERE PURCHASE_INVOICE = '" + POInvoice + "'";
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "DELETE PURCHASE DETAIL DATA IN ORDER TO UPDATE DETAIL DATA");
+
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
@@ -702,7 +729,7 @@ namespace RoyalPetz_ADMIN
                             {
                                 sqlCommand = "INSERT INTO PURCHASE_DETAIL (PURCHASE_INVOICE, PRODUCT_ID, PRODUCT_PRICE, PRODUCT_QTY, PURCHASE_SUBTOTAL) VALUES " +
                                                     "('" + POInvoice + "', '" + detailPODataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["qty"].Value) + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailPODataGridView.Rows[i].Cells["subTotal"].Value)) + ")";
-
+                                gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "INSERT DETAIL PURCHASE DATA [" + detailPODataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["qty"].Value) + "]");
                                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                     throw internalEX;
                             }
@@ -713,13 +740,13 @@ namespace RoyalPetz_ADMIN
                     case globalConstants.PRINTOUT_PURCHASE_ORDER:
                         // UPDATE PURCHASE ORDER TABLE
                         sqlCommand = "UPDATE PURCHASE_HEADER SET PURCHASE_SENT = 1 WHERE PURCHASE_INVOICE = '" + POInvoice + "'";
-
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "UPDATE PURCHASE HEADER DATA TO INDICATE PO HAS BEEN PRINTED OUT, THEREFORE UNEDITABLE");
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
                         //ATTEMPT TO UPDATE TAX TABLE
                         sqlCommand = "UPDATE PURCHASE_HEADER_TAX SET PURCHASE_SENT = 1 WHERE PURCHASE_INVOICE = '" + POInvoice + "'";
-
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "UPDATE FLAG AT PURCHASE HEADER TAX");
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
                         break;
@@ -730,6 +757,7 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "EXCEPTION THROWN ["+e.Message+"]");
                 try
                 {
                     DS.rollBack();
@@ -765,8 +793,10 @@ namespace RoyalPetz_ADMIN
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "ATTEMPT TO SAVE DATA");
             if (saveData())
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "PURCHASE ORDER SAVED");
                 switch(originModuleID)
                 {
                     case globalConstants.NEW_PURCHASE_ORDER:

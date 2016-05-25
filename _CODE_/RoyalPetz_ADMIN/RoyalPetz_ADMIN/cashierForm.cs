@@ -66,6 +66,9 @@ namespace RoyalPetz_ADMIN
         public cashierForm(int counter)
         {
             InitializeComponent();
+
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : MULTIPLE CASHIER INSTANCE [" + counter + "]");
+
             label1.Text = "Struk # : " + counter;
 
             objCounter = counter + 1;
@@ -73,12 +76,19 @@ namespace RoyalPetz_ADMIN
 
         public void setCustomerID(int ID)
         {
-            selectedPelangganID = ID;
-            setCustomerProfile();
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : SELECTED CUSTOMER ID [" + ID+ "]");
 
+            selectedPelangganID = ID;
+
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ATTEMPT TO SET CUSTOMER PROFILE");
+            setCustomerProfile();
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : FINISHED SET CUSTOMER PROFILE");
+
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ATTEMPT TO REFRESH PRODUCT PRICE");
             refreshProductPrice();
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : PRODUCT PRICE REFRESHED");
         }
-        
+
         private void updateLabel()
         {
             localDate = DateTime.Now;
@@ -87,6 +97,7 @@ namespace RoyalPetz_ADMIN
 
         private void updateRowNumber()
         {
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : UPDATE ROW NUMBER, TOTAL ROW ["+ cashierDataGridView.Rows.Count+"]");
             for (int i = 0;i<cashierDataGridView.Rows.Count;i++)
                 cashierDataGridView.Rows[i].Cells["F8"].Value = i + 1;
         }
@@ -95,14 +106,21 @@ namespace RoyalPetz_ADMIN
         {
             int prevValue = 0;
             bool allowToAdd = true;
-                
+
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ADD NEW ROW,  isActive [" + isActive.ToString() + "]");
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ADD NEW ROW,  ROW COUNT [" + cashierDataGridView.Rows.Count + "]");
+
             if (cashierDataGridView.Rows.Count > 0 )
             {
                 prevValue = Convert.ToInt32(cashierDataGridView.Rows[cashierDataGridView.Rows.Count-1].Cells["F8"].Value);
 
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ADD NEW ROW,  PREV VALUE [" + prevValue + "]");
+
                 if (null == cashierDataGridView.Rows[cashierDataGridView.Rows.Count - 1].Cells["productID"].Value)
                     allowToAdd = false;
             }
+
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ADD NEW ROW,  ALLOW TO ADD [" + allowToAdd.ToString() + "]");
 
             if (allowToAdd)
             {
@@ -128,13 +146,17 @@ namespace RoyalPetz_ADMIN
             int rowSelectedIndex = 0;
             double currQty;
 
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ADD NEW ROW FROM BARCODE [" + productName + "]");
+
             // CHECK FOR EXISTING SELECTED ITEM
             for (i = 0;i<cashierDataGridView.Rows.Count && !found;i++)
             {
                 if (cashierDataGridView.Rows[i].Cells["productName"].Value.ToString() == productName)
-                { 
+                {
                     found = true;
                     rowSelectedIndex = i;
+
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : EXISTING ROW FOUND [" + rowSelectedIndex + "]");
                 }
             }
 
@@ -142,16 +164,20 @@ namespace RoyalPetz_ADMIN
             {
                 addNewRow(false);
                 rowSelectedIndex = cashierDataGridView.Rows.Count - 1;
+
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : NEW ROW ADDED [" + rowSelectedIndex + "]");
             }
 
             DataGridViewComboBoxCell productNameComboCell = (DataGridViewComboBoxCell)cashierDataGridView.Rows[rowSelectedIndex].Cells["productName"];
             DataGridViewRow selectedRow = cashierDataGridView.Rows[rowSelectedIndex];
 
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : RETRIEVE PRODUCT NAME");
             for (i =0;i<productNameComboCell.Items.Count;i++)
             {
                 if (productName == productNameComboCell.Items[i].ToString())
                 {
                     productNameComboCell.Value = productNameComboCell.Items[i];
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : DISPLAY PRODUCT NAME [" + productNameComboCell.Items[i].ToString() + "]");
                     break;
                 }
             }
@@ -160,13 +186,15 @@ namespace RoyalPetz_ADMIN
             { 
                 cashierDataGridView.Rows[rowSelectedIndex].Cells["qty"].Value = 1;
                 salesQty[rowSelectedIndex] = "1";
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : SET QTY TO 1 BECAUSE OF NEW ROW");
             }
             else
             {
                 currQty = Convert.ToDouble(salesQty[rowSelectedIndex]) + 1;
-
                 cashierDataGridView.Rows[rowSelectedIndex].Cells["qty"].Value = currQty;
                 salesQty[rowSelectedIndex] = currQty.ToString();
+
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : QTY FOR THE EXISTING ROW [" + currQty.ToString() + "]");
             }
 
             comboSelectedIndexChangeMethod(rowSelectedIndex, i, selectedRow);
@@ -177,25 +205,34 @@ namespace RoyalPetz_ADMIN
             switch (key)
             {
                 case Keys.F3:
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : CREATE NEW INSTANCE [" + objCounter + "]");
+
                     cashierForm displayForm = new cashierForm(objCounter);
                     displayForm.Show();
                     break;
             
                 case Keys.F4:
                     //MessageBox.Show("F4");
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : DISPLAY PELANGGAN FORM");
                     dataPelangganForm pelangganForm = new dataPelangganForm(globalConstants.CASHIER_MODULE, this);
                     pelangganForm.ShowDialog(this);
                     break;
             
                 case Keys.F8:
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : HOTKEY TO ADD NEW ROW PRESSED");
+
                     addNewRow();
                     break;
 
                 case Keys.F9:
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : HOTKEY TO SAVE AND PRINT OUT INVOICE PRESSED");
+
                     saveAndPrintOutInvoice();
                     break;
 
                 case Keys.F2:
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : DISPLAY BARCODE FORM");
+
                     barcodeForm displayBarcodeForm = new barcodeForm(this, globalConstants.CASHIER_MODULE);
 
                     displayBarcodeForm.Top = this.Top - displayBarcodeForm.Height;
@@ -272,6 +309,8 @@ namespace RoyalPetz_ADMIN
 
         private void registerGlobalHotkey()
         {
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : REGISTER HOTKEY");
+
             ghk_F3 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F3, this);
             ghk_F3.Register();
 
@@ -324,6 +363,8 @@ namespace RoyalPetz_ADMIN
 
         private void unregisterGlobalHotkey()
         {
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : UNREGISTER HOTKEY");
+
             ghk_F3.Unregister();
             ghk_F4.Unregister();
             ghk_F8.Unregister();
@@ -366,9 +407,12 @@ namespace RoyalPetz_ADMIN
                     rdr.Read();
 
                     pelangganTextBox.Text = rdr.GetString("CUSTOMER_FULL_NAME");
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : SET CUSTOMER PROFILE [" + pelangganTextBox.Text + "]");
+
                     isLoading = true;
                     customerComboBox.SelectedIndex = rdr.GetInt32("CUSTOMER_GROUP") - 1;
                     customerComboBox.Text = customerComboBox.Items[customerComboBox.SelectedIndex].ToString();
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : CUSTOMER GROUP [" + customerComboBox.Text + "]");
                     isLoading = false;
                 }
             }
@@ -390,8 +434,12 @@ namespace RoyalPetz_ADMIN
 
                     cashierDataGridView.Rows[i].Cells["productPrice"].Value = productPrice;
 
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : CHECK IF THERE'S ANY ENTRY IN THE PRODUCT DISC");
+
                     if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM CUSTOMER_PRODUCT_DISC WHERE CUSTOMER_ID = " + selectedPelangganID + " AND PRODUCT_ID = '" + productID + "'")) > 0)
                     {
+                        gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ENTRY IN THE PRODUCT DISC FOUND, RETRIEVE THE DISC VALUE");
+
                         // DATA EXIST, LOAD DISC VALUE
                         using (rdr = DS.getData("SELECT * FROM CUSTOMER_PRODUCT_DISC WHERE CUSTOMER_ID = " + selectedPelangganID + " AND PRODUCT_ID = '" + productID + "'"))
                         {
@@ -407,8 +455,10 @@ namespace RoyalPetz_ADMIN
 
                                 cashierDataGridView.Rows[i].Cells["discRP"].Value = rdr.GetString("DISC_RP");
                                 discRP[i] = rdr.GetString("DISC_RP");
+
+                                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : DISC FOUND [" + rdr.GetString("DISC_1") + ", " + rdr.GetString("DISC_2") + ", " + rdr.GetString("DISC_RP") + "]");
                             }
-                            
+
                             rdr.Close();
                         }
                     }
@@ -533,14 +583,20 @@ namespace RoyalPetz_ADMIN
 
             SODateTime = String.Format(culture, "{0:dd-MM-yyyy HH:mm}", DateTime.Now);
 
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ATTEMPT TO SAVE SALES DATA [" + SODateTime + "]");
+
             if (discJualMaskedTextBox.Text.Length > 0)
+            { 
                 salesDiscountFinal = discJualMaskedTextBox.Text;
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : SALES DISC FINAL [" + discJualMaskedTextBox.Text + "]");
+            }
 
             if (cashRadioButton.Checked)
             {
                 salesTop = 1;
                 salesPaid = 1;
                 SODueDateTime = String.Format(culture, "{0:dd-MM-yyyy}", DateTime.Now); ;
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : CASH SALES");
                 //paymentMethod = paymentComboBox.SelectedIndex;
             }
             else
@@ -551,6 +607,7 @@ namespace RoyalPetz_ADMIN
                 SODueDateTimeValue.AddDays(Convert.ToInt32(tempoMaskedTextBox.Text));
                 SODueDateTimeValue = SODueDateTimeValue.AddDays(Convert.ToInt32(tempoMaskedTextBox.Text));
                 SODueDateTime = String.Format(culture, "{0:dd-MM-yyyy}", SODueDateTimeValue);
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : NON CASH - SALES DUE DATE ["+ SODueDateTime + "]");
             }
 
             // TAX LIMIT CALCULATION
@@ -561,10 +618,13 @@ namespace RoyalPetz_ADMIN
 
             // CHECK WHETHER THE PARAMETER FOR TAX CALCULATION HAS BEEN SET
             taxLimitValue = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(PERSENTASE_PENJUALAN, 0) FROM SYS_CONFIG_TAX WHERE ID = 1"));
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CHECK IF TAX LIMIT SET FOR PERCENTAGE PURCHASE [" + taxLimitValue + "]");
+
             if (taxLimitValue == 0)
             {
                 taxLimitType = 1;
                 taxLimitValue = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(AVERAGE_PENJUALAN_HARIAN, 0) FROM SYS_CONFIG_TAX WHERE ID = 1"));
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CHECK IF TAX LIMIT SET FOR AVERAGE DAILY PURCHASE [" + taxLimitValue + "]");
 
                 if (taxLimitValue != 0)
                     addToTaxTable = true;
@@ -578,13 +638,22 @@ namespace RoyalPetz_ADMIN
                 if (taxLimitType == 0) // PERCENTAGE CALCULATION
                 {
                     parameterCalculation = currentSalesTotal * taxLimitValue / 100;
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "PERCENTAGE CALCULATION [" + parameterCalculation + "]");
+
                     if (currentTaxTotal > parameterCalculation)
+                    {
                         addToTaxTable = false;
+                        gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CURRENT TAX TOTAL IS BIGGER THAN PARAMETER CALCULATION");
+                    }
                 }
                 else // AMOUNT CALCULATION
                 {
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "AMOUNT CALCULATION [" + taxLimitValue + "]");
                     if (currentTaxTotal > taxLimitValue)
+                    {
                         addToTaxTable = false;
+                        gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CURRENT TAX TOTAL IS BIGGER THAN AMOUNT CALCULATION");
+                    }
                 }
             }
             // ----------------------------------------------------------------------
@@ -602,7 +671,8 @@ namespace RoyalPetz_ADMIN
                 sqlCommand = "INSERT INTO SALES_HEADER (SALES_INVOICE, CUSTOMER_ID, SALES_DATE, SALES_TOTAL, SALES_DISCOUNT_FINAL, SALES_TOP, SALES_TOP_DATE, SALES_PAID, SALES_PAYMENT, SALES_PAYMENT_CHANGE, SALES_PAYMENT_METHOD) " +
                                     "VALUES " +
                                     "('" + salesInvoice + "', " + selectedPelangganID + ", STR_TO_DATE('" + SODateTime + "', '%d-%m-%Y %H:%i'), " + gutil.validateDecimalNumericInput(globalTotalValue) + ", " + gutil.validateDecimalNumericInput(Convert.ToDouble(salesDiscountFinal)) + ", " + salesTop + ", STR_TO_DATE('" + SODueDateTime + "', '%d-%m-%Y'), " + salesPaid + ", " + gutil.validateDecimalNumericInput(bayarAmount) + ", " + gutil.validateDecimalNumericInput(sisaBayar) + ", " + selectedPaymentMethod + ")";
-                
+
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "INSERT INTO SALES HEADER [" + salesInvoice + "]");
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
 
@@ -612,6 +682,7 @@ namespace RoyalPetz_ADMIN
                                     "VALUES " +
                                     "('" + salesInvoice + "', " + selectedPelangganID + ", STR_TO_DATE('" + SODateTime + "', '%d-%m-%Y %H:%i'), " + gutil.validateDecimalNumericInput(globalTotalValue) + ", " + gutil.validateDecimalNumericInput(Convert.ToDouble(salesDiscountFinal)) + ", " + salesTop + ", STR_TO_DATE('" + SODueDateTime + "', '%d-%m-%Y'), " + salesPaid + ", " + gutil.validateDecimalNumericInput(bayarAmount) + ", " + gutil.validateDecimalNumericInput(sisaBayar) + ", " + selectedPaymentMethod + ")";
 
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "INSERT INTO SALES HEADER TAX [" + salesInvoice + "]");
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
                 }
@@ -631,6 +702,9 @@ namespace RoyalPetz_ADMIN
                                             "('" + salesInvoice + "', '" + productID + "', " + Convert.ToDouble(cashierDataGridView.Rows[i].Cells["productPrice"].Value) + ", " +
                                             gutil.validateDecimalNumericInput(Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value)) + ", " + gutil.validateDecimalNumericInput(disc1) + ", " + gutil.validateDecimalNumericInput(disc2) + ", " + gutil.validateDecimalNumericInput(discRP) + ", " + gutil.validateDecimalNumericInput(Convert.ToDouble(cashierDataGridView.Rows[i].Cells["jumlah"].Value)) + ")";
 
+                        gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "INSERT INTO SALES DETAIL[" + productID + ", " + Convert.ToDouble(cashierDataGridView.Rows[i].Cells["productPrice"].Value) + ", " +
+                                            gutil.validateDecimalNumericInput(Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value)) + "]");
+
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
@@ -641,6 +715,7 @@ namespace RoyalPetz_ADMIN
                                                 "('" + salesInvoice + "', '" + productID + "', " + Convert.ToDouble(cashierDataGridView.Rows[i].Cells["productPrice"].Value) + ", " +
                                                 gutil.validateDecimalNumericInput(Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value)) + ", " + gutil.validateDecimalNumericInput(disc1) + ", " + gutil.validateDecimalNumericInput(disc2) + ", " + gutil.validateDecimalNumericInput(discRP) + ", " + gutil.validateDecimalNumericInput(Convert.ToDouble(cashierDataGridView.Rows[i].Cells["jumlah"].Value)) + ")";
 
+                            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "INSERT INTO SALES DETAIL TAX [" + productID + "]");
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;
                         }
@@ -649,6 +724,7 @@ namespace RoyalPetz_ADMIN
                         sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value) +
                                             " WHERE PRODUCT_ID = '" + cashierDataGridView.Rows[i].Cells["productID"].Value.ToString() + "'";
 
+                        gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "REDUCE STOCK AT MASTER PRODUCT [" + cashierDataGridView.Rows[i].Cells["productID"].Value.ToString() + "]");
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
@@ -659,12 +735,14 @@ namespace RoyalPetz_ADMIN
                             {
                                 // UPDATE VALUE
                                 sqlCommand = "UPDATE CUSTOMER_PRODUCT_DISC SET DISC_1 = " + gutil.validateDecimalNumericInput(disc1) + ", DISC_2 = " + gutil.validateDecimalNumericInput(disc2) + ", DISC_RP = " + gutil.validateDecimalNumericInput(discRP) + " WHERE CUSTOMER_ID = " + selectedPelangganID + " AND PRODUCT_ID = '" + productID + "'";
+                                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "UPDATE CUSTOMER PRODUCT DISC [" + productID + "]");
                             }
                             else
                             {
                                 // INSERT VALUE
                                 sqlCommand = "INSERT INTO CUSTOMER_PRODUCT_DISC (CUSTOMER_ID, PRODUCT_ID, DISC_1, DISC_2 , DISC_RP) VALUES " +
                                                     "(" + selectedPelangganID + ", '" + productID + "', " + gutil.validateDecimalNumericInput(disc1) + ", " + gutil.validateDecimalNumericInput(disc2) + ", " + gutil.validateDecimalNumericInput(discRP) + ")";
+                                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "INSERT CUSTOMER PRODUCT DISC [" + productID + "]");
                             }
 
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
@@ -679,6 +757,7 @@ namespace RoyalPetz_ADMIN
                 sqlCommand = "INSERT INTO CREDIT (SALES_INVOICE, CREDIT_DUE_DATE, CREDIT_NOMINAL, CREDIT_PAID) VALUES " +
                                     "('" + salesInvoice + "', STR_TO_DATE('" + SODueDateTime + "', '%d-%m-%Y'), " + gutil.validateDecimalNumericInput(globalTotalValue) + ", " + salesPaid + ")";
 
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "INSERT TO CREDIT TABLE [" + salesInvoice + "]");
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
 
@@ -689,6 +768,7 @@ namespace RoyalPetz_ADMIN
                     // ADD A NEW ENTRY ON THE DAILY JOURNAL TO KEEP TRACK THE ADDITIONAL CASH AMOUNT 
                     sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
                                                    "VALUES (1, STR_TO_DATE('" + SODateTime + "', '%d-%m-%Y %H:%i')" + ", " + gutil.validateDecimalNumericInput(globalTotalValue) + ", 'PEMBAYARAN " + salesInvoice + "', '" + gutil.getUserID() + "', 1)";
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "INSERT TO DAILY JOURNAL TABLE [" + gutil.validateDecimalNumericInput(globalTotalValue) + "]");
 
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
@@ -700,6 +780,8 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "EXCEPTION THROWN [" + e.Message + "]");
+
                 try
                 {
                     DS.rollBack(ref internalEX);
@@ -737,10 +819,15 @@ namespace RoyalPetz_ADMIN
         {
             if (DialogResult.Yes == MessageBox.Show("SAVE AND PRINT OUT ?", "WARNING", MessageBoxButtons.YesNo,MessageBoxIcon.Warning))
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "ATTEMPT TO SAVE AND PRINT OUT INVOICE");
+
                 totalPenjualanTextBox.Focus();
                 if (saveData())
                 {
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "TRANSACTION SAVED");
+
                     gutil.saveUserChangeLog(globalConstants.MENU_PENJUALAN, globalConstants.CHANGE_LOG_INSERT, "NEW TRANSAKSI PENJUALAN [" + selectedsalesinvoice + "]");
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "PRINT OUT INVOICE");
                     PrintReceipt();
                     gutil.showSuccess(gutil.INS);
 
@@ -770,6 +857,8 @@ namespace RoyalPetz_ADMIN
 
             rsult = DS.getDataSingleValue("SELECT IFNULL(NO_FAKTUR, '') FROM SYS_CONFIG WHERE ID = 1").ToString();
 
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : NO FAKTUR [" + rsult + "]");
+
             return rsult;
         }
 
@@ -787,6 +876,8 @@ namespace RoyalPetz_ADMIN
             sqlCommand = "SELECT IFNULL(MAX(CONVERT(SUBSTRING(SALES_INVOICE, INSTR(SALES_INVOICE,'-')+1), UNSIGNED INTEGER)),'0') AS SALES_INVOICE FROM SALES_HEADER WHERE SALES_INVOICE LIKE '" + salesInvPrefix + "%'";
 
             maxSalesInvoice = DS.getDataSingleValue(sqlCommand).ToString();
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : MAX SALES INVOICE [" + maxSalesInvoice + "]");
+
             //if (maxSalesInvoice.Length > salesInvPrefix.Length)
             //{
             //    maxSalesInvoice = maxSalesInvoice.Substring(salesInvPrefix.Length);
@@ -812,6 +903,7 @@ namespace RoyalPetz_ADMIN
             //    maxSalesInvoice = "0" + maxSalesInvoice;
 
             salesInvoice = salesInvPrefix + maxSalesInvoice;
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : SALES INVOICE [" + salesInvoice + "]");
 
             return salesInvoice;
         }
@@ -830,7 +922,11 @@ namespace RoyalPetz_ADMIN
             else
                 priceType = "PRODUCT_WHOLESALE_PRICE";
 
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : PRODUCT PRICE TYPE [" + priceType + "]");
+
             result = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(" + priceType + ", 0) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
+
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : PRODUCT PRICE [" + result + "]");
 
             return result;
         }
@@ -862,6 +958,8 @@ namespace RoyalPetz_ADMIN
             double disc2Value = 0;
             double discRPValue = 0;
 
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : CALCULATE SUBTOTAL");
+
             try
             {
                 productQty = Convert.ToDouble(salesQty[rowSelectedIndex]);
@@ -892,12 +990,15 @@ namespace RoyalPetz_ADMIN
                 subTotal = 0;
             }
 
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : SUBTOTAL [" + subTotal + "]");
             return subTotal;
         }
 
         private bool stockIsEnough(string productID, double qtyRequested)
         {
             bool result = false;
+
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : CHECK STOCK QTY IS ENOUGH [" + productID + "]");
 
             if (productID.Length <= 0)
                 result = true; // NO PRODUCT SELECTED YET
@@ -909,6 +1010,8 @@ namespace RoyalPetz_ADMIN
 
                 if (stockQty >= qtyRequested)
                     result = true;
+
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : CHECK STOCK QTY IS ENOUGH [" + stockQty + ", " + qtyRequested + "]");
             }
 
             return result;
@@ -932,11 +1035,13 @@ namespace RoyalPetz_ADMIN
 
             hpp = getProductPriceValue(selectedProductID, customerComboBox.SelectedIndex);
 
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : comboSelectedIndexChangeMethod, HPP [" + hpp + "]");
             selectedRow.Cells["productPrice"].Value = hpp;
             selectedRow.Cells["productId"].Value = selectedProductID;
 
             if (selectedPelangganID != 0)
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : comboSelectedIndexChangeMethod, CHECK FOR CUST PRODUCT DISC, selectedPelangganID ["+ selectedPelangganID + "]");
                 if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM CUSTOMER_PRODUCT_DISC WHERE CUSTOMER_ID = " + selectedPelangganID + " AND PRODUCT_ID = '" + selectedProductID + "'")) > 0)
                 {
                     // DATA EXIST, LOAD DISC VALUE
@@ -954,6 +1059,8 @@ namespace RoyalPetz_ADMIN
 
                             selectedRow.Cells["discRP"].Value = rdr.GetString("DISC_RP");
                             discRP[rowSelectedIndex] = rdr.GetString("DISC_RP");
+
+                            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : comboSelectedIndexChangeMethod, LOAD DISC [" + rdr.GetString("DISC_1") + ", " + rdr.GetString("DISC_2") +", " + rdr.GetString("DISC_RP") + "]");
                         }
 
                         rdr.Close();
@@ -973,8 +1080,9 @@ namespace RoyalPetz_ADMIN
             }
 
             subTotal = calculateSubTotal(rowSelectedIndex, hpp);
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : comboSelectedIndexChangeMethod, subTotal [" + subTotal + "]");
             selectedRow.Cells["jumlah"].Value = subTotal;
-
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : comboSelectedIndexChangeMethod, attempt to calculate total");
             calculateTotal();
         }
 
@@ -1004,7 +1112,8 @@ namespace RoyalPetz_ADMIN
             productNameComboCell.Value = productNameComboCell.Items[selectedIndex];
 
             hpp = getProductPriceValue(selectedProductID, customerComboBox.SelectedIndex);
-            
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ComboBox_SelectedIndexChanged, HPP [" + hpp + "]");
+
             selectedRow.Cells["productPrice"].Value = hpp;
 
             if (null == selectedRow.Cells["qty"].Value)
@@ -1014,6 +1123,7 @@ namespace RoyalPetz_ADMIN
 
             if (selectedPelangganID != 0)
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ComboBox_SelectedIndexChanged, CHECK FOR CUST PRODUCT DISC, selectedPelangganID [" + selectedPelangganID + "]");
                 if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM CUSTOMER_PRODUCT_DISC WHERE CUSTOMER_ID = " + selectedPelangganID + " AND PRODUCT_ID = '" + selectedProductID + "'")) > 0)
                 {
                     // DATA EXIST, LOAD DISC VALUE
@@ -1031,6 +1141,8 @@ namespace RoyalPetz_ADMIN
 
                             selectedRow.Cells["discRP"].Value = rdr.GetString("DISC_RP");
                             discRP[rowSelectedIndex] = rdr.GetString("DISC_RP");
+
+                            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ComboBox_SelectedIndexChanged, LOAD DISC [" + rdr.GetString("DISC_1") + ", " + rdr.GetString("DISC_2") + ", " + rdr.GetString("DISC_RP") + "]");
                         }
                   
                         rdr.Close();
@@ -1050,7 +1162,9 @@ namespace RoyalPetz_ADMIN
             }
 
             subTotal = calculateSubTotal(rowSelectedIndex, hpp);
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ComboBox_SelectedIndexChanged, subTotal [" + subTotal + "]");
             selectedRow.Cells["jumlah"].Value = subTotal;
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ComboBox_SelectedIndexChanged, attempt to calculate total");
 
             calculateTotal();
         }
@@ -1064,6 +1178,8 @@ namespace RoyalPetz_ADMIN
             string previousInput = "";
             string tempString = "";
 
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : TextBox_TextChanged, isLoading [" + isLoading.ToString() + "]");
+
             if (isLoading)
                 return;
 
@@ -1072,6 +1188,8 @@ namespace RoyalPetz_ADMIN
             rowSelectedIndex = cashierDataGridView.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = cashierDataGridView.Rows[rowSelectedIndex];
 
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : TextBox_TextChanged, rowSelectedIndex [" + rowSelectedIndex + "]");
+
             //if (cashierDataGridView.CurrentCell.ColumnIndex != 3 && cashierDataGridView.CurrentCell.ColumnIndex != 4 && cashierDataGridView.CurrentCell.ColumnIndex != 5 && cashierDataGridView.CurrentCell.ColumnIndex != 6)
             if (cashierDataGridView.CurrentCell.OwningColumn.Name == "qty" && cashierDataGridView.CurrentCell.OwningColumn.Name == "disc1" && cashierDataGridView.CurrentCell.OwningColumn.Name == "disc2" && cashierDataGridView.CurrentCell.OwningColumn.Name == "discRP")
                 return;
@@ -1079,7 +1197,7 @@ namespace RoyalPetz_ADMIN
             if (dataGridViewTextBoxEditingControl.Text.Length <= 0)
             {
                 // IF TEXTBOX IS EMPTY, DEFAULT THE VALUE TO 0 AND EXIT THE CHECKING
-
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : TextBox_TextChanged, empty texbox, reset ["+ cashierDataGridView.CurrentCell.OwningColumn.Name + "] value to 0");
                 isLoading = true;
                 // reset subTotal Value and recalculate total
                 selectedRow.Cells["jumlah"].Value = 0;
@@ -1103,10 +1221,11 @@ namespace RoyalPetz_ADMIN
                 }
 
                 dataGridViewTextBoxEditingControl.Text = "0";
-
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : TextBox_TextChanged, recalculate total value");
                 calculateTotal();
 
                 dataGridViewTextBoxEditingControl.SelectionStart = dataGridViewTextBoxEditingControl.Text.Length;
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : TextBox_TextChanged, set the cursor to end of textbox");
                 isLoading = false;
                 return;
             }
@@ -1130,47 +1249,54 @@ namespace RoyalPetz_ADMIN
                     break;
             }
 
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : TextBox_TextChanged, previousInput [" + previousInput + "]");
             isLoading = true;
             if (previousInput == "0")
             {
                 tempString = dataGridViewTextBoxEditingControl.Text;
                 if (tempString.IndexOf('0') == 0 && tempString.Length > 1 && tempString.IndexOf("0.") < 0)
                     dataGridViewTextBoxEditingControl.Text = tempString.Remove(tempString.IndexOf('0'), 1);
+
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : TextBox_TextChanged, dataGridViewTextBoxEditingControl.Text [" + dataGridViewTextBoxEditingControl.Text + "]");
             }
             
-                if (gutil.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
-                    && (dataGridViewTextBoxEditingControl.Text.Length > 0 && dataGridViewTextBoxEditingControl.Text != ".")
-                    )
+            if (gutil.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
+                && (dataGridViewTextBoxEditingControl.Text.Length > 0 && dataGridViewTextBoxEditingControl.Text != ".")
+                )
+            {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : TextBox_TextChanged, dataGridViewTextBoxEditingControl.Text pass REGEX Checking");
+                switch (cashierDataGridView.CurrentCell.OwningColumn.Name)
                 {
-                    switch (cashierDataGridView.CurrentCell.OwningColumn.Name)
-                    {
-                        case "qty":                            
-                            if (stockIsEnough(productID, Convert.ToDouble(dataGridViewTextBoxEditingControl.Text)))
-                                salesQty[rowSelectedIndex] = dataGridViewTextBoxEditingControl.Text;
-                            else
-                                dataGridViewTextBoxEditingControl.Text = salesQty[rowSelectedIndex];
-                            break;
-                        case "disc1":
-                            disc1[rowSelectedIndex] = dataGridViewTextBoxEditingControl.Text;
-                            break;
-                        case "disc2":
-                            disc2[rowSelectedIndex] = dataGridViewTextBoxEditingControl.Text;
-                            break;
-                        case "discRP":
-                            discRP[rowSelectedIndex] = dataGridViewTextBoxEditingControl.Text;
-                            break;
-                    }
+                    case "qty":                            
+                        if (stockIsEnough(productID, Convert.ToDouble(dataGridViewTextBoxEditingControl.Text)))
+                            salesQty[rowSelectedIndex] = dataGridViewTextBoxEditingControl.Text;
+                        else
+                            dataGridViewTextBoxEditingControl.Text = salesQty[rowSelectedIndex];
+                        break;
+                    case "disc1":
+                        disc1[rowSelectedIndex] = dataGridViewTextBoxEditingControl.Text;
+                        break;
+                    case "disc2":
+                        disc2[rowSelectedIndex] = dataGridViewTextBoxEditingControl.Text;
+                        break;
+                    case "discRP":
+                        discRP[rowSelectedIndex] = dataGridViewTextBoxEditingControl.Text;
+                        break;
+                }
             }
             else
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : TextBox_TextChanged, dataGridViewTextBoxEditingControl.Text did not pass REGEX Checking");
                 dataGridViewTextBoxEditingControl.Text = previousInput;
             }
 
             productPrice = Convert.ToDouble(selectedRow.Cells["productPrice"].Value);
 
             subTotal = calculateSubTotal(rowSelectedIndex, productPrice);
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : TextBox_TextChanged, subtotal value [" + subTotal + "]");
             selectedRow.Cells["jumlah"].Value = subTotal;
 
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : TextBox_TextChanged, attempt to calculate total value");
             calculateTotal();
             dataGridViewTextBoxEditingControl.SelectionStart = dataGridViewTextBoxEditingControl.Text.Length;
 
@@ -1203,7 +1329,7 @@ namespace RoyalPetz_ADMIN
             string noFakturValue;
 
             noFakturValue = DS.getDataSingleValue("SELECT NO_FAKTUR FROM SYS_CONFIG").ToString();
-
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : loadNoFaktur, noFakturValue [" + noFakturValue + "]");
             noFakturLabel.Text = noFakturValue;
         }
 
@@ -1211,7 +1337,9 @@ namespace RoyalPetz_ADMIN
         {
             registerGlobalHotkey();
 
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : cashierForm_Load, ATTEMPT TO LOAD NO FAKTUR");
             loadNoFaktur();
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : cashierForm_Load, ATTEMPT TO addColumnToDataGrid");
             addColumnToDataGrid();
 
             customerComboBox.SelectedIndex = 0;
@@ -1339,6 +1467,7 @@ namespace RoyalPetz_ADMIN
                 DataGridViewRow selectedRow = cashierDataGridView.Rows[rowSelectedIndex];
 
                 cashierDataGridView.Rows.Remove(selectedRow);
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : deleteCurrentRow [" + rowSelectedIndex + "]");
             }
         }
 
@@ -1346,8 +1475,10 @@ namespace RoyalPetz_ADMIN
         {
             if (e.KeyCode == Keys.Delete)
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : cashierDataGridView_KeyDown delete pressed");
                 if (DialogResult.Yes == MessageBox.Show("DELETE CURRENT ROW?", "WARNING", MessageBoxButtons.YesNo))
                 {
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : cashierDataGridView_KeyDown ATTEMPT TO DELETE ROW");
                     deleteCurrentRow();
                     updateRowNumber();
                     calculateTotal();
@@ -1360,12 +1491,15 @@ namespace RoyalPetz_ADMIN
             double total = 0;
             double discJual = 0;
             double totalAfterDisc = 0;
-            
+
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : calculateTotal");
             for (int i = 0; i < cashierDataGridView.Rows.Count; i++)
             {
                 if ( null != cashierDataGridView.Rows[i].Cells["jumlah"].Value )
                     total = total + Convert.ToDouble(cashierDataGridView.Rows[i].Cells["jumlah"].Value);
             }
+
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : calculateTotal ["+ total + "]");
 
             globalTotalValue = total;
             totalAfterDisc = total;
@@ -1378,6 +1512,7 @@ namespace RoyalPetz_ADMIN
                 discJual = Convert.ToDouble(discJualMaskedTextBox.Text);
                 totalAfterDisc = Math.Round(totalAfterDisc - discJual, 2);
             }
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : calculateTotal, totalAfterDisc [" + totalAfterDisc + "]");
 
             totalAfterDiscTextBox.Text = totalAfterDisc.ToString("c2", culture);
 
@@ -1389,6 +1524,7 @@ namespace RoyalPetz_ADMIN
             double totalAfterDisc = 0;
             if (bayarTextBox.Text.Length > 0)
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : calculateChangeValue, bayarTextBox.Text [" + bayarTextBox.Text + "]");
                 bayarAmount = Convert.ToDouble(bayarTextBox.Text);
                 totalAfterDisc = globalTotalValue - discValue;
                 if (bayarAmount > totalAfterDisc)
@@ -1396,6 +1532,7 @@ namespace RoyalPetz_ADMIN
                 else
                     sisaBayar = 0;
 
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : calculateChangeValue, sisaBayar [" + sisaBayar + "]");
                 uangKembaliTextBox.Text = sisaBayar.ToString("C2", culture);
             }
         }
@@ -1420,6 +1557,7 @@ namespace RoyalPetz_ADMIN
                 discValue = 0;
             }
 
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : discJualMaskedTextBox_Validating, totalAfterDisc [" + totalAfterDisc + "]");
             totalAfterDiscTextBox.Text = totalAfterDisc.ToString("C2", culture);
         }
 
@@ -1457,6 +1595,7 @@ namespace RoyalPetz_ADMIN
 
         private void ChangePrinterButton_Click(object sender, EventArgs e)
         {
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ChangePrinterButton_Click, DISPLAY PRINTER SELECTION FORM");
             SetPrinterForm displayedForm = new SetPrinterForm();
             displayedForm.ShowDialog(this);
         }
@@ -1472,6 +1611,7 @@ namespace RoyalPetz_ADMIN
             {
                 if (rdr.HasRows)
                 {
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : loadInfoToko");
                     while (rdr.Read())
                     {
                         if (!String.IsNullOrEmpty(rdr.GetString("NAME")))
@@ -1506,6 +1646,8 @@ namespace RoyalPetz_ADMIN
             {
                 if (rdr.HasRows)
                 {
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : loadNamaUser");
+
                     rdr.Read();
                     nama = rdr.GetString("NAME");
                 }
@@ -1523,8 +1665,13 @@ namespace RoyalPetz_ADMIN
             //cek paper mode
             int papermode = gutil.getPaper();
             int paperLength = 0;
+
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : PrintReceipt");
+
+
             if (papermode == 0) //kertas POS
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : PrintReceipt, POS size Paper");
                 //width, height
                 paperLength = calculatePageLength();
                 PaperSize psize = new PaperSize("Custom", 320, paperLength);//820);
@@ -1539,6 +1686,8 @@ namespace RoyalPetz_ADMIN
                 }
             } else
             {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : PrintReceipt, papermode [" + papermode + "]");
+
                 //kertas 1/2 kwarto atau kwarto using crystal report
                 //preview laporan
                 DS.mySqlConnect();
@@ -1552,10 +1701,12 @@ namespace RoyalPetz_ADMIN
                 DS.writeXML(sqlCommandx, globalConstants.SalesReceiptXML);
                 if (gutil.getPaper() == 2) // kuarto
                 {
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : PrintReceipt, kuarto paper, display SalesReceiptKuartoForm");
                     SalesReceiptKuartoForm displayedform = new SalesReceiptKuartoForm();
                     displayedform.ShowDialog(this); ;
                 } else
                 {
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : PrintReceipt, display SalesReceiptForm");
                     SalesReceiptForm displayedform = new SalesReceiptForm();
                     displayedform.ShowDialog(this);
                 }
@@ -1642,7 +1793,8 @@ namespace RoyalPetz_ADMIN
             //end of footer
 
             totalLengthPage = totalLengthPage + Offset + 15;
-            
+
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : calculatePageLength, totalLengthPage [" + totalLengthPage + "]");
             return totalLengthPage;
         }
 
@@ -1652,6 +1804,8 @@ namespace RoyalPetz_ADMIN
             string nm, almt, tlpn, email;
 
             //event printing
+
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : printDocument1_PrintPage, print POS size receipt");
 
             Graphics graphics = e.Graphics;
             Font font = new Font("Courier New", 10);

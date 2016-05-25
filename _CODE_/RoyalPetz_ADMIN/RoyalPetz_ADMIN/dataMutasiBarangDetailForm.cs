@@ -1086,8 +1086,13 @@ namespace RoyalPetz_ADMIN
             gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "SAVE/APPROVE MUTASI");
             if (saveData())
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "MUTASI SAVED TO LOCAL DATA");
+
                 if (!updateDataAtBranch())
+                {
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "FAILED TO UPDATE BRANCH DATA");
                     MessageBox.Show("KONEKSI KE CABANG GAGAL");
+                }
                 //if (!directMutasiBarang)
 
                 gUtil.saveUserChangeLog(globalConstants.MENU_MUTASI_BARANG, globalConstants.CHANGE_LOG_INSERT, "APPROVE MUTASI BARANG TGL MUTASI [" + PMDateTimePicker.Text + "], NO PERMINTAAN [" + ROInvoiceTextBox.Text + "]");
@@ -1142,10 +1147,14 @@ namespace RoyalPetz_ADMIN
             subModuleID = globalConstants.REJECT_PRODUCT_MUTATION;
             if (saveData())
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "REQUEST ORDER [" + ROInvoiceTextBox.Text + "] REJECTED");
+
                 if (!directMutasiBarang)
                     if (!updateDataAtBranch())
+                    {
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "FAIL TO UPDATE BRANCH DATA");
                         MessageBox.Show("KONEKSI KE CABANG GAGAL");
-
+                    }
                 totalApproved.Text = "Rp. 0";
 
                 gUtil.saveUserChangeLog(globalConstants.MENU_MUTASI_BARANG, globalConstants.CHANGE_LOG_UPDATE, "REJECT PERMINTAAN [" + ROInvoiceTextBox.Text + "]");
@@ -1407,8 +1416,11 @@ namespace RoyalPetz_ADMIN
 
         private void acceptedButton_Click(object sender, EventArgs e)
         {
+            gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "MANUALLY SET MUTASI [" + selectedPMInvoice + "] TO RECEIVED");
             if (setReceived())
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "MUTASI [" + selectedPMInvoice + "] SET TO RECEIVED");
+
                 gUtil.saveUserChangeLog(globalConstants.MENU_MUTASI_BARANG, globalConstants.CHANGE_LOG_UPDATE, "MUTASI [" + selectedPMInvoice + "] SUDAH DITERIMA");
                 MessageBox.Show("MUTASI DITERIMA");
                 acceptedButton.Visible = false;

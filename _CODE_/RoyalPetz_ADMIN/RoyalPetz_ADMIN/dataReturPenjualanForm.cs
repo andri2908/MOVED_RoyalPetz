@@ -488,6 +488,8 @@ namespace RoyalPetz_ADMIN
                     sqlCommand = "INSERT INTO RETURN_SALES_HEADER (RS_INVOICE, SALES_INVOICE, CUSTOMER_ID, RS_DATETIME, RS_TOTAL) VALUES " +
                                     "('" + returID + "', '" + selectedSalesInvoice + "', " + selectedCustomerID + ", STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), " + gutil.validateDecimalNumericInput(returTotal) + ")";
 
+                gutil.saveSystemDebugLog(originModuleID, "INSERT INTO RETURN SALES HEADER [" + returID + "]");
+
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
 
@@ -512,58 +514,68 @@ namespace RoyalPetz_ADMIN
                     sqlCommand = "INSERT INTO RETURN_SALES_DETAIL (RS_INVOICE, PRODUCT_ID, PRODUCT_SALES_PRICE, PRODUCT_SALES_QTY, PRODUCT_RETURN_QTY, RS_DESCRIPTION, RS_SUBTOTAL) VALUES " +
                                         "('" + returID + "', '" + detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + hppValue + ", " + soQty + ", " + qtyValue + ", '" + descriptionValue + "', " + gutil.validateDecimalNumericInput(Convert.ToDouble(detailReturDataGridView.Rows[i].Cells["subTotal"].Value)) + ")";
 
+                    gutil.saveSystemDebugLog(originModuleID, "INSERT INTO RETURN SALES DETAIL [" + detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString() + ", " + hppValue + ", " + soQty + ", " + qtyValue + "]");
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
 
                     // UPDATE MASTER PRODUCT
                     sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY + " + qtyValue + " WHERE PRODUCT_ID = '" + detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString() + "'";
 
+                    gutil.saveSystemDebugLog(originModuleID, "UPDATE MASTER PRODUCT QTY ["+ detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString() + "]");
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
                 }
 
                 extraAmount = 0;
                 // IF THERE'S ANY CREDIT LEFT FOR THAT PARTICULAR INVOICE
+                gutil.saveSystemDebugLog(originModuleID, "CHECK FOR ANY OUTSTANDING AMOUNT FOR THE INVOICE");
                 if (originModuleID == globalConstants.RETUR_PENJUALAN)
                 {
                     totalCredit = getTotalCredit();
                     selectedCreditID = getCreditID();
 
+                    gutil.saveSystemDebugLog(originModuleID, "selectedCreditID [" + selectedCreditID + "]");
                     if (selectedCreditID > 0)
                     {
                         if (totalCredit >= globalTotalValue)
                         {
                             // RETUR VALUE LESS THAN OR EQUAL TOTAL CREDIT
                             // add retur as cash payment with description retur no
+                            gutil.saveSystemDebugLog(originModuleID, "RETUR VALUE LESS THAN OR EQUAL TOTAL CREDIT");
                             sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED, PAYMENT_DUE_DATE, PAYMENT_CONFIRMED_DATE) VALUES " +
                                                 "(" + selectedCreditID + ", STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), 1, " + gutil.validateDecimalNumericInput(globalTotalValue) + ", 'RETUR [" + returID + "]', 1, STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'))";
-                
+
+                            gutil.saveSystemDebugLog(originModuleID, "INSERT INTO PAYMENT CREDIT [" + selectedCreditID + ", " + gutil.validateDecimalNumericInput(globalTotalValue) + "]");
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;
                         }
                         else
                         {
                             // RETUR VALUE BIGGER THAN TOTAL CREDIT
+                            gutil.saveSystemDebugLog(originModuleID, "RETUR VALUE BIGGER THAN TOTAL CREDIT");
                             // return the extra amount as cash
                             extraAmount = globalTotalValue - totalCredit;
+                            gutil.saveSystemDebugLog(originModuleID, "extraAmount [" + extraAmount + "]");
                             sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED, PAYMENT_DUE_DATE, PAYMENT_CONFIRMED_DATE) VALUES " +
                                                 "(" + selectedCreditID + ", STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), 1, " + gutil.validateDecimalNumericInput(totalCredit) + ", 'RETUR [" + noReturTextBox.Text + "]', 1, STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'))";
 
+                            gutil.saveSystemDebugLog(originModuleID, "INSERT INTO PAYMENT CREDIT [" + selectedCreditID + ", " + gutil.validateDecimalNumericInput(totalCredit) + "]");
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;
                         }
 
                         if (totalCredit <= globalTotalValue)
                         {
+                            gutil.saveSystemDebugLog(originModuleID, "RETUR VALUE BIGGER THAN TOTAL CREDIT VALUE, MEANS FULLY PAID");
                             // UPDATE SALES HEADER TABLE
                             sqlCommand = "UPDATE SALES_HEADER SET SALES_PAID = 1 WHERE SALES_INVOICE = '" + selectedSalesInvoice + "'";
-
+                            gutil.saveSystemDebugLog(originModuleID, "UPDATE SALES HEADER [" + selectedSalesInvoice + "]");
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;
 
                             // UPDATE CREDIT TABLE
                             sqlCommand = "UPDATE CREDIT SET CREDIT_PAID = 1 WHERE CREDIT_ID = " + selectedCreditID;
-
+                            gutil.saveSystemDebugLog(originModuleID, "UPDATE CREDIT [" + selectedCreditID + "]");
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;
                         }
@@ -573,6 +585,7 @@ namespace RoyalPetz_ADMIN
                 }
                 else if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
                 {
+                    gutil.saveSystemDebugLog(originModuleID, "GET LIST OF OUTSTANDING CREDIT AND PAY FROM THE OLDEST CREDIT");
                     if (returnCash)
                         extraAmount = globalTotalValue;
                     else
@@ -591,6 +604,7 @@ namespace RoyalPetz_ADMIN
 
                         if (dt.Rows.Count > 0)
                         {
+                            gutil.saveSystemDebugLog(originModuleID, "AMOUNT OF RETUR ["+ returNominal + "] NUM OF OUTSTANDING CREDIT [" + dt.Rows.Count + "]");
                             rowCounter = 0;
                             while (returNominal > 0 && rowCounter < dt.Rows.Count)
                             {
@@ -599,17 +613,24 @@ namespace RoyalPetz_ADMIN
                                 currentCreditID = Convert.ToInt32(dt.Rows[rowCounter]["CREDIT_ID"].ToString());
                                 outstandingCreditAmount = Convert.ToDouble(dt.Rows[rowCounter]["SISA PIUTANG"].ToString());
 
+                                gutil.saveSystemDebugLog(originModuleID, "currentCreditID [" + currentCreditID + "] outstandingCreditAmount [" + outstandingCreditAmount + "]");
+
                                 if (outstandingCreditAmount <= returNominal && outstandingCreditAmount > 0)
                                 {
+                                    gutil.saveSystemDebugLog(originModuleID, "currentCreditID [" + currentCreditID + "] FULLY PAID");
                                     actualReturAmount = outstandingCreditAmount;
                                     fullyPaid = true;
                                 }
                                 else
+                                {
                                     actualReturAmount = returNominal;
+                                    gutil.saveSystemDebugLog(originModuleID, "currentCreditID [" + currentCreditID + "] NOT FULLY PAID [" + actualReturAmount + "]");
+                                }
 
                                 sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED, PAYMENT_DUE_DATE, PAYMENT_CONFIRMED_DATE) VALUES " +
                                                     "(" + currentCreditID + ", STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), 1, " + gutil.validateDecimalNumericInput(actualReturAmount) + ", 'RETUR [" + returID + "]', 1, STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'))";
 
+                                gutil.saveSystemDebugLog(originModuleID, "INSERT TO PAYMENT CREDIT [" + currentCreditID + ", " + gutil.validateDecimalNumericInput(actualReturAmount) + "]");
                                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                     throw internalEX;
 
@@ -617,13 +638,15 @@ namespace RoyalPetz_ADMIN
                                 {
                                     // UPDATE CREDIT TABLE
                                     sqlCommand = "UPDATE CREDIT SET CREDIT_PAID = 1 WHERE CREDIT_ID = " + currentCreditID;
-
+                                    gutil.saveSystemDebugLog(originModuleID, "UPDATE CREDIT [" + currentCreditID + "] TO FULLY PAID");
                                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                         throw internalEX;
                                 }
 
                                 returNominal = returNominal - actualReturAmount;
+                                gutil.saveSystemDebugLog(originModuleID, "returNominal [" + returNominal + "]");
                                 rowCounter += 1;
+                                gutil.saveSystemDebugLog(originModuleID, "rowCounter [" + rowCounter + "]");
                             }
                         }
                     }
@@ -634,6 +657,7 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gutil.saveSystemDebugLog(originModuleID, "EXCEPTION THROWN [" + e.Message + "]");
                 try
                 {
                     DS.rollBack();
@@ -702,12 +726,18 @@ namespace RoyalPetz_ADMIN
             {
                 if (DialogResult.Yes == MessageBox.Show("RETUR BERUPA UANG CASH?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     returnCash = true;
+
+                gutil.saveSystemDebugLog(globalConstants.MENU_RETUR_PENJUALAN_STOK, "RETURN CASH [" + returnCash.ToString() + "]");
             }
 
+            gutil.saveSystemDebugLog(globalConstants.MENU_RETUR_PENJUALAN, "ATTEMPT TO SAVE DATA");
             if (saveData())
             {
                 if (extraAmount > 0)
+                {
                     MessageBox.Show("JUMLAH YANG DIKEMBALIKAN SEBESAR " + extraAmount.ToString("C", culture));
+                    gutil.saveSystemDebugLog(globalConstants.MENU_RETUR_PENJUALAN, "extraAmount [" + extraAmount + "]");
+                }
 
                 gutil.saveUserChangeLog(globalConstants.MENU_RETUR_PENJUALAN, globalConstants.CHANGE_LOG_INSERT, "RETUR PENJUALAN [" + noReturTextBox.Text + "]");
                 errorLabel.Text = "";

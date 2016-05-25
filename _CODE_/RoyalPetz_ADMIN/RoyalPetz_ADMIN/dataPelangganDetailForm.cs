@@ -207,6 +207,7 @@ namespace RoyalPetz_ADMIN
                         sqlCommand = "INSERT INTO MASTER_CUSTOMER " +
                                             "(CUSTOMER_FULL_NAME, CUSTOMER_ADDRESS1, CUSTOMER_ADDRESS2, CUSTOMER_ADDRESS_CITY, CUSTOMER_PHONE, CUSTOMER_FAX, CUSTOMER_EMAIL, CUSTOMER_ACTIVE, CUSTOMER_JOINED_DATE, CUSTOMER_TOTAL_SALES_COUNT, CUSTOMER_GROUP) " +
                                             "VALUES ('" + custName + "', '" + custAddress1 + "', '" + custAddress2 + "', '" + custAddressCity+ "', '" + custPhone + "', '" + custFax + "', '" + custEmail + "', "+custStatus+", STR_TO_DATE('"+custJoinedDate+"', '%d-%m-%Y'), "+custTotalSales+", "+custGroup+")";
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PELANGGAN, "INSERT NEW CUSTOMER DATA [" + custName + "]");
                         break;
                     case globalConstants.EDIT_CUSTOMER:
 
@@ -223,6 +224,7 @@ namespace RoyalPetz_ADMIN
                                             "CUSTOMER_TOTAL_SALES_COUNT = " + custTotalSales + ", " +
                                             "CUSTOMER_GROUP = " + custGroup + " " +
                                             "WHERE CUSTOMER_ID = " + selectedCustomerID;
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PELANGGAN, "EDIT CUSTOMER DATA [" + selectedCustomerID + "]");
                         break;
                 }
 
@@ -234,6 +236,8 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PELANGGAN, "EXCEPTION THROWN [" + e.Message+ "]");
+
                 try
                 {
                     DS.rollBack();
@@ -270,8 +274,10 @@ namespace RoyalPetz_ADMIN
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            gUtil.saveSystemDebugLog(globalConstants.MENU_PELANGGAN, "ATTEMPT TO SAVE DATA");
             if (saveData())
             {
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PELANGGAN, "DATA SAVED");
                 if (originModuleID == globalConstants.NEW_CUSTOMER)
                     gUtil.saveUserChangeLog(globalConstants.MENU_PELANGGAN, globalConstants.CHANGE_LOG_INSERT, "INSERT NEW PELANGGAN [" + custNameTextBox.Text + "]");
                 else
