@@ -34,7 +34,8 @@ namespace RoyalPetz_ADMIN
 		
 		public void readHDD_ID()
         {
-            string drive = "C";
+            string drive = Path.GetPathRoot(Environment.SystemDirectory); //"C";
+            drive = drive.Substring(0, 1);
             ManagementObject dsk = new ManagementObject(
                 @"win32_logicaldisk.deviceid=""" + drive + @":""");
             dsk.Get();

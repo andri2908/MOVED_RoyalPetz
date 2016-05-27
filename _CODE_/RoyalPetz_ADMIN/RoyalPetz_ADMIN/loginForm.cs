@@ -19,7 +19,7 @@ namespace RoyalPetz_ADMIN
         private Data_Access DS = new Data_Access();
         private globalUtilities gutil = new globalUtilities();
         private globalCryptographyMethod gCrypto = new globalCryptographyMethod();
-        private string licenseFilePath = Application.StartupPath + "\\license.lic";
+        private string licenseFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\license.lic";//Application.StartupPath + "\\license.lic";
 
         private int selectedUserID = 0;
         private int selectedUserGroupID = 0;
