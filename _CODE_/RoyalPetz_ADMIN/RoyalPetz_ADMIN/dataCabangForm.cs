@@ -68,7 +68,7 @@ namespace RoyalPetz_ADMIN
                     dt.Load(rdr);
                     dataCabangGridView.DataSource = dt;
 
-                    dataCabangGridView.Columns["BRANCH_ID"].Visible = false;
+                    dataCabangGridView.Columns["BRANCH_ID"].Visible = true;
                     dataCabangGridView.Columns["NAMA CABANG"].Width = 200;
                     dataCabangGridView.Columns["ALAMAT IP CABANG"].Width = 200;
                 }

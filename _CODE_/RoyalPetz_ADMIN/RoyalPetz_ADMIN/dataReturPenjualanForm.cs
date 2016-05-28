@@ -180,11 +180,18 @@ namespace RoyalPetz_ADMIN
         private double getSOQty(string productID)
         {
             double result = 0;
+            double soQTY = 0;
+            double returQTY = 0;
             string sqlCommand = "";
             DS.mySqlConnect();
 
-            sqlCommand = "SELECT SUM(PRODUCT_QTY) FROM SALES_DETAIL WHERE SALES_INVOICE = '" + selectedSalesInvoice + "' AND PRODUCT_ID = '" + productID + "'";
-            result = Convert.ToDouble(DS.getDataSingleValue(sqlCommand));
+            sqlCommand = "SELECT IFNULL(SUM(PRODUCT_QTY), 0) FROM SALES_DETAIL WHERE SALES_INVOICE = '" + selectedSalesInvoice + "' AND PRODUCT_ID = '" + productID + "'";
+            soQTY = Convert.ToDouble(DS.getDataSingleValue(sqlCommand));
+
+            sqlCommand = "SELECT IFNULL(SUM(PRODUCT_RETURN_QTY), 0) FROM RETURN_SALES_DETAIL RSD, RETURN_SALES_HEADER RSH WHERE RSD.RS_INVOICE = RSH.RS_INVOICE AND RSH.SALES_INVOICE = '" + selectedSalesInvoice + "' AND RSD.PRODUCT_ID = '" + productID + "'";
+            returQTY = Convert.ToDouble(DS.getDataSingleValue(sqlCommand));
+
+            result = soQTY - returQTY;
 
             return result;
         }
@@ -356,9 +363,17 @@ namespace RoyalPetz_ADMIN
         {
             string result = "";
             double resultValue = 0;
+            double invoiceValue = 0;
+            double paymentValue = 0;
 
             // GLOBAL SALES TOTAL VALUE WITHOUT ANY PAYMENT / RETURN
-            resultValue = Convert.ToDouble(DS.getDataSingleValue("SELECT SALES_TOTAL FROM SALES_HEADER WHERE SALES_INVOICE = '" + selectedSalesInvoice + "'"));
+            invoiceValue = Convert.ToDouble(DS.getDataSingleValue("SELECT SALES_TOTAL FROM SALES_HEADER WHERE SALES_INVOICE = '" + selectedSalesInvoice + "'"));
+
+            // TOTAL PAYMENT / RETURN
+            paymentValue = Convert.ToDouble(DS.getDataSingleValue("SELECT SUM(PAYMENT_NOMINAL) FROM PAYMENT_CREDIT PC, CREDIT C WHERE PC.CREDIT_ID = C.CREDIT_ID AND C.SALES_INVOICE = '" + selectedSalesInvoice + "'"));
+
+            resultValue = invoiceValue - paymentValue;
+
             result = resultValue.ToString("C2", culture);
 
             return result;
@@ -460,6 +475,7 @@ namespace RoyalPetz_ADMIN
             DataTable dt = new DataTable();
             int rowCounter;
             int currentCreditID;
+            string currentSalesInvoice;
             bool fullyPaid = false;
 
             
@@ -478,7 +494,7 @@ namespace RoyalPetz_ADMIN
 
             try
             {
-                DS.mySqlConnect();
+                //DS.mySqlConnect();
 
                 // SAVE HEADER TABLE
                 if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
@@ -567,9 +583,16 @@ namespace RoyalPetz_ADMIN
                         if (totalCredit <= globalTotalValue)
                         {
                             gutil.saveSystemDebugLog(originModuleID, "RETUR VALUE BIGGER THAN TOTAL CREDIT VALUE, MEANS FULLY PAID");
+                            
                             // UPDATE SALES HEADER TABLE
                             sqlCommand = "UPDATE SALES_HEADER SET SALES_PAID = 1 WHERE SALES_INVOICE = '" + selectedSalesInvoice + "'";
                             gutil.saveSystemDebugLog(originModuleID, "UPDATE SALES HEADER [" + selectedSalesInvoice + "]");
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+
+                            // UPDATE SALES HEADER TAX TABLE
+                            sqlCommand = "UPDATE SALES_HEADER_TAX SET SALES_PAID = 1 WHERE SALES_INVOICE = '" + selectedSalesInvoice + "'";
+                            gutil.saveSystemDebugLog(originModuleID, "UPDATE SALES HEADER TAX [" + selectedSalesInvoice + "]");
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;
 
@@ -591,7 +614,7 @@ namespace RoyalPetz_ADMIN
                     else
                     {
                         // GET A LIST OF OUTSTANDING SALES CREDIT
-                        sqlCommand = "SELECT C.CREDIT_ID, (CREDIT_NOMINAL - IFNULL(PC.PAYMENT, 0)) AS 'SISA PIUTANG' " +
+                        sqlCommand = "SELECT C.SALES_INVOICE, C.CREDIT_ID, (CREDIT_NOMINAL - IFNULL(PC.PAYMENT, 0)) AS 'SISA PIUTANG' " +
                                             "FROM SALES_HEADER S, CREDIT C LEFT OUTER JOIN (SELECT CREDIT_ID, SUM(PAYMENT_NOMINAL) AS PAYMENT FROM PAYMENT_CREDIT GROUP BY CREDIT_ID) PC ON PC.CREDIT_ID = C.CREDIT_ID  " +
                                             "WHERE S.CUSTOMER_ID = " + selectedCustomerID + " AND C.CREDIT_PAID = 0 " +
                                             "AND C.SALES_INVOICE = S.SALES_INVOICE ORDER BY C.CREDIT_ID ASC";
@@ -610,6 +633,7 @@ namespace RoyalPetz_ADMIN
                             {
                                 fullyPaid = false;
 
+                                currentSalesInvoice = dt.Rows[rowCounter]["SALES_INVOICE"].ToString();
                                 currentCreditID = Convert.ToInt32(dt.Rows[rowCounter]["CREDIT_ID"].ToString());
                                 outstandingCreditAmount = Convert.ToDouble(dt.Rows[rowCounter]["SISA PIUTANG"].ToString());
 
@@ -641,6 +665,19 @@ namespace RoyalPetz_ADMIN
                                     gutil.saveSystemDebugLog(originModuleID, "UPDATE CREDIT [" + currentCreditID + "] TO FULLY PAID");
                                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                         throw internalEX;
+
+                                    // UPDATE SALES HEADER TABLE
+                                    sqlCommand = "UPDATE SALES_HEADER SET SALES_PAID = 1 WHERE SALES_INVOICE = " + currentSalesInvoice;
+                                    gutil.saveSystemDebugLog(originModuleID, "UPDATE SALES_HEADER [" + currentSalesInvoice + "] TO FULLY PAID");
+                                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                        throw internalEX;
+
+                                    // UPDATE SALES HEADER TAX TABLE
+                                    sqlCommand = "UPDATE SALES_HEADER_TAX SET SALES_PAID = 1 WHERE SALES_INVOICE = " + currentSalesInvoice;
+                                    gutil.saveSystemDebugLog(originModuleID, "UPDATE SALES_HEADER_TAX [" + currentSalesInvoice + "] TO FULLY PAID");
+                                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                        throw internalEX;
+
                                 }
 
                                 returNominal = returNominal - actualReturAmount;

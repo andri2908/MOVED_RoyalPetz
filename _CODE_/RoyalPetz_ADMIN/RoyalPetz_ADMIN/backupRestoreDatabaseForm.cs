@@ -78,10 +78,10 @@ namespace RoyalPetz_ADMIN
             saveFileDialog1.AddExtension = true;
             saveFileDialog1.DefaultExt = "sql";
             saveFileDialog1.Filter = "SQL File (.sql)|*.sql";
-            saveFileDialog1.ShowDialog();
 
-            if (saveFileDialog1.FileName.Length > 0 )
-                backupDatabase(saveFileDialog1.FileName);
+            if (DialogResult.OK ==  saveFileDialog1.ShowDialog())
+                if (gUtil.allTrim(saveFileDialog1.FileName).Length > 0 )
+                    backupDatabase(saveFileDialog1.FileName);
         }
 
         private void restoreDatabase(string fileName)

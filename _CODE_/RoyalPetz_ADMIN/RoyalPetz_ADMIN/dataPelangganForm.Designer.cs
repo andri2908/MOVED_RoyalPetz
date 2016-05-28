@@ -115,6 +115,7 @@
             this.unknownCustomerButton.TabIndex = 35;
             this.unknownCustomerButton.Text = "PELANGGAN TIDAK TERDAFTAR";
             this.unknownCustomerButton.UseVisualStyleBackColor = true;
+            this.unknownCustomerButton.Visible = false;
             this.unknownCustomerButton.Click += new System.EventHandler(this.unknownCustomerButton_Click);
             // 
             // dataPelangganForm

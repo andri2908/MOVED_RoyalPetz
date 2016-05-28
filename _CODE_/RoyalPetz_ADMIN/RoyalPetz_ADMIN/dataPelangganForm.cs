@@ -35,8 +35,8 @@ namespace RoyalPetz_ADMIN
 
             originModuleID = moduleID;
 
-            if (originModuleID != globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
-                unknownCustomerButton.Visible = false;
+            if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
+                unknownCustomerButton.Visible = true;
 
             userAccessOption = DS.getUserAccessRight(globalConstants.MENU_PELANGGAN, gutil.getUserGroupID());
 
@@ -59,9 +59,12 @@ namespace RoyalPetz_ADMIN
             if (originModuleID == globalConstants.CASHIER_MODULE)
             { 
                 newButton.Visible = false;
-                unknownCustomerButton.Visible = false;
+            //    unknownCustomerButton.Visible = false;
                 pelanggangnonactiveoption.Visible = false;
             }
+
+            if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
+                unknownCustomerButton.Visible = true;
         }
 
         private void newButton_Click(object sender, EventArgs e)

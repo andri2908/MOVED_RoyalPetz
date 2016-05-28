@@ -253,6 +253,7 @@ namespace RoyalPetz_ADMIN
             TanggalTransaksi.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
             loadtypeaccount();
             LoadBranchInfo();
+            loadTransaksi();
         }
 
         private void dataTransaksiJurnalHarianDetailForm_Activated(object sender, EventArgs e)
@@ -273,7 +274,7 @@ namespace RoyalPetz_ADMIN
             int Account_ID = 0;
             String TglTrans = "";
             Double NominalAkun = 0;
-            int branch_id = 0;
+            int branch_id = getBranchID();
             String deskripsi = "";
             int user_id = 0;
             int pm_id = 0;
@@ -384,10 +385,13 @@ namespace RoyalPetz_ADMIN
         private bool checkDataTransaksi(String datetimetrans)
         {
             MySqlDataReader rdr;
-
+            string sqlCommand;
             DS.mySqlConnect();
 
-            using (rdr = DS.getData("SELECT JOURNAL_ID as 'ID' FROM DAILY_JOURNAL WHERE JOURNAL_DATETIME = " + "STR_TO_DATE('" + datetimetrans + "', '%d-%m-%Y')"))
+            sqlCommand = "SELECT JOURNAL_ID as 'ID' FROM DAILY_JOURNAL WHERE journal_datetime >= STR_TO_DATE('"+datetimetrans+ " 00:00:00', '%d-%m-%Y %k:%i:%s') AND journal_datetime <= STR_TO_DATE('" + datetimetrans + " 23:59:59', '%d-%m-%Y %k:%i:%s')";
+            //"SELECT JOURNAL_ID as 'ID' FROM DAILY_JOURNAL WHERE JOURNAL_DATETIME LIKE " + "STR_TO_DATE('" + datetimetrans + "', '%d-%m-%Y%')";
+
+            using (rdr = DS.getData(sqlCommand))
             {
                 if (rdr.HasRows)
                 {
@@ -402,9 +406,13 @@ namespace RoyalPetz_ADMIN
 
         private int getBranchID()
         {
-            int result;
+            int result = 0;
+            int numOfRows = 0;
 
-            result = Convert.ToInt32(DS.getDataSingleValue("SELECT IFNULL(BRANCH_ID, 0) FROM SYS_CONFIG WHERE ID = 2"));
+            numOfRows = Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM SYS_CONFIG WHERE ID = 2"));
+
+            if (numOfRows > 0)
+                result = Convert.ToInt32(DS.getDataSingleValue("SELECT IFNULL(BRANCH_ID, 0) FROM SYS_CONFIG WHERE ID = 2"));
 
             return result;
         }
@@ -416,7 +424,14 @@ namespace RoyalPetz_ADMIN
             String TglTrans = String.Format(culture, "{0:dd-MM-yyyy}", selectedDate);
             int branch_id = 0;
             String cabang = "";
-
+            string sqlCommand;
+            String nmakun;
+            String deskripsiakun;
+            Double nominalakun;
+            String pembayaran;
+            int pm_id;
+            Double debet;
+            Double credit;
             if (checkDataTransaksi(TglTrans))
             {
                 //modeupdate
@@ -427,8 +442,9 @@ namespace RoyalPetz_ADMIN
                 MySqlDataReader rdr;
 
                 //DS.mySqlConnect();
-
-                using (rdr = DS.getData("SELECT JOURNAL_ID, ACCOUNT_ID, JOURNAL_NOMINAL, IFNULL(BRANCH_ID, 0) AS BRANCH_ID, JOURNAL_DESCRIPTION, USER_ID, PM_ID FROM DAILY_JOURNAL WHERE JOURNAL_DATETIME = " + "STR_TO_DATE('" + TglTrans + "', '%d-%m-%Y')"))
+                sqlCommand = "SELECT JOURNAL_ID, ACCOUNT_ID, JOURNAL_NOMINAL, IFNULL(BRANCH_ID, 0) AS BRANCH_ID, JOURNAL_DESCRIPTION, USER_ID, PM_ID FROM DAILY_JOURNAL WHERE JOURNAL_DATETIME >= STR_TO_DATE('"+TglTrans+ " 00:00:00', '%d-%m-%Y %k:%i:%s') AND JOURNAL_DATETIME <= STR_TO_DATE('" + TglTrans + " 23:59:59', '%d-%m-%Y %k:%i:%s')";
+                    //SELECT JOURNAL_ID as 'ID' FROM DAILY_JOURNAL WHERE 
+                using (rdr = DS.getData(sqlCommand))
                 {
                     if (rdr.HasRows)
                     {
@@ -440,13 +456,13 @@ namespace RoyalPetz_ADMIN
                             selectedDJID = rdr.GetInt32("JOURNAL_ID");
                             selectedAccountID = rdr.GetInt32("ACCOUNT_ID");
                             loadDeskripsi(selectedAccountID);
-                            String nmakun = NamaAkunTextbox.Text;
-                            int pm_id = rdr.GetInt32("PM_ID");
+                            nmakun = NamaAkunTextbox.Text;
+                            pm_id = rdr.GetInt32("PM_ID");
                             carabayarcombobox.SelectedValue = pm_id;
-                            String deskripsiakun = rdr.GetString("JOURNAL_DESCRIPTION");
+                            deskripsiakun = rdr.GetString("JOURNAL_DESCRIPTION");
                             DeskripsiAkunTextbox.Text = deskripsiakun;
-                            Double nominalakun = 0;
-                            String pembayaran = carabayarcombobox.GetItemText(carabayarcombobox.SelectedItem);
+                            nominalakun = 0;
+                            pembayaran = carabayarcombobox.GetItemText(carabayarcombobox.SelectedItem);
 
                             branch_id = rdr.GetInt32("BRANCH_ID");
                             if (branch_id != 0)
@@ -458,8 +474,8 @@ namespace RoyalPetz_ADMIN
                             nominalakun = rdr.GetDouble("JOURNAL_NOMINAL");
 
                             //check debet/credit
-                            Double debet = nominalakun;
-                            Double credit = 0;
+                            debet = nominalakun;
+                            credit = 0;
                             if (selectedTipeAkun == 2) //credit
                             {
                                 credit = nominalakun;

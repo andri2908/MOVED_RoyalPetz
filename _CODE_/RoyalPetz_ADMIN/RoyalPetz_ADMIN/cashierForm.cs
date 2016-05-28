@@ -541,7 +541,7 @@ namespace RoyalPetz_ADMIN
             else
             {
                 // CHECK TEMPO
-                if (tempoMaskedTextBox.Text.Length <= 0)
+                if (tempoMaskedTextBox.Text.Length <= 0 || tempoMaskedTextBox.Text == "0")
                 {
                     errorLabel.Text = "LAMA TEMPO TIDAK BOLEH NOL";
                     return false;
@@ -2056,41 +2056,44 @@ namespace RoyalPetz_ADMIN
             graphics.DrawString(ucapan, new Font("Courier New", 7),
                      new SolidBrush(Color.Black), rectright, sf);
 
-            Offset = Offset + 15;
-            rect.Y = startY + Offset;
-            rect.X = startX + 15;
-            rect.Width = 260;
-            sf.LineAlignment = StringAlignment.Near;
-            sf.Alignment = StringAlignment.Near;
-            ucapan = "               TUNAI   :";
-            rectcenter.Y = rect.Y;
-            graphics.DrawString(ucapan, new Font("Courier New", 7),
-                     new SolidBrush(Color.Black), rectcenter, sf);
-            sf.LineAlignment = StringAlignment.Far;
-            sf.Alignment = StringAlignment.Far;
+            if (cashRadioButton.Checked == true)
+            { 
+                Offset = Offset + 15;
+                rect.Y = startY + Offset;
+                rect.X = startX + 15;
+                rect.Width = 260;
+                sf.LineAlignment = StringAlignment.Near;
+                sf.Alignment = StringAlignment.Near;
+                ucapan = "               TUNAI   :";
+                rectcenter.Y = rect.Y;
+                graphics.DrawString(ucapan, new Font("Courier New", 7),
+                         new SolidBrush(Color.Black), rectcenter, sf);
+                sf.LineAlignment = StringAlignment.Far;
+                sf.Alignment = StringAlignment.Far;
 
-            double jumlahBayar = Convert.ToDouble(bayarTextBox.Text);
-            ucapan = jumlahBayar.ToString("C2", culture);//"Rp." + String.Format("{0:C2}", bayarTextBox.Text);
-            rectright.Y = Offset - startY + 1;
-            graphics.DrawString(ucapan, new Font("Courier New", 7),
-                     new SolidBrush(Color.Black), rectright, sf);
+                double jumlahBayar = Convert.ToDouble(bayarTextBox.Text);
+                ucapan = jumlahBayar.ToString("C2", culture);//"Rp." + String.Format("{0:C2}", bayarTextBox.Text);
+                rectright.Y = Offset - startY + 1;
+                graphics.DrawString(ucapan, new Font("Courier New", 7),
+                         new SolidBrush(Color.Black), rectright, sf);
 
-            Offset = Offset + 15;
-            rect.Y = startY + Offset;
-            rect.X = startX + 15;
-            rect.Width = 260;
-            sf.LineAlignment = StringAlignment.Near;
-            sf.Alignment = StringAlignment.Near;
-            ucapan = "               KEMBALI :";
-            rectcenter.Y = rect.Y;
-            graphics.DrawString(ucapan, new Font("Courier New", 7),
-                     new SolidBrush(Color.Black), rectcenter, sf);
-            sf.LineAlignment = StringAlignment.Far;
-            sf.Alignment = StringAlignment.Far;
-            ucapan = uangKembaliTextBox.Text;
-            rectright.Y = Offset - startY + 1;
-            graphics.DrawString(ucapan, new Font("Courier New", 7),
-                     new SolidBrush(Color.Black), rectright, sf);
+                Offset = Offset + 15;
+                rect.Y = startY + Offset;
+                rect.X = startX + 15;
+                rect.Width = 260;
+                sf.LineAlignment = StringAlignment.Near;
+                sf.Alignment = StringAlignment.Near;
+                ucapan = "               KEMBALI :";
+                rectcenter.Y = rect.Y;
+                graphics.DrawString(ucapan, new Font("Courier New", 7),
+                         new SolidBrush(Color.Black), rectcenter, sf);
+                sf.LineAlignment = StringAlignment.Far;
+                sf.Alignment = StringAlignment.Far;
+                ucapan = uangKembaliTextBox.Text;
+                rectright.Y = Offset - startY + 1;
+                graphics.DrawString(ucapan, new Font("Courier New", 7),
+                         new SolidBrush(Color.Black), rectright, sf);
+            }
 
             total_qty = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(SUM(PRODUCT_QTY), 0) FROM SALES_DETAIL S, MASTER_PRODUCT P WHERE S.PRODUCT_ID = P.PRODUCT_ID AND S.SALES_INVOICE = '" + selectedsalesinvoice + "'"));
 

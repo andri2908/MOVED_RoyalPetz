@@ -69,8 +69,12 @@ namespace RoyalPetz_ADMIN
         public string getHQ_IPServer()
         {
             string HQ_Ip = "";
+            int dataExist = 0;
 
-            HQ_Ip = getDataSingleValue("SELECT IFNULL(HQ_IP4, '') FROM SYS_CONFIG WHERE ID = 2").ToString();
+            dataExist = Convert.ToInt32(getDataSingleValue("SELECT COUNT(1) FROM SYS_CONFIG WHERE ID = 2"));
+
+            if (dataExist > 0)
+                HQ_Ip = getDataSingleValue("SELECT IFNULL(HQ_IP4, '') FROM SYS_CONFIG WHERE ID = 2").ToString();
 
             return HQ_Ip;
         }

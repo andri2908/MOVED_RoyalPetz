@@ -111,11 +111,11 @@ namespace RoyalPetz_ADMIN
                 return false;
             }
 
-            if (ipAddressExist())
-            {
-                errorLabel.Text = "IP ADDRESS SUDAH TERDAFTAR";
-                return false;
-            }
+            //if (ipAddressExist())
+           // {
+            //    errorLabel.Text = "IP ADDRESS SUDAH TERDAFTAR";
+             //   return false;
+           // }
 
             return true;
         }

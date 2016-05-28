@@ -763,7 +763,7 @@ namespace RoyalPetz_ADMIN
             string result = "";
             int lastNo;
 
-            lastNo = Convert.ToInt32(DS.getDataSingleValue("SELECT MAX(CONVERT(SUBSTRING(PM_INVOICE, 4), UNSIGNED INTEGER)) FROM PRODUCTS_MUTATION_HEADER"));
+            lastNo = Convert.ToInt32(DS.getDataSingleValue("SELECT IFNULL(MAX(CONVERT(SUBSTRING(PM_INVOICE, 4), UNSIGNED INTEGER)), 0) FROM PRODUCTS_MUTATION_HEADER"));
             lastNo++;
 
             result = "PM-" + lastNo.ToString();
