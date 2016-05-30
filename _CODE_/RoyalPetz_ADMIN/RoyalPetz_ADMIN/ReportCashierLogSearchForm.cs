@@ -79,17 +79,22 @@ namespace RoyalPetz_ADMIN
             dateTo = String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(datetoPicker.Value));
             DS.mySqlConnect();
             string sqlCommandx = "";
-            string supplier = "";
-            if (ErrorLabel.Visible == true)
+            string user_id = "";
+            if (ErrorLabel.Visible == false)
             {
-                supplier = "AND PH.SUPPLIER_ID = '" + UserIDCombobox.SelectedValue + "' ";
+                user_id = "AND CL.USER_ID = " + UserIDCombobox.SelectedValue + " ";
             }
-            sqlCommandx = "SELECT PH.PURCHASE_DATETIME AS 'TGL', PH.PURCHASE_DATE_RECEIVED AS 'TERIMA', PURCHASE_INVOICE AS 'INVOICE', MS.SUPPLIER_FULL_NAME AS 'SUPPLIER', PH.PURCHASE_TOTAL AS 'TOTAL', IF(PH.PURCHASE_TERM_OF_PAYMENT>0,'KREDIT','TUNAI') AS 'TOP', PH.PURCHASE_TERM_OF_PAYMENT_DURATION AS 'HARI', IF(PH.PURCHASE_PAID>0,'LUNAS','BELUM LUNAS') AS 'STATUS' " +
-                                        "FROM PURCHASE_HEADER PH, MASTER_SUPPLIER MS " +
-                                        "WHERE PH.SUPPLIER_ID = MS.SUPPLIER_ID " + supplier + "AND DATE_FORMAT(PH.PURCHASE_DATETIME, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(PH.PURCHASE_DATETIME, '%Y%m%d')  <= '" + dateTo + "' " +
-                                        "ORDER BY TGL";
+            sqlCommandx = "SELECT MU.USER_FULL_NAME AS 'USERID', CL.DATE_LOGIN AS 'LOGIN',CL.DATE_LOGOUT AS 'LOGOUT', CL.AMOUNT_START AS 'START', CL.AMOUNT_END AS 'END', " +
+                            "CL.COMMENT AS 'COMMENT', CL.TOTAL_CASH_TRANSACTION AS 'CASH', CL.TOTAL_NON_CASH_TRANSACTION AS 'NONCASH',CL.TOTAL_OTHER_TRANSACTION AS 'OTHER', " +
+                            "SH.SALES_INVOICE AS 'INVOICE', SH.SALES_DATE AS 'TGLTRANS', IF(SH.SALES_TOP = 1, 'TUNAI', 'CREDIT') AS 'TOP', SH.SALES_TOTAL AS 'TOTAL' " +
+                            "FROM CASHIER_LOG CL, SALES_HEADER SH, MASTER_USER MU " +
+                            "WHERE SH.SALES_DATE >= CL.DATE_LOGIN AND SH.SALES_DATE <= CL.DATE_LOGOUT " +
+                            "AND DATE_FORMAT(CL.DATE_LOGIN, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(CL.DATE_LOGIN, '%Y%m%d')  <= '" + dateTo + "' " +
+                            "AND CL.USER_ID = MU.ID " + user_id + " " +
+                            "GROUP BY INVOICE " +
+                            "ORDER BY TGLTRANS ASC";
             DS.writeXML(sqlCommandx, globalConstants.CashierLogXML);
-            ReportPurchaseSummaryForm displayedForm1 = new ReportPurchaseSummaryForm();
+            ReportCashierLogForm displayedForm1 = new ReportCashierLogForm();
             displayedForm1.ShowDialog(this);
         }
     }

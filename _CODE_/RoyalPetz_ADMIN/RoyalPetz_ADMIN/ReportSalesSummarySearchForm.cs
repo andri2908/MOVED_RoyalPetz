@@ -53,7 +53,7 @@ namespace RoyalPetz_ADMIN
 
             using (rdr = DS.getData(SQLcommand))
             {
-                if (rdr.HasRows)
+                //if (rdr.HasRows)
                 {
                     dt.Load(rdr);
 
@@ -62,16 +62,17 @@ namespace RoyalPetz_ADMIN
                     workRow["NAME"] = "P-UMUM";
 
                     dt.Rows.Add(workRow);
+
                     CustNameCombobox.DataSource = dt;
                     CustNameCombobox.ValueMember = "ID";
                     CustNameCombobox.DisplayMember = "NAME";
                 }
-                else
-                {
-                    CustNameCombobox.ValueMember = "ID";
-                    CustNameCombobox.DisplayMember = "NAME";
-                    CustNameCombobox.Items.Insert(0, "P-UMUM");
-                }
+                ////else
+                //{
+                //    CustNameCombobox.ValueMember = "ID";
+                //    CustNameCombobox.DisplayMember = "NAME";
+                //    CustNameCombobox.Items.Insert(0, "P-UMUM");
+                //}
             }
             //CustNameCombobox.SelectedIndex = 0;
             CustNameCombobox.SelectedIndex = CustNameCombobox.FindStringExact("P-UMUM");
@@ -124,6 +125,13 @@ namespace RoyalPetz_ADMIN
                     ProductcomboBox.Visible = true;
                     loadProduct();
                     break;
+                case globalConstants.REPORT_SALES_SUMMARY:
+                    LabelOptions.Visible = false;
+                    nonactivecheckbox.Visible = false;
+                    CustNameCombobox.Visible = false;
+                    ProductcomboBox.Visible = false;
+                    loadcustomer();
+                    break;
                 default:
                     LabelOptions.Text = "Pelanggan";
                     CustNameCombobox.Visible = true;
@@ -148,18 +156,18 @@ namespace RoyalPetz_ADMIN
             switch (originModuleID)
             {
                     case globalConstants.REPORT_SALES_SUMMARY:
-                        result = int.TryParse(CustNameCombobox.Items[CustNameCombobox.SelectedIndex].ToString(), out cust_id);
-                        if (result)
-                        {
+                    //result = int.TryParse(CustNameCombobox.SelectedValue.ToString(), out cust_id);
+                    //if (result)
+                    //{
 
-                        }
-                        else
-                        {
-                            cust_id = 0;
-                        }
-                        sqlCommandx = "SELECT SALES_INVOICE AS 'INVOICE', C.CUSTOMER_FULL_NAME AS 'CUSTOMER', DATE_FORMAT(S.SALES_DATE, '%d-%M-%Y') AS 'DATE',S.SALES_TOTAL AS 'TOTAL', IF(C.CUSTOMER_GROUP=1,'RETAIL',IF(C.CUSTOMER_GROUP=2,'GROSIR','PARTAI')) AS 'GROUP' " +
-                                        "FROM SALES_HEADER S,MASTER_CUSTOMER C " +
-                                        "WHERE S.CUSTOMER_ID = C.CUSTOMER_ID AND DATE_FORMAT(S.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(S.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "' AND S.CUSTOMER_ID = " + cust_id + " " +
+                    //}
+                    //else
+                    //{
+                    //    cust_id = 0;
+                    //}
+                    sqlCommandx = "SELECT SALES_INVOICE AS 'INVOICE', C.CUSTOMER_FULL_NAME AS 'CUSTOMER', DATE_FORMAT(S.SALES_DATE, '%d-%M-%Y') AS 'DATE',S.SALES_TOTAL AS 'TOTAL', IF(C.CUSTOMER_GROUP=1,'RETAIL',IF(C.CUSTOMER_GROUP=2,'GROSIR','PARTAI')) AS 'GROUP' " +
+                                    "FROM SALES_HEADER S,MASTER_CUSTOMER C " +
+                                    "WHERE S.CUSTOMER_ID = C.CUSTOMER_ID AND DATE_FORMAT(S.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(S.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "'" +  //AND S.CUSTOMER_ID = " + cust_id + " " +
                                         "UNION " +
                                         "SELECT S.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', DATE_FORMAT(S.SALES_DATE, '%d-%M-%Y') AS 'DATE', S.SALES_TOTAL AS 'TOTAL', 'RETAIL' AS 'GROUP' " +
                                         "FROM SALES_HEADER S " +
@@ -169,25 +177,35 @@ namespace RoyalPetz_ADMIN
                         displayedForm1.ShowDialog(this);
                         break;
                     case globalConstants.REPORT_SALES_DETAILED:
-                        result = int.TryParse(CustNameCombobox.Items[CustNameCombobox.SelectedIndex].ToString(), out cust_id);
-                        if (result)
+                    // result = int.TryParse(CustNameCombobox.Items[CustNameCombobox.SelectedIndex].ToString(), out cust_id);
+                    result = int.TryParse(CustNameCombobox.SelectedValue.ToString(), out cust_id);
+                    if (cust_id > 0)
                         {
-
-                        }
-                        else
-                        {
-                            cust_id = 0;
-                        }
                         sqlCommandx = "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', MC.CUSTOMER_FULL_NAME AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', PRODUCT_QTY AS 'QTY', " +
                                     "PRODUCT_SALES_PRICE AS 'PRICE', ROUND((PRODUCT_QTY * PRODUCT_SALES_PRICE) - SALES_SUBTOTAL, 2) AS 'POTONGAN', SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
-                                    "FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT M, MASTER_CUSTOMER MC WHERE SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "' AND SH.CUSTOMER_ID = " + cust_id +
-                                    " UNION " +
-                                    "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', PRODUCT_QTY AS 'QTY', PRODUCT_SALES_PRICE AS 'PRICE', " +
-                                    "ROUND((PRODUCT_QTY * PRODUCT_SALES_PRICE) - SALES_SUBTOTAL, 2) AS 'POTONGAN', SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
-                                    "FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT M WHERE SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND SH.CUSTOMER_ID = 0 AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "'";
+                                    "FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT M, MASTER_CUSTOMER MC " +
+                                    "WHERE SH.CUSTOMER_ID = MC.CUSTOMER_ID AND SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "' AND SH.CUSTOMER_ID = " + cust_id;
+                    }
+                    else
+                        {
+                            cust_id = 0;
+                        sqlCommandx = "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', PRODUCT_QTY AS 'QTY', " +
+                                    "PRODUCT_SALES_PRICE AS 'PRICE', ROUND((PRODUCT_QTY * PRODUCT_SALES_PRICE) - SALES_SUBTOTAL, 2) AS 'POTONGAN', SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
+                                    "FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT M " +
+                                    "WHERE SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "' AND SH.CUSTOMER_ID = " + cust_id;
+                    }
+                    //sqlCommandx = "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', IFNULL(MC.CUSTOMER_FULL_NAME, 'P-UMUM') AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', PRODUCT_QTY AS 'QTY', " +
+                    //            "PRODUCT_SALES_PRICE AS 'PRICE', ROUND((PRODUCT_QTY * PRODUCT_SALES_PRICE) - SALES_SUBTOTAL, 2) AS 'POTONGAN', SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
+                    //            "FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT M, MASTER_CUSTOMER MC " +
+                    //            "WHERE SH.CUSTOMER_ID = MC.CUSTOMER_ID AND SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "' AND SH.CUSTOMER_ID = " + cust_id;
+                                    //" UNION " +
+                                    //"SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', PRODUCT_QTY AS 'QTY', PRODUCT_SALES_PRICE AS 'PRICE', " +
+                                    //"ROUND((PRODUCT_QTY * PRODUCT_SALES_PRICE) - SALES_SUBTOTAL, 2) AS 'POTONGAN', SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
+                                    //"FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT M " +
+                                    //"WHERE SH.CUSTOMER_ID = MC.CUSTOMER_ID AND SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND SH.CUSTOMER_ID = 0 AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "'";
                         DS.writeXML(sqlCommandx, globalConstants.SalesDetailedXML);
-                        //ReportSalesDetailedForm displayedForm2 = new ReportSalesDetailedForm();
-                        //displayedForm2.ShowDialog(this);
+                        ReportSalesDetailedForm displayedForm2 = new ReportSalesDetailedForm();
+                        displayedForm2.ShowDialog(this);
                         break;
                 case globalConstants.REPORT_SALES_PRODUCT:
                     prod_id = ProductcomboBox.SelectedValue.ToString();
@@ -209,8 +227,8 @@ namespace RoyalPetz_ADMIN
                                         "GROUP BY INVOICE " +
                                         "ORDER BY PAID,BULAN,DATE ASC";
                     DS.writeXML(sqlCommandx, globalConstants.SalesOmzetXML);
-                    //ReportSalesOmzetForm displayedForm4 = new ReportSalesOmzetForm();
-                    //displayedForm4.ShowDialog(this);
+                    ReportSalesOmzetForm displayedForm4 = new ReportSalesOmzetForm();
+                    displayedForm4.ShowDialog(this);
                     break;
             }
                

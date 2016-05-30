@@ -1,6 +1,6 @@
 ﻿namespace RoyalPetz_ADMIN
 {
-    partial class ReportCashierLogForm
+    partial class ReportDebtDueForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
-            this.ReportCashierLog1 = new RoyalPetz_ADMIN.ReportCashierLog();
+            this.ReportDebtDue1 = new RoyalPetz_ADMIN.ReportDebtDue();
             this.SuspendLayout();
             // 
             // crystalReportViewer1
@@ -40,25 +40,22 @@
             this.crystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.crystalReportViewer1.Location = new System.Drawing.Point(0, 0);
             this.crystalReportViewer1.Name = "crystalReportViewer1";
-            this.crystalReportViewer1.ReportSource = this.ReportCashierLog1;
-            this.crystalReportViewer1.ShowCloseButton = false;
-            this.crystalReportViewer1.ShowCopyButton = false;
+            this.crystalReportViewer1.ReportSource = this.ReportDebtDue1;
             this.crystalReportViewer1.ShowGroupTreeButton = false;
             this.crystalReportViewer1.ShowParameterPanelButton = false;
-            this.crystalReportViewer1.Size = new System.Drawing.Size(803, 329);
+            this.crystalReportViewer1.Size = new System.Drawing.Size(832, 369);
             this.crystalReportViewer1.TabIndex = 0;
-            this.crystalReportViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
-            // ReportCashierLogForm
+            // ReportDebtDueForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(803, 329);
+            this.ClientSize = new System.Drawing.Size(832, 369);
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "ReportCashierLogForm";
-            this.Text = "Laporan Penjualan Kasir";
-            this.Load += new System.EventHandler(this.ReportCashierLogForm_Load);
+            this.Name = "ReportDebtDueForm";
+            this.Text = "Laporan Hutang Akan Jatuh Tempo";
+            this.Load += new System.EventHandler(this.ReportDebtDueForm_Load);
             this.ResumeLayout(false);
 
         }
@@ -66,7 +63,6 @@
         #endregion
 
         private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
-        private ReportCashierLog ReportCashierLog1;
-        //private ReportCashierLog ReportCashierLog1;
+        private ReportDebtDue ReportDebtDue1;
     }
 }

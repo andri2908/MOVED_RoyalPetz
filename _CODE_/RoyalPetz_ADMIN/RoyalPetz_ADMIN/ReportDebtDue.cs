@@ -16,14 +16,14 @@ namespace RoyalPetz_ADMIN {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class ReportCashierLog : ReportClass {
+    public class ReportDebtDue : ReportClass {
         
-        public ReportCashierLog() {
+        public ReportDebtDue() {
         }
         
         public override string ResourceName {
             get {
-                return "ReportCashierLog.rpt";
+                return "ReportDebtDue.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace RoyalPetz_ADMIN {
         
         public override string FullResourceName {
             get {
-                return "RoyalPetz_ADMIN.ReportCashierLog.rpt";
+                return "RoyalPetz_ADMIN.ReportDebtDue.rpt";
             }
             set {
                 // Do nothing
@@ -66,7 +66,7 @@ namespace RoyalPetz_ADMIN {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace RoyalPetz_ADMIN {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,33 +82,17 @@ namespace RoyalPetz_ADMIN {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
-            get {
-                return this.ReportDefinition.Sections[4];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
-            get {
-                return this.ReportDefinition.Sections[5];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public CrystalDecisions.CrystalReports.Engine.Section Section5 {
             get {
-                return this.ReportDefinition.Sections[6];
+                return this.ReportDefinition.Sections[4];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedReportCashierLog : Component, ICachedReport {
+    public class CachedReportDebtDue : Component, ICachedReport {
         
-        public CachedReportCashierLog() {
+        public CachedReportDebtDue() {
         }
         
         [Browsable(false)]
@@ -145,7 +129,7 @@ namespace RoyalPetz_ADMIN {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            ReportCashierLog rpt = new ReportCashierLog();
+            ReportDebtDue rpt = new ReportDebtDue();
             rpt.Site = this.Site;
             return rpt;
         }

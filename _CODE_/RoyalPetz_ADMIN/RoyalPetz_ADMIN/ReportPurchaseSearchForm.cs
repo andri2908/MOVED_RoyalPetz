@@ -125,7 +125,7 @@ namespace RoyalPetz_ADMIN
             if (ErrorLabel.Visible == true)
             {
                 supplier = "AND PH.SUPPLIER_ID = '" + SupplierNameCombobox.SelectedValue + "' ";
-                supplier = "AND PD.PRODUCT_ID = '" + ProductcomboBox.SelectedValue + "' ";
+                produk = "AND PD.PRODUCT_ID = '" + ProductcomboBox.SelectedValue + "' ";
             }
             switch (originModuleID)
             {
@@ -141,16 +141,16 @@ namespace RoyalPetz_ADMIN
                 case globalConstants.REPORT_PURCHASE_DETAILED:
                     sqlCommandx = "SELECT PH.PURCHASE_DATETIME AS 'TGL', PH.PURCHASE_DATE_RECEIVED AS 'TERIMA', PH.PURCHASE_INVOICE AS 'INVOICE', MS.SUPPLIER_FULL_NAME AS 'SUPPLIER', MP.PRODUCT_NAME AS 'PRODUK', PD.PRODUCT_PRICE AS 'HARGA', PD.PRODUCT_QTY AS 'QTY', PD.PURCHASE_SUBTOTAL AS 'SUBTOTAL' " +
                                         "FROM PURCHASE_HEADER PH, PURCHASE_DETAIL PD, MASTER_SUPPLIER MS, MASTER_PRODUCT MP " +
-                                        "WHERE PH.SUPPLIER_ID = MS.SUPPLIER_ID " + supplier + "AND PD.PRODUCT_ID = MP.PRODUCT_ID AND DATE_FORMAT(PH.PURCHASE_DATETIME, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(PH.PURCHASE_DATETIME, '%Y%m%d')  <= '" + dateTo + "' " +
+                                        "WHERE PD.PURCHASE_INVOICE = PH.PURCHASE_INVOICE AND PH.SUPPLIER_ID = MS.SUPPLIER_ID " + supplier + "AND PD.PRODUCT_ID = MP.PRODUCT_ID AND DATE_FORMAT(PH.PURCHASE_DATETIME, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(PH.PURCHASE_DATETIME, '%Y%m%d')  <= '" + dateTo + "' " +
                                         "ORDER BY TGL,INVOICE,PRODUK";
                     DS.writeXML(sqlCommandx, globalConstants.PurchaseDetailedXML);
                     ReportPurchaseDetailedForm displayedForm2 = new ReportPurchaseDetailedForm();
                     displayedForm2.ShowDialog(this);
                     break;
                 case globalConstants.REPORT_PURCHASE_ByPRODUCT:
-                    sqlCommandx = "SELECT PH.PURCHASE_DATETIME AS 'TGL', PH.PURCHASE_DATE_RECEIVED AS 'TERIMA', PH.PURCHASE_INVOICE AS 'INVOICE', MS.SUPPLIER_FULL_NAME AS 'SUPPLIER', MP.PRODUCT_NAME AS 'PRODUK', PD.PRODUCT_PRICE AS 'HARGA', PD.PRODUCT_QTY AS 'QTY', PD.PURCHASE_SUBTOTAL AS 'SUBTOTAL' " +
+                    sqlCommandx = "SELECT DATE(PH.PURCHASE_DATETIME) AS 'TGL', PH.PURCHASE_DATE_RECEIVED AS 'TERIMA', PH.PURCHASE_INVOICE AS 'INVOICE', MS.SUPPLIER_FULL_NAME AS 'SUPPLIER', MP.PRODUCT_NAME AS 'PRODUK', PD.PRODUCT_PRICE AS 'HARGA', PD.PRODUCT_QTY AS 'QTY', PD.PURCHASE_SUBTOTAL AS 'SUBTOTAL' " +
                                         "FROM PURCHASE_HEADER PH, PURCHASE_DETAIL PD, MASTER_SUPPLIER MS, MASTER_PRODUCT MP " +
-                                        "WHERE PH.SUPPLIER_ID = MS.SUPPLIER_ID AND PD.PRODUCT_ID = MP.PRODUCT_ID " + produk + "AND DATE_FORMAT(PH.PURCHASE_DATETIME, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(PH.PURCHASE_DATETIME, '%Y%m%d')  <= '" + dateTo + "' " +
+                                        "WHERE PD.PURCHASE_INVOICE = PH.PURCHASE_INVOICE AND PH.SUPPLIER_ID = MS.SUPPLIER_ID AND PD.PRODUCT_ID = MP.PRODUCT_ID " + produk + "AND DATE_FORMAT(PH.PURCHASE_DATETIME, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(PH.PURCHASE_DATETIME, '%Y%m%d')  <= '" + dateTo + "' " +
                                         "ORDER BY TGL";
                     DS.writeXML(sqlCommandx, globalConstants.PurchasebyProductXML);
                     ReportPurchasebyProductForm displayedForm3 = new ReportPurchasebyProductForm();

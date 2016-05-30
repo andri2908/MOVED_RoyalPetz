@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.LimitTextBox = new System.Windows.Forms.MaskedTextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.TagscomboBox = new System.Windows.Forms.ComboBox();
             this.nonactivecheckbox = new System.Windows.Forms.CheckBox();
             this.CariButton = new System.Windows.Forms.Button();
@@ -37,8 +39,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.datetoPicker = new System.Windows.Forms.DateTimePicker();
             this.datefromPicker = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.LimitTextBox = new System.Windows.Forms.MaskedTextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,6 +61,24 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Kriteria Pencarian Data Penjualan";
+            // 
+            // LimitTextBox
+            // 
+            this.LimitTextBox.Location = new System.Drawing.Point(204, 91);
+            this.LimitTextBox.Mask = "90000";
+            this.LimitTextBox.Name = "LimitTextBox";
+            this.LimitTextBox.Size = new System.Drawing.Size(64, 27);
+            this.LimitTextBox.TabIndex = 8;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(6, 94);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(142, 18);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Limit Pencarian";
             // 
             // TagscomboBox
             // 
@@ -137,24 +155,6 @@
             this.datefromPicker.Size = new System.Drawing.Size(200, 27);
             this.datefromPicker.TabIndex = 0;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 94);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(142, 18);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Limit Pencarian";
-            // 
-            // LimitTextBox
-            // 
-            this.LimitTextBox.Location = new System.Drawing.Point(204, 91);
-            this.LimitTextBox.Mask = "90000";
-            this.LimitTextBox.Name = "LimitTextBox";
-            this.LimitTextBox.Size = new System.Drawing.Size(64, 27);
-            this.LimitTextBox.TabIndex = 8;
-            // 
             // ReportTopSalesFormSearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -163,6 +163,7 @@
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ReportTopSalesFormSearchForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Top Sales Report";
             this.Load += new System.EventHandler(this.ReportTopSalesFormSearchForm_Load);
             this.groupBox1.ResumeLayout(false);

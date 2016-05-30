@@ -167,6 +167,7 @@
             this.ClientSize = new System.Drawing.Size(689, 167);
             this.Controls.Add(this.groupBox1);
             this.Name = "ReportPurchaseSearchForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Laporan Pembelian";
             this.Load += new System.EventHandler(this.ReportPurchaseSearchForm_Load);
             this.groupBox1.ResumeLayout(false);

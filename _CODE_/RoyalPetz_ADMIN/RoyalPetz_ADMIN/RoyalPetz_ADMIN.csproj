@@ -402,6 +402,12 @@
     <Compile Include="ReportBranchForm.Designer.cs">
       <DependentUpon>ReportBranchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportCashierLog.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportCashierLog.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportCashierLogForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -437,6 +443,30 @@
     </Compile>
     <Compile Include="ReportCustomerForm.Designer.cs">
       <DependentUpon>ReportCustomerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportDebtDue.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportDebtDue.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportDebtDueForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportDebtDueForm.Designer.cs">
+      <DependentUpon>ReportDebtDueForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportDebtUnpaid.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportDebtUnpaid.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportDebtUnpaidForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportDebtUnpaidForm.Designer.cs">
+      <DependentUpon>ReportDebtUnpaidForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ReportGroupUser.cs">
       <AutoGen>True</AutoGen>
@@ -918,6 +948,10 @@
     <EmbeddedResource Include="ReportBranchForm.resx">
       <DependentUpon>ReportBranchForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportCashierLog.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportCashierLog.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportCashierLogForm.resx">
       <DependentUpon>ReportCashierLogForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -937,6 +971,20 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportCustomerForm.resx">
       <DependentUpon>ReportCustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportDebtDue.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportDebtDue.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportDebtDueForm.resx">
+      <DependentUpon>ReportDebtDueForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportDebtUnpaid.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportDebtUnpaid.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportDebtUnpaidForm.resx">
+      <DependentUpon>ReportDebtUnpaidForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportGroupUser.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

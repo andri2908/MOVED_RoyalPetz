@@ -196,6 +196,13 @@ namespace RoyalPetz_ADMIN
         public const string PrintBarcodeXML = "PrintBarcode.xml";
         public const string CashierLogXML = "CashierLog.xml";
 
+        public const string DebtUnpaidXML = "DebtUnpaid.xml";
+        public const string DebtPaidXML = "DebtPaid.xml";
+        public const string DebtDueXML = "DebtDue.xml";
+
+        public const string CreditUnpaidXML = "CreditUnpaid.xml";
+        public const string CreditPaidXML = "CreditPaid.xml";
+        public const string CreditDueXML = "CreditDue.xml";
         public const string PurchaseSummaryXML = "PurchaseSummary.xml";
         public const string PurchaseDetailedXML = "PurchaseDetailed.xml";
         public const string PurchasebyProductXML = "PurchasebyProduct.xml";

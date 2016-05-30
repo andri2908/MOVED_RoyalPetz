@@ -1096,5 +1096,34 @@ namespace RoyalPetz_ADMIN
             ReportCashierLogSearchForm displayedForm = new ReportCashierLogSearchForm();
             displayedForm.ShowDialog(this);
         }
+
+        private void negativeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void hutangLewatJatuhTempoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string sqlCommandx = "";
+            sqlCommandx = "SELECT D.PURCHASE_INVOICE AS 'INVOICE', D.DEBT_NOMINAL AS 'TOTAL', DATE(D.DEBT_DUE_DATE) AS 'JATUHTEMPO', " +
+                            "DATEDIFF(NOW(), D.DEBT_DUE_DATE) AS 'TERLAMBAT' " +
+                            "FROM DEBT D " +
+                            "WHERE D.DEBT_PAID = 0 AND DATEDIFF(NOW(), D.DEBT_DUE_DATE)> 0";
+            DS.writeXML(sqlCommandx, globalConstants.DebtUnpaidXML);
+            ReportDebtUnpaidForm displayedForm = new ReportDebtUnpaidForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void analisaUmurHutangToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string sqlCommandx = "";
+            sqlCommandx = "SELECT D.PURCHASE_INVOICE AS 'INVOICE', D.DEBT_NOMINAL AS 'TOTAL', D.DEBT_DUE_DATE AS 'JATUHTEMPO', " +
+                            "DATEDIFF(NOW(), D.DEBT_DUE_DATE) AS 'WAKTU' " +
+                            "FROM DEBT D WHERE " +
+                            "D.DEBT_PAID = 0 AND DATEDIFF(NOW(), D.DEBT_DUE_DATE)< 0";
+            DS.writeXML(sqlCommandx, globalConstants.DebtDueXML);
+            ReportDebtDueForm displayedForm = new ReportDebtDueForm();
+            displayedForm.ShowDialog(this);
+        }
     }
 }

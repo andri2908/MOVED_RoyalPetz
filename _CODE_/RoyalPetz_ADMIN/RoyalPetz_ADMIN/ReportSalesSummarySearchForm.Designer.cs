@@ -163,6 +163,7 @@
             this.ClientSize = new System.Drawing.Size(686, 168);
             this.Controls.Add(this.groupBox1);
             this.Name = "ReportSalesSummarySearchForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Laporan Penjualan";
             this.Load += new System.EventHandler(this.ReportSalesSummarySearchForm_Load);
             this.groupBox1.ResumeLayout(false);

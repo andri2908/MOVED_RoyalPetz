@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Globalization;
+using System.Drawing.Printing;
 
 namespace RoyalPetz_ADMIN
 {
@@ -342,14 +343,41 @@ namespace RoyalPetz_ADMIN
 
         private bool saveData()
         {
+            bool result = false;
             if (dataValidated())
             {
-                return saveDataTransaction();
+                smallPleaseWait pleaseWait = new smallPleaseWait();
+                pleaseWait.Show();
+
+                //  ALlow main UI thread to properly display please wait form.
+                Application.DoEvents();
+                result = saveDataTransaction();
+
+                pleaseWait.Close();
+
+                return result;
             }
 
             return false;
         }
         
+        private void printReceipt()
+        {
+            int paperLength;
+
+            paperLength = calculatePageLength();
+            PaperSize psize = new PaperSize("Custom", 320, paperLength);//820);
+            printDocument1.DefaultPageSettings.PaperSize = psize;
+            DialogResult result;
+            printPreviewDialog1.Width = 512;
+            printPreviewDialog1.Height = 768;
+            result = printPreviewDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                printDocument1.Print();
+            }
+        }
+
         private void saveButton_Click(object sender, EventArgs e)
         {
             gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_PIUTANG, "ATTEMPT TO SAVE PAYMENT CREDIT");
@@ -363,6 +391,11 @@ namespace RoyalPetz_ADMIN
                 if (isPaymentExceed)
                 {
                     MessageBox.Show("UANG KEMBALI SEBESAR " + (Convert.ToDouble(paymentMaskedTextBox.Text) - globalTotalValue).ToString("C2", culture));
+                }
+
+                if (DialogResult.Yes == MessageBox.Show("PRINT RECEIPT ?", "WARNING", MessageBoxButtons.YesNo))
+                {
+                    printReceipt();
                 }
 
                 loadDataDetailPayment();
@@ -740,5 +773,415 @@ namespace RoyalPetz_ADMIN
                 paymentMaskedTextBox.SelectAll();
             });
         }
+
+        private void loadInfoToko(int opt, out string namatoko, out string almt, out string telepon, out string email)
+        {
+            MySqlDataReader rdr;
+            DataTable dt = new DataTable();
+            namatoko = ""; almt = ""; telepon = ""; email = "";
+            DS.mySqlConnect();
+            //1 load default 2 setting user
+            using (rdr = DS.getData("SELECT IFNULL(BRANCH_ID,0) AS 'BRANCH_ID', IFNULL(HQ_IP4,'') AS 'IP', IFNULL(STORE_NAME,'') AS 'NAME', IFNULL(STORE_ADDRESS,'') AS 'ADDRESS', IFNULL(STORE_PHONE,'') AS 'PHONE', IFNULL(STORE_EMAIL,'') AS 'EMAIL' FROM SYS_CONFIG WHERE ID =  " + opt))
+            {
+                if (rdr.HasRows)
+                {
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : loadInfoToko");
+                    while (rdr.Read())
+                    {
+                        if (!String.IsNullOrEmpty(rdr.GetString("NAME")))
+                        {
+                            namatoko = rdr.GetString("NAME");
+                        }
+                        if (!String.IsNullOrEmpty(rdr.GetString("ADDRESS")))
+                        {
+                            almt = rdr.GetString("ADDRESS");
+                        }
+                        if (!String.IsNullOrEmpty(rdr.GetString("PHONE")))
+                        {
+                            telepon = rdr.GetString("PHONE");
+                        }
+                        if (!String.IsNullOrEmpty(rdr.GetString("EMAIL")))
+                        {
+                            email = rdr.GetString("EMAIL");
+                        }
+                    }
+                }
+            }
+        }
+
+        private void loadNamaUser(int user_id, out string nama)
+        {
+            nama = "";
+            MySqlDataReader rdr;
+            DataTable dt = new DataTable();
+            DS.mySqlConnect();
+            //1 load default 2 setting user
+            using (rdr = DS.getData("SELECT USER_NAME AS 'NAME' FROM MASTER_USER WHERE ID=" + user_id))
+            {
+                if (rdr.HasRows)
+                {
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : loadNamaUser");
+
+                    rdr.Read();
+                    nama = rdr.GetString("NAME");
+                }
+            }
+        }
+
+        private int calculatePageLength()
+        {
+            int startY = 10;
+            int Offset = 15;
+            int Offsetplus = 3;
+            int totalLengthPage = startY + Offset;
+            string nm, almt, tlpn, email;
+
+            loadInfoToko(2, out nm, out almt, out tlpn, out email);
+
+            //set printing area
+            Offset = Offset + 12;
+
+            Offset = Offset + 10;
+
+            if (!email.Equals(""))
+                Offset = Offset + 10;
+
+            Offset = Offset + 15;
+            //end of header
+
+            //start of content
+
+            //1. PAYMENT METHOD
+            Offset = Offset + 15;
+
+            //2. CUSTOMER NAME
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 15 + Offsetplus;
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+
+            //DETAIL PENJUALAN
+
+            //DS.mySqlConnect();
+            //MySqlDataReader rdr;
+            //using (rdr = DS.getData("SELECT S.ID, S.PRODUCT_ID AS 'P-ID', P.PRODUCT_NAME AS 'NAME', S.PRODUCT_QTY AS 'QTY',ROUND(S.SALES_SUBTOTAL/S.PRODUCT_QTY) AS 'PRICE' FROM sales_detail S, master_product P WHERE S.PRODUCT_ID=P.PRODUCT_ID AND S.SALES_INVOICE='" + selectedsalesinvoice + "'"))//+ "group by s.product_id") )
+            //{
+            //    if (rdr.HasRows)
+            //    {
+            //        while (rdr.Read())
+            //            Offset = Offset + 15;
+            //    }
+            //}
+            //DS.mySqlClose();
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 25;
+            //end of content
+
+            //FOOTER
+
+            Offset = Offset + 15 + Offsetplus;
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+
+            Offset = Offset + 15;
+            //end of footer
+
+            totalLengthPage = totalLengthPage + Offset + 15;
+
+            //gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : calculatePageLength, totalLengthPage [" + totalLengthPage + "]");
+            return totalLengthPage;
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            String ucapan = "";
+            string nm, almt, tlpn, email;
+
+            //event printing
+
+            gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_PIUTANG, "printDocument1_PrintPage, print POS size receipt");
+
+            Graphics graphics = e.Graphics;
+            Font font = new Font("Courier New", 10);
+            float fontHeight = font.GetHeight();
+            int startX = 5;
+            int colxwidth = 93; //31x3
+            int totrowwidth = 310; //310/10=31
+            int totrowheight = 20;
+            int startY = 5;
+            int Offset = 15;
+            int offset_plus = 3;
+            string sqlCommand;
+            string customer = "";
+            string tgl = "";
+            string group = "";
+            double total = 0;
+            string paymentDesc = "";
+            double totalPayment = 0;
+
+            //HEADER
+
+            //set allignemnt
+            StringFormat sf = new StringFormat();
+            sf.LineAlignment = StringAlignment.Center;
+            sf.Alignment = StringAlignment.Center;
+
+            //set whole printing area
+            System.Drawing.RectangleF rect = new System.Drawing.RectangleF(startX, startY + Offset, totrowwidth, totrowheight);
+            //set right print area
+            System.Drawing.RectangleF rectright = new System.Drawing.RectangleF(totrowwidth - colxwidth - startX, startY + Offset, colxwidth, totrowheight);
+            //set middle print area
+            System.Drawing.RectangleF rectcenter = new System.Drawing.RectangleF((startX + (totrowwidth / 2) - colxwidth - startX), startY + Offset, (totrowwidth / 2) - startX, totrowheight);
+
+            loadInfoToko(2, out nm, out almt, out tlpn, out email);
+
+            graphics.DrawString(nm, new Font("Courier New", 9),
+                                new SolidBrush(Color.Black), rect, sf);
+
+            Offset = Offset + 12;
+            rect.Y = startY + Offset;
+            graphics.DrawString(almt,
+                     new Font("Courier New", 7),
+                     new SolidBrush(Color.Black), rect, sf);
+
+            Offset = Offset + 10;
+            rect.Y = startY + Offset;
+            graphics.DrawString(tlpn,
+                     new Font("Courier New", 7),
+                     new SolidBrush(Color.Black), rect, sf);
+
+            if (!email.Equals(""))
+            {
+                Offset = Offset + 10;
+                rect.Y = startY + Offset;
+                graphics.DrawString(email,
+                         new Font("Courier New", 7),
+                     new SolidBrush(Color.Black), rect, sf);
+            }
+
+            Offset = Offset + 13;
+            rect.Y = startY + Offset;
+            String underLine = "-------------------------------------";  //37 character
+            graphics.DrawString(underLine, new Font("Courier New", 9),
+                     new SolidBrush(Color.Black), rect, sf);
+            //end of header
+
+            //start of content
+            MySqlDataReader rdr;
+            DataTable dt = new DataTable();
+
+            DS.mySqlConnect();
+            //load customer id
+            sqlCommand = "SELECT S.SALES_INVOICE AS 'INVOICE', C.CUSTOMER_FULL_NAME AS 'CUSTOMER',DATE_FORMAT(S.SALES_DATE, '%d-%M-%Y') AS 'DATE',S.SALES_TOTAL AS 'TOTAL', IF(C.CUSTOMER_GROUP=1,'RETAIL',IF(C.CUSTOMER_GROUP=2,'GROSIR','PARTAI')) AS 'GROUP' FROM SALES_HEADER S,MASTER_CUSTOMER C WHERE S.CUSTOMER_ID = C.CUSTOMER_ID AND S.SALES_INVOICE = '" + selectedSOInvoice + "'" +
+                " UNION " +
+                "SELECT S.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', DATE_FORMAT(S.SALES_DATE, '%d-%M-%Y') AS 'DATE', S.SALES_TOTAL AS 'TOTAL', 'RETAIL' AS 'GROUP' FROM SALES_HEADER S WHERE S.CUSTOMER_ID = 0 AND S.SALES_INVOICE = '" + selectedSOInvoice + "'" +
+                "ORDER BY DATE ASC";
+            using (rdr = DS.getData(sqlCommand))
+            {
+                if (rdr.HasRows)
+                {
+                    rdr.Read();
+                    customer = rdr.GetString("CUSTOMER");
+                    tgl = rdr.GetString("DATE");
+                    total = rdr.GetDouble("TOTAL");
+                    group = rdr.GetString("GROUP");
+                }
+            }
+            DS.mySqlClose();
+
+            Offset = Offset + 12;
+            rect.Y = startY + Offset;
+            rect.X = startX + 15;
+            rect.Width = 280;
+            //SET TO LEFT MARGIN
+            sf.LineAlignment = StringAlignment.Near;
+            sf.Alignment = StringAlignment.Near;
+            ucapan = "PEMBAYARAN PIUTANG";
+            graphics.DrawString(ucapan, new Font("Courier New", 7),
+                     new SolidBrush(Color.Black), rect, sf);
+
+            //2. CUSTOMER NAME
+            Offset = Offset + 12;
+            rect.Y = startY + Offset;
+            ucapan = "PELANGGAN : " + customer + " [" + group + "]";
+            graphics.DrawString(ucapan, new Font("Courier New", 7),
+                     new SolidBrush(Color.Black), rect, sf);
+
+            Offset = Offset + 13;
+            rect.Y = startY + Offset;
+            rect.X = startX;
+            rect.Width = totrowwidth;
+            sf.LineAlignment = StringAlignment.Center;
+            sf.Alignment = StringAlignment.Center;
+            graphics.DrawString(underLine, new Font("Courier New", 9),
+                     new SolidBrush(Color.Black), rect, sf);
+
+            Offset = Offset + 12;
+            rect.Y = startY + Offset;
+            rect.Width = totrowwidth;
+            ucapan = "BUKTI PEMBAYARAN";
+            graphics.DrawString(ucapan, new Font("Courier New", 7),
+                     new SolidBrush(Color.Black), rect, sf);
+
+            Offset = Offset + 15 + offset_plus;
+            rect.Y = startY + Offset;
+            rect.X = startX + 15;
+            rect.Width = 280;
+            sf.LineAlignment = StringAlignment.Near;
+            sf.Alignment = StringAlignment.Near;
+            ucapan = "NO. NOTA : " + selectedSOInvoice;
+            graphics.DrawString(ucapan, new Font("Courier New", 7),
+                     new SolidBrush(Color.Black), rect, sf);
+
+            Offset = Offset + 12;
+            rect.Y = startY + Offset;
+            ucapan = "TOTAL    : " + total.ToString("C2", culture);
+            graphics.DrawString(ucapan, new Font("Courier New", 7),
+                     new SolidBrush(Color.Black), rect, sf);
+
+            Offset = Offset + 12;
+            rect.Y = startY + Offset;
+            ucapan = "TANGGAL  : " + tgl;
+            graphics.DrawString(ucapan, new Font("Courier New", 7),
+                     new SolidBrush(Color.Black), rect, sf);
+
+            Offset = Offset + 12;
+            rect.Y = startY + Offset;
+            string nama = "";
+            loadNamaUser(gutil.getUserID(), out nama);
+            ucapan = "OPERATOR : " + nama;
+            graphics.DrawString(ucapan, new Font("Courier New", 7),
+                     new SolidBrush(Color.Black), rect, sf);
+
+            Offset = Offset + 13;
+            rect.Y = startY + Offset;
+            rect.X = startX;
+            rect.Width = totrowwidth;
+            sf.LineAlignment = StringAlignment.Center;
+            sf.Alignment = StringAlignment.Center;
+            graphics.DrawString(underLine, new Font("Courier New", 9),
+                     new SolidBrush(Color.Black), rect, sf);
+
+            // JUMLAH TOTAL INVOICE
+            sf.LineAlignment = StringAlignment.Near;
+            sf.Alignment = StringAlignment.Near;
+
+            // DISPLAY ALL PAYMENT FOR THE INVOICE
+            sqlCommand = "SELECT DATE_FORMAT(PC.PAYMENT_DATE, '%d-%M-%Y') AS 'PAYMENT_DATE', PC.PAYMENT_NOMINAL, PC.PAYMENT_DESCRIPTION FROM PAYMENT_CREDIT PC, CREDIT C WHERE PC.PAYMENT_CONFIRMED = 1 AND PC.CREDIT_ID = C.CREDIT_ID AND C.SALES_INVOICE = '" + selectedSOInvoice + "'";
+            using (rdr = DS.getData(sqlCommand))
+            {
+                if (rdr.HasRows)
+                {
+                    while (rdr.Read())
+                    {
+                        Offset = Offset + 15;
+                        rect.Y = startY + Offset;
+                        rect.X = startX + 15;
+                        rect.Width = 280;
+                        sf.LineAlignment = StringAlignment.Near;
+                        sf.Alignment = StringAlignment.Near;
+
+                        paymentDesc = rdr.GetString("PAYMENT_DESCRIPTION");
+                        totalPayment = totalPayment + rdr.GetDouble("PAYMENT_NOMINAL");
+                        ucapan = rdr.GetString("PAYMENT_DATE") + " " + rdr.GetDouble("PAYMENT_NOMINAL").ToString("C2", culture) + " " + paymentDesc;
+                        if (ucapan.Length > 30)
+                        {
+                            ucapan = ucapan.Substring(0, 30); //maximum 30 character
+                        }
+                        //
+                        graphics.DrawString(ucapan, new Font("Courier New", 7),
+                                 new SolidBrush(Color.Black), rect, sf);
+                    }
+                }
+            }
+
+            Offset = Offset + 13;
+            rect.Y = startY + Offset;
+            rect.X = startX;
+            rect.Width = totrowwidth;
+            sf.LineAlignment = StringAlignment.Center;
+            sf.Alignment = StringAlignment.Center;
+            graphics.DrawString(underLine, new Font("Courier New", 9),
+                     new SolidBrush(Color.Black), rect, sf);
+
+            Offset = Offset + 15;
+            rect.Y = startY + Offset;
+            rect.X = startX + 15;
+            rect.Width = 260;
+            sf.LineAlignment = StringAlignment.Near;
+            sf.Alignment = StringAlignment.Near;
+            ucapan = "    JUMLAH PEMBAYARAN  :";
+            rectcenter.Y = rect.Y;
+            graphics.DrawString(ucapan, new Font("Courier New", 7),
+                     new SolidBrush(Color.Black), rectcenter, sf);
+            sf.LineAlignment = StringAlignment.Far;
+            sf.Alignment = StringAlignment.Far;
+            ucapan = totalPayment.ToString("C2", culture);
+            rectright.Y = Offset - startY + 1;
+            graphics.DrawString(ucapan, new Font("Courier New", 7),
+                     new SolidBrush(Color.Black), rectright, sf);
+
+            Offset = Offset + 25 + offset_plus;
+            rect.Y = startY + Offset;
+            rect.X = startX + 15;
+            rect.Width = 280;
+            sf.LineAlignment = StringAlignment.Near;
+            sf.Alignment = StringAlignment.Near;
+            ucapan = "TOTAL PIUTANG: " + (total-totalPayment).ToString("C2", culture);
+            graphics.DrawString(ucapan, new Font("Courier New", 7),
+                     new SolidBrush(Color.Black), rect, sf);
+            //eNd of content
+
+            //FOOTER
+
+            Offset = Offset + 13;
+            rect.Y = startY + Offset;
+            rect.X = startX;
+            rect.Width = totrowwidth;
+            sf.LineAlignment = StringAlignment.Center;
+            sf.Alignment = StringAlignment.Center;
+            graphics.DrawString(underLine, new Font("Courier New", 9),
+                     new SolidBrush(Color.Black), rect, sf);
+
+            Offset = Offset + 15;
+            rect.Y = startY + Offset;
+            ucapan = "TERIMA KASIH ATAS KUNJUNGAN ANDA";
+            graphics.DrawString(ucapan, new Font("Courier New", 7),
+                     new SolidBrush(Color.Black), rect, sf);
+
+            Offset = Offset + 15;
+            rect.Y = startY + Offset;
+            ucapan = "MAAF BARANG YANG SUDAH DIBELI";
+            graphics.DrawString(ucapan, new Font("Courier New", 7),
+                     new SolidBrush(Color.Black), rect, sf);
+
+            Offset = Offset + 15;
+            rect.Y = startY + Offset;
+            ucapan = "TIDAK DAPAT DITUKAR/ DIKEMBALIKKAN";
+            graphics.DrawString(ucapan, new Font("Courier New", 7),
+                     new SolidBrush(Color.Black), rect, sf);
+            //end of footer
+        }
+
+
     }
 }
