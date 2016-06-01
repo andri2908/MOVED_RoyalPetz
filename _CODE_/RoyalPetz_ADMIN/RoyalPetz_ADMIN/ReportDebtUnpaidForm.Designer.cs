@@ -45,18 +45,18 @@
             this.crystalReportViewer1.ShowCopyButton = false;
             this.crystalReportViewer1.ShowGroupTreeButton = false;
             this.crystalReportViewer1.ShowParameterPanelButton = false;
-            this.crystalReportViewer1.Size = new System.Drawing.Size(882, 446);
+            this.crystalReportViewer1.Size = new System.Drawing.Size(1075, 507);
             this.crystalReportViewer1.TabIndex = 0;
             // 
             // ReportDebtUnpaidForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(882, 446);
+            this.ClientSize = new System.Drawing.Size(1075, 507);
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ReportDebtUnpaidForm";
-            this.Text = "Laporan Piutan Lewat Jatuh Tempo";
+            this.Text = "Laporan Hutang Lewat Jatuh Tempo";
             this.Load += new System.EventHandler(this.ReportDebtUnpaidForm_Load);
             this.ResumeLayout(false);
 

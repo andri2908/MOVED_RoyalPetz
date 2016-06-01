@@ -830,80 +830,88 @@ namespace RoyalPetz_ADMIN
 
         private int calculatePageLength()
         {
-            int startY = 10;
-            int Offset = 15;
-            int Offsetplus = 3;
-            int totalLengthPage = startY + Offset;
             string nm, almt, tlpn, email;
+            //event printing
+
+            int startY = 5;
+            int Offset = 15;
+            int offset_plus = 3;
+            string sqlCommand;
+            int totalLengthPage = startY + Offset; ;
+
+            //HEADER
+
+            //set allignemnt
 
             loadInfoToko(2, out nm, out almt, out tlpn, out email);
 
-            //set printing area
             Offset = Offset + 12;
 
             Offset = Offset + 10;
 
             if (!email.Equals(""))
+            {
                 Offset = Offset + 10;
+            }
 
-            Offset = Offset + 15;
+            Offset = Offset + 13;
             //end of header
 
             //start of content
+            MySqlDataReader rdr;
 
-            //1. PAYMENT METHOD
-            Offset = Offset + 15;
+            Offset = Offset + 12;
+            //SET TO LEFT MARGIN
 
             //2. CUSTOMER NAME
-            Offset = Offset + 15;
+            Offset = Offset + 12;
+
+            Offset = Offset + 13;
+
+            Offset = Offset + 12;
+
+            Offset = Offset + 15 + offset_plus;
+
+            Offset = Offset + 12;
+
+            Offset = Offset + 12;
+
+            Offset = Offset + 12;
+
+            Offset = Offset + 13;
+
+            // DISPLAY ALL PAYMENT FOR THE INVOICE
+            sqlCommand = "SELECT DATE_FORMAT(PC.PAYMENT_DATE, '%d-%M-%Y') AS 'PAYMENT_DATE', PC.PAYMENT_NOMINAL, PC.PAYMENT_DESCRIPTION FROM PAYMENT_CREDIT PC, CREDIT C WHERE PC.PAYMENT_CONFIRMED = 1 AND PC.CREDIT_ID = C.CREDIT_ID AND C.SALES_INVOICE = '" + selectedSOInvoice + "'";
+            using (rdr = DS.getData(sqlCommand))
+            {
+                if (rdr.HasRows)
+                {
+                    while (rdr.Read())
+                    {
+                        Offset = Offset + 15;
+                    }
+                }
+            }
+
+            Offset = Offset + 13;
 
             Offset = Offset + 15;
 
-            Offset = Offset + 15;
-
-            Offset = Offset + 15 + Offsetplus;
+            Offset = Offset + 13;
 
             Offset = Offset + 15;
 
-            Offset = Offset + 15;
-
-            Offset = Offset + 15;
-
-            //DETAIL PENJUALAN
-
-            //DS.mySqlConnect();
-            //MySqlDataReader rdr;
-            //using (rdr = DS.getData("SELECT S.ID, S.PRODUCT_ID AS 'P-ID', P.PRODUCT_NAME AS 'NAME', S.PRODUCT_QTY AS 'QTY',ROUND(S.SALES_SUBTOTAL/S.PRODUCT_QTY) AS 'PRICE' FROM sales_detail S, master_product P WHERE S.PRODUCT_ID=P.PRODUCT_ID AND S.SALES_INVOICE='" + selectedsalesinvoice + "'"))//+ "group by s.product_id") )
-            //{
-            //    if (rdr.HasRows)
-            //    {
-            //        while (rdr.Read())
-            //            Offset = Offset + 15;
-            //    }
-            //}
-            //DS.mySqlClose();
-
-            Offset = Offset + 15;
-
-            Offset = Offset + 15;
-
-            Offset = Offset + 15;
-
-            Offset = Offset + 15;
-
-            Offset = Offset + 25;
-            //end of content
+            //eNd of content
 
             //FOOTER
 
-            Offset = Offset + 15 + Offsetplus;
+            Offset = Offset + 13;
 
             Offset = Offset + 15;
 
             Offset = Offset + 15;
 
             Offset = Offset + 15;
-            //end of footer
 
             totalLengthPage = totalLengthPage + Offset + 15;
 
@@ -1102,7 +1110,7 @@ namespace RoyalPetz_ADMIN
 
                         paymentDesc = rdr.GetString("PAYMENT_DESCRIPTION");
                         totalPayment = totalPayment + rdr.GetDouble("PAYMENT_NOMINAL");
-                        ucapan = rdr.GetString("PAYMENT_DATE") + " " + rdr.GetDouble("PAYMENT_NOMINAL").ToString("C2", culture) + " " + paymentDesc;
+                        ucapan = "[" + rdr.GetString("PAYMENT_DATE") + "] " + rdr.GetDouble("PAYMENT_NOMINAL").ToString("C2", culture) + " " + paymentDesc;
                         if (ucapan.Length > 30)
                         {
                             ucapan = ucapan.Substring(0, 30); //maximum 30 character
@@ -1140,15 +1148,32 @@ namespace RoyalPetz_ADMIN
             graphics.DrawString(ucapan, new Font("Courier New", 7),
                      new SolidBrush(Color.Black), rectright, sf);
 
-            Offset = Offset + 25 + offset_plus;
+            Offset = Offset + 13;
+            rect.Y = startY + Offset;
+            rect.X = startX;
+            rect.Width = totrowwidth;
+            sf.LineAlignment = StringAlignment.Center;
+            sf.Alignment = StringAlignment.Center;
+            graphics.DrawString(underLine, new Font("Courier New", 9),
+                     new SolidBrush(Color.Black), rect, sf);
+
+            Offset = Offset + 15;
             rect.Y = startY + Offset;
             rect.X = startX + 15;
-            rect.Width = 280;
+            rect.Width = 260;
             sf.LineAlignment = StringAlignment.Near;
             sf.Alignment = StringAlignment.Near;
-            ucapan = "TOTAL PIUTANG: " + (total-totalPayment).ToString("C2", culture);
+            ucapan = "        TOTAL PIUTANG  :";
+            rectcenter.Y = rect.Y;
             graphics.DrawString(ucapan, new Font("Courier New", 7),
-                     new SolidBrush(Color.Black), rect, sf);
+                     new SolidBrush(Color.Black), rectcenter, sf);
+            sf.LineAlignment = StringAlignment.Far;
+            sf.Alignment = StringAlignment.Far;
+            ucapan = (total - totalPayment).ToString("C2", culture);
+            rectright.Y = Offset - startY + 1;
+            graphics.DrawString(ucapan, new Font("Courier New", 7),
+                     new SolidBrush(Color.Black), rectright, sf);
+
             //eNd of content
 
             //FOOTER
@@ -1182,6 +1207,12 @@ namespace RoyalPetz_ADMIN
             //end of footer
         }
 
-
+        private void printButton_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.Yes == MessageBox.Show("PRINT RECEIPT ?", "WARNING", MessageBoxButtons.YesNo))
+            {
+                printReceipt();
+            }
+        }
     }
 }

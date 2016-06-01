@@ -43,18 +43,18 @@
             this.crystalReportViewer1.ReportSource = this.ReportDebtDue1;
             this.crystalReportViewer1.ShowGroupTreeButton = false;
             this.crystalReportViewer1.ShowParameterPanelButton = false;
-            this.crystalReportViewer1.Size = new System.Drawing.Size(832, 369);
+            this.crystalReportViewer1.Size = new System.Drawing.Size(1075, 507);
             this.crystalReportViewer1.TabIndex = 0;
             // 
             // ReportDebtDueForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(832, 369);
+            this.ClientSize = new System.Drawing.Size(1075, 507);
             this.Controls.Add(this.crystalReportViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ReportDebtDueForm";
-            this.Text = "Laporan Hutang Akan Jatuh Tempo";
+            this.Text = "Laporan Hutang Jatuh Tempo";
             this.Load += new System.EventHandler(this.ReportDebtDueForm_Load);
             this.ResumeLayout(false);
 

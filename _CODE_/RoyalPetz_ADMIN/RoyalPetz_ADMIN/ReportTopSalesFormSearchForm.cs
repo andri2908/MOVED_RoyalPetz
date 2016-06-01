@@ -35,6 +35,9 @@ namespace RoyalPetz_ADMIN
 
         private void ReportTopSalesFormSearchForm_Load(object sender, EventArgs e)
         {
+            datefromPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+            datetoPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+
             gutil.reArrangeTabOrder(this);
             LimitTextBox.Text = "1";
             switch(originModuleID)

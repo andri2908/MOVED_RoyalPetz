@@ -470,7 +470,7 @@ namespace RoyalPetz_ADMIN
 
             try
             { 
-                sqlCommand = "INSERT INTO CASHIER_CHANGE_LOG (USER_ID, MODULE_ID, CHANGE_ID, CHANGE_DATETIME, CHANGE_DESCRIPTION) VALUES (" + getUserID() + ", " +moduleID + ", " + changeID + ", STR_TO_DATE('" + dateTimeNow + "', '%d-%m-%Y %H:%i'), '" + changeDescription + "')";
+                sqlCommand = "INSERT INTO USER_CHANGE_LOG (USER_ID, MODULE_ID, CHANGE_ID, CHANGE_DATETIME, CHANGE_DESCRIPTION) VALUES (" + getUserID() + ", " +moduleID + ", " + changeID + ", STR_TO_DATE('" + dateTimeNow + "', '%d-%m-%Y %H:%i'), '" + changeDescription + "')";
                 DS.executeNonQueryCommand(sqlCommand);
 
                 DS.commit();

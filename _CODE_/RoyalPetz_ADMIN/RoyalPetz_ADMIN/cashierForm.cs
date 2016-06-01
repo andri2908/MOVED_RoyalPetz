@@ -37,7 +37,8 @@ namespace RoyalPetz_ADMIN
         private List<string> disc1 = new List<string>();
         private List<string> disc2 = new List<string>();
         private List<string> discRP = new List<string>();
-        
+
+        private Hotkeys.GlobalHotkey ghk_Add;
         private Hotkeys.GlobalHotkey ghk_F1;
         private Hotkeys.GlobalHotkey ghk_F2;
         private Hotkeys.GlobalHotkey ghk_F3;
@@ -224,6 +225,13 @@ namespace RoyalPetz_ADMIN
                     addNewRow();
                     break;
 
+                case Keys.F11:
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : HOTKEY TO OPEN PRODUK SEARCH FORM PRESSED");
+
+                    dataProdukForm displayProdukForm = new dataProdukForm(globalConstants.CASHIER_MODULE, this);
+                    displayProdukForm.ShowDialog(this);
+                    break;
+
                 case Keys.F9:
                     gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : HOTKEY TO SAVE AND PRINT OUT INVOICE PRESSED");
 
@@ -241,6 +249,9 @@ namespace RoyalPetz_ADMIN
                     displayBarcodeForm.ShowDialog(this);
                     break;
 
+                case Keys.Add:
+                    bayarTextBox.Focus();
+                    break;
 
                 case Keys.F1:
                     MessageBox.Show("F1");
@@ -253,9 +264,6 @@ namespace RoyalPetz_ADMIN
                     break;
                 case Keys.F10:
                     MessageBox.Show("F10");
-                    break;
-                case Keys.F11:
-                    MessageBox.Show("F11");
                     break;
                 case Keys.F12:
                     MessageBox.Show("F12");
@@ -279,7 +287,14 @@ namespace RoyalPetz_ADMIN
             switch (key)
             {
                 case Keys.Delete: // CTRL + DELETE
-                    MessageBox.Show("CTRL+DELETE");
+                    //MessageBox.Show("CTRL+DELETE");
+                    if (DialogResult.Yes == MessageBox.Show("DELETE CURRENT ROW?", "WARNING", MessageBoxButtons.YesNo))
+                    {
+                        gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : cashierDataGridView_KeyDown ATTEMPT TO DELETE ROW");
+                        deleteCurrentRow();
+                        updateRowNumber();
+                        calculateTotal();
+                    }
                     break;
                 case Keys.C: // CTRL + C
                     MessageBox.Show("CTRL+C");
@@ -326,6 +341,15 @@ namespace RoyalPetz_ADMIN
             ghk_F2 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F2, this);
             ghk_F2.Register();
 
+            ghk_F11 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F11, this);
+            ghk_F11.Register();
+
+            ghk_Add = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Add, this);
+            ghk_Add.Register();
+
+            ghk_CTRL_DEL = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Delete, this);
+            ghk_CTRL_DEL.Register();
+
             //ghk_F1 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F1, this);
             //ghk_F1.Register();
 
@@ -335,8 +359,8 @@ namespace RoyalPetz_ADMIN
 
             //ghk_F7 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F7, this);
             //ghk_F7.Register();
-            
-            
+
+
             //ghk_F10 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F10, this);
             //ghk_F10.Register();
 
@@ -347,8 +371,7 @@ namespace RoyalPetz_ADMIN
             ////ghk_F12 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F12, this);
             ////ghk_F12.Register();
 
-            //ghk_CTRL_DEL = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Delete, this);
-            //ghk_CTRL_DEL.Register();
+
 
             //ghk_CTRL_C = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.C, this);
             //ghk_CTRL_C.Register();
@@ -370,17 +393,19 @@ namespace RoyalPetz_ADMIN
             ghk_F8.Unregister();
             ghk_F9.Unregister();
             ghk_F2.Unregister();
+            ghk_Add.Unregister();
+            ghk_F11.Unregister();
 
+            ghk_CTRL_DEL.Unregister();
             //ghk_F1.Unregister();
 
             //ghk_F5.Unregister();
             //ghk_F7.Unregister();
 
             //ghk_F10.Unregister();
-            //ghk_F11.Unregister();
             ////ghk_F12.Unregister();
 
-            //ghk_CTRL_DEL.Unregister();
+
             //ghk_CTRL_C.Unregister();
             //ghk_CTRL_U.Unregister();
 
@@ -1483,24 +1508,27 @@ namespace RoyalPetz_ADMIN
                 int rowSelectedIndex = cashierDataGridView.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = cashierDataGridView.Rows[rowSelectedIndex];
 
-                cashierDataGridView.Rows.Remove(selectedRow);
-                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : deleteCurrentRow [" + rowSelectedIndex + "]");
+                if (null != selectedRow)
+                { 
+                    cashierDataGridView.Rows.Remove(selectedRow);
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : deleteCurrentRow [" + rowSelectedIndex + "]");
+                }
             }
         }
 
         private void cashierDataGridView_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete)
-            {
-                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : cashierDataGridView_KeyDown delete pressed");
-                if (DialogResult.Yes == MessageBox.Show("DELETE CURRENT ROW?", "WARNING", MessageBoxButtons.YesNo))
-                {
-                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : cashierDataGridView_KeyDown ATTEMPT TO DELETE ROW");
-                    deleteCurrentRow();
-                    updateRowNumber();
-                    calculateTotal();
-                }
-            }
+            //if (e.KeyCode == Keys.Delete)
+            //{
+            //    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : cashierDataGridView_KeyDown delete pressed");
+            //    if (DialogResult.Yes == MessageBox.Show("DELETE CURRENT ROW?", "WARNING", MessageBoxButtons.YesNo))
+            //    {
+            //        gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : cashierDataGridView_KeyDown ATTEMPT TO DELETE ROW");
+            //        deleteCurrentRow();
+            //        updateRowNumber();
+            //        calculateTotal();
+            //    }
+            //}
         }
 
         private void calculateTotal()
@@ -1988,6 +2016,8 @@ namespace RoyalPetz_ADMIN
             sf.Alignment = StringAlignment.Near;
             //read sales_detail
 
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : BEFORE DISPLAY DETAIL PENJUALAN");
+
             DS.mySqlConnect();
             string product_id = "";
             string product_name = "";
@@ -2029,6 +2059,8 @@ namespace RoyalPetz_ADMIN
                 }
             }
             DS.mySqlClose();
+
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : AFTER DISPLAY DETAIL PENJUALAN");
 
             Offset = Offset + 13;
             rect.Y = startY + Offset;

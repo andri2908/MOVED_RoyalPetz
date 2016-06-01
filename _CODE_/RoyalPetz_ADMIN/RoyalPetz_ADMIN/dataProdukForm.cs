@@ -17,7 +17,9 @@ namespace RoyalPetz_ADMIN
     {
         private int originModuleID = 0;
         private int selectedProductID = 0;
+        private string selectedProductName = "";
         private stokPecahBarangForm parentForm;
+        private cashierForm parentCashierForm;
         private globalUtilities gutil = new globalUtilities();
         private Data_Access DS = new Data_Access();
 
@@ -49,6 +51,19 @@ namespace RoyalPetz_ADMIN
             newButton.Visible = false;
         }
 
+        public dataProdukForm(int moduleID, cashierForm thisParentForm)
+        {
+            InitializeComponent();
+
+            originModuleID = moduleID;
+            parentCashierForm = thisParentForm;
+
+            // accessed from other form other than Master -> Data Produk
+            // it means that this form is only displayed for browsing / searching purpose only
+            newButton.Visible = false;
+        }
+
+
         private void displaySpecificForm()
         {
             switch (originModuleID)
@@ -68,6 +83,10 @@ namespace RoyalPetz_ADMIN
                     this.Close();
                     break;
 
+                case globalConstants.CASHIER_MODULE:
+                    parentCashierForm.addNewRowFromBarcode(selectedProductName);
+                    this.Close();
+                    break;
                 default: // MASTER DATA PRODUK
                     dataProdukDetailForm displayForm = new dataProdukDetailForm(globalConstants.EDIT_PRODUK, selectedProductID);
                     displayForm.ShowDialog(this);
@@ -129,13 +148,15 @@ namespace RoyalPetz_ADMIN
         private void tagProdukDataGridView_DoubleClick(object sender, EventArgs e)
         {
             if (dataProdukGridView.Rows.Count <= 0)
-                    return;
+                return;
 
             int selectedrowindex = dataProdukGridView.SelectedCells[0].RowIndex;
+
             DataGridViewRow selectedRow = dataProdukGridView.Rows[selectedrowindex];
             selectedProductID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+            selectedProductName = selectedRow.Cells["NAMA PRODUK"].Value.ToString();
+
             displaySpecificForm();
-            
         }
 
         private void tagProdukDataGridView_KeyPress(object sender, KeyPressEventArgs e)
@@ -165,10 +186,11 @@ namespace RoyalPetz_ADMIN
 
                 DataGridViewRow selectedRow = dataProdukGridView.Rows[selectedrowindex];
                 selectedProductID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
-
+                selectedProductName = selectedRow.Cells["NAMA PRODUK"].Value.ToString();
                 displaySpecificForm();
             }
         }
+
         private void dataProdukForm_Activated(object sender, EventArgs e)
         {
             if (!namaProdukTextBox.Text.Equals(""))

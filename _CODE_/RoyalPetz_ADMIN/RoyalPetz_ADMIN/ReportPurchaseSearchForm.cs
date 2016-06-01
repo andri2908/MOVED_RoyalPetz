@@ -162,6 +162,10 @@ namespace RoyalPetz_ADMIN
         private void ReportPurchaseSearchForm_Load(object sender, EventArgs e)
         {
             ErrorLabel.Visible = false;
+
+            datefromPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+            datetoPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+
             if (originModuleID != globalConstants.REPORT_PURCHASE_ByPRODUCT)
             {
                 LabelOptions.Text = "Supplier";

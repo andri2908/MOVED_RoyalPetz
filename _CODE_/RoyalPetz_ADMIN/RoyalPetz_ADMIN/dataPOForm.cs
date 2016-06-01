@@ -98,6 +98,9 @@ namespace RoyalPetz_ADMIN
             {
                 sqlCommand = sqlCommand + "  AND P.PURCHASE_PAID = 0 AND PURCHASE_SENT = 1 AND PURCHASE_RECEIVED = 1";
             }
+            else if (originModuleID == globalConstants.REPRINT_PURCHASE_ORDER)
+            {
+            }
             else
             {
                 sqlCommand = sqlCommand + " AND PURCHASE_SENT = 0";
@@ -189,6 +192,17 @@ namespace RoyalPetz_ADMIN
             gUtil.reArrangeTabOrder(this);
         }
 
+        private void printOutPurchaseOrder(string PONo)
+        {
+            string sqlCommandx = "SELECT PH.PURCHASE_DATETIME AS 'TGL', PH.PURCHASE_DATE_RECEIVED AS 'TERIMA', PH.PURCHASE_INVOICE AS 'INVOICE', MS.SUPPLIER_FULL_NAME AS 'SUPPLIER', MP.PRODUCT_NAME AS 'PRODUK', PD.PRODUCT_PRICE AS 'HARGA', PD.PRODUCT_QTY AS 'QTY', PD.PURCHASE_SUBTOTAL AS 'SUBTOTAL' " +
+                                        "FROM PURCHASE_HEADER PH, PURCHASE_DETAIL PD, MASTER_SUPPLIER MS, MASTER_PRODUCT MP " +
+                                        "WHERE PH.PURCHASE_INVOICE = '" + PONo + "' AND PH.SUPPLIER_ID = MS.SUPPLIER_ID AND PD.PURCHASE_INVOICE = PH.PURCHASE_INVOICE AND PD.PRODUCT_ID = MP.PRODUCT_ID";
+
+            DS.writeXML(sqlCommandx, globalConstants.purchaseOrderXML);
+            purchaseOrderPrintOutForm displayForm = new purchaseOrderPrintOutForm();
+            displayForm.ShowDialog(this);
+        }
+
         private void dataPurchaseOrder_KeyDown(object sender, KeyEventArgs e)
         {
             string selectedPurchaseInvoice;
@@ -200,7 +214,7 @@ namespace RoyalPetz_ADMIN
 
                 int rowSelectedIndex = (dataPurchaseOrder.SelectedCells[0].RowIndex);
                 DataGridViewRow selectedRow = dataPurchaseOrder.Rows[rowSelectedIndex];
-                
+
 
                 if (originModuleID == 0)
                 {
@@ -211,8 +225,8 @@ namespace RoyalPetz_ADMIN
                 else if (originModuleID == globalConstants.PENERIMAAN_BARANG_DARI_PO)
                 {
                     selectedPurchaseInvoice = selectedRow.Cells["NO PURCHASE"].Value.ToString();
-                    if (null!= parentForm)
-                    { 
+                    if (null != parentForm)
+                    {
                         penerimaanBarangForm originForm = (penerimaanBarangForm)parentForm;
                         originForm.setSelectedInvoice(selectedPurchaseInvoice);
                     }
@@ -225,6 +239,11 @@ namespace RoyalPetz_ADMIN
                     selectedPurchaseInvoice = selectedRow.Cells["NO PURCHASE"].Value.ToString();
                     pembayaranHutangForm displayedPembayaranForm = new pembayaranHutangForm(selectedPurchaseInvoice);
                     displayedPembayaranForm.ShowDialog(this);
+                }
+                else if (originModuleID == globalConstants.REPRINT_PURCHASE_ORDER)
+                {
+                    selectedPurchaseInvoice = selectedRow.Cells["NO PURCHASE"].Value.ToString();
+                    printOutPurchaseOrder(selectedPurchaseInvoice);
                 }
 
                 loadPOData();
@@ -265,6 +284,11 @@ namespace RoyalPetz_ADMIN
                 pembayaranHutangForm displayedPembayaranForm = new pembayaranHutangForm(selectedPurchaseInvoice);
                 displayedPembayaranForm.ShowDialog(this);
             }
+            else if (originModuleID == globalConstants.REPRINT_PURCHASE_ORDER)
+            {
+                selectedPurchaseInvoice = selectedRow.Cells["NO PURCHASE"].Value.ToString();
+                printOutPurchaseOrder(selectedPurchaseInvoice);
+            }
 
             loadPOData();
         }
@@ -278,6 +302,11 @@ namespace RoyalPetz_ADMIN
         private void dataPurchaseOrder_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void supplierCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            supplierID = Convert.ToInt32(supplierHiddenCombo.Items[supplierCombo.SelectedIndex].ToString());
         }
     }
 }

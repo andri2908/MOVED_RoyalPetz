@@ -396,8 +396,9 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripMenuItem67_Click(object sender, EventArgs e)
         {
-//            dataMutasiBarangForm displayedForm = new dataMutasiBarangForm(globalConstants.REPRINT_PERMINTAAN_BARANG);
-//            displayedForm.ShowDialog(this);
+            dataPOForm displayedForm = new dataPOForm(globalConstants.REPRINT_PURCHASE_ORDER);
+            displayedForm.ShowDialog(this);
+            //            dataMutasiBarangForm displayedForm = new dataMutasiBarangForm(globalConstants.REPRINT_PERMINTAAN_BARANG);
         }
 
         private void toolStripMenuItem52_Click(object sender, EventArgs e)
@@ -996,7 +997,7 @@ namespace RoyalPetz_ADMIN
 
         private void MENU_penerimaanBarang_Click(object sender, EventArgs e)
         {
-            penerimaanBarangForm displayedForm = new penerimaanBarangForm();
+            dataPenerimaanBarangForm displayedForm = new dataPenerimaanBarangForm();
             displayedForm.ShowDialog(this);
         }
 
@@ -1097,16 +1098,11 @@ namespace RoyalPetz_ADMIN
             displayedForm.ShowDialog(this);
         }
 
-        private void negativeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void hutangLewatJatuhTempoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string sqlCommandx = "";
             sqlCommandx = "SELECT D.PURCHASE_INVOICE AS 'INVOICE', D.DEBT_NOMINAL AS 'TOTAL', DATE(D.DEBT_DUE_DATE) AS 'JATUHTEMPO', " +
-                            "DATEDIFF(NOW(), D.DEBT_DUE_DATE) AS 'TERLAMBAT' " +
+                            "ABS(DATEDIFF(NOW(), D.DEBT_DUE_DATE)) AS 'TERLAMBAT' " +
                             "FROM DEBT D " +
                             "WHERE D.DEBT_PAID = 0 AND DATEDIFF(NOW(), D.DEBT_DUE_DATE)> 0";
             DS.writeXML(sqlCommandx, globalConstants.DebtUnpaidXML);
@@ -1123,6 +1119,71 @@ namespace RoyalPetz_ADMIN
                             "D.DEBT_PAID = 0 AND DATEDIFF(NOW(), D.DEBT_DUE_DATE)< 0";
             DS.writeXML(sqlCommandx, globalConstants.DebtDueXML);
             ReportDebtDueForm displayedForm = new ReportDebtDueForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void analisaUmurPiutangToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string sqlCommandx = "";
+            sqlCommandx = "SELECT C.SALES_INVOICE AS 'INVOICE', C.CREDIT_NOMINAL AS 'TOTAL', C.CREDIT_DUE_DATE AS 'JATUHTEMPO', " +
+                            "DATEDIFF(NOW(), C.CREDIT_DUE_DATE) AS 'WAKTU' FROM CREDIT C " +
+                            "WHERE C.SALES_INVOICE IS NOT NULL AND C.CREDIT_PAID = 0 AND DATEDIFF(NOW(), C.CREDIT_DUE_DATE)< 0";
+            DS.writeXML(sqlCommandx, globalConstants.CreditDueXML);
+            ReportCreditDueForm displayedForm = new ReportCreditDueForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void piutangLewatJatuhTempoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string sqlCommandx = "";
+            sqlCommandx = "SELECT C.SALES_INVOICE AS 'INVOICE', C.CREDIT_NOMINAL AS 'TOTAL', C.CREDIT_DUE_DATE AS 'JATUHTEMPO', " +
+                            "ABS(DATEDIFF(NOW(), C.CREDIT_DUE_DATE)) AS 'TERLAMBAT' " +
+                            "FROM CREDIT C " +
+                            "WHERE C.SALES_INVOICE IS NOT NULL AND C.CREDIT_PAID = 0 AND DATEDIFF(NOW(), C.CREDIT_DUE_DATE)> 0";
+            DS.writeXML(sqlCommandx, globalConstants.CreditUnpaidXML);
+            ReportCreditUnpaidForm displayedForm = new ReportCreditUnpaidForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void stokDibawahLimitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string sqlCommandx = "";
+            sqlCommandx = "SELECT P.PRODUCT_ID AS 'ID', P.PRODUCT_NAME AS 'NAMA PRODUK', P.PRODUCT_DESCRIPTION AS 'DESKRIPSI', P.PRODUCT_BRAND AS 'MERK', " +
+                            "P.PRODUCT_SHELVES AS 'NOMOR RAK', P.PRODUCT_STOCK_QTY AS 'STOK', P.PRODUCT_LIMIT_STOCK AS 'LIMIT STOK', U.UNIT_NAME AS 'SATUAN' " +
+                            "FROM MASTER_PRODUCT P, MASTER_UNIT U " +
+                            "WHERE P.UNIT_ID = U.UNIT_ID AND P.PRODUCT_IS_SERVICE = 0 AND P.PRODUCT_ACTIVE = 1 AND P.PRODUCT_STOCK_QTY <= P.PRODUCT_LIMIT_STOCK";
+            DS.writeXML(sqlCommandx, globalConstants.ProductStockLimitXML);
+            //ReportCreditUnpaidForm displayedForm = new ReportCreditUnpaidForm();
+            //displayedForm.ShowDialog(this);
+        }
+
+        private void deviasiAdjustmentStokToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void pembelianToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void penjualanToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void permintaanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void mutasiBarangToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm();
             displayedForm.ShowDialog(this);
         }
     }

@@ -143,6 +143,7 @@
             // 
             // datetoPicker
             // 
+            this.datetoPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.datetoPicker.Location = new System.Drawing.Point(444, 25);
             this.datetoPicker.Name = "datetoPicker";
             this.datetoPicker.Size = new System.Drawing.Size(200, 27);
@@ -150,6 +151,7 @@
             // 
             // datefromPicker
             // 
+            this.datefromPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.datefromPicker.Location = new System.Drawing.Point(204, 25);
             this.datefromPicker.Name = "datefromPicker";
             this.datefromPicker.Size = new System.Drawing.Size(200, 27);

@@ -26,6 +26,7 @@ namespace RoyalPetz_ADMIN
         bool isLoading = false;
         double POduration = 0;
         private Hotkeys.GlobalHotkey ghk_F2;
+        Button[] arrButton = new Button[3];
 
         private List<string> detailRequestQty = new List<string>();
         private List<string> detailHpp = new List<string>();
@@ -508,40 +509,20 @@ namespace RoyalPetz_ADMIN
 
         private void penerimaanBarangForm_Load(object sender, EventArgs e)
         {
-            Button[] arrButton = new Button[2];
-
             errorLabel.Text = "";
             PRDtPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
             int userAccessOption = 0;
-            // invoiceDtPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
 
             //initializeScreen();
             labelTotal.Visible = false;
             labelTotal_1.Visible = false;
             labelTotalValue.Visible = false;
 
-            //detailGridView.Columns["qtyRequest"].Visible = false;
             addDataGridColumn();
             detailGridView.EditingControlShowing += detailGridView_EditingControlShowing;
             
             fillInSupplierCombo();
 
-            //isLoading = true;
-
-            //loadDataHeader();
-            //loadDataDetail();
-
-            //if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_MUTASI)
-            //{ 
-            //    branchFromTextBox.Text = getBranchName(selectedFromID);
-            //    branchToTextBox.Text = getBranchName(selectedToID);
-            //}
-            //else
-            //{
-            //    branchFromTextBox.Text = getSupplierName(selectedFromID);
-            //}
-
-            //isLoading = false;
 
             userAccessOption = DS.getUserAccessRight(globalConstants.MENU_PENERIMAAN_BARANG_DARI_MUTASI, gUtil.getUserGroupID());
             if (userAccessOption == 1)
@@ -556,7 +537,8 @@ namespace RoyalPetz_ADMIN
                 searchPOButton.Visible = false;
 
             arrButton[0] = saveButton;
-            arrButton[1] = resetButton;
+            arrButton[1] = reprintButton;
+            arrButton[2] = resetButton;
             gUtil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
             
             gUtil.reArrangeTabOrder(this);
@@ -1134,9 +1116,20 @@ namespace RoyalPetz_ADMIN
 
         private bool saveData()
         {
+            bool result;
             if (dataValidated())
             {
-                return saveDataTransaction();
+                smallPleaseWait pleaseWait = new smallPleaseWait();
+                pleaseWait.Show();
+
+                //  ALlow main UI thread to properly display please wait form.
+                Application.DoEvents();
+
+                result = saveDataTransaction();
+
+                pleaseWait.Close();
+
+                return result;
             }
 
             return false;
@@ -1226,6 +1219,36 @@ namespace RoyalPetz_ADMIN
             return result;
         }
 
+        private void printReport(string invoiceNo)
+        {
+            string sqlCommandx = "";
+            if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_MUTASI)
+            {
+                sqlCommandx = "SELECT '1' AS TYPE, '"+noMutasiTextBox.Text+"' AS ORIGIN_INVOICE, DATE(PH.PR_DATE) AS 'TGL', PH.PR_INVOICE AS 'INVOICE', MP.PRODUCT_NAME AS 'PRODUK', PD.PRODUCT_BASE_PRICE AS 'HARGA', PD.PRODUCT_QTY AS 'QTY', PD.PR_SUBTOTAL AS 'SUBTOTAL' " +
+                                     "FROM PRODUCTS_RECEIVED_HEADER PH, PRODUCTS_RECEIVED_DETAIL PD, MASTER_PRODUCT MP " +
+                                     "WHERE PH.PR_INVOICE = '" + invoiceNo + "' AND PD.PR_INVOICE = PH.PR_INVOICE AND PD.PRODUCT_ID = MP.PRODUCT_ID";
+            }
+            else if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_PO)
+            {
+                sqlCommandx = "SELECT '2' AS TYPE, '" + noInvoiceTextBox.Text + "' AS ORIGIN_INVOICE, DATE(PH.PR_DATE) AS 'TGL', PH.PR_INVOICE AS 'INVOICE', MP.PRODUCT_NAME AS 'PRODUK', PD.PRODUCT_BASE_PRICE AS 'HARGA', PD.PRODUCT_QTY AS 'QTY', PD.PR_SUBTOTAL AS 'SUBTOTAL' " +
+                                     "FROM PRODUCTS_RECEIVED_HEADER PH, PRODUCTS_RECEIVED_DETAIL PD, MASTER_PRODUCT MP " +
+                                     "WHERE PH.PR_INVOICE = '" + invoiceNo + "' AND PD.PR_INVOICE = PH.PR_INVOICE AND PD.PRODUCT_ID = MP.PRODUCT_ID";
+            }
+            else
+            {
+                sqlCommandx = "SELECT '0' AS TYPE, 'AA' AS ORIGIN_INVOICE, DATE(PH.PR_DATE) AS 'TGL', PH.PR_INVOICE AS 'INVOICE', MP.PRODUCT_NAME AS 'PRODUK', PD.PRODUCT_BASE_PRICE AS 'HARGA', PD.PRODUCT_QTY AS 'QTY', PD.PR_SUBTOTAL AS 'SUBTOTAL' " +
+                                     "FROM PRODUCTS_RECEIVED_HEADER PH, PRODUCTS_RECEIVED_DETAIL PD, MASTER_PRODUCT MP " +
+                                     "WHERE PH.PR_INVOICE = '" + invoiceNo + "' AND PD.PR_INVOICE = PH.PR_INVOICE AND PD.PRODUCT_ID = MP.PRODUCT_ID";
+            }
+
+            //"WHERE PD.PURCHASE_INVOICE = PH.PURCHASE_INVOICE AND PH.SUPPLIER_ID = MS.SUPPLIER_ID " + supplier + "AND PD.PRODUCT_ID = MP.PRODUCT_ID AND DATE_FORMAT(PH.PURCHASE_DATETIME, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(PH.PURCHASE_DATETIME, '%Y%m%d')  <= '" + dateTo + "' " +
+            //"ORDER BY TGL,INVOICE,PRODUK";
+
+            DS.writeXML(sqlCommandx, globalConstants.penerimaanBarangXML);
+            penerimaanBarangPrintOutForm displayForm = new penerimaanBarangPrintOutForm();
+            displayForm.ShowDialog(this);
+        }
+
         private void saveButton_Click(object sender, EventArgs e)
         {
             gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "SAVE PENERIMAAN BARANG");
@@ -1249,8 +1272,23 @@ namespace RoyalPetz_ADMIN
                 else
                     gUtil.saveUserChangeLog(globalConstants.MENU_MUTASI_BARANG, globalConstants.CHANGE_LOG_INSERT, "PENERIMAAN BARANG [" + prInvoiceTextBox.Text + "] NO PO [" + selectedInvoice + "]");
 
+                if (DialogResult.Yes == MessageBox.Show("PRINT RECEIPT ? ", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                {
+                    smallPleaseWait pleaseWait = new smallPleaseWait();
+                    pleaseWait.Show();
+
+                    //  ALlow main UI thread to properly display please wait form.
+                    Application.DoEvents();
+                    printReport(prInvoiceTextBox.Text);
+
+                    pleaseWait.Close();
+                }
 
                 saveButton.Visible = false;
+                reprintButton.Visible = true;
+
+                gUtil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
+
                 prInvoiceTextBox.Enabled = false;
                 PRDtPicker.Enabled = false;
                 detailGridView.ReadOnly = true;
@@ -1344,6 +1382,8 @@ namespace RoyalPetz_ADMIN
             supplierCombo.Text = "";
 
             saveButton.Visible = true;
+            reprintButton.Visible = false;
+            gUtil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
 
             prInvoiceTextBox.Focus();
             prInvoiceTextBox.Enabled = true;
@@ -1380,6 +1420,21 @@ namespace RoyalPetz_ADMIN
         private void penerimaanBarangForm_Deactivate(object sender, EventArgs e)
         {
             unregisterGlobalHotkey();
+        }
+
+        private void reprintButton_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.Yes == MessageBox.Show("PRINT RECEIPT ? ", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            {
+                smallPleaseWait pleaseWait = new smallPleaseWait();
+                pleaseWait.Show();
+
+                //  ALlow main UI thread to properly display please wait form.
+                Application.DoEvents();
+                printReport(prInvoiceTextBox.Text);
+
+                pleaseWait.Close();
+            }
         }
     }
 }

@@ -47,6 +47,7 @@ namespace RoyalPetz_ADMIN
         public const int DATA_PIUTANG_MUTASI = 116;
         public const int BROWSE_PO_PENERIMAAN = 117;
         public const int BROWSE_MUTASI_PENERIMAAN = 118;
+        public const int REPRINT_PURCHASE_ORDER = 119;
 
         public const int NEW_GROUP_USER = 201;
         public const int EDIT_GROUP_USER = 202;
@@ -196,6 +197,14 @@ namespace RoyalPetz_ADMIN
         public const string PrintBarcodeXML = "PrintBarcode.xml";
         public const string CashierLogXML = "CashierLog.xml";
 
+        public const string ProductDeviationXML= "ProductDeviation.xml";
+        public const string ProductStockLimitXML = "ProductStockLimit.xml";
+        public const string ProductMutationXML = "ProductMutation.xml";
+
+        public const string SalesReturnXML = "SalesReturn.xml";
+        public const string PurchaseReturnXML = "PurchaseReturn.xml";
+        public const string RequestReturnXML = "RequestReturn.xml";
+
         public const string DebtUnpaidXML = "DebtUnpaid.xml";
         public const string DebtPaidXML = "DebtPaid.xml";
         public const string DebtDueXML = "DebtDue.xml";
@@ -203,9 +212,13 @@ namespace RoyalPetz_ADMIN
         public const string CreditUnpaidXML = "CreditUnpaid.xml";
         public const string CreditPaidXML = "CreditPaid.xml";
         public const string CreditDueXML = "CreditDue.xml";
+        
         public const string PurchaseSummaryXML = "PurchaseSummary.xml";
         public const string PurchaseDetailedXML = "PurchaseDetailed.xml";
         public const string PurchasebyProductXML = "PurchasebyProduct.xml";
+
+        public const string purchaseOrderXML = "PurchaseOrder.xml";
+        public const string penerimaanBarangXML = "ProductsReceived.xml";
 
     }
 }

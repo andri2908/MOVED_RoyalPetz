@@ -111,6 +111,9 @@ namespace RoyalPetz_ADMIN
 
         private void ReportSalesSummarySearchForm_Load(object sender, EventArgs e)
         {
+            datefromPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+            datetoPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+
             switch (originModuleID)
             {
                 case globalConstants.REPORT_SALES_OMZET:

@@ -211,6 +211,7 @@
             this.supplierCombo.Name = "supplierCombo";
             this.supplierCombo.Size = new System.Drawing.Size(311, 26);
             this.supplierCombo.TabIndex = 40;
+            this.supplierCombo.SelectedIndexChanged += new System.EventHandler(this.supplierCombo_SelectedIndexChanged);
             // 
             // displayButton
             // 

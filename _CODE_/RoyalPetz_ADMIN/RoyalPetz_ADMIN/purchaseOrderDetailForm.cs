@@ -783,9 +783,20 @@ namespace RoyalPetz_ADMIN
 
         private bool saveData()
         {
+            bool result = false;
             if (dataValidated())
             {
-                return saveDataTransaction();
+                smallPleaseWait pleaseWait = new smallPleaseWait();
+                pleaseWait.Show();
+
+                //  ALlow main UI thread to properly display please wait form.
+                Application.DoEvents();
+
+                result  = saveDataTransaction();
+
+                pleaseWait.Close();
+
+                return result;
             }
 
             return false;
@@ -797,7 +808,7 @@ namespace RoyalPetz_ADMIN
             if (saveData())
             {
                 gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "PURCHASE ORDER SAVED");
-                switch(originModuleID)
+                switch (originModuleID)
                 {
                     case globalConstants.NEW_PURCHASE_ORDER:
                         gUtil.saveUserChangeLog(globalConstants.MENU_PURCHASE_ORDER, globalConstants.CHANGE_LOG_INSERT, "CREATE NEW PURCHASE ORDER [" + POinvoiceTextBox.Text + "]");
@@ -959,6 +970,25 @@ namespace RoyalPetz_ADMIN
             selectedSupplierID = Convert.ToInt32(supplierHiddenCombo.Items[supplierCombo.SelectedIndex]);
         }
 
+        private void printOutPurchaseOrder()
+        {
+            string PONo = POinvoiceTextBox.Text;
+
+            //string sqlCommandx = "SELECT PH.PURCHASE_INVOICE, MS.SUPPLIER_FULL_NAME, PURCHASE_DATETIME, IF(PURCHASE_TERM_OF_PAYMENT = 0, 'TUNAI', 'KREDIT') AS TOP, PURCHASE_TERM_OF_PAYMENT_DURATION, " +
+            //                              "MP.PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_QTY, PURCHASE_SUBTOTAL " +
+            //                              "FROM PURCHASE_HEADER PH, MASTER_SUPPLIER MS, PURCHASE_DETAIL PD, MASTER_PRODUCT MP " +
+            //                              "WHERE PH.PURCHASE_INVOICE = '" + PONo + "' AND PH.SUPPLIER_ID = MS.SUPPLIER_ID AND PD.PURCHASE_INVOICE = PH.PURCHASE_INVOICE AND PD.PRODUCT_ID = MP.PRODUCT_ID";
+            string sqlCommandx = "SELECT PH.PURCHASE_DATETIME AS 'TGL', PH.PURCHASE_DATE_RECEIVED AS 'TERIMA', PH.PURCHASE_INVOICE AS 'INVOICE', MS.SUPPLIER_FULL_NAME AS 'SUPPLIER', MP.PRODUCT_NAME AS 'PRODUK', PD.PRODUCT_PRICE AS 'HARGA', PD.PRODUCT_QTY AS 'QTY', PD.PURCHASE_SUBTOTAL AS 'SUBTOTAL' " +
+                                        "FROM PURCHASE_HEADER PH, PURCHASE_DETAIL PD, MASTER_SUPPLIER MS, MASTER_PRODUCT MP " +
+                                        "WHERE PH.PURCHASE_INVOICE = '" + PONo + "' AND PH.SUPPLIER_ID = MS.SUPPLIER_ID AND PD.PURCHASE_INVOICE = PH.PURCHASE_INVOICE AND PD.PRODUCT_ID = MP.PRODUCT_ID";
+                                        //"WHERE PD.PURCHASE_INVOICE = PH.PURCHASE_INVOICE AND PH.SUPPLIER_ID = MS.SUPPLIER_ID " + supplier + "AND PD.PRODUCT_ID = MP.PRODUCT_ID AND DATE_FORMAT(PH.PURCHASE_DATETIME, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(PH.PURCHASE_DATETIME, '%Y%m%d')  <= '" + dateTo + "' " +
+                                        //"ORDER BY TGL,INVOICE,PRODUK";
+
+            DS.writeXML(sqlCommandx, globalConstants.purchaseOrderXML);
+            purchaseOrderPrintOutForm displayForm = new purchaseOrderPrintOutForm();
+            displayForm.ShowDialog(this);
+        }
+
         private void generateButton_Click(object sender, EventArgs e)
         {
             originModuleID = globalConstants.PRINTOUT_PURCHASE_ORDER;
@@ -975,6 +1005,8 @@ namespace RoyalPetz_ADMIN
                 durationTextBox.ReadOnly = true;
                 detailPODataGridView.ReadOnly = true;
                 detailPODataGridView.AllowUserToAddRows = false;
+
+                printOutPurchaseOrder();
 
                 gUtil.showSuccess(gUtil.INS);
             }
