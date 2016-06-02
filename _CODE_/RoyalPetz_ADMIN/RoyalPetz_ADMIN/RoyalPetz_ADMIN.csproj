@@ -72,6 +72,12 @@
     <Compile Include="cashierForm.designer.cs">
       <DependentUpon>cashierForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="cashierHelpForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cashierHelpForm.Designer.cs">
+      <DependentUpon>cashierHelpForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="cashierLoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -836,6 +842,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="cashierForm.resx">
       <DependentUpon>cashierForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cashierHelpForm.resx">
+      <DependentUpon>cashierHelpForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="cashierLoginForm.resx">
       <DependentUpon>cashierLoginForm.cs</DependentUpon>

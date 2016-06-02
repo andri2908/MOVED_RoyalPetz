@@ -38,7 +38,6 @@ namespace RoyalPetz_ADMIN
         private List<string> disc2 = new List<string>();
         private List<string> discRP = new List<string>();
 
-        private Hotkeys.GlobalHotkey ghk_Add;
         private Hotkeys.GlobalHotkey ghk_F1;
         private Hotkeys.GlobalHotkey ghk_F2;
         private Hotkeys.GlobalHotkey ghk_F3;
@@ -56,6 +55,8 @@ namespace RoyalPetz_ADMIN
         private Hotkeys.GlobalHotkey ghk_CTRL_U;
 
         private Hotkeys.GlobalHotkey ghk_ALT_F4;
+        private Hotkeys.GlobalHotkey ghk_Add;
+        private Hotkeys.GlobalHotkey ghk_Enter;
 
         private adminForm parentForm;
 
@@ -253,9 +254,16 @@ namespace RoyalPetz_ADMIN
                     bayarTextBox.Focus();
                     break;
 
-                case Keys.F1:
-                    MessageBox.Show("F1");
+                case Keys.Enter:
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : HOTKEY TO SAVE AND PRINT OUT INVOICE PRESSED");
+                    saveAndPrintOutInvoice();
                     break;
+
+                case Keys.F1:
+                    cashierHelpForm displayHelp = new cashierHelpForm();
+                    displayHelp.ShowDialog(this);
+                    break;
+
                 case Keys.F5:
                     MessageBox.Show("F5");
                     break;
@@ -326,6 +334,12 @@ namespace RoyalPetz_ADMIN
         {
             gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : REGISTER HOTKEY");
 
+            ghk_F1 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F1, this);
+            ghk_F1.Register();
+
+            ghk_F2 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F2, this);
+            ghk_F2.Register();
+
             ghk_F3 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F3, this);
             ghk_F3.Register();
 
@@ -338,9 +352,6 @@ namespace RoyalPetz_ADMIN
             ghk_F9 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F9, this);
             ghk_F9.Register();
 
-            ghk_F2 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F2, this);
-            ghk_F2.Register();
-
             ghk_F11 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F11, this);
             ghk_F11.Register();
 
@@ -350,8 +361,9 @@ namespace RoyalPetz_ADMIN
             ghk_CTRL_DEL = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Delete, this);
             ghk_CTRL_DEL.Register();
 
-            //ghk_F1 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F1, this);
-            //ghk_F1.Register();
+            ghk_Enter = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Enter, this);
+            ghk_Enter.Register();
+
 
 
             //ghk_F5 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F5, this);
@@ -388,16 +400,18 @@ namespace RoyalPetz_ADMIN
         {
             gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : UNREGISTER HOTKEY");
 
+            ghk_F1.Unregister();
+            ghk_F2.Unregister();
             ghk_F3.Unregister();
             ghk_F4.Unregister();
             ghk_F8.Unregister();
             ghk_F9.Unregister();
-            ghk_F2.Unregister();
-            ghk_Add.Unregister();
             ghk_F11.Unregister();
 
+            ghk_Add.Unregister();
+            ghk_Enter.Unregister();
+
             ghk_CTRL_DEL.Unregister();
-            //ghk_F1.Unregister();
 
             //ghk_F5.Unregister();
             //ghk_F7.Unregister();
@@ -842,7 +856,14 @@ namespace RoyalPetz_ADMIN
 
         private void saveAndPrintOutInvoice()
         {
-            if (DialogResult.Yes == MessageBox.Show("SAVE AND PRINT OUT ?", "WARNING", MessageBoxButtons.YesNo,MessageBoxIcon.Warning))
+            string message = "";
+
+            if (printoutCheckBox.Checked == true)
+                message = "SAVE AND PRINT OUT ?";
+            else
+                message = "SAVE DATA ?";
+
+            if (DialogResult.Yes == MessageBox.Show(message, "WARNING", MessageBoxButtons.YesNo,MessageBoxIcon.Warning))
             {
                 gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "ATTEMPT TO SAVE AND PRINT OUT INVOICE");
 
@@ -852,8 +873,13 @@ namespace RoyalPetz_ADMIN
                     gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "TRANSACTION SAVED");
 
                     gutil.saveUserChangeLog(globalConstants.MENU_PENJUALAN, globalConstants.CHANGE_LOG_INSERT, "NEW TRANSAKSI PENJUALAN [" + selectedsalesinvoice + "]");
-                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "PRINT OUT INVOICE");
-                    PrintReceipt();
+
+                    if (printoutCheckBox.Checked == false)
+                    { 
+                        gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "PRINT OUT INVOICE");
+                        PrintReceipt();
+                    }
+
                     gutil.showSuccess(gutil.INS);
 
                     isLoading = true;
@@ -1133,6 +1159,10 @@ namespace RoyalPetz_ADMIN
             DataGridViewComboBoxEditingControl dataGridViewComboBoxEditingControl = sender as DataGridViewComboBoxEditingControl;
 
             selectedIndex = dataGridViewComboBoxEditingControl.SelectedIndex;
+
+            if (selectedIndex < 0)
+                return;
+
             rowSelectedIndex = cashierDataGridView.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = cashierDataGridView.Rows[rowSelectedIndex];
 
