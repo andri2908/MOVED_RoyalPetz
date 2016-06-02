@@ -2082,7 +2082,7 @@ namespace RoyalPetz_ADMIN
                         rectright.Y = Offset-startY;
                         sf.LineAlignment = StringAlignment.Far;
                         sf.Alignment = StringAlignment.Far;
-                        ucapan = product_price.ToString("C2", culture);//" Rp." + product_price;
+                        ucapan = "@" + product_price.ToString("C2", culture);//" Rp." + product_price;
                         graphics.DrawString(ucapan, new Font("Courier New", 7),
                                  new SolidBrush(Color.Black), rectright, sf);
                     }
