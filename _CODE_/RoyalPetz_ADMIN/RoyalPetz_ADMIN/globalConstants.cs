@@ -48,6 +48,7 @@ namespace RoyalPetz_ADMIN
         public const int BROWSE_PO_PENERIMAAN = 117;
         public const int BROWSE_MUTASI_PENERIMAAN = 118;
         public const int REPRINT_PURCHASE_ORDER = 119;
+        public const int DUMMY_TRANSACTION_TAX = 120;
 
         public const int NEW_GROUP_USER = 201;
         public const int EDIT_GROUP_USER = 202;
@@ -144,6 +145,7 @@ namespace RoyalPetz_ADMIN
         public const int MENU_PENGATURAN_LIMIT_PAJAK = 49;
 
         public const int MENU_MODULE_MESSAGING = 50;
+        public const int MENU_TAX_MODULE = 51;
 
         // CONSTANTS FOR USER CHANGE LOG
         public const int CHANGE_LOG_LOGIN = 1;

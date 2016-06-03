@@ -705,12 +705,12 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripMenuItem74_DropDownClosed(object sender, EventArgs e)
         {
-            toolStripMenuItem74.ForeColor = Color.FloralWhite;
+            MAINMENU_TaxModule.ForeColor = Color.FloralWhite;
         }
 
         private void toolStripMenuItem74_DropDownOpened(object sender, EventArgs e)
         {
-            toolStripMenuItem74.ForeColor = Color.Black;
+            MAINMENU_TaxModule.ForeColor = Color.Black;
         }
 
         private void informasiToolStripMenuItem_DropDownClosed(object sender, EventArgs e)
@@ -883,7 +883,7 @@ namespace RoyalPetz_ADMIN
             setAccessibility(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, SHORTCUT_hutang);
             // SUB MENU PENGATURAN LIMIT PAJAK
             setAccessibility(globalConstants.MENU_PENGATURAN_LIMIT_PAJAK, MENU_pengaturanLimitPajak);
-
+            setAccessibility(globalConstants.MENU_TAX_MODULE, MAINMENU_TaxModule);
         }
 
         private void toolStripMenuItem1_Click_1(object sender, EventArgs e)
@@ -1184,6 +1184,30 @@ namespace RoyalPetz_ADMIN
         private void mutasiBarangToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem28_Click(object sender, EventArgs e)
+        {
+            cashierForm displayedForm = new cashierForm(globalConstants.DUMMY_TRANSACTION_TAX, true);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            ReportSalesSummarySearchForm displayedForm = new ReportSalesSummarySearchForm(globalConstants.REPORT_SALES_DETAILED, true);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem7_Click(object sender, EventArgs e)
+        {
+            ReportSalesSummarySearchForm displayedForm = new ReportSalesSummarySearchForm(globalConstants.REPORT_SALES_SUMMARY, true);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem8_Click(object sender, EventArgs e)
+        {
+            ReportSalesSummarySearchForm displayedForm = new ReportSalesSummarySearchForm(globalConstants.REPORT_SALES_PRODUCT, true);
             displayedForm.ShowDialog(this);
         }
     }

@@ -298,6 +298,13 @@ namespace RoyalPetz_ADMIN
                     gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_PIUTANG, "UPDATE SALES HEADER SET TO FULLY PAID [" + selectedSOInvoice + "]");
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
+
+                    // UPDATE SALES HEADER TAX TABLE
+                    sqlCommand = "UPDATE SALES_HEADER_TAX SET SALES_PAID = 1 WHERE ORIGIN_SALES_INVOICE = '" + selectedSOInvoice + "'";
+
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_PIUTANG, "UPDATE SALES HEADER TAX SET TO FULLY PAID [" + selectedSOInvoice + "]");
+                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        throw internalEX;
                 }
 
                 if (paymentMethod == 1)

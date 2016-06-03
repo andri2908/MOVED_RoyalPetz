@@ -507,6 +507,13 @@ namespace RoyalPetz_ADMIN
                                     gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : UPDATE SALES HEADER SET FULLY PAID [" + noInvoice + "]");
                                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                         throw internalEX;
+
+                                    // UPDATE SALES HEADER TAX TABLE
+                                    sqlCommand = "UPDATE SALES_HEADER_TAX SET SALES_PAID = 1 WHERE ORIGIN_SALES_INVOICE = '" + noInvoice + "'";
+
+                                    gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : UPDATE SALES HEADER TAX SET FULLY PAID [" + noInvoice + "]");
+                                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                        throw internalEX;
                                 }
                             }
                             else if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)

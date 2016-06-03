@@ -152,12 +152,8 @@
             this.masterSatuanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.masterUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generatorXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem74 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem27 = new System.Windows.Forms.ToolStripMenuItem();
+            this.MAINMENU_TaxModule = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem28 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem29 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem30 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem31 = new System.Windows.Forms.ToolStripMenuItem();
             this.informasiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.developerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem26 = new System.Windows.Forms.ToolStripMenuItem();
@@ -177,6 +173,10 @@
             this.SHORTCUT_returBeli = new System.Windows.Forms.ToolStripButton();
             this.SHORTCUT_returJual = new System.Windows.Forms.ToolStripButton();
             this.timerMessage = new System.Windows.Forms.Timer(this.components);
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -193,7 +193,7 @@
             this.MAINMENU_KEUANGAN,
             this.laporanToolStripMenuItem,
             this.toolStripMenuItem25,
-            this.toolStripMenuItem74,
+            this.MAINMENU_TaxModule,
             this.informasiToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -653,7 +653,7 @@
             this.MENU_requestOrder.ForeColor = System.Drawing.Color.FloralWhite;
             this.MENU_requestOrder.Name = "MENU_requestOrder";
             this.MENU_requestOrder.ShowShortcutKeys = false;
-            this.MENU_requestOrder.Size = new System.Drawing.Size(235, 22);
+            this.MENU_requestOrder.Size = new System.Drawing.Size(243, 22);
             this.MENU_requestOrder.Text = "Request Order";
             this.MENU_requestOrder.Click += new System.EventHandler(this.toolStripMenuItem65_Click);
             // 
@@ -663,7 +663,7 @@
             this.MENU_purchaseOrder.ForeColor = System.Drawing.Color.FloralWhite;
             this.MENU_purchaseOrder.Name = "MENU_purchaseOrder";
             this.MENU_purchaseOrder.ShowShortcutKeys = false;
-            this.MENU_purchaseOrder.Size = new System.Drawing.Size(235, 22);
+            this.MENU_purchaseOrder.Size = new System.Drawing.Size(243, 22);
             this.MENU_purchaseOrder.Text = "Purchase Order";
             this.MENU_purchaseOrder.Click += new System.EventHandler(this.toolStripMenuItem36_Click);
             // 
@@ -673,7 +673,7 @@
             this.MENU_reprintRequestOrder.ForeColor = System.Drawing.Color.FloralWhite;
             this.MENU_reprintRequestOrder.Name = "MENU_reprintRequestOrder";
             this.MENU_reprintRequestOrder.ShowShortcutKeys = false;
-            this.MENU_reprintRequestOrder.Size = new System.Drawing.Size(235, 22);
+            this.MENU_reprintRequestOrder.Size = new System.Drawing.Size(243, 22);
             this.MENU_reprintRequestOrder.Text = "Re-print Purchase Order";
             this.MENU_reprintRequestOrder.Click += new System.EventHandler(this.toolStripMenuItem67_Click);
             // 
@@ -1406,69 +1406,29 @@
             this.generatorXMLToolStripMenuItem.Text = "Generator XML";
             this.generatorXMLToolStripMenuItem.Click += new System.EventHandler(this.generatorXMLToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem74
+            // MAINMENU_TaxModule
             // 
-            this.toolStripMenuItem74.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem74.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem27,
-            this.toolStripMenuItem28});
-            this.toolStripMenuItem74.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMenuItem74.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripMenuItem74.Name = "toolStripMenuItem74";
-            this.toolStripMenuItem74.Size = new System.Drawing.Size(66, 20);
-            this.toolStripMenuItem74.Text = "Admin";
-            this.toolStripMenuItem74.DropDownClosed += new System.EventHandler(this.toolStripMenuItem74_DropDownClosed);
-            this.toolStripMenuItem74.DropDownOpened += new System.EventHandler(this.toolStripMenuItem74_DropDownOpened);
-            // 
-            // toolStripMenuItem27
-            // 
-            this.toolStripMenuItem27.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem27.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMenuItem27.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripMenuItem27.Name = "toolStripMenuItem27";
-            this.toolStripMenuItem27.Size = new System.Drawing.Size(211, 22);
-            this.toolStripMenuItem27.Text = "Laporan Penjualan";
+            this.MAINMENU_TaxModule.BackColor = System.Drawing.Color.SteelBlue;
+            this.MAINMENU_TaxModule.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem28,
+            this.toolStripMenuItem5});
+            this.MAINMENU_TaxModule.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MAINMENU_TaxModule.ForeColor = System.Drawing.Color.FloralWhite;
+            this.MAINMENU_TaxModule.Name = "MAINMENU_TaxModule";
+            this.MAINMENU_TaxModule.Size = new System.Drawing.Size(92, 20);
+            this.MAINMENU_TaxModule.Text = "Penjualan";
+            this.MAINMENU_TaxModule.DropDownClosed += new System.EventHandler(this.toolStripMenuItem74_DropDownClosed);
+            this.MAINMENU_TaxModule.DropDownOpened += new System.EventHandler(this.toolStripMenuItem74_DropDownOpened);
             // 
             // toolStripMenuItem28
             // 
             this.toolStripMenuItem28.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem28.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem29,
-            this.toolStripMenuItem30,
-            this.toolStripMenuItem31});
             this.toolStripMenuItem28.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripMenuItem28.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripMenuItem28.Name = "toolStripMenuItem28";
-            this.toolStripMenuItem28.Size = new System.Drawing.Size(211, 22);
+            this.toolStripMenuItem28.Size = new System.Drawing.Size(265, 22);
             this.toolStripMenuItem28.Text = "Transaksi";
-            // 
-            // toolStripMenuItem29
-            // 
-            this.toolStripMenuItem29.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem29.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMenuItem29.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripMenuItem29.Name = "toolStripMenuItem29";
-            this.toolStripMenuItem29.Size = new System.Drawing.Size(322, 22);
-            this.toolStripMenuItem29.Text = "Tambah / Hapus Transaksi Harian";
-            // 
-            // toolStripMenuItem30
-            // 
-            this.toolStripMenuItem30.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem30.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMenuItem30.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripMenuItem30.Name = "toolStripMenuItem30";
-            this.toolStripMenuItem30.Size = new System.Drawing.Size(322, 22);
-            this.toolStripMenuItem30.Text = "Pembayaran Hutang";
-            this.toolStripMenuItem30.Click += new System.EventHandler(this.toolStripMenuItem30_Click);
-            // 
-            // toolStripMenuItem31
-            // 
-            this.toolStripMenuItem31.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem31.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMenuItem31.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripMenuItem31.Name = "toolStripMenuItem31";
-            this.toolStripMenuItem31.Size = new System.Drawing.Size(322, 22);
-            this.toolStripMenuItem31.Text = "Penerimaan Piutang";
+            this.toolStripMenuItem28.Click += new System.EventHandler(this.toolStripMenuItem28_Click);
             // 
             // informasiToolStripMenuItem
             // 
@@ -1487,7 +1447,7 @@
             this.developerToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
             this.developerToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.developerToolStripMenuItem.Name = "developerToolStripMenuItem";
-            this.developerToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.developerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.developerToolStripMenuItem.Text = "Developer";
             this.developerToolStripMenuItem.Click += new System.EventHandler(this.developerToolStripMenuItem_Click);
             // 
@@ -1661,6 +1621,45 @@
             this.timerMessage.Interval = 3600000;
             this.timerMessage.Tick += new System.EventHandler(this.timerMessage_Tick);
             // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem5.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem6,
+            this.toolStripMenuItem7,
+            this.toolStripMenuItem8});
+            this.toolStripMenuItem5.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(265, 22);
+            this.toolStripMenuItem5.Text = "Laporan Penjualan Produk";
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem6.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(213, 22);
+            this.toolStripMenuItem6.Text = "Detailed";
+            this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
+            // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem7.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(213, 22);
+            this.toolStripMenuItem7.Text = "Summary ";
+            this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
+            // 
+            // toolStripMenuItem8
+            // 
+            this.toolStripMenuItem8.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem8.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(213, 22);
+            this.toolStripMenuItem8.Text = "Per Produk-Barang";
+            this.toolStripMenuItem8.Click += new System.EventHandler(this.toolStripMenuItem8_Click);
+            // 
             // adminForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1749,12 +1748,8 @@
         private System.Windows.Forms.ToolStripMenuItem MENU_pembayaranPiutang;
         private System.Windows.Forms.ToolStripMenuItem MENU_pengaturanLimitPajak;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem26;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem74;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem27;
+        private System.Windows.Forms.ToolStripMenuItem MAINMENU_TaxModule;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem28;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem29;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem30;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem31;
         private System.Windows.Forms.ToolStripMenuItem MENU_pengaturanGroupAkses;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem MENU_pengaturanNomorRak;
@@ -1846,6 +1841,10 @@
         private System.Windows.Forms.ToolStripMenuItem summaryToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem perProdukBarangToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem permintaanToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
         //private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
     }
 }

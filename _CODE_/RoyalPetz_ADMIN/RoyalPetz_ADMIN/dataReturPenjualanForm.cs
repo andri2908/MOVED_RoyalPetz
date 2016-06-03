@@ -594,7 +594,7 @@ namespace RoyalPetz_ADMIN
                                 throw internalEX;
 
                             // UPDATE SALES HEADER TAX TABLE
-                            sqlCommand = "UPDATE SALES_HEADER_TAX SET SALES_PAID = 1 WHERE SALES_INVOICE = '" + selectedSalesInvoice + "'";
+                            sqlCommand = "UPDATE SALES_HEADER_TAX SET SALES_PAID = 1 WHERE ORIGIN_SALES_INVOICE = '" + selectedSalesInvoice + "'";
                             gutil.saveSystemDebugLog(originModuleID, "UPDATE SALES HEADER TAX [" + selectedSalesInvoice + "]");
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;
@@ -676,7 +676,7 @@ namespace RoyalPetz_ADMIN
                                         throw internalEX;
 
                                     // UPDATE SALES HEADER TAX TABLE
-                                    sqlCommand = "UPDATE SALES_HEADER_TAX SET SALES_PAID = 1 WHERE SALES_INVOICE = " + currentSalesInvoice;
+                                    sqlCommand = "UPDATE SALES_HEADER_TAX SET SALES_PAID = 1 WHERE ORIGIN_SALES_INVOICE = " + currentSalesInvoice;
                                     gutil.saveSystemDebugLog(originModuleID, "UPDATE SALES_HEADER_TAX [" + currentSalesInvoice + "] TO FULLY PAID");
                                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                         throw internalEX;
