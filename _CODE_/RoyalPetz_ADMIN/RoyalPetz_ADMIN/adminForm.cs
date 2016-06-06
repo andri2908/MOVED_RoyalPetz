@@ -1153,37 +1153,43 @@ namespace RoyalPetz_ADMIN
                             "FROM MASTER_PRODUCT P, MASTER_UNIT U " +
                             "WHERE P.UNIT_ID = U.UNIT_ID AND P.PRODUCT_IS_SERVICE = 0 AND P.PRODUCT_ACTIVE = 1 AND P.PRODUCT_STOCK_QTY <= P.PRODUCT_LIMIT_STOCK";
             DS.writeXML(sqlCommandx, globalConstants.ProductStockLimitXML);
-            //ReportCreditUnpaidForm displayedForm = new ReportCreditUnpaidForm();
-            //displayedForm.ShowDialog(this);
+            ReportProductStockLimitForm displayedForm = new ReportProductStockLimitForm();
+            displayedForm.ShowDialog(this);
         }
 
         private void deviasiAdjustmentStokToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm();
+            ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm(globalConstants.REPORT_STOCK_DEVIATION);
             displayedForm.ShowDialog(this);
         }
 
         private void pembelianToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm();
+            ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm(globalConstants.REPORT_PURCHASE_RETURN);
             displayedForm.ShowDialog(this);
         }
 
         private void penjualanToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm();
+            ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm(globalConstants.REPORT_SALES_RETURN);
             displayedForm.ShowDialog(this);
         }
 
         private void permintaanToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm();
+            ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm(globalConstants.REPORT_REQUEST_RETURN);
             displayedForm.ShowDialog(this);
         }
 
         private void mutasiBarangToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm();
+            ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm(globalConstants.REPORT_PRODUCT_MUTATION);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void pembayaranHutangToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportPaymentSearchForm displayedForm = new ReportPaymentSearchForm(globalConstants.REPORT_DEBT_PAYMENT);
             displayedForm.ShowDialog(this);
         }
 
@@ -1193,6 +1199,35 @@ namespace RoyalPetz_ADMIN
             displayedForm.ShowDialog(this);
         }
 
+        private void pembayaranPiutangToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportPaymentSearchForm displayedForm = new ReportPaymentSearchForm(globalConstants.REPORT_CREDIT_PAYMENT);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void pembayaranMutasiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportPaymentSearchForm displayedForm = new ReportPaymentSearchForm(globalConstants.REPORT_MUTATION_PAYMENT);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void pengeluaranKasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportFinanceSearchForm displayedForm = new ReportFinanceSearchForm(globalConstants.REPORT_FINANCE_OUT);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void pemasukanKasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportFinanceSearchForm displayedForm = new ReportFinanceSearchForm(globalConstants.REPORT_FINANCE_OUT);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void labaRugiHarianToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportFinanceSearchForm displayedForm = new ReportFinanceSearchForm(globalConstants.REPORT_MARGIN);
+            displayedForm.ShowDialog(this);
+        }
         private void toolStripMenuItem6_Click(object sender, EventArgs e)
         {
             ReportSalesSummarySearchForm displayedForm = new ReportSalesSummarySearchForm(globalConstants.REPORT_SALES_DETAILED, true);

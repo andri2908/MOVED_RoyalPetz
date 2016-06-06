@@ -175,6 +175,20 @@ namespace RoyalPetz_ADMIN
         public const int REPORT_PURCHASE_DETAILED = 711;
         public const int REPORT_PURCHASE_ByPRODUCT = 712;
 
+        public const int REPORT_PURCHASE_RETURN = 720;
+        public const int REPORT_SALES_RETURN = 721;
+        public const int REPORT_REQUEST_RETURN = 722;
+        public const int REPORT_PRODUCT_MUTATION = 723;
+        public const int REPORT_STOCK_DEVIATION = 724;
+
+        public const int REPORT_DEBT_PAYMENT = 731;
+        public const int REPORT_CREDIT_PAYMENT = 732;
+        public const int REPORT_MUTATION_PAYMENT = 733;
+
+        public const int REPORT_FINANCE_IN = 741;
+        public const int REPORT_FINANCE_OUT = 742;
+        public const int REPORT_MARGIN = 743;
+
         //XML file
         public const string AccountXML = "MasterAccount.xml";
         public const string BranchXML = "MasterBranch.xml";
@@ -201,7 +215,13 @@ namespace RoyalPetz_ADMIN
 
         public const string ProductDeviationXML= "ProductDeviation.xml";
         public const string ProductStockLimitXML = "ProductStockLimit.xml";
+
         public const string ProductMutationXML = "ProductMutation.xml";
+        public const string MutationPaidXML = "MutationPaid.xml";
+
+        public const string FinanceInXML = "FinanceIn.xml";
+        public const string FinanceOutXML = "FinanceOut.xml";
+        public const string MarginXML = "Margin.xml";
 
         public const string SalesReturnXML = "SalesReturn.xml";
         public const string PurchaseReturnXML = "PurchaseReturn.xml";
@@ -214,7 +234,7 @@ namespace RoyalPetz_ADMIN
         public const string CreditUnpaidXML = "CreditUnpaid.xml";
         public const string CreditPaidXML = "CreditPaid.xml";
         public const string CreditDueXML = "CreditDue.xml";
-        
+
         public const string PurchaseSummaryXML = "PurchaseSummary.xml";
         public const string PurchaseDetailedXML = "PurchaseDetailed.xml";
         public const string PurchasebyProductXML = "PurchasebyProduct.xml";
