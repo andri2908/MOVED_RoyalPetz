@@ -58,6 +58,7 @@ namespace RoyalPetz_ADMIN
 
         private Hotkeys.GlobalHotkey ghk_ALT_F4;
         private Hotkeys.GlobalHotkey ghk_Add;
+        private Hotkeys.GlobalHotkey ghk_Substract;
         private Hotkeys.GlobalHotkey ghk_Enter;
 
         private adminForm parentForm;
@@ -255,7 +256,7 @@ namespace RoyalPetz_ADMIN
 
                     barcodeForm displayBarcodeForm = new barcodeForm(this, globalConstants.CASHIER_MODULE);
 
-                    displayBarcodeForm.Top = this.Top - displayBarcodeForm.Height;
+                    displayBarcodeForm.Top = this.Top;// - displayBarcodeForm.Height;
                     displayBarcodeForm.Left = (Screen.PrimaryScreen.Bounds.Width / 2) - (displayBarcodeForm.Width / 2);
 
                     displayBarcodeForm.ShowDialog(this);
@@ -263,6 +264,10 @@ namespace RoyalPetz_ADMIN
 
                 case Keys.Add:
                     bayarTextBox.Focus();
+                    break;
+
+                case Keys.Subtract:
+                    discJualMaskedTextBox.Focus();
                     break;
 
                 case Keys.Enter:
@@ -369,6 +374,9 @@ namespace RoyalPetz_ADMIN
             ghk_Add = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Add, this);
             ghk_Add.Register();
 
+            ghk_Substract = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Subtract, this);
+            ghk_Substract.Register();
+
             ghk_CTRL_DEL = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Delete, this);
             ghk_CTRL_DEL.Register();
 
@@ -420,6 +428,7 @@ namespace RoyalPetz_ADMIN
             ghk_F11.Unregister();
 
             ghk_Add.Unregister();
+            ghk_Substract.Unregister();
             ghk_Enter.Unregister();
 
             ghk_CTRL_DEL.Unregister();
@@ -1494,18 +1503,18 @@ namespace RoyalPetz_ADMIN
 
             productIdColumn.HeaderText = "KODE PRODUK";
             productIdColumn.Name = "productID";
-            productIdColumn.Width = 200;
+            productIdColumn.Width = 150;
             cashierDataGridView.Columns.Add(productIdColumn);
 
             // PRODUCT NAME COLUMN
             productNameCmb.HeaderText = "NAMA PRODUK";
             productNameCmb.Name = "productName";
-            productNameCmb.Width = 320;
+            productNameCmb.Width = 200;
             cashierDataGridView.Columns.Add(productNameCmb);
 
             productPriceColumn.HeaderText = "HARGA";
             productPriceColumn.Name = "productPrice";
-            productPriceColumn.Width = 200;
+            productPriceColumn.Width = 100;
 
             // USER WHO HAS ACCESS TO PENGATURAN HARGA CAN EDIT THE PRODUCT PRICE MANUALLY
             userAccessOption = DS.getUserAccessRight(globalConstants.MENU_PENGATURAN_HARGA, gutil.getUserGroupID());
@@ -1516,29 +1525,29 @@ namespace RoyalPetz_ADMIN
 
             stockQtyColumn.HeaderText = "QTY";
             stockQtyColumn.Name = "qty";
-            stockQtyColumn.Width = 100;
+            stockQtyColumn.Width = 80;
             cashierDataGridView.Columns.Add(stockQtyColumn);
 
             disc1Column.HeaderText = "DISC 1 (%)";
             disc1Column.Name = "disc1";
-            disc1Column.Width = 150;
+            disc1Column.Width = 75;
             disc1Column.MaxInputLength = 5;
             cashierDataGridView.Columns.Add(disc1Column);
 
             disc2Column.HeaderText = "DISC 2 (%)";
             disc2Column.Name = "disc2";
-            disc2Column.Width = 150;
+            disc2Column.Width = 75;
             disc2Column.MaxInputLength = 5;
             cashierDataGridView.Columns.Add(disc2Column);
 
             discRPColumn.HeaderText = "DISC RP";
             discRPColumn.Name = "discRP";
-            discRPColumn.Width = 150;
+            discRPColumn.Width = 100;
             cashierDataGridView.Columns.Add(discRPColumn);
 
             subTotalColumn.HeaderText = "JUMLAH";
             subTotalColumn.Name = "jumlah";
-            subTotalColumn.Width = 200;
+            subTotalColumn.Width = 150;
             subTotalColumn.ReadOnly = true;
             cashierDataGridView.Columns.Add(subTotalColumn);
 
@@ -1922,7 +1931,7 @@ namespace RoyalPetz_ADMIN
             Graphics graphics = e.Graphics;
             Font font = new Font("Courier New", 10);
             float fontHeight = font.GetHeight();
-            int startX = 5;
+            int startX = 2;
             int colxwidth = 93; //31x3
             int totrowwidth = 310; //310/10=31
             int totrowheight = 20;
@@ -1931,6 +1940,7 @@ namespace RoyalPetz_ADMIN
             int startY = 5;
             int Offset = 15;
             int offset_plus = 3;
+            int fontSize = 7;
             //HEADER
 
             //set allignemnt
@@ -1953,13 +1963,13 @@ namespace RoyalPetz_ADMIN
             Offset = Offset + 12;
             rect.Y = startY + Offset;
             graphics.DrawString(almt,
-                     new Font("Courier New", 7),
+                     new Font("Courier New", fontSize),
                      new SolidBrush(Color.Black), rect, sf);
 
             Offset = Offset + 10;
             rect.Y = startY + Offset;
             graphics.DrawString(tlpn,
-                     new Font("Courier New", 7),
+                     new Font("Courier New", fontSize),
                      new SolidBrush(Color.Black), rect, sf);
 
             if (!email.Equals(""))
@@ -1967,13 +1977,13 @@ namespace RoyalPetz_ADMIN
                 Offset = Offset + 10;
                 rect.Y = startY + Offset;
                 graphics.DrawString(email,
-                         new Font("Courier New", 7),
+                         new Font("Courier New", fontSize),
                      new SolidBrush(Color.Black), rect, sf);
             }
 
             Offset = Offset + 13;
             rect.Y = startY + Offset;
-            String underLine = "-------------------------------------";  //37 character
+            String underLine = "---------------------------------------";  //37 character
             graphics.DrawString(underLine, new Font("Courier New", 9),
                      new SolidBrush(Color.Black), rect, sf);
             //end of header
@@ -1989,6 +1999,7 @@ namespace RoyalPetz_ADMIN
             string group = "";
             double total = 0;
             string sqlCommand = "";
+            
             if (originModuleID == 0)  // NORMAL TRANSACTION
             { 
             sqlCommand = "SELECT S.SALES_INVOICE AS 'INVOICE', C.CUSTOMER_FULL_NAME AS 'CUSTOMER',DATE_FORMAT(S.SALES_DATE, '%d-%M-%Y') AS 'DATE',S.SALES_TOTAL AS 'TOTAL', IF(C.CUSTOMER_GROUP=1,'RETAIL',IF(C.CUSTOMER_GROUP=2,'GROSIR','PARTAI')) AS 'GROUP' FROM SALES_HEADER S,MASTER_CUSTOMER C WHERE S.CUSTOMER_ID = C.CUSTOMER_ID AND S.SALES_INVOICE = '" + selectedsalesinvoice + "'" +
@@ -2032,14 +2043,14 @@ namespace RoyalPetz_ADMIN
             {
                 ucapan = "JUAL TUNAI KEPADA";
             }
-            graphics.DrawString(ucapan, new Font("Courier New", 7),
+            graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                      new SolidBrush(Color.Black), rect, sf);
 
             //2. CUSTOMER NAME
             Offset = Offset + 12;
             rect.Y = startY + Offset;
             ucapan = "PELANGGAN : " + customer + " [" + group + "]";
-            graphics.DrawString(ucapan, new Font("Courier New", 7),
+            graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                      new SolidBrush(Color.Black), rect, sf);
 
             Offset = Offset + 13;
@@ -2055,7 +2066,7 @@ namespace RoyalPetz_ADMIN
             rect.Y = startY + Offset;
             rect.Width = totrowwidth;
             ucapan = "BUKTI PEMBAYARAN";
-            graphics.DrawString(ucapan, new Font("Courier New", 7),
+            graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                      new SolidBrush(Color.Black), rect, sf);
             
             Offset = Offset + 15 + offset_plus;
@@ -2068,13 +2079,13 @@ namespace RoyalPetz_ADMIN
                 ucapan = "NO. NOTA : " + selectedsalesinvoice;
             else
                 ucapan = "NO. NOTA : " + selectedsalesinvoiceTax;
-            graphics.DrawString(ucapan, new Font("Courier New", 7),
+            graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                      new SolidBrush(Color.Black), rect, sf);
 
             Offset = Offset + 12;
             rect.Y = startY + Offset;
             ucapan = "TANGGAL  : "+ tgl;
-            graphics.DrawString(ucapan, new Font("Courier New", 7),
+            graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                      new SolidBrush(Color.Black), rect, sf);
 
             Offset = Offset + 12;
@@ -2082,7 +2093,7 @@ namespace RoyalPetz_ADMIN
             string nama = "";
             loadNamaUser(gutil.getUserID(), out nama);
             ucapan = "OPERATOR : " +  nama;
-            graphics.DrawString(ucapan, new Font("Courier New", 7),
+            graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                      new SolidBrush(Color.Black), rect, sf);
 
             Offset = Offset + 13;
@@ -2139,14 +2150,14 @@ namespace RoyalPetz_ADMIN
                             ucapan = ucapan.Substring(0, 30); //maximum 30 character
                         }
                         //
-                        graphics.DrawString(ucapan, new Font("Courier New", 7),
+                        graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                                  new SolidBrush(Color.Black), rect, sf);
 
                         rectright.Y = Offset-startY;
                         sf.LineAlignment = StringAlignment.Far;
                         sf.Alignment = StringAlignment.Far;
                         ucapan = "@" + product_price.ToString("C2", culture);//" Rp." + product_price;
-                        graphics.DrawString(ucapan, new Font("Courier New", 7),
+                        graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                                  new SolidBrush(Color.Black), rectright, sf);
                     }
                 }
@@ -2170,13 +2181,13 @@ namespace RoyalPetz_ADMIN
             sf.Alignment = StringAlignment.Near;
             ucapan = "               JUMLAH  :";
             rectcenter.Y = rect.Y;
-            graphics.DrawString(ucapan, new Font("Courier New", 7),
+            graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                      new SolidBrush(Color.Black), rectcenter, sf);
             sf.LineAlignment = StringAlignment.Far;
             sf.Alignment = StringAlignment.Far;
             ucapan = total.ToString("C2", culture);
             rectright.Y = Offset - startY + 1;
-            graphics.DrawString(ucapan, new Font("Courier New", 7),
+            graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                      new SolidBrush(Color.Black), rectright, sf);
 
             if (cashRadioButton.Checked == true)
@@ -2189,7 +2200,7 @@ namespace RoyalPetz_ADMIN
                 sf.Alignment = StringAlignment.Near;
                 ucapan = "               TUNAI   :";
                 rectcenter.Y = rect.Y;
-                graphics.DrawString(ucapan, new Font("Courier New", 7),
+                graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                          new SolidBrush(Color.Black), rectcenter, sf);
                 sf.LineAlignment = StringAlignment.Far;
                 sf.Alignment = StringAlignment.Far;
@@ -2197,7 +2208,7 @@ namespace RoyalPetz_ADMIN
                 double jumlahBayar = Convert.ToDouble(bayarTextBox.Text);
                 ucapan = jumlahBayar.ToString("C2", culture);//"Rp." + String.Format("{0:C2}", bayarTextBox.Text);
                 rectright.Y = Offset - startY + 1;
-                graphics.DrawString(ucapan, new Font("Courier New", 7),
+                graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                          new SolidBrush(Color.Black), rectright, sf);
 
                 Offset = Offset + 15;
@@ -2208,13 +2219,13 @@ namespace RoyalPetz_ADMIN
                 sf.Alignment = StringAlignment.Near;
                 ucapan = "               KEMBALI :";
                 rectcenter.Y = rect.Y;
-                graphics.DrawString(ucapan, new Font("Courier New", 7),
+                graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                          new SolidBrush(Color.Black), rectcenter, sf);
                 sf.LineAlignment = StringAlignment.Far;
                 sf.Alignment = StringAlignment.Far;
                 ucapan = uangKembaliTextBox.Text;
                 rectright.Y = Offset - startY + 1;
-                graphics.DrawString(ucapan, new Font("Courier New", 7),
+                graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                          new SolidBrush(Color.Black), rectright, sf);
             }
 
@@ -2238,7 +2249,7 @@ namespace RoyalPetz_ADMIN
             sf.LineAlignment = StringAlignment.Near;
             sf.Alignment = StringAlignment.Near;
             ucapan = "TOTAL BARANG : " + total_qty;
-            graphics.DrawString(ucapan, new Font("Courier New", 7),
+            graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                      new SolidBrush(Color.Black), rect, sf);
             //eNd of content
 
@@ -2256,19 +2267,19 @@ namespace RoyalPetz_ADMIN
             Offset = Offset + 15;
             rect.Y = startY + Offset;
             ucapan = "TERIMA KASIH ATAS KUNJUNGAN ANDA";
-            graphics.DrawString(ucapan, new Font("Courier New", 7),
+            graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                      new SolidBrush(Color.Black), rect, sf);
 
             Offset = Offset + 15;
             rect.Y = startY + Offset;
             ucapan = "MAAF BARANG YANG SUDAH DIBELI";
-            graphics.DrawString(ucapan, new Font("Courier New", 7),
+            graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                      new SolidBrush(Color.Black), rect, sf);
 
             Offset = Offset + 15;
             rect.Y = startY + Offset;
             ucapan = "TIDAK DAPAT DITUKAR/ DIKEMBALIKKAN";
-            graphics.DrawString(ucapan, new Font("Courier New", 7),
+            graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                      new SolidBrush(Color.Black), rect, sf);
             //end of footer
 
