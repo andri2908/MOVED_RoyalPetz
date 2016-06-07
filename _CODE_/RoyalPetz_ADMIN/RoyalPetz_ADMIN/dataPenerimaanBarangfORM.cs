@@ -68,9 +68,9 @@ namespace RoyalPetz_ADMIN
             PODtPicker_2.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
             fillInSupplierCombo();
 
-            userAccessOption = DS.getUserAccessRight(globalConstants.PENERIMAAN_BARANG, gUtil.getUserGroupID());
+            userAccessOption = DS.getUserAccessRight(globalConstants.MENU_PENERIMAAN_BARANG, gUtil.getUserGroupID());
 
-            if (userAccessOption == 2 || userAccessOption == 6)
+            if (userAccessOption == 1)
                 newButton.Visible = true;
             else
                 newButton.Visible = false;
