@@ -93,7 +93,7 @@ namespace RoyalPetz_ADMIN
             ghk_F2.Unregister();
         }
 
-        public void addNewRowFromBarcode(string productName)
+        public void addNewRowFromBarcode(string productID, string productName)
         {
             int i = 0;
             bool found = false;

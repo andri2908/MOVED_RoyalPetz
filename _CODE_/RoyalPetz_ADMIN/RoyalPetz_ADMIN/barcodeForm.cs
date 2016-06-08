@@ -45,6 +45,21 @@ namespace RoyalPetz_ADMIN
             return productName;
         }
 
+        private string getProductID(string barcodeValue)
+        {
+            string productID = "";
+
+            if (barcodeValue.Length > 0)
+                try
+                {
+                    productID = DS.getDataSingleValue("SELECT IFNULL(PRODUCT_ID, '') FROM MASTER_PRODUCT WHERE PRODUCT_BARCODE = '" + barcodeValue + "'").ToString();
+                }
+                catch (Exception e)
+                { }
+
+            return productID;
+        }
+
         private void barcodeTextBox_TextChanged(object sender, EventArgs e)
         {
         }
@@ -57,21 +72,23 @@ namespace RoyalPetz_ADMIN
 
         private void barcodeTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
+            string productID = "";
             if (e.KeyChar == 13)
             { 
                 productNameTextBox.Text = getProductName(barcodeTextBox.Text);
+                productID = getProductID(barcodeTextBox.Text);
 
                 if (productNameTextBox.Text.Length > 0)
                 {
                     if (originModuleID == globalConstants.CASHIER_MODULE)
                     {
                         originCashierForm = (cashierForm)parentForm;
-                        originCashierForm.addNewRowFromBarcode(productNameTextBox.Text);
+                        originCashierForm.addNewRowFromBarcode(productID, productNameTextBox.Text);
                     }
                     else if (originModuleID == globalConstants.PENERIMAAN_BARANG)
                     {
                         originPenerimaanForm = (penerimaanBarangForm)parentForm;
-                        originPenerimaanForm.addNewRowFromBarcode(productNameTextBox.Text);
+                        originPenerimaanForm.addNewRowFromBarcode(productID, productNameTextBox.Text);
                     }
                 }
 

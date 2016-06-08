@@ -150,7 +150,7 @@ namespace RoyalPetz_ADMIN
 
         }
 
-        public void addNewRowFromBarcode(string productName)
+        public void addNewRowFromBarcode(string productID, string productName)
         {
             int i = 0;
             bool found = false;
@@ -195,20 +195,37 @@ namespace RoyalPetz_ADMIN
 
             if (!found)
             { 
-                cashierDataGridView.Rows[rowSelectedIndex].Cells["qty"].Value = 1;
-                salesQty[rowSelectedIndex] = "1";
-                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : SET QTY TO 1 BECAUSE OF NEW ROW");
+                if (stockIsEnough(productID, 1))
+                { 
+                    cashierDataGridView.Rows[rowSelectedIndex].Cells["qty"].Value = 1;
+                    salesQty[rowSelectedIndex] = "1";
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : SET QTY TO 1 BECAUSE OF NEW ROW");
+                }
+                else
+                {
+                    cashierDataGridView.Rows[rowSelectedIndex].Cells["qty"].Value = 0;
+                    salesQty[rowSelectedIndex] = "0";
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : SET QTY TO 0 BECAUSE OF NEW ROW BUT STOCK IS NOT ENOUGH");
+                }
             }
             else
             {
                 currQty = Convert.ToDouble(salesQty[rowSelectedIndex]) + 1;
-                cashierDataGridView.Rows[rowSelectedIndex].Cells["qty"].Value = currQty;
-                salesQty[rowSelectedIndex] = currQty.ToString();
 
-                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : QTY FOR THE EXISTING ROW [" + currQty.ToString() + "]");
+                if (stockIsEnough(productID, currQty))
+                { 
+                    cashierDataGridView.Rows[rowSelectedIndex].Cells["qty"].Value = currQty;
+                    salesQty[rowSelectedIndex] = currQty.ToString();
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : QTY FOR THE EXISTING ROW [" + currQty.ToString() + "]");
+                }
+                else
+                {
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : QTY FOR THE EXISTING ROW NOT CHANGED");
+                }
             }
 
             comboSelectedIndexChangeMethod(rowSelectedIndex, i, selectedRow);
+            cashierDataGridView.CurrentCell = cashierDataGridView.Rows[rowSelectedIndex].Cells["qty"];
         }
 
         private void captureAll(Keys key)
@@ -1020,6 +1037,8 @@ namespace RoyalPetz_ADMIN
             {
                 ComboBox comboBox = e.Control as ComboBox;
                 comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
+                comboBox.AutoCompleteMode = AutoCompleteMode.Append;
+                comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
             }
 
             if (
@@ -1177,9 +1196,14 @@ namespace RoyalPetz_ADMIN
             int selectedIndex = 0;
             int rowSelectedIndex = 0;
             string selectedProductID = "";
+            string selectedProductName = "";
+
             double hpp = 0;
             double subTotal = 0;
             MySqlDataReader rdr;
+            string currentProductID = "";
+            string currentProductName = "";
+            bool changed = false;
 
             if (isLoading)  
                 return;
@@ -1194,12 +1218,32 @@ namespace RoyalPetz_ADMIN
             rowSelectedIndex = cashierDataGridView.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = cashierDataGridView.Rows[rowSelectedIndex];
 
+            if (null != selectedRow.Cells["productID"].Value)
+                currentProductID = selectedRow.Cells["productID"].Value.ToString();
+
+            if (null != selectedRow.Cells["productName"].Value)
+                currentProductName = selectedRow.Cells["productName"].Value.ToString();
+
             DataGridViewComboBoxCell productIDComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productID"];
             DataGridViewComboBoxCell productNameComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productName"];
 
             selectedProductID = productIDComboCell.Items[selectedIndex].ToString();
-            productIDComboCell.Value = productIDComboCell.Items[selectedIndex];
-            productNameComboCell.Value = productNameComboCell.Items[selectedIndex];
+            selectedProductName = productNameComboCell.Items[selectedIndex].ToString();
+
+            if (selectedProductID != currentProductID)
+            { 
+                productIDComboCell.Value = productIDComboCell.Items[selectedIndex];
+                changed = true;
+            }
+
+            if (selectedProductName != currentProductName)
+            { 
+                productNameComboCell.Value = productNameComboCell.Items[selectedIndex];
+                changed = true;
+            }
+
+            if (!changed)
+                return;
 
             hpp = getProductPriceValue(selectedProductID, customerComboBox.SelectedIndex, true);
             gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ComboBox_SelectedIndexChanged, PRODUCT_BASE_PRICE [" + hpp + "]");
@@ -1260,6 +1304,7 @@ namespace RoyalPetz_ADMIN
             gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ComboBox_SelectedIndexChanged, attempt to calculate total");
 
             calculateTotal();
+            
         }
 
         private void TextBox_TextChanged(object sender, EventArgs e)
@@ -1442,6 +1487,8 @@ namespace RoyalPetz_ADMIN
 
             gutil.reArrangeTabOrder(this);
             errorLabel.Text = "";
+
+            userStatusLabel.Text = "Welcome, " + DS.getDataSingleValue("SELECT IFNULL(USER_FULL_NAME, 0) FROM MASTER_USER WHERE ID = " + gutil.getUserID()).ToString();
         }
 
         private void cashierForm_Activated(object sender, EventArgs e)
@@ -1567,9 +1614,11 @@ namespace RoyalPetz_ADMIN
                 DataGridViewRow selectedRow = cashierDataGridView.Rows[rowSelectedIndex];
 
                 if (null != selectedRow)
-                { 
+                {
+                    isLoading = true;
                     cashierDataGridView.Rows.Remove(selectedRow);
                     gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : deleteCurrentRow [" + rowSelectedIndex + "]");
+                    isLoading = false;
                 }
             }
         }

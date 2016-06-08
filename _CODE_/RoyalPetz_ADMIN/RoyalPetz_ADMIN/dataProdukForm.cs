@@ -17,6 +17,7 @@ namespace RoyalPetz_ADMIN
     {
         private int originModuleID = 0;
         private int selectedProductID = 0;
+        private string selectedkodeProduct = "";
         private string selectedProductName = "";
         private stokPecahBarangForm parentForm;
         private cashierForm parentCashierForm;
@@ -84,7 +85,7 @@ namespace RoyalPetz_ADMIN
                     break;
 
                 case globalConstants.CASHIER_MODULE:
-                    parentCashierForm.addNewRowFromBarcode(selectedProductName);
+                    parentCashierForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName);
                     this.Close();
                     break;
                 default: // MASTER DATA PRODUK
@@ -155,6 +156,7 @@ namespace RoyalPetz_ADMIN
             DataGridViewRow selectedRow = dataProdukGridView.Rows[selectedrowindex];
             selectedProductID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
             selectedProductName = selectedRow.Cells["NAMA PRODUK"].Value.ToString();
+            selectedkodeProduct = selectedRow.Cells["PRODUK ID"].Value.ToString();
 
             displaySpecificForm();
         }
@@ -187,6 +189,8 @@ namespace RoyalPetz_ADMIN
                 DataGridViewRow selectedRow = dataProdukGridView.Rows[selectedrowindex];
                 selectedProductID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
                 selectedProductName = selectedRow.Cells["NAMA PRODUK"].Value.ToString();
+                selectedkodeProduct = selectedRow.Cells["PRODUK ID"].Value.ToString();
+
                 displaySpecificForm();
             }
         }
@@ -211,7 +215,6 @@ namespace RoyalPetz_ADMIN
         private void dataProdukForm_Load(object sender, EventArgs e)
         {
             int userAccessOption = 0;
-            gutil.reArrangeTabOrder(this);
 
             userAccessOption = DS.getUserAccessRight(globalConstants.MENU_TAMBAH_PRODUK, gutil.getUserGroupID());
 
@@ -219,6 +222,15 @@ namespace RoyalPetz_ADMIN
                 newButton.Visible = true;
             else
                 newButton.Visible = false;
+
+            if (originModuleID == globalConstants.CASHIER_MODULE)
+            {
+                newButton.Visible = false;
+                produknonactiveoption.Visible = false;
+            }
+
+            textBox1.Focus();
+            gutil.reArrangeTabOrder(this);
         }
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -56,7 +57,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 354F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 355F));
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label6, 1, 1);
@@ -124,7 +125,7 @@
             // 
             this.namaGroupTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.namaGroupTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaGroupTextBox.Location = new System.Drawing.Point(195, 8);
+            this.namaGroupTextBox.Location = new System.Drawing.Point(194, 8);
             this.namaGroupTextBox.Name = "namaGroupTextBox";
             this.namaGroupTextBox.ReadOnly = true;
             this.namaGroupTextBox.Size = new System.Drawing.Size(346, 27);
@@ -134,7 +135,7 @@
             // 
             this.deskripsiTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.deskripsiTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deskripsiTextBox.Location = new System.Drawing.Point(195, 49);
+            this.deskripsiTextBox.Location = new System.Drawing.Point(194, 49);
             this.deskripsiTextBox.Name = "deskripsiTextBox";
             this.deskripsiTextBox.ReadOnly = true;
             this.deskripsiTextBox.Size = new System.Drawing.Size(346, 27);
@@ -180,6 +181,14 @@
             this.hakAkses,
             this.moduleID,
             this.featureID});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.groupAccessDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.groupAccessDataGridView.Location = new System.Drawing.Point(1, 184);
             this.groupAccessDataGridView.Name = "groupAccessDataGridView";
             this.groupAccessDataGridView.RowHeadersVisible = false;
