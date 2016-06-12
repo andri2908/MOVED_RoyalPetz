@@ -12,6 +12,7 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Globalization;
 using System.IO;
+using Hotkeys;
 
 namespace RoyalPetz_ADMIN
 {
@@ -30,6 +31,15 @@ namespace RoyalPetz_ADMIN
         private string previousInput = "";
         private string noMutasi = "";
         private Button[] arrButton = new Button[5];
+
+        private Hotkeys.GlobalHotkey ghk_F1;
+        private Hotkeys.GlobalHotkey ghk_F2;
+        private Hotkeys.GlobalHotkey ghk_F8;
+        private Hotkeys.GlobalHotkey ghk_F9;
+        private Hotkeys.GlobalHotkey ghk_F11;
+
+        private Hotkeys.GlobalHotkey ghk_CTRL_DEL;
+        private Hotkeys.GlobalHotkey ghk_CTRL_ENTER;
 
         private Data_Access DS = new Data_Access();
         private List<string> detailRequestQtyApproved = new List<string>();
@@ -107,6 +117,241 @@ namespace RoyalPetz_ADMIN
             inisialisasiInterface();
         }
 
+        private void captureAll(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.F1:
+                    penerimaanBarangHelpForm displayHelp = new penerimaanBarangHelpForm();
+                    displayHelp.ShowDialog(this);
+                    break;
+
+                case Keys.F2:
+                    if (directMutasiBarang)
+                    {
+                        barcodeForm displayBarcodeForm = new barcodeForm(this, globalConstants.MUTASI_BARANG);
+
+                        displayBarcodeForm.Top = this.Top + 5;
+                        displayBarcodeForm.Left = this.Left + 5;//(Screen.PrimaryScreen.Bounds.Width / 2) - (displayBarcodeForm.Width / 2);
+
+                        displayBarcodeForm.ShowDialog(this);
+                    }
+                    break;
+
+                case Keys.F8:
+                    if (directMutasiBarang)
+                    {
+                        detailRequestOrderDataGridView.Focus();
+                        addNewRow();
+                    }
+                    break;
+
+                case Keys.F9:
+                    if (approveButton.Visible == true)
+                        approveButton.PerformClick();
+                    break;
+
+                case Keys.F11:
+                    if (directMutasiBarang)
+                    {
+                        dataProdukForm displayProdukForm = new dataProdukForm(globalConstants.MUTASI_BARANG, this);
+                        displayProdukForm.ShowDialog(this);
+                    }
+                    break;
+            }
+        }
+
+        private void captureCtrlModifier(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.Delete: // CTRL + DELETE
+                    if (detailRequestOrderDataGridView.ReadOnly == false)
+                    {
+                        if (DialogResult.Yes == MessageBox.Show("DELETE CURRENT ROW?", "WARNING", MessageBoxButtons.YesNo))
+                        {
+                            deleteCurrentRow();
+                            calculateTotal();
+                        }
+                    }
+                    break;
+
+                case Keys.Enter: // CTRL + ENTER
+                    if (approveButton.Visible == true)
+                        approveButton.PerformClick();
+                    break;
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == Constants.WM_HOTKEY_MSG_ID)
+            {
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                int modifier = (int)m.LParam & 0xFFFF;
+
+                if (modifier == Constants.NOMOD)
+                    captureAll(key);
+                //else if (modifier == Constants.ALT)
+                //    captureAltModifier(key);
+                else if (modifier == Constants.CTRL)
+                    captureCtrlModifier(key);
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void registerGlobalHotkey()
+        {
+            ghk_F1 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F1, this);
+            ghk_F1.Register();
+
+            ghk_F2 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F2, this);
+            ghk_F2.Register();
+
+            ghk_F8 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F8, this);
+            ghk_F8.Register();
+
+            ghk_F9 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F9, this);
+            ghk_F9.Register();
+
+            ghk_F11 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F11, this);
+            ghk_F11.Register();
+
+
+            ghk_CTRL_DEL = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Delete, this);
+            ghk_CTRL_DEL.Register();
+
+            ghk_CTRL_ENTER = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Enter, this);
+            ghk_CTRL_ENTER.Register();
+
+        }
+
+        private void unregisterGlobalHotkey()
+        {
+            ghk_F1.Unregister();
+            ghk_F2.Unregister();
+            ghk_F8.Unregister();
+            ghk_F9.Unregister();
+            ghk_F11.Unregister();
+
+            ghk_CTRL_DEL.Unregister();
+            ghk_CTRL_ENTER.Unregister();
+        }
+
+        public void addNewRow()
+        {
+            int newRowIndex = 0;
+            bool allowToAdd = true;
+
+            for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count && allowToAdd; i++)
+            {
+                if (null != detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value)
+                {
+                    if (!gUtil.isProductIDExist(detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString()))
+                    {
+                        allowToAdd = false;
+                        newRowIndex = i;
+                    }
+                }
+                else
+                {
+                    allowToAdd = false;
+                    newRowIndex = i;
+                }
+            }
+
+            if (allowToAdd)
+            {
+                detailRequestOrderDataGridView.Rows.Add();
+                detailRequestQtyApproved.Add("0");
+                newRowIndex = detailRequestOrderDataGridView.Rows.Count - 1;
+            }
+            else
+            {
+                DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[newRowIndex];
+                clearUpSomeRowContents(selectedRow, newRowIndex);
+            }
+
+            detailRequestOrderDataGridView.CurrentCell = detailRequestOrderDataGridView.Rows[newRowIndex].Cells["productID"];
+        }
+
+        public void addNewRowFromBarcode(string productID, string productName)
+        {
+            int i = 0;
+            bool found = false;
+            int rowSelectedIndex = 0;
+            bool foundEmptyRow = false;
+            int emptyRowIndex = 0;
+            double currQty;
+            double subTotal;
+            double hpp;
+
+            if (detailRequestOrderDataGridView.ReadOnly == true)
+                return;
+
+            detailRequestOrderDataGridView.Focus();
+
+            // CHECK FOR EXISTING SELECTED ITEM
+            for (i = 0; i < detailRequestOrderDataGridView.Rows.Count && !found && !foundEmptyRow; i++)
+            {
+                if (null != detailRequestOrderDataGridView.Rows[i].Cells["productName"].Value)
+                {
+                    if (detailRequestOrderDataGridView.Rows[i].Cells["productName"].Value.ToString() == productName)
+                    {
+                        found = true;
+                        rowSelectedIndex = i;
+                    }
+                }
+                else
+                {
+                    foundEmptyRow = true;
+                    emptyRowIndex = i;
+                }
+            }
+
+            if (!found)
+            {
+                if (foundEmptyRow)
+                {
+                    detailRequestQtyApproved[emptyRowIndex] = "0";
+                    rowSelectedIndex = emptyRowIndex;
+                }
+                else
+                {
+                    detailRequestOrderDataGridView.Rows.Add();
+                    detailRequestQtyApproved.Add("0");
+                    rowSelectedIndex = detailRequestOrderDataGridView.Rows.Count - 1;
+                }
+            }
+
+            DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[rowSelectedIndex];
+            updateSomeRowContents(selectedRow, rowSelectedIndex, productID);
+
+            if (!found)
+            {
+                selectedRow.Cells["qty"].Value = 1;
+                detailRequestQtyApproved[rowSelectedIndex] = "1";
+                currQty = 1;
+            }
+            else
+            {
+                currQty = Convert.ToDouble(detailRequestQtyApproved[rowSelectedIndex]) + 1;
+
+                selectedRow.Cells["qty"].Value = currQty;
+                detailRequestQtyApproved[rowSelectedIndex] = currQty.ToString();
+            }
+
+            hpp = Convert.ToDouble(selectedRow.Cells["HPP"].Value);
+
+            subTotal = Math.Round((hpp * currQty), 2);
+            selectedRow.Cells["subTotal"].Value = subTotal;
+
+            calculateTotal();
+
+            detailRequestOrderDataGridView.CurrentCell = selectedRow.Cells["qty"];
+        }
+
         private void calculateTotal()
         {
             double total = 0;
@@ -137,79 +382,159 @@ namespace RoyalPetz_ADMIN
             return result;
         }
 
+        private double getHPP(string productID)
+        {
+            double result = 0;
+
+            result = Convert.ToDouble(DS.getDataSingleValue("SELECT PRODUCT_BASE_PRICE FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
+            return result;
+        }
+
+        private void setTextBoxCustomSource(TextBox textBox)
+        {
+            MySqlDataReader rdr;
+            string sqlCommand = "";
+            string[] arr = null;
+            List<string> arrList = new List<string>();
+
+            sqlCommand = "SELECT PRODUCT_ID FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1";
+            rdr = DS.getData(sqlCommand);
+
+            if (rdr.HasRows)
+            {
+                while (rdr.Read())
+                {
+                    arrList.Add(rdr.GetString("PRODUCT_ID"));
+                }
+                AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
+                arr = arrList.ToArray();
+                collection.AddRange(arr);
+
+                textBox.AutoCompleteCustomSource = collection;
+            }
+
+            rdr.Close();
+        }
+
         private void detailRequestOrderDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            //int qtyPosition;
-
-            //if (!directMutasiBarang)
-            //    qtyPosition = 2;
-            //else
-            //    qtyPosition = 1;
-
-            if ((detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name == "productID" || detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name == "productName")  && e.Control is ComboBox)
+            if ((detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name == "productID") && e.Control is TextBox)
             {
-                ComboBox comboBox = e.Control as ComboBox;
-                comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
+                TextBox productIDTextBox = e.Control as TextBox;
+                productIDTextBox.TextChanged -= TextBox_TextChanged;
+                productIDTextBox.PreviewKeyDown += TextBox_previewKeyDown;
+                productIDTextBox.CharacterCasing = CharacterCasing.Upper;
+                productIDTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                productIDTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                setTextBoxCustomSource(productIDTextBox);
             }
 
             if (detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name == "qty" && e.Control is TextBox)
             {
                 TextBox textBox = e.Control as TextBox;
                 textBox.TextChanged += TextBox_TextChanged;
+                textBox.PreviewKeyDown -= TextBox_previewKeyDown;
+                textBox.AutoCompleteMode = AutoCompleteMode.None;
             }
         }
 
-        private double getHPP(string productID)
+        private void clearUpSomeRowContents(DataGridViewRow selectedRow, int rowSelectedIndex)
         {
-            double result = 0;
-
-            result = Convert.ToDouble(DS.getDataSingleValue("SELECT PRODUCT_BASE_PRICE FROM MASTER_PRODUCT WHERE PRODUCT_ID = '"+productID+"'"));
-            return result;
-        }
-
-        private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int rowSelectedIndex = 0;
-            double productQty = 0;
-            double hppValue = 0;
-            double subTotal = 0;
-            int cmbSelectedIndex = 0;
-            string productID = "";
-
-            if (isLoading)
-                return;
-
-            DataGridViewComboBoxEditingControl dataGridViewComboBoxEditingControl = sender as DataGridViewComboBoxEditingControl;
-
-            rowSelectedIndex = detailRequestOrderDataGridView.SelectedCells[0].RowIndex;
-            DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[rowSelectedIndex];
-            cmbSelectedIndex = dataGridViewComboBoxEditingControl.SelectedIndex;
-
-            if (cmbSelectedIndex < 0)
-                return;
-
-            // get product id
-            DataGridViewComboBoxCell productIDComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productID"];
-            DataGridViewComboBoxCell productNameComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productName"];
-
-            productID = productIDComboCell.Items[cmbSelectedIndex].ToString();
-            productIDComboCell.Value = productIDComboCell.Items[cmbSelectedIndex];
-            productNameComboCell.Value = productNameComboCell.Items[cmbSelectedIndex];
-
-            // get hpp
-            hppValue = getHPP(productID);
-            selectedRow.Cells["hpp"].Value = hppValue;
-            
-            productQty = Convert.ToDouble(selectedRow.Cells["qty"].Value);
-            hppValue = Convert.ToDouble(selectedRow.Cells["hpp"].Value);
-            subTotal = Math.Round((hppValue * productQty), 2);
-
-            selectedRow.Cells["subTotal"].Value = subTotal;
+            isLoading = true;
+            selectedRow.Cells["productName"].Value = "";
+            selectedRow.Cells["HPP"].Value = "0";
+            selectedRow.Cells["subTotal"].Value = "0";
+            selectedRow.Cells["qty"].Value = "0";
+            detailRequestQtyApproved[rowSelectedIndex] = "0";
 
             calculateTotal();
+            isLoading = false;
         }
 
-        private void TextBox_TextChanged(object sender, EventArgs e)
+        private void updateSomeRowContents(DataGridViewRow selectedRow, int rowSelectedIndex, string currentValue)
+        {
+            int numRow = 0;
+            string selectedProductID = "";
+            string selectedProductName = "";
+
+            double hpp = 0;
+            string currentProductID = "";
+            string currentProductName = "";
+            bool changed = false;
+
+            numRow = Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'"));
+
+            if (numRow > 0)
+            {
+                selectedProductID = currentValue;
+
+                if (null != selectedRow.Cells["productID"].Value)
+                    currentProductID = selectedRow.Cells["productID"].Value.ToString();
+
+                if (null != selectedRow.Cells["productName"].Value)
+                    currentProductName = selectedRow.Cells["productName"].Value.ToString();
+
+                selectedProductName = DS.getDataSingleValue("SELECT IFNULL(PRODUCT_NAME,'') FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'").ToString();
+
+                selectedRow.Cells["productId"].Value = selectedProductID;
+                selectedRow.Cells["productName"].Value = selectedProductName;
+
+                if (selectedProductID != currentProductID)
+                    changed = true;
+
+                if (selectedProductName != currentProductName)
+                    changed = true;
+
+                if (!changed)
+                    return;
+
+                hpp = getHPP(selectedProductID);
+                gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "updateSomeRowsContent, PRODUCT_BASE_PRICE [" + hpp + "]");
+                selectedRow.Cells["HPP"].Value = hpp.ToString();
+
+                selectedRow.Cells["qty"].Value = 0;
+                detailRequestQtyApproved[rowSelectedIndex] = "0";
+
+                selectedRow.Cells["subTotal"].Value = 0;
+
+                gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "updateSomeRowsContent, attempt to calculate total");
+
+                calculateTotal();
+            }
+            else
+            {
+                clearUpSomeRowContents(selectedRow, rowSelectedIndex);
+            }
+        }
+
+        private void TextBox_previewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            string currentValue = "";
+            int rowSelectedIndex = 0;
+            DataGridViewTextBoxEditingControl dataGridViewComboBoxEditingControl = sender as DataGridViewTextBoxEditingControl;
+
+            if (detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name != "productID")
+                return;
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                currentValue = dataGridViewComboBoxEditingControl.Text;
+                rowSelectedIndex = detailRequestOrderDataGridView.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[rowSelectedIndex];
+
+                if (currentValue.Length > 0)
+                {
+                    updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
+                    detailRequestOrderDataGridView.CurrentCell = selectedRow.Cells["qty"];
+                }
+                else
+                {
+                    clearUpSomeRowContents(selectedRow, rowSelectedIndex);
+                }
+            }
+        }
+
+       private void TextBox_TextChanged(object sender, EventArgs e)
         {
             int rowSelectedIndex = 0;
             double productQty = 0;
@@ -219,6 +544,9 @@ namespace RoyalPetz_ADMIN
             string tempString = "";
 
             if (isLoading)
+                return;
+
+            if (detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name != "qty")
                 return;
 
             DataGridViewTextBoxEditingControl dataGridViewTextBoxEditingControl = sender as DataGridViewTextBoxEditingControl;
@@ -361,7 +689,7 @@ namespace RoyalPetz_ADMIN
 
             DS.mySqlConnect();
 
-            sqlCommand = "SELECT * FROM PRODUCTS_MUTATION_HEADER WHERE PM_INVOICE = '" + selectedPMInvoice + "'";
+            sqlCommand = "SELECT PM_DATETIME, IFNULL(RO_INVOICE, '') AS RO_INVOICE, BRANCH_ID_FROM, BRANCH_ID_TO, PM_TOTAL FROM PRODUCTS_MUTATION_HEADER WHERE PM_INVOICE = '" + selectedPMInvoice + "'";
 
             using (rdr = DS.getData(sqlCommand))
             {
@@ -372,6 +700,7 @@ namespace RoyalPetz_ADMIN
                         //noMutasiTextBox.Text = rdr.GetString("PM_INVOICE");
                         PMDateTimePicker.Value = rdr.GetDateTime("PM_DATETIME");
                         ROInvoiceTextBox.Text = rdr.GetString("RO_INVOICE");
+
                         selectedBranchFromID = rdr.GetInt32("BRANCH_ID_FROM");
                         selectedBranchToID = rdr.GetInt32("BRANCH_ID_TO");
 
@@ -467,23 +796,6 @@ namespace RoyalPetz_ADMIN
             return result;
         }
 
-        //private string getNoMutasi()
-        //{
-        //    MySqlDataReader rdr;
-        //    string retVal = "";
-
-        //    using (rdr = DS.getData("SELECT PM_INVOICE FROM PRODUCTS_MUTATION_HEADER WHERE RO_INVOICE = '" + selectedROInvoice + "'"))
-        //    {
-        //        if (rdr.HasRows)
-        //        {
-        //            rdr.Read();
-        //            retVal = rdr.GetString("PM_INVOICE");
-        //        }
-        //    }
-
-        //    return retVal;
-        //}
-
         private DateTime getPMDateTimeValue()
         {
             MySqlDataReader rdr;
@@ -533,33 +845,11 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        private void addDataToProductNameCombo(DataGridViewComboBoxColumn comboColumn, DataGridViewComboBoxColumn comboIDColumn)
-        {
-            MySqlDataReader rdr;
-            string sqlCommand = "";
-
-            sqlCommand = "SELECT PRODUCT_ID, PRODUCT_NAME FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 ORDER BY PRODUCT_NAME ASC";
-
-            comboColumn.Items.Clear();
-            comboIDColumn.Items.Clear();
-
-            using (rdr = DS.getData(sqlCommand))
-            {
-                while (rdr.Read())
-                {
-                    comboColumn.Items.Add(rdr.GetString("PRODUCT_NAME"));
-                    comboIDColumn.Items.Add(rdr.GetString("PRODUCT_ID"));
-                }
-            }
-
-            rdr.Close();
-
-        }
-
         private void addColumnToDetailDataGrid()
         {
             DataGridViewTextBoxColumn productIDColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn productNameColumn = new DataGridViewTextBoxColumn();
+
             DataGridViewTextBoxColumn qtyReqColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn qtyColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn hppColumn = new DataGridViewTextBoxColumn();
@@ -590,21 +880,32 @@ namespace RoyalPetz_ADMIN
             }
             else
             {
-                productIDComboColumn.Name = "productID";
-                productIDComboColumn.HeaderText = "KODE PRODUK";
-                if (originModuleID != globalConstants.VIEW_PRODUCT_MUTATION && originModuleID != globalConstants.REPRINT_PERMINTAAN_BARANG)
-                    productIDComboColumn.DefaultCellStyle.BackColor = Color.LightBlue;
-                productIDComboColumn.Width = 100;
-                detailRequestOrderDataGridView.Columns.Add(productIDComboColumn);
+                //productIDComboColumn.Name = "productID";
+                //productIDComboColumn.HeaderText = "KODE PRODUK";
+                //if (originModuleID != globalConstants.VIEW_PRODUCT_MUTATION && originModuleID != globalConstants.REPRINT_PERMINTAAN_BARANG)
+                //    productIDComboColumn.DefaultCellStyle.BackColor = Color.LightBlue;
+                //productIDComboColumn.Width = 100;
+                //detailRequestOrderDataGridView.Columns.Add(productIDComboColumn);
 
-                productNameComboColumn.Name = "productName";
-                productNameComboColumn.HeaderText = "NAMA PRODUK";
-                if (originModuleID != globalConstants.VIEW_PRODUCT_MUTATION && originModuleID != globalConstants.REPRINT_PERMINTAAN_BARANG)
-                    productNameComboColumn.DefaultCellStyle.BackColor = Color.LightBlue;
-                productNameComboColumn.Width = 300;
-                addDataToProductNameCombo(productNameComboColumn, productIDComboColumn);
+                //productNameComboColumn.Name = "productName";
+                //productNameComboColumn.HeaderText = "NAMA PRODUK";
+                //if (originModuleID != globalConstants.VIEW_PRODUCT_MUTATION && originModuleID != globalConstants.REPRINT_PERMINTAAN_BARANG)
+                //    productNameComboColumn.DefaultCellStyle.BackColor = Color.LightBlue;
+                //productNameComboColumn.Width = 300;
+                //addDataToProductNameCombo(productNameComboColumn, productIDComboColumn);
 
-                detailRequestOrderDataGridView.Columns.Add(productNameComboColumn);
+                //detailRequestOrderDataGridView.Columns.Add(productNameComboColumn);
+                productIDColumn.Name = "productID";
+                productIDColumn.HeaderText = "KODE PRODUK";
+                productIDColumn.DefaultCellStyle.BackColor = Color.LightBlue;
+                productIDColumn.Width = 100;
+                detailRequestOrderDataGridView.Columns.Add(productIDColumn);
+
+                productNameColumn.Name = "productName";
+                productNameColumn.HeaderText = "NAMA PRODUK";
+                productNameColumn.ReadOnly = true;
+                productNameColumn.Width = 300;
+                detailRequestOrderDataGridView.Columns.Add(productNameColumn);
             }
 
             qtyColumn.Name = "qty";
@@ -628,20 +929,6 @@ namespace RoyalPetz_ADMIN
 
         }
 
-        private bool roInvoiceAvailable()
-        {
-            bool result = false;
-            object resultQuery;
-
-            resultQuery = DS.getDataSingleValue("SELECT RO_INVOICE FROM PRODUCTS_MUTATION_HEADER WHERE PM_INVOICE = '" + selectedPMInvoice + "'");
-
-            if (null != resultQuery)
-            {
-                result = true;
-            }
-            return result;
-        }
-
         private void dataMutasiBarangDetailForm_Load(object sender, EventArgs e)
         {
             int userAccessOption = 0;
@@ -653,7 +940,6 @@ namespace RoyalPetz_ADMIN
             selectedBranchFromID = 0;
 
             addColumnToDetailDataGrid();
-            //exportButton.Visible = false;
 
             if (!directMutasiBarang)
             {
@@ -668,21 +954,15 @@ namespace RoyalPetz_ADMIN
 
                     approveButton.Visible = true;
                     createPOButton.Visible = true;
-                    //reprintButton.Visible = false;
-
-                    //noMutasiTextBox.Focus();
                     PMDateTimePicker.Focus();
                 }
                 else
                 {
                     detailRequestOrderDataGridView.Columns["qtyRequest"].Visible = false;
-
-                    //noMutasiTextBox.ReadOnly = true;
                     PMDateTimePicker.Enabled = false;
 
                     if (originModuleID != globalConstants.VIEW_PRODUCT_MUTATION)
                     {
-                        //noMutasiTextBox.Text = getNoMutasi();
                         PMDateTimePicker.Value = getPMDateTimeValue();
                     }
 
@@ -690,26 +970,8 @@ namespace RoyalPetz_ADMIN
 
                     approveButton.Visible = false;
                     createPOButton.Visible = false;
-                    //reprintButton.Visible = true;
-
-                    //label1.Visible = false;
-                    //label14.Visible = false;
-                    //ROInvoiceTextBox.Visible = false;
-
-                    //label9.Visible = false;
-                    //label6.Visible = false;
-                    //RODateTimePicker.Visible = false;
-
-                    //label7.Visible = false;
-                    //label5.Visible = false;
-                    //ROExpiredDateTimePicker.Visible = false;
-
-                    //totalApproved.Visible = false;
-                    //totalApprovedLabel.Visible = false;
-                    //label13.Visible = false;
                 }
 
-                //branchFromCombo.Text = getBranchName(selectedBranchFromID);
                 branchToCombo.Text = getBranchName(selectedBranchToID);
                 branchFromCombo.Enabled = false;
                 branchToCombo.Enabled = false;
@@ -719,16 +981,10 @@ namespace RoyalPetz_ADMIN
             else
             {
                 subModuleID = globalConstants.NEW_PRODUCT_MUTATION;
-
-                //branchFromCombo.Enabled = true;
                 branchToCombo.Enabled = true;
-
-                //fillInBranchCombo(branchFromCombo, branchFromComboHidden);
                 fillInBranchCombo(branchToCombo, branchToComboHidden);
 
                 label3.Text = "TUJUAN MUTASI";
-                detailRequestOrderDataGridView.AllowUserToAddRows = true;
-
             }
 
             isLoading = false;
@@ -894,34 +1150,11 @@ namespace RoyalPetz_ADMIN
 
         private bool dataValidated()
         {
-            bool dataExist = false;
+            bool dataExist = true;
             int i = 0;
 
             if (subModuleID == globalConstants.REJECT_PRODUCT_MUTATION)
                 return true;
-
-            //if (noMutasiTextBox.Text.Length <= 0)
-            //{
-            //    errorLabel.Text = "NO MUTASI TIDAK BOLEH KOSONG";
-            //    return false;
-            //}
-
-            while ( i < detailRequestOrderDataGridView.Rows.Count)
-            { 
-                if (null != detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value)
-                { 
-                    dataExist = true;
-                    break;
-                }
-
-                i++;
-            }
-
-            if (!dataExist)
-            {
-                errorLabel.Text = "TIDAK ADA PRODUK YANG DIPILIH";
-                return false;
-            }
 
             if (globalTotalValue == 0)
             {
@@ -935,15 +1168,46 @@ namespace RoyalPetz_ADMIN
                 return false;
             }
 
+            if (detailRequestOrderDataGridView.Rows.Count <= 0)
+            {
+                errorLabel.Text = "TIDAK ADA PRODUCT YANG DIPILIH";
+                return false;
+            }
+
+            for (i = 0; i < detailRequestOrderDataGridView.Rows.Count && dataExist; i++)
+            {
+                if (null != detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value)
+                    dataExist = gUtil.isProductIDExist(detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString());
+                else
+                    dataExist = false;
+            }
+            if (!dataExist)
+            {
+                errorLabel.Text = "PRODUCT ID PADA BARIS [" + i + "] INVALID";
+                return false;
+            }
+
             return true;
         }
 
         private bool saveData()
         {
+            bool result = false;
             if (dataValidated())
-                return saveDataTransaction();
+            {
+                smallPleaseWait pleaseWait = new smallPleaseWait();
+                pleaseWait.Show();
 
-            return false;
+                //  ALlow main UI thread to properly display please wait form.
+                Application.DoEvents();
+                result = saveDataTransaction();
+
+                pleaseWait.Close();
+
+                return result;
+            }
+
+            return result;
         }
 
         private bool insertAndUpdateBranchData(int approvedRO)
@@ -1114,32 +1378,6 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        //private bool noMutasiExist()
-        //{
-        //    //bool result = false;
-
-        //    //if (0 < Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM PRODUCTS_MUTATION_HEADER WHERE PM_INVOICE = '" + noMutasiTextBox.Text + "'")))
-        //    //    result = true;
-
-        //    //return result;
-        //}
-
-        private void noMutasiTextBox_TextChanged(object sender, EventArgs e)
-        {
-            //if (isLoading)
-            //    return;
-
-            //noMutasiTextBox.Text = noMutasiTextBox.Text.Trim();
-
-            //if (noMutasiExist() && (subModuleID == globalConstants.NEW_PRODUCT_MUTATION))
-            //{
-            //    errorLabel.Text = "NO MUTASI SUDAH ADA";
-            //    noMutasiTextBox.Focus();
-            //}
-            //else
-            //    errorLabel.Text = "";
-        }
-        
         private void rejectButton_Click(object sender, EventArgs e)
         {
             gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "REJECT REQUEST ORDER");
@@ -1174,7 +1412,7 @@ namespace RoyalPetz_ADMIN
         private void dataMutasiBarangDetailForm_Activated(object sender, EventArgs e)
         {
             errorLabel.Text = "";
-
+            registerGlobalHotkey();
         }
 
         private void deleteCurrentRow()
@@ -1184,35 +1422,14 @@ namespace RoyalPetz_ADMIN
                 int rowSelectedIndex = detailRequestOrderDataGridView.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[rowSelectedIndex];
 
-                detailRequestOrderDataGridView.Rows.Remove(selectedRow);
-            }
-        }
-
-        private void detailRequestOrderDataGridView_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Delete)
-            {
-                if (DialogResult.Yes == MessageBox.Show("DELETE CURRENT ROW?", "WARNING", MessageBoxButtons.YesNo))
+                if (null != selectedRow)
                 {
-                    deleteCurrentRow();
-                    calculateTotal();
+                    isLoading = true;
+                    detailRequestOrderDataGridView.Rows.Remove(selectedRow);
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "deleteCurrentRow [" + rowSelectedIndex + "]");
+                    isLoading = false;
                 }
             }
-        }
-
-        private void reprintButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private bool isROActive()
-        {
-            bool result = false;
-
-            if (1 == Convert.ToInt32(DS.getDataSingleValue("SELECT RO_ACTIVE FROM REQUEST_ORDER_HEADER WHERE RO_INVOICE = '"+selectedROInvoice+"'")))
-                result = true;
-
-            return result;
         }
 
         private void createPOButton_Click(object sender, EventArgs e)
@@ -1427,6 +1644,32 @@ namespace RoyalPetz_ADMIN
                 exportButton.Visible = false;
                 
                 gUtil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
+            }
+        }
+
+        private void dataMutasiBarangDetailForm_Deactivate(object sender, EventArgs e)
+        {
+            unregisterGlobalHotkey();
+        }
+
+        private void detailRequestOrderDataGridView_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = detailRequestOrderDataGridView[e.ColumnIndex, e.RowIndex];
+            DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[e.RowIndex];
+
+            if (cell.OwningColumn.Name == "productID")
+            {
+                if (null != cell.Value)
+                {
+                    if (cell.Value.ToString().Length > 0)
+                    {
+                        updateSomeRowContents(selectedRow, e.RowIndex, cell.Value.ToString());
+                    }
+                    else
+                    {
+                        clearUpSomeRowContents(selectedRow, e.RowIndex);
+                    }
+                }
             }
         }
     }

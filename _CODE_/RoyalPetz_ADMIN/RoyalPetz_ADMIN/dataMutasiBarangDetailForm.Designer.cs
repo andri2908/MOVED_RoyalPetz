@@ -109,7 +109,7 @@
             this.detailRequestOrderDataGridView.RowHeadersVisible = false;
             this.detailRequestOrderDataGridView.Size = new System.Drawing.Size(894, 297);
             this.detailRequestOrderDataGridView.TabIndex = 39;
-            this.detailRequestOrderDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.detailRequestOrderDataGridView_KeyDown);
+            this.detailRequestOrderDataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailRequestOrderDataGridView_CellValidated);
             // 
             // label2
             // 
@@ -616,6 +616,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PRODUK MUTASI";
             this.Activated += new System.EventHandler(this.dataMutasiBarangDetailForm_Activated);
+            this.Deactivate += new System.EventHandler(this.dataMutasiBarangDetailForm_Deactivate);
             this.Load += new System.EventHandler(this.dataMutasiBarangDetailForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.detailRequestOrderDataGridView)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);

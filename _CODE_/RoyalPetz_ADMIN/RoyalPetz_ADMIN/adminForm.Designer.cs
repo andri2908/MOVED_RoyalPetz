@@ -849,7 +849,6 @@
             this.MENU_pembayaranPiutang.Name = "MENU_pembayaranPiutang";
             this.MENU_pembayaranPiutang.Size = new System.Drawing.Size(322, 22);
             this.MENU_pembayaranPiutang.Text = "Pembayaran Piutang";
-            this.MENU_pembayaranPiutang.Click += new System.EventHandler(this.toolStripMenuItem68_Click);
             // 
             // toolStripMenuItem3
             // 
@@ -888,7 +887,6 @@
             this.MENU_pembayaranHutangKeSupplier.Name = "MENU_pembayaranHutangKeSupplier";
             this.MENU_pembayaranHutangKeSupplier.Size = new System.Drawing.Size(322, 22);
             this.MENU_pembayaranHutangKeSupplier.Text = "Pembayaran Hutang ke Supplier";
-            this.MENU_pembayaranHutangKeSupplier.Click += new System.EventHandler(this.toolStripMenuItem38_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -960,7 +958,6 @@
             this.pembelianBarangToolStripMenuItem.Name = "pembelianBarangToolStripMenuItem";
             this.pembelianBarangToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.pembelianBarangToolStripMenuItem.Text = "Pembelian Barang";
-            this.pembelianBarangToolStripMenuItem.Click += new System.EventHandler(this.pembelianBarangToolStripMenuItem_Click);
             // 
             // detailedToolStripMenuItem2
             // 

@@ -392,12 +392,22 @@ namespace RoyalPetz_ADMIN
 
         private bool saveData(int mode)
         {
+            bool result = false;
             if (DataValidated())
             {
-                return saveDataTransaction(mode);
+                smallPleaseWait pleaseWait = new smallPleaseWait();
+                pleaseWait.Show();
+
+                //  ALlow main UI thread to properly display please wait form.
+                Application.DoEvents();
+                result = saveDataTransaction(mode);
+
+                pleaseWait.Close();
+
+                return result;
             }
 
-            return false;
+            return result;
         }
         private void saveButton_Click_1(object sender, EventArgs e)
         {

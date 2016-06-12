@@ -19,8 +19,17 @@ namespace RoyalPetz_ADMIN
         private int selectedProductID = 0;
         private string selectedkodeProduct = "";
         private string selectedProductName = "";
+
         private stokPecahBarangForm parentForm;
         private cashierForm parentCashierForm;
+        private penerimaanBarangForm parentPenerimaanBarangForm;
+        private purchaseOrderDetailForm parentPOForm;
+        private dataMutasiBarangDetailForm parentMutasiForm;
+        private permintaanProdukForm parentRequestForm;
+        private dataReturPenjualanForm parentReturJualForm;
+        private string returJualSearchParam = "";
+        private dataReturPermintaanForm parentReturBeliForm;
+
         private globalUtilities gutil = new globalUtilities();
         private Data_Access DS = new Data_Access();
 
@@ -64,6 +73,76 @@ namespace RoyalPetz_ADMIN
             newButton.Visible = false;
         }
 
+        public dataProdukForm(int moduleID, penerimaanBarangForm thisParentForm)
+        {
+            InitializeComponent();
+
+            originModuleID = moduleID;
+            parentPenerimaanBarangForm = thisParentForm;
+
+            // accessed from other form other than Master -> Data Produk
+            // it means that this form is only displayed for browsing / searching purpose only
+            newButton.Visible = false;
+        }
+
+        public dataProdukForm(int moduleID, purchaseOrderDetailForm thisParentForm)
+        {
+            InitializeComponent();
+
+            originModuleID = moduleID;
+            parentPOForm = thisParentForm;
+
+            // accessed from other form other than Master -> Data Produk
+            // it means that this form is only displayed for browsing / searching purpose only
+            newButton.Visible = false;
+        }
+
+        public dataProdukForm(int moduleID, dataMutasiBarangDetailForm thisParentForm)
+        {
+            InitializeComponent();
+
+            originModuleID = moduleID;
+            parentMutasiForm = thisParentForm;
+
+            // accessed from other form other than Master -> Data Produk
+            // it means that this form is only displayed for browsing / searching purpose only
+            newButton.Visible = false;
+        }
+
+        public dataProdukForm(int moduleID, permintaanProdukForm thisParentForm)
+        {
+            InitializeComponent();
+
+            originModuleID = moduleID;
+            parentRequestForm = thisParentForm;
+
+            // accessed from other form other than Master -> Data Produk
+            // it means that this form is only displayed for browsing / searching purpose only
+            newButton.Visible = false;
+        }
+
+        public dataProdukForm(int moduleID, dataReturPenjualanForm thisParentForm, string searchParam = "")
+        {
+            InitializeComponent();
+
+            originModuleID = moduleID;
+            parentReturJualForm = thisParentForm;
+            returJualSearchParam = searchParam;
+            // accessed from other form other than Master -> Data Produk
+            // it means that this form is only displayed for browsing / searching purpose only
+            newButton.Visible = false;
+        }
+
+        public dataProdukForm(int moduleID, dataReturPermintaanForm thisParentForm)
+        {
+            InitializeComponent();
+
+            originModuleID = moduleID;
+            parentReturBeliForm = thisParentForm;
+            // accessed from other form other than Master -> Data Produk
+            // it means that this form is only displayed for browsing / searching purpose only
+            newButton.Visible = false;
+        }
 
         private void displaySpecificForm()
         {
@@ -88,6 +167,33 @@ namespace RoyalPetz_ADMIN
                     parentCashierForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName);
                     this.Close();
                     break;
+
+                case globalConstants.PENERIMAAN_BARANG:
+                    parentPenerimaanBarangForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName);
+                    this.Close();
+                    break;
+
+                case globalConstants.NEW_PURCHASE_ORDER:
+                    parentPOForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName);
+                    this.Close();
+                    break;
+
+                case globalConstants.MUTASI_BARANG:
+                    parentMutasiForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName);
+                    this.Close();
+                    break;
+
+                case globalConstants.NEW_REQUEST_ORDER:
+                    parentRequestForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName);
+                    this.Close();
+                    break;
+
+                case globalConstants.RETUR_PENJUALAN:
+                case globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT:
+                    parentReturJualForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName);
+                    this.Close();
+                    break;
+
                 default: // MASTER DATA PRODUK
                     dataProdukDetailForm displayForm = new dataProdukDetailForm(globalConstants.EDIT_PRODUK, selectedProductID);
                     displayForm.ShowDialog(this);
@@ -113,7 +219,7 @@ namespace RoyalPetz_ADMIN
         {
             MySqlDataReader rdr;
             DataTable dt = new DataTable();
-            string sqlCommand;
+            string sqlCommand = "";
             string namaProductParam = "";
             string kodeProductParam = "";
 
@@ -124,8 +230,31 @@ namespace RoyalPetz_ADMIN
             namaProductParam = MySqlHelper.EscapeString(namaProdukTextBox.Text);
             kodeProductParam = MySqlHelper.EscapeString(textBox1.Text);
 
-            sqlCommand = "SELECT ID, PRODUCT_ID AS 'PRODUK ID', PRODUCT_NAME AS 'NAMA PRODUK', PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 AND PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND PRODUCT_NAME LIKE '%" + namaProductParam + "%'";
-            
+            if (originModuleID == globalConstants.RETUR_PENJUALAN)
+            {
+                sqlCommand = "SELECT M.ID, M.PRODUCT_ID AS 'PRODUK ID', M.PRODUCT_NAME AS 'NAMA PRODUK', M.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' " +
+                                    "FROM MASTER_PRODUCT M, SALES_DETAIL SD " +
+                                    "WHERE SD.SALES_INVOICE = '" + returJualSearchParam + "' AND SD.PRODUCT_ID = M.PRODUCT_ID AND PRODUCT_IS_SERVICE = 0 " +
+                                    "AND M.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND M.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" +
+                                    " GROUP BY M.PRODUCT_ID";
+            }
+            else if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
+            {
+                sqlCommand = "SELECT M.ID, M.PRODUCT_ID AS 'PRODUK ID', M.PRODUCT_NAME AS 'NAMA PRODUK', M.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' " +
+                                    "FROM MASTER_PRODUCT M, SALES_DETAIL SD, SALES_HEADER SH " +
+                                    "WHERE PRODUCT_ACTIVE = 1 AND SH.SALES_INVOICE = SD.SALES_INVOICE AND SD.PRODUCT_ID = M.PRODUCT_ID AND SH.CUSTOMER_ID = " + Convert.ToInt32(returJualSearchParam) + " AND PRODUCT_IS_SERVICE = 0 " +
+                                    "AND M.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND M.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" +
+                                    " GROUP BY M.PRODUCT_ID";
+            }
+            else if (originModuleID == globalConstants.RETUR_PEMBELIAN)
+            {
+                sqlCommand = "SELECT ID, PRODUCT_ID AS 'PRODUK ID', PRODUCT_NAME AS 'NAMA PRODUK', PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 AND PRODUCT_IS_SERVICE = 0 AND (PRODUCT_STOCK_QTY - PRODUCT_LIMIT_STOCK > 0) ORDER BY PRODUCT_NAME ASC";
+            }
+            else
+            {
+                sqlCommand = "SELECT ID, PRODUCT_ID AS 'PRODUK ID', PRODUCT_NAME AS 'NAMA PRODUK', PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 AND PRODUCT_IS_SERVICE = 0 AND PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND PRODUCT_NAME LIKE '%" + namaProductParam + "%'";
+            }
+
             if (originModuleID == globalConstants.STOK_PECAH_BARANG)
             {
                 sqlCommand = sqlCommand + " AND PRODUCT_IS_SERVICE = 0";
@@ -223,19 +352,40 @@ namespace RoyalPetz_ADMIN
             else
                 newButton.Visible = false;
 
-            if (originModuleID == globalConstants.CASHIER_MODULE)
+            if (originModuleID == globalConstants.CASHIER_MODULE || originModuleID == globalConstants.PENERIMAAN_BARANG || 
+                originModuleID == globalConstants.NEW_PURCHASE_ORDER || originModuleID == globalConstants.MUTASI_BARANG ||
+                originModuleID == globalConstants.NEW_REQUEST_ORDER || originModuleID == globalConstants.RETUR_PENJUALAN ||
+                originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT || originModuleID == globalConstants.RETUR_PEMBELIAN
+                )
             {
                 newButton.Visible = false;
                 produknonactiveoption.Visible = false;
             }
 
-            textBox1.Focus();
             gutil.reArrangeTabOrder(this);
+
+            textBox1.Focus();
         }
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
             loadProdukData();
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Convert.ToInt32(e.KeyChar) == 13)
+            {
+                dataProdukGridView.Focus();
+            }
+        }
+
+        private void namaProdukTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Convert.ToInt32(e.KeyChar) == 13)
+            {
+                dataProdukGridView.Focus();
+            }
         }
     }
 }

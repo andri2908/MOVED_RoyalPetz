@@ -322,6 +322,12 @@
     <Compile Include="penerimaanBarangForm.Designer.cs">
       <DependentUpon>penerimaanBarangForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="penerimaanBarangHelpForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="penerimaanBarangHelpForm.Designer.cs">
+      <DependentUpon>penerimaanBarangHelpForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="penerimaanBarangPrintOut.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1121,6 +1127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="penerimaanBarangForm.resx">
       <DependentUpon>penerimaanBarangForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="penerimaanBarangHelpForm.resx">
+      <DependentUpon>penerimaanBarangHelpForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="penerimaanBarangPrintOut.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

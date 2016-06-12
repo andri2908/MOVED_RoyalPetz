@@ -12,6 +12,7 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Globalization;
 using System.Drawing.Printing;
+using Hotkeys;
 
 
 namespace RoyalPetz_ADMIN
@@ -25,12 +26,22 @@ namespace RoyalPetz_ADMIN
         private double globalTotalValue = 0;
         private bool isLoading = false;
         private bool returnCash = false;
+
         private List<string> returnQty = new List<string>();
-        private List<string> SOreturnQty = new List<string>();
+        //private List<string> SOreturnQty = new List<string>();
+
         private string previousInput = "";
         private double extraAmount = 0;
         private string returID = "0";
 
+        private Hotkeys.GlobalHotkey ghk_F1;
+        private Hotkeys.GlobalHotkey ghk_F2;
+        private Hotkeys.GlobalHotkey ghk_F8;
+        private Hotkeys.GlobalHotkey ghk_F9;
+        private Hotkeys.GlobalHotkey ghk_F11;
+
+        private Hotkeys.GlobalHotkey ghk_CTRL_DEL;
+        private Hotkeys.GlobalHotkey ghk_CTRL_ENTER;
 
         private Data_Access DS = new Data_Access();
         private globalUtilities gutil = new globalUtilities();
@@ -64,51 +75,296 @@ namespace RoyalPetz_ADMIN
             }
         }
 
+        private void captureAll(Keys key)
+        {
+            string searchParam = "";
+            switch (key)
+            {
+                case Keys.F1:
+                    penerimaanBarangHelpForm displayHelp = new penerimaanBarangHelpForm();
+                    displayHelp.ShowDialog(this);
+                    break;
+
+                case Keys.F2:
+                    if (saveButton.Enabled == true)
+                    { 
+                        barcodeForm displayBarcodeForm = new barcodeForm(this, globalConstants.RETUR_PENJUALAN);
+
+                        displayBarcodeForm.Top = this.Top + 5;
+                        displayBarcodeForm.Left = this.Left + 5;//(Screen.PrimaryScreen.Bounds.Width / 2) - (displayBarcodeForm.Width / 2);
+
+                        displayBarcodeForm.ShowDialog(this);
+                    }
+                    break;
+
+                case Keys.F8:
+                    if (detailReturDataGridView.ReadOnly == false)
+                    { 
+                        detailReturDataGridView.Focus();
+                        addNewRow();
+                    }
+                    break;
+
+                case Keys.F9:
+                    if ( saveButton.Enabled == true )
+                        saveButton.PerformClick();
+                    break;
+
+                case Keys.F11:
+                    if (detailReturDataGridView.ReadOnly == false)
+                    {
+                        if (originModuleID == globalConstants.RETUR_PENJUALAN)
+                            searchParam = selectedSalesInvoice;
+                        else if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
+                            searchParam = selectedCustomerID.ToString();
+
+                        dataProdukForm displayProdukForm = new dataProdukForm(originModuleID, this, searchParam);
+                        displayProdukForm.ShowDialog(this);
+                    }
+                    break;
+            }
+        }
+
+        private void captureCtrlModifier(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.Delete: // CTRL + DELETE
+                    if (detailReturDataGridView.ReadOnly == false)
+                    {
+                        if (DialogResult.Yes == MessageBox.Show("DELETE CURRENT ROW?", "WARNING", MessageBoxButtons.YesNo))
+                        {
+                            deleteCurrentRow();
+                            calculateTotal();
+                        }
+                    }
+                    break;
+
+                case Keys.Enter: // CTRL + ENTER
+                    if (saveButton.Enabled == true)
+                        saveButton.PerformClick();
+                    break;
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == Constants.WM_HOTKEY_MSG_ID)
+            {
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                int modifier = (int)m.LParam & 0xFFFF;
+
+                if (modifier == Constants.NOMOD)
+                    captureAll(key);
+                //else if (modifier == Constants.ALT)
+                //    captureAltModifier(key);
+                else if (modifier == Constants.CTRL)
+                    captureCtrlModifier(key);
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void registerGlobalHotkey()
+        {
+            ghk_F1 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F1, this);
+            ghk_F1.Register();
+
+            ghk_F2 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F2, this);
+            ghk_F2.Register();
+
+            ghk_F8 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F8, this);
+            ghk_F8.Register();
+
+            ghk_F9 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F9, this);
+            ghk_F9.Register();
+
+            ghk_F11 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F11, this);
+            ghk_F11.Register();
+
+
+            ghk_CTRL_DEL = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Delete, this);
+            ghk_CTRL_DEL.Register();
+
+            ghk_CTRL_ENTER = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Enter, this);
+            ghk_CTRL_ENTER.Register();
+
+        }
+
+        private void unregisterGlobalHotkey()
+        {
+            ghk_F1.Unregister();
+            ghk_F2.Unregister();
+            ghk_F8.Unregister();
+            ghk_F9.Unregister();
+            ghk_F11.Unregister();
+
+            ghk_CTRL_DEL.Unregister();
+            ghk_CTRL_ENTER.Unregister();
+        }
+
+        public void addNewRow()
+        {
+            int newRowIndex = 0;
+            bool allowToAdd = true;
+
+            for (int i = 0; i < detailReturDataGridView.Rows.Count && allowToAdd; i++)
+            {
+                if (null != detailReturDataGridView.Rows[i].Cells["productID"].Value)
+                {
+                    if (!gutil.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString()))
+                    {
+                        allowToAdd = false;
+                        newRowIndex = i;
+                    }
+                }
+                else
+                {
+                    allowToAdd = false;
+                    newRowIndex = i;
+                }
+            }
+
+            if (allowToAdd)
+            {
+                detailReturDataGridView.Rows.Add();
+                returnQty.Add("0");
+                newRowIndex = detailReturDataGridView.Rows.Count - 1;
+            }
+            else
+            {
+                DataGridViewRow selectedRow = detailReturDataGridView.Rows[newRowIndex];
+                clearUpSomeRowContents(selectedRow, newRowIndex);
+            }
+
+            detailReturDataGridView.CurrentCell = detailReturDataGridView.Rows[newRowIndex].Cells["productID"];
+        }
+
+        public void addNewRowFromBarcode(string productID, string productName)
+        {
+            int i = 0;
+            bool found = false;
+            int rowSelectedIndex = 0;
+            bool foundEmptyRow = false;
+            int emptyRowIndex = 0;
+            double currQty;
+            double subTotal;
+            double hpp;
+
+            if (detailReturDataGridView.ReadOnly == true)
+                return;
+
+            detailReturDataGridView.Focus();
+
+            // CHECK FOR EXISTING SELECTED ITEM
+            for (i = 0; i < detailReturDataGridView.Rows.Count && !found && !foundEmptyRow; i++)
+            {
+                if (null != detailReturDataGridView.Rows[i].Cells["productName"].Value)
+                {
+                    if (detailReturDataGridView.Rows[i].Cells["productName"].Value.ToString() == productName)
+                    {
+                        found = true;
+                        rowSelectedIndex = i;
+                    }
+                }
+                else
+                {
+                    foundEmptyRow = true;
+                    emptyRowIndex = i;
+                }
+            }
+
+            if (!found)
+            {
+                if (foundEmptyRow)
+                {
+                    returnQty[emptyRowIndex] = "0";
+                    rowSelectedIndex = emptyRowIndex;
+                }
+                else
+                {
+                    detailReturDataGridView.Rows.Add();
+                    returnQty.Add("0");
+                    rowSelectedIndex = detailReturDataGridView.Rows.Count - 1;
+                }
+            }
+
+            DataGridViewRow selectedRow = detailReturDataGridView.Rows[rowSelectedIndex];
+            updateSomeRowContents(selectedRow, rowSelectedIndex, productID);
+
+            if (!found)
+            {
+                selectedRow.Cells["qty"].Value = 1;
+                returnQty[rowSelectedIndex] = "1";
+                currQty = 1;
+            }
+            else
+            {
+                currQty = Convert.ToDouble(returnQty[rowSelectedIndex]) + 1;
+
+                selectedRow.Cells["qty"].Value = currQty;
+                returnQty[rowSelectedIndex] = currQty.ToString();
+            }
+
+            hpp = Convert.ToDouble(selectedRow.Cells["productPrice"].Value);
+
+            subTotal = Math.Round((hpp * currQty), 2);
+            selectedRow.Cells["subTotal"].Value = subTotal;
+
+            calculateTotal();
+
+            detailReturDataGridView.CurrentCell = selectedRow.Cells["qty"];
+        }
+
         private void addDataGridColumn()
         {
-            MySqlDataReader rdr;
-            string sqlCommand = "";
+            //MySqlDataReader rdr;
+            //string sqlCommand = "";
 
-            DataGridViewComboBoxColumn productIdCmb = new DataGridViewComboBoxColumn();
-            DataGridViewComboBoxColumn productNameCmb = new DataGridViewComboBoxColumn();
+            //DataGridViewComboBoxColumn productIdCmb = new DataGridViewComboBoxColumn();
+            //DataGridViewComboBoxColumn productNameCmb = new DataGridViewComboBoxColumn();
+
+            DataGridViewTextBoxColumn productIDColumn = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn productNameColumn = new DataGridViewTextBoxColumn();
+
             DataGridViewTextBoxColumn stockQtyColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn purchaseQtyColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn retailPriceColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn subtotalColumn = new DataGridViewTextBoxColumn();
             
-            if (originModuleID == globalConstants.RETUR_PENJUALAN)
-                sqlCommand = "SELECT M.PRODUCT_ID, M.PRODUCT_NAME FROM MASTER_PRODUCT M, SALES_DETAIL SD " +
-                                    "WHERE SD.SALES_INVOICE = '" + selectedSalesInvoice + "' AND SD.PRODUCT_ID = M.PRODUCT_ID " + 
-                                    "GROUP BY M.PRODUCT_ID";
-            else
-                sqlCommand = "SELECT M.PRODUCT_ID, M.PRODUCT_NAME FROM MASTER_PRODUCT M, SALES_DETAIL SD, SALES_HEADER SH " +
-                                    "WHERE PRODUCT_ACTIVE = 1 AND SH.SALES_INVOICE = SD.SALES_INVOICE AND SD.PRODUCT_ID = M.PRODUCT_ID AND SH.CUSTOMER_ID = " + selectedCustomerID + 
-                                    " GROUP BY M.PRODUCT_ID";
+            //if (originModuleID == globalConstants.RETUR_PENJUALAN)
+            //    sqlCommand = "SELECT M.PRODUCT_ID, M.PRODUCT_NAME FROM MASTER_PRODUCT M, SALES_DETAIL SD " +
+            //                        "WHERE SD.SALES_INVOICE = '" + selectedSalesInvoice + "' AND SD.PRODUCT_ID = M.PRODUCT_ID " + 
+            //                        "GROUP BY M.PRODUCT_ID";
+            //else
+            //    sqlCommand = "SELECT M.PRODUCT_ID, M.PRODUCT_NAME FROM MASTER_PRODUCT M, SALES_DETAIL SD, SALES_HEADER SH " +
+            //                        "WHERE PRODUCT_ACTIVE = 1 AND SH.SALES_INVOICE = SD.SALES_INVOICE AND SD.PRODUCT_ID = M.PRODUCT_ID AND SH.CUSTOMER_ID = " + selectedCustomerID + 
+            //                        " GROUP BY M.PRODUCT_ID";
 
             //productComboHidden.Items.Clear();
 
-            using (rdr = DS.getData(sqlCommand))
-            {
-                while (rdr.Read())
-                {
-                    productNameCmb.Items.Add(rdr.GetString("PRODUCT_NAME"));
-                    productIdCmb.Items.Add(rdr.GetString("PRODUCT_ID"));
-                }
-            }
+            //using (rdr = DS.getData(sqlCommand))
+            //{
+            //    while (rdr.Read())
+            //    {
+            //        productNameCmb.Items.Add(rdr.GetString("PRODUCT_NAME"));
+            //        productIdCmb.Items.Add(rdr.GetString("PRODUCT_ID"));
+            //    }
+            //}
 
-            rdr.Close();
+            //rdr.Close();
 
-            productIdCmb.HeaderText = "KODE PRODUK";
-            productIdCmb.Name = "productID";
-            productIdCmb.Width = 200;
-            productIdCmb.DefaultCellStyle.BackColor = Color.LightBlue;
-            detailReturDataGridView.Columns.Add(productIdCmb);
+            productIDColumn.HeaderText = "KODE PRODUK";
+            productIDColumn.Name = "productID";
+            productIDColumn.Width = 200;
+            productIDColumn.DefaultCellStyle.BackColor = Color.LightBlue;
+            detailReturDataGridView.Columns.Add(productIDColumn);
 
-            productNameCmb.HeaderText = "NAMA PRODUK";
-            productNameCmb.Name = "productName";
-            productNameCmb.Width = 300;
-            productNameCmb.DefaultCellStyle.BackColor = Color.LightBlue;
-            detailReturDataGridView.Columns.Add(productNameCmb);
+            productNameColumn.HeaderText = "NAMA PRODUK";
+            productNameColumn.Name = "productName";
+            productNameColumn.Width = 300;
+            productNameColumn.ReadOnly = true;
+            detailReturDataGridView.Columns.Add(productNameColumn);
 
             retailPriceColumn.HeaderText = "SALES PRICE";
             retailPriceColumn.Name = "productPrice";
@@ -150,19 +406,18 @@ namespace RoyalPetz_ADMIN
             return result;
         }
 
-        private void detailReturDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        private void calculateTotal()
         {
-            if ((detailReturDataGridView.CurrentCell.OwningColumn.Name == "productID" || detailReturDataGridView.CurrentCell.OwningColumn.Name == "productName") && e.Control is ComboBox)
+            double total = 0;
+
+            for (int i = 0; i < detailReturDataGridView.Rows.Count; i++)
             {
-                ComboBox comboBox = e.Control as ComboBox;
-                comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
+                if (null != detailReturDataGridView.Rows[i].Cells["subtotal"].Value)
+                    total = total + Convert.ToDouble(detailReturDataGridView.Rows[i].Cells["subtotal"].Value);
             }
 
-            if (detailReturDataGridView.CurrentCell.OwningColumn.Name == "qty" && e.Control is TextBox)
-            {
-                TextBox textBox = e.Control as TextBox;
-                textBox.TextChanged += TextBox_TextChanged;
-            }
+            globalTotalValue = total;
+            totalLabel.Text = total.ToString("C2", culture);//"Rp. " + total.ToString();
         }
 
         private double getProductPriceValue(string productID)
@@ -199,58 +454,158 @@ namespace RoyalPetz_ADMIN
 
             return result;
         }
-        
-        private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void setTextBoxCustomSource(TextBox textBox)
         {
-            int selectedIndex = 0;
-            int rowSelectedIndex = 0;
-            string selectedProductID = "";
-            double hpp = 0;
-            double subTotal = 0;
-
-            DataGridViewComboBoxEditingControl dataGridViewComboBoxEditingControl = sender as DataGridViewComboBoxEditingControl;
-            selectedIndex = dataGridViewComboBoxEditingControl.SelectedIndex;
-            rowSelectedIndex = detailReturDataGridView.SelectedCells[0].RowIndex;
-            DataGridViewRow selectedRow = detailReturDataGridView.Rows[rowSelectedIndex];
-
-            DataGridViewComboBoxCell productIDComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productID"];
-            DataGridViewComboBoxCell productNameComboCell = (DataGridViewComboBoxCell)selectedRow.Cells["productName"];
-
-            if (selectedIndex < 0)
-                return;
-
-            selectedProductID = productIDComboCell.Items[selectedIndex].ToString();
-            productIDComboCell.Value = productIDComboCell.Items[selectedIndex];
-            productNameComboCell.Value = productNameComboCell.Items[selectedIndex];
-
-            hpp = getProductPriceValue(selectedProductID);
-
-            selectedRow.Cells["productPrice"].Value = hpp;
-
-            if (null == selectedRow.Cells["qty"].Value)
-                selectedRow.Cells["qty"].Value = 0;
+            MySqlDataReader rdr;
+            string sqlCommand = "";
+            string[] arr = null;
+            List<string> arrList = new List<string>();
 
             if (originModuleID == globalConstants.RETUR_PENJUALAN)
-                selectedRow.Cells["SOqty"].Value = getSOQty(selectedProductID);
+                sqlCommand = "SELECT M.PRODUCT_ID, M.PRODUCT_NAME FROM MASTER_PRODUCT M, SALES_DETAIL SD " +
+                                    "WHERE SD.SALES_INVOICE = '" + selectedSalesInvoice + "' AND SD.PRODUCT_ID = M.PRODUCT_ID  AND PRODUCT_IS_SERVICE = 0 " +
+                                    "GROUP BY M.PRODUCT_ID";
+            else
+                sqlCommand = "SELECT M.PRODUCT_ID, M.PRODUCT_NAME FROM MASTER_PRODUCT M, SALES_DETAIL SD, SALES_HEADER SH " +
+                                    "WHERE PRODUCT_ACTIVE = 1 AND SH.SALES_INVOICE = SD.SALES_INVOICE AND SD.PRODUCT_ID = M.PRODUCT_ID AND SH.CUSTOMER_ID = " + selectedCustomerID + " AND PRODUCT_IS_SERVICE = 0" +
+                                    " GROUP BY M.PRODUCT_ID";
 
-            subTotal = Math.Round((hpp * Convert.ToDouble(Convert.ToDouble(selectedRow.Cells["qty"].Value))), 2);
-            selectedRow.Cells["subtotal"].Value = subTotal;
+            rdr = DS.getData(sqlCommand);
 
-            calculateTotal();
-        }
-
-        private void calculateTotal()
-        {
-            double total = 0;
-
-            for (int i = 0; i < detailReturDataGridView.Rows.Count; i++)
+            if (rdr.HasRows)
             {
-                if (null != detailReturDataGridView.Rows[i].Cells["subtotal"].Value)
-                    total = total + Convert.ToDouble(detailReturDataGridView.Rows[i].Cells["subtotal"].Value);
+                while (rdr.Read())
+                {
+                    arrList.Add(rdr.GetString("PRODUCT_ID"));
+                }
+                AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
+                arr = arrList.ToArray();
+                collection.AddRange(arr);
+
+                textBox.AutoCompleteCustomSource = collection;
             }
 
-            globalTotalValue = total;
-            totalLabel.Text = total.ToString("C2", culture);//"Rp. " + total.ToString();
+            rdr.Close();
+        }
+
+        private void detailReturDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if ((detailReturDataGridView.CurrentCell.OwningColumn.Name == "productID") && e.Control is TextBox)
+            {
+                TextBox productIDTextBox = e.Control as TextBox;
+                productIDTextBox.TextChanged -= TextBox_TextChanged;
+                productIDTextBox.PreviewKeyDown += TextBox_previewKeyDown;
+                productIDTextBox.CharacterCasing = CharacterCasing.Upper;
+                productIDTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                productIDTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                setTextBoxCustomSource(productIDTextBox);
+            }
+
+            if (detailReturDataGridView.CurrentCell.OwningColumn.Name == "qty" && e.Control is TextBox)
+            {
+                TextBox textBox = e.Control as TextBox;
+                textBox.TextChanged += TextBox_TextChanged;
+                textBox.PreviewKeyDown -= TextBox_previewKeyDown;
+                textBox.AutoCompleteMode = AutoCompleteMode.None;
+            }
+        }
+
+        private void clearUpSomeRowContents(DataGridViewRow selectedRow, int rowSelectedIndex)
+        {
+            isLoading = true;
+            selectedRow.Cells["productName"].Value = "";
+            selectedRow.Cells["productPrice"].Value = "0";
+            selectedRow.Cells["subTotal"].Value = "0";
+            selectedRow.Cells["qty"].Value = "0";
+
+            returnQty[rowSelectedIndex] = "0";
+
+            calculateTotal();
+            isLoading = false;
+        }
+
+        private void updateSomeRowContents(DataGridViewRow selectedRow, int rowSelectedIndex, string currentValue)
+        {
+            int numRow = 0;
+            string selectedProductID = "";
+            string selectedProductName = "";
+
+            double hpp = 0;
+            string currentProductID = "";
+            string currentProductName = "";
+            bool changed = false;
+
+            numRow = Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'"));
+
+            if (numRow > 0)
+            {
+                selectedProductID = currentValue;
+
+                if (null != selectedRow.Cells["productID"].Value)
+                    currentProductID = selectedRow.Cells["productID"].Value.ToString();
+
+                if (null != selectedRow.Cells["productName"].Value)
+                    currentProductName = selectedRow.Cells["productName"].Value.ToString();
+
+                selectedProductName = DS.getDataSingleValue("SELECT IFNULL(PRODUCT_NAME,'') FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'").ToString();
+
+                selectedRow.Cells["productId"].Value = selectedProductID;
+                selectedRow.Cells["productName"].Value = selectedProductName;
+
+                if (selectedProductID != currentProductID)
+                    changed = true;
+
+                if (selectedProductName != currentProductName)
+                    changed = true;
+
+                if (!changed)
+                    return;
+
+                hpp = getProductPriceValue(selectedProductID);
+                gutil.saveSystemDebugLog(globalConstants.MENU_RETUR_PENJUALAN, "updateSomeRowsContent, PRODUCT_BASE_PRICE [" + hpp + "]");
+                selectedRow.Cells["productPrice"].Value = hpp.ToString();
+
+                selectedRow.Cells["qty"].Value = 0;
+                returnQty[rowSelectedIndex] = "0";
+
+                selectedRow.Cells["subTotal"].Value = 0;
+
+                gutil.saveSystemDebugLog(globalConstants.MENU_RETUR_PENJUALAN, "updateSomeRowsContent, attempt to calculate total");
+
+                calculateTotal();
+            }
+            else
+            {
+                clearUpSomeRowContents(selectedRow, rowSelectedIndex);
+            }
+        }
+
+        private void TextBox_previewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            string currentValue = "";
+            int rowSelectedIndex = 0;
+            DataGridViewTextBoxEditingControl dataGridViewComboBoxEditingControl = sender as DataGridViewTextBoxEditingControl;
+
+            if (detailReturDataGridView.CurrentCell.OwningColumn.Name != "productID")
+                return;
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                currentValue = dataGridViewComboBoxEditingControl.Text;
+                rowSelectedIndex = detailReturDataGridView.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = detailReturDataGridView.Rows[rowSelectedIndex];
+
+                if (currentValue.Length > 0)
+                {
+                    updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
+                    detailReturDataGridView.CurrentCell = selectedRow.Cells["qty"];
+                }
+                else
+                {
+                    clearUpSomeRowContents(selectedRow, rowSelectedIndex);
+                }
+            }
         }
 
         private void TextBox_TextChanged(object sender, EventArgs e)
@@ -271,6 +626,9 @@ namespace RoyalPetz_ADMIN
             //    productID = selectedRow.Cells["productID"].Value.ToString();
 
             if (isLoading)
+                return;
+
+            if (detailReturDataGridView.CurrentCell.OwningColumn.Name != "qty")
                 return;
 
             if (dataGridViewTextBoxEditingControl.Text.Length <= 0)
@@ -426,20 +784,10 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        private void detailReturDataGridView_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Delete)
-            {
-                if (DialogResult.Yes == MessageBox.Show("DELETE CURRENT ROW?", "WARNING", MessageBoxButtons.YesNo))
-                {
-                    deleteCurrentRow();
-                    calculateTotal();
-                }
-            }
-        }
-
         private bool dataValidated()
         {
+            bool dataExist = true;
+            int i = 0;
             if (noReturTextBox.Text.Length <= 0)
             {
                 errorLabel.Text = "NO RETUR TIDAK BOLEH KOSONG";
@@ -451,6 +799,27 @@ namespace RoyalPetz_ADMIN
                 errorLabel.Text = "NILAI RETUR 0";
                 return false;   
             }
+
+            if (detailReturDataGridView.Rows.Count <= 0)
+            {
+                errorLabel.Text = "TIDAK ADA BARANG YANG DIRETUR";
+                return false;
+            }
+
+            for (i = 0; i < detailReturDataGridView.Rows.Count && dataExist; i++)
+            {
+                if (null != detailReturDataGridView.Rows[i].Cells["productID"].Value)
+                    dataExist = gutil.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString());
+                else
+                    dataExist = false;
+            }
+            if (!dataExist)
+            {
+                i = i+1;
+                errorLabel.Text = "PRODUCT ID PADA BARIS [" + i + "] INVALID";
+                return false;
+            }
+
 
             return true;
         }
@@ -723,12 +1092,22 @@ namespace RoyalPetz_ADMIN
 
         private bool saveData()
         {
+            bool result = false;
             if (dataValidated())
             {
-                return saveDataTransaction();
+                smallPleaseWait pleaseWait = new smallPleaseWait();
+                pleaseWait.Show();
+
+                //  ALlow main UI thread to properly display please wait form.
+                Application.DoEvents();
+                result = saveDataTransaction();
+
+                pleaseWait.Close();
+
+                return result;
             }
 
-            return false;
+            return result;
         }
 
         private double getTotalCredit()
@@ -946,6 +1325,19 @@ namespace RoyalPetz_ADMIN
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            int salesPaidStatus;
+
+            if (originModuleID == globalConstants.RETUR_PENJUALAN)
+            {
+                salesPaidStatus = Convert.ToInt32(DS.getDataSingleValue("SELECT IFNULL(SALES_PAID, 0) FROM SALES_HEADER WHERE SALES_INVOICE = '"+ selectedSalesInvoice + "'"));
+                gutil.saveSystemDebugLog(globalConstants.MENU_RETUR_PENJUALAN, "SALES PAID STATUS [" + salesPaidStatus + "]");
+                if (salesPaidStatus == 1)
+                {
+                    MessageBox.Show("INVOICE SUDAH TERBAYAR, RETUR BERUPA UANG CASH", "INFO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    returnCash = true;
+                }
+            }
+
             if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
             {
                 if (DialogResult.Yes == MessageBox.Show("RETUR BERUPA UANG CASH?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
@@ -1322,6 +1714,38 @@ namespace RoyalPetz_ADMIN
             graphics.DrawString(ucapan, new Font("Courier New", 7),
                      new SolidBrush(Color.Black), rect, sf);
             //end of footer
+        }
+
+        private void dataReturPenjualanForm_Activated(object sender, EventArgs e)
+        {
+            registerGlobalHotkey();
+        }
+
+        private void dataReturPenjualanForm_Deactivate(object sender, EventArgs e)
+        {
+            unregisterGlobalHotkey();
+        }
+
+        private void detailReturDataGridView_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = detailReturDataGridView[e.ColumnIndex, e.RowIndex];
+            DataGridViewRow selectedRow = detailReturDataGridView.Rows[e.RowIndex];
+
+            if (cell.OwningColumn.Name == "productID")
+            {
+                if (null != cell.Value)
+                {
+                    if (cell.Value.ToString().Length > 0)
+                    {
+                        updateSomeRowContents(selectedRow, e.RowIndex, cell.Value.ToString());
+                    }
+                    else
+                    {
+                        clearUpSomeRowContents(selectedRow, e.RowIndex);
+                    }
+                }
+            }
+
         }
     }
 }

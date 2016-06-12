@@ -98,7 +98,7 @@
             // 
             this.PODateTimePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PODateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.PODateTimePicker.Location = new System.Drawing.Point(404, 3);
+            this.PODateTimePicker.Location = new System.Drawing.Point(401, 3);
             this.PODateTimePicker.Name = "PODateTimePicker";
             this.PODateTimePicker.Size = new System.Drawing.Size(173, 27);
             this.PODateTimePicker.TabIndex = 21;
@@ -109,7 +109,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label9.Location = new System.Drawing.Point(257, 8);
+            this.label9.Location = new System.Drawing.Point(254, 8);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(135, 18);
             this.label9.TabIndex = 20;
@@ -231,7 +231,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 147F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 222F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 225F));
             this.tableLayoutPanel2.Controls.Add(this.PODateTimePicker, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.POinvoiceTextBox, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label9, 2, 0);
@@ -279,6 +279,8 @@
             // 
             // detailPODataGridView
             // 
+            this.detailPODataGridView.AllowUserToAddRows = false;
+            this.detailPODataGridView.AllowUserToDeleteRows = false;
             this.detailPODataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -304,7 +306,6 @@
             this.detailPODataGridView.Size = new System.Drawing.Size(888, 308);
             this.detailPODataGridView.TabIndex = 46;
             this.detailPODataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.detailPODataGridView_RowsAdded);
-            this.detailPODataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.detailPODataGridView_KeyDown);
             // 
             // label10
             // 
@@ -483,6 +484,8 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PURCHASE ORDER DETAIL";
+            this.Activated += new System.EventHandler(this.purchaseOrderDetailForm_Activated);
+            this.Deactivate += new System.EventHandler(this.purchaseOrderDetailForm_Deactivate);
             this.Load += new System.EventHandler(this.purchaseOrderDetailForm_Load);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();

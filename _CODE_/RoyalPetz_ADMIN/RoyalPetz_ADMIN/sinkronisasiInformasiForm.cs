@@ -217,8 +217,16 @@ namespace RoyalPetz_ADMIN
             saveFileDialog1.DefaultExt = "sql";
             saveFileDialog1.Filter = "SQL File (.sql)|*.sql";
             saveFileDialog1.ShowDialog();
-           
+
+            smallPleaseWait pleaseWait = new smallPleaseWait();
+            pleaseWait.Show();
+
+            //  ALlow main UI thread to properly display please wait form.
+            Application.DoEvents();
             exportData(saveFileDialog1.FileName, DS);
+
+            pleaseWait.Close();
+
             gutil.saveSystemDebugLog(globalConstants.MENU_SINKRONISASI_INFORMASI, "EXPORTED FILE NAME = " + saveFileDialog1.FileName);
             MessageBox.Show("DONE");
         }
@@ -443,7 +451,15 @@ namespace RoyalPetz_ADMIN
 
                 //restore database from file
                 gutil.saveSystemDebugLog(globalConstants.MENU_SINKRONISASI_INFORMASI, "SINKRONISASI INFORMASI, FILENAME [" + fileNameTextbox.Text + "]");
+                smallPleaseWait pleaseWait = new smallPleaseWait();
+                pleaseWait.Show();
+                //  ALlow main UI thread to properly display please wait form.
+                Application.DoEvents();
+
                 syncInformation(fileNameTextbox.Text);
+
+                pleaseWait.Close();
+
                 gutil.saveUserChangeLog(globalConstants.MENU_SINKRONISASI_INFORMASI, globalConstants.CHANGE_LOG_UPDATE, "SINKRONISASI INFORMASI DENGAN SERVER VIA USB EXPORT");
                 
             }
@@ -494,10 +510,18 @@ namespace RoyalPetz_ADMIN
         private void importFromServerButton_Click(object sender, EventArgs e)
         {
             if (DialogResult.Yes == MessageBox.Show("PASTIKAN TIDAK ADA KONEKSI AKTIF KE DATABASE LOKAL, SEMUA USER DIPASTIKAN LOG OUT", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            {
+                smallPleaseWait pleaseWait = new smallPleaseWait();
+                pleaseWait.Show();
+                //  ALlow main UI thread to properly display please wait form.
+                Application.DoEvents();
+
                 if (syncToCentralHQ())
                 { 
                     gutil.saveUserChangeLog(globalConstants.MENU_SINKRONISASI_INFORMASI, globalConstants.CHANGE_LOG_UPDATE, "SINKRONISASI INFORMASI DENGAN SERVER VIA ONLINE CONNECTION");
                 }
+                pleaseWait.Close();
+            }
         }
     }
 }

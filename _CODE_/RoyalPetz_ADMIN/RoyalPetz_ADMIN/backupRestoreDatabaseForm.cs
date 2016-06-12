@@ -79,9 +79,18 @@ namespace RoyalPetz_ADMIN
             saveFileDialog1.DefaultExt = "sql";
             saveFileDialog1.Filter = "SQL File (.sql)|*.sql";
 
-            if (DialogResult.OK ==  saveFileDialog1.ShowDialog())
-                if (gUtil.allTrim(saveFileDialog1.FileName).Length > 0 )
+            if (DialogResult.OK == saveFileDialog1.ShowDialog())
+                if (gUtil.allTrim(saveFileDialog1.FileName).Length > 0)
+                {
+                    smallPleaseWait pleaseWait = new smallPleaseWait();
+                    pleaseWait.Show();
+
+                    //  ALlow main UI thread to properly display please wait form.
+                    Application.DoEvents();
                     backupDatabase(saveFileDialog1.FileName);
+
+                    pleaseWait.Close();
+                }
         }
 
         private void restoreDatabase(string fileName)
@@ -103,8 +112,16 @@ namespace RoyalPetz_ADMIN
         {
             if (fileNameTextbox.Text != "")
             {
+                smallPleaseWait pleaseWait = new smallPleaseWait();
+                pleaseWait.Show();
+
+                //  ALlow main UI thread to properly display please wait form.
+                Application.DoEvents();
                 //restore database from file
                 restoreDatabase(fileNameTextbox.Text);
+
+                pleaseWait.Close();
+
                 gUtil.saveUserChangeLog(globalConstants.MENU_SINKRONISASI_INFORMASI, globalConstants.CHANGE_LOG_UPDATE, "RESTORE DATABASE FROM LOCAL BACKUP");
             }
             else

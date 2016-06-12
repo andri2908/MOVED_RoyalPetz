@@ -42,7 +42,7 @@ namespace RoyalPetz_ADMIN
             int rowSelectedIndex = dataInvoiceDataGridView.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dataInvoiceDataGridView.Rows[rowSelectedIndex];
 
-            if (selectedRow.Cells["SALES_PAID"].Value.ToString() == "1")
+            if (selectedRow.Cells["SALES_PAID"].Value.ToString() == "1" && originModuleID == globalConstants.PEMBAYARAN_PIUTANG)
                 return;
 
             selectedSO = selectedRow.Cells["SALES_INVOICE"].Value.ToString();
@@ -110,7 +110,7 @@ namespace RoyalPetz_ADMIN
                     sqlCommand = sqlCommand + "AND H.SALES_INVOICE like '%" + noInvoiceParam + "%' ";
                 }
 
-                sqlCommand = sqlCommand + "AND SALES_PAID = 0";
+                //sqlCommand = sqlCommand + "AND SALES_PAID = 0";
             }
 
             using(rdr = DS.getData(sqlCommand))
@@ -167,7 +167,7 @@ namespace RoyalPetz_ADMIN
                 int rowSelectedIndex = dataInvoiceDataGridView.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = dataInvoiceDataGridView.Rows[rowSelectedIndex];
 
-                if (selectedRow.Cells["SALES_PAID"].Value.ToString() == "1")
+                if (selectedRow.Cells["SALES_PAID"].Value.ToString() == "1" && originModuleID == globalConstants.PEMBAYARAN_PIUTANG)
                     return;
 
                 selectedSO = selectedRow.Cells["SALES_INVOICE"].Value.ToString();

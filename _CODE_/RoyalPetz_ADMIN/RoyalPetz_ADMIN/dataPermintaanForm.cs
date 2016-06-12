@@ -63,22 +63,6 @@ namespace RoyalPetz_ADMIN
                     dataMutasiBarangDetailForm displayedForm = new dataMutasiBarangDetailForm(globalConstants.CEK_DATA_MUTASI, roID);
                     displayedForm.ShowDialog(this);
                     break;
-
-                    //case globalConstants.PEMBAYARAN_HUTANG:
-                    //    pembayaranHutangForm pembayaranForm = new pembayaranHutangForm();
-                    //    pembayaranForm.ShowDialog(this);
-                    //    break;
-
-                    //case globalConstants.PENERIMAAN_BARANG:
-                    //    penerimaanBarangForm penerimaanBarangDisplayedForm = new penerimaanBarangForm();
-                    //    penerimaanBarangDisplayedForm.ShowDialog(this);
-                    //    break;
-
-                    //default:
-                    //    dataReturPermintaanForm returPermintaanBarangDisplayedForm = new dataReturPermintaanForm();
-                    //    returPermintaanBarangDisplayedForm.ShowDialog(this);
-                    //    break;
-
             }
         }
 
@@ -114,13 +98,8 @@ namespace RoyalPetz_ADMIN
 
             DS.mySqlConnect();
 
-            //sqlCommand = "SELECT ID, RO_INVOICE AS 'NO PERMINTAAN', DATE_FORMAT(RO_DATETIME, '%d-%M-%Y')  AS 'TANGGAL PERMINTAAN', DATE_FORMAT(RO_EXPIRED, '%d-%M-%Y') AS 'TANGGAL EXPIRED', M1.BRANCH_NAME AS 'ASAL PERMINTAAN', M2.BRANCH_NAME AS 'TUJUAN PERMINTAAN', RO_TOTAL AS 'TOTAL' " +
-            //                    "FROM REQUEST_ORDER_HEADER LEFT OUTER JOIN MASTER_BRANCH M1 ON (RO_BRANCH_ID_FROM = M1.BRANCH_ID) " +
-            //                    "LEFT OUTER JOIN MASTER_BRANCH M2 ON (RO_BRANCH_ID_TO = M2.BRANCH_ID) " +
-            //                    "WHERE 1 = 1";
-
             sqlCommand = "SELECT ID, RO_INVOICE AS 'NO PERMINTAAN', DATE_FORMAT(RO_DATETIME, '%d-%M-%Y')  AS 'TANGGAL PERMINTAAN', DATE_FORMAT(RO_EXPIRED, '%d-%M-%Y') AS 'TANGGAL EXPIRED', M1.BRANCH_NAME AS 'ASAL PERMINTAAN', RO_TOTAL AS 'TOTAL' " +
-                                "FROM REQUEST_ORDER_HEADER RH, MASTER_BRANCH M1 " + //LEFT OUTER JOIN MASTER_BRANCH M1 ON (RO_BRANCH_ID_TO = M1.BRANCH_ID) " +
+                                "FROM REQUEST_ORDER_HEADER RH, MASTER_BRANCH M1 " + 
                                 "WHERE 1 = 1 AND RO_BRANCH_ID_TO = M1.BRANCH_ID AND RO_ACTIVE = 1";
 
             if (!showAll)
@@ -131,11 +110,6 @@ namespace RoyalPetz_ADMIN
                     sqlCommand = sqlCommand + " AND DATE_FORMAT(RO_EXPIRED, '%Y%m%d') > '" + dateFrom + "'";
                 }
  
-                //if (!showApprovedROCheckbox.Checked)
-                //{
-                //    sqlCommand = sqlCommand + " AND RO_ACTIVE = 1";
-                //}
-
                 if (noROInvoiceTextBox.Text.Length > 0)
                 {
                     noROInvoiceParam = MySqlHelper.EscapeString(noROInvoiceTextBox.Text);
@@ -145,11 +119,6 @@ namespace RoyalPetz_ADMIN
                 dateFrom = String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(RODtPicker_1.Value));
                 dateTo= String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(RODtPicker_2.Value));
                 sqlCommand = sqlCommand + " AND DATE_FORMAT(RO_DATETIME, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(RO_DATETIME, '%Y%m%d')  <= '" + dateTo + "'";
-
-                //if (branchFromCombo.Text.Length > 0 )
-                //{
-                //    sqlCommand = sqlCommand + " AND RO_BRANCH_ID_FROM = " + selectedBranchFromID;
-                //}
 
                 if (branchToCombo.Text.Length > 0)
                 {
@@ -171,7 +140,6 @@ namespace RoyalPetz_ADMIN
                     dataRequestOrderGridView.Columns["TANGGAL PERMINTAAN"].Width = 200;
                     dataRequestOrderGridView.Columns["TANGGAL EXPIRED"].Width = 200;
                     dataRequestOrderGridView.Columns["ASAL PERMINTAAN"].Width = 200;
-            //        dataRequestOrderGridView.Columns["TUJUAN PERMINTAAN"].Width = 200;
                     dataRequestOrderGridView.Columns["TOTAL"].Width = 200;
                 }
 
