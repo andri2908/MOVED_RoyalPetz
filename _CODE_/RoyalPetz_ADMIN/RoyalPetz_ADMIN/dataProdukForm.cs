@@ -194,6 +194,12 @@ namespace RoyalPetz_ADMIN
                     this.Close();
                     break;
 
+                case globalConstants.RETUR_PEMBELIAN_KE_PUSAT:
+                case globalConstants.RETUR_PEMBELIAN_KE_SUPPLIER:
+                    parentReturBeliForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName);
+                    this.Close();
+                    break;
+
                 default: // MASTER DATA PRODUK
                     dataProdukDetailForm displayForm = new dataProdukDetailForm(globalConstants.EDIT_PRODUK, selectedProductID);
                     displayForm.ShowDialog(this);

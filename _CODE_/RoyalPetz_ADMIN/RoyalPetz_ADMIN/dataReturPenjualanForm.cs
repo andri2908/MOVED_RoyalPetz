@@ -318,12 +318,6 @@ namespace RoyalPetz_ADMIN
 
         private void addDataGridColumn()
         {
-            //MySqlDataReader rdr;
-            //string sqlCommand = "";
-
-            //DataGridViewComboBoxColumn productIdCmb = new DataGridViewComboBoxColumn();
-            //DataGridViewComboBoxColumn productNameCmb = new DataGridViewComboBoxColumn();
-
             DataGridViewTextBoxColumn productIDColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn productNameColumn = new DataGridViewTextBoxColumn();
 
@@ -331,28 +325,9 @@ namespace RoyalPetz_ADMIN
             DataGridViewTextBoxColumn purchaseQtyColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn retailPriceColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn subtotalColumn = new DataGridViewTextBoxColumn();
-            
-            //if (originModuleID == globalConstants.RETUR_PENJUALAN)
-            //    sqlCommand = "SELECT M.PRODUCT_ID, M.PRODUCT_NAME FROM MASTER_PRODUCT M, SALES_DETAIL SD " +
-            //                        "WHERE SD.SALES_INVOICE = '" + selectedSalesInvoice + "' AND SD.PRODUCT_ID = M.PRODUCT_ID " + 
-            //                        "GROUP BY M.PRODUCT_ID";
-            //else
-            //    sqlCommand = "SELECT M.PRODUCT_ID, M.PRODUCT_NAME FROM MASTER_PRODUCT M, SALES_DETAIL SD, SALES_HEADER SH " +
-            //                        "WHERE PRODUCT_ACTIVE = 1 AND SH.SALES_INVOICE = SD.SALES_INVOICE AND SD.PRODUCT_ID = M.PRODUCT_ID AND SH.CUSTOMER_ID = " + selectedCustomerID + 
-            //                        " GROUP BY M.PRODUCT_ID";
-
-            //productComboHidden.Items.Clear();
-
-            //using (rdr = DS.getData(sqlCommand))
-            //{
-            //    while (rdr.Read())
-            //    {
-            //        productNameCmb.Items.Add(rdr.GetString("PRODUCT_NAME"));
-            //        productIdCmb.Items.Add(rdr.GetString("PRODUCT_ID"));
-            //    }
-            //}
-
-            //rdr.Close();
+            DataGridViewTextBoxColumn productDisc1Column = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn productDisc2Column = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn productDiscRPColumn = new DataGridViewTextBoxColumn();
 
             productIDColumn.HeaderText = "KODE PRODUK";
             productIDColumn.Name = "productID";
@@ -379,8 +354,26 @@ namespace RoyalPetz_ADMIN
                 purchaseQtyColumn.Width = 100;
                 purchaseQtyColumn.ReadOnly = true;
                 detailReturDataGridView.Columns.Add(purchaseQtyColumn);
+
+                productDisc1Column.HeaderText = "DISC 1 (%)";
+                productDisc1Column.Name = "disc1";
+                productDisc1Column.Width = 100;
+                productDisc1Column.ReadOnly = true;
+                detailReturDataGridView.Columns.Add(productDisc1Column);
+
+                productDisc2Column.HeaderText = "DISC 2 (%)";
+                productDisc2Column.Name = "disc2";
+                productDisc2Column.Width = 100;
+                productDisc2Column.ReadOnly = true;
+                detailReturDataGridView.Columns.Add(productDisc2Column);
+
+                productDiscRPColumn.HeaderText = "DISC RP";
+                productDiscRPColumn.Name = "discRP";
+                productDiscRPColumn.Width = 100;
+                productDiscRPColumn.ReadOnly = true;
+                detailReturDataGridView.Columns.Add(productDiscRPColumn);
             }
-            
+
             stockQtyColumn.HeaderText = "QTY";
             stockQtyColumn.Name = "qty";
             stockQtyColumn.Width = 100;
@@ -409,6 +402,7 @@ namespace RoyalPetz_ADMIN
         private void calculateTotal()
         {
             double total = 0;
+            double discTotal = 0;
 
             for (int i = 0; i < detailReturDataGridView.Rows.Count; i++)
             {
@@ -416,7 +410,12 @@ namespace RoyalPetz_ADMIN
                     total = total + Convert.ToDouble(detailReturDataGridView.Rows[i].Cells["subtotal"].Value);
             }
 
-            globalTotalValue = total;
+            if (originModuleID == globalConstants.RETUR_PENJUALAN)
+            {
+                discTotal = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(SALES_DISCOUNT_FINAL, 0) FROM SALES_HEADER WHERE SALES_INVOICE = '" + selectedSalesInvoice + "'"));
+            }
+
+            globalTotalValue = total - discTotal;
             totalLabel.Text = total.ToString("C2", culture);//"Rp. " + total.ToString();
         }
 
@@ -518,8 +517,15 @@ namespace RoyalPetz_ADMIN
             selectedRow.Cells["productPrice"].Value = "0";
             selectedRow.Cells["subTotal"].Value = "0";
             selectedRow.Cells["qty"].Value = "0";
-
             returnQty[rowSelectedIndex] = "0";
+
+            if (originModuleID == globalConstants.RETUR_PENJUALAN)
+            { 
+                selectedRow.Cells["SOQty"].Value = "0";
+                selectedRow.Cells["disc1"].Value = "0";
+                selectedRow.Cells["disc2"].Value = "0";
+                selectedRow.Cells["discRP"].Value = "0";
+            }
 
             calculateTotal();
             isLoading = false;
@@ -535,6 +541,10 @@ namespace RoyalPetz_ADMIN
             string currentProductID = "";
             string currentProductName = "";
             bool changed = false;
+            double soQTY = 0;
+            double disc1 = 0;
+            double disc2 = 0;
+            double discRP = 0;
 
             numRow = Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'"));
 
@@ -574,6 +584,21 @@ namespace RoyalPetz_ADMIN
                 gutil.saveSystemDebugLog(globalConstants.MENU_RETUR_PENJUALAN, "updateSomeRowsContent, attempt to calculate total");
 
                 calculateTotal();
+
+                if (originModuleID == globalConstants.RETUR_PENJUALAN)
+                {
+                    soQTY = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(SUM(PRODUCT_QTY), 0) FROM SALES_DETAIL WHERE SALES_INVOICE = '"+selectedSalesInvoice+"' AND PRODUCT_ID = '"+ selectedProductID+"'"));
+                    selectedRow.Cells["SOQty"].Value = soQTY;
+
+                    disc1 = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(PRODUCT_DISC1, 0) FROM SALES_DETAIL WHERE SALES_INVOICE = '" + selectedSalesInvoice + "' AND PRODUCT_ID = '" + selectedProductID + "'"));
+                    selectedRow.Cells["disc1"].Value = disc1;
+
+                    disc2 = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(PRODUCT_DISC2, 0) FROM SALES_DETAIL WHERE SALES_INVOICE = '" + selectedSalesInvoice + "' AND PRODUCT_ID = '" + selectedProductID + "'"));
+                    selectedRow.Cells["disc2"].Value = disc2;
+
+                    discRP = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(PRODUCT_DISC_RP, 0) FROM SALES_DETAIL WHERE SALES_INVOICE = '" + selectedSalesInvoice + "' AND PRODUCT_ID = '" + selectedProductID + "'"));
+                    selectedRow.Cells["discRP"].Value = discRP;
+                }
             }
             else
             {
@@ -693,6 +718,22 @@ namespace RoyalPetz_ADMIN
             productPrice = Convert.ToDouble(selectedRow.Cells["productPrice"].Value);
 
             subTotal = Math.Round((productPrice * Convert.ToDouble(returnQty[rowSelectedIndex])), 2);
+
+            if (null != selectedRow.Cells["disc1"].Value)
+            {
+                subTotal = subTotal - Math.Round((subTotal * Convert.ToDouble(selectedRow.Cells["disc1"].Value)/100), 2);
+            }
+
+            if (null != selectedRow.Cells["disc2"].Value)
+            {
+                subTotal = subTotal - Math.Round((subTotal * Convert.ToDouble(selectedRow.Cells["disc2"].Value) / 100), 2);
+            }
+
+            if (null != selectedRow.Cells["discRP"].Value)
+            {
+                subTotal = subTotal - Convert.ToDouble(selectedRow.Cells["discRP"].Value);
+            }
+
             selectedRow.Cells["subtotal"].Value = subTotal;
 
             calculateTotal();
@@ -1326,6 +1367,9 @@ namespace RoyalPetz_ADMIN
         private void saveButton_Click(object sender, EventArgs e)
         {
             int salesPaidStatus;
+
+            if (DialogResult.No == MessageBox.Show("SAVE DATA", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                return;
 
             if (originModuleID == globalConstants.RETUR_PENJUALAN)
             {
