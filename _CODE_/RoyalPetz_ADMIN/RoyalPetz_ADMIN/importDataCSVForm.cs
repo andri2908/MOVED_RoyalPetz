@@ -33,6 +33,7 @@ namespace RoyalPetz_ADMIN
             bool result = true;
             string s = "";
             string[] sValue;
+            List<string> fields = new List<string>();
 
             detailImportDataGrid.Rows.Clear();
 
@@ -48,7 +49,68 @@ namespace RoyalPetz_ADMIN
                 while ((s = sr.ReadLine()) != null)
                 {
                     //Console.WriteLine(s);
-                    sValue = s.Split(',');
+                    //sValue = s.Split(',');
+                    //if (!sValue[3].Equals(sValue[4]))
+                    //    detailImportDataGrid.Rows.Add(sValue);
+                    int pos = 0;
+                    int rows = 0;
+                    fields.Clear();
+                    while (pos < s.Length)
+                    {
+                        string value;
+
+                        // Special handling for quoted field
+                        if (s[pos] == '"')
+                        {
+                            // Skip initial quote
+                            pos++;
+
+                            // Parse quoted value
+                            int start = pos;
+                            while (pos < s.Length)
+                            {
+                                // Test for quote character
+                                if (s[pos] == '"')
+                                {
+                                    // Found one
+                                    pos++;
+
+                                    // If two quotes together, keep one
+                                    // Otherwise, indicates end of value
+                                    if (pos >= s.Length || s[pos] != '"')
+                                    {
+                                        pos--;
+                                        break;
+                                    }
+                                }
+                                pos++;
+                            }
+                            value = s.Substring(start, pos - start);
+                            value = value.Replace("\"\"", "\"");
+                        }
+                        else
+                        {
+                            // Parse unquoted value
+                            int start = pos;
+                            while (pos < s.Length && s[pos] != ',')
+                                pos++;
+                            value = s.Substring(start, pos - start);
+                        }
+
+                        // Add field to list
+                        if (rows < fields.Count)
+                            fields[rows] = value;
+                        else
+                            fields.Add(value);
+                        rows++;
+
+                        // Eat up to and including next comma
+                        while (pos < s.Length && s[pos] != ',')
+                            pos++;
+                        if (pos < s.Length)
+                            pos++;
+                    }
+                    sValue = fields.ToArray();
                     if (!sValue[3].Equals(sValue[4]))
                         detailImportDataGrid.Rows.Add(sValue);
                 }
