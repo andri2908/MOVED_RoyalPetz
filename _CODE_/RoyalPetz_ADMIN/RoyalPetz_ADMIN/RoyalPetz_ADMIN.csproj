@@ -60,6 +60,12 @@
     <Compile Include="aboutusform.Designer.cs">
       <DependentUpon>aboutusform.cs</DependentUpon>
     </Compile>
+    <Compile Include="adminHelpForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="adminHelpForm.Designer.cs">
+      <DependentUpon>adminHelpForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="barcodeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -998,6 +1004,9 @@
     </Compile>
     <EmbeddedResource Include="aboutusform.resx">
       <DependentUpon>aboutusform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="adminHelpForm.resx">
+      <DependentUpon>adminHelpForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="barcodeForm.resx">
       <DependentUpon>barcodeForm.cs</DependentUpon>

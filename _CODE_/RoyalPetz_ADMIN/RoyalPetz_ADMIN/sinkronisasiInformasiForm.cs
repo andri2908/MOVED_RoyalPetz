@@ -55,7 +55,7 @@ namespace RoyalPetz_ADMIN
             //System.Diagnostics.Process proc = new System.Diagnostics.Process();
             MySqlDataReader rdr;
             string sqlCommand = "";
-            string insertStatement;
+            string insertStatement = "";
             StreamWriter sw = null;
 
             // EXPORT MASTER PRODUCT DATA
@@ -90,7 +90,7 @@ namespace RoyalPetz_ADMIN
             //localDate = String.Format(culture, "{0:ddMMyyyy}", DateTime.Now);
             //fileName = "SYNCINFO_PRODUCT_" + localDate + ".sql";
 
-            sqlCommand = "SELECT PRODUCT_ID, PRODUCT_BARCODE, PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_BASE_PRICE, PRODUCT_RETAIL_PRICE, PRODUCT_BULK_PRICE, PRODUCT_WHOLESALE_PRICE, UNIT_ID, PRODUCT_IS_SERVICE FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1";
+            sqlCommand = "SELECT PRODUCT_ID, IFNULL(PRODUCT_BARCODE, '') AS PRODUCT_BARCODE, IFNULL(PRODUCT_NAME, '') AS PRODUCT_NAME, IFNULL(PRODUCT_DESCRIPTION, '') AS PRODUCT_DESCRIPTION, PRODUCT_BASE_PRICE, PRODUCT_RETAIL_PRICE, PRODUCT_BULK_PRICE, PRODUCT_WHOLESALE_PRICE, UNIT_ID, PRODUCT_IS_SERVICE FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1";
             using (rdr = DAccess.getData(sqlCommand, isHQConnection))
             {
                 if (rdr.HasRows)
@@ -119,7 +119,7 @@ namespace RoyalPetz_ADMIN
             // EXPORT MASTER KATEGORI DATA
             sw.WriteLine("");
             sw.WriteLine("DELETE FROM MASTER_CATEGORY;");
-            sqlCommand = "SELECT CATEGORY_ID, CATEGORY_NAME, CATEGORY_DESCRIPTION FROM MASTER_CATEGORY WHERE CATEGORY_ACTIVE = 1";
+            sqlCommand = "SELECT CATEGORY_ID, CATEGORY_NAME, IFNULL(CATEGORY_DESCRIPTION, '') AS CATEGORY_DESCRIPTION FROM MASTER_CATEGORY WHERE CATEGORY_ACTIVE = 1";
             using (rdr = DAccess.getData(sqlCommand, isHQConnection))
             {
                 if (rdr.HasRows)
@@ -138,7 +138,7 @@ namespace RoyalPetz_ADMIN
             // EXPORT MASTER UNIT DATA
             sw.WriteLine("");
             sw.WriteLine("DELETE FROM MASTER_UNIT;");
-            sqlCommand = "SELECT UNIT_ID, UNIT_NAME, UNIT_DESCRIPTION FROM MASTER_UNIT WHERE UNIT_ACTIVE = 1";
+            sqlCommand = "SELECT UNIT_ID, UNIT_NAME, IFNULL(UNIT_DESCRIPTION, '') AS UNIT_DESCRIPTION FROM MASTER_UNIT WHERE UNIT_ACTIVE = 1";
             using (rdr = DAccess.getData(sqlCommand, isHQConnection))
             {
                 if (rdr.HasRows)
