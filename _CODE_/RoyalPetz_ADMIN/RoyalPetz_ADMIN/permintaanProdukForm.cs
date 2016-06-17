@@ -1106,6 +1106,7 @@ namespace RoyalPetz_ADMIN
         private bool saveData()
         {
             bool result = false;
+            isLoading = true;
             if (dataValidated())
             {
                 smallPleaseWait pleaseWait = new smallPleaseWait();
@@ -1119,7 +1120,7 @@ namespace RoyalPetz_ADMIN
 
                 return result;
             }
-
+            isLoading = false;
             return result;
         }
 
@@ -1475,6 +1476,9 @@ namespace RoyalPetz_ADMIN
         {
             var cell = detailRequestOrderDataGridView[e.ColumnIndex, e.RowIndex];
             DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[e.RowIndex];
+
+            if (isLoading == true)
+                return;
 
             if (cell.OwningColumn.Name == "productID")
             {

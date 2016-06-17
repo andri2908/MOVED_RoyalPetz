@@ -241,6 +241,7 @@ namespace RoyalPetz_ADMIN
 
         public const string purchaseOrderXML = "PurchaseOrder.xml";
         public const string penerimaanBarangXML = "ProductsReceived.xml";
+        public const string returPermintaanXML = "ReturPermintaan.xml";
 
     }
 }

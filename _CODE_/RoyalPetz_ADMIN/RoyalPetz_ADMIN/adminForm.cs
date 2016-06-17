@@ -599,7 +599,9 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripMenuItem13_Click(object sender, EventArgs e)
         {
-            dataReturPermintaanForm displayedForm = new dataReturPermintaanForm(globalConstants.RETUR_PEMBELIAN_KE_SUPPLIER);
+            //dataReturPermintaanForm displayedForm = new dataReturPermintaanForm(globalConstants.RETUR_PEMBELIAN_KE_PUSAT);
+            //displayedForm.ShowDialog(this);
+            dataReturForm displayedForm = new dataReturForm(globalConstants.RETUR_PEMBELIAN_KE_SUPPLIER);
             displayedForm.ShowDialog(this);
         }
 
@@ -820,9 +822,10 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripMenuItem37_Click(object sender, EventArgs e)
         {
-            dataReturPermintaanForm displayedForm = new dataReturPermintaanForm(globalConstants.RETUR_PEMBELIAN_KE_PUSAT);
+            //dataReturPermintaanForm displayedForm = new dataReturPermintaanForm(globalConstants.RETUR_PEMBELIAN_KE_PUSAT);
+            //displayedForm.ShowDialog(this);
+            dataReturForm displayedForm = new dataReturForm(globalConstants.RETUR_PEMBELIAN_KE_PUSAT);
             displayedForm.ShowDialog(this);
-
         }
 
         private void toolStripMenuItem39_Click(object sender, EventArgs e)
@@ -1304,6 +1307,12 @@ namespace RoyalPetz_ADMIN
         private void toolStripMenuItem8_Click(object sender, EventArgs e)
         {
             ReportSalesSummarySearchForm displayedForm = new ReportSalesSummarySearchForm(globalConstants.REPORT_SALES_PRODUCT, true);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem9_Click_1(object sender, EventArgs e)
+        {
+            dataReturForm displayedForm = new dataReturForm(globalConstants.RETUR_PENJUALAN);
             displayedForm.ShowDialog(this);
         }
     }

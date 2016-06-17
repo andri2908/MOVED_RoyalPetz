@@ -180,6 +180,7 @@
             this.SHORTCUT_returBeli = new System.Windows.Forms.ToolStripButton();
             this.SHORTCUT_returJual = new System.Windows.Forms.ToolStripButton();
             this.timerMessage = new System.Windows.Forms.Timer(this.components);
+            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -769,7 +770,8 @@
             this.MENU_returPenjualan.BackColor = System.Drawing.Color.SteelBlue;
             this.MENU_returPenjualan.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MENU_returByInvoice,
-            this.MENU_returByStokAdjustment});
+            this.MENU_returByStokAdjustment,
+            this.toolStripMenuItem9});
             this.MENU_returPenjualan.ForeColor = System.Drawing.Color.FloralWhite;
             this.MENU_returPenjualan.Name = "MENU_returPenjualan";
             this.MENU_returPenjualan.Size = new System.Drawing.Size(221, 22);
@@ -1699,6 +1701,15 @@
             this.timerMessage.Interval = 3600000;
             this.timerMessage.Tick += new System.EventHandler(this.timerMessage_Tick);
             // 
+            // toolStripMenuItem9
+            // 
+            this.toolStripMenuItem9.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem9.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(226, 22);
+            this.toolStripMenuItem9.Text = "Reprint Retur";
+            this.toolStripMenuItem9.Click += new System.EventHandler(this.toolStripMenuItem9_Click_1);
+            // 
             // adminForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1887,6 +1898,7 @@
         private System.Windows.Forms.ToolStripMenuItem pengeluaranKasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pemasukanKasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem labaRugiHarianToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
         //private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
     }
 }

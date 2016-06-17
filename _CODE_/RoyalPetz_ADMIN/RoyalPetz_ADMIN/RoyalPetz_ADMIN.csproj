@@ -129,6 +129,12 @@
     <Compile Include="dataPOForm.Designer.cs">
       <DependentUpon>dataPOForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="dataReturForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataReturForm.Designer.cs">
+      <DependentUpon>dataReturForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="dataReturPenjualanForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,6 +212,12 @@
     </Compile>
     <Compile Include="dataReturPermintaanForm.Designer.cs">
       <DependentUpon>dataReturPermintaanForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dataReturPermintaanPrintOutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataReturPermintaanPrintOutForm.Designer.cs">
+      <DependentUpon>dataReturPermintaanPrintOutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="dataSatuanDetailForm.cs">
       <SubType>Form</SubType>
@@ -912,6 +924,12 @@
     <Compile Include="ReportUserForm.Designer.cs">
       <DependentUpon>ReportUserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="dataReturPermintaanPrintOut.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dataReturPermintaanPrintOut.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SalesReceipt.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1041,6 +1059,9 @@
     <EmbeddedResource Include="dataPOForm.resx">
       <DependentUpon>dataPOForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dataReturForm.resx">
+      <DependentUpon>dataReturForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dataReturPenjualanForm.resx">
       <DependentUpon>dataReturPenjualanForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -1079,6 +1100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dataReturPermintaanForm.resx">
       <DependentUpon>dataReturPermintaanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataReturPermintaanPrintOutForm.resx">
+      <DependentUpon>dataReturPermintaanPrintOutForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dataSatuanDetailForm.resx">
       <DependentUpon>dataSatuanDetailForm.cs</DependentUpon>
@@ -1473,6 +1497,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportUserForm.resx">
       <DependentUpon>ReportUserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataReturPermintaanPrintOut.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>dataReturPermintaanPrintOut.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="SalesReceipt.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

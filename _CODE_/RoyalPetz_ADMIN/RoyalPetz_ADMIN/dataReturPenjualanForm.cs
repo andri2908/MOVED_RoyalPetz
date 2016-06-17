@@ -587,7 +587,7 @@ namespace RoyalPetz_ADMIN
 
                 if (originModuleID == globalConstants.RETUR_PENJUALAN)
                 {
-                    soQTY = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(SUM(PRODUCT_QTY), 0) FROM SALES_DETAIL WHERE SALES_INVOICE = '"+selectedSalesInvoice+"' AND PRODUCT_ID = '"+ selectedProductID+"'"));
+                    soQTY = getSOQty(selectedProductID);//Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(SUM(PRODUCT_QTY), 0) FROM SALES_DETAIL WHERE SALES_INVOICE = '"+selectedSalesInvoice+"' AND PRODUCT_ID = '"+ selectedProductID+"'"));
                     selectedRow.Cells["SOQty"].Value = soQTY;
 
                     disc1 = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(PRODUCT_DISC1, 0) FROM SALES_DETAIL WHERE SALES_INVOICE = '" + selectedSalesInvoice + "' AND PRODUCT_ID = '" + selectedProductID + "'"));
@@ -923,7 +923,7 @@ namespace RoyalPetz_ADMIN
                     throw internalEX;
 
                 // SAVE DETAIL TABLE
-                for (int i = 0; i < detailReturDataGridView.Rows.Count - 1; i++)
+                for (int i = 0; i < detailReturDataGridView.Rows.Count; i++)
                 {
                     hppValue = Convert.ToDouble(detailReturDataGridView.Rows[i].Cells["productPrice"].Value);
                     qtyValue = Convert.ToDouble(detailReturDataGridView.Rows[i].Cells["qty"].Value);
@@ -1226,7 +1226,7 @@ namespace RoyalPetz_ADMIN
             {
                 if (rdr.HasRows)
                 {
-                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : loadNamaUser");
+                    gutil.saveSystemDebugLog(globalConstants.MENU_RETUR_PENJUALAN, "CASHIER FORM : loadNamaUser");
 
                     rdr.Read();
                     nama = rdr.GetString("NAME");

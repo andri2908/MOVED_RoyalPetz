@@ -856,7 +856,27 @@ namespace RoyalPetz_ADMIN
 
             return result;
         }
-        
+
+        private void printOutReturPermintaan()
+        {
+            string returNo = noReturTextBox.Text;
+            string sqlCommandx = "";
+            string moduleType = "RETUR PEMBELIAN";
+
+            if (originModuleID == globalConstants.RETUR_PEMBELIAN_KE_SUPPLIER)
+                moduleType = "RETUR PEMBELIAN";
+            else
+                moduleType = "RETUR PERMINTAAN";
+
+            sqlCommandx = "SELECT '"+ moduleType + "' AS MODULE_TYPE, RPH.RP_ID, IFNULL(MS.SUPPLIER_FULL_NAME, 'HQ PUSAT'), RPH.RP_DATE, RPH.RP_TOTAL, MP.PRODUCT_NAME, RPD.PRODUCT_BASEPRICE, RPD.PRODUCT_QTY, RPD.RP_DESCRIPTION, RPD.RP_SUBTOTAL " +
+                                     "FROM RETURN_PURCHASE_HEADER RPH LEFT OUTER JOIN MASTER_SUPPLIER MS ON RPH.SUPPLIER_ID = MS.SUPPLIER_ID, MASTER_PRODUCT MP, RETURN_PURCHASE_DETAIL RPD " +
+                                     "WHERE RPD.RP_ID = RPH.RP_ID AND RPD.PRODUCT_ID = MP.PRODUCT_ID AND RPH.RP_ID = '"+returNo+"'";
+           
+            DS.writeXML(sqlCommandx, globalConstants.returPermintaanXML);
+            dataReturPermintaanPrintOutForm displayForm = new dataReturPermintaanPrintOutForm();
+            displayForm.ShowDialog(this);
+        }
+
         private void saveAndPrintButton_Click(object sender, EventArgs e)
         {
             GUTIL.saveSystemDebugLog(globalConstants.MENU_RETUR_PEMBELIAN, "ATTEMPT TO SAVE TO LOCAL DATA FIRST");
@@ -866,6 +886,8 @@ namespace RoyalPetz_ADMIN
                     GUTIL.saveUserChangeLog(globalConstants.MENU_RETUR_PEMBELIAN, globalConstants.CHANGE_LOG_INSERT, "CREATE NEW RETUR PEMBELIAN [" + noReturTextBox.Text + "] KE SUPPLIER [" + supplierCombo.Text + "]");
                 else
                     GUTIL.saveUserChangeLog(globalConstants.MENU_RETUR_PERMINTAAN, globalConstants.CHANGE_LOG_INSERT, "CREATE NEW RETUR PERMINTAAN [" + noReturTextBox.Text + "]");
+
+                printOutReturPermintaan();
 
                 GUTIL.showSuccess(GUTIL.INS);
                 GUTIL.ResetAllControls(this);
