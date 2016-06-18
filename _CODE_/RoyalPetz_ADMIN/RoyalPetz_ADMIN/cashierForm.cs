@@ -125,6 +125,17 @@ namespace RoyalPetz_ADMIN
                     pelangganForm.ShowDialog(this);
                     break;
 
+                case Keys.F5:
+                    if (DialogResult.Yes == MessageBox.Show("HAPUS DATA DATA DI LAYAR ?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                        clearUpScreen();
+                    break;
+
+                case Keys.F7:
+                    if (selectedsalesinvoice != "")
+                        if (DialogResult.Yes == MessageBox.Show("REPRINT INVOICE ?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                            reprintInvoice();
+                    break;
+
                 case Keys.F8:
                     gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : HOTKEY TO ADD NEW ROW PRESSED");
 
@@ -152,13 +163,6 @@ namespace RoyalPetz_ADMIN
                     discJualMaskedTextBox.Focus();
                     break;
 
-
-                case Keys.F5:
-                    MessageBox.Show("F5");
-                    break;
-                case Keys.F7:
-                    MessageBox.Show("F7");
-                    break;
                 case Keys.F10:
                     MessageBox.Show("F10");
                     break;
@@ -243,6 +247,12 @@ namespace RoyalPetz_ADMIN
             ghk_F4 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F4, this);
             ghk_F4.Register();
 
+            ghk_F5 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F5, this);
+            ghk_F5.Register();
+
+            ghk_F7 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F7, this);
+            ghk_F7.Register();
+
             ghk_F8 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F8, this);
             ghk_F8.Register();
 
@@ -264,11 +274,6 @@ namespace RoyalPetz_ADMIN
             ghk_CTRL_Enter = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Enter, this);
             ghk_CTRL_Enter.Register();
             
-            //ghk_F5 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F5, this);
-            //ghk_F5.Register();
-
-            //ghk_F7 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F7, this);
-            //ghk_F7.Register();
 
 
             //ghk_F10 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F10, this);
@@ -302,6 +307,8 @@ namespace RoyalPetz_ADMIN
             ghk_F2.Unregister();
             ghk_F3.Unregister();
             ghk_F4.Unregister();
+            ghk_F5.Unregister();
+            ghk_F7.Unregister();
             ghk_F8.Unregister();
             ghk_F9.Unregister();
             ghk_F11.Unregister();
@@ -312,8 +319,6 @@ namespace RoyalPetz_ADMIN
             ghk_CTRL_DEL.Unregister();
             ghk_CTRL_Enter.Unregister();
 
-            //ghk_F5.Unregister();
-            //ghk_F7.Unregister();
 
             //ghk_F10.Unregister();
             ////ghk_F12.Unregister();
@@ -323,6 +328,45 @@ namespace RoyalPetz_ADMIN
             //ghk_CTRL_U.Unregister();
 
             //ghk_ALT_F4.Unregister();
+        }
+
+        private void reprintInvoice()
+        {
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "RE-PRINT INVOICE");
+            PrintReceipt();
+        }
+
+        public void clearUpScreen()
+        {
+            isLoading = true;
+
+            //while (cashierDataGridView.Rows.Count > 0 )
+            //    cashierDataGridView.Rows.Remove(cashierDataGridView.Rows[0]);
+            cashierDataGridView.Rows.Clear();
+            isLoading = false;
+
+            salesQty.Clear();
+            disc1.Clear();
+            disc2.Clear();
+            discRP.Clear();
+            selectedPelangganID = 0;
+            globalTotalValue = 0;
+            discValue = 0;
+            totalLabel.Text = globalTotalValue.ToString("C2", culture);
+            gutil.ResetAllControls(this);
+
+            totalPenjualanTextBox.Text = globalTotalValue.ToString("C2", culture);
+            totalAfterDiscTextBox.Text = globalTotalValue.ToString("C2", culture);
+            uangKembaliTextBox.Text = "0";
+
+            customerComboBox.SelectedIndex = 0;
+            customerComboBox.Text = customerComboBox.Items[0].ToString();
+
+            paymentComboBox.SelectedIndex = 0;
+            paymentComboBox.Text = paymentComboBox.Items[0].ToString();
+
+            cashRadioButton.Checked = true;
+            creditRadioButton.Checked = false;
         }
 
         public void setCustomerID(int ID)
@@ -995,22 +1039,7 @@ namespace RoyalPetz_ADMIN
 
                     gutil.showSuccess(gutil.INS);
 
-                    isLoading = true;
-                    
-                    //while (cashierDataGridView.Rows.Count > 0 )
-                    //    cashierDataGridView.Rows.Remove(cashierDataGridView.Rows[0]);
-                    cashierDataGridView.Rows.Clear();
-                    isLoading = false;
-
-                    salesQty.Clear();
-                    disc1.Clear();
-                    disc2.Clear();
-                    discRP.Clear();
-                    selectedPelangganID = 0;
-                    globalTotalValue = 0;
-                    discValue = 0;
-                    totalLabel.Text = "Rp. 0";
-                    gutil.ResetAllControls(this);
+                    //clearUpScreen();
                 }
             }
         }
