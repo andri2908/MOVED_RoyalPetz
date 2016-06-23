@@ -1315,5 +1315,13 @@ namespace RoyalPetz_ADMIN
             dataReturForm displayedForm = new dataReturForm(globalConstants.RETUR_PENJUALAN);
             displayedForm.ShowDialog(this);
         }
+
+        private void toolStripMenuItem10_Click_1(object sender, EventArgs e)
+        {
+            Process p = new Process();
+            p.StartInfo.FileName = "USBLib.exe";
+            p.StartInfo.Arguments = "runAdmin";
+            p.Start();
+        }
     }
 }

@@ -89,6 +89,7 @@
             this.MENU_returPenjualan = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_returByInvoice = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_returByStokAdjustment = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
             this.MAINMENU_KEUANGAN = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_pengaturanNomorAkun = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_transaksi = new System.Windows.Forms.ToolStripMenuItem();
@@ -180,7 +181,7 @@
             this.SHORTCUT_returBeli = new System.Windows.Forms.ToolStripButton();
             this.SHORTCUT_returJual = new System.Windows.Forms.ToolStripButton();
             this.timerMessage = new System.Windows.Forms.Timer(this.components);
-            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -795,6 +796,15 @@
             this.MENU_returByStokAdjustment.Text = "Penyesuaian Stok";
             this.MENU_returByStokAdjustment.Click += new System.EventHandler(this.toolStripMenuItem23_Click);
             // 
+            // toolStripMenuItem9
+            // 
+            this.toolStripMenuItem9.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem9.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(226, 22);
+            this.toolStripMenuItem9.Text = "Reprint Retur";
+            this.toolStripMenuItem9.Click += new System.EventHandler(this.toolStripMenuItem9_Click_1);
+            // 
             // MAINMENU_KEUANGAN
             // 
             this.MAINMENU_KEUANGAN.BackColor = System.Drawing.Color.SteelBlue;
@@ -1307,7 +1317,8 @@
             this.toolStripMenuItem25.BackColor = System.Drawing.Color.SteelBlue;
             this.toolStripMenuItem25.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.laporanTabelMasterToolStripMenuItem,
-            this.generatorXMLToolStripMenuItem});
+            this.generatorXMLToolStripMenuItem,
+            this.toolStripMenuItem10});
             this.toolStripMenuItem25.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripMenuItem25.ForeColor = System.Drawing.Color.FloralWhite;
             this.toolStripMenuItem25.Name = "toolStripMenuItem25";
@@ -1701,14 +1712,14 @@
             this.timerMessage.Interval = 3600000;
             this.timerMessage.Tick += new System.EventHandler(this.timerMessage_Tick);
             // 
-            // toolStripMenuItem9
+            // toolStripMenuItem10
             // 
-            this.toolStripMenuItem9.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem9.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(226, 22);
-            this.toolStripMenuItem9.Text = "Reprint Retur";
-            this.toolStripMenuItem9.Click += new System.EventHandler(this.toolStripMenuItem9_Click_1);
+            this.toolStripMenuItem10.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem10.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem10.Name = "toolStripMenuItem10";
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(183, 22);
+            this.toolStripMenuItem10.Text = "USB Utility";
+            this.toolStripMenuItem10.Click += new System.EventHandler(this.toolStripMenuItem10_Click_1);
             // 
             // adminForm
             // 
@@ -1899,6 +1910,7 @@
         private System.Windows.Forms.ToolStripMenuItem pemasukanKasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem labaRugiHarianToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem10;
         //private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
     }
 }
