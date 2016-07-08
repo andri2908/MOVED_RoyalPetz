@@ -105,6 +105,12 @@
     <Compile Include="createConfigFileForm.Designer.cs">
       <DependentUpon>createConfigFileForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="crReportContainer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="crReportContainer.Designer.cs">
+      <DependentUpon>crReportContainer.cs</DependentUpon>
+    </Compile>
     <Compile Include="dataNomorAkun.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -262,6 +268,12 @@
       <DependentUpon>dataUserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DATA_ACCESS.cs" />
+    <Compile Include="dummyReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dummyReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="exportStockOpnameForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1044,6 +1056,9 @@
     <EmbeddedResource Include="createConfigFileForm.resx">
       <DependentUpon>createConfigFileForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="crReportContainer.resx">
+      <DependentUpon>crReportContainer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dataNomorAkun.resx">
       <DependentUpon>dataNomorAkun.cs</DependentUpon>
     </EmbeddedResource>
@@ -1124,6 +1139,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dataUserForm.resx">
       <DependentUpon>dataUserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dummyReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>dummyReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="exportStockOpnameForm.resx">
       <DependentUpon>exportStockOpnameForm.cs</DependentUpon>

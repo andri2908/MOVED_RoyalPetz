@@ -29,6 +29,9 @@ namespace RoyalPetz_ADMIN
 
         public loginForm()
         {
+            crReportContainer dummyReport = new crReportContainer();
+            dummyReport.ShowDialog();
+
             InitializeComponent();
         }
 

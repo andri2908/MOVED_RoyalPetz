@@ -57,7 +57,7 @@ namespace RoyalPetz_ADMIN
 
             DS.mySqlConnect();
 
-            using (rdr = DS.getData("SELECT * FROM MASTER_CATEGORY WHERE CATEGORY_ID=  " + selectedCategoryID))
+            using (rdr = DS.getData("SELECT IFNULL(CATEGORY_NAME, '') AS CATEGORY_NAME, IFNULL(CATEGORY_DESCRIPTION, '') AS CATEGORY_DESCRIPTION FROM MASTER_CATEGORY WHERE CATEGORY_ID =  " + selectedCategoryID))
             {
                 if (rdr.HasRows)
                 {
