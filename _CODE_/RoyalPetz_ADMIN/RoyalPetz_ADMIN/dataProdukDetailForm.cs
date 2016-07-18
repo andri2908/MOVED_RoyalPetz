@@ -511,6 +511,12 @@ namespace RoyalPetz_ADMIN
             }
 
             string kodeProdukValue = MySqlHelper.EscapeString(kodeProdukTextBox.Text);
+            if (kodeProdukValue.Length <= 0)
+            {
+                errorLabel.Text = "PRODUK ID TIDAK BOLEH KOSONG";
+                return false;
+            }
+
             if ((productIDExist(kodeProdukValue)) && (originModuleID != globalConstants.EDIT_PRODUK))
             {
                 errorLabel.Text = "PRODUK ID SUDAH ADA";

@@ -1229,11 +1229,22 @@ namespace RoyalPetz_ADMIN
             else
             {
                 double stockQty = 0;
+                double limitQty = 0;
 
-                stockQty = Convert.ToDouble(DS.getDataSingleValue("SELECT (PRODUCT_STOCK_QTY - PRODUCT_LIMIT_STOCK) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
+                stockQty = Convert.ToDouble(DS.getDataSingleValue("SELECT PRODUCT_STOCK_QTY FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
+                limitQty = Convert.ToDouble(DS.getDataSingleValue("SELECT PRODUCT_LIMIT_STOCK FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
 
                 if (stockQty >= qtyRequested)
                     result = true;
+
+                if (stockQty - qtyRequested <= limitQty)
+                {
+                    errorLabel.Text = productID + " MENCAPAI LIMIT";
+                }
+                else
+                {
+                    errorLabel.Text = "";
+                }
 
                 gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : CHECK STOCK QTY IS ENOUGH [" + stockQty + ", " + qtyRequested + "]");
             }
