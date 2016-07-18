@@ -34,11 +34,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.datetoPicker = new System.Windows.Forms.DateTimePicker();
             this.datefromPicker = new System.Windows.Forms.DateTimePicker();
+            this.MonthPicker = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.MonthPicker);
             this.groupBox1.Controls.Add(this.CariButton);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
@@ -95,6 +97,15 @@
             this.datefromPicker.Size = new System.Drawing.Size(200, 27);
             this.datefromPicker.TabIndex = 0;
             // 
+            // MonthPicker
+            // 
+            this.MonthPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.MonthPicker.Location = new System.Drawing.Point(205, 25);
+            this.MonthPicker.Name = "MonthPicker";
+            this.MonthPicker.Size = new System.Drawing.Size(234, 27);
+            this.MonthPicker.TabIndex = 5;
+            this.MonthPicker.Visible = false;
+            // 
             // ReportFinanceSearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -118,5 +129,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker datetoPicker;
         private System.Windows.Forms.DateTimePicker datefromPicker;
+        private System.Windows.Forms.DateTimePicker MonthPicker;
     }
 }

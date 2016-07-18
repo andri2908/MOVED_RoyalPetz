@@ -642,6 +642,18 @@
     <Compile Include="ReportMarginForm.Designer.cs">
       <DependentUpon>ReportMarginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportMonthlyBalance.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportMonthlyBalance.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportMonthlyBalanceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportMonthlyBalanceForm.Designer.cs">
+      <DependentUpon>ReportMonthlyBalanceForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportMutationPaid.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1347,6 +1359,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportMarginForm.resx">
       <DependentUpon>ReportMarginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportMonthlyBalance.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportMonthlyBalance.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportMonthlyBalanceForm.resx">
+      <DependentUpon>ReportMonthlyBalanceForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportMutationPaid.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

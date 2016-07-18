@@ -20,6 +20,7 @@ namespace RoyalPetz_ADMIN
         public const string REGEX_NUMBER_ONLY = @"^[0-9]*$";
         public const string REGEX_ALPHANUMERIC_ONLY = @"^[0-9A-Za-z]*$";
         public const string CUSTOM_DATE_FORMAT = "dd MMM yyyy";
+        public const string CUSTOM_MONTH_FORMAT = "MMMM yyyy";
         private const string logFileName = "system.log";
 
         public int INS = 1;
@@ -481,6 +482,8 @@ namespace RoyalPetz_ADMIN
 
         public void saveSystemDebugLog(int moduleID, string logMessage)
         {
+            return;
+
             string messageToWrite;
             string dateTimeLog = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
             string moduleName = "";

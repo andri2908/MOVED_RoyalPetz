@@ -188,6 +188,7 @@ namespace RoyalPetz_ADMIN
         public const int REPORT_FINANCE_IN = 741;
         public const int REPORT_FINANCE_OUT = 742;
         public const int REPORT_MARGIN = 743;
+        public const int REPORT_MONTHLY_BALANCE = 744;
 
         //XML file
         public const string AccountXML = "MasterAccount.xml";
@@ -222,6 +223,8 @@ namespace RoyalPetz_ADMIN
         public const string FinanceInXML = "FinanceIn.xml";
         public const string FinanceOutXML = "FinanceOut.xml";
         public const string MarginXML = "Margin.xml";
+        //public const string DailyBalanceXML = "DailyBalance.xml";
+        public const string MonthlyBalanceXML = "MonthlyBalance.xml";
 
         public const string SalesReturnXML = "SalesReturn.xml";
         public const string PurchaseReturnXML = "PurchaseReturn.xml";

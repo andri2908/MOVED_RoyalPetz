@@ -154,6 +154,7 @@
             this.masterSatuanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.masterUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generatorXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem74 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem27 = new System.Windows.Forms.ToolStripMenuItem();
             this.MAINMENU_TaxModule = new System.Windows.Forms.ToolStripMenuItem();
@@ -181,7 +182,7 @@
             this.SHORTCUT_returBeli = new System.Windows.Forms.ToolStripButton();
             this.SHORTCUT_returJual = new System.Windows.Forms.ToolStripButton();
             this.timerMessage = new System.Windows.Forms.Timer(this.components);
-            this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
+            this.labaRugiBulananToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -1156,7 +1157,8 @@
             this.rugiLabaPenjualanToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pengeluaranKasToolStripMenuItem,
             this.pemasukanKasToolStripMenuItem,
-            this.labaRugiHarianToolStripMenuItem});
+            this.labaRugiHarianToolStripMenuItem,
+            this.labaRugiBulananToolStripMenuItem});
             this.rugiLabaPenjualanToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.rugiLabaPenjualanToolStripMenuItem.Name = "rugiLabaPenjualanToolStripMenuItem";
             this.rugiLabaPenjualanToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
@@ -1435,6 +1437,15 @@
             this.generatorXMLToolStripMenuItem.Text = "Generator XML";
             this.generatorXMLToolStripMenuItem.Click += new System.EventHandler(this.generatorXMLToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem10
+            // 
+            this.toolStripMenuItem10.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem10.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem10.Name = "toolStripMenuItem10";
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(183, 22);
+            this.toolStripMenuItem10.Text = "USB Utility";
+            this.toolStripMenuItem10.Click += new System.EventHandler(this.toolStripMenuItem10_Click_1);
+            // 
             // toolStripMenuItem74
             // 
             this.toolStripMenuItem74.BackColor = System.Drawing.Color.SteelBlue;
@@ -1712,14 +1723,14 @@
             this.timerMessage.Interval = 3600000;
             this.timerMessage.Tick += new System.EventHandler(this.timerMessage_Tick);
             // 
-            // toolStripMenuItem10
+            // labaRugiBulananToolStripMenuItem
             // 
-            this.toolStripMenuItem10.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem10.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-            this.toolStripMenuItem10.Size = new System.Drawing.Size(183, 22);
-            this.toolStripMenuItem10.Text = "USB Utility";
-            this.toolStripMenuItem10.Click += new System.EventHandler(this.toolStripMenuItem10_Click_1);
+            this.labaRugiBulananToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.labaRugiBulananToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.labaRugiBulananToolStripMenuItem.Name = "labaRugiBulananToolStripMenuItem";
+            this.labaRugiBulananToolStripMenuItem.Size = new System.Drawing.Size(275, 22);
+            this.labaRugiBulananToolStripMenuItem.Text = "Laba/Rugi Bulanan";
+            this.labaRugiBulananToolStripMenuItem.Click += new System.EventHandler(this.labaRugiBulananToolStripMenuItem_Click);
             // 
             // adminForm
             // 
@@ -1911,6 +1922,7 @@
         private System.Windows.Forms.ToolStripMenuItem labaRugiHarianToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem10;
+        private System.Windows.Forms.ToolStripMenuItem labaRugiBulananToolStripMenuItem;
         //private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
     }
 }
