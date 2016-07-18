@@ -168,7 +168,8 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.cashierDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.cashierDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.cashierDataGridView.ColumnHeadersHeight = 50;
+            this.cashierDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.cashierDataGridView.Cursor = System.Windows.Forms.Cursors.Default;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FloralWhite;
@@ -197,7 +198,6 @@
             this.cashierDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.cashierDataGridView.Size = new System.Drawing.Size(983, 334);
             this.cashierDataGridView.TabIndex = 8;
-            this.cashierDataGridView.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.cashierDataGridView_CellLeave);
             this.cashierDataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.cashierDataGridView_CellValidated);
             // 
             // panel5

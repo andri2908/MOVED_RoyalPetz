@@ -80,7 +80,7 @@ namespace RoyalPetz_ADMIN
         public const int EDIT_AKUN = 502;
         public const int NEW_DJ = 503;
         public const int EDIT_DJ = 504;
-
+        public const int COPY_NOTA = 505;
 
         // THESE CONSTANTS ARE USED TO CHECK GROUP ACCESS MODULE
         // THE VALUES MUST BE TIED TO THE VALUES INSIDE THE DATABASE TABLE

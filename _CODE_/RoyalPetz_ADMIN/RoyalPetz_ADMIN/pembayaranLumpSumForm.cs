@@ -470,8 +470,17 @@ namespace RoyalPetz_ADMIN
                         }
                         else
                         {
-                            sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED, PAYMENT_DUE_DATE) VALUES " +
-                                            "(" + currentCreditID + ", STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y'), 1, " + gutil.validateDecimalNumericInput(actualPaymentAmount) + ", '" + paymentDescription + "', " + paymentConfirmed + ", STR_TO_DATE('" + paymentDueDateTime + "', '%d-%m-%Y'))";
+                            if (paymentConfirmed == 0)
+                            { 
+                                sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED, PAYMENT_DUE_DATE) VALUES " +
+                                                "(" + currentCreditID + ", STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y'), 1, " + gutil.validateDecimalNumericInput(actualPaymentAmount) + ", '" + paymentDescription + "', " + paymentConfirmed + ", STR_TO_DATE('" + paymentDueDateTime + "', '%d-%m-%Y'))";
+                            }
+                            else
+                            {
+                                sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED, PAYMENT_CONFIRMED_DATE, PAYMENT_DUE_DATE) VALUES " +
+                                                "(" + currentCreditID + ", STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y'), 1, " + gutil.validateDecimalNumericInput(actualPaymentAmount) + ", '" + paymentDescription + "', " + paymentConfirmed + ", STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y'), STR_TO_DATE('" + paymentDueDateTime + "', '%d-%m-%Y'))";
+                            }
+
                             gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : INSERT INTO PAYMENT CREDIT [" + currentCreditID + ", " + gutil.validateDecimalNumericInput(actualPaymentAmount) + "]");
                         }
 

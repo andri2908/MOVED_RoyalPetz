@@ -273,10 +273,18 @@ namespace RoyalPetz_ADMIN
             {
                 DS.mySqlConnect();
 
-                // SAVE HEADER TABLE
-                sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED, PAYMENT_DUE_DATE) VALUES " +
-                                    "(" + selectedCreditID + ", STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y'), " + paymentMethod + ", " + gutil.validateDecimalNumericInput(paymentNominal) + ", '" + paymentDescription + "', " + paymentConfirmed + ", STR_TO_DATE('" + paymentDueDateTime + "', '%d-%m-%Y'))";
-
+                if (paymentConfirmed == 0)
+                { 
+                    // SAVE HEADER TABLE
+                    sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED, PAYMENT_DUE_DATE) VALUES " +
+                                        "(" + selectedCreditID + ", STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y'), " + paymentMethod + ", " + gutil.validateDecimalNumericInput(paymentNominal) + ", '" + paymentDescription + "', " + paymentConfirmed + ", STR_TO_DATE('" + paymentDueDateTime + "', '%d-%m-%Y'))";
+                }
+                else
+                {
+                    // SAVE HEADER TABLE
+                    sqlCommand = "INSERT INTO PAYMENT_CREDIT (CREDIT_ID, PAYMENT_DATE, PM_ID, PAYMENT_NOMINAL, PAYMENT_DESCRIPTION, PAYMENT_CONFIRMED, PAYMENT_CONFIRMED_DATE, PAYMENT_DUE_DATE) VALUES " +
+                                        "(" + selectedCreditID + ", STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y'), " + paymentMethod + ", " + gutil.validateDecimalNumericInput(paymentNominal) + ", '" + paymentDescription + "', " + paymentConfirmed + ", STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y'), STR_TO_DATE('" + paymentDueDateTime + "', '%d-%m-%Y'))";
+                }
                 gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_PIUTANG, "INSERT INTO PAYMENT CREDIT [" + selectedCreditID + ", " + gutil.validateDecimalNumericInput(paymentNominal) + "]");
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
