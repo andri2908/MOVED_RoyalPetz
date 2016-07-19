@@ -793,7 +793,8 @@ namespace RoyalPetz_ADMIN
             string salesDateValue = "";
             bool addToTaxTable = false;
 
-            SODateTime = String.Format(culture, "{0:dd-MM-yyyy HH:mm}", DateTime.Now);
+            //SODateTime = String.Format(culture, "{0:dd-MM-yyyy HH:mm}", DateTime.Now);
+            SODateTime = gutil.getCustomStringFormatDate(DateTime.Now);
 
             gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ATTEMPT TO SAVE SALES DATA [" + SODateTime + "]");
 
@@ -991,7 +992,7 @@ namespace RoyalPetz_ADMIN
                         throw internalEX;
 
 
-                    if (selectedPaymentMethod == 0)
+                    if (salesTop == 1 && selectedPaymentMethod == 0)
                     {
                         // PAYMENT IN CASH THEREFORE ADDING THE AMOUNT OF CASH IN THE CASH REGISTER
                         // ADD A NEW ENTRY ON THE DAILY JOURNAL TO KEEP TRACK THE ADDITIONAL CASH AMOUNT 
@@ -2263,7 +2264,11 @@ namespace RoyalPetz_ADMIN
             Offset = Offset + add_offset;
             rect.Y = startY + Offset;
             //String underLine = "--------------------------------";  //32 character
+<<<<<<< HEAD
             String underLine = "-------------------------------";  //31 character
+=======
+            String underLine = "------------------------------";  //32 character
+>>>>>>> origin/master
             graphics.DrawString(underLine, new Font("Courier New", 9),
                      new SolidBrush(Color.Black), rect, sf);
             //end of header
@@ -2445,6 +2450,7 @@ namespace RoyalPetz_ADMIN
                         graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                                  new SolidBrush(Color.Black), rect, sf);
 
+<<<<<<< HEAD
                         //new line
                         Offset = Offset + add_offset;
                         rect.Y = startY + Offset;
@@ -2459,6 +2465,10 @@ namespace RoyalPetz_ADMIN
 
                         rectright.X = startRightX - 5;
                         rectright.Y = rect.Y;
+=======
+                        rectright.X = startRightX - 5;
+                        rectright.Y = rect.Y - 2;
+>>>>>>> origin/master
                         rectright.Width = colxwidth - 5;
                         sf.LineAlignment = StringAlignment.Far;
                         sf.Alignment = StringAlignment.Far;

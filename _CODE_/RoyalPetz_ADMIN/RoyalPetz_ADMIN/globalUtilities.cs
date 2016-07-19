@@ -535,5 +535,37 @@ namespace RoyalPetz_ADMIN
             return result;
         }
 
+        public string getCustomStringFormatDate(DateTime inputDateTime)
+        {
+            string result = "";
+
+            string dateInput = "";
+            string hourInput = "";
+            string minuteInput = "";
+
+            dateInput = String.Format(culture, "{0:dd-MM-yyyy}", inputDateTime);
+            hourInput = String.Format(culture, "{0:HH}", inputDateTime);
+            minuteInput = String.Format(culture, "{0:mm}", inputDateTime);
+
+            result = dateInput + " " + hourInput + ":" + minuteInput;
+
+            return result;
+        }
+
+        public string getCustomStringFormatTime(DateTime inputDateTime)
+        {
+            string result = "";
+
+            string hourInput = "";
+            string minuteInput = "";
+
+            hourInput = String.Format(culture, "{0:HH}", inputDateTime);
+            minuteInput = String.Format(culture, "{0:mm}", inputDateTime);
+
+            result = hourInput + ":" + minuteInput;
+
+            return result;
+        }
+
     }
 }

@@ -219,6 +219,7 @@ namespace RoyalPetz_ADMIN
             string sqlCommand = "";
             int paymentMethod = 0;
             string paymentDateTime = "";
+            string currentTime = "";
             DateTime selectedPaymentDate;
             string paymentDueDateTime = "";
             DateTime selectedPaymentDueDate;
@@ -227,11 +228,17 @@ namespace RoyalPetz_ADMIN
 
             string paymentDescription = "";
             int paymentConfirmed = 0;
-            
+
+            string dailyJournalDateTime = "";
+
             MySqlException internalEX = null;
 
             selectedPaymentDate = paymentDateTimePicker.Value;
+
             paymentDateTime = String.Format(culture, "{0:dd-MM-yyyy}", selectedPaymentDate);
+            currentTime = gutil.getCustomStringFormatTime(DateTime.Now);
+            dailyJournalDateTime = paymentDateTime + " " + currentTime;
+
             paymentNominal = Convert.ToDouble(paymentMaskedTextBox.Text);
             paymentMethod = paymentCombo.SelectedIndex + 1;
             paymentDescription = MySqlHelper.EscapeString(descriptionTextBox.Text);
@@ -320,7 +327,7 @@ namespace RoyalPetz_ADMIN
                     // PAYMENT IN CASH THEREFORE ADDING THE AMOUNT OF CASH IN THE CASH REGISTER
                     // ADD A NEW ENTRY ON THE DAILY JOURNAL TO KEEP TRACK THE ADDITIONAL CASH AMOUNT 
                     sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, BRANCH_ID, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
-                                                   "VALUES (1, STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y')" + ", " + gutil.validateDecimalNumericInput(paymentNominal) + ", " + branchID + ", 'PEMBAYARAN PIUTANG " + selectedSOInvoice + "', '" + gutil.getUserID() + "', 1)";
+                                                   "VALUES (1, STR_TO_DATE('" + dailyJournalDateTime + "', '%d-%m-%Y %H:%i')" + ", " + gutil.validateDecimalNumericInput(paymentNominal) + ", " + branchID + ", 'PEMBAYARAN PIUTANG " + selectedSOInvoice + "', '" + gutil.getUserID() + "', 1)";
 
                     gutil.saveSystemDebugLog(globalConstants.MENU_PEMBAYARAN_PIUTANG, "CASH TRANSACTION, INSERT INTO DAILY JOURNAL [" + gutil.validateDecimalNumericInput(paymentNominal) + "]");
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
