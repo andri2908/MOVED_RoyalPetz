@@ -793,7 +793,8 @@ namespace RoyalPetz_ADMIN
             string salesDateValue = "";
             bool addToTaxTable = false;
 
-            SODateTime = String.Format(culture, "{0:dd-MM-yyyy HH:mm}", DateTime.Now);
+            //SODateTime = String.Format(culture, "{0:dd-MM-yyyy HH:mm}", DateTime.Now);
+            SODateTime = gutil.getCustomStringFormatDate(DateTime.Now);
 
             gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ATTEMPT TO SAVE SALES DATA [" + SODateTime + "]");
 
@@ -991,7 +992,7 @@ namespace RoyalPetz_ADMIN
                         throw internalEX;
 
 
-                    if (selectedPaymentMethod == 0)
+                    if (salesTop == 1 && selectedPaymentMethod == 0)
                     {
                         // PAYMENT IN CASH THEREFORE ADDING THE AMOUNT OF CASH IN THE CASH REGISTER
                         // ADD A NEW ENTRY ON THE DAILY JOURNAL TO KEEP TRACK THE ADDITIONAL CASH AMOUNT 

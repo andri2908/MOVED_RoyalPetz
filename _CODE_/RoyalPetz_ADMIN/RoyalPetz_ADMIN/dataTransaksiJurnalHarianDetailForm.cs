@@ -284,6 +284,7 @@ namespace RoyalPetz_ADMIN
 
             int Account_ID = 0;
             String TglTrans = "";
+            String timeTrans = "";
             Double NominalAkun = 0;
             int branch_id = getBranchID();
             String deskripsi = "";
@@ -295,7 +296,11 @@ namespace RoyalPetz_ADMIN
 
             for (int rows = 0; rows < TransaksiAccountGridView.Rows.Count; rows++)
             {
-                TglTrans = String.Format(culture, "{0:dd-MM-yyyy HH:mm}", TransaksiAccountGridView.Rows[rows].Cells[1].Value.ToString());
+                TglTrans = String.Format(culture, "{0:dd-MM-yyyy}", TransaksiAccountGridView.Rows[rows].Cells[1].Value.ToString());
+                timeTrans = gutil.getCustomStringFormatTime(DateTime.Now);
+
+                TglTrans = TglTrans + " " + timeTrans;
+
                 Account_ID = Int32.Parse(TransaksiAccountGridView.Rows[rows].Cells[2].Value.ToString());
                 pm_id = Int32.Parse(TransaksiAccountGridView.Rows[rows].Cells[6].Value.ToString());
                 Double debet, credit;

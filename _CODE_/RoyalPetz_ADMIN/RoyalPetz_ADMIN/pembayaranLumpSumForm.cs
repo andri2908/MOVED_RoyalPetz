@@ -91,13 +91,13 @@ namespace RoyalPetz_ADMIN
 
             if (originModuleID == globalConstants.DATA_PIUTANG_MUTASI)
                 sqlCommand = "SELECT IFNULL(SUM(PAYMENT_NOMINAL), 0) FROM PAYMENT_CREDIT PC, PRODUCTS_MUTATION_HEADER PM, CREDIT C " +
-                                    "WHERE PC.CREDIT_ID = C.CREDIT_ID AND C.PM_INVOICE = PM.PM_INVOICE AND PC.PAYMENT_INVALID = 0 AND PM.BRANCH_ID_TO = " + selectedBranchID;
+                                    "WHERE PC.CREDIT_ID = C.CREDIT_ID AND C.PM_INVOICE = PM.PM_INVOICE AND C.CREDIT_PAID = 0 AND PC.PAYMENT_INVALID = 0 AND PM.BRANCH_ID_TO = " + selectedBranchID;
             else if (originModuleID == globalConstants.PEMBAYARAN_PIUTANG)
                 sqlCommand = "SELECT IFNULL(SUM(PAYMENT_NOMINAL), 0) FROM PAYMENT_CREDIT PC, SALES_HEADER SH, CREDIT C " +
-                                    "WHERE PC.CREDIT_ID = C.CREDIT_ID AND C.SALES_INVOICE = SH.SALES_INVOICE AND PC.PAYMENT_INVALID = 0 AND SH.CUSTOMER_ID = " + selectedCustomerID;
+                                    "WHERE PC.CREDIT_ID = C.CREDIT_ID AND C.SALES_INVOICE = SH.SALES_INVOICE AND C.CREDIT_PAID = 0 AND PC.PAYMENT_INVALID = 0 AND SH.CUSTOMER_ID = " + selectedCustomerID;
             else if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
                 sqlCommand = "SELECT IFNULL(SUM(PAYMENT_NOMINAL), 0) FROM PAYMENT_DEBT PD, PURCHASE_HEADER PH, DEBT D " +
-                                    "WHERE PD.DEBT_ID = D.DEBT_ID AND D.PURCHASE_INVOICE = PH.PURCHASE_INVOICE AND PD.PAYMENT_INVALID = 0 AND PH.SUPPLIER_ID = " + selectedSupplierID;
+                                    "WHERE PD.DEBT_ID = D.DEBT_ID AND D.PURCHASE_INVOICE = PH.PURCHASE_INVOICE AND D.DEBT_PAID = 0 AND PD.PAYMENT_INVALID = 0 AND PH.SUPPLIER_ID = " + selectedSupplierID;
 
             if (creditID > 0)
             { 
@@ -356,11 +356,17 @@ namespace RoyalPetz_ADMIN
             DateTime selectedPaymentDueDate;
 
             string paymentDescription = "";
+            string dailyJournalDateTime = "";
+            string currentTime = "";
 
             MySqlException internalEX = null;
 
             selectedPaymentDate = paymentDateTimePicker.Value;
             paymentDateTime = String.Format(culture, "{0:dd-MM-yyyy}", selectedPaymentDate);
+
+            currentTime = gutil.getCustomStringFormatTime(DateTime.Now);
+            dailyJournalDateTime = paymentDateTime + " " + currentTime;
+
             paymentNominal = Convert.ToDouble(paymentMaskedTextBox.Text);
             paymentDescription = MySqlHelper.EscapeString(descriptionTextBox.Text);
 
@@ -546,7 +552,7 @@ namespace RoyalPetz_ADMIN
                             // ADD A NEW ENTRY ON THE DAILY JOURNAL TO KEEP TRACK THE ADDITIONAL CASH AMOUNT 
                             noInvoice = DS.getDataSingleValue("SELECT IFNULL(SALES_INVOICE, '') FROM CREDIT WHERE CREDIT_ID = " + currentCreditID).ToString();
                             sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, BRANCH_ID, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
-                                                               "VALUES (1, STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y')" + ", " + actualPaymentAmount + ", " + branchID + ", 'PEMBAYARAN PIUTANG " + noInvoice + "', '" + gutil.getUserID() + "', 1)";
+                                                               "VALUES (1, STR_TO_DATE('" + dailyJournalDateTime + "', '%d-%m-%Y %H:%i')" + ", " + actualPaymentAmount + ", " + branchID + ", 'PEMBAYARAN PIUTANG " + noInvoice + "', '" + gutil.getUserID() + "', 1)";
 
                             gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : INSERT INTO DAILY JOURNAL [" + actualPaymentAmount + "]");
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
@@ -564,7 +570,7 @@ namespace RoyalPetz_ADMIN
                     // PAYMENT IN CASH THEREFORE ADDING THE AMOUNT OF CASH IN THE CASH REGISTER
                     // ADD A NEW ENTRY ON THE DAILY JOURNAL TO KEEP TRACK THE ADDITIONAL CASH AMOUNT 
                     sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, BRANCH_ID, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
-                                        "VALUES (1, STR_TO_DATE('" + paymentDateTime + "', '%d-%m-%Y')" + ", " + gutil.validateDecimalNumericInput(changeAmount) + ", " + selectedBranchID + ", 'SISA PIUTANG MUTASI" + noInvoice + "', '" + gutil.getUserID() + "', 1)";
+                                        "VALUES (1, STR_TO_DATE('" + dailyJournalDateTime + "', '%d-%m-%Y %H:%i')" + ", " + gutil.validateDecimalNumericInput(changeAmount) + ", " + selectedBranchID + ", 'SISA PIUTANG MUTASI" + noInvoice + "', '" + gutil.getUserID() + "', 1)";
 
                     gutil.saveSystemDebugLog(0, "PEMBAYARAN LUMPSUM : INSERT INTO DAILY JOURNAL [" + actualPaymentAmount + "]");
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
