@@ -714,6 +714,12 @@ namespace RoyalPetz_ADMIN
                     return false;
                 }
 
+                if (null == cashierDataGridView.Rows[i].Cells["productID"].Value)
+                {
+                    errorLabel.Text = "KODE PRODUK DI BARIS " + (i + 1) + " TIDAK VALID";
+                    return false;
+                }
+
                 if (!productIDValid(cashierDataGridView.Rows[i].Cells["productID"].Value.ToString()))
                 {
                     errorLabel.Text = "KODE PRODUK DI BARIS " + (i + 1) + " TIDAK VALID";
