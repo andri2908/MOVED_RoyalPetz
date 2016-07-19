@@ -482,7 +482,7 @@ namespace RoyalPetz_ADMIN
 
         public void saveSystemDebugLog(int moduleID, string logMessage)
         {
-            return;
+          //  return;
 
             string messageToWrite;
             string dateTimeLog = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
