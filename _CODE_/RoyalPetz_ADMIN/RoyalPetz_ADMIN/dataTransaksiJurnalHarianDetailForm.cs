@@ -105,7 +105,18 @@ namespace RoyalPetz_ADMIN
                 String pembayaran = carabayarcombobox.GetItemText(carabayarcombobox.SelectedItem);
                 String cabang = branchCombobox.GetItemText(branchCombobox.SelectedItem);
                 int pm_id = Int32.Parse(carabayarcombobox.SelectedValue.ToString());
-                int branch_id = Int32.Parse(branchCombobox.SelectedValue.ToString());
+
+                int branch_id = 0;// Int32.Parse(branchCombobox.SelectedValue.ToString());
+
+                if (Int32.TryParse(gutil.allTrim(branchCombobox.SelectedValue.ToString()), out branch_id))
+                {
+                }
+                else
+                {
+                    // ASSUME GUDANG PUSAT
+                    branch_id = 0;
+                }
+
                 //tryparse
                 if (Double.TryParse(gutil.allTrim(NominalTextbox.Text), out nominalakun))
                 {

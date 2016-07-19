@@ -2262,7 +2262,8 @@ namespace RoyalPetz_ADMIN
 
             Offset = Offset + add_offset;
             rect.Y = startY + Offset;
-            String underLine = "--------------------------------";  //32 character
+            //String underLine = "--------------------------------";  //32 character
+            String underLine = "------------------------------";  //32 character
             graphics.DrawString(underLine, new Font("Courier New", 9),
                      new SolidBrush(Color.Black), rect, sf);
             //end of header
@@ -2396,6 +2397,7 @@ namespace RoyalPetz_ADMIN
             double total_qty = 0;
             double product_qty = 0;
             double product_price = 0;
+            float startRightX = totrowwidth - colxwidth - startX;
 
             if (originModuleID != globalConstants.DUMMY_TRANSACTION_TAX)
             {
@@ -2433,6 +2435,7 @@ namespace RoyalPetz_ADMIN
                         graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                                  new SolidBrush(Color.Black), rect, sf);
 
+                        rectright.X = startRightX - 5;
                         rectright.Y = rect.Y - 2;
                         rectright.Width = colxwidth - 5;
                         sf.LineAlignment = StringAlignment.Far;
@@ -2461,16 +2464,17 @@ namespace RoyalPetz_ADMIN
             //rectcenter.Width = colxwidth;
             sf.LineAlignment = StringAlignment.Near;
             sf.Alignment = StringAlignment.Near;
-            ucapan = "JUMLAH  :";
+            ucapan = "JUMLAH  : " + total.ToString("C2", culture);
             //rectcenter.Y = rect.Y;
             graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                      new SolidBrush(Color.Black), rect, sf);
-            sf.LineAlignment = StringAlignment.Far;
-            sf.Alignment = StringAlignment.Far;
-            ucapan = total.ToString("C2", culture);
-            rectright.Y = rect.Y-2;
-            graphics.DrawString(ucapan, new Font("Courier New", fontSize),
-                     new SolidBrush(Color.Black), rectright, sf);
+            //sf.LineAlignment = StringAlignment.Far;
+            //sf.Alignment = StringAlignment.Far;
+            //ucapan = total.ToString("C2", culture);
+            //rectright.X = rectright.X - 5;
+            //rectright.Y = rect.Y-2;
+            //graphics.DrawString(ucapan, new Font("Courier New", fontSize),
+            //         new SolidBrush(Color.Black), rectright, sf);
 
             if (cashRadioButton.Checked == true)
             {
@@ -2480,18 +2484,19 @@ namespace RoyalPetz_ADMIN
                 //rectcenter.Width = colxwidth;
                 sf.LineAlignment = StringAlignment.Near;
                 sf.Alignment = StringAlignment.Near;
-                ucapan = "TUNAI   :";
+                double jumlahBayar = Convert.ToDouble(bayarTextBox.Text);
+                ucapan = "TUNAI   : " + jumlahBayar.ToString("C2", culture);
                 //rectcenter.Y = rect.Y;
                 graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                          new SolidBrush(Color.Black), rect, sf);
                 sf.LineAlignment = StringAlignment.Far;
                 sf.Alignment = StringAlignment.Far;
 
-                double jumlahBayar = Convert.ToDouble(bayarTextBox.Text);
-                ucapan = jumlahBayar.ToString("C2", culture);//"Rp." + String.Format("{0:C2}", bayarTextBox.Text);
-                rectright.Y = rect.Y-2;
-                graphics.DrawString(ucapan, new Font("Courier New", fontSize),
-                         new SolidBrush(Color.Black), rectright, sf);
+                //ucapan = jumlahBayar.ToString("C2", culture);//"Rp." + String.Format("{0:C2}", bayarTextBox.Text);
+                //rectright.X = rectright.X - 5;
+                //rectright.Y = rect.Y-2;
+                //graphics.DrawString(ucapan, new Font("Courier New", fontSize),
+                //         new SolidBrush(Color.Black), rectright, sf);
 
                 Offset = Offset + add_offset;
                 rect.Y = startY + Offset;
@@ -2499,16 +2504,17 @@ namespace RoyalPetz_ADMIN
                 //rectcenter.Width = colxwidth;
                 sf.LineAlignment = StringAlignment.Near;
                 sf.Alignment = StringAlignment.Near;
-                ucapan = "KEMBALI :";
+                ucapan = "KEMBALI : " + uangKembaliTextBox.Text;
                 //rectcenter.Y = rect.Y;
                 graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                          new SolidBrush(Color.Black), rect, sf);
-                sf.LineAlignment = StringAlignment.Far;
-                sf.Alignment = StringAlignment.Far;
-                ucapan = uangKembaliTextBox.Text;
-                rectright.Y = rect.Y-2;
-                graphics.DrawString(ucapan, new Font("Courier New", fontSize),
-                         new SolidBrush(Color.Black), rectright, sf);
+                //sf.LineAlignment = StringAlignment.Far;
+                //sf.Alignment = StringAlignment.Far;
+                //ucapan = uangKembaliTextBox.Text;
+                //rectright.X = rectright.X - 5;
+                //rectright.Y = rect.Y-2;
+                //graphics.DrawString(ucapan, new Font("Courier New", fontSize),
+                //         new SolidBrush(Color.Black), rectright, sf);
             }
 
             if (originModuleID != globalConstants.DUMMY_TRANSACTION_TAX)
@@ -2526,7 +2532,7 @@ namespace RoyalPetz_ADMIN
 
             Offset = Offset + add_offset + offset_plus;
             rect.Y = startY + Offset;
-            rect.X = startX + 15;
+            rect.X = startX + 10;
             rect.Width = totrowwidth;
             sf.LineAlignment = StringAlignment.Near;
             sf.Alignment = StringAlignment.Near;
