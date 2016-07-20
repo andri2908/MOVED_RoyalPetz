@@ -198,10 +198,12 @@
             this.cashierDataGridView.Size = new System.Drawing.Size(983, 334);
             this.cashierDataGridView.TabIndex = 8;
             this.cashierDataGridView.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.cashierDataGridView_CellEnter);
+            this.cashierDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.cashierDataGridView_CellFormatting);
             this.cashierDataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.cashierDataGridView_CellValidated);
             this.cashierDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.cashierDataGridView_RowsAdded);
             this.cashierDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cashierDataGridView_KeyDown);
             this.cashierDataGridView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cashierDataGridView_KeyPress);
+            this.cashierDataGridView.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cashierDataGridView_KeyUp);
             // 
             // panel5
             // 
@@ -405,6 +407,7 @@
             this.discJualMaskedTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.discJualMaskedTextBox.TextChanged += new System.EventHandler(this.discJualMaskedTextBox_TextChanged);
             this.discJualMaskedTextBox.Enter += new System.EventHandler(this.discJualMaskedTextBox_Enter);
+            this.discJualMaskedTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.discJualMaskedTextBox_KeyPress);
             this.discJualMaskedTextBox.Leave += new System.EventHandler(this.discJualMaskedTextBox_Leave);
             this.discJualMaskedTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.discJualMaskedTextBox_Validating);
             // 
@@ -419,6 +422,7 @@
             this.bayarTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.bayarTextBox.TextChanged += new System.EventHandler(this.bayarTextBox_TextChanged);
             this.bayarTextBox.Enter += new System.EventHandler(this.bayarTextBox_Enter);
+            this.bayarTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.bayarTextBox_KeyPress);
             this.bayarTextBox.Leave += new System.EventHandler(this.bayarTextBox_Leave);
             // 
             // uangKembaliTextBox

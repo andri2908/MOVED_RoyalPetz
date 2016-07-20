@@ -370,7 +370,7 @@ namespace RoyalPetz_ADMIN
 
             gutil.reArrangeTabOrder(this);
 
-            textBox1.Focus();
+            textBox1.Select();
         }
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)

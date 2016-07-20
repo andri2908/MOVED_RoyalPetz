@@ -24,6 +24,7 @@ namespace RoyalPetz_ADMIN
         private double globalTotalValue = 0;
         private List<string> detailQty = new List<string>();
         private List<string> detailHpp = new List<string>();
+        private List<string> subtotalList = new List<string>();
 
         private CultureInfo culture = new CultureInfo("id-ID");
         string previousInput = "";
@@ -33,6 +34,7 @@ namespace RoyalPetz_ADMIN
         private Hotkeys.GlobalHotkey ghk_F8;
         private Hotkeys.GlobalHotkey ghk_F9;
         private Hotkeys.GlobalHotkey ghk_F11;
+        private Hotkeys.GlobalHotkey ghk_DEL;
 
         private Hotkeys.GlobalHotkey ghk_CTRL_DEL;
         private Hotkeys.GlobalHotkey ghk_CTRL_ENTER;
@@ -75,12 +77,14 @@ namespace RoyalPetz_ADMIN
                 case Keys.F2:
                     if (detailPODataGridView.ReadOnly == false)
                     {
+                        PODateTimePicker.Focus();
                         barcodeForm displayBarcodeForm = new barcodeForm(this, globalConstants.NEW_PURCHASE_ORDER);
 
                         displayBarcodeForm.Top = this.Top + 5;
                         displayBarcodeForm.Left = this.Left + 5;//(Screen.PrimaryScreen.Bounds.Width / 2) - (displayBarcodeForm.Width / 2);
 
                         displayBarcodeForm.ShowDialog(this);
+                        detailPODataGridView.Focus();
                     }
                     break;
 
@@ -100,9 +104,23 @@ namespace RoyalPetz_ADMIN
                 case Keys.F11:
                     if (detailPODataGridView.ReadOnly == false)
                     {
+                        PODateTimePicker.Focus();
                         dataProdukForm displayProdukForm = new dataProdukForm(globalConstants.NEW_PURCHASE_ORDER, this);
                         displayProdukForm.ShowDialog(this);
+                        detailPODataGridView.Focus();
                     }
+                    break;
+
+                case Keys.Delete:
+                    if (detailPODataGridView.Rows.Count > 1)
+                        if (detailPODataGridView.ReadOnly == false)
+                        {
+                            if (DialogResult.Yes == MessageBox.Show("DELETE CURRENT ROW?", "WARNING", MessageBoxButtons.YesNo))
+                            {
+                                deleteCurrentRow();
+                                calculateTotal();
+                            }
+                        }
                     break;
             }
         }
@@ -155,8 +173,8 @@ namespace RoyalPetz_ADMIN
             ghk_F2 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F2, this);
             ghk_F2.Register();
 
-            ghk_F8 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F8, this);
-            ghk_F8.Register();
+            //ghk_F8 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F8, this);
+            //ghk_F8.Register();
 
             ghk_F9 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F9, this);
             ghk_F9.Register();
@@ -164,9 +182,11 @@ namespace RoyalPetz_ADMIN
             ghk_F11 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F11, this);
             ghk_F11.Register();
 
+            ghk_DEL = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Delete, this);
+            ghk_DEL.Register();
 
-            ghk_CTRL_DEL = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Delete, this);
-            ghk_CTRL_DEL.Register();
+            //ghk_CTRL_DEL = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Delete, this);
+            //ghk_CTRL_DEL.Register();
 
             ghk_CTRL_ENTER = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Enter, this);
             ghk_CTRL_ENTER.Register();
@@ -177,11 +197,13 @@ namespace RoyalPetz_ADMIN
         {
             ghk_F1.Unregister();
             ghk_F2.Unregister();
-            ghk_F8.Unregister();
+            //ghk_F8.Unregister();
             ghk_F9.Unregister();
             ghk_F11.Unregister();
 
-            ghk_CTRL_DEL.Unregister();
+            ghk_DEL.Unregister();
+
+            //ghk_CTRL_DEL.Unregister();
             ghk_CTRL_ENTER.Unregister();
         }
 
@@ -237,12 +259,15 @@ namespace RoyalPetz_ADMIN
             if (detailPODataGridView.ReadOnly == true)
                 return;
 
+            detailPODataGridView.AllowUserToAddRows = false;
+
             detailPODataGridView.Focus();
 
             // CHECK FOR EXISTING SELECTED ITEM
             for (i = 0; i < detailPODataGridView.Rows.Count && !found && !foundEmptyRow; i++)
             {
-                if (null != detailPODataGridView.Rows[i].Cells["productName"].Value)
+                if (null != detailPODataGridView.Rows[i].Cells["productName"].Value && 
+                    null != detailPODataGridView.Rows[i].Cells["productID"].Value && gUtil.isProductIDExist(detailPODataGridView.Rows[i].Cells["productID"].Value.ToString()))
                 {
                     if (detailPODataGridView.Rows[i].Cells["productName"].Value.ToString() == productName)
                     {
@@ -263,6 +288,7 @@ namespace RoyalPetz_ADMIN
                 {
                     detailQty[emptyRowIndex] = "0";
                     detailHpp[emptyRowIndex] = "0";
+                    subtotalList[emptyRowIndex] = "0";
                     rowSelectedIndex = emptyRowIndex;
                 }
                 else
@@ -270,6 +296,7 @@ namespace RoyalPetz_ADMIN
                     detailPODataGridView.Rows.Add();
                     detailQty.Add("0");
                     detailHpp.Add("0");
+                    subtotalList.Add("0");
                     rowSelectedIndex = detailPODataGridView.Rows.Count - 1;
                 }
             }
@@ -291,14 +318,16 @@ namespace RoyalPetz_ADMIN
                 detailQty[rowSelectedIndex] = currQty.ToString();
             }
 
-            hpp = Convert.ToDouble(selectedRow.Cells["HPP"].Value);
+            hpp = Convert.ToDouble(detailHpp[rowSelectedIndex]);
 
             subTotal = Math.Round((hpp * currQty), 2);
-            selectedRow.Cells["subTotal"].Value = subTotal;
+            selectedRow.Cells["subTotal"].Value = subTotal.ToString("N0", culture);
+            subtotalList[rowSelectedIndex] = subTotal.ToString();
 
             calculateTotal();
 
             detailPODataGridView.CurrentCell = selectedRow.Cells["qty"];
+            detailPODataGridView.AllowUserToAddRows = true;
         }
 
         private void fillInSupplierCombo()
@@ -478,11 +507,11 @@ namespace RoyalPetz_ADMIN
 
             for (int i = 0; i < detailPODataGridView.Rows.Count; i++)
             {
-                total = total + Convert.ToDouble(detailPODataGridView.Rows[i].Cells["subTotal"].Value);
+                total = total + Convert.ToDouble(subtotalList[i]);
             }
 
             globalTotalValue = total;
-            totalLabel.Text = total.ToString("C2", culture);
+            totalLabel.Text = total.ToString("C0", culture);
         }
 
         private void clearUpSomeRowContents(DataGridViewRow selectedRow, int rowSelectedIndex)
@@ -492,6 +521,7 @@ namespace RoyalPetz_ADMIN
             selectedRow.Cells["HPP"].Value = "0";
             detailHpp[rowSelectedIndex] = "0";
             selectedRow.Cells["subTotal"].Value = "0";
+            subtotalList[rowSelectedIndex] = "0";
             selectedRow.Cells["qty"].Value = "0";
             detailQty[rowSelectedIndex] = "0";
 
@@ -538,13 +568,14 @@ namespace RoyalPetz_ADMIN
 
                 hpp = getHPPValue(selectedProductID);
                 gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "updateSomeRowsContent, PRODUCT_BASE_PRICE [" + hpp + "]");
-                selectedRow.Cells["HPP"].Value = hpp.ToString();
+                selectedRow.Cells["HPP"].Value = hpp.ToString("N0", culture);
                 detailHpp[rowSelectedIndex] = hpp.ToString();
 
                 selectedRow.Cells["qty"].Value = 0;
                 detailQty[rowSelectedIndex] = "0";
 
                 selectedRow.Cells["subTotal"].Value = 0;
+                subtotalList[rowSelectedIndex] = "0";
 
                 gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "updateSomeRowsContent, attempt to calculate total");
 
@@ -608,6 +639,7 @@ namespace RoyalPetz_ADMIN
                 isLoading = true;
                 // reset subTotal Value and recalculate total
                 selectedRow.Cells["subtotal"].Value = 0;
+                subtotalList[rowSelectedIndex] = "0";
 
                 if (detailPODataGridView.CurrentCell.OwningColumn.Name == "qty")
                     detailQty[rowSelectedIndex] = "0";
@@ -658,7 +690,8 @@ namespace RoyalPetz_ADMIN
             productQty = Convert.ToDouble(detailQty[rowSelectedIndex]);
             subTotal = Math.Round((hppValue * productQty), 2);
 
-            selectedRow.Cells["subtotal"].Value = subTotal;
+            selectedRow.Cells["subtotal"].Value = subTotal.ToString("N0", culture);
+            subtotalList[rowSelectedIndex] = subTotal.ToString();
 
             calculateTotal();
 
@@ -742,6 +775,10 @@ namespace RoyalPetz_ADMIN
             gUtil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
 
             gUtil.reArrangeTabOrder(this);
+
+            detailHpp.Add("0");
+            detailQty.Add("0");
+            subtotalList.Add("0");
         }
 
         private void POinvoiceTextBox_TextChanged(object sender, EventArgs e)
@@ -1319,6 +1356,7 @@ namespace RoyalPetz_ADMIN
         {
             detailQty.Add("0");
             detailHpp.Add("0");
+            subtotalList.Add("0");
         }
 
         private void durationTextBox_Enter(object sender, EventArgs e)

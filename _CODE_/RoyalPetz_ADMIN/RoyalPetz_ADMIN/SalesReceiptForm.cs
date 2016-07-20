@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using CrystalDecisions.ReportSource;
 using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.ReportAppServer;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
@@ -41,6 +42,34 @@ namespace RoyalPetz_ADMIN
             }
         }
 
+        private void testPaper()
+        {
+            //⁠⁠⁠System.Drawing.Printing.PrintDocument pDoc = new System.Drawing.Printing.PrintDocument();
+            //CrystalDecisions.ReportAppServer.Controllers.PrintReportOptions rasPROpts = new CrystalDecisions.ReportAppServer.Controllers.PrintReportOptions();
+            //CrystalDecisions.ReportAppServer.ReportDefModel.PrintOptions newOpts = new CrystalDecisions.ReportAppServer.ReportDefModel.PrintOptions();
+
+            //newOpts.DissociatePageSizeAndPrinterPaperSize = false;
+
+            //if (rdoCurrent.Checked)
+            //{
+            //    newOpts.PrinterName = cboCurrentPrinters.SelectedItem.ToString();
+
+            //    newOpts.PaperSize = (CrPaperSizeEnum)cboCurrentPaperSizes.SelectedIndex;
+            //    newOpts.PaperSource = (CrPaperSourceEnum)cboCurrentPaperTrays.SelectedIndex;
+            //}
+            //else
+            //{
+            //    pDoc.PrinterSettings.PrinterName = cboDefaultPrinters.Text;
+
+            //    newOpts.PrinterName = cboDefaultPrinters.Text;
+            //    newOpts.PaperSize = (CrPaperSizeEnum)cboDefaultPaperTrays.SelectedIndex;
+            //    newOpts.PaperSource = (CrPaperSourceEnum)cboDefaultPaperTrays.SelectedIndex;
+            //}
+
+            //rptClientDoc.PrintOutputController.ModifyPrintOptions(newOpts);
+        }
+    
+
         private void SalesReceiptForm_Load(object sender, EventArgs e)
         {
             /*
@@ -57,6 +86,7 @@ namespace RoyalPetz_ADMIN
 
                 //prepare report for preview
                 SalesReceipt rptXMLReport = new SalesReceipt();
+                
                 CrystalDecisions.CrystalReports.Engine.TextObject txtReportHeader1, txtReportHeader2, txtReportHeader3, txtReportHeader4;
                 txtReportHeader1 = rptXMLReport.ReportDefinition.ReportObjects["NamaTokoLabel"] as TextObject;
                 txtReportHeader2 = rptXMLReport.ReportDefinition.ReportObjects["InfoTokoLabel"] as TextObject;

@@ -44,6 +44,8 @@ namespace RoyalPetz_ADMIN
         private CultureInfo culture = new CultureInfo("id-ID");
         private Button[] arrButton = new Button[3];
 
+        MaskedTextBox maskedTextBox;
+
         public permintaanProdukForm()
         {
             InitializeComponent();
@@ -787,6 +789,10 @@ namespace RoyalPetz_ADMIN
             stockQtyColumn.DefaultCellStyle.BackColor = Color.LightBlue;
             detailRequestOrderDataGridView.Columns.Add(stockQtyColumn);
 
+            //detailRequestOrderDataGridView.Columns["qty"].DefaultCellStyle.Format = "0,.###";
+            //detailRequestOrderDataGridView.Columns["qty"].DefaultCellStyle.Format = "#,#";
+            detailRequestOrderDataGridView.Columns["qty"].DefaultCellStyle.Format = "#,0.##";
+
             basePriceColumn.HeaderText = "HARGA POKOK";
             basePriceColumn.Name = "HPP";
             basePriceColumn.Width = 200;
@@ -798,6 +804,99 @@ namespace RoyalPetz_ADMIN
             subTotalColumn.Width = 200;
             subTotalColumn.ReadOnly = true;
             detailRequestOrderDataGridView.Columns.Add(subTotalColumn);
+
+            //this.maskedTextBox = new MaskedTextBox();
+            //this.maskedTextBox.Visible = false;
+            //this.detailRequestOrderDataGridView.Controls.Add(this.maskedTextBox);
+
+            //this.detailRequestOrderDataGridView.CellBeginEdit += new DataGridViewCellCancelEventHandler(dataGridView1_CellBeginEdit);
+            //this.detailRequestOrderDataGridView.CellEndEdit += new DataGridViewCellEventHandler(dataGridView1_CellEndEdit);
+            //this.detailRequestOrderDataGridView.Scroll += new ScrollEventHandler(dataGridView1_Scroll);
+        }
+
+        void dataGridView1_Scroll(object sender, ScrollEventArgs e)
+
+        {
+
+            if (this.maskedTextBox.Visible)
+
+            {
+                //we have to adjust the location for the MaskedTextBox while scrolling
+
+                Rectangle rect = this.detailRequestOrderDataGridView.GetCellDisplayRectangle(
+
+                    this.detailRequestOrderDataGridView.CurrentCell.ColumnIndex,
+
+                    this.detailRequestOrderDataGridView.CurrentCell.RowIndex, true);
+
+                this.maskedTextBox.Location = rect.Location;
+
+            }
+
+        }
+
+
+
+        void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+
+        {
+
+            if (e.ColumnIndex == this.detailRequestOrderDataGridView.Columns["qty"].Index) 
+
+            {
+
+                //string type = this.detailRequestOrderDataGridView["Type", e.RowIndex].Value.ToString();
+
+                //if (type == "Home Phone" || type == "Cell" || type == "Work")
+
+                {
+
+                    this.maskedTextBox.Mask = "000.000.000";
+
+                    Rectangle rect =
+                       this.detailRequestOrderDataGridView.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
+
+                    this.maskedTextBox.Location = rect.Location;
+
+                    this.maskedTextBox.Size = rect.Size;
+
+                    //this.maskedTextBox.Text = "1000";
+
+                    if (this.detailRequestOrderDataGridView[e.ColumnIndex, e.RowIndex].Value != null)
+
+                    {
+
+                        this.maskedTextBox.Text = this.detailRequestOrderDataGridView[e.ColumnIndex,
+                            e.RowIndex].Value.ToString();
+
+                    }
+
+                    this.maskedTextBox.Visible = true;
+
+                }
+
+                // if type is Email, do no show the MaskedTextBox
+
+            }
+
+        }
+
+
+
+        void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+
+        {
+
+            if (this.maskedTextBox.Visible)
+
+            {
+
+                this.detailRequestOrderDataGridView.CurrentCell.Value = this.maskedTextBox.Text;
+
+                this.maskedTextBox.Visible = false;
+
+            }
+
         }
 
         private void permintaanProdukForm_Load(object sender, EventArgs e)
@@ -1495,6 +1594,16 @@ namespace RoyalPetz_ADMIN
                 }
             }
 
+        }
+
+        private void detailRequestOrderDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 2 && e.RowIndex != this.detailRequestOrderDataGridView.NewRowIndex && null != e.Value)
+            {
+                double d = double.Parse(e.Value.ToString());
+                //e.Value = d.ToString("0.00##");#,0.##
+                e.Value = d.ToString("#,0.##");
+            }
         }
     }
 }

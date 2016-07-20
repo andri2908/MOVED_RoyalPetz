@@ -955,6 +955,7 @@ namespace RoyalPetz_ADMIN
             if (originModuleID != globalConstants.VIEW_PRODUCT_MUTATION && originModuleID != globalConstants.REPRINT_PERMINTAAN_BARANG)
                 qtyColumn.DefaultCellStyle.BackColor = Color.LightBlue;
             detailRequestOrderDataGridView.Columns.Add(qtyColumn);
+            detailRequestOrderDataGridView.Columns["qty"].DefaultCellStyle.Format = "###.###.###";
 
             hppColumn.Name = "hpp";
             hppColumn.HeaderText = "HARGA POKOK";
@@ -1571,7 +1572,7 @@ namespace RoyalPetz_ADMIN
                     if (null != detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value)
                     {
                         sqlCommand = "INSERT INTO PRODUCTS_MUTATION_DETAIL (PM_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, PRODUCT_QTY, PM_SUBTOTAL) VALUES " +
-                                            "('" + noMutasi + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["hpp"].Value) + ", " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["qty"].Value) + ", " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value) + ")";
+                                            "('" + noMutasi + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(productPriceList[i]) + ", " + Convert.ToDouble(detailRequestQtyApproved[i]) + ", " + Convert.ToDouble(subtotalList[i]) + ")";
 
                         using (StreamWriter outputFile = new StreamWriter(exportedFileName, true))
                         {
