@@ -31,6 +31,7 @@ namespace RoyalPetz_ADMIN
         private Hotkeys.GlobalHotkey ghk_F8;
         private Hotkeys.GlobalHotkey ghk_F9;
         private Hotkeys.GlobalHotkey ghk_F11;
+        private Hotkeys.GlobalHotkey ghk_DEL;
 
         private Hotkeys.GlobalHotkey ghk_CTRL_DEL;
         private Hotkeys.GlobalHotkey ghk_CTRL_ENTER;
@@ -39,6 +40,10 @@ namespace RoyalPetz_ADMIN
 
         private List<string> detailRequestQty = new List<string>();
         private List<string> detailHpp = new List<string>();
+        private List<string> productPriceList = new List<string>();
+        private List<string> subtotalList = new List<string>();
+
+
         string previousInput = "";
 
         globalUtilities gUtil = new globalUtilities();
@@ -61,13 +66,15 @@ namespace RoyalPetz_ADMIN
 
                 case Keys.F2:
                     if (detailGridView.ReadOnly == false)
-                    { 
+                    {
+                        PRDtPicker.Focus();
                         barcodeForm displayBarcodeForm = new barcodeForm(this, globalConstants.PENERIMAAN_BARANG);
 
                         displayBarcodeForm.Top = this.Top + 5;
                         displayBarcodeForm.Left = this.Left + 5;//(Screen.PrimaryScreen.Bounds.Width / 2) - (displayBarcodeForm.Width / 2);
 
                         displayBarcodeForm.ShowDialog(this);
+                        detailGridView.Focus();
                     }
                     break;
 
@@ -86,10 +93,23 @@ namespace RoyalPetz_ADMIN
 
                 case Keys.F11:
                     if (detailGridView.ReadOnly == false)
-                    { 
+                    {
+                        PRDtPicker.Focus();
                         dataProdukForm displayProdukForm = new dataProdukForm(globalConstants.PENERIMAAN_BARANG, this);
                         displayProdukForm.ShowDialog(this);
+                        detailGridView.Focus();
                     }
+                    break;
+
+                case Keys.Delete:
+                    if (detailGridView.Rows.Count > 1)
+                        if (detailGridView.ReadOnly == false)
+                            if ((detailGridView.Focused))
+                                if (DialogResult.Yes == MessageBox.Show("DELETE CURRENT ROW?", "WARNING", MessageBoxButtons.YesNo))
+                                {
+                                    deleteCurrentRow();
+                                    calculateTotal();
+                                }
                     break;
             }
         }
@@ -152,9 +172,11 @@ namespace RoyalPetz_ADMIN
             ghk_F11 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F11, this);
             ghk_F11.Register();
 
+            ghk_DEL = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Delete, this);
+            ghk_DEL.Register();
 
-            ghk_CTRL_DEL = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Delete, this);
-            ghk_CTRL_DEL.Register();
+            //ghk_CTRL_DEL = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Delete, this);
+            //ghk_CTRL_DEL.Register();
 
             ghk_CTRL_ENTER = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Enter, this);
             ghk_CTRL_ENTER.Register();
@@ -168,8 +190,9 @@ namespace RoyalPetz_ADMIN
             ghk_F8.Unregister();
             ghk_F9.Unregister();
             ghk_F11.Unregister();
+            ghk_DEL.Unregister();
 
-            ghk_CTRL_DEL.Unregister();
+            // ghk_CTRL_DEL.Unregister();
             ghk_CTRL_ENTER.Unregister();
         }
 
@@ -180,7 +203,7 @@ namespace RoyalPetz_ADMIN
 
             for (int i=0;i<detailGridView.Rows.Count && allowToAdd;i++)
             {
-                if (null != detailGridView.Rows[i].Cells["productID"].Value)
+                if (null != detailGridView.Rows[i].Cells["productID"].Value )
                 {
                     if (!gUtil.isProductIDExist(detailGridView.Rows[i].Cells["productID"].Value.ToString()))
                     {
@@ -228,7 +251,9 @@ namespace RoyalPetz_ADMIN
             // CHECK FOR EXISTING SELECTED ITEM
             for (i = 0; i < detailGridView.Rows.Count && !found && !foundEmptyRow; i++)
             {
-                if (null != detailGridView.Rows[i].Cells["productName"].Value)
+                if (null != detailGridView.Rows[i].Cells["productName"].Value &&
+                    null != detailGridView.Rows[i].Cells["productID"].Value &&
+                    gUtil.isProductIDExist(detailGridView.Rows[i].Cells["productID"].Value.ToString()))
                 { 
                     if (detailGridView.Rows[i].Cells["productName"].Value.ToString() == productName)
                     {
@@ -249,6 +274,7 @@ namespace RoyalPetz_ADMIN
                 {
                     detailRequestQty[emptyRowIndex] = "0";
                     detailHpp[emptyRowIndex] = "0";
+                    subtotalList[emptyRowIndex] = "0";
                     rowSelectedIndex = emptyRowIndex;
                 }
                 else
@@ -256,6 +282,7 @@ namespace RoyalPetz_ADMIN
                     detailGridView.Rows.Add();
                     detailRequestQty.Add("0");
                     detailHpp.Add("0");
+                    subtotalList.Add("0");
                     rowSelectedIndex = detailGridView.Rows.Count - 1;
                 }
             }
@@ -277,10 +304,11 @@ namespace RoyalPetz_ADMIN
                 detailRequestQty[rowSelectedIndex] = currQty.ToString();
             }
 
-            hpp = Convert.ToDouble(selectedRow.Cells["hpp"].Value);
+            hpp = Convert.ToDouble(detailHpp[rowSelectedIndex]);
 
             subTotal = Math.Round((hpp * currQty), 2);
-            selectedRow.Cells["subtotal"].Value = subTotal;
+            selectedRow.Cells["subtotal"].Value = subTotal.ToString("N0", culture);
+            subtotalList[rowSelectedIndex] = subTotal.ToString();
 
             calculateTotal();
 
@@ -434,7 +462,7 @@ namespace RoyalPetz_ADMIN
         {
             MySqlDataReader rdr;
             string sqlCommand = "";
-
+            double tempVal = 0;
             switch (originModuleId)
             {
                 case globalConstants.PENERIMAAN_BARANG_DARI_MUTASI:
@@ -448,8 +476,22 @@ namespace RoyalPetz_ADMIN
                             {
                                 detailGridView.Rows.Add(rdr.GetString("PRODUCT_ID"), rdr.GetString("PRODUCT_NAME"), rdr.GetString("PRODUCT_QTY"), rdr.GetString("PRODUCT_BASE_PRICE"), rdr.GetString("PRODUCT_QTY"), rdr.GetString("PM_SUBTOTAL"));
 
-                                detailRequestQty.Add(rdr.GetString("PRODUCT_QTY"));
-                                detailHpp.Add(rdr.GetString("PRODUCT_BASE_PRICE"));
+                                detailRequestQty[detailGridView.Rows.Count - 1] = rdr.GetString("PRODUCT_QTY");
+                                detailHpp[detailGridView.Rows.Count - 1] = rdr.GetString("PRODUCT_BASE_PRICE");
+                                subtotalList[detailGridView.Rows.Count - 1] = rdr.GetString("PM_SUBTOTAL");
+
+                                tempVal = Convert.ToDouble(rdr.GetString("PRODUCT_BASE_PRICE"));
+                                detailGridView.Rows[detailGridView.Rows.Count - 1].Cells["hpp"].Value = tempVal.ToString("N0", culture);
+
+                                tempVal = Convert.ToDouble(rdr.GetString("PRODUCT_QTY"));
+                                detailGridView.Rows[detailGridView.Rows.Count - 1].Cells["qtyReceived"].Value = tempVal.ToString("N0", culture);
+                                detailGridView.Rows[detailGridView.Rows.Count - 1].Cells["qtyRequest"].Value = tempVal.ToString("N0", culture);
+
+                                tempVal = Convert.ToDouble(rdr.GetString("PM_SUBTOTAL"));
+                                detailGridView.Rows[detailGridView.Rows.Count - 1].Cells["subtotal"].Value = tempVal.ToString("N0", culture);
+
+                                //detailRequestQty.Add(rdr.GetString("PRODUCT_QTY"));
+                                //detailHpp.Add(rdr.GetString("PRODUCT_BASE_PRICE"));
                             }
                         }
                     }
@@ -466,8 +508,22 @@ namespace RoyalPetz_ADMIN
                             {
                                 detailGridView.Rows.Add(rdr.GetString("PRODUCT_ID"), rdr.GetString("PRODUCT_NAME"), rdr.GetString("PRODUCT_QTY"), rdr.GetString("PRODUCT_PRICE"), rdr.GetString("PRODUCT_QTY"), rdr.GetString("PURCHASE_SUBTOTAL"));
 
-                                detailRequestQty.Add(rdr.GetString("PRODUCT_QTY"));
-                                detailHpp.Add(rdr.GetString("PRODUCT_PRICE"));
+                                detailRequestQty[detailGridView.Rows.Count - 1] = rdr.GetString("PRODUCT_QTY");
+                                detailHpp[detailGridView.Rows.Count - 1] = rdr.GetString("PRODUCT_BASE_PRICE");
+                                subtotalList[detailGridView.Rows.Count - 1] = rdr.GetString("PM_SUBTOTAL");
+
+                                tempVal = Convert.ToDouble(rdr.GetString("PRODUCT_BASE_PRICE"));
+                                detailGridView.Rows[detailGridView.Rows.Count - 1].Cells["hpp"].Value = tempVal.ToString("N0", culture);
+
+                                tempVal = Convert.ToDouble(rdr.GetString("PRODUCT_QTY"));
+                                detailGridView.Rows[detailGridView.Rows.Count - 1].Cells["qtyReceived"].Value = tempVal.ToString("N0", culture);
+                                detailGridView.Rows[detailGridView.Rows.Count - 1].Cells["qtyRequest"].Value = tempVal.ToString("N0", culture);
+
+                                tempVal = Convert.ToDouble(rdr.GetString("PM_SUBTOTAL"));
+                                detailGridView.Rows[detailGridView.Rows.Count - 1].Cells["subtotal"].Value = tempVal.ToString("N0", culture);
+
+                                //detailRequestQty.Add(rdr.GetString("PRODUCT_QTY"));
+                                //detailHpp.Add(rdr.GetString("PRODUCT_PRICE"));
                             }
                         }
                     }
@@ -613,6 +669,10 @@ namespace RoyalPetz_ADMIN
             
             gUtil.reArrangeTabOrder(this);
 
+            detailHpp.Add("0");
+            detailRequestQty.Add("0");
+            productPriceList.Add("0");
+            subtotalList.Add("0");
         }
 
         private double getHPPValue(string productID)
@@ -732,7 +792,7 @@ namespace RoyalPetz_ADMIN
 
                 hpp = getHPPValue(selectedProductID);
                 gUtil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ComboBox_SelectedIndexChanged, PRODUCT_BASE_PRICE [" + hpp + "]");
-                selectedRow.Cells["hpp"].Value = hpp.ToString();
+                selectedRow.Cells["hpp"].Value = hpp.ToString("N0", culture);
                 detailHpp[rowSelectedIndex] = hpp.ToString();
 
                 selectedRow.Cells["qtyReceived"].Value = 0;
@@ -876,18 +936,19 @@ namespace RoyalPetz_ADMIN
                 {
                     //changes on hpp
                     hppValue = Convert.ToDouble(dataGridViewTextBoxEditingControl.Text);
-                    productQty = Convert.ToDouble(selectedRow.Cells["qtyReceived"].Value);
+                    productQty = Convert.ToDouble(detailRequestQty[rowSelectedIndex]);
                 }
                 else
                 {
                     //changes on qty
                     productQty = Convert.ToDouble(dataGridViewTextBoxEditingControl.Text);
-                    hppValue = Convert.ToDouble(selectedRow.Cells["hpp"].Value);
+                    hppValue = Convert.ToDouble(detailHpp[rowSelectedIndex]);
                 }
 
                 subTotal = Math.Round((hppValue * productQty), 2);
 
-                selectedRow.Cells["subtotal"].Value = subTotal;
+                selectedRow.Cells["subtotal"].Value = subTotal.ToString("N0", culture);
+                subtotalList[rowSelectedIndex] = subTotal.ToString();
 
                 calculateTotal();
             }
@@ -905,11 +966,11 @@ namespace RoyalPetz_ADMIN
             double total = 0;
             for (int i =0;i<detailGridView.Rows.Count;i++)
             {
-                total = total + Convert.ToDouble(detailGridView.Rows[i].Cells["subtotal"].Value);
+                total = total + Convert.ToDouble(subtotalList[i]);
             }
 
             globalTotalValue = total;
-            labelAcceptValue.Text = globalTotalValue.ToString("c", culture);
+            labelAcceptValue.Text = globalTotalValue.ToString("C", culture);
         }
 
         private bool isNoPRExist()
@@ -959,18 +1020,18 @@ namespace RoyalPetz_ADMIN
                 return false;
             }
 
-            for (i = 0; i < detailGridView.Rows.Count && dataExist; i ++)
-            {
-                if (null != detailGridView.Rows[i].Cells["productID"].Value)
-                    dataExist = gUtil.isProductIDExist(detailGridView.Rows[i].Cells["productID"].Value.ToString());
-                else
-                    dataExist = false;
-            }
-            if (!dataExist)
-            {
-                errorLabel.Text = "PRODUCT ID PADA BARIS ["+ i +"] INVALID";
-                return false;
-            }
+            //for (i = 0; i < detailGridView.Rows.Count && dataExist; i ++)
+            //{
+            //    if (null != detailGridView.Rows[i].Cells["productID"].Value)
+            //        dataExist = gUtil.isProductIDExist(detailGridView.Rows[i].Cells["productID"].Value.ToString());
+            //    else
+            //        dataExist = false;
+            //}
+            //if (!dataExist)
+            //{
+            //    errorLabel.Text = "PRODUCT ID PADA BARIS ["+ i +"] INVALID";
+            //    return false;
+            //}
 
             if (globalTotalValue <= 0)
             {
@@ -1563,6 +1624,10 @@ namespace RoyalPetz_ADMIN
 
         private void detailGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
+            detailHpp.Add("0");
+            detailRequestQty.Add("0");
+            productPriceList.Add("0");
+            subtotalList.Add("0");
         }
 
         private void durationTextBox_Enter(object sender, EventArgs e)
@@ -1615,6 +1680,56 @@ namespace RoyalPetz_ADMIN
                     {
                         clearUpSomeRowContents(selectedRow, e.RowIndex);
                     }
+                }
+            }
+            else if (cell.OwningColumn.Name == "qtyReceived")
+            {
+                double tempValue = 0;
+                if (null != selectedRow.Cells["productID"].Value && gUtil.isProductIDExist(selectedRow.Cells["productID"].Value.ToString()))
+                {
+                    //isLoadingNumFormat = true;
+                    tempValue = Convert.ToDouble(detailRequestQty[e.RowIndex]);
+                    selectedRow.Cells["qtyReceived"].Value = tempValue.ToString("N0", culture);
+                    //isLoadingNumFormat = false;
+                }
+            }
+            else if (cell.OwningColumn.Name == "hpp")
+            {
+                double tempValue = 0;
+                if (null != selectedRow.Cells["productID"].Value && gUtil.isProductIDExist(selectedRow.Cells["productID"].Value.ToString()))
+                {
+                    //isLoadingNumFormat = true;
+                    tempValue = Convert.ToDouble(detailHpp[e.RowIndex]);
+                    selectedRow.Cells["hpp"].Value = tempValue.ToString("N0", culture);
+                    //isLoadingNumFormat = false;
+                }
+            }
+        }
+
+        private void detailGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = detailGridView[e.ColumnIndex, e.RowIndex];
+            DataGridViewRow selectedRow = detailGridView.Rows[e.RowIndex];
+
+            if (isLoading)
+                return;
+
+            if (cell.OwningColumn.Name == "qtyReceived")
+            {
+                if (null != selectedRow.Cells["productID"].Value && gUtil.isProductIDExist(selectedRow.Cells["productID"].Value.ToString()))
+                {
+                    //isLoading = true;
+                    selectedRow.Cells["qtyReceived"].Value = detailRequestQty[e.RowIndex];
+                    //isLoading = false;
+                }
+            }
+            else if (cell.OwningColumn.Name == "hpp")
+            {
+                if (null != selectedRow.Cells["productID"].Value && gUtil.isProductIDExist(selectedRow.Cells["productID"].Value.ToString()))
+                {
+                    //isLoading = true;
+                    selectedRow.Cells["hpp"].Value = detailHpp[e.RowIndex];
+                    //isLoading = false;
                 }
             }
         }

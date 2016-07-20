@@ -24,6 +24,9 @@ namespace RoyalPetz_ADMIN
         private bool isLoading = false;
 
         private List<string> detailQty = new List<string>();
+        private List<string> productPriceList = new List<string>();
+        private List<string> subtotalList = new List<string>();
+
         private CultureInfo culture = new CultureInfo("id-ID");
 
         private Hotkeys.GlobalHotkey ghk_F1;
@@ -31,6 +34,7 @@ namespace RoyalPetz_ADMIN
         private Hotkeys.GlobalHotkey ghk_F8;
         private Hotkeys.GlobalHotkey ghk_F9;
         private Hotkeys.GlobalHotkey ghk_F11;
+        private Hotkeys.GlobalHotkey ghk_DEL;
 
         private Hotkeys.GlobalHotkey ghk_CTRL_DEL;
         private Hotkeys.GlobalHotkey ghk_CTRL_ENTER;
@@ -156,12 +160,15 @@ namespace RoyalPetz_ADMIN
                     break;
 
                 case Keys.F2:
+                        ReturDtPicker_1.Focus();
+
                         barcodeForm displayBarcodeForm = new barcodeForm(this, globalConstants.RETUR_PEMBELIAN);
 
                         displayBarcodeForm.Top = this.Top + 5;
                         displayBarcodeForm.Left = this.Left + 5;//(Screen.PrimaryScreen.Bounds.Width / 2) - (displayBarcodeForm.Width / 2);
 
                         displayBarcodeForm.ShowDialog(this);
+                        detailReturDataGridView.Focus();
                     break;
 
                 case Keys.F8:
@@ -174,8 +181,24 @@ namespace RoyalPetz_ADMIN
                     break;
 
                 case Keys.F11:
+                        ReturDtPicker_1.Focus();
+
                         dataProdukForm displayProdukForm = new dataProdukForm(originModuleID, this);
                         displayProdukForm.ShowDialog(this);
+
+                        detailReturDataGridView.Focus();
+                    break;
+
+                case Keys.Delete:
+                    if (detailReturDataGridView.ReadOnly == false)
+                    {
+                        if (detailReturDataGridView.Focused)
+                            if (DialogResult.Yes == MessageBox.Show("DELETE CURRENT ROW?", "WARNING", MessageBoxButtons.YesNo))
+                            {
+                                deleteCurrentRow();
+                                calculateTotal();
+                            }
+                    }
                     break;
             }
         }
@@ -227,8 +250,8 @@ namespace RoyalPetz_ADMIN
             ghk_F2 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F2, this);
             ghk_F2.Register();
 
-            ghk_F8 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F8, this);
-            ghk_F8.Register();
+            //ghk_F8 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F8, this);
+            //ghk_F8.Register();
 
             ghk_F9 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F9, this);
             ghk_F9.Register();
@@ -236,9 +259,11 @@ namespace RoyalPetz_ADMIN
             ghk_F11 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F11, this);
             ghk_F11.Register();
 
+            ghk_DEL = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Delete, this);
+            ghk_DEL.Register();
 
-            ghk_CTRL_DEL = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Delete, this);
-            ghk_CTRL_DEL.Register();
+            //ghk_CTRL_DEL = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Delete, this);
+            //ghk_CTRL_DEL.Register();
 
             ghk_CTRL_ENTER = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Enter, this);
             ghk_CTRL_ENTER.Register();
@@ -249,11 +274,11 @@ namespace RoyalPetz_ADMIN
         {
             ghk_F1.Unregister();
             ghk_F2.Unregister();
-            ghk_F8.Unregister();
+            //ghk_F8.Unregister();
             ghk_F9.Unregister();
             ghk_F11.Unregister();
 
-            ghk_CTRL_DEL.Unregister();
+            //ghk_CTRL_DEL.Unregister();
             ghk_CTRL_ENTER.Unregister();
         }
 
@@ -313,8 +338,12 @@ namespace RoyalPetz_ADMIN
             // CHECK FOR EXISTING SELECTED ITEM
             for (i = 0; i < detailReturDataGridView.Rows.Count && !found && !foundEmptyRow; i++)
             {
-                if (null != detailReturDataGridView.Rows[i].Cells["productName"].Value)
-                {
+                if (
+                    null != detailReturDataGridView.Rows[i].Cells["productName"].Value && 
+                    null != detailReturDataGridView.Rows[i].Cells["productID"].Value 
+                    && GUTIL.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString())
+                    )               
+               {
                     if (detailReturDataGridView.Rows[i].Cells["productName"].Value.ToString() == productName)
                     {
                         found = true;
@@ -387,11 +416,11 @@ namespace RoyalPetz_ADMIN
 
             for (int i = 0; i < detailReturDataGridView.Rows.Count; i++)
             {
-                total = total + Convert.ToDouble(detailReturDataGridView.Rows[i].Cells["subTotal"].Value);
+                total = total + Convert.ToDouble(subtotalList[i]);
             }
 
             globalTotalValue = total;
-            totalLabel.Text = total.ToString("C2", culture);//"Rp. " + total.ToString();
+            totalLabel.Text = total.ToString("C0", culture);//"Rp. " + total.ToString();
         }
 
         private void setTextBoxCustomSource(TextBox textBox)
@@ -496,12 +525,14 @@ namespace RoyalPetz_ADMIN
 
                 hpp = getHPPValue(selectedProductID);
                 GUTIL.saveSystemDebugLog(globalConstants.MENU_RETUR_PERMINTAAN, "updateSomeRowsContent, PRODUCT_BASE_PRICE [" + hpp + "]");
-                selectedRow.Cells["hpp"].Value = hpp.ToString();
+                selectedRow.Cells["hpp"].Value = hpp.ToString("N0", culture);
+                productPriceList[rowSelectedIndex] = hpp.ToString();
 
                 selectedRow.Cells["qty"].Value = 0;
                 detailQty[rowSelectedIndex] = "0";
 
                 selectedRow.Cells["subTotal"].Value = 0;
+                subtotalList[rowSelectedIndex] = "0";
 
                 GUTIL.saveSystemDebugLog(globalConstants.MENU_RETUR_PERMINTAAN, "updateSomeRowsContent, attempt to calculate total");
 
@@ -629,11 +660,12 @@ namespace RoyalPetz_ADMIN
                 //changes on qty
                 productQty = Convert.ToDouble(dataGridViewTextBoxEditingControl.Text);
                 if (null != selectedRow.Cells["hpp"].Value)
-                    hppValue = Convert.ToDouble(selectedRow.Cells["hpp"].Value);
+                    hppValue = Convert.ToDouble(productPriceList[rowSelectedIndex]);
 
                 subTotal = Math.Round((hppValue * productQty), 2);
 
-                selectedRow.Cells["subTotal"].Value = subTotal;
+                selectedRow.Cells["subTotal"].Value = subTotal.ToString("N0", culture);
+                subtotalList[rowSelectedIndex] = subTotal.ToString();
 
                 calculateTotal();
             }
@@ -667,6 +699,10 @@ namespace RoyalPetz_ADMIN
             addColumnToDataGrid();
 
             GUTIL.reArrangeTabOrder(this);
+
+            detailQty.Add("0");
+            productPriceList.Add("0");
+            subtotalList.Add("0");
         }
 
         private void supplierCombo_SelectedIndexChanged(object sender, EventArgs e)
@@ -725,19 +761,19 @@ namespace RoyalPetz_ADMIN
                 return false;
             }
 
-            for (i = 0; i < detailReturDataGridView.Rows.Count && dataExist; i++)
-            {
-                if (null != detailReturDataGridView.Rows[i].Cells["productID"].Value)
-                    dataExist = GUTIL.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString());
-                else
-                    dataExist = false;
-            }
-            if (!dataExist)
-            {
-                i = i + 1;
-                errorLabel.Text = "PRODUCT ID PADA BARIS [" + i + "] INVALID";
-                return false;
-            }
+            //for (i = 0; i < detailReturDataGridView.Rows.Count && dataExist; i++)
+            //{
+            //    if (null != detailReturDataGridView.Rows[i].Cells["productID"].Value)
+            //        dataExist = GUTIL.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString());
+            //    else
+            //        dataExist = false;
+            //}
+            //if (!dataExist)
+            //{
+            //    i = i + 1;
+            //    errorLabel.Text = "PRODUCT ID PADA BARIS [" + i + "] INVALID";
+            //    return false;
+            //}
 
             return true;
         }
@@ -781,10 +817,10 @@ namespace RoyalPetz_ADMIN
                 // SAVE DETAIL TABLE
                 for (int i = 0; i < detailReturDataGridView.Rows.Count; i++)
                 {
-                    if (null != detailReturDataGridView.Rows[i].Cells["productID"].Value)
+                    if (null != detailReturDataGridView.Rows[i].Cells["productID"].Value && GUTIL.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString()))
                     { 
-                       hppValue = Convert.ToDouble(detailReturDataGridView.Rows[i].Cells["HPP"].Value);
-                       qtyValue = Convert.ToDouble(detailReturDataGridView.Rows[i].Cells["qty"].Value);
+                       hppValue = Convert.ToDouble(productPriceList[i]);
+                       qtyValue = Convert.ToDouble(detailQty[i]);
                       
                        try
                        {
@@ -795,7 +831,7 @@ namespace RoyalPetz_ADMIN
                             descriptionValue = " ";
                        }
                        sqlCommand = "INSERT INTO RETURN_PURCHASE_DETAIL (RP_ID, PRODUCT_ID, PRODUCT_BASEPRICE, PRODUCT_QTY, RP_DESCRIPTION, RP_SUBTOTAL) VALUES " +
-                                           "('" + returID + "', '" + detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " +hppValue  + ", " + qtyValue + ", '" + MySqlHelper.EscapeString(descriptionValue) + "', " + Convert.ToDouble(detailReturDataGridView.Rows[i].Cells["subTotal"].Value) + ")";
+                                           "('" + returID + "', '" + detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " +hppValue  + ", " + qtyValue + ", '" + MySqlHelper.EscapeString(descriptionValue) + "', " + Convert.ToDouble(subtotalList[i]) + ")";
                         GUTIL.saveSystemDebugLog(globalConstants.MENU_RETUR_PEMBELIAN, "INSERT TO RETURN PURCHASE DETAIL");
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                            throw internalEX;
@@ -907,6 +943,8 @@ namespace RoyalPetz_ADMIN
         private void detailReturDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             detailQty.Add("0");
+            productPriceList.Add("0");
+            subtotalList.Add("0");
         }
 
         private void deleteCurrentRow()

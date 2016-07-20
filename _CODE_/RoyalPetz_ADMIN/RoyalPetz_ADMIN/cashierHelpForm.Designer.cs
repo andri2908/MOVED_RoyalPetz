@@ -101,6 +101,7 @@
             this.label5.Size = new System.Drawing.Size(245, 18);
             this.label5.TabIndex = 40;
             this.label5.Text = "F8 : Tambahkan Baris Baru";
+            this.label5.Visible = false;
             // 
             // label6
             // 
@@ -173,6 +174,7 @@
             this.label11.Size = new System.Drawing.Size(211, 18);
             this.label11.TabIndex = 47;
             this.label11.Text = "F7 : Print Ulang Invoice";
+            this.label11.Visible = false;
             // 
             // label12
             // 
@@ -185,6 +187,7 @@
             this.label12.Size = new System.Drawing.Size(254, 18);
             this.label12.TabIndex = 46;
             this.label12.Text = "F5 : Bersihkan Data di Layar";
+            this.label12.Visible = false;
             // 
             // cashierHelpForm
             // 

@@ -82,7 +82,6 @@
             // 
             // detailRequestOrderDataGridView
             // 
-            this.detailRequestOrderDataGridView.AllowUserToAddRows = false;
             this.detailRequestOrderDataGridView.AllowUserToDeleteRows = false;
             this.detailRequestOrderDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -109,7 +108,9 @@
             this.detailRequestOrderDataGridView.RowHeadersVisible = false;
             this.detailRequestOrderDataGridView.Size = new System.Drawing.Size(894, 297);
             this.detailRequestOrderDataGridView.TabIndex = 39;
+            this.detailRequestOrderDataGridView.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailRequestOrderDataGridView_CellEnter);
             this.detailRequestOrderDataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailRequestOrderDataGridView_CellValidated);
+            this.detailRequestOrderDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.detailRequestOrderDataGridView_RowsAdded);
             // 
             // label2
             // 
