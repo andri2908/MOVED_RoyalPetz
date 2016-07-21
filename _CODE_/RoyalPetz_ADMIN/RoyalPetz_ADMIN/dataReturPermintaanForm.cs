@@ -192,7 +192,6 @@ namespace RoyalPetz_ADMIN
                 case Keys.Delete:
                     if (detailReturDataGridView.ReadOnly == false)
                     {
-                        if (detailReturDataGridView.Focused)
                             if (DialogResult.Yes == MessageBox.Show("DELETE CURRENT ROW?", "WARNING", MessageBoxButtons.YesNo))
                             {
                                 deleteCurrentRow();
@@ -393,6 +392,7 @@ namespace RoyalPetz_ADMIN
 
             subTotal = Math.Round((hpp * currQty), 2);
             selectedRow.Cells["subTotal"].Value = subTotal;
+            subtotalList[rowSelectedIndex] = subTotal.ToString();
 
             calculateTotal();
 
@@ -414,7 +414,7 @@ namespace RoyalPetz_ADMIN
         {
             double total = 0;
 
-            for (int i = 0; i < detailReturDataGridView.Rows.Count; i++)
+            for (int i = 0; i < detailReturDataGridView.Rows.Count-1; i++)
             {
                 total = total + Convert.ToDouble(subtotalList[i]);
             }
@@ -477,9 +477,10 @@ namespace RoyalPetz_ADMIN
             isLoading = true;
             selectedRow.Cells["productName"].Value = "";
             selectedRow.Cells["hpp"].Value = "0";
+            productPriceList[rowSelectedIndex] = "0";
             selectedRow.Cells["subTotal"].Value = "0";
+            subtotalList[rowSelectedIndex] = "0";
             selectedRow.Cells["qty"].Value = "0";
-
             detailQty[rowSelectedIndex] = "0";
 
             calculateTotal();
@@ -525,7 +526,7 @@ namespace RoyalPetz_ADMIN
 
                 hpp = getHPPValue(selectedProductID);
                 GUTIL.saveSystemDebugLog(globalConstants.MENU_RETUR_PERMINTAAN, "updateSomeRowsContent, PRODUCT_BASE_PRICE [" + hpp + "]");
-                selectedRow.Cells["hpp"].Value = hpp.ToString("N0", culture);
+                selectedRow.Cells["hpp"].Value = hpp.ToString();
                 productPriceList[rowSelectedIndex] = hpp.ToString();
 
                 selectedRow.Cells["qty"].Value = 0;
@@ -596,6 +597,7 @@ namespace RoyalPetz_ADMIN
                 isLoading = true;
                 // reset subTotal Value and recalculate total
                 selectedRow.Cells["subTotal"].Value = 0;
+                subtotalList[rowSelectedIndex] = "0";
 
                 if (detailQty.Count > rowSelectedIndex)
                     detailQty[rowSelectedIndex] = "0";
@@ -628,14 +630,6 @@ namespace RoyalPetz_ADMIN
                     && (dataGridViewTextBoxEditingControl.Text.Length > 0))
                 {
                     detailQty.Add(dataGridViewTextBoxEditingControl.Text);
-                    //if (detailReturDataGridView.CurrentCell.ColumnIndex == 2)
-                    //{
-                    //    detailQty.Add(dataGridViewTextBoxEditingControl.Text);
-                    //}
-                    //else
-                    //{
-                    //    detailQty.Add(selectedRow.Cells["qty"].Value.ToString());
-                    //}
                 }
                 else
                 {
@@ -664,7 +658,7 @@ namespace RoyalPetz_ADMIN
 
                 subTotal = Math.Round((hppValue * productQty), 2);
 
-                selectedRow.Cells["subTotal"].Value = subTotal.ToString("N0", culture);
+                selectedRow.Cells["subTotal"].Value = subTotal.ToString();
                 subtotalList[rowSelectedIndex] = subTotal.ToString();
 
                 calculateTotal();
@@ -815,7 +809,7 @@ namespace RoyalPetz_ADMIN
                       throw internalEX;
 
                 // SAVE DETAIL TABLE
-                for (int i = 0; i < detailReturDataGridView.Rows.Count; i++)
+                for (int i = 0; i < detailReturDataGridView.Rows.Count-1; i++)
                 {
                     if (null != detailReturDataGridView.Rows[i].Cells["productID"].Value && GUTIL.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString()))
                     { 
@@ -929,7 +923,7 @@ namespace RoyalPetz_ADMIN
                 GUTIL.ResetAllControls(this);
                 detailReturDataGridView.Rows.Clear();
                 globalTotalValue = 0;
-                totalLabel.Text = globalTotalValue.ToString("C", culture);
+                totalLabel.Text = globalTotalValue.ToString("C0", culture);
                 ReturDtPicker_1.Value = DateTime.Now;
             }
         }
@@ -953,8 +947,21 @@ namespace RoyalPetz_ADMIN
             {
                 int rowSelectedIndex = detailReturDataGridView.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = detailReturDataGridView.Rows[rowSelectedIndex];
+                detailReturDataGridView.CurrentCell = selectedRow.Cells["productName"];
 
-                detailReturDataGridView.Rows.Remove(selectedRow);
+                if (null != selectedRow && rowSelectedIndex != detailReturDataGridView.Rows.Count - 1)
+                {
+                    for (int i = rowSelectedIndex; i < detailReturDataGridView.Rows.Count - 1; i++)
+                    {
+                        detailQty[i] = detailQty[i + 1];
+                        productPriceList[i] = productPriceList[i + 1];
+                        subtotalList[i] = subtotalList[i + 1];
+                    }
+
+                    isLoading = true;
+                    detailReturDataGridView.Rows.Remove(selectedRow);
+                    isLoading = false;
+                }
             }
         }
 
@@ -998,6 +1005,21 @@ namespace RoyalPetz_ADMIN
                         clearUpSomeRowContents(selectedRow, e.RowIndex);
                     }
                 }
+            }
+        }
+
+        private void detailReturDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (
+               (detailReturDataGridView.Columns[e.ColumnIndex].Name == "hpp" ||
+               detailReturDataGridView.Columns[e.ColumnIndex].Name == "qty" ||
+               detailReturDataGridView.Columns[e.ColumnIndex].Name == "subTotal")
+              && e.RowIndex != this.detailReturDataGridView.NewRowIndex && null != e.Value)
+            {
+                isLoading = true;
+                double d = double.Parse(e.Value.ToString());
+                e.Value = d.ToString(globalUtilities.CELL_FORMATTING_NUMERIC_FORMAT);
+                isLoading = false;
             }
         }
     }

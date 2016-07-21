@@ -234,6 +234,7 @@ namespace RoyalPetz_ADMIN
                 detailPODataGridView.Rows.Add();
                 detailHpp.Add("0");
                 detailQty.Add("0");
+                subtotalList.Add("0");
                 newRowIndex = detailPODataGridView.Rows.Count - 1;
             }
             else
@@ -321,7 +322,7 @@ namespace RoyalPetz_ADMIN
             hpp = Convert.ToDouble(detailHpp[rowSelectedIndex]);
 
             subTotal = Math.Round((hpp * currQty), 2);
-            selectedRow.Cells["subTotal"].Value = subTotal.ToString("N0", culture);
+            selectedRow.Cells["subTotal"].Value = subTotal.ToString();
             subtotalList[rowSelectedIndex] = subTotal.ToString();
 
             calculateTotal();
@@ -365,12 +366,6 @@ namespace RoyalPetz_ADMIN
 
         private void addDataGridColumn()
         {
-            //MySqlDataReader rdr;
-            //string sqlCommand = "";
-
-            //DataGridViewComboBoxColumn productIdCmb= new DataGridViewComboBoxColumn();
-            //DataGridViewComboBoxColumn productNameCmb = new DataGridViewComboBoxColumn();
-
             DataGridViewTextBoxColumn productIDTextBox = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn productNameTextBox = new DataGridViewTextBoxColumn();
 
@@ -378,36 +373,6 @@ namespace RoyalPetz_ADMIN
             DataGridViewTextBoxColumn basePriceColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn subTotalColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn displaySubTotalColumn = new DataGridViewTextBoxColumn();
-
-            //sqlCommand = "SELECT PRODUCT_ID, PRODUCT_NAME FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 ORDER BY PRODUCT_NAME ASC";
-
-            ////productIDComboHidden.Items.Clear();
-            ////productNameComboHidden.Items.Clear();
-
-            //using (rdr = DS.getData(sqlCommand))
-            //{
-            //    while (rdr.Read())
-            //    {
-            //        productNameCmb.Items.Add(rdr.GetString("PRODUCT_NAME"));
-            //        productIdCmb.Items.Add(rdr.GetString("PRODUCT_ID"));
-            //        //productIDComboHidden.Items.Add(rdr.GetString("PRODUCT_ID"));
-            //        //productNameComboHidden.Items.Add(rdr.GetString("PRODUCT_NAME"));
-            //    }
-            //}
-
-            //rdr.Close();
-
-            //productIdCmb.HeaderText = "KODE PRODUK";
-            //productIdCmb.Name = "productID";
-            //productIdCmb.Width = 200;
-            //productIdCmb.DefaultCellStyle.BackColor = Color.LightBlue;
-            //detailPODataGridView.Columns.Add(productIdCmb);
-
-            //productNameCmb.HeaderText = "NAMA PRODUK";
-            //productNameCmb.Name = "productName";
-            //productNameCmb.Width = 300;
-            //productNameCmb.DefaultCellStyle.BackColor = Color.LightBlue;
-            //detailPODataGridView.Columns.Add(productNameCmb);
 
             productIDTextBox.HeaderText = "KODE PRODUK";
             productIDTextBox.Name = "productID";
@@ -505,7 +470,7 @@ namespace RoyalPetz_ADMIN
         {
             double total = 0;
 
-            for (int i = 0; i < detailPODataGridView.Rows.Count; i++)
+            for (int i = 0; i < detailPODataGridView.Rows.Count-1; i++)
             {
                 total = total + Convert.ToDouble(subtotalList[i]);
             }
@@ -568,7 +533,7 @@ namespace RoyalPetz_ADMIN
 
                 hpp = getHPPValue(selectedProductID);
                 gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "updateSomeRowsContent, PRODUCT_BASE_PRICE [" + hpp + "]");
-                selectedRow.Cells["HPP"].Value = hpp.ToString("N0", culture);
+                selectedRow.Cells["HPP"].Value = hpp;
                 detailHpp[rowSelectedIndex] = hpp.ToString();
 
                 selectedRow.Cells["qty"].Value = 0;
@@ -690,7 +655,7 @@ namespace RoyalPetz_ADMIN
             productQty = Convert.ToDouble(detailQty[rowSelectedIndex]);
             subTotal = Math.Round((hppValue * productQty), 2);
 
-            selectedRow.Cells["subtotal"].Value = subTotal.ToString("N0", culture);
+            selectedRow.Cells["subtotal"].Value = subTotal.ToString();
             subtotalList[rowSelectedIndex] = subTotal.ToString();
 
             calculateTotal();
@@ -819,18 +784,18 @@ namespace RoyalPetz_ADMIN
                 return false;
             }
 
-            for (i = 0; i < detailPODataGridView.Rows.Count && dataExist; i++)
-            {
-                if (null != detailPODataGridView.Rows[i].Cells["productID"].Value)
-                    dataExist = gUtil.isProductIDExist(detailPODataGridView.Rows[i].Cells["productID"].Value.ToString());
-                else
-                    dataExist = false;
-            }
-            if (!dataExist)
-            {
-                errorLabel.Text = "PRODUCT ID PADA BARIS [" + i + "] INVALID";
-                return false;
-            }
+            //for (i = 0; i < detailPODataGridView.Rows.Count && dataExist; i++)
+            //{
+            //    if (null != detailPODataGridView.Rows[i].Cells["productID"].Value)
+            //        dataExist = gUtil.isProductIDExist(detailPODataGridView.Rows[i].Cells["productID"].Value.ToString());
+            //    else
+            //        dataExist = false;
+            //}
+            //if (!dataExist)
+            //{
+            //    errorLabel.Text = "PRODUCT ID PADA BARIS [" + i + "] INVALID";
+            //    return false;
+            //}
 
             return true;
         }
@@ -956,7 +921,7 @@ namespace RoyalPetz_ADMIN
                         }
 
                         // SAVE DETAIL TABLE
-                        for (int i = 0; i < detailPODataGridView.Rows.Count; i++)
+                        for (int i = 0; i < detailPODataGridView.Rows.Count-1; i++)
                         {
                             if (null != detailPODataGridView.Rows[i].Cells["productID"].Value)
                             { 
@@ -1008,7 +973,7 @@ namespace RoyalPetz_ADMIN
                         }
 
                         // SAVE DETAIL TABLE
-                        for (int i = 0; i < detailPODataGridView.Rows.Count; i++)
+                        for (int i = 0; i < detailPODataGridView.Rows.Count-1; i++)
                         {
                             if (null != detailPODataGridView.Rows[i].Cells["productID"].Value)
                             {
@@ -1055,7 +1020,7 @@ namespace RoyalPetz_ADMIN
                             throw internalEX;
 
                         // RE-INSERT DETAIL TABLE
-                        for (int i = 0; i < detailPODataGridView.Rows.Count; i++)
+                        for (int i = 0; i < detailPODataGridView.Rows.Count-1; i++)
                         {
                             if (null != detailPODataGridView.Rows[i].Cells["productID"].Value)
                             {
@@ -1188,8 +1153,6 @@ namespace RoyalPetz_ADMIN
                         POinvoiceTextBox.Text = rdr.GetString("PURCHASE_INVOICE");
                         PODateTimePicker.Value = rdr.GetDateTime("PURCHASE_DATETIME");
 
-                        //ROInvoiceTextBox.Text = rdr.GetString("RO_INVOICE");
-                        
                         supplierCombo.Text = rdr.GetString("SUPPLIER_FULL_NAME");
                         termOfPaymentCombo.SelectedIndex = rdr.GetInt32("PURCHASE_TERM_OF_PAYMENT");
                         durationTextBox.Text = rdr.GetString("PURCHASE_TERM_OF_PAYMENT_DURATION");//Convert.ToInt32((rdr.GetDateTime("PURCHASE_TERM_OF_PAYMENT_DATE") - rdr.GetDateTime("PURCHASE_DATETIME")).TotalDays).ToString();
@@ -1231,6 +1194,9 @@ namespace RoyalPetz_ADMIN
                     while(rdr.Read())
                     {
                         detailPODataGridView.Rows.Add(rdr.GetString("PRODUCT_ID"), rdr.GetString("PRODUCT_NAME"), rdr.GetString("PRODUCT_BASE_PRICE"), rdr.GetString("RO_QTY"), rdr.GetString("RO_SUBTOTAL"));
+                        detailHpp[detailPODataGridView.Rows.Count - 2] = rdr.GetString("PRODUCT_BASE_PRICE");
+                        detailQty[detailPODataGridView.Rows.Count - 2] = rdr.GetString("RO_QTY");
+                        subtotalList[detailPODataGridView.Rows.Count - 2] = rdr.GetString("RO_SUBTOTAL");
                     }
 
                     calculateTotal();
@@ -1253,6 +1219,9 @@ namespace RoyalPetz_ADMIN
                     while (rdr.Read())
                     {
                         detailPODataGridView.Rows.Add(rdr.GetString("PRODUCT_ID"), rdr.GetString("PRODUCT_NAME"), rdr.GetString("PRODUCT_PRICE"), rdr.GetString("PRODUCT_QTY"), rdr.GetString("PURCHASE_SUBTOTAL"));
+                        detailHpp[detailPODataGridView.Rows.Count - 2] = rdr.GetString("PRODUCT_PRICE");
+                        detailQty[detailPODataGridView.Rows.Count - 2] = rdr.GetString("PRODUCT_QTY");
+                        subtotalList[detailPODataGridView.Rows.Count - 2] = rdr.GetString("PURCHASE_SUBTOTAL");
                     }
 
                     calculateTotal();
@@ -1280,9 +1249,17 @@ namespace RoyalPetz_ADMIN
             {
                 int rowSelectedIndex = detailPODataGridView.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = detailPODataGridView.Rows[rowSelectedIndex];
+                detailPODataGridView.CurrentCell = selectedRow.Cells["productName"];
 
-                if (null != selectedRow)
+                if (null != selectedRow && rowSelectedIndex != detailPODataGridView.Rows.Count - 1)
                 {
+                    for (int i = rowSelectedIndex; i < detailPODataGridView.Rows.Count - 1; i++)
+                    {
+                        detailQty[i] = detailQty[i + 1];
+                        detailHpp[i] = detailHpp[i + 1];
+                        subtotalList[i] = subtotalList[i + 1];
+                    }
+
                     isLoading = true;
                     detailPODataGridView.Rows.Remove(selectedRow);
                     gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "deleteCurrentRow [" + rowSelectedIndex + "]");
@@ -1300,15 +1277,9 @@ namespace RoyalPetz_ADMIN
         {
             string PONo = POinvoiceTextBox.Text;
 
-            //string sqlCommandx = "SELECT PH.PURCHASE_INVOICE, MS.SUPPLIER_FULL_NAME, PURCHASE_DATETIME, IF(PURCHASE_TERM_OF_PAYMENT = 0, 'TUNAI', 'KREDIT') AS TOP, PURCHASE_TERM_OF_PAYMENT_DURATION, " +
-            //                              "MP.PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_QTY, PURCHASE_SUBTOTAL " +
-            //                              "FROM PURCHASE_HEADER PH, MASTER_SUPPLIER MS, PURCHASE_DETAIL PD, MASTER_PRODUCT MP " +
-            //                              "WHERE PH.PURCHASE_INVOICE = '" + PONo + "' AND PH.SUPPLIER_ID = MS.SUPPLIER_ID AND PD.PURCHASE_INVOICE = PH.PURCHASE_INVOICE AND PD.PRODUCT_ID = MP.PRODUCT_ID";
             string sqlCommandx = "SELECT PH.PURCHASE_DATETIME AS 'TGL', PH.PURCHASE_DATE_RECEIVED AS 'TERIMA', PH.PURCHASE_INVOICE AS 'INVOICE', MS.SUPPLIER_FULL_NAME AS 'SUPPLIER', MP.PRODUCT_NAME AS 'PRODUK', PD.PRODUCT_PRICE AS 'HARGA', PD.PRODUCT_QTY AS 'QTY', PD.PURCHASE_SUBTOTAL AS 'SUBTOTAL' " +
                                         "FROM PURCHASE_HEADER PH, PURCHASE_DETAIL PD, MASTER_SUPPLIER MS, MASTER_PRODUCT MP " +
                                         "WHERE PH.PURCHASE_INVOICE = '" + PONo + "' AND PH.SUPPLIER_ID = MS.SUPPLIER_ID AND PD.PURCHASE_INVOICE = PH.PURCHASE_INVOICE AND PD.PRODUCT_ID = MP.PRODUCT_ID";
-                                        //"WHERE PD.PURCHASE_INVOICE = PH.PURCHASE_INVOICE AND PH.SUPPLIER_ID = MS.SUPPLIER_ID " + supplier + "AND PD.PRODUCT_ID = MP.PRODUCT_ID AND DATE_FORMAT(PH.PURCHASE_DATETIME, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(PH.PURCHASE_DATETIME, '%Y%m%d')  <= '" + dateTo + "' " +
-                                        //"ORDER BY TGL,INVOICE,PRODUK";
 
             DS.writeXML(sqlCommandx, globalConstants.purchaseOrderXML);
             purchaseOrderPrintOutForm displayForm = new purchaseOrderPrintOutForm();
@@ -1375,6 +1346,21 @@ namespace RoyalPetz_ADMIN
         private void purchaseOrderDetailForm_Deactivate(object sender, EventArgs e)
         {
             unregisterGlobalHotkey();
+        }
+
+        private void detailPODataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (
+              (detailPODataGridView.Columns[e.ColumnIndex].Name == "qty" ||
+              detailPODataGridView.Columns[e.ColumnIndex].Name == "HPP" ||
+              detailPODataGridView.Columns[e.ColumnIndex].Name == "subTotal")
+             && e.RowIndex != this.detailPODataGridView.NewRowIndex && null != e.Value)
+            {
+                isLoading = true;
+                double d = double.Parse(e.Value.ToString());
+                e.Value = d.ToString(globalUtilities.CELL_FORMATTING_NUMERIC_FORMAT);
+                isLoading = false;
+            }
         }
     }
 }

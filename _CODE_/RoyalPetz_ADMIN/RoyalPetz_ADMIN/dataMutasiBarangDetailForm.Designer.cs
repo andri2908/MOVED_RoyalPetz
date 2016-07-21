@@ -108,7 +108,7 @@
             this.detailRequestOrderDataGridView.RowHeadersVisible = false;
             this.detailRequestOrderDataGridView.Size = new System.Drawing.Size(894, 297);
             this.detailRequestOrderDataGridView.TabIndex = 39;
-            this.detailRequestOrderDataGridView.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailRequestOrderDataGridView_CellEnter);
+            this.detailRequestOrderDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.detailRequestOrderDataGridView_CellFormatting);
             this.detailRequestOrderDataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailRequestOrderDataGridView_CellValidated);
             this.detailRequestOrderDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.detailRequestOrderDataGridView_RowsAdded);
             // 

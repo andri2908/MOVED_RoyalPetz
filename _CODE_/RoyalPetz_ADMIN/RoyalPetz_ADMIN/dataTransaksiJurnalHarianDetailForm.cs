@@ -608,23 +608,25 @@ namespace RoyalPetz_ADMIN
                 TransaksiAccountGridView.Refresh();
             }
         }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
+      
         private void NominalTextbox_Enter(object sender, EventArgs e)
         {
             BeginInvoke((Action)delegate
             {
                 NominalTextbox.SelectAll();
             });
+        }
+
+        private void TransaksiAccountGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (
+                 (TransaksiAccountGridView.Columns[e.ColumnIndex].Name == "debet" ||
+                 TransaksiAccountGridView.Columns[e.ColumnIndex].Name == "kredit" )
+                && e.RowIndex != this.TransaksiAccountGridView.NewRowIndex && null != e.Value)
+            {
+                double d = double.Parse(e.Value.ToString());
+                e.Value = d.ToString(globalUtilities.CELL_FORMATTING_NUMERIC_FORMAT);
+            }
         }
     }
 }

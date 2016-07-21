@@ -21,6 +21,7 @@ namespace RoyalPetz_ADMIN
         public const string REGEX_ALPHANUMERIC_ONLY = @"^[0-9A-Za-z]*$";
         public const string CUSTOM_DATE_FORMAT = "dd MMM yyyy";
         public const string CUSTOM_MONTH_FORMAT = "MMMM yyyy";
+        public const string CELL_FORMATTING_NUMERIC_FORMAT = "#,0.##";
         private const string logFileName = "system.log";
 
         public int INS = 1;

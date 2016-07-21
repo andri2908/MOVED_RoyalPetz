@@ -105,7 +105,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label11.Location = new System.Drawing.Point(224, 8);
+            this.label11.Location = new System.Drawing.Point(223, 8);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(171, 18);
             this.label11.TabIndex = 20;
@@ -141,7 +141,7 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 192F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 210F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 211F));
             this.tableLayoutPanel6.Controls.Add(this.rsDateTimePicker, 3, 0);
             this.tableLayoutPanel6.Controls.Add(this.noReturTextBox, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.label11, 2, 0);
@@ -157,7 +157,7 @@
             this.rsDateTimePicker.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.rsDateTimePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rsDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.rsDateTimePicker.Location = new System.Drawing.Point(416, 4);
+            this.rsDateTimePicker.Location = new System.Drawing.Point(415, 4);
             this.rsDateTimePicker.Name = "rsDateTimePicker";
             this.rsDateTimePicker.Size = new System.Drawing.Size(173, 27);
             this.rsDateTimePicker.TabIndex = 55;
@@ -272,7 +272,7 @@
             this.detailReturDataGridView.RowHeadersVisible = false;
             this.detailReturDataGridView.Size = new System.Drawing.Size(888, 379);
             this.detailReturDataGridView.TabIndex = 51;
-            this.detailReturDataGridView.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailReturDataGridView_CellEnter);
+            this.detailReturDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.detailReturDataGridView_CellFormatting);
             this.detailReturDataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailReturDataGridView_CellValidated);
             this.detailReturDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.detailReturDataGridView_RowsAdded);
             // 

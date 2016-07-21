@@ -170,7 +170,6 @@ namespace RoyalPetz_ADMIN
                 case Keys.Delete:
                     if (detailRequestOrderDataGridView.Rows.Count > 1)
                         if (detailRequestOrderDataGridView.ReadOnly == false)
-                            if ((detailRequestOrderDataGridView.Focused))
                                 if (DialogResult.Yes == MessageBox.Show("DELETE CURRENT ROW?", "WARNING", MessageBoxButtons.YesNo))
                                 {
                                     deleteCurrentRow();
@@ -394,7 +393,7 @@ namespace RoyalPetz_ADMIN
         {
             double total = 0;
 
-            for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count; i++)
+            for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count-1; i++)
             {
                 total = total + Convert.ToDouble(subtotalList[i]);// Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subtotal"].Value);
             }
@@ -480,8 +479,13 @@ namespace RoyalPetz_ADMIN
         {
             isLoading = true;
             selectedRow.Cells["productName"].Value = "";
+
             selectedRow.Cells["HPP"].Value = "0";
+            productPriceList[rowSelectedIndex] = "0";
+
             selectedRow.Cells["subTotal"].Value = "0";
+            subtotalList[rowSelectedIndex] = "0";
+
             selectedRow.Cells["qty"].Value = "0";
             detailRequestQtyApproved[rowSelectedIndex] = "0";
 
@@ -528,13 +532,14 @@ namespace RoyalPetz_ADMIN
 
                 hpp = getHPP(selectedProductID);
                 gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "updateSomeRowsContent, PRODUCT_BASE_PRICE [" + hpp + "]");
-                selectedRow.Cells["HPP"].Value = hpp.ToString("N0", culture);
+                selectedRow.Cells["HPP"].Value = hpp.ToString();
                 productPriceList[rowSelectedIndex] = hpp.ToString();
 
                 selectedRow.Cells["qty"].Value = 0;
                 detailRequestQtyApproved[rowSelectedIndex] = "0";
 
                 selectedRow.Cells["subTotal"].Value = 0;
+                subtotalList[rowSelectedIndex] = "0";
                 
                 gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "updateSomeRowsContent, attempt to calculate total");
 
@@ -603,6 +608,7 @@ namespace RoyalPetz_ADMIN
                 isLoading = true;
                 // reset subTotal Value and recalculate total
                 selectedRow.Cells["subTotal"].Value = 0;
+                subtotalList[rowSelectedIndex] = "0";
 
                 if (detailRequestQtyApproved.Count >= rowSelectedIndex + 1)
                     detailRequestQtyApproved[rowSelectedIndex] = "0";
@@ -660,7 +666,7 @@ namespace RoyalPetz_ADMIN
                         hppValue = Convert.ToDouble(productPriceList[rowSelectedIndex]);
                         subTotal = Math.Round((hppValue * productQty), 2);
 
-                        selectedRow.Cells["subTotal"].Value = subTotal.ToString("N0", culture);
+                        selectedRow.Cells["subTotal"].Value = subTotal.ToString();
                         subtotalList[rowSelectedIndex] = subTotal.ToString();
 
 
@@ -713,8 +719,8 @@ namespace RoyalPetz_ADMIN
 
                         selectedROInvoice = rdr.GetString("RO_INVOICE");
 
-                        totalLabel.Text = rdr.GetDouble("RO_TOTAL").ToString("C2", culture);
-                        totalApproved.Text = rdr.GetDouble("RO_TOTAL").ToString("C2", culture);
+                        totalLabel.Text = rdr.GetDouble("RO_TOTAL").ToString("C0", culture);
+                        totalApproved.Text = rdr.GetDouble("RO_TOTAL").ToString("C0", culture);
                         globalTotalValue = rdr.GetDouble("RO_TOTAL");
                     }
 
@@ -769,7 +775,7 @@ namespace RoyalPetz_ADMIN
 
             if (subModuleID == globalConstants.NEW_PRODUCT_MUTATION)
                 // load all data from request order
-                sqlCommand = "SELECT R.*, M.PRODUCT_NAME, (M.PRODUCT_STOCK_QTY - M.PRODUCT_LIMIT_STOCK) AS PRODUCT_QTY FROM REQUEST_ORDER_DETAIL R, MASTER_PRODUCT M WHERE R.RO_INVOICE = '" + selectedROInvoice + "' AND R.PRODUCT_ID = M.PRODUCT_ID";
+                sqlCommand = "SELECT R.*, M.PRODUCT_NAME, M.PRODUCT_STOCK_QTY AS PRODUCT_QTY FROM REQUEST_ORDER_DETAIL R, MASTER_PRODUCT M WHERE R.RO_INVOICE = '" + selectedROInvoice + "' AND R.PRODUCT_ID = M.PRODUCT_ID";
             else
                 // load all data from product mutation 
                 sqlCommand = "SELECT PM.*, M.PRODUCT_NAME FROM PRODUCTS_MUTATION_DETAIL PM, MASTER_PRODUCT M WHERE PM.PM_INVOICE = '" + selectedPMInvoice + "' AND PM.PRODUCT_ID = M.PRODUCT_ID";
@@ -795,12 +801,18 @@ namespace RoyalPetz_ADMIN
                         subTotal = Math.Round((hpp*qtyApproved),2);
 
                         detailRequestOrderDataGridView.Rows.Add(rdr.GetString("PRODUCT_ID"), productName, rdr.GetString("RO_QTY"), qtyApproved.ToString(), hpp.ToString(), subTotal.ToString());
-                        detailRequestQtyApproved.Add(qtyApproved.ToString());
+                        //detailRequestQtyApproved.Add(qtyApproved.ToString());
+                        detailRequestQtyApproved[detailRequestOrderDataGridView.Rows.Count - 2] = qtyApproved.ToString();
+                        productPriceList[detailRequestOrderDataGridView.Rows.Count - 2] = hpp.ToString();
+                        subtotalList[detailRequestOrderDataGridView.Rows.Count - 2] = subTotal.ToString();
                     }
                     else
                     {
                         detailRequestOrderDataGridView.Rows.Add(rdr.GetString("PRODUCT_ID"), productName, "0", rdr.GetString("PRODUCT_QTY"), rdr.GetString("PRODUCT_BASE_PRICE"), rdr.GetString("PM_SUBTOTAL"));
-                        detailRequestQtyApproved.Add(rdr.GetString("PRODUCT_QTY"));
+                        detailRequestQtyApproved[detailRequestOrderDataGridView.Rows.Count - 2] = rdr.GetString("PRODUCT_QTY");
+                        productPriceList[detailRequestOrderDataGridView.Rows.Count - 2] = rdr.GetString("PRODUCT_BASE_PRICE");
+                        subtotalList[detailRequestOrderDataGridView.Rows.Count - 2] = rdr.GetString("PM_SUBTOTAL");
+
                     }
                 }
 
@@ -921,21 +933,6 @@ namespace RoyalPetz_ADMIN
             }
             else
             {
-                //productIDComboColumn.Name = "productID";
-                //productIDComboColumn.HeaderText = "KODE PRODUK";
-                //if (originModuleID != globalConstants.VIEW_PRODUCT_MUTATION && originModuleID != globalConstants.REPRINT_PERMINTAAN_BARANG)
-                //    productIDComboColumn.DefaultCellStyle.BackColor = Color.LightBlue;
-                //productIDComboColumn.Width = 100;
-                //detailRequestOrderDataGridView.Columns.Add(productIDComboColumn);
-
-                //productNameComboColumn.Name = "productName";
-                //productNameComboColumn.HeaderText = "NAMA PRODUK";
-                //if (originModuleID != globalConstants.VIEW_PRODUCT_MUTATION && originModuleID != globalConstants.REPRINT_PERMINTAAN_BARANG)
-                //    productNameComboColumn.DefaultCellStyle.BackColor = Color.LightBlue;
-                //productNameComboColumn.Width = 300;
-                //addDataToProductNameCombo(productNameComboColumn, productIDComboColumn);
-
-                //detailRequestOrderDataGridView.Columns.Add(productNameComboColumn);
                 productIDColumn.Name = "productID";
                 productIDColumn.HeaderText = "KODE PRODUK";
                 productIDColumn.DefaultCellStyle.BackColor = Color.LightBlue;
@@ -955,7 +952,6 @@ namespace RoyalPetz_ADMIN
             if (originModuleID != globalConstants.VIEW_PRODUCT_MUTATION && originModuleID != globalConstants.REPRINT_PERMINTAAN_BARANG)
                 qtyColumn.DefaultCellStyle.BackColor = Color.LightBlue;
             detailRequestOrderDataGridView.Columns.Add(qtyColumn);
-            detailRequestOrderDataGridView.Columns["qty"].DefaultCellStyle.Format = "###.###.###";
 
             hppColumn.Name = "hpp";
             hppColumn.HeaderText = "HARGA POKOK";
@@ -1118,7 +1114,7 @@ namespace RoyalPetz_ADMIN
                             throw internalEX;
 
                         // SAVE DETAIL TABLE
-                        for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count; i++)
+                        for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count-1; i++)
                         {
                             if (null == detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value || !productIDValid(detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString()))
                                 continue;
@@ -1128,12 +1124,15 @@ namespace RoyalPetz_ADMIN
                             else
                                 qtyApproved = 0;
 
-                            sqlCommand = "INSERT INTO PRODUCTS_MUTATION_DETAIL (PM_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, PRODUCT_QTY, PM_SUBTOTAL) VALUES " +
-                                                "('" + noMutasi + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["hpp"].Value) + ", " + qtyApproved + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value)) + ")";
+                            if (qtyApproved > 0)
+                            { 
+                                sqlCommand = "INSERT INTO PRODUCTS_MUTATION_DETAIL (PM_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, PRODUCT_QTY, PM_SUBTOTAL) VALUES " +
+                                                    "('" + noMutasi + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["hpp"].Value) + ", " + qtyApproved + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value)) + ")";
 
-                            gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "ADD DETAIL NEW MUTASI [" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + ", " + qtyApproved + "]");
-                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                                throw internalEX;
+                                gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "ADD DETAIL NEW MUTASI [" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + ", " + qtyApproved + "]");
+                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                    throw internalEX;
+                            }
                         }
 
                         if (!directMutasiBarang)
@@ -1467,9 +1466,17 @@ namespace RoyalPetz_ADMIN
             {
                 int rowSelectedIndex = detailRequestOrderDataGridView.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[rowSelectedIndex];
+                detailRequestOrderDataGridView.CurrentCell = selectedRow.Cells["productName"];
 
-                if (null != selectedRow)
+                if (null != selectedRow && rowSelectedIndex != detailRequestOrderDataGridView.Rows.Count - 1)
                 {
+                    for (int i = rowSelectedIndex; i < detailRequestOrderDataGridView.Rows.Count - 1; i++)
+                    {
+                        detailRequestQtyApproved[i] = detailRequestQtyApproved[i + 1];
+                        productPriceList[i] = productPriceList[i + 1];
+                        subtotalList[i] = subtotalList[i + 1];
+                    }
+
                     isLoading = true;
                     detailRequestOrderDataGridView.Rows.Remove(selectedRow);
                     gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "deleteCurrentRow [" + rowSelectedIndex + "]");
@@ -1717,19 +1724,6 @@ namespace RoyalPetz_ADMIN
                     }
                 }
             }
-            else if (cell.OwningColumn.Name == "qty")
-            {
-                double tempValue = 0;
-                if (null != selectedRow.Cells["productID"].Value && productIDValid(selectedRow.Cells["productID"].Value.ToString()))
-                {
-                    //isLoadingNumFormat = true;
-                    tempValue = Convert.ToDouble(detailRequestQtyApproved[e.RowIndex]);
-                    selectedRow.Cells["qty"].Value = tempValue.ToString("N0", culture);
-                    //isLoadingNumFormat = false;
-                }
-            }
-
-
         }
 
         private void detailRequestOrderDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -1739,22 +1733,19 @@ namespace RoyalPetz_ADMIN
             subtotalList.Add("0");
         }
 
-        private void detailRequestOrderDataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
+        private void detailRequestOrderDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            var cell = detailRequestOrderDataGridView[e.ColumnIndex, e.RowIndex];
-            DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[e.RowIndex];
-
-            if (isLoading)
-                return;
-
-            if (cell.OwningColumn.Name == "qty")
+            if (
+                (detailRequestOrderDataGridView.Columns[e.ColumnIndex].Name == "hpp" ||
+                detailRequestOrderDataGridView.Columns[e.ColumnIndex].Name == "qty" ||
+                detailRequestOrderDataGridView.Columns[e.ColumnIndex].Name == "qtyRequest" ||
+                detailRequestOrderDataGridView.Columns[e.ColumnIndex].Name == "subtotal")
+               && e.RowIndex != this.detailRequestOrderDataGridView.NewRowIndex && null != e.Value)
             {
-                if (null != selectedRow.Cells["productID"].Value && productIDValid(selectedRow.Cells["productID"].Value.ToString()))
-                {
-                    //isLoading = true;
-                    selectedRow.Cells["qty"].Value = detailRequestQtyApproved[e.RowIndex];
-                    //isLoading = false;
-                }
+                isLoading = true;
+                double d = double.Parse(e.Value.ToString());
+                e.Value = d.ToString(globalUtilities.CELL_FORMATTING_NUMERIC_FORMAT);
+                isLoading = false;
             }
         }
     }

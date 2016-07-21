@@ -110,6 +110,7 @@
             this.detailReturDataGridView.RowHeadersVisible = false;
             this.detailReturDataGridView.Size = new System.Drawing.Size(897, 421);
             this.detailReturDataGridView.TabIndex = 38;
+            this.detailReturDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.detailReturDataGridView_CellFormatting);
             this.detailReturDataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailReturDataGridView_CellValidated);
             this.detailReturDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.detailReturDataGridView_RowsAdded);
             this.detailReturDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.detailReturDataGridView_KeyDown);
@@ -222,7 +223,7 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 187F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 251F));
             this.tableLayoutPanel6.Controls.Add(this.ReturDtPicker_1, 3, 0);
             this.tableLayoutPanel6.Controls.Add(this.noReturTextBox, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.label18, 2, 0);
@@ -237,7 +238,7 @@
             // 
             this.ReturDtPicker_1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ReturDtPicker_1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.ReturDtPicker_1.Location = new System.Drawing.Point(376, 3);
+            this.ReturDtPicker_1.Location = new System.Drawing.Point(375, 3);
             this.ReturDtPicker_1.Name = "ReturDtPicker_1";
             this.ReturDtPicker_1.Size = new System.Drawing.Size(144, 27);
             this.ReturDtPicker_1.TabIndex = 41;
@@ -249,7 +250,7 @@
             this.noReturTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.noReturTextBox.Location = new System.Drawing.Point(3, 4);
             this.noReturTextBox.Name = "noReturTextBox";
-            this.noReturTextBox.Size = new System.Drawing.Size(164, 27);
+            this.noReturTextBox.Size = new System.Drawing.Size(163, 27);
             this.noReturTextBox.TabIndex = 16;
             this.noReturTextBox.TextChanged += new System.EventHandler(this.noReturTextBox_TextChanged);
             // 
@@ -259,7 +260,7 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label18.Location = new System.Drawing.Point(189, 8);
+            this.label18.Location = new System.Drawing.Point(188, 8);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(176, 18);
             this.label18.TabIndex = 20;

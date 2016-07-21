@@ -33,18 +33,20 @@ namespace RoyalPetz_ADMIN
         private Hotkeys.GlobalHotkey ghk_F8;
         private Hotkeys.GlobalHotkey ghk_F9;
         private Hotkeys.GlobalHotkey ghk_F11;
+        private Hotkeys.GlobalHotkey ghk_DEL;
 
         private Hotkeys.GlobalHotkey ghk_CTRL_DEL;
         private Hotkeys.GlobalHotkey ghk_CTRL_ENTER;
 
         private Data_Access DS = new Data_Access();
+
         private List<string> detailRequestQty = new List<string>();
-        
+        private List<string> productPriceList = new List<string>();
+        private List<string> subtotalList = new List<string>();
+
         private globalUtilities gUtil = new globalUtilities();
         private CultureInfo culture = new CultureInfo("id-ID");
         private Button[] arrButton = new Button[3];
-
-        MaskedTextBox maskedTextBox;
 
         public permintaanProdukForm()
         {
@@ -94,6 +96,18 @@ namespace RoyalPetz_ADMIN
                 case Keys.F11:
                     dataProdukForm displayProdukForm = new dataProdukForm(globalConstants.NEW_REQUEST_ORDER, this);
                     displayProdukForm.ShowDialog(this);
+                    break;
+
+                case Keys.Delete:
+                    if (detailRequestOrderDataGridView.Rows.Count > 1)
+                        if (detailRequestOrderDataGridView.ReadOnly == false)
+                        {
+                            if (DialogResult.Yes == MessageBox.Show("DELETE CURRENT ROW?", "WARNING", MessageBoxButtons.YesNo))
+                            {
+                                deleteCurrentRow();
+                                calculateTotal();
+                            }
+                        }
                     break;
             }
         }
@@ -145,8 +159,8 @@ namespace RoyalPetz_ADMIN
             ghk_F2 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F2, this);
             ghk_F2.Register();
 
-            ghk_F8 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F8, this);
-            ghk_F8.Register();
+            //ghk_F8 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F8, this);
+            //ghk_F8.Register();
 
             ghk_F9 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F9, this);
             ghk_F9.Register();
@@ -154,9 +168,11 @@ namespace RoyalPetz_ADMIN
             ghk_F11 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F11, this);
             ghk_F11.Register();
 
+            ghk_DEL = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Delete, this);
+            ghk_DEL.Register();
 
-            ghk_CTRL_DEL = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Delete, this);
-            ghk_CTRL_DEL.Register();
+            //ghk_CTRL_DEL = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Delete, this);
+            //ghk_CTRL_DEL.Register();
 
             ghk_CTRL_ENTER = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Enter, this);
             ghk_CTRL_ENTER.Register();
@@ -167,11 +183,12 @@ namespace RoyalPetz_ADMIN
         {
             ghk_F1.Unregister();
             ghk_F2.Unregister();
-            ghk_F8.Unregister();
+            //ghk_F8.Unregister();
             ghk_F9.Unregister();
             ghk_F11.Unregister();
+            ghk_DEL.Unregister();
 
-            ghk_CTRL_DEL.Unregister();
+            //ghk_CTRL_DEL.Unregister();
             ghk_CTRL_ENTER.Unregister();
         }
 
@@ -231,7 +248,9 @@ namespace RoyalPetz_ADMIN
             // CHECK FOR EXISTING SELECTED ITEM
             for (i = 0; i < detailRequestOrderDataGridView.Rows.Count && !found && !foundEmptyRow; i++)
             {
-                if (null != detailRequestOrderDataGridView.Rows[i].Cells["productName"].Value)
+                if (null != detailRequestOrderDataGridView.Rows[i].Cells["productName"].Value &&
+                     null != detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value &&
+                     gUtil.isProductIDExist(detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString()))
                 {
                     if (detailRequestOrderDataGridView.Rows[i].Cells["productName"].Value.ToString() == productName)
                     {
@@ -337,6 +356,9 @@ namespace RoyalPetz_ADMIN
                 {
                     productName = rdr.GetString("PRODUCT_NAME");
                     detailRequestOrderDataGridView.Rows.Add(rdr.GetString("PRODUCT_ID"), productName, rdr.GetString("RO_QTY"), rdr.GetString("PRODUCT_BASE_PRICE"), rdr.GetString("RO_SUBTOTAL"));
+                    subtotalList[detailRequestOrderDataGridView.Rows.Count - 1] = rdr.GetString("RO_SUBTOTAL");
+                    productPriceList[detailRequestOrderDataGridView.Rows.Count - 1] = rdr.GetString("PRODUCT_BASE_PRICE");
+                    detailRequestQty[detailRequestOrderDataGridView.Rows.Count - 1] = rdr.GetString("RO_QTY");
                 }
 
                 rdr.Close();
@@ -347,7 +369,7 @@ namespace RoyalPetz_ADMIN
         {
             double total = 0;
 
-            for (int i = 0; i<detailRequestOrderDataGridView.Rows.Count;i++)
+            for (int i = 0; i<detailRequestOrderDataGridView.Rows.Count-1;i++)
             {
                 total = total + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value);
             }
@@ -813,92 +835,7 @@ namespace RoyalPetz_ADMIN
             //this.detailRequestOrderDataGridView.CellEndEdit += new DataGridViewCellEventHandler(dataGridView1_CellEndEdit);
             //this.detailRequestOrderDataGridView.Scroll += new ScrollEventHandler(dataGridView1_Scroll);
         }
-
-        void dataGridView1_Scroll(object sender, ScrollEventArgs e)
-
-        {
-
-            if (this.maskedTextBox.Visible)
-
-            {
-                //we have to adjust the location for the MaskedTextBox while scrolling
-
-                Rectangle rect = this.detailRequestOrderDataGridView.GetCellDisplayRectangle(
-
-                    this.detailRequestOrderDataGridView.CurrentCell.ColumnIndex,
-
-                    this.detailRequestOrderDataGridView.CurrentCell.RowIndex, true);
-
-                this.maskedTextBox.Location = rect.Location;
-
-            }
-
-        }
-
-
-
-        void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-
-        {
-
-            if (e.ColumnIndex == this.detailRequestOrderDataGridView.Columns["qty"].Index) 
-
-            {
-
-                //string type = this.detailRequestOrderDataGridView["Type", e.RowIndex].Value.ToString();
-
-                //if (type == "Home Phone" || type == "Cell" || type == "Work")
-
-                {
-
-                    this.maskedTextBox.Mask = "000.000.000";
-
-                    Rectangle rect =
-                       this.detailRequestOrderDataGridView.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
-
-                    this.maskedTextBox.Location = rect.Location;
-
-                    this.maskedTextBox.Size = rect.Size;
-
-                    //this.maskedTextBox.Text = "1000";
-
-                    if (this.detailRequestOrderDataGridView[e.ColumnIndex, e.RowIndex].Value != null)
-
-                    {
-
-                        this.maskedTextBox.Text = this.detailRequestOrderDataGridView[e.ColumnIndex,
-                            e.RowIndex].Value.ToString();
-
-                    }
-
-                    this.maskedTextBox.Visible = true;
-
-                }
-
-                // if type is Email, do no show the MaskedTextBox
-
-            }
-
-        }
-
-
-
-        void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-
-        {
-
-            if (this.maskedTextBox.Visible)
-
-            {
-
-                this.detailRequestOrderDataGridView.CurrentCell.Value = this.maskedTextBox.Text;
-
-                this.maskedTextBox.Visible = false;
-
-            }
-
-        }
-
+        
         private void permintaanProdukForm_Load(object sender, EventArgs e)
         {
             int userAccessOption = 0;
@@ -934,7 +871,11 @@ namespace RoyalPetz_ADMIN
             arrButton[2] = exportButton;
             gUtil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
 
-            gUtil.reArrangeTabOrder(this);            
+            gUtil.reArrangeTabOrder(this);
+
+            subtotalList.Add("0");
+            productPriceList.Add("0");
+            detailRequestQty.Add("0");
         }
 
         private bool invoiceExist()
@@ -1032,11 +973,11 @@ namespace RoyalPetz_ADMIN
         private bool dataValidated()
         {
             int i = 0;
-            bool dataExist = true;
+            //bool dataExist = true;
 
             if (selectedBranchToID == 0)
             {
-                errorLabel.Text = "INFORMASI CABANG BELUM DI ISI";
+                errorLabel.Text = "SYSTEM BRANCH ID BELUM DIISI";
                 return false;
             }
 
@@ -1052,19 +993,19 @@ namespace RoyalPetz_ADMIN
                 return false;
             }
 
-            for (i = 0; i < detailRequestOrderDataGridView.Rows.Count && dataExist; i++)
-            {
-                if (null != detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value)
-                    dataExist = gUtil.isProductIDExist(detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString());
-                else
-                    dataExist = false;
-            }
-            if (!dataExist)
-            {
-                i = i + 1;
-                errorLabel.Text = "PRODUCT ID PADA BARIS [" + i + "] INVALID";
-                return false;
-            }
+            //for (i = 0; i < detailRequestOrderDataGridView.Rows.Count && dataExist; i++)
+            //{
+            //    if (null != detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value)
+            //        dataExist = gUtil.isProductIDExist(detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString());
+            //    else
+            //        dataExist = false;
+            //}
+            //if (!dataExist)
+            //{
+            //    i = i + 1;
+            //    errorLabel.Text = "PRODUCT ID PADA BARIS [" + i + "] INVALID";
+            //    return false;
+            //}
 
             return true;
         }
@@ -1122,7 +1063,7 @@ namespace RoyalPetz_ADMIN
                             throw internalEX;
 
                         // SAVE DETAIL TABLE
-                        for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count; i++)
+                        for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count-1; i++)
                         {
                             if (null != detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value)
                             {
@@ -1158,7 +1099,7 @@ namespace RoyalPetz_ADMIN
                             throw internalEX;
 
                         // RE-INSERT DETAIL TABLE
-                        for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count; i++)
+                        for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count-1; i++)
                         {
                             if (null != detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value)
                             {
@@ -1258,9 +1199,23 @@ namespace RoyalPetz_ADMIN
             if (detailRequestOrderDataGridView.SelectedCells.Count > 0)
             {
                 int rowSelectedIndex = detailRequestOrderDataGridView.SelectedCells[0].RowIndex;
-                DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[rowSelectedIndex];    
+                DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[rowSelectedIndex];
+                detailRequestOrderDataGridView.CurrentCell = selectedRow.Cells["productName"];
 
-                detailRequestOrderDataGridView.Rows.Remove(selectedRow);
+                if (null != selectedRow && rowSelectedIndex != detailRequestOrderDataGridView.Rows.Count - 1)
+                {
+                    for (int i = rowSelectedIndex; i < detailRequestOrderDataGridView.Rows.Count - 1; i++)
+                    {
+                        detailRequestQty[i] = detailRequestQty[i + 1];
+                        productPriceList[i] = productPriceList[i + 1];
+                        subtotalList[i] = subtotalList[i + 1];
+                    }
+
+                    isLoading = true;
+                    detailRequestOrderDataGridView.Rows.Remove(selectedRow);
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "deleteCurrentRow [" + rowSelectedIndex + "]");
+                    isLoading = false;
+                }
             }
         }
 
@@ -1598,12 +1553,24 @@ namespace RoyalPetz_ADMIN
 
         private void detailRequestOrderDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 2 && e.RowIndex != this.detailRequestOrderDataGridView.NewRowIndex && null != e.Value)
+            if (
+              (detailRequestOrderDataGridView.Columns[e.ColumnIndex].Name == "qty" ||
+              detailRequestOrderDataGridView.Columns[e.ColumnIndex].Name == "HPP" ||
+              detailRequestOrderDataGridView.Columns[e.ColumnIndex].Name == "subTotal")
+             && e.RowIndex != this.detailRequestOrderDataGridView.NewRowIndex && null != e.Value)
             {
+                isLoading = true;
                 double d = double.Parse(e.Value.ToString());
-                //e.Value = d.ToString("0.00##");#,0.##
-                e.Value = d.ToString("#,0.##");
+                e.Value = d.ToString(globalUtilities.CELL_FORMATTING_NUMERIC_FORMAT);
+                isLoading = false;
             }
+        }
+
+        private void detailRequestOrderDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            subtotalList.Add("0");
+            productPriceList.Add("0");
+            detailRequestQty.Add("0");
         }
     }
 }

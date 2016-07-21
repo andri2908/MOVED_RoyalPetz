@@ -113,7 +113,6 @@
             this.label5.Size = new System.Drawing.Size(93, 18);
             this.label5.TabIndex = 43;
             this.label5.Text = "TANGGAL";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // saveButton
             // 
@@ -161,7 +160,6 @@
             this.label8.Size = new System.Drawing.Size(14, 18);
             this.label8.TabIndex = 45;
             this.label8.Text = ":";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // TransaksiAccountGridView
             // 
@@ -203,6 +201,7 @@
             this.TransaksiAccountGridView.Size = new System.Drawing.Size(719, 357);
             this.TransaksiAccountGridView.TabIndex = 42;
             this.TransaksiAccountGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.TransaksiAccountGridView_CellDoubleClick);
+            this.TransaksiAccountGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.TransaksiAccountGridView_CellFormatting);
             // 
             // journal_id
             // 
