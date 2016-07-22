@@ -784,7 +784,7 @@ namespace RoyalPetz_ADMIN
 
                 // CHECK PAYMENT AMOUNT MUST BE MORE OR EQUALS THAN THE BILL
                 paymentAmount = Convert.ToDouble(bayarAmount);
-                if (paymentAmount < globalTotalValue)
+                if (paymentAmount < globalTotalValue - discValue)
                 {
                     errorLabel.Text = "JUMLAH PEMBAYARAN LEBIH KECIL DARI NOTA";
                     return false;
@@ -840,8 +840,8 @@ namespace RoyalPetz_ADMIN
             gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ATTEMPT TO SAVE SALES DATA [" + SODateTime + "]");
 
             if (discJualMaskedTextBox.Text.Length > 0)
-            { 
-                salesDiscountFinal = discJualMaskedTextBox.Text;
+            {
+                salesDiscountFinal = discValue.ToString();
                 gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : SALES DISC FINAL [" + discJualMaskedTextBox.Text + "]");
             }
 
@@ -1454,7 +1454,7 @@ namespace RoyalPetz_ADMIN
 
                 hpp = getProductPriceValue(selectedProductID, customerComboBox.SelectedIndex);
                 gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : ComboBox_SelectedIndexChanged, PRODUCT_SALES_PRICE [" + hpp + "]");
-                selectedRow.Cells["productPrice"].Value = hpp.ToString();
+                selectedRow.Cells["productPrice"].Value = hpp;
                 productPriceList[rowSelectedIndex] = hpp.ToString();
 
                 selectedRow.Cells["qty"].Value = 0;
@@ -1501,7 +1501,7 @@ namespace RoyalPetz_ADMIN
                 }
 
                 selectedRow.Cells["jumlah"].Value = "0";
-
+                jumlahList[rowSelectedIndex] = "0";
                 calculateTotal();
             }
             else
@@ -1690,7 +1690,7 @@ namespace RoyalPetz_ADMIN
 
             subTotal = calculateSubTotal(rowSelectedIndex, productPrice);
             gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : TextBox_TextChanged, subtotal value [" + subTotal + "]");
-            selectedRow.Cells["jumlah"].Value = subTotal.ToString();
+            selectedRow.Cells["jumlah"].Value = subTotal;
             jumlahList[rowSelectedIndex] = subTotal.ToString();
 
             gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : TextBox_TextChanged, attempt to calculate total value");
@@ -2839,11 +2839,13 @@ namespace RoyalPetz_ADMIN
             {
                 totalAfterDisc = globalTotalValue - Convert.ToDouble(discJualMaskedTextBox.Text);
                 discValue = Convert.ToDouble(discJualMaskedTextBox.Text);
+                totalLabel.Text = (globalTotalValue - discValue).ToString("C0", culture);
             }
             else
             {
                 totalAfterDisc = globalTotalValue;
                 discValue = 0;
+                totalLabel.Text = (globalTotalValue - discValue).ToString("C0", culture);
             }
 
             gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : discJualMaskedTextBox_Validating, totalAfterDisc [" + totalAfterDisc + "]");
