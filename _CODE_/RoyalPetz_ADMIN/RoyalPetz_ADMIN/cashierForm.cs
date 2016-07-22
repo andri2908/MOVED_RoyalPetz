@@ -2568,10 +2568,10 @@ namespace RoyalPetz_ADMIN
 
 
 
-                        rectright.X = startRightX - 15;
+                        rectright.X = startRightX - 35;
                         rectright.Y = rect.Y;
 
-                        rectright.Width = colxwidth - 5;
+                        rectright.Width = colxwidth;// - 5;
                         sf.LineAlignment = StringAlignment.Far;
                         sf.Alignment = StringAlignment.Far;
                         ucapan = subtotal.ToString("C2", culture);//" Rp." + product_price;
@@ -2593,7 +2593,7 @@ namespace RoyalPetz_ADMIN
 
             Offset = Offset + add_offset;
             rect.Y = startY + Offset;
-            rect.X = rect.X + 80;//95;
+            rect.X = rect.X + 70;//95;
             //rectcenter.X = rectcenter.X + 15;
             //rectcenter.Width = colxwidth;
             sf.LineAlignment = StringAlignment.Near;
@@ -2638,7 +2638,7 @@ namespace RoyalPetz_ADMIN
                 //rectcenter.Width = colxwidth;
                 sf.LineAlignment = StringAlignment.Near;
                 sf.Alignment = StringAlignment.Near;
-                ucapan = "KEMBALI : " + uangKembaliTextBox.Text;
+                ucapan = "KEMBALI : " + uangKembaliTextBox.Text + ",00";
                 //rectcenter.Y = rect.Y;
                 graphics.DrawString(ucapan, new Font("Courier New", fontSize),
                          new SolidBrush(Color.Black), rect, sf);
@@ -2859,6 +2859,7 @@ namespace RoyalPetz_ADMIN
 
             gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : discJualMaskedTextBox_Validating, totalAfterDisc [" + totalAfterDisc + "]");
             totalAfterDiscTextBox.Text = totalAfterDisc.ToString("C0", culture);
+            calculateChangeValue();
         }
 
         private void discJualMaskedTextBox_KeyPress(object sender, KeyPressEventArgs e)
