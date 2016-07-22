@@ -416,6 +416,14 @@ namespace RoyalPetz_ADMIN
             disc1.Clear();
             disc2.Clear();
             discRP.Clear();
+
+
+            salesQty.Add("0");
+            disc1.Add("0");
+            disc2.Add("0");
+            discRP.Add("0");
+
+
             selectedPelangganID = 0;
             globalTotalValue = 0;
             discValue = 0;
@@ -1818,6 +1826,7 @@ namespace RoyalPetz_ADMIN
         private void cashierForm_Load(object sender, EventArgs e)
         {
             registerGlobalHotkey();
+
             salesQty.Add("0");
             disc1.Add("0");
             disc2.Add("0");
@@ -2147,8 +2156,8 @@ namespace RoyalPetz_ADMIN
                 DialogResult result;
                 printPreviewDialog1.Width = 512;
                 printPreviewDialog1.Height = 768;
-                result = printPreviewDialog1.ShowDialog();
-                if (result == DialogResult.OK)
+                //result = printPreviewDialog1.ShowDialog();
+                //if (result == DialogResult.OK)
                 {
                     printDocument1.Print();
                 }
@@ -2559,7 +2568,7 @@ namespace RoyalPetz_ADMIN
 
 
 
-                        rectright.X = startRightX - 5;
+                        rectright.X = startRightX - 15;
                         rectright.Y = rect.Y;
 
                         rectright.Width = colxwidth - 5;
@@ -2584,7 +2593,7 @@ namespace RoyalPetz_ADMIN
 
             Offset = Offset + add_offset;
             rect.Y = startY + Offset;
-            rect.X = rect.X + 95;
+            rect.X = rect.X + 80;//95;
             //rectcenter.X = rectcenter.X + 15;
             //rectcenter.Width = colxwidth;
             sf.LineAlignment = StringAlignment.Near;
