@@ -22,6 +22,10 @@ namespace RoyalPetz_ADMIN
         Data_Access DS = new Data_Access();
         private globalUtilities gutil = new globalUtilities();
 
+        dataGroupDetailForm newGroupForm = null;
+        dataGroupDetailForm editGroupForm = null;
+        groupAccessModuleForm displayGroupAccessForm = null;
+
         public dataGroupForm()
         {
             InitializeComponent();
@@ -57,8 +61,11 @@ namespace RoyalPetz_ADMIN
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            dataGroupDetailForm displayForm = new dataGroupDetailForm(globalConstants.NEW_GROUP_USER);
-            displayForm.ShowDialog(this);
+            if (null == newGroupForm || newGroupForm.IsDisposed)
+                    newGroupForm = new dataGroupDetailForm(globalConstants.NEW_GROUP_USER);
+
+            newGroupForm.Show();
+            newGroupForm.WindowState = FormWindowState.Normal;
         }
 
         private void loadUserGroupData()
@@ -99,15 +106,21 @@ namespace RoyalPetz_ADMIN
                 case globalConstants.TAMBAH_HAPUS_GROUP_USER:
                     gutil.saveSystemDebugLog(0, "CREATE DATA GROUP DETAIL FORM, GROUP USER ID ["+selectedGroupID+"]");
 
-                    dataGroupDetailForm displayNewGroupForm = new dataGroupDetailForm(globalConstants.EDIT_GROUP_USER, selectedGroupID);
-                    displayNewGroupForm.ShowDialog(this);
+                    if (null == editGroupForm || editGroupForm.IsDisposed)
+                            editGroupForm = new dataGroupDetailForm(globalConstants.EDIT_GROUP_USER, selectedGroupID);
+
+                    editGroupForm.Show();
+                    editGroupForm.WindowState = FormWindowState.Normal;
                     break;
                 
                 case globalConstants.PENGATURAN_GRUP_AKSES:
                     gutil.saveSystemDebugLog(0, "CREATE DATA GROUP ACCESS MODULE FORM, GROUP USER ID [" + selectedGroupID + "]");
 
-                    groupAccessModuleForm groupAccessForm = new groupAccessModuleForm(selectedGroupID);
-                    groupAccessForm.ShowDialog(this);
+                    if (null == displayGroupAccessForm || displayGroupAccessForm.IsDisposed)
+                            displayGroupAccessForm = new groupAccessModuleForm(selectedGroupID);
+
+                    displayGroupAccessForm.Show();
+                    displayGroupAccessForm.WindowState = FormWindowState.Normal;
                     break;
 
                 //case globalConstants.PENGATURAN_POTONGAN_HARGA:

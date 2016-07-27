@@ -22,6 +22,10 @@ namespace RoyalPetz_ADMIN
         Data_Access DS = new Data_Access();
         private globalUtilities gutil = new globalUtilities();
 
+        dataUserDetailForm newUserForm = null;
+        dataUserDetailForm editUserForm = null;
+
+
         public dataUserForm()
         {
             InitializeComponent();
@@ -123,8 +127,12 @@ namespace RoyalPetz_ADMIN
             {
                 default:
                     gutil.saveSystemDebugLog(0, "CREATE DATA USER DETAIL FORM, UID [" + selectedUserID + "]");
-                    dataUserDetailForm displayForm = new dataUserDetailForm(globalConstants.EDIT_USER, selectedUserID);
-                    displayForm.ShowDialog(this);
+
+                    if (null == editUserForm || editUserForm.IsDisposed)
+                            editUserForm = new dataUserDetailForm(globalConstants.EDIT_USER, selectedUserID);
+
+                    editUserForm.Show();
+                    editUserForm.WindowState = FormWindowState.Normal;
                     break;
             }
         }
@@ -132,8 +140,11 @@ namespace RoyalPetz_ADMIN
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            dataUserDetailForm displayForm = new dataUserDetailForm(globalConstants.NEW_USER);
-            displayForm.ShowDialog(this);
+            if (null == newUserForm || newUserForm.IsDisposed)
+                    newUserForm = new dataUserDetailForm(globalConstants.NEW_USER);
+
+            newUserForm.Show();
+            newUserForm.WindowState = FormWindowState.Normal;
         }
 
         private void dataSalesDataGridView_DoubleClick(object sender, EventArgs e)

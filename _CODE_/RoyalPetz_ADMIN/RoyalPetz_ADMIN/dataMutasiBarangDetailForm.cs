@@ -753,8 +753,8 @@ namespace RoyalPetz_ADMIN
 
                         selectedROInvoice = rdr.GetString("RO_INVOICE");
 
-                        totalLabel.Text = rdr.GetDouble("PM_TOTAL").ToString("C2", culture);
-                        totalApproved.Text = rdr.GetDouble("PM_TOTAL").ToString("C2", culture);
+                        totalLabel.Text = rdr.GetDouble("PM_TOTAL").ToString("C0", culture);
+                        totalApproved.Text = rdr.GetDouble("PM_TOTAL").ToString("C0", culture);
                         globalTotalValue = rdr.GetDouble("PM_TOTAL");
                     }
 

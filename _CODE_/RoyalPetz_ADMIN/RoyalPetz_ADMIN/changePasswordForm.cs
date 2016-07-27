@@ -178,5 +178,10 @@ namespace RoyalPetz_ADMIN
         {
             errorLabel.Text = "";
         }
+
+        private void changePasswordForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
     }
 }

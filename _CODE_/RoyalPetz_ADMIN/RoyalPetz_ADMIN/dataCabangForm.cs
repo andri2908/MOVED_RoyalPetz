@@ -22,6 +22,10 @@ namespace RoyalPetz_ADMIN
 
         private globalUtilities gutil = new globalUtilities();
 
+        dataCabangDetailForm newBranchForm = null;
+        dataCabangDetailForm editBranchForm = null;
+        pembayaranLumpSumForm pembayaranPiutangForm = null;
+
         public dataCabangForm()
         {
             InitializeComponent();
@@ -37,8 +41,12 @@ namespace RoyalPetz_ADMIN
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            dataCabangDetailForm displayedForm = new dataCabangDetailForm(globalConstants.NEW_BRANCH, 0);
-            displayedForm.ShowDialog(this);
+            if (null == newBranchForm || newBranchForm.IsDisposed)
+                newBranchForm = new dataCabangDetailForm(globalConstants.NEW_BRANCH, 0);
+
+            newBranchForm.Show();
+            newBranchForm.WindowState = FormWindowState.Normal;
+
             dataCabangGridView.DataSource = null;
             if (!namaBranchTextbox.Text.Equals(""))
                 loadBranchData(namaBranchTextbox.Text);
@@ -96,13 +104,19 @@ namespace RoyalPetz_ADMIN
 
             if (originModuleID == globalConstants.DATA_PIUTANG_MUTASI)
             {
-                pembayaranLumpSumForm dataPiutangMutasi = new pembayaranLumpSumForm(originModuleID, selectedBranchID);
-                dataPiutangMutasi.ShowDialog(this);
+                if (null == pembayaranPiutangForm || pembayaranPiutangForm.IsDisposed)
+                    pembayaranPiutangForm = new pembayaranLumpSumForm(originModuleID, selectedBranchID);
+
+                pembayaranPiutangForm.Show();
+                pembayaranPiutangForm.WindowState = FormWindowState.Normal;
             }
             else
             {
-                dataCabangDetailForm displayedForm = new dataCabangDetailForm(globalConstants.EDIT_BRANCH, selectedBranchID);
-                displayedForm.ShowDialog(this);
+                if (null == editBranchForm || editBranchForm.IsDisposed)
+                        editBranchForm = new dataCabangDetailForm(globalConstants.EDIT_BRANCH, selectedBranchID);
+
+                editBranchForm.Show();
+                editBranchForm.WindowState = FormWindowState.Normal;
             }
         }
 
@@ -139,14 +153,21 @@ namespace RoyalPetz_ADMIN
                 if (originModuleID == globalConstants.DATA_PIUTANG_MUTASI)
                 {
                     gutil.saveSystemDebugLog(0, "CREATE PEMBAYARAN PIUTANG MUTASI, BRANCH ID [" + selectedBranchID + "]");
-                    pembayaranLumpSumForm dataPiutangMutasi = new pembayaranLumpSumForm(originModuleID , selectedBranchID);
-                    dataPiutangMutasi.ShowDialog(this);
+
+                    if (null == pembayaranPiutangForm || pembayaranPiutangForm.IsDisposed)
+                        pembayaranPiutangForm = new pembayaranLumpSumForm(originModuleID, selectedBranchID);
+
+                    pembayaranPiutangForm.Show();
+                    pembayaranPiutangForm.WindowState = FormWindowState.Normal;
                 }
                 else
                 {
                     gutil.saveSystemDebugLog(0, "CREATE DATA BRANCH DETAIL, BRANCH ID [" + selectedBranchID + "]");
-                    dataCabangDetailForm displayedForm = new dataCabangDetailForm(globalConstants.EDIT_BRANCH, selectedBranchID);
-                    displayedForm.ShowDialog(this);
+                    if (null == editBranchForm || editBranchForm.IsDisposed)
+                            editBranchForm = new dataCabangDetailForm(globalConstants.EDIT_BRANCH, selectedBranchID);
+
+                    editBranchForm.Show();
+                    editBranchForm.WindowState = FormWindowState.Normal;
                 }
             }
         }

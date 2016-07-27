@@ -33,6 +33,11 @@ namespace RoyalPetz_ADMIN
         private globalUtilities gutil = new globalUtilities();
         private Data_Access DS = new Data_Access();
 
+        dataProdukDetailForm newProductForm = null;
+        dataProdukDetailForm editProductForm = null;
+        stokPecahBarangForm displayStokPecahBarangForm = null;
+        penyesuaianStokForm displayPenyesuaianStokForm = null;
+
         public dataProdukForm()
         {
             InitializeComponent();
@@ -148,14 +153,20 @@ namespace RoyalPetz_ADMIN
         {
             switch (originModuleID)
             {
-                case globalConstants.STOK_PECAH_BARANG: 
-                    stokPecahBarangForm displaystokPecahBarangForm = new stokPecahBarangForm(selectedProductID);
-                    displaystokPecahBarangForm.ShowDialog(this);
+                case globalConstants.STOK_PECAH_BARANG:
+                    if (null == displayStokPecahBarangForm || displayStokPecahBarangForm.IsDisposed)
+                        displayStokPecahBarangForm = new stokPecahBarangForm(selectedProductID);
+
+                    displayStokPecahBarangForm.Show();
+                    displayStokPecahBarangForm.WindowState = FormWindowState.Normal;
                     break;
 
                 case globalConstants.PENYESUAIAN_STOK:
-                    penyesuaianStokForm penyesuaianStokForm = new penyesuaianStokForm(selectedProductID);
-                    penyesuaianStokForm.ShowDialog(this);
+                    if (null == displayPenyesuaianStokForm || displayPenyesuaianStokForm.IsDisposed)
+                        displayPenyesuaianStokForm = new penyesuaianStokForm(selectedProductID);
+
+                    displayPenyesuaianStokForm.Show();
+                    displayPenyesuaianStokForm.WindowState = FormWindowState.Normal;
                     break;
 
                 case globalConstants.BROWSE_STOK_PECAH_BARANG:
@@ -201,16 +212,22 @@ namespace RoyalPetz_ADMIN
                     break;
 
                 default: // MASTER DATA PRODUK
-                    dataProdukDetailForm displayForm = new dataProdukDetailForm(globalConstants.EDIT_PRODUK, selectedProductID);
-                    displayForm.ShowDialog(this);
+                    if (null == editProductForm || editProductForm.IsDisposed)
+                        editProductForm = new dataProdukDetailForm(globalConstants.EDIT_PRODUK, selectedProductID);
+
+                    editProductForm.Show();
+                    editProductForm.WindowState = FormWindowState.Normal;
                     break;
             }   
         }
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            dataProdukDetailForm displayForm = new dataProdukDetailForm(globalConstants.NEW_PRODUK);
-            displayForm.ShowDialog(this);
+            if (null == newProductForm || newProductForm.IsDisposed)
+                newProductForm = new dataProdukDetailForm(globalConstants.NEW_PRODUK);
+
+            newProductForm.Show();
+            newProductForm.WindowState = FormWindowState.Normal;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

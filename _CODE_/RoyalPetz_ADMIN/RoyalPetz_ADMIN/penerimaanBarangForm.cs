@@ -42,6 +42,7 @@ namespace RoyalPetz_ADMIN
         private List<string> detailHpp = new List<string>();
         private List<string> subtotalList = new List<string>();
 
+        private bool forceUpOneLevel = false;
 
         string previousInput = "";
 
@@ -646,6 +647,8 @@ namespace RoyalPetz_ADMIN
             detailHpp.Add("0");
             detailRequestQty.Add("0");
             subtotalList.Add("0");
+
+            prInvoiceTextBox.Select();
         }
 
         private double getHPPValue(string productID)
@@ -693,6 +696,7 @@ namespace RoyalPetz_ADMIN
                 textBox.TextChanged += TextBox_TextChanged;
                 textBox.PreviewKeyDown -= TextBox_previewKeyDown;
                 textBox.AutoCompleteMode = AutoCompleteMode.None;
+                textBox.KeyUp += Textbox_KeyUp; 
             }
 
             if ((detailGridView.CurrentCell.OwningColumn.Name == "productID") && e.Control is TextBox)
@@ -804,6 +808,7 @@ namespace RoyalPetz_ADMIN
                 {
                     updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
                     detailGridView.CurrentCell = selectedRow.Cells["qtyReceived"];
+                    forceUpOneLevel = true;
                 }
                 else
                 {
@@ -811,6 +816,17 @@ namespace RoyalPetz_ADMIN
                 }
             }
         }
+
+        private void Textbox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (forceUpOneLevel)
+            {
+                int pos = detailGridView.CurrentCell.RowIndex;
+                detailGridView.CurrentCell = detailGridView.Rows[pos - 1].Cells["qty"];
+                forceUpOneLevel = false;
+            }
+        }
+
 
         private void TextBox_TextChanged(object sender, EventArgs e)
         {

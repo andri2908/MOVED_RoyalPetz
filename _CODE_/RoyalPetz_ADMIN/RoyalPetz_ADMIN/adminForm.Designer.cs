@@ -86,6 +86,7 @@
             this.MENU_transaksiPenjualan = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_modulKasir = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_setNoFaktur = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_returPenjualan = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_returByInvoice = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_returByStokAdjustment = new System.Windows.Forms.ToolStripMenuItem();
@@ -156,8 +157,6 @@
             this.masterUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generatorXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem74 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem27 = new System.Windows.Forms.ToolStripMenuItem();
             this.MAINMENU_TaxModule = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem28 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
@@ -183,7 +182,6 @@
             this.SHORTCUT_returBeli = new System.Windows.Forms.ToolStripButton();
             this.SHORTCUT_returJual = new System.Windows.Forms.ToolStripButton();
             this.timerMessage = new System.Windows.Forms.Timer(this.components);
-            this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -200,7 +198,6 @@
             this.MAINMENU_KEUANGAN,
             this.laporanToolStripMenuItem,
             this.toolStripMenuItem25,
-            this.toolStripMenuItem74,
             this.MAINMENU_TaxModule,
             this.informasiToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -769,6 +766,15 @@
             this.MENU_setNoFaktur.Text = "Set No Faktur";
             this.MENU_setNoFaktur.Click += new System.EventHandler(this.toolStripMenuItem19_Click);
             // 
+            // toolStripMenuItem11
+            // 
+            this.toolStripMenuItem11.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem11.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem11.Name = "toolStripMenuItem11";
+            this.toolStripMenuItem11.Size = new System.Drawing.Size(174, 22);
+            this.toolStripMenuItem11.Text = "Copy Nota";
+            this.toolStripMenuItem11.Click += new System.EventHandler(this.toolStripMenuItem11_Click_1);
+            // 
             // MENU_returPenjualan
             // 
             this.MENU_returPenjualan.BackColor = System.Drawing.Color.SteelBlue;
@@ -961,6 +967,8 @@
             this.laporanToolStripMenuItem.Name = "laporanToolStripMenuItem";
             this.laporanToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
             this.laporanToolStripMenuItem.Text = "Laporan";
+            this.laporanToolStripMenuItem.DropDownClosed += new System.EventHandler(this.laporanToolStripMenuItem_DropDownClosed);
+            this.laporanToolStripMenuItem.DropDownOpened += new System.EventHandler(this.laporanToolStripMenuItem_DropDownOpened);
             // 
             // pembelianBarangToolStripMenuItem
             // 
@@ -1457,28 +1465,6 @@
             this.toolStripMenuItem10.Text = "USB Utility";
             this.toolStripMenuItem10.Click += new System.EventHandler(this.toolStripMenuItem10_Click_1);
             // 
-            // toolStripMenuItem74
-            // 
-            this.toolStripMenuItem74.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem74.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem27});
-            this.toolStripMenuItem74.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMenuItem74.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripMenuItem74.Name = "toolStripMenuItem74";
-            this.toolStripMenuItem74.Size = new System.Drawing.Size(66, 20);
-            this.toolStripMenuItem74.Text = "Admin";
-            this.toolStripMenuItem74.DropDownClosed += new System.EventHandler(this.toolStripMenuItem74_DropDownClosed);
-            this.toolStripMenuItem74.DropDownOpened += new System.EventHandler(this.toolStripMenuItem74_DropDownOpened);
-            // 
-            // toolStripMenuItem27
-            // 
-            this.toolStripMenuItem27.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem27.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMenuItem27.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripMenuItem27.Name = "toolStripMenuItem27";
-            this.toolStripMenuItem27.Size = new System.Drawing.Size(211, 22);
-            this.toolStripMenuItem27.Text = "Laporan Penjualan";
-            // 
             // MAINMENU_TaxModule
             // 
             this.MAINMENU_TaxModule.BackColor = System.Drawing.Color.SteelBlue;
@@ -1629,7 +1615,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(1008, 69);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
-            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
             // SHORTCUT_produk
             // 
@@ -1734,15 +1719,6 @@
             this.timerMessage.Interval = 3600000;
             this.timerMessage.Tick += new System.EventHandler(this.timerMessage_Tick);
             // 
-            // toolStripMenuItem11
-            // 
-            this.toolStripMenuItem11.BackColor = System.Drawing.Color.SteelBlue;
-            this.toolStripMenuItem11.ForeColor = System.Drawing.Color.FloralWhite;
-            this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-            this.toolStripMenuItem11.Size = new System.Drawing.Size(174, 22);
-            this.toolStripMenuItem11.Text = "Copy Nota";
-            this.toolStripMenuItem11.Click += new System.EventHandler(this.toolStripMenuItem11_Click_1);
-            // 
             // adminForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1831,9 +1807,7 @@
         private System.Windows.Forms.ToolStripMenuItem MENU_pembayaranPiutang;
         private System.Windows.Forms.ToolStripMenuItem MENU_pengaturanLimitPajak;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem26;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem74;
         private System.Windows.Forms.ToolStripMenuItem MAINMENU_TaxModule;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem27;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem28;
         private System.Windows.Forms.ToolStripMenuItem MENU_pengaturanGroupAkses;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
