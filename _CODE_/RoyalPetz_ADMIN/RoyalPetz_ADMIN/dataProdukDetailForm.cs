@@ -37,7 +37,10 @@ namespace RoyalPetz_ADMIN
         private int options = 0;
         private bool isLoading = false;
         private stokPecahBarangForm parentForm;
-        
+
+        dataKategoriProdukForm selectKategoriForm = null;
+        dataSatuanForm selectSatuanForm = null;
+
         public dataProdukDetailForm()
         {
             InitializeComponent();
@@ -61,6 +64,8 @@ namespace RoyalPetz_ADMIN
         public void setSelectedUnitID(int unitID)
         {
             selectedUnitID = unitID;
+
+            loadUnitIDInformation();
         }
 
         public void addSelectedKategoriID(int kategoriID)
@@ -74,6 +79,8 @@ namespace RoyalPetz_ADMIN
 
             if (!exist)
                 currentSelectedKategoriID.Add(kategoriID);
+
+            loadKategoriIDInformation();
         }
 
         private bool checkRegEx(string textToCheck)
@@ -431,10 +438,11 @@ namespace RoyalPetz_ADMIN
 
         private void searchUnitButton_Click(object sender, EventArgs e)
         {
-            dataSatuanForm displayedForm = new dataSatuanForm(globalConstants.PRODUK_DETAIL_FORM, this);
-            displayedForm.ShowDialog(this);
+            if (null == selectSatuanForm || selectSatuanForm.IsDisposed)
+                selectSatuanForm = new dataSatuanForm(globalConstants.PRODUK_DETAIL_FORM, this);
 
-            loadUnitIDInformation();
+            selectSatuanForm.Show();
+            selectSatuanForm.WindowState = FormWindowState.Normal;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -460,10 +468,13 @@ namespace RoyalPetz_ADMIN
 
         private void searchKategoriButton_Click(object sender, EventArgs e)
         {
-            dataKategoriProdukForm displayedForm = new dataKategoriProdukForm(globalConstants.PRODUK_DETAIL_FORM, this);
-            displayedForm.ShowDialog(this);
+            if (null == selectKategoriForm || selectKategoriForm.IsDisposed)
+            {
+                selectKategoriForm = new dataKategoriProdukForm(globalConstants.PRODUK_DETAIL_FORM, this);
+            }
 
-            loadKategoriIDInformation();
+            selectKategoriForm.Show();
+            selectKategoriForm.WindowState = FormWindowState.Normal;
         }
 
         private bool dataValidated()

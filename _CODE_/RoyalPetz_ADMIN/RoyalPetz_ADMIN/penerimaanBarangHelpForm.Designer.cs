@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -47,18 +46,6 @@
             this.label6.Size = new System.Drawing.Size(307, 18);
             this.label6.TabIndex = 50;
             this.label6.Text = "F11 : Tampilkan Pencarian Produk";
-            // 
-            // label5
-            // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label5.Location = new System.Drawing.Point(12, 93);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(245, 18);
-            this.label5.TabIndex = 49;
-            this.label5.Text = "F8 : Tambahkan Baris Baru";
             // 
             // label2
             // 
@@ -104,9 +91,9 @@
             this.label9.ForeColor = System.Drawing.Color.FloralWhite;
             this.label9.Location = new System.Drawing.Point(12, 181);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(316, 18);
+            this.label9.Size = new System.Drawing.Size(272, 18);
             this.label9.TabIndex = 53;
-            this.label9.Text = "Ctrl+Delete : Menghapus Row Aktif";
+            this.label9.Text = "Delete : Menghapus Row Aktif";
             // 
             // penerimaanBarangHelpForm
             // 
@@ -117,7 +104,6 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
@@ -133,7 +119,6 @@
         #endregion
 
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label7;

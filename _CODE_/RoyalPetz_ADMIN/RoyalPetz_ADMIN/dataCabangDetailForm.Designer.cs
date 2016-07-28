@@ -66,7 +66,7 @@
             this.branchAddress2TextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.branchAddress2TextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.branchAddress2TextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.branchAddress2TextBox.Location = new System.Drawing.Point(222, 124);
+            this.branchAddress2TextBox.Location = new System.Drawing.Point(221, 124);
             this.branchAddress2TextBox.MaxLength = 100;
             this.branchAddress2TextBox.Name = "branchAddress2TextBox";
             this.branchAddress2TextBox.Size = new System.Drawing.Size(595, 27);
@@ -77,7 +77,7 @@
             this.branchAddressCityTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.branchAddressCityTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.branchAddressCityTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.branchAddressCityTextBox.Location = new System.Drawing.Point(222, 164);
+            this.branchAddressCityTextBox.Location = new System.Drawing.Point(221, 164);
             this.branchAddressCityTextBox.MaxLength = 100;
             this.branchAddressCityTextBox.Name = "branchAddressCityTextBox";
             this.branchAddressCityTextBox.Size = new System.Drawing.Size(595, 27);
@@ -88,7 +88,7 @@
             this.branchTelephoneTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.branchTelephoneTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.branchTelephoneTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.branchTelephoneTextBox.Location = new System.Drawing.Point(222, 203);
+            this.branchTelephoneTextBox.Location = new System.Drawing.Point(221, 203);
             this.branchTelephoneTextBox.MaxLength = 15;
             this.branchTelephoneTextBox.Name = "branchTelephoneTextBox";
             this.branchTelephoneTextBox.Size = new System.Drawing.Size(146, 27);
@@ -124,7 +124,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 92.76018F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.239819F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 616F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 617F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.branchNameTextBox, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.branchAddress1TextBox, 2, 3);
@@ -172,7 +172,7 @@
             this.tableLayoutPanel2.Controls.Add(this.label3, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.ip2Textbox, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.label7, 3, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(222, 41);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(221, 41);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -268,7 +268,7 @@
             this.branchNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.branchNameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.branchNameTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.branchNameTextBox.Location = new System.Drawing.Point(222, 5);
+            this.branchNameTextBox.Location = new System.Drawing.Point(221, 5);
             this.branchNameTextBox.MaxLength = 30;
             this.branchNameTextBox.Name = "branchNameTextBox";
             this.branchNameTextBox.Size = new System.Drawing.Size(595, 27);
@@ -279,7 +279,7 @@
             this.branchAddress1TextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.branchAddress1TextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.branchAddress1TextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.branchAddress1TextBox.Location = new System.Drawing.Point(222, 83);
+            this.branchAddress1TextBox.Location = new System.Drawing.Point(221, 83);
             this.branchAddress1TextBox.MaxLength = 100;
             this.branchAddress1TextBox.Name = "branchAddress1TextBox";
             this.branchAddress1TextBox.Size = new System.Drawing.Size(595, 27);
@@ -339,7 +339,7 @@
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label17.Location = new System.Drawing.Point(207, 10);
+            this.label17.Location = new System.Drawing.Point(206, 10);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(9, 18);
             this.label17.TabIndex = 12;
@@ -351,7 +351,7 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label18.Location = new System.Drawing.Point(207, 48);
+            this.label18.Location = new System.Drawing.Point(206, 48);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(9, 18);
             this.label18.TabIndex = 13;
@@ -363,7 +363,7 @@
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label23.Location = new System.Drawing.Point(207, 87);
+            this.label23.Location = new System.Drawing.Point(206, 87);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(9, 18);
             this.label23.TabIndex = 14;
@@ -375,7 +375,7 @@
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label30.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label30.Location = new System.Drawing.Point(207, 208);
+            this.label30.Location = new System.Drawing.Point(206, 208);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(9, 18);
             this.label30.TabIndex = 15;
@@ -398,7 +398,7 @@
             this.nonAktifCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.nonAktifCheckbox.AutoSize = true;
             this.nonAktifCheckbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nonAktifCheckbox.Location = new System.Drawing.Point(222, 250);
+            this.nonAktifCheckbox.Location = new System.Drawing.Point(221, 250);
             this.nonAktifCheckbox.Name = "nonAktifCheckbox";
             this.nonAktifCheckbox.Size = new System.Drawing.Size(170, 22);
             this.nonAktifCheckbox.TabIndex = 6;

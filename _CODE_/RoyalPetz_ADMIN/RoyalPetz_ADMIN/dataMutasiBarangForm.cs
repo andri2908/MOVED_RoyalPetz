@@ -26,6 +26,8 @@ namespace RoyalPetz_ADMIN
         private Data_Access DS = new Data_Access();
         private Form parentForm;
 
+        dataMutasiBarangDetailForm newMutasiForm = null;
+
         public dataMutasiBarangForm()
         {
             InitializeComponent();
@@ -56,13 +58,16 @@ namespace RoyalPetz_ADMIN
             switch (originModuleID)
             {
                 case globalConstants.CEK_DATA_MUTASI:
-                    if (!PMInvoice.Equals(""))
-                        subModuleID = globalConstants.VIEW_PRODUCT_MUTATION;
-                    else
-                        subModuleID = globalConstants.MUTASI_BARANG;
+                        if (!PMInvoice.Equals(""))
+                            subModuleID = globalConstants.VIEW_PRODUCT_MUTATION;
+                        else
+                            subModuleID = globalConstants.MUTASI_BARANG;
 
-                        dataMutasiBarangDetailForm displayedForm = new dataMutasiBarangDetailForm(subModuleID, PMInvoice);
-                        displayedForm.ShowDialog(this);
+                        if (null == newMutasiForm || newMutasiForm.IsDisposed)
+                            newMutasiForm = new dataMutasiBarangDetailForm(subModuleID, PMInvoice);
+
+                        newMutasiForm.Show();
+                        newMutasiForm.WindowState = FormWindowState.Normal;
                     break;
 
                 case globalConstants.PENERIMAAN_BARANG:

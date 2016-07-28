@@ -23,6 +23,9 @@ namespace RoyalPetz_ADMIN
 
         Data_Access DS = new Data_Access();
 
+        dataSatuanDetailForm displaySatuanDetailForm = null;
+        dataSatuanDetailForm editSatuanDetailForm = null;
+
         public dataSatuanForm()
         {
             InitializeComponent();
@@ -37,8 +40,11 @@ namespace RoyalPetz_ADMIN
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            dataSatuanDetailForm displayedForm = new dataSatuanDetailForm(globalConstants.NEW_UNIT);
-            displayedForm.ShowDialog(this);
+            if (null == displaySatuanDetailForm || displaySatuanDetailForm.IsDisposed)
+                    displaySatuanDetailForm = new dataSatuanDetailForm(globalConstants.NEW_UNIT);
+
+            displaySatuanDetailForm.Show();
+            displaySatuanDetailForm.WindowState = FormWindowState.Normal;
         }
 
         private void loadUnitData()
@@ -108,9 +114,12 @@ namespace RoyalPetz_ADMIN
                     this.Close();
                     break;
 
-                default:                    
-                    dataSatuanDetailForm displayedForm = new dataSatuanDetailForm(globalConstants.EDIT_UNIT, selectedUnitID);
-                    displayedForm.ShowDialog(this);
+                default:           
+                    if (null == editSatuanDetailForm || editSatuanDetailForm.IsDisposed)
+                            editSatuanDetailForm = new dataSatuanDetailForm(globalConstants.EDIT_UNIT, selectedUnitID);
+
+                    editSatuanDetailForm.Show();
+                    editSatuanDetailForm.WindowState = FormWindowState.Normal;
                     break;
             }
         }

@@ -26,6 +26,9 @@ namespace RoyalPetz_ADMIN
         private globalUtilities gUtil = new globalUtilities();
         private CultureInfo culture = new CultureInfo("id-ID");
 
+        permintaanProdukForm newPermintaanForm = null;
+        permintaanProdukForm editPermintaanForm = null;
+
         public dataPermintaanForm()
         {
             InitializeComponent();
@@ -49,13 +52,19 @@ namespace RoyalPetz_ADMIN
                 case globalConstants.PERMINTAAN_BARANG:
                     if (roID == 0)
                     {
-                        permintaanProdukForm requestOrderForm = new permintaanProdukForm(globalConstants.NEW_REQUEST_ORDER);
-                        requestOrderForm.ShowDialog(this);
+                        if (null == newPermintaanForm || newPermintaanForm.IsDisposed)
+                                newPermintaanForm = new permintaanProdukForm(globalConstants.NEW_REQUEST_ORDER);
+
+                        newPermintaanForm.Show();
+                        newPermintaanForm.WindowState = FormWindowState.Normal;
                     }
                     else
                     {
-                        permintaanProdukForm editRequestOrderForm = new permintaanProdukForm(globalConstants.EDIT_REQUEST_ORDER, roID);
-                        editRequestOrderForm.ShowDialog(this);
+                        if (null == editPermintaanForm || editPermintaanForm.IsDisposed)
+                                editPermintaanForm = new permintaanProdukForm(globalConstants.EDIT_REQUEST_ORDER, roID);
+
+                        editPermintaanForm.Show();
+                        editPermintaanForm.WindowState = FormWindowState.Normal;
                     }
                     break;
 

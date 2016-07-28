@@ -22,6 +22,10 @@ namespace RoyalPetz_ADMIN
         private globalUtilities gutil = new globalUtilities();
         Data_Access DS = new Data_Access();
 
+        pengaturanKategoriProdukForm displayPengaturanKategoriForm = null;
+        dataKategoriProdukDetailForm editKategoriForm = null;
+        dataKategoriProdukDetailForm newKategoriForm = null;
+
         public dataKategoriProdukForm()
         {
             InitializeComponent();
@@ -96,21 +100,30 @@ namespace RoyalPetz_ADMIN
                     break;
 
                 case globalConstants.PENGATURAN_KATEGORI_PRODUK:
-                    pengaturanKategoriProdukForm pengaturanKategoriForm = new pengaturanKategoriProdukForm(selectedCategoryID);
-                    pengaturanKategoriForm.ShowDialog(this);
+                    if (null == displayPengaturanKategoriForm || displayPengaturanKategoriForm.IsDisposed)
+                            displayPengaturanKategoriForm = new pengaturanKategoriProdukForm(selectedCategoryID);
+
+                    displayPengaturanKategoriForm.Show();
+                    displayPengaturanKategoriForm.WindowState = FormWindowState.Normal;
                     break;
 
                 default:
-                    dataKategoriProdukDetailForm displayedForm = new dataKategoriProdukDetailForm(globalConstants.EDIT_CATEGORY, selectedCategoryID);
-                    displayedForm.ShowDialog(this);
+                    if (null == editKategoriForm || editKategoriForm.IsDisposed)
+                        editKategoriForm = new dataKategoriProdukDetailForm(globalConstants.EDIT_CATEGORY, selectedCategoryID);
+
+                    editKategoriForm.Show();
+                    editKategoriForm.WindowState = FormWindowState.Normal;
                     break;
             }
         }
 
         private void newButton_Click_1(object sender, EventArgs e)
         {
-            dataKategoriProdukDetailForm displayForm = new dataKategoriProdukDetailForm(globalConstants.NEW_CATEGORY);
-            displayForm.ShowDialog(this);
+            if (null == newKategoriForm || newKategoriForm.IsDisposed)
+                 newKategoriForm = new dataKategoriProdukDetailForm(globalConstants.NEW_CATEGORY);
+
+            newKategoriForm.Show();
+            newKategoriForm.WindowState = FormWindowState.Normal;
         }
 
         private void tagProdukDataGridView_DoubleClick(object sender, EventArgs e)

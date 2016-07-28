@@ -32,6 +32,9 @@ namespace RoyalPetz_ADMIN
         private CultureInfo culture = new CultureInfo("id-ID");
         private bool isLoading = false;
 
+        dataProdukForm displayBrowseDataProdukForm = null;
+        dataProdukDetailForm newProdukForm = null;
+
         public stokPecahBarangForm()
         {
             InitializeComponent();
@@ -46,22 +49,28 @@ namespace RoyalPetz_ADMIN
         public void setNewSelectedProductID(int productID)
         {
             newSelectedInternalProductID = productID;
+
+            loadProductName();
         }
 
         private void newProduk_Click(object sender, EventArgs e)
         {
-            dataProdukDetailForm displayForm = new dataProdukDetailForm(globalConstants.STOK_PECAH_BARANG, this);
-            displayForm.ShowDialog(this);
+            if (null == newProdukForm || newProdukForm.IsDisposed)
+                    newProdukForm = new dataProdukDetailForm(globalConstants.STOK_PECAH_BARANG, this);
 
-            loadProductName();
+            newProdukForm.Show();
+            newProdukForm.WindowState = FormWindowState.Normal;
+            //loadProductName();
         }
 
         private void browseProdukButton_Click(object sender, EventArgs e)
         {
-            dataProdukForm displayForm = new dataProdukForm(globalConstants.BROWSE_STOK_PECAH_BARANG, this);
-            displayForm.ShowDialog(this);
+            if (null == displayBrowseDataProdukForm || displayBrowseDataProdukForm.IsDisposed)
+                    displayBrowseDataProdukForm = new dataProdukForm(globalConstants.BROWSE_STOK_PECAH_BARANG, this);
 
-            loadProductName();
+            displayBrowseDataProdukForm.Show();
+            displayBrowseDataProdukForm.WindowState = FormWindowState.Normal;
+
             numberOfProductTextBox.Text = "0";
         }
 
