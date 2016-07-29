@@ -46,6 +46,9 @@ namespace RoyalPetz_ADMIN
        // private string selectedPOInvoice = "";
         Button[] arrButton = new Button[2];
 
+        barcodeForm displayBarcodeForm = null;
+        dataProdukForm browseProdukForm = null;
+
         public purchaseOrderDetailForm()
         {
             InitializeComponent();
@@ -78,13 +81,17 @@ namespace RoyalPetz_ADMIN
                     if (detailPODataGridView.ReadOnly == false)
                     {
                         PODateTimePicker.Focus();
-                        barcodeForm displayBarcodeForm = new barcodeForm(this, globalConstants.NEW_PURCHASE_ORDER);
+                        if (null == displayBarcodeForm || displayBarcodeForm.IsDisposed)
+                        { 
+                            displayBarcodeForm = new barcodeForm(this, globalConstants.NEW_PURCHASE_ORDER);
 
-                        displayBarcodeForm.Top = this.Top + 5;
-                        displayBarcodeForm.Left = this.Left + 5;//(Screen.PrimaryScreen.Bounds.Width / 2) - (displayBarcodeForm.Width / 2);
+                            displayBarcodeForm.Top = this.Top + 5;
+                            displayBarcodeForm.Left = this.Left + 5;//(Screen.PrimaryScreen.Bounds.Width / 2) - (displayBarcodeForm.Width / 2);
+                        }
 
-                        displayBarcodeForm.ShowDialog(this);
-                        detailPODataGridView.Focus();
+                        displayBarcodeForm.Show();
+                        displayBarcodeForm.WindowState = FormWindowState.Normal;
+                        //detailPODataGridView.Focus();
                     }
                     break;
 
@@ -105,9 +112,12 @@ namespace RoyalPetz_ADMIN
                     if (detailPODataGridView.ReadOnly == false)
                     {
                         PODateTimePicker.Focus();
-                        dataProdukForm displayProdukForm = new dataProdukForm(globalConstants.NEW_PURCHASE_ORDER, this);
-                        displayProdukForm.ShowDialog(this);
-                        detailPODataGridView.Focus();
+                        if (null == browseProdukForm || browseProdukForm.IsDisposed)
+                                browseProdukForm = new dataProdukForm(globalConstants.NEW_PURCHASE_ORDER, this);
+
+                        browseProdukForm.Show();
+                        browseProdukForm.WindowState = FormWindowState.Normal;
+                        //detailPODataGridView.Focus();
                     }
                     break;
 

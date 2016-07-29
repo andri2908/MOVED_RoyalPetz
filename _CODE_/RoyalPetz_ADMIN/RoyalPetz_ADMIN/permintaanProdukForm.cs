@@ -48,6 +48,9 @@ namespace RoyalPetz_ADMIN
         private CultureInfo culture = new CultureInfo("id-ID");
         private Button[] arrButton = new Button[3];
 
+        barcodeForm displayBarcodeForm = null;
+        dataProdukForm browseProdukForm = null;
+
         public permintaanProdukForm()
         {
             InitializeComponent();
@@ -76,12 +79,16 @@ namespace RoyalPetz_ADMIN
                     break;
 
                 case Keys.F2:
-                    barcodeForm displayBarcodeForm = new barcodeForm(this, globalConstants.NEW_REQUEST_ORDER);
+                    if (null == displayBarcodeForm || displayBarcodeForm.IsDisposed)
+                    { 
+                        displayBarcodeForm = new barcodeForm(this, globalConstants.NEW_REQUEST_ORDER);
 
-                    displayBarcodeForm.Top = this.Top + 5;
-                    displayBarcodeForm.Left = this.Left + 5;//(Screen.PrimaryScreen.Bounds.Width / 2) - (displayBarcodeForm.Width / 2);
+                        displayBarcodeForm.Top = this.Top + 5;
+                        displayBarcodeForm.Left = this.Left + 5;//(Screen.PrimaryScreen.Bounds.Width / 2) - (displayBarcodeForm.Width / 2);
+                    }
 
-                    displayBarcodeForm.ShowDialog(this);
+                    displayBarcodeForm.Show();
+                    displayBarcodeForm.WindowState = FormWindowState.Normal;
                     break;
 
                 case Keys.F8:
@@ -94,8 +101,11 @@ namespace RoyalPetz_ADMIN
                     break;
 
                 case Keys.F11:
-                    dataProdukForm displayProdukForm = new dataProdukForm(globalConstants.NEW_REQUEST_ORDER, this);
-                    displayProdukForm.ShowDialog(this);
+                    if (null == browseProdukForm || browseProdukForm.IsDisposed)
+                        browseProdukForm = new dataProdukForm(globalConstants.NEW_REQUEST_ORDER, this);
+
+                    browseProdukForm.Show();
+                    browseProdukForm.WindowState = FormWindowState.Normal;
                     break;
 
                 case Keys.Delete:

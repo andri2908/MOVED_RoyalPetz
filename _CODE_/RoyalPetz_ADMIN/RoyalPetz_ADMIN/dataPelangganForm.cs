@@ -22,6 +22,12 @@ namespace RoyalPetz_ADMIN
 
         private Data_Access DS = new Data_Access();
 
+        dataPelangganDetailForm newPelangganForm = null;
+        dataPelangganDetailForm editPelangganForm = null;
+        dataReturPenjualanForm returPenjualanForm = null;
+        dataReturPenjualanForm unknownCustReturPenjualanForm = null;
+        pembayaranLumpSumForm pembayaranPiutangLumpSumForm = null;
+
         public dataPelangganForm()
         {
             InitializeComponent();
@@ -69,8 +75,11 @@ namespace RoyalPetz_ADMIN
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            dataPelangganDetailForm displayForm = new dataPelangganDetailForm(globalConstants.NEW_CUSTOMER);
-            displayForm.ShowDialog(this);
+            if (null == newPelangganForm || newPelangganForm.IsDisposed)
+                    newPelangganForm = new dataPelangganDetailForm(globalConstants.NEW_CUSTOMER);
+
+            newPelangganForm.Show();
+            newPelangganForm.WindowState = FormWindowState.Normal;
         }
 
         private void loadCustomerData()
@@ -145,18 +154,27 @@ namespace RoyalPetz_ADMIN
             }
             else if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
             {
-                dataReturPenjualanForm displayedReturForm = new dataReturPenjualanForm(originModuleID, "", selectedCustomerID);
-                displayedReturForm.ShowDialog(this);
+                if (null == returPenjualanForm || returPenjualanForm.IsDisposed)
+                        returPenjualanForm = new dataReturPenjualanForm(originModuleID, "", selectedCustomerID);
+
+                returPenjualanForm.Show();
+                returPenjualanForm.WindowState = FormWindowState.Normal;
             }
             else if (originModuleID == globalConstants.PEMBAYARAN_PIUTANG)
             {
-                pembayaranLumpSumForm pembayaranForm = new pembayaranLumpSumForm(originModuleID, selectedCustomerID);
-                pembayaranForm.ShowDialog(this);
+                if (null == pembayaranPiutangLumpSumForm || pembayaranPiutangLumpSumForm.IsDisposed)
+                        pembayaranPiutangLumpSumForm = new pembayaranLumpSumForm(originModuleID, selectedCustomerID);
+
+                pembayaranPiutangLumpSumForm.Show();
+                pembayaranPiutangLumpSumForm.WindowState = FormWindowState.Normal;
             }
             else
             {
-                dataPelangganDetailForm displayedForm = new dataPelangganDetailForm(globalConstants.EDIT_CUSTOMER, selectedCustomerID);
-                displayedForm.ShowDialog(this);
+                if (null == editPelangganForm || editPelangganForm.IsDisposed)
+                        editPelangganForm = new dataPelangganDetailForm(globalConstants.EDIT_CUSTOMER, selectedCustomerID);
+
+                editPelangganForm.Show();
+                editPelangganForm.WindowState = FormWindowState.Normal;
             }
         }
 
@@ -195,26 +213,38 @@ namespace RoyalPetz_ADMIN
                 }
                 else if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
                 {
-                    dataReturPenjualanForm displayDataReturPenjualan = new dataReturPenjualanForm(originModuleID, "", selectedCustomerID);
-                    displayDataReturPenjualan.ShowDialog(this);
+                    if (null == returPenjualanForm || returPenjualanForm.IsDisposed)
+                        returPenjualanForm = new dataReturPenjualanForm(originModuleID, "", selectedCustomerID);
+
+                    returPenjualanForm.Show();
+                    returPenjualanForm.WindowState = FormWindowState.Normal;
                 }
                 else if (originModuleID == globalConstants.PEMBAYARAN_PIUTANG)
                 {
-                    pembayaranLumpSumForm pembayaranForm = new pembayaranLumpSumForm(originModuleID, selectedCustomerID);
-                    pembayaranForm.ShowDialog(this);
+                    if (null == pembayaranPiutangLumpSumForm || pembayaranPiutangLumpSumForm.IsDisposed)
+                        pembayaranPiutangLumpSumForm = new pembayaranLumpSumForm(originModuleID, selectedCustomerID);
+
+                    pembayaranPiutangLumpSumForm.Show();
+                    pembayaranPiutangLumpSumForm.WindowState = FormWindowState.Normal;
                 }
                 else 
                 {
-                    dataPelangganDetailForm displayedForm = new dataPelangganDetailForm(globalConstants.EDIT_CUSTOMER, selectedCustomerID);
-                    displayedForm.ShowDialog(this);
+                    if (null == editPelangganForm || editPelangganForm.IsDisposed)
+                        editPelangganForm = new dataPelangganDetailForm(globalConstants.EDIT_CUSTOMER, selectedCustomerID);
+
+                    editPelangganForm.Show();
+                    editPelangganForm.WindowState = FormWindowState.Normal;
                 }
             }
         }
 
         private void unknownCustomerButton_Click(object sender, EventArgs e)
         {
-            dataReturPenjualanForm displayedReturForm = new dataReturPenjualanForm(originModuleID, "", 0);
-            displayedReturForm.ShowDialog(this);
+            if (null == unknownCustReturPenjualanForm || unknownCustReturPenjualanForm.IsDisposed)
+                    unknownCustReturPenjualanForm = new dataReturPenjualanForm(originModuleID, "", 0);
+
+            unknownCustReturPenjualanForm.Show();
+            unknownCustReturPenjualanForm.WindowState = FormWindowState.Normal;
         }
     }
 }

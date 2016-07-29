@@ -42,6 +42,9 @@ namespace RoyalPetz_ADMIN
         private Data_Access DS = new Data_Access();
         private globalUtilities GUTIL = new globalUtilities();
 
+        barcodeForm displayBarcodeForm = null;
+        dataProdukForm browseProdukForm = null;
+
         public dataReturPermintaanForm()
         {
             InitializeComponent();
@@ -162,13 +165,17 @@ namespace RoyalPetz_ADMIN
                 case Keys.F2:
                         ReturDtPicker_1.Focus();
 
-                        barcodeForm displayBarcodeForm = new barcodeForm(this, globalConstants.RETUR_PEMBELIAN);
+                        if (null == displayBarcodeForm || displayBarcodeForm.IsDisposed)
+                        {
+                            displayBarcodeForm = new barcodeForm(this, globalConstants.RETUR_PEMBELIAN);
 
-                        displayBarcodeForm.Top = this.Top + 5;
-                        displayBarcodeForm.Left = this.Left + 5;//(Screen.PrimaryScreen.Bounds.Width / 2) - (displayBarcodeForm.Width / 2);
+                            displayBarcodeForm.Top = this.Top + 5;
+                            displayBarcodeForm.Left = this.Left + 5;//(Screen.PrimaryScreen.Bounds.Width / 2) - (displayBarcodeForm.Width / 2);
+                        }
 
-                        displayBarcodeForm.ShowDialog(this);
-                        detailReturDataGridView.Focus();
+                        displayBarcodeForm.Show();
+                        displayBarcodeForm.WindowState = FormWindowState.Normal;
+                    //detailReturDataGridView.Focus();
                     break;
 
                 case Keys.F8:
@@ -183,10 +190,12 @@ namespace RoyalPetz_ADMIN
                 case Keys.F11:
                         ReturDtPicker_1.Focus();
 
-                        dataProdukForm displayProdukForm = new dataProdukForm(originModuleID, this);
-                        displayProdukForm.ShowDialog(this);
+                        if (null == browseProdukForm || browseProdukForm.IsDisposed)
+                            browseProdukForm = new dataProdukForm(originModuleID, this);
 
-                        detailReturDataGridView.Focus();
+                        browseProdukForm.Show();
+                        browseProdukForm.WindowState = FormWindowState.Normal;
+                        //detailReturDataGridView.Focus();
                     break;
 
                 case Keys.Delete:

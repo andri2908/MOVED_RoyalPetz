@@ -27,10 +27,14 @@ namespace RoyalPetz_ADMIN
         private int originModuleID = 0;
         private bool upd_mode = false;
         int selectedrowindex = -1;
+
+        dataNomorAkun browseNoAkunForm = null;
+
         public dataTransaksiJurnalHarianDetailForm()
         {
             InitializeComponent();
         }
+
         public dataTransaksiJurnalHarianDetailForm(int moduleID, int UserID)
         {
             selectedUserID = UserID;
@@ -189,6 +193,7 @@ namespace RoyalPetz_ADMIN
         {
             selectedAccountID = AccountID;
             //kodeAkunTextbox.Text = selectedAccountID.ToString();
+            loadDeskripsi(selectedAccountID);
         }
 
         private void loadDeskripsi(int accountID)
@@ -253,9 +258,11 @@ namespace RoyalPetz_ADMIN
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            dataNomorAkun displayedForm = new dataNomorAkun(globalConstants.TAMBAH_HAPUS_JURNAL_HARIAN, this);
-            displayedForm.ShowDialog(this);
-            loadDeskripsi(selectedAccountID);
+            if (null == browseNoAkunForm || browseNoAkunForm.IsDisposed)
+                browseNoAkunForm = new dataNomorAkun(globalConstants.TAMBAH_HAPUS_JURNAL_HARIAN, this);
+
+            browseNoAkunForm.Show();
+            browseNoAkunForm.WindowState = FormWindowState.Normal;
         }
 
         private void dataTransaksiJurnalHarianDetailForm_Load(object sender, EventArgs e)

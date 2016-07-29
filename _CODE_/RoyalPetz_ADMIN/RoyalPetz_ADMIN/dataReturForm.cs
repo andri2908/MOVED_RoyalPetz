@@ -24,6 +24,10 @@ namespace RoyalPetz_ADMIN
         private int supplierID = 0;
         private string returID = "";
 
+        dataReturPermintaanForm returPembelianForm = null;
+        dataReturPermintaanForm returMutasiForm = null;
+        dataInvoiceForm returPenjualanForm = null;
+
         public dataReturForm()
         {
             InitializeComponent();
@@ -364,16 +368,6 @@ namespace RoyalPetz_ADMIN
             selectedNoRetur = selectedRow.Cells["NO RETUR"].Value.ToString();
 
             printOutSelectedRetur(selectedNoRetur);
-        }
-
-        private void dataPurchaseOrder_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dataPurchaseOrder_KeyPress(object sender, KeyPressEventArgs e)
-        {
-           
         }
 
         private void dataPurchaseOrder_KeyDown(object sender, KeyEventArgs e)
@@ -901,18 +895,27 @@ namespace RoyalPetz_ADMIN
         {
             if (originModuleID == globalConstants.RETUR_PEMBELIAN_KE_SUPPLIER)
             {
-                dataReturPermintaanForm displayedForm = new dataReturPermintaanForm(globalConstants.RETUR_PEMBELIAN_KE_SUPPLIER);
-                displayedForm.ShowDialog(this);
+                if (null == returPembelianForm || returPembelianForm.IsDisposed)
+                        returPembelianForm = new dataReturPermintaanForm(globalConstants.RETUR_PEMBELIAN_KE_SUPPLIER);
+
+                returPembelianForm.Show();
+                returPembelianForm.WindowState = FormWindowState.Normal;
             }
             else if (originModuleID == globalConstants.RETUR_PEMBELIAN_KE_PUSAT)
             {
-                dataReturPermintaanForm displayedForm = new dataReturPermintaanForm(globalConstants.RETUR_PEMBELIAN_KE_PUSAT);
-                displayedForm.ShowDialog(this);
+                if (null == returMutasiForm || returMutasiForm.IsDisposed)
+                        returMutasiForm = new dataReturPermintaanForm(globalConstants.RETUR_PEMBELIAN_KE_PUSAT);
+
+                returMutasiForm.Show();
+                returMutasiForm.WindowState = FormWindowState.Normal;
             }
             else if (originModuleID == globalConstants.RETUR_PENJUALAN)
             {
-                dataInvoiceForm displayedForm = new dataInvoiceForm(globalConstants.RETUR_PENJUALAN);
-                displayedForm.ShowDialog(this);
+                if (null == returPenjualanForm || returPenjualanForm.IsDisposed)
+                        returPenjualanForm = new dataInvoiceForm(globalConstants.RETUR_PENJUALAN);
+
+                returPenjualanForm.Show();
+                returPenjualanForm.WindowState = FormWindowState.Normal;
             }
         }
     }

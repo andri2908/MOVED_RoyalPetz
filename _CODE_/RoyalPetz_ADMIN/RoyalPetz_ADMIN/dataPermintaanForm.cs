@@ -28,6 +28,7 @@ namespace RoyalPetz_ADMIN
 
         permintaanProdukForm newPermintaanForm = null;
         permintaanProdukForm editPermintaanForm = null;
+        dataMutasiBarangDetailForm browseDataMutasiDetailForm = null;
 
         public dataPermintaanForm()
         {
@@ -69,8 +70,11 @@ namespace RoyalPetz_ADMIN
                     break;
 
                 case globalConstants.CEK_DATA_MUTASI:
-                    dataMutasiBarangDetailForm displayedForm = new dataMutasiBarangDetailForm(globalConstants.CEK_DATA_MUTASI, roID);
-                    displayedForm.ShowDialog(this);
+                    if (null == browseDataMutasiDetailForm || browseDataMutasiDetailForm.IsDisposed)
+                            browseDataMutasiDetailForm = new dataMutasiBarangDetailForm(globalConstants.CEK_DATA_MUTASI, roID);
+
+                    browseDataMutasiDetailForm.Show();
+                    browseDataMutasiDetailForm.WindowState = FormWindowState.Normal;
                     break;
             }
         }

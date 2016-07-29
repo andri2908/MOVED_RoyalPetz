@@ -71,6 +71,9 @@ namespace RoyalPetz_ADMIN
         private Hotkeys.GlobalHotkey ghk_Substract;
 
         //private adminForm parentForm;
+        barcodeForm displayBarcodeForm = null;
+        dataProdukForm browseProdukForm = null;
+        dataPelangganForm browsePelangganForm = null;
 
         public cashierForm()
         {
@@ -119,14 +122,18 @@ namespace RoyalPetz_ADMIN
                         totalAfterDiscTextBox.Focus();
                         gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : DISPLAY BARCODE FORM");
 
-                        barcodeForm displayBarcodeForm = new barcodeForm(this, globalConstants.CASHIER_MODULE);
+                        if (null == displayBarcodeForm || displayBarcodeForm.IsDisposed)
+                        { 
+                            displayBarcodeForm = new barcodeForm(this, globalConstants.CASHIER_MODULE);
 
-                        displayBarcodeForm.Top = this.Top + 5;// - displayBarcodeForm.Height;
-                        displayBarcodeForm.Left = this.Left + 5;// (Screen.PrimaryScreen.Bounds.Width / 2) - (displayBarcodeForm.Width / 2);
+                            displayBarcodeForm.Top = this.Top + 5;// - displayBarcodeForm.Height;
+                            displayBarcodeForm.Left = this.Left + 5;// (Screen.PrimaryScreen.Bounds.Width / 2) - (displayBarcodeForm.Width / 2);
+                        }
 
-                        displayBarcodeForm.ShowDialog(this);
+                        displayBarcodeForm.Show();
+                        displayBarcodeForm.WindowState = FormWindowState.Normal;
 
-                        cashierDataGridView.Focus();
+                        //cashierDataGridView.Focus();
                     }
                     break;
 
@@ -145,8 +152,11 @@ namespace RoyalPetz_ADMIN
                     {
                         //MessageBox.Show("F4");
                         gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : DISPLAY PELANGGAN FORM");
-                        dataPelangganForm pelangganForm = new dataPelangganForm(globalConstants.CASHIER_MODULE, this);
-                        pelangganForm.ShowDialog(this);
+                        if (null == browsePelangganForm || browsePelangganForm.IsDisposed)
+                                browsePelangganForm = new dataPelangganForm(globalConstants.CASHIER_MODULE, this);
+
+                        browsePelangganForm.Show();
+                        browsePelangganForm.WindowState = FormWindowState.Normal;
                     }
                     break;
 
@@ -188,10 +198,13 @@ namespace RoyalPetz_ADMIN
 
                         gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : HOTKEY TO OPEN PRODUK SEARCH FORM PRESSED");
 
-                        dataProdukForm displayProdukForm = new dataProdukForm(globalConstants.CASHIER_MODULE, this);
-                        displayProdukForm.ShowDialog(this);
+                        if (null == browseProdukForm || browseProdukForm.IsDisposed)
+                                browseProdukForm = new dataProdukForm(globalConstants.CASHIER_MODULE, this);
 
-                        cashierDataGridView.Focus();
+                        browseProdukForm.Show();
+                        browseProdukForm.WindowState = FormWindowState.Normal;
+
+                        //cashierDataGridView.Focus();
                     }
                     break;
 

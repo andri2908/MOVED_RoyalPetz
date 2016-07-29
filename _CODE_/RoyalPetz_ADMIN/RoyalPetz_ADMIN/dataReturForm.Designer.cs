@@ -258,10 +258,8 @@
             this.dataPurchaseOrder.RowHeadersVisible = false;
             this.dataPurchaseOrder.Size = new System.Drawing.Size(921, 427);
             this.dataPurchaseOrder.TabIndex = 58;
-            this.dataPurchaseOrder.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataPurchaseOrder_CellContentClick);
             this.dataPurchaseOrder.DoubleClick += new System.EventHandler(this.dataPurchaseOrder_DoubleClick);
             this.dataPurchaseOrder.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataPurchaseOrder_KeyDown);
-            this.dataPurchaseOrder.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataPurchaseOrder_KeyPress);
             // 
             // printPreviewDialog1
             // 

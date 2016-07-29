@@ -51,6 +51,9 @@ namespace RoyalPetz_ADMIN
         private globalUtilities gUtil = new globalUtilities();
         private CultureInfo culture = new CultureInfo("id-ID");
 
+        barcodeForm displayBarcodeForm = null;
+        dataProdukForm browseProdukForm = null;
+
         public dataMutasiBarangDetailForm()
         {
             InitializeComponent();
@@ -134,13 +137,18 @@ namespace RoyalPetz_ADMIN
                     if (directMutasiBarang)
                     {
                         ROInvoiceTextBox.Focus();
-                        barcodeForm displayBarcodeForm = new barcodeForm(this, globalConstants.MUTASI_BARANG);
 
-                        displayBarcodeForm.Top = this.Top + 5;
-                        displayBarcodeForm.Left = this.Left + 5;//(Screen.PrimaryScreen.Bounds.Width / 2) - (displayBarcodeForm.Width / 2);
+                        if (null == displayBarcodeForm || displayBarcodeForm.IsDisposed)
+                        { 
+                            barcodeForm displayBarcodeForm = new barcodeForm(this, globalConstants.MUTASI_BARANG);
 
-                        displayBarcodeForm.ShowDialog(this);
-                        detailRequestOrderDataGridView.Focus();
+                            displayBarcodeForm.Top = this.Top + 5;
+                            displayBarcodeForm.Left = this.Left + 5;//(Screen.PrimaryScreen.Bounds.Width / 2) - (displayBarcodeForm.Width / 2);
+                        }
+
+                        displayBarcodeForm.Show();
+                        displayBarcodeForm.WindowState = FormWindowState.Normal;
+                        //                        detailRequestOrderDataGridView.Focus();
                     }
                     break;
 
@@ -161,9 +169,16 @@ namespace RoyalPetz_ADMIN
                     if (directMutasiBarang)
                     {
                         ROInvoiceTextBox.Focus();
-                        dataProdukForm displayProdukForm = new dataProdukForm(globalConstants.MUTASI_BARANG, this);
-                        displayProdukForm.ShowDialog(this);
-                        detailRequestOrderDataGridView.Focus();
+
+                        if (null == browseProdukForm || browseProdukForm.IsDisposed)
+                        {
+                            browseProdukForm = new dataProdukForm(globalConstants.MUTASI_BARANG, this);
+                        }
+
+                        browseProdukForm.Show();
+                        browseProdukForm.WindowState = FormWindowState.Normal;
+
+                        //detailRequestOrderDataGridView.Focus();
                     }
                     break;
 

@@ -51,6 +51,9 @@ namespace RoyalPetz_ADMIN
         private globalUtilities gutil = new globalUtilities();
         private CultureInfo culture = new CultureInfo("id-ID");
 
+        barcodeForm displayBarcodeForm = null;
+        dataProdukForm browseProdukForm = null;
+
         public dataReturPenjualanForm()
         {
             InitializeComponent();
@@ -93,13 +96,18 @@ namespace RoyalPetz_ADMIN
                     if (saveButton.Enabled == true)
                     {
                         invoiceInfoTextBox.Focus();
-                        barcodeForm displayBarcodeForm = new barcodeForm(this, globalConstants.RETUR_PENJUALAN);
 
-                        displayBarcodeForm.Top = this.Top + 5;
-                        displayBarcodeForm.Left = this.Left + 5;//(Screen.PrimaryScreen.Bounds.Width / 2) - (displayBarcodeForm.Width / 2);
+                        if (null == displayBarcodeForm || displayBarcodeForm.IsDisposed)
+                        {
+                            displayBarcodeForm = new barcodeForm(this, globalConstants.RETUR_PENJUALAN);
 
-                        displayBarcodeForm.ShowDialog(this);
-                        detailReturDataGridView.Focus();
+                            displayBarcodeForm.Top = this.Top + 5;
+                            displayBarcodeForm.Left = this.Left + 5;//(Screen.PrimaryScreen.Bounds.Width / 2) - (displayBarcodeForm.Width / 2);
+                        }
+
+                        displayBarcodeForm.Show();
+                        displayBarcodeForm.WindowState = FormWindowState.Normal;
+                        //detailReturDataGridView.Focus();
                     }
                     break;
 
@@ -120,14 +128,19 @@ namespace RoyalPetz_ADMIN
                     if (detailReturDataGridView.ReadOnly == false)
                     {
                         invoiceInfoTextBox.Focus();
-                        if (originModuleID == globalConstants.RETUR_PENJUALAN)
-                            searchParam = selectedSalesInvoice;
-                        else if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
-                            searchParam = selectedCustomerID.ToString();
+                        if (null == browseProdukForm || browseProdukForm.IsDisposed)
+                        {
+                            if (originModuleID == globalConstants.RETUR_PENJUALAN)
+                                searchParam = selectedSalesInvoice;
+                            else if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
+                                searchParam = selectedCustomerID.ToString();
 
-                        dataProdukForm displayProdukForm = new dataProdukForm(originModuleID, this, searchParam);
-                        displayProdukForm.ShowDialog(this);
-                        detailReturDataGridView.Focus();
+                            browseProdukForm = new dataProdukForm(originModuleID, this, searchParam);
+                        }
+
+                        browseProdukForm.Show();
+                        browseProdukForm.WindowState = FormWindowState.Normal;
+                        //detailReturDataGridView.Focus();
                     }
                     break;
                 case Keys.Delete:

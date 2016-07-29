@@ -21,6 +21,9 @@ namespace RoyalPetz_ADMIN
         private dataTransaksiJurnalHarianDetailForm parentForm;
         private Data_Access DS = new Data_Access();
 
+        dataNomorAkunDetailForm newNoAkunForm = null;
+        dataNomorAkunDetailForm editNoAkunForm = null;
+
         public dataNomorAkun()
         {
             InitializeComponent();
@@ -56,8 +59,11 @@ namespace RoyalPetz_ADMIN
                     this.Close();
                     break;
                 default:
-                    dataNomorAkunDetailForm displayedForm = new dataNomorAkunDetailForm(globalConstants.EDIT_AKUN, selectedAccountID);
-                    displayedForm.ShowDialog(this);
+                    if (null == editNoAkunForm || editNoAkunForm.IsDisposed)
+                        editNoAkunForm = new dataNomorAkunDetailForm(globalConstants.EDIT_AKUN, selectedAccountID);
+
+                    editNoAkunForm.Show();
+                    editNoAkunForm.WindowState = FormWindowState.Normal;
                     break;
             }
         }
@@ -109,8 +115,11 @@ namespace RoyalPetz_ADMIN
 
         private void newButton_Click(object sender, EventArgs e)
         {
-            dataNomorAkunDetailForm displayedForm = new dataNomorAkunDetailForm(globalConstants.NEW_AKUN, 0);
-            displayedForm.ShowDialog(this);
+            if (null == newNoAkunForm || newNoAkunForm.IsDisposed)
+                newNoAkunForm = new dataNomorAkunDetailForm(globalConstants.NEW_AKUN, 0);
+
+            newNoAkunForm.Show();
+            newNoAkunForm.WindowState = FormWindowState.Normal;
         }
 
         private void dataNomorAkun_Activated(object sender, EventArgs e)

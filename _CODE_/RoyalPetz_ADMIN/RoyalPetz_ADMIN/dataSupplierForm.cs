@@ -22,6 +22,10 @@ namespace RoyalPetz_ADMIN
 
         private Data_Access DS = new Data_Access();
 
+        dataSupplierDetailForm newSupplierForm = null;
+        dataSupplierDetailForm editSupplierForm = null;
+        pembayaranLumpSumForm pembayaranHutangForm = null;
+
         public dataSupplierForm()
         {
             InitializeComponent();
@@ -37,8 +41,11 @@ namespace RoyalPetz_ADMIN
 
         private void newButton_Click(object sender, EventArgs e)
         {          
-            dataSupplierDetailForm displayedForm = new dataSupplierDetailForm(globalConstants.NEW_SUPPLIER);
-            displayedForm.ShowDialog(this);
+            if (null == newSupplierForm || newSupplierForm.IsDisposed)
+                    newSupplierForm = new dataSupplierDetailForm(globalConstants.NEW_SUPPLIER);
+
+            newSupplierForm.Show();
+            newSupplierForm.WindowState = FormWindowState.Normal;
         }
 
         private void loadSupplierData()
@@ -95,11 +102,6 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        private void dataSupplierDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void dataSupplierDataGridView_DoubleClick(object sender, EventArgs e)
         {
             if (dataSupplierDataGridView.Rows.Count <= 0)
@@ -112,13 +114,19 @@ namespace RoyalPetz_ADMIN
 
             if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
             {
-                pembayaranLumpSumForm pembayaranHutangForm = new pembayaranLumpSumForm(originModuleID, selectedSupplierID);
-                pembayaranHutangForm.ShowDialog(this);
+                if (null == pembayaranHutangForm || pembayaranHutangForm.IsDisposed)
+                        pembayaranHutangForm = new pembayaranLumpSumForm(originModuleID, selectedSupplierID);
+
+                pembayaranHutangForm.Show();
+                pembayaranHutangForm.WindowState = FormWindowState.Normal;
             }
             else
             {
-                dataSupplierDetailForm displayedForm = new dataSupplierDetailForm(globalConstants.EDIT_SUPPLIER, selectedSupplierID);
-                displayedForm.ShowDialog(this);
+                if (null == editSupplierForm || editSupplierForm.IsDisposed)
+                        editSupplierForm = new dataSupplierDetailForm(globalConstants.EDIT_SUPPLIER, selectedSupplierID);
+
+                editSupplierForm.Show();
+                editSupplierForm.WindowState = FormWindowState.Normal;
             }
         }
 
@@ -149,13 +157,19 @@ namespace RoyalPetz_ADMIN
 
                 if (originModuleID == globalConstants.PEMBAYARAN_HUTANG)
                 {
-                    pembayaranLumpSumForm pembayaranHutangForm = new pembayaranLumpSumForm(originModuleID, selectedSupplierID);
-                    pembayaranHutangForm.ShowDialog(this);
+                    if (null == pembayaranHutangForm || pembayaranHutangForm.IsDisposed)
+                            pembayaranHutangForm = new pembayaranLumpSumForm(originModuleID, selectedSupplierID);
+
+                    pembayaranHutangForm.Show();
+                    pembayaranHutangForm.WindowState = FormWindowState.Normal;
                 }
                 else
                 {
-                    dataSupplierDetailForm displayedForm = new dataSupplierDetailForm(globalConstants.EDIT_SUPPLIER, selectedSupplierID);
-                    displayedForm.ShowDialog(this);
+                    if (null == editSupplierForm || editSupplierForm.IsDisposed)
+                            editSupplierForm = new dataSupplierDetailForm(globalConstants.EDIT_SUPPLIER, selectedSupplierID);
+
+                    editSupplierForm.Show();
+                    editSupplierForm.WindowState = FormWindowState.Normal;
                 }
             }
         }

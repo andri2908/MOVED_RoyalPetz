@@ -99,7 +99,6 @@
             this.dataSupplierDataGridView.RowHeadersVisible = false;
             this.dataSupplierDataGridView.Size = new System.Drawing.Size(438, 480);
             this.dataSupplierDataGridView.TabIndex = 13;
-            this.dataSupplierDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataSupplierDataGridView_CellContentClick);
             this.dataSupplierDataGridView.DoubleClick += new System.EventHandler(this.dataSupplierDataGridView_DoubleClick);
             this.dataSupplierDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataSupplierDataGridView_KeyDown);
             // 
