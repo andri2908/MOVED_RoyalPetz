@@ -39,8 +39,13 @@ namespace RoyalPetz_ADMIN
         private Hotkeys.GlobalHotkey ghk_CTRL_DEL;
         private Hotkeys.GlobalHotkey ghk_CTRL_ENTER;
 
+        private Hotkeys.GlobalHotkey ghk_UP;
+        private Hotkeys.GlobalHotkey ghk_DOWN;
+
         private Data_Access DS = new Data_Access();
         private globalUtilities GUTIL = new globalUtilities();
+        private bool navKeyRegistered = false;
+        private bool delKeyRegistered = false;
 
         barcodeForm displayBarcodeForm = null;
         dataProdukForm browseProdukForm = null;
@@ -267,8 +272,8 @@ namespace RoyalPetz_ADMIN
             ghk_F11 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F11, this);
             ghk_F11.Register();
 
-            ghk_DEL = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Delete, this);
-            ghk_DEL.Register();
+            //ghk_DEL = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Delete, this);
+            //ghk_DEL.Register();
 
             //ghk_CTRL_DEL = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Delete, this);
             //ghk_CTRL_DEL.Register();
@@ -276,6 +281,7 @@ namespace RoyalPetz_ADMIN
             ghk_CTRL_ENTER = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Enter, this);
             ghk_CTRL_ENTER.Register();
 
+            registerNavigationKey();
         }
 
         private void unregisterGlobalHotkey()
@@ -288,6 +294,42 @@ namespace RoyalPetz_ADMIN
 
             //ghk_CTRL_DEL.Unregister();
             ghk_CTRL_ENTER.Unregister();
+
+            unregisterNavigationKey();
+        }
+
+        private void registerDelKey()
+        {
+            ghk_DEL = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Delete, this);
+            ghk_DEL.Register();
+
+            delKeyRegistered = true;
+        }
+
+        private void unregisterDelKey()
+        {
+            ghk_DEL.Unregister();
+
+            delKeyRegistered = false;
+        }
+
+        private void registerNavigationKey()
+        {
+            ghk_UP = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Up, this);
+            ghk_UP.Register();
+
+            ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
+            ghk_DOWN.Register();
+
+            navKeyRegistered = true;
+        }
+
+        private void unregisterNavigationKey()
+        {
+            ghk_UP.Unregister();
+            ghk_DOWN.Unregister();
+
+            navKeyRegistered = false;
         }
 
         public void addNewRow()
@@ -948,6 +990,9 @@ namespace RoyalPetz_ADMIN
             detailQty.Add("0");
             productPriceList.Add("0");
             subtotalList.Add("0");
+
+            if (navKeyRegistered)
+                unregisterNavigationKey();
         }
 
         private void deleteCurrentRow()
@@ -989,11 +1034,17 @@ namespace RoyalPetz_ADMIN
         private void dataReturPermintaanForm_Activated(object sender, EventArgs e)
         {
             registerGlobalHotkey();
+
+            if (detailReturDataGridView.Focused)
+                registerDelKey();
         }
 
         private void dataReturPermintaanForm_Deactivate(object sender, EventArgs e)
         {
             unregisterGlobalHotkey();
+
+            if (delKeyRegistered)
+                unregisterDelKey();
         }
 
         private void detailReturDataGridView_CellValidated(object sender, DataGridViewCellEventArgs e)
@@ -1031,5 +1082,32 @@ namespace RoyalPetz_ADMIN
                 isLoading = false;
             }
         }
+
+        private void detailReturDataGridView_Enter(object sender, EventArgs e)
+        {
+            if (navKeyRegistered)
+                unregisterNavigationKey();
+
+            registerDelKey();
+        }
+
+        private void detailReturDataGridView_Leave(object sender, EventArgs e)
+        {
+            if (!navKeyRegistered)
+                registerNavigationKey();
+
+            unregisterDelKey();
+        }
+
+        private void genericControl_Enter(object sender, EventArgs e)
+        {
+            unregisterNavigationKey();
+        }
+
+        private void genericControl_Leave(object sender, EventArgs e)
+        {
+            registerNavigationKey();
+        }
+
     }
 }

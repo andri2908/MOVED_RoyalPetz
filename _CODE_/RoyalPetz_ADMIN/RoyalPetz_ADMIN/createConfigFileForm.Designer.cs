@@ -251,6 +251,8 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "IP SERVER";
+            this.Activated += new System.EventHandler(this.createConfigFileForm_Activated);
+            this.Deactivate += new System.EventHandler(this.createConfigFileForm_Deactivate);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.createConfigFileForm_FormClosed);
             this.Load += new System.EventHandler(this.createConfigFileForm_Load);
             this.panel1.ResumeLayout(false);

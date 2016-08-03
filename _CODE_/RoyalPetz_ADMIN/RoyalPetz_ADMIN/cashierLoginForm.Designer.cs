@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.endAmountBox = new System.Windows.Forms.MaskedTextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.endTimeTextBox = new System.Windows.Forms.TextBox();
             this.startAmountBox = new System.Windows.Forms.MaskedTextBox();
@@ -41,12 +41,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.startTimeTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.endAmountBox = new System.Windows.Forms.MaskedTextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.remarkTextBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.errorLabel = new System.Windows.Forms.Label();
             this.continueButton = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.remarkTextBox = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -58,7 +58,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.46919F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.530806F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 241F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 242F));
             this.tableLayoutPanel1.Controls.Add(this.label9, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.endTimeTextBox, 2, 2);
@@ -85,15 +85,17 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(465, 252);
             this.tableLayoutPanel1.TabIndex = 66;
             // 
-            // endAmountBox
+            // label9
             // 
-            this.endAmountBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.endAmountBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.endAmountBox.Location = new System.Drawing.Point(226, 121);
-            this.endAmountBox.Mask = "0000000000000000000000";
-            this.endAmountBox.Name = "endAmountBox";
-            this.endAmountBox.Size = new System.Drawing.Size(233, 27);
-            this.endAmountBox.TabIndex = 70;
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label9.Location = new System.Drawing.Point(3, 194);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(84, 18);
+            this.label9.TabIndex = 71;
+            this.label9.Text = "REMARK";
             // 
             // label1
             // 
@@ -111,7 +113,7 @@
             // 
             this.endTimeTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.endTimeTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.endTimeTextBox.Location = new System.Drawing.Point(226, 82);
+            this.endTimeTextBox.Location = new System.Drawing.Point(225, 82);
             this.endTimeTextBox.Name = "endTimeTextBox";
             this.endTimeTextBox.ReadOnly = true;
             this.endTimeTextBox.Size = new System.Drawing.Size(187, 27);
@@ -121,7 +123,7 @@
             // 
             this.startAmountBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.startAmountBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startAmountBox.Location = new System.Drawing.Point(226, 41);
+            this.startAmountBox.Location = new System.Drawing.Point(225, 41);
             this.startAmountBox.Mask = "0000000000000000000000";
             this.startAmountBox.Name = "startAmountBox";
             this.startAmountBox.Size = new System.Drawing.Size(233, 27);
@@ -133,7 +135,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label8.Location = new System.Drawing.Point(207, 126);
+            this.label8.Location = new System.Drawing.Point(206, 126);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(13, 18);
             this.label8.TabIndex = 67;
@@ -157,7 +159,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(207, 7);
+            this.label4.Location = new System.Drawing.Point(206, 7);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(13, 18);
             this.label4.TabIndex = 10;
@@ -169,7 +171,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(207, 45);
+            this.label6.Location = new System.Drawing.Point(206, 45);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(13, 18);
             this.label6.TabIndex = 12;
@@ -181,7 +183,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(207, 86);
+            this.label7.Location = new System.Drawing.Point(206, 86);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(13, 18);
             this.label7.TabIndex = 13;
@@ -203,7 +205,7 @@
             // 
             this.startTimeTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.startTimeTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startTimeTextBox.Location = new System.Drawing.Point(226, 3);
+            this.startTimeTextBox.Location = new System.Drawing.Point(225, 3);
             this.startTimeTextBox.Name = "startTimeTextBox";
             this.startTimeTextBox.ReadOnly = true;
             this.startTimeTextBox.Size = new System.Drawing.Size(187, 27);
@@ -220,6 +222,39 @@
             this.label5.Size = new System.Drawing.Size(135, 18);
             this.label5.TabIndex = 18;
             this.label5.Text = "LOGOUT TIME";
+            // 
+            // endAmountBox
+            // 
+            this.endAmountBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.endAmountBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.endAmountBox.Location = new System.Drawing.Point(225, 121);
+            this.endAmountBox.Mask = "0000000000000000000000";
+            this.endAmountBox.Name = "endAmountBox";
+            this.endAmountBox.Size = new System.Drawing.Size(233, 27);
+            this.endAmountBox.TabIndex = 70;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label10.Location = new System.Drawing.Point(206, 194);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(13, 18);
+            this.label10.TabIndex = 72;
+            this.label10.Text = ":";
+            // 
+            // remarkTextBox
+            // 
+            this.remarkTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.remarkTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.remarkTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.remarkTextBox.Location = new System.Drawing.Point(225, 158);
+            this.remarkTextBox.Multiline = true;
+            this.remarkTextBox.Name = "remarkTextBox";
+            this.remarkTextBox.Size = new System.Drawing.Size(236, 91);
+            this.remarkTextBox.TabIndex = 73;
             // 
             // panel1
             // 
@@ -256,47 +291,12 @@
             this.continueButton.UseVisualStyleBackColor = true;
             this.continueButton.Click += new System.EventHandler(this.continueButton_Click);
             // 
-            // label9
-            // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label9.Location = new System.Drawing.Point(3, 194);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(84, 18);
-            this.label9.TabIndex = 71;
-            this.label9.Text = "REMARK";
-            // 
-            // label10
-            // 
-            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label10.Location = new System.Drawing.Point(207, 194);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(13, 18);
-            this.label10.TabIndex = 72;
-            this.label10.Text = ":";
-            // 
-            // remarkTextBox
-            // 
-            this.remarkTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.remarkTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.remarkTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.remarkTextBox.Location = new System.Drawing.Point(226, 158);
-            this.remarkTextBox.Multiline = true;
-            this.remarkTextBox.Name = "remarkTextBox";
-            this.remarkTextBox.Size = new System.Drawing.Size(236, 91);
-            this.remarkTextBox.TabIndex = 73;
-            // 
             // cashierLoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(497, 383);
+            this.ClientSize = new System.Drawing.Size(493, 379);
             this.ControlBox = false;
             this.Controls.Add(this.continueButton);
             this.Controls.Add(this.panel1);
@@ -308,6 +308,8 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CASHIER SHIFT FORM";
+            this.Activated += new System.EventHandler(this.cashierLoginForm_Activated);
+            this.Deactivate += new System.EventHandler(this.cashierLoginForm_Deactivate);
             this.Load += new System.EventHandler(this.cashierLoginForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

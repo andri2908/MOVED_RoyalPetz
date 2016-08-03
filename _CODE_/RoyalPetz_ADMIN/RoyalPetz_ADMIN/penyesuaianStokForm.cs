@@ -12,6 +12,8 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Globalization;
 
+using Hotkeys;
+
 namespace RoyalPetz_ADMIN
 {
     public partial class penyesuaianStokForm : Form
@@ -23,6 +25,9 @@ namespace RoyalPetz_ADMIN
         private Data_Access DS = new Data_Access();
         private CultureInfo culture = new CultureInfo("id-ID");
 
+        private Hotkeys.GlobalHotkey ghk_UP;
+        private Hotkeys.GlobalHotkey ghk_DOWN;
+
         public penyesuaianStokForm()
         {
             InitializeComponent();
@@ -32,6 +37,48 @@ namespace RoyalPetz_ADMIN
         {
             InitializeComponent();
             selectedProductID = productID;
+        }
+
+        private void captureAll(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.Up:
+                    SendKeys.Send("+{TAB}");
+                    break;
+                case Keys.Down:
+                    SendKeys.Send("{TAB}");
+                    break;
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == Constants.WM_HOTKEY_MSG_ID)
+            {
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                int modifier = (int)m.LParam & 0xFFFF;
+
+                if (modifier == Constants.NOMOD)
+                    captureAll(key);
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void registerGlobalHotkey()
+        {
+            ghk_UP = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Up, this);
+            ghk_UP.Register();
+
+            ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
+            ghk_DOWN.Register();
+        }
+
+        private void unregisterGlobalHotkey()
+        {
+            ghk_UP.Unregister();
+            ghk_DOWN.Unregister();
         }
 
         private void loadProductData()
@@ -194,6 +241,7 @@ namespace RoyalPetz_ADMIN
         private void penyesuaianStokForm_Activated(object sender, EventArgs e)
         {
             //if need something
+            registerGlobalHotkey();
         }
 
         private void jumlahBaruMaskedTextBox_Enter(object sender, EventArgs e)
@@ -202,6 +250,11 @@ namespace RoyalPetz_ADMIN
             {
                 jumlahBaruMaskedTextBox.SelectAll();
             });
+        }
+
+        private void penyesuaianStokForm_Deactivate(object sender, EventArgs e)
+        {
+            unregisterGlobalHotkey();
         }
     }
 }

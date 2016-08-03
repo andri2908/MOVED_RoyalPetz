@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
+using Hotkeys;
+
 namespace RoyalPetz_ADMIN
 {
     public partial class dataCabangDetailForm : Form
@@ -21,9 +23,55 @@ namespace RoyalPetz_ADMIN
         private int options = 0;
         private Data_Access DS = new Data_Access();
         private string selectedIP = "";
+
+        private Hotkeys.GlobalHotkey ghk_UP;
+        private Hotkeys.GlobalHotkey ghk_DOWN;
+
         public dataCabangDetailForm()
         {
             InitializeComponent();
+        }
+
+        private void captureAll(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.Up:
+                    SendKeys.Send("+{TAB}");
+                    break;
+                case Keys.Down:
+                    SendKeys.Send("{TAB}");
+                    break;
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == Constants.WM_HOTKEY_MSG_ID)
+            {
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                int modifier = (int)m.LParam & 0xFFFF;
+
+                if (modifier == Constants.NOMOD)
+                    captureAll(key);
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void registerGlobalHotkey()
+        {
+            ghk_UP = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Up, this);
+            ghk_UP.Register();
+
+            ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
+            ghk_DOWN.Register();
+        }
+
+        private void unregisterGlobalHotkey()
+        {
+            ghk_UP.Unregister();
+            ghk_DOWN.Unregister();
         }
 
         public dataCabangDetailForm(int moduleID, int branchID)
@@ -32,8 +80,9 @@ namespace RoyalPetz_ADMIN
 
             originModuleID = moduleID;
             selectedBranchID = branchID;
+
         }
-        
+
         private void loadBranchDataInformation()
         {
             MySqlDataReader rdr;
@@ -247,7 +296,7 @@ namespace RoyalPetz_ADMIN
         {
             int userAccessOption = 0;
             Button[] arrButton = new Button[2];
-                        
+
             userAccessOption = DS.getUserAccessRight(globalConstants.MENU_MANAJEMEN_CABANG, gUtil.getUserGroupID());
 
             if (originModuleID == globalConstants.NEW_BRANCH)
@@ -295,6 +344,7 @@ namespace RoyalPetz_ADMIN
                     break;
             }
             errorLabel.Text = "";
+            registerGlobalHotkey();
         }
 
         private void ip1Textbox_KeyPress(object sender, KeyPressEventArgs e)
@@ -313,6 +363,11 @@ namespace RoyalPetz_ADMIN
         {
             if (e.KeyChar == '.')
                 ip4Textbox.Focus();
+        }
+
+        private void dataCabangDetailForm_Deactivate(object sender, EventArgs e)
+        {
+            unregisterGlobalHotkey();
         }
     }
 }

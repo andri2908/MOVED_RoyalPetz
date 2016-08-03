@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
+using Hotkeys;
+
 namespace RoyalPetz_ADMIN
 {
     public partial class groupAccessModuleForm : Form
@@ -18,6 +20,10 @@ namespace RoyalPetz_ADMIN
         private Data_Access DS = new Data_Access();
         private globalUtilities gutil = new globalUtilities();
         private int selectedGroupID = 0;
+
+        private Hotkeys.GlobalHotkey ghk_UP;
+        private Hotkeys.GlobalHotkey ghk_DOWN;
+        private bool navKeyRegistered = false;
 
         private void fillInDummyData()
         {
@@ -38,6 +44,52 @@ namespace RoyalPetz_ADMIN
             InitializeComponent();
 
             selectedGroupID = groupID;
+        }
+
+        private void captureAll(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.Up:
+                    SendKeys.Send("+{TAB}");
+                    break;
+                case Keys.Down:
+                    SendKeys.Send("{TAB}");
+                    break;
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == Constants.WM_HOTKEY_MSG_ID)
+            {
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                int modifier = (int)m.LParam & 0xFFFF;
+
+                if (modifier == Constants.NOMOD)
+                    captureAll(key);
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void registerGlobalHotkey()
+        {
+            ghk_UP = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Up, this);
+            ghk_UP.Register();
+
+            ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
+            ghk_DOWN.Register();
+
+            navKeyRegistered = true;
+        }
+
+        private void unregisterGlobalHotkey()
+        {
+            ghk_UP.Unregister();
+            ghk_DOWN.Unregister();
+
+            navKeyRegistered = false;
         }
 
         public void setSelectedGroupID(int groupID)
@@ -282,12 +334,30 @@ namespace RoyalPetz_ADMIN
         private void groupAccessModuleForm_Activated(object sender, EventArgs e)
         {
             //if need something
+            registerGlobalHotkey();
         }
 
         private void checkAll_CheckedChanged(object sender, EventArgs e)
         {
             for (int i=0;i<groupAccessDataGridView.Rows.Count;i++)
                 groupAccessDataGridView.Rows[i].Cells["hakAkses"].Value = checkAll.Checked;
+        }
+
+        private void groupAccessModuleForm_Deactivate(object sender, EventArgs e)
+        {
+            unregisterGlobalHotkey();
+        }
+
+        private void groupAccessDataGridView_Enter(object sender, EventArgs e)
+        {
+            if (navKeyRegistered)
+                unregisterGlobalHotkey();
+        }
+
+        private void groupAccessDataGridView_Leave(object sender, EventArgs e)
+        {
+            if (!navKeyRegistered)
+                registerGlobalHotkey();
         }
     }
 }

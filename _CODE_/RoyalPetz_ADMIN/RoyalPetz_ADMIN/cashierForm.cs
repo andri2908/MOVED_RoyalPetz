@@ -36,6 +36,8 @@ namespace RoyalPetz_ADMIN
 
         private double sisaBayar = 0;
         private int originModuleID = 0;
+        private bool navKeyRegistered = false;
+        private bool delKeyRegistered = false;
 
         private Data_Access DS = new Data_Access();
 
@@ -69,6 +71,9 @@ namespace RoyalPetz_ADMIN
         private Hotkeys.GlobalHotkey ghk_ALT_F4;
         private Hotkeys.GlobalHotkey ghk_Add;
         private Hotkeys.GlobalHotkey ghk_Substract;
+
+        private Hotkeys.GlobalHotkey ghk_UP;
+        private Hotkeys.GlobalHotkey ghk_DOWN;
 
         //private adminForm parentForm;
         barcodeForm displayBarcodeForm = null;
@@ -218,10 +223,10 @@ namespace RoyalPetz_ADMIN
 
                 case Keys.Delete:
                     //if (cashierDataGridView.Focused)
-                    if (!bayarTextBox.Focused && !discJualMaskedTextBox.Focused && 
-                        !tempoMaskedTextBox.Focused && !paymentComboBox.Focused &&
-                        !customerComboBox.Focused 
-                        )
+                    //if (!bayarTextBox.Focused && !discJualMaskedTextBox.Focused && 
+                    //    !tempoMaskedTextBox.Focused && !paymentComboBox.Focused &&
+                    //    !customerComboBox.Focused 
+                    //    )
                     { 
                         if (originModuleID != globalConstants.COPY_NOTA)
                             if (cashierDataGridView.Rows.Count > 1)
@@ -241,6 +246,15 @@ namespace RoyalPetz_ADMIN
                 case Keys.F12:
                     MessageBox.Show("F12");
                     break;
+
+                case Keys.Up:
+                    SendKeys.Send("+{TAB}");
+                    break;
+
+                case Keys.Down:
+                    SendKeys.Send("{TAB}");
+                    break;
+
             }
         }
 
@@ -344,15 +358,15 @@ namespace RoyalPetz_ADMIN
             ghk_Substract = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Subtract, this);
             ghk_Substract.Register();
 
-            ghk_DEL = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Delete, this);
-            ghk_DEL.Register();
+            //ghk_DEL = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Delete, this);
+            //ghk_DEL.Register();
 
             //ghk_CTRL_DEL = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Delete, this);
             //ghk_CTRL_DEL.Register();
 
             ghk_CTRL_Enter = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Enter, this);
             ghk_CTRL_Enter.Register();
-            
+
 
 
             //ghk_F10 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F10, this);
@@ -375,7 +389,26 @@ namespace RoyalPetz_ADMIN
 
             //ghk_ALT_F4 = new Hotkeys.GlobalHotkey(Constants.ALT, Keys.F4, this);
             //ghk_ALT_F4.Register();
+            registerNavigationKey();
+        }
 
+        private void registerNavigationKey()
+        {
+            ghk_UP = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Up, this);
+            ghk_UP.Register();
+
+            ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
+            ghk_DOWN.Register();
+
+            navKeyRegistered = true;
+        }
+
+        private void unregisterNavigationKey()
+        {
+            ghk_UP.Unregister();
+            ghk_DOWN.Unregister();
+
+            navKeyRegistered = false;
         }
 
         private void unregisterGlobalHotkey()
@@ -394,7 +427,7 @@ namespace RoyalPetz_ADMIN
 
             ghk_Add.Unregister();
             ghk_Substract.Unregister();
-            ghk_DEL.Unregister();
+            //ghk_DEL.Unregister();
 
             //ghk_CTRL_DEL.Unregister();
             ghk_CTRL_Enter.Unregister();
@@ -408,6 +441,22 @@ namespace RoyalPetz_ADMIN
             //ghk_CTRL_U.Unregister();
 
             //ghk_ALT_F4.Unregister();
+            unregisterNavigationKey();
+        }
+
+        private void registerDelKey()
+        {
+            ghk_DEL = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Delete, this);
+            ghk_DEL.Register();
+
+            delKeyRegistered = true;
+        }
+
+        private void unregisterDelKey()
+        {
+            ghk_DEL.Unregister();
+
+            delKeyRegistered = false;
         }
 
         private void reprintInvoice()
@@ -1893,12 +1942,18 @@ namespace RoyalPetz_ADMIN
 
             updateLabel();
             timer1.Start();
+
+            if (cashierDataGridView.Focused)
+                registerDelKey();
         }
 
         private void cashierForm_Deactivate(object sender, EventArgs e)
         {
             timer1.Stop();
             unregisterGlobalHotkey();
+
+            if (delKeyRegistered)
+                unregisterDelKey();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -2788,6 +2843,12 @@ namespace RoyalPetz_ADMIN
             discRP.Add("0");
             productPriceList.Add("0");
             jumlahList.Add("0");
+
+            if (navKeyRegistered)
+            { 
+                unregisterNavigationKey();
+                registerDelKey();
+            }
         }
 
         private void bayarTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -2891,6 +2952,45 @@ namespace RoyalPetz_ADMIN
                 e.Value = d.ToString(globalUtilities.CELL_FORMATTING_NUMERIC_FORMAT);
                 isLoading = false;    
             }
+        }
+
+        private void cashierDataGridView_Enter(object sender, EventArgs e)
+        {
+            if (navKeyRegistered)
+            { 
+                unregisterNavigationKey();
+            }
+            registerDelKey();
+        }
+
+        private void cashierDataGridView_Leave(object sender, EventArgs e)
+        {
+            if (!navKeyRegistered)
+            {
+                registerNavigationKey();
+            }
+
+            unregisterDelKey();
+        }
+
+        private void customerComboBox_Enter(object sender, EventArgs e)
+        {
+            unregisterNavigationKey();
+        }
+
+        private void customerComboBox_Leave(object sender, EventArgs e)
+        {
+            registerNavigationKey();
+        }
+
+        private void paymentComboBox_Enter(object sender, EventArgs e)
+        {
+            unregisterNavigationKey();
+        }
+
+        private void paymentComboBox_Leave(object sender, EventArgs e)
+        {
+            registerNavigationKey();
         }
     }
 }

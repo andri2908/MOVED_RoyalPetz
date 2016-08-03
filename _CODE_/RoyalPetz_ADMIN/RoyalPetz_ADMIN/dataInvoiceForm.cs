@@ -12,6 +12,8 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Globalization;
 
+using Hotkeys;
+
 namespace RoyalPetz_ADMIN
 {
     public partial class dataInvoiceForm : Form
@@ -23,6 +25,11 @@ namespace RoyalPetz_ADMIN
         private globalUtilities gutil = new globalUtilities();
         private Data_Access DS = new Data_Access();
 
+        private Hotkeys.GlobalHotkey ghk_UP;
+        private Hotkeys.GlobalHotkey ghk_DOWN;
+
+        private bool navKeyRegistered = false;
+
         public dataInvoiceForm()
         {
             InitializeComponent();
@@ -33,6 +40,53 @@ namespace RoyalPetz_ADMIN
             InitializeComponent();
             originModuleID = moduleID;
         }
+
+        private void captureAll(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.Up:
+                    SendKeys.Send("+{TAB}");
+                    break;
+                case Keys.Down:
+                    SendKeys.Send("{TAB}");
+                    break;
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == Constants.WM_HOTKEY_MSG_ID)
+            {
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                int modifier = (int)m.LParam & 0xFFFF;
+
+                if (modifier == Constants.NOMOD)
+                    captureAll(key);
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void registerGlobalHotkey()
+        {
+            ghk_UP = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Up, this);
+            ghk_UP.Register();
+
+            ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
+            ghk_DOWN.Register();
+
+            navKeyRegistered = true;
+        }
+
+        private void unregisterGlobalHotkey()
+        {
+            ghk_UP.Unregister();
+            ghk_DOWN.Unregister();
+
+            navKeyRegistered = false;
+        }
+
 
         private void dataInvoiceDataGridView_DoubleClick(object sender, EventArgs e)
         {
@@ -193,7 +247,34 @@ namespace RoyalPetz_ADMIN
                 return;
 
             loadData();
+            registerGlobalHotkey();
         }
 
+        private void dataInvoiceForm_Deactivate(object sender, EventArgs e)
+        {
+            unregisterGlobalHotkey();
+        }
+
+        private void dataInvoiceDataGridView_Enter(object sender, EventArgs e)
+        {
+            if (navKeyRegistered)
+                unregisterGlobalHotkey();
+        }
+
+        private void dataInvoiceDataGridView_Leave(object sender, EventArgs e)
+        {
+            if (!navKeyRegistered)
+                registerGlobalHotkey();
+        }
+
+        private void pelangganCombo_Enter(object sender, EventArgs e)
+        {
+            unregisterGlobalHotkey();
+        }
+
+        private void pelangganCombo_Leave(object sender, EventArgs e)
+        {
+            registerGlobalHotkey();
+        }
     }
 }

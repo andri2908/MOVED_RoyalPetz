@@ -13,6 +13,8 @@ using MySql.Data.MySqlClient;
 using System.Globalization;
 using System.Drawing.Printing;
 
+using Hotkeys;
+
 namespace RoyalPetz_ADMIN
 {
     public partial class dataReturForm : Form
@@ -28,6 +30,10 @@ namespace RoyalPetz_ADMIN
         dataReturPermintaanForm returMutasiForm = null;
         dataInvoiceForm returPenjualanForm = null;
 
+        private Hotkeys.GlobalHotkey ghk_UP;
+        private Hotkeys.GlobalHotkey ghk_DOWN;
+        private bool navKeyRegistered = false;
+
         public dataReturForm()
         {
             InitializeComponent();
@@ -37,6 +43,52 @@ namespace RoyalPetz_ADMIN
         {
             InitializeComponent();
             originModuleID = moduleID;
+        }
+
+        private void captureAll(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.Up:
+                    SendKeys.Send("+{TAB}");
+                    break;
+                case Keys.Down:
+                    SendKeys.Send("{TAB}");
+                    break;
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == Constants.WM_HOTKEY_MSG_ID)
+            {
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                int modifier = (int)m.LParam & 0xFFFF;
+
+                if (modifier == Constants.NOMOD)
+                    captureAll(key);
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void registerGlobalHotkey()
+        {
+            ghk_UP = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Up, this);
+            ghk_UP.Register();
+
+            ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
+            ghk_DOWN.Register();
+
+            navKeyRegistered = true;
+        }
+
+        private void unregisterGlobalHotkey()
+        {
+            ghk_UP.Unregister();
+            ghk_DOWN.Unregister();
+
+            navKeyRegistered = false;
         }
 
         public void fillInSupplierCombo()
@@ -917,6 +969,38 @@ namespace RoyalPetz_ADMIN
                 returPenjualanForm.Show();
                 returPenjualanForm.WindowState = FormWindowState.Normal;
             }
+        }
+
+        private void genericControl_Enter(object sender, EventArgs e)
+        {
+            unregisterGlobalHotkey();
+        }
+
+        private void genericControl_Leave(object sender, EventArgs e)
+        {
+            registerGlobalHotkey();
+        }
+
+        private void dataReturForm_Activated(object sender, EventArgs e)
+        {
+            registerGlobalHotkey();
+        }
+
+        private void dataReturForm_Deactivate(object sender, EventArgs e)
+        {
+            unregisterGlobalHotkey();
+        }
+
+        private void dataPurchaseOrder_Enter(object sender, EventArgs e)
+        {
+            if (navKeyRegistered)
+                unregisterGlobalHotkey();
+        }
+
+        private void dataPurchaseOrder_Leave(object sender, EventArgs e)
+        {
+            if (!navKeyRegistered)
+                registerGlobalHotkey();
         }
     }
 }

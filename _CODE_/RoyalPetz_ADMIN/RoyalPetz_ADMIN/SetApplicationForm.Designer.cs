@@ -481,6 +481,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pengaturan Sistem Aplikasi";
             this.Activated += new System.EventHandler(this.setDatabaseLocationForm_Activated);
+            this.Deactivate += new System.EventHandler(this.SetApplicationForm_Deactivate);
             this.Load += new System.EventHandler(this.setDatabaseLocationForm_Load);
             this.ConModeBox.ResumeLayout(false);
             this.ConModeBox.PerformLayout();

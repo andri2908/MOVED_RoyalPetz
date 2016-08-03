@@ -66,6 +66,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.resetbutton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.barcodeTextBox = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -73,7 +74,6 @@
             this.label22 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
-            this.barcodeTextBox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -523,6 +523,18 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ID PRODUK";
             // 
+            // barcodeTextBox
+            // 
+            this.barcodeTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.barcodeTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.barcodeTextBox.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.barcodeTextBox.Location = new System.Drawing.Point(468, 25);
+            this.barcodeTextBox.MaxLength = 15;
+            this.barcodeTextBox.Name = "barcodeTextBox";
+            this.barcodeTextBox.Size = new System.Drawing.Size(174, 26);
+            this.barcodeTextBox.TabIndex = 79;
+            this.barcodeTextBox.TextChanged += new System.EventHandler(this.barcodeTextBox_TextChanged);
+            // 
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -614,18 +626,6 @@
             this.label25.TabIndex = 76;
             this.label25.Text = "HARGA JUAL PARTAI";
             // 
-            // barcodeTextBox
-            // 
-            this.barcodeTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.barcodeTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.barcodeTextBox.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.barcodeTextBox.Location = new System.Drawing.Point(468, 25);
-            this.barcodeTextBox.MaxLength = 15;
-            this.barcodeTextBox.Name = "barcodeTextBox";
-            this.barcodeTextBox.Size = new System.Drawing.Size(174, 26);
-            this.barcodeTextBox.TabIndex = 79;
-            this.barcodeTextBox.TextChanged += new System.EventHandler(this.barcodeTextBox_TextChanged);
-            // 
             // dataProdukDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -649,6 +649,8 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DATA PRODUK ";
+            this.Activated += new System.EventHandler(this.dataProdukDetailForm_Activated);
+            this.Deactivate += new System.EventHandler(this.dataProdukDetailForm_Deactivate);
             this.Load += new System.EventHandler(this.dataProdukDetailForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

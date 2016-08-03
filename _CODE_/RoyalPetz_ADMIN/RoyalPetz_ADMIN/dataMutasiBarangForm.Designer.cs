@@ -84,8 +84,10 @@
             this.dataRequestOrderGridView.Size = new System.Drawing.Size(940, 417);
             this.dataRequestOrderGridView.TabIndex = 33;
             this.dataRequestOrderGridView.DoubleClick += new System.EventHandler(this.dataSalesDataGridView_DoubleClick);
+            this.dataRequestOrderGridView.Enter += new System.EventHandler(this.dataRequestOrderGridView_Enter);
             this.dataRequestOrderGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataRequestOrderGridView_KeyDown);
             this.dataRequestOrderGridView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataRequestOrderGridView_KeyPress);
+            this.dataRequestOrderGridView.Leave += new System.EventHandler(this.dataRequestOrderGridView_Leave);
             // 
             // newButton
             // 
@@ -180,6 +182,8 @@
             this.branchToCombo.Size = new System.Drawing.Size(321, 26);
             this.branchToCombo.TabIndex = 42;
             this.branchToCombo.SelectedIndexChanged += new System.EventHandler(this.branchToCombo_SelectedIndexChanged);
+            this.branchToCombo.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.branchToCombo.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // branchFromCombo
             // 
@@ -193,6 +197,8 @@
             this.branchFromCombo.TabIndex = 40;
             this.branchFromCombo.Visible = false;
             this.branchFromCombo.SelectedIndexChanged += new System.EventHandler(this.branchFromCombo_SelectedIndexChanged);
+            this.branchFromCombo.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.branchFromCombo.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // tableLayoutPanel2
             // 
@@ -218,6 +224,8 @@
             this.PMDtPicker_1.Name = "PMDtPicker_1";
             this.PMDtPicker_1.Size = new System.Drawing.Size(146, 27);
             this.PMDtPicker_1.TabIndex = 38;
+            this.PMDtPicker_1.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.PMDtPicker_1.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // label5
             // 
@@ -239,6 +247,8 @@
             this.PMDtPicker_2.Name = "PMDtPicker_2";
             this.PMDtPicker_2.Size = new System.Drawing.Size(150, 27);
             this.PMDtPicker_2.TabIndex = 43;
+            this.PMDtPicker_2.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.PMDtPicker_2.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // label1
             // 

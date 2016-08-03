@@ -89,7 +89,9 @@
             this.dataUserGroupGridView.Size = new System.Drawing.Size(603, 475);
             this.dataUserGroupGridView.TabIndex = 28;
             this.dataUserGroupGridView.DoubleClick += new System.EventHandler(this.dataSalesDataGridView_DoubleClick);
+            this.dataUserGroupGridView.Enter += new System.EventHandler(this.dataUserGroupGridView_Enter);
             this.dataUserGroupGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataUserGroupGridView_KeyDown);
+            this.dataUserGroupGridView.Leave += new System.EventHandler(this.dataUserGroupGridView_Leave);
             // 
             // newButton
             // 
@@ -132,6 +134,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NAMA GROUP";
             this.Activated += new System.EventHandler(this.dataGroupForm_Activated);
+            this.Deactivate += new System.EventHandler(this.dataGroupForm_Deactivate);
             this.Load += new System.EventHandler(this.dataGroupForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataUserGroupGridView)).EndInit();
             this.ResumeLayout(false);

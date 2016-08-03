@@ -179,6 +179,8 @@
             this.RODateTimePicker.Name = "RODateTimePicker";
             this.RODateTimePicker.Size = new System.Drawing.Size(152, 27);
             this.RODateTimePicker.TabIndex = 21;
+            this.RODateTimePicker.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.RODateTimePicker.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // label9
             // 
@@ -267,6 +269,8 @@
             this.branchFromCombo.TabIndex = 18;
             this.branchFromCombo.Visible = false;
             this.branchFromCombo.SelectedIndexChanged += new System.EventHandler(this.branchFromCombo_SelectedIndexChanged);
+            this.branchFromCombo.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.branchFromCombo.Leave += new System.EventHandler(this.genericControl_Leave);
             this.branchFromCombo.Validated += new System.EventHandler(this.branchFromCombo_Validated);
             // 
             // label5
@@ -444,6 +448,8 @@
             this.branchToCombo.TabIndex = 21;
             this.branchToCombo.Visible = false;
             this.branchToCombo.SelectedIndexChanged += new System.EventHandler(this.branchToCombo_SelectedIndexChanged);
+            this.branchToCombo.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.branchToCombo.Leave += new System.EventHandler(this.genericControl_Leave);
             this.branchToCombo.Validated += new System.EventHandler(this.branchToCombo_Validated);
             // 
             // label14
@@ -500,7 +506,9 @@
             this.detailRequestOrderDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.detailRequestOrderDataGridView_CellFormatting);
             this.detailRequestOrderDataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailRequestOrderDataGridView_CellValidated);
             this.detailRequestOrderDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.detailRequestOrderDataGridView_RowsAdded);
+            this.detailRequestOrderDataGridView.Enter += new System.EventHandler(this.detailRequestOrderDataGridView_Enter);
             this.detailRequestOrderDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.detailRequestOrderDataGridView_KeyDown);
+            this.detailRequestOrderDataGridView.Leave += new System.EventHandler(this.detailRequestOrderDataGridView_Leave);
             // 
             // exportButton
             // 

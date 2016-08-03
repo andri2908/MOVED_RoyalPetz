@@ -57,7 +57,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 355F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 356F));
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label6, 1, 1);
@@ -103,7 +103,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(172, 12);
+            this.label6.Location = new System.Drawing.Point(171, 12);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(14, 18);
             this.label6.TabIndex = 12;
@@ -115,7 +115,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(172, 54);
+            this.label7.Location = new System.Drawing.Point(171, 54);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(14, 18);
             this.label7.TabIndex = 13;
@@ -125,7 +125,7 @@
             // 
             this.namaGroupTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.namaGroupTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaGroupTextBox.Location = new System.Drawing.Point(194, 8);
+            this.namaGroupTextBox.Location = new System.Drawing.Point(193, 8);
             this.namaGroupTextBox.Name = "namaGroupTextBox";
             this.namaGroupTextBox.ReadOnly = true;
             this.namaGroupTextBox.Size = new System.Drawing.Size(346, 27);
@@ -135,7 +135,7 @@
             // 
             this.deskripsiTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.deskripsiTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deskripsiTextBox.Location = new System.Drawing.Point(194, 49);
+            this.deskripsiTextBox.Location = new System.Drawing.Point(193, 49);
             this.deskripsiTextBox.Name = "deskripsiTextBox";
             this.deskripsiTextBox.ReadOnly = true;
             this.deskripsiTextBox.Size = new System.Drawing.Size(346, 27);
@@ -194,6 +194,8 @@
             this.groupAccessDataGridView.RowHeadersVisible = false;
             this.groupAccessDataGridView.Size = new System.Drawing.Size(569, 477);
             this.groupAccessDataGridView.TabIndex = 29;
+            this.groupAccessDataGridView.Enter += new System.EventHandler(this.groupAccessDataGridView_Enter);
+            this.groupAccessDataGridView.Leave += new System.EventHandler(this.groupAccessDataGridView_Leave);
             // 
             // moduleName
             // 
@@ -264,6 +266,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PENGATURAN GROUP AKSES";
             this.Activated += new System.EventHandler(this.groupAccessModuleForm_Activated);
+            this.Deactivate += new System.EventHandler(this.groupAccessModuleForm_Deactivate);
             this.Load += new System.EventHandler(this.groupAccessModuleForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

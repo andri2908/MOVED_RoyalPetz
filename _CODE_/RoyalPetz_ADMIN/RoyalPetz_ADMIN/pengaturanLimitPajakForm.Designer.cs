@@ -57,7 +57,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 93.91534F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.084656F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 219F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 220F));
             this.tableLayoutPanel1.Controls.Add(this.persentasePembelian, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
@@ -89,7 +89,7 @@
             // 
             this.persentasePembelian.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.persentasePembelian.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.persentasePembelian.Location = new System.Drawing.Point(377, 38);
+            this.persentasePembelian.Location = new System.Drawing.Point(376, 38);
             this.persentasePembelian.Mask = "000";
             this.persentasePembelian.Name = "persentasePembelian";
             this.persentasePembelian.Size = new System.Drawing.Size(49, 27);
@@ -128,7 +128,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(355, 7);
+            this.label4.Location = new System.Drawing.Point(354, 7);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(14, 18);
             this.label4.TabIndex = 10;
@@ -140,7 +140,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(355, 43);
+            this.label6.Location = new System.Drawing.Point(354, 43);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(14, 18);
             this.label6.TabIndex = 12;
@@ -152,7 +152,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(355, 78);
+            this.label7.Location = new System.Drawing.Point(354, 78);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(14, 18);
             this.label7.TabIndex = 13;
@@ -162,7 +162,7 @@
             // 
             this.omsetPenjualan.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.omsetPenjualan.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.omsetPenjualan.Location = new System.Drawing.Point(377, 74);
+            this.omsetPenjualan.Location = new System.Drawing.Point(376, 74);
             this.omsetPenjualan.Name = "omsetPenjualan";
             this.omsetPenjualan.Size = new System.Drawing.Size(204, 27);
             this.omsetPenjualan.TabIndex = 17;
@@ -173,7 +173,7 @@
             // 
             this.persentasePenjualan.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.persentasePenjualan.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.persentasePenjualan.Location = new System.Drawing.Point(377, 3);
+            this.persentasePenjualan.Location = new System.Drawing.Point(376, 3);
             this.persentasePenjualan.Mask = "000";
             this.persentasePenjualan.Name = "persentasePenjualan";
             this.persentasePenjualan.Size = new System.Drawing.Size(49, 27);
@@ -188,7 +188,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label8.Location = new System.Drawing.Point(355, 113);
+            this.label8.Location = new System.Drawing.Point(354, 113);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(14, 18);
             this.label8.TabIndex = 46;
@@ -198,7 +198,7 @@
             // 
             this.omsetPembelian.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.omsetPembelian.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.omsetPembelian.Location = new System.Drawing.Point(377, 108);
+            this.omsetPembelian.Location = new System.Drawing.Point(376, 108);
             this.omsetPembelian.Name = "omsetPembelian";
             this.omsetPembelian.Size = new System.Drawing.Size(204, 27);
             this.omsetPembelian.TabIndex = 47;
@@ -223,7 +223,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label10.Location = new System.Drawing.Point(355, 148);
+            this.label10.Location = new System.Drawing.Point(354, 148);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(14, 18);
             this.label10.TabIndex = 49;
@@ -233,7 +233,7 @@
             // 
             this.rasioToleransi.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.rasioToleransi.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rasioToleransi.Location = new System.Drawing.Point(377, 144);
+            this.rasioToleransi.Location = new System.Drawing.Point(376, 144);
             this.rasioToleransi.Name = "rasioToleransi";
             this.rasioToleransi.Size = new System.Drawing.Size(204, 27);
             this.rasioToleransi.TabIndex = 50;
@@ -314,6 +314,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PENGATURAN LIMIT PAJAK";
             this.Activated += new System.EventHandler(this.pengaturanLimitPajakForm_Activated);
+            this.Deactivate += new System.EventHandler(this.pengaturanLimitPajakForm_Deactivate);
             this.Load += new System.EventHandler(this.pengaturanLimitPajakForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

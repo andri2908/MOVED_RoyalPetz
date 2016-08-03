@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.noInvoiceTextBox = new System.Windows.Forms.TextBox();
             this.dataInvoiceDataGridView = new System.Windows.Forms.DataGridView();
@@ -66,23 +66,23 @@
             this.dataInvoiceDataGridView.AllowUserToAddRows = false;
             this.dataInvoiceDataGridView.AllowUserToDeleteRows = false;
             this.dataInvoiceDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataInvoiceDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataInvoiceDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataInvoiceDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataInvoiceDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataInvoiceDataGridView.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataInvoiceDataGridView.Location = new System.Drawing.Point(0, 136);
             this.dataInvoiceDataGridView.MultiSelect = false;
             this.dataInvoiceDataGridView.Name = "dataInvoiceDataGridView";
@@ -90,7 +90,9 @@
             this.dataInvoiceDataGridView.Size = new System.Drawing.Size(602, 449);
             this.dataInvoiceDataGridView.TabIndex = 33;
             this.dataInvoiceDataGridView.DoubleClick += new System.EventHandler(this.dataInvoiceDataGridView_DoubleClick);
+            this.dataInvoiceDataGridView.Enter += new System.EventHandler(this.dataInvoiceDataGridView_Enter);
             this.dataInvoiceDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataInvoiceDataGridView_KeyDown);
+            this.dataInvoiceDataGridView.Leave += new System.EventHandler(this.dataInvoiceDataGridView_Leave);
             // 
             // displayButton
             // 
@@ -126,6 +128,8 @@
             this.pelangganCombo.Size = new System.Drawing.Size(260, 26);
             this.pelangganCombo.TabIndex = 46;
             this.pelangganCombo.SelectedIndexChanged += new System.EventHandler(this.pelangganCombo_SelectedIndexChanged);
+            this.pelangganCombo.Enter += new System.EventHandler(this.pelangganCombo_Enter);
+            this.pelangganCombo.Leave += new System.EventHandler(this.pelangganCombo_Leave);
             this.pelangganCombo.Validated += new System.EventHandler(this.pelangganCombo_Validated);
             // 
             // pelangganComboHidden
@@ -174,6 +178,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DATA INVOICE";
             this.Activated += new System.EventHandler(this.dataInvoiceForm_Activated);
+            this.Deactivate += new System.EventHandler(this.dataInvoiceForm_Deactivate);
             this.Load += new System.EventHandler(this.dataInvoiceForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataInvoiceDataGridView)).EndInit();
             this.ResumeLayout(false);

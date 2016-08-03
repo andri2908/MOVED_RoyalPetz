@@ -89,7 +89,9 @@
             this.dataUnitGridView.Size = new System.Drawing.Size(518, 479);
             this.dataUnitGridView.TabIndex = 28;
             this.dataUnitGridView.DoubleClick += new System.EventHandler(this.dataUnitGridView_DoubleClick);
+            this.dataUnitGridView.Enter += new System.EventHandler(this.dataUnitGridView_Enter);
             this.dataUnitGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataUnitGridView_KeyDown);
+            this.dataUnitGridView.Leave += new System.EventHandler(this.dataUnitGridView_Leave);
             // 
             // newButton
             // 
@@ -132,6 +134,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DATA SATUAN";
             this.Activated += new System.EventHandler(this.dataSatuanForm_Activated);
+            this.Deactivate += new System.EventHandler(this.dataSatuanForm_Deactivate);
             this.Load += new System.EventHandler(this.dataSatuanForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataUnitGridView)).EndInit();
             this.ResumeLayout(false);

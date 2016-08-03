@@ -167,6 +167,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Backup / Restore Database";
             this.Activated += new System.EventHandler(this.backupRestoreDatabaseForm_Activated);
+            this.Deactivate += new System.EventHandler(this.backupRestoreDatabaseForm_Deactivate);
             this.Load += new System.EventHandler(this.backupRestoreDatabaseForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);

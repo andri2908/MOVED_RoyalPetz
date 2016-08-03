@@ -13,6 +13,8 @@ using MySql.Data.MySqlClient;
 using System.Globalization;
 using System.IO;
 
+using Hotkeys;
+
 namespace RoyalPetz_ADMIN
 {
     public partial class importDataCSVForm : Form
@@ -23,9 +25,59 @@ namespace RoyalPetz_ADMIN
 
         string selectedFileName = "";
 
+        private Hotkeys.GlobalHotkey ghk_UP;
+        private Hotkeys.GlobalHotkey ghk_DOWN;
+        private bool navKeyRegistered = false;
+
         public importDataCSVForm()
         {
             InitializeComponent();
+        }
+
+        private void captureAll(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.Up:
+                    SendKeys.Send("+{TAB}");
+                    break;
+                case Keys.Down:
+                    SendKeys.Send("{TAB}");
+                    break;
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == Constants.WM_HOTKEY_MSG_ID)
+            {
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                int modifier = (int)m.LParam & 0xFFFF;
+
+                if (modifier == Constants.NOMOD)
+                    captureAll(key);
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void registerGlobalHotkey()
+        {
+            ghk_UP = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Up, this);
+            ghk_UP.Register();
+
+            ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
+            ghk_DOWN.Register();
+
+            navKeyRegistered = true;
+        }
+
+        private void unregisterGlobalHotkey()
+        {
+            ghk_UP.Unregister();
+            ghk_DOWN.Unregister();
+
+            navKeyRegistered = false;
         }
 
         private bool loadToDataGrid()
@@ -236,5 +288,26 @@ namespace RoyalPetz_ADMIN
             gutil.reArrangeTabOrder(this);
         }
 
+        private void importDataCSVForm_Activated(object sender, EventArgs e)
+        {
+            registerGlobalHotkey();
+        }
+
+        private void importDataCSVForm_Deactivate(object sender, EventArgs e)
+        {
+            unregisterGlobalHotkey();
+        }
+
+        private void detailImportDataGrid_Enter(object sender, EventArgs e)
+        {
+            if (navKeyRegistered)
+                unregisterGlobalHotkey();
+        }
+
+        private void detailImportDataGrid_Leave(object sender, EventArgs e)
+        {
+            if (!navKeyRegistered)
+                registerGlobalHotkey();
+        }
     }
 }

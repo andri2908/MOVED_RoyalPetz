@@ -12,6 +12,8 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Globalization;
 
+using Hotkeys;
+
 namespace RoyalPetz_ADMIN
 {
     public partial class stokPecahBarangForm : Form
@@ -35,6 +37,9 @@ namespace RoyalPetz_ADMIN
         dataProdukForm displayBrowseDataProdukForm = null;
         dataProdukDetailForm newProdukForm = null;
 
+        private Hotkeys.GlobalHotkey ghk_UP;
+        private Hotkeys.GlobalHotkey ghk_DOWN;
+
         public stokPecahBarangForm()
         {
             InitializeComponent();
@@ -44,6 +49,48 @@ namespace RoyalPetz_ADMIN
         {
             InitializeComponent();
             selectedInternalProductID = productID;
+        }
+
+        private void captureAll(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.Up:
+                    SendKeys.Send("+{TAB}");
+                    break;
+                case Keys.Down:
+                    SendKeys.Send("{TAB}");
+                    break;
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == Constants.WM_HOTKEY_MSG_ID)
+            {
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                int modifier = (int)m.LParam & 0xFFFF;
+
+                if (modifier == Constants.NOMOD)
+                    captureAll(key);
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void registerGlobalHotkey()
+        {
+            ghk_UP = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Up, this);
+            ghk_UP.Register();
+
+            ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
+            ghk_DOWN.Register();
+        }
+
+        private void unregisterGlobalHotkey()
+        {
+            ghk_UP.Unregister();
+            ghk_DOWN.Unregister();
         }
 
         public void setNewSelectedProductID(int productID)
@@ -445,6 +492,13 @@ namespace RoyalPetz_ADMIN
             loadUnitInformation();
 
             loadCategoryInformation();
+
+            registerGlobalHotkey();
+        }
+
+        private void stokPecahBarangForm_Deactivate(object sender, EventArgs e)
+        {
+            unregisterGlobalHotkey();
         }
     }
 }

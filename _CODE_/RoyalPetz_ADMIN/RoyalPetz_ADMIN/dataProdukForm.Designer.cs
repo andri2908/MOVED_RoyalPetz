@@ -70,8 +70,10 @@
             this.dataProdukGridView.Size = new System.Drawing.Size(669, 445);
             this.dataProdukGridView.TabIndex = 0;
             this.dataProdukGridView.DoubleClick += new System.EventHandler(this.tagProdukDataGridView_DoubleClick);
+            this.dataProdukGridView.Enter += new System.EventHandler(this.dataProdukGridView_Enter);
             this.dataProdukGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataProdukGridView_KeyDown);
             this.dataProdukGridView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tagProdukDataGridView_KeyPress);
+            this.dataProdukGridView.Leave += new System.EventHandler(this.dataProdukGridView_Leave);
             // 
             // namaProdukTextBox
             // 
@@ -160,6 +162,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NAMA PRODUK";
             this.Activated += new System.EventHandler(this.dataProdukForm_Activated);
+            this.Deactivate += new System.EventHandler(this.dataProdukForm_Deactivate);
             this.Load += new System.EventHandler(this.dataProdukForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataProdukGridView)).EndInit();
             this.ResumeLayout(false);

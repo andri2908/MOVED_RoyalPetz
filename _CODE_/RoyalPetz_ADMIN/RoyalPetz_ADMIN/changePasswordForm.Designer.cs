@@ -53,7 +53,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 94.27481F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.725191F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 212F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 213F));
             this.tableLayoutPanel1.Controls.Add(this.label8, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.newPasswordTextBox, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
@@ -79,7 +79,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label8.Location = new System.Drawing.Point(264, 96);
+            this.label8.Location = new System.Drawing.Point(263, 96);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(9, 18);
             this.label8.TabIndex = 67;
@@ -89,7 +89,7 @@
             // 
             this.newPasswordTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.newPasswordTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newPasswordTextBox.Location = new System.Drawing.Point(279, 43);
+            this.newPasswordTextBox.Location = new System.Drawing.Point(278, 43);
             this.newPasswordTextBox.MaxLength = 15;
             this.newPasswordTextBox.Name = "newPasswordTextBox";
             this.newPasswordTextBox.PasswordChar = '*';
@@ -126,7 +126,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(264, 8);
+            this.label6.Location = new System.Drawing.Point(263, 8);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(9, 18);
             this.label6.TabIndex = 12;
@@ -138,7 +138,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(264, 48);
+            this.label7.Location = new System.Drawing.Point(263, 48);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(9, 18);
             this.label7.TabIndex = 13;
@@ -148,7 +148,7 @@
             // 
             this.oldPasswordTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.oldPasswordTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.oldPasswordTextBox.Location = new System.Drawing.Point(279, 4);
+            this.oldPasswordTextBox.Location = new System.Drawing.Point(278, 4);
             this.oldPasswordTextBox.MaxLength = 15;
             this.oldPasswordTextBox.Name = "oldPasswordTextBox";
             this.oldPasswordTextBox.PasswordChar = '*';
@@ -171,7 +171,7 @@
             // 
             this.newPassword2TextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.newPassword2TextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newPassword2TextBox.Location = new System.Drawing.Point(279, 91);
+            this.newPassword2TextBox.Location = new System.Drawing.Point(278, 91);
             this.newPassword2TextBox.MaxLength = 15;
             this.newPassword2TextBox.Name = "newPassword2TextBox";
             this.newPassword2TextBox.PasswordChar = '*';
@@ -243,6 +243,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CHANGE PASSWORD";
             this.Activated += new System.EventHandler(this.changePasswordForm_Activated);
+            this.Deactivate += new System.EventHandler(this.changePasswordForm_Deactivate);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.changePasswordForm_FormClosing);
             this.Load += new System.EventHandler(this.changePasswordForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);

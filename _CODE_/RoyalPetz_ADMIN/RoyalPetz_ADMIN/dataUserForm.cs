@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
+using Hotkeys;
+
 namespace RoyalPetz_ADMIN
 {
     public partial class dataUserForm : Form
@@ -25,6 +27,9 @@ namespace RoyalPetz_ADMIN
         dataUserDetailForm newUserForm = null;
         dataUserDetailForm editUserForm = null;
 
+        private Hotkeys.GlobalHotkey ghk_UP;
+        private Hotkeys.GlobalHotkey ghk_DOWN;
+        private bool navKeyRegistered = false;
 
         public dataUserForm()
         {
@@ -38,6 +43,52 @@ namespace RoyalPetz_ADMIN
             originModuleID = moduleID;
 
             newButton.Visible = false;
+        }
+
+        private void captureAll(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.Up:
+                    SendKeys.Send("+{TAB}");
+                    break;
+                case Keys.Down:
+                    SendKeys.Send("{TAB}");
+                    break;
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == Constants.WM_HOTKEY_MSG_ID)
+            {
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                int modifier = (int)m.LParam & 0xFFFF;
+
+                if (modifier == Constants.NOMOD)
+                    captureAll(key);
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void registerGlobalHotkey()
+        {
+            ghk_UP = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Up, this);
+            ghk_UP.Register();
+
+            ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
+            ghk_DOWN.Register();
+
+            navKeyRegistered = true;
+        }
+
+        private void unregisterGlobalHotkey()
+        {
+            ghk_UP.Unregister();
+            ghk_DOWN.Unregister();
+
+            navKeyRegistered = false;
         }
 
         private void loadUserData(string userNameParam)
@@ -164,6 +215,8 @@ namespace RoyalPetz_ADMIN
             groupcombobox.Text = "ALL";
             if (!namaUserTextbox.Text.Equals(""))
                 loadUserData(namaUserTextbox.Text);
+
+            registerGlobalHotkey();
         }
 
         private void namaUserTextbox_TextChanged(object sender, EventArgs e)
@@ -219,6 +272,33 @@ namespace RoyalPetz_ADMIN
             DS.writeXML(sqlCommandx,globalConstants.UserXML);
             ReportUserForm displayedform = new ReportUserForm();
             displayedform.ShowDialog(this);
+        }
+
+        private void genericControl_Enter(object sender, EventArgs e)
+        {
+            unregisterGlobalHotkey();
+        }
+
+        private void genericControl_Leave(object sender, EventArgs e)
+        {
+            registerGlobalHotkey();
+        }
+
+        private void dataUserForm_Deactivate(object sender, EventArgs e)
+        {
+            unregisterGlobalHotkey();
+        }
+
+        private void dataUserGridView_Enter(object sender, EventArgs e)
+        {
+            if (navKeyRegistered)
+                unregisterGlobalHotkey();
+        }
+
+        private void dataUserGridView_Leave(object sender, EventArgs e)
+        {
+            if (!navKeyRegistered)
+                registerGlobalHotkey();
         }
     }
 }

@@ -90,7 +90,9 @@
             this.dataCabangGridView.TabIndex = 28;
             this.dataCabangGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataCabangGridView_CellContentClick);
             this.dataCabangGridView.DoubleClick += new System.EventHandler(this.dataCabangGridView_DoubleClick);
+            this.dataCabangGridView.Enter += new System.EventHandler(this.dataCabangGridView_Enter);
             this.dataCabangGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataCabangGridView_KeyDown);
+            this.dataCabangGridView.Leave += new System.EventHandler(this.dataCabangGridView_Leave);
             // 
             // newButton
             // 
@@ -133,6 +135,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DATA CABANG";
             this.Activated += new System.EventHandler(this.dataCabangForm_Activated);
+            this.Deactivate += new System.EventHandler(this.dataCabangForm_Deactivate);
             this.Load += new System.EventHandler(this.dataCabangForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataCabangGridView)).EndInit();
             this.ResumeLayout(false);

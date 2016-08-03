@@ -139,7 +139,7 @@
             this.tableLayoutPanel4.ColumnCount = 3;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.93733F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.06267F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 252F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 244F));
             this.tableLayoutPanel4.Controls.Add(this.paymentCombo, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.cairDTPicker, 2, 0);
             this.tableLayoutPanel4.Controls.Add(this.labelCair, 1, 0);
@@ -162,17 +162,21 @@
             this.paymentCombo.Size = new System.Drawing.Size(229, 26);
             this.paymentCombo.TabIndex = 66;
             this.paymentCombo.SelectedIndexChanged += new System.EventHandler(this.paymentCombo_SelectedIndexChanged);
+            this.paymentCombo.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.paymentCombo.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // cairDTPicker
             // 
             this.cairDTPicker.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cairDTPicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cairDTPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.cairDTPicker.Location = new System.Drawing.Point(355, 3);
+            this.cairDTPicker.Location = new System.Drawing.Point(363, 3);
             this.cairDTPicker.Name = "cairDTPicker";
             this.cairDTPicker.Size = new System.Drawing.Size(173, 27);
             this.cairDTPicker.TabIndex = 59;
             this.cairDTPicker.Visible = false;
+            this.cairDTPicker.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.cairDTPicker.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // labelCair
             // 
@@ -180,9 +184,9 @@
             this.labelCair.AutoSize = true;
             this.labelCair.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCair.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.labelCair.Location = new System.Drawing.Point(246, 0);
+            this.labelCair.Location = new System.Drawing.Point(251, 6);
             this.labelCair.Name = "labelCair";
-            this.labelCair.Size = new System.Drawing.Size(98, 31);
+            this.labelCair.Size = new System.Drawing.Size(104, 18);
             this.labelCair.TabIndex = 58;
             this.labelCair.Text = "TGL CAIR :";
             this.labelCair.Visible = false;
@@ -204,7 +208,7 @@
             this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 237F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 239F));
             this.tableLayoutPanel3.Controls.Add(this.cabangNameTextBox, 0, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(280, 40);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -246,6 +250,8 @@
             this.paymentDateTimePicker.Name = "paymentDateTimePicker";
             this.paymentDateTimePicker.Size = new System.Drawing.Size(171, 27);
             this.paymentDateTimePicker.TabIndex = 56;
+            this.paymentDateTimePicker.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.paymentDateTimePicker.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // label5
             // 
@@ -532,6 +538,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DATA PIUTANG MUTASI";
             this.Activated += new System.EventHandler(this.pembayaranLumpSumForm_Activated);
+            this.Deactivate += new System.EventHandler(this.pembayaranLumpSumForm_Deactivate);
             this.Load += new System.EventHandler(this.dataPiutangMutasiForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

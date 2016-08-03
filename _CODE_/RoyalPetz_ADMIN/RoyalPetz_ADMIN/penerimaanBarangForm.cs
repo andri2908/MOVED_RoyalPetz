@@ -36,6 +36,9 @@ namespace RoyalPetz_ADMIN
         private Hotkeys.GlobalHotkey ghk_CTRL_DEL;
         private Hotkeys.GlobalHotkey ghk_CTRL_ENTER;
 
+        private Hotkeys.GlobalHotkey ghk_UP;
+        private Hotkeys.GlobalHotkey ghk_DOWN;
+
         Button[] arrButton = new Button[3];
 
         private List<string> detailRequestQty = new List<string>();
@@ -43,6 +46,8 @@ namespace RoyalPetz_ADMIN
         private List<string> subtotalList = new List<string>();
 
         private bool forceUpOneLevel = false;
+        private bool navKeyRegistered = false;
+        private bool delKeyRegistered = false;
 
         string previousInput = "";
 
@@ -123,6 +128,14 @@ namespace RoyalPetz_ADMIN
                                     calculateTotal();
                                 }
                     break;
+
+                case Keys.Up:
+                    SendKeys.Send("+{TAB}");
+                    break;
+
+                case Keys.Down:
+                    SendKeys.Send("{TAB}");
+                    break;
             }
         }
 
@@ -184,8 +197,8 @@ namespace RoyalPetz_ADMIN
             ghk_F11 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F11, this);
             ghk_F11.Register();
 
-            ghk_DEL = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Delete, this);
-            ghk_DEL.Register();
+            //ghk_DEL = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Delete, this);
+            //ghk_DEL.Register();
 
             //ghk_CTRL_DEL = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Delete, this);
             //ghk_CTRL_DEL.Register();
@@ -193,6 +206,7 @@ namespace RoyalPetz_ADMIN
             ghk_CTRL_ENTER = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Enter, this);
             ghk_CTRL_ENTER.Register();
 
+            registerNavigationKey();
         }
 
         private void unregisterGlobalHotkey()
@@ -202,10 +216,46 @@ namespace RoyalPetz_ADMIN
             ghk_F8.Unregister();
             ghk_F9.Unregister();
             ghk_F11.Unregister();
-            ghk_DEL.Unregister();
+            //ghk_DEL.Unregister();
 
             // ghk_CTRL_DEL.Unregister();
             ghk_CTRL_ENTER.Unregister();
+
+            unregisterNavigationKey();
+        }
+
+        private void registerNavigationKey()
+        {
+            ghk_UP = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Up, this);
+            ghk_UP.Register();
+
+            ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
+            ghk_DOWN.Register();
+
+            navKeyRegistered = true;
+        }
+
+        private void unregisterNavigationKey()
+        {
+            ghk_UP.Unregister();
+            ghk_DOWN.Unregister();
+
+            navKeyRegistered = false;
+        }
+
+        private void registerDelKey()
+        {
+            ghk_DEL = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Delete, this);
+            ghk_DEL.Register();
+
+            delKeyRegistered = true;
+        }
+
+        private void unregisterDelKey()
+        {
+            ghk_DEL.Unregister();
+
+            delKeyRegistered = false;
         }
 
         public void addNewRow()
@@ -1649,6 +1699,9 @@ namespace RoyalPetz_ADMIN
             detailHpp.Add("0");
             detailRequestQty.Add("0");
             subtotalList.Add("0");
+
+            if (navKeyRegistered)
+                unregisterNavigationKey();
         }
 
         private void durationTextBox_Enter(object sender, EventArgs e)
@@ -1662,11 +1715,17 @@ namespace RoyalPetz_ADMIN
         private void penerimaanBarangForm_Activated(object sender, EventArgs e)
         {
             registerGlobalHotkey();
+
+            if (detailGridView.Focused)
+                registerDelKey();
         }
 
         private void penerimaanBarangForm_Deactivate(object sender, EventArgs e)
         {
             unregisterGlobalHotkey();
+
+            if (delKeyRegistered)
+                unregisterDelKey();
         }
 
         private void reprintButton_Click(object sender, EventArgs e)
@@ -1719,6 +1778,22 @@ namespace RoyalPetz_ADMIN
                 e.Value = d.ToString(globalUtilities.CELL_FORMATTING_NUMERIC_FORMAT);
                 isLoading = false;
             }
+        }
+
+        private void detailGridView_Enter(object sender, EventArgs e)
+        {
+            if (navKeyRegistered)
+                unregisterNavigationKey();
+
+            registerDelKey();
+        }
+
+        private void detailGridView_Leave(object sender, EventArgs e)
+        {
+            if (!navKeyRegistered)
+                registerNavigationKey();
+
+            unregisterDelKey();
         }
     }
 }

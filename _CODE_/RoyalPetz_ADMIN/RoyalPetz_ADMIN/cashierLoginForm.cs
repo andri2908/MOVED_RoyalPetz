@@ -12,6 +12,8 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Globalization;
 
+using Hotkeys;
+
 namespace RoyalPetz_ADMIN
 {
     public partial class cashierLoginForm : Form
@@ -23,10 +25,55 @@ namespace RoyalPetz_ADMIN
         private int logEntryID = 0;
         private DateTime dateTimeLogin;
 
+        private Hotkeys.GlobalHotkey ghk_UP;
+        private Hotkeys.GlobalHotkey ghk_DOWN;
+
         public cashierLoginForm(int status)
         {
             InitializeComponent();
             loginState = status;
+        }
+
+        private void captureAll(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.Up:
+                    SendKeys.Send("+{TAB}");
+                    break;
+                case Keys.Down:
+                    SendKeys.Send("{TAB}");
+                    break;
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == Constants.WM_HOTKEY_MSG_ID)
+            {
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                int modifier = (int)m.LParam & 0xFFFF;
+
+                if (modifier == Constants.NOMOD)
+                    captureAll(key);
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void registerGlobalHotkey()
+        {
+            ghk_UP = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Up, this);
+            ghk_UP.Register();
+
+            ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
+            ghk_DOWN.Register();
+        }
+
+        private void unregisterGlobalHotkey()
+        {
+            ghk_UP.Unregister();
+            ghk_DOWN.Unregister();
         }
 
         private bool dataValidated()
@@ -254,6 +301,16 @@ namespace RoyalPetz_ADMIN
 
             gUtil.reArrangeTabOrder(this);
 
+        }
+
+        private void cashierLoginForm_Activated(object sender, EventArgs e)
+        {
+            registerGlobalHotkey();
+        }
+
+        private void cashierLoginForm_Deactivate(object sender, EventArgs e)
+        {
+            unregisterGlobalHotkey(); 
         }
     }
 }

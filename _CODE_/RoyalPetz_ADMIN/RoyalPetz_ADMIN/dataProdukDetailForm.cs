@@ -12,6 +12,7 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 
 using System.Text.RegularExpressions;
+using Hotkeys;
 
 namespace RoyalPetz_ADMIN
 {
@@ -41,6 +42,9 @@ namespace RoyalPetz_ADMIN
         dataKategoriProdukForm selectKategoriForm = null;
         dataSatuanForm selectSatuanForm = null;
 
+        private Hotkeys.GlobalHotkey ghk_UP;
+        private Hotkeys.GlobalHotkey ghk_DOWN;
+
         public dataProdukDetailForm()
         {
             InitializeComponent();
@@ -59,6 +63,48 @@ namespace RoyalPetz_ADMIN
 
             originModuleID = moduleID;
             parentForm = thisParentForm;
+        }
+
+        private void captureAll(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.Up:
+                    SendKeys.Send("+{TAB}");
+                    break;
+                case Keys.Down:
+                    SendKeys.Send("{TAB}");
+                    break;
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == Constants.WM_HOTKEY_MSG_ID)
+            {
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                int modifier = (int)m.LParam & 0xFFFF;
+
+                if (modifier == Constants.NOMOD)
+                    captureAll(key);
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void registerGlobalHotkey()
+        {
+            ghk_UP = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Up, this);
+            ghk_UP.Register();
+
+            ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
+            ghk_DOWN.Register();
+        }
+
+        private void unregisterGlobalHotkey()
+        {
+            ghk_UP.Unregister();
+            ghk_DOWN.Unregister();
         }
 
         public void setSelectedUnitID(int unitID)
@@ -987,6 +1033,16 @@ namespace RoyalPetz_ADMIN
             DS.writeXML(sqlCommandx, globalConstants.PrintBarcodeXML);
             PrintBarcodeForm displayedForm = new PrintBarcodeForm();
             displayedForm.ShowDialog(this);
+        }
+
+        private void dataProdukDetailForm_Activated(object sender, EventArgs e)
+        {
+            registerGlobalHotkey();
+        }
+
+        private void dataProdukDetailForm_Deactivate(object sender, EventArgs e)
+        {
+            unregisterGlobalHotkey();
         }
     }
 }

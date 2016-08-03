@@ -90,7 +90,9 @@
             this.dataAccountGridView.TabIndex = 33;
             this.dataAccountGridView.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataAccountGridView_CellContentDoubleClick);
             this.dataAccountGridView.DoubleClick += new System.EventHandler(this.dataAccountGridView_DoubleClick);
+            this.dataAccountGridView.Enter += new System.EventHandler(this.dataAccountGridView_Enter);
             this.dataAccountGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataAccountGridView_KeyDown);
+            this.dataAccountGridView.Leave += new System.EventHandler(this.dataAccountGridView_Leave);
             // 
             // newButton
             // 
@@ -133,6 +135,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DATA NOMOR AKUN";
             this.Activated += new System.EventHandler(this.dataNomorAkun_Activated);
+            this.Deactivate += new System.EventHandler(this.dataNomorAkun_Deactivate);
             this.Load += new System.EventHandler(this.dataNomorAkun_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataAccountGridView)).EndInit();
             this.ResumeLayout(false);

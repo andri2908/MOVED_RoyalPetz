@@ -12,6 +12,8 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
 
+using Hotkeys;
+
 namespace RoyalPetz_ADMIN
 {
     public partial class dataSupplierDetailForm : Form
@@ -25,7 +27,10 @@ namespace RoyalPetz_ADMIN
         private Data_Access DS = new Data_Access();
         private globalUtilities gUtil = new globalUtilities();
         private int options = 0;
-        
+
+        private Hotkeys.GlobalHotkey ghk_UP;
+        private Hotkeys.GlobalHotkey ghk_DOWN;
+
         public dataSupplierDetailForm()
         {
             InitializeComponent();
@@ -44,6 +49,48 @@ namespace RoyalPetz_ADMIN
 
             originModuleID = moduleID;
             selectedSupplierID = supplierID;
+        }
+
+        private void captureAll(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.Up:
+                    SendKeys.Send("+{TAB}");
+                    break;
+                case Keys.Down:
+                    SendKeys.Send("{TAB}");
+                    break;
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == Constants.WM_HOTKEY_MSG_ID)
+            {
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                int modifier = (int)m.LParam & 0xFFFF;
+
+                if (modifier == Constants.NOMOD)
+                    captureAll(key);
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void registerGlobalHotkey()
+        {
+            ghk_UP = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Up, this);
+            ghk_UP.Register();
+
+            ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
+            ghk_DOWN.Register();
+        }
+
+        private void unregisterGlobalHotkey()
+        {
+            ghk_UP.Unregister();
+            ghk_DOWN.Unregister();
         }
 
         private void loadSupplierData()
@@ -292,6 +339,12 @@ namespace RoyalPetz_ADMIN
                     loadSupplierData();
                     break;
             }
+            registerGlobalHotkey();
+        }
+
+        private void dataSupplierDetailForm_Deactivate(object sender, EventArgs e)
+        {
+            unregisterGlobalHotkey();
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using Hotkeys;
 
 namespace RoyalPetz_ADMIN
 {
@@ -25,6 +26,10 @@ namespace RoyalPetz_ADMIN
         pengaturanKategoriProdukForm displayPengaturanKategoriForm = null;
         dataKategoriProdukDetailForm editKategoriForm = null;
         dataKategoriProdukDetailForm newKategoriForm = null;
+
+        private Hotkeys.GlobalHotkey ghk_UP;
+        private Hotkeys.GlobalHotkey ghk_DOWN;
+        private bool navKeyRegistered = false;
 
         public dataKategoriProdukForm()
         {
@@ -47,6 +52,52 @@ namespace RoyalPetz_ADMIN
             originModuleID = moduleID;
             parentForm = thisForm;
             //newButton.Visible = false;
+        }
+
+        private void captureAll(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.Up:
+                    SendKeys.Send("+{TAB}");
+                    break;
+                case Keys.Down:
+                    SendKeys.Send("{TAB}");
+                    break;
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == Constants.WM_HOTKEY_MSG_ID)
+            {
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                int modifier = (int)m.LParam & 0xFFFF;
+
+                if (modifier == Constants.NOMOD)
+                    captureAll(key);
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void registerGlobalHotkey()
+        {
+            ghk_UP = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Up, this);
+            ghk_UP.Register();
+
+            ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
+            ghk_DOWN.Register();
+
+            navKeyRegistered = true;
+        }
+
+        private void unregisterGlobalHotkey()
+        {
+            ghk_UP.Unregister();
+            ghk_DOWN.Unregister();
+
+            navKeyRegistered = false;
         }
 
         private void loadKategoriData()
@@ -146,6 +197,8 @@ namespace RoyalPetz_ADMIN
             {
                 loadKategoriData();
             }
+
+            registerGlobalHotkey();
         }
 
         private void dataKategoriProdukForm_Load(object sender, EventArgs e)
@@ -175,6 +228,23 @@ namespace RoyalPetz_ADMIN
             if (e.KeyCode == Keys.Enter)
                 if (kategoriProdukDataGridView.Rows.Count > 0)
                     displaySpecificForm();
+        }
+
+        private void dataKategoriProdukForm_Deactivate(object sender, EventArgs e)
+        {
+            unregisterGlobalHotkey();
+        }
+
+        private void kategoriProdukDataGridView_Enter(object sender, EventArgs e)
+        {
+            if (navKeyRegistered)
+                unregisterGlobalHotkey();
+        }
+
+        private void kategoriProdukDataGridView_Leave(object sender, EventArgs e)
+        {
+            if (!navKeyRegistered)
+                registerGlobalHotkey();
         }
     }
 }

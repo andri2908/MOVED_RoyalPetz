@@ -87,6 +87,8 @@
             this.PODtPicker_1.Name = "PODtPicker_1";
             this.PODtPicker_1.Size = new System.Drawing.Size(144, 27);
             this.PODtPicker_1.TabIndex = 38;
+            this.PODtPicker_1.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.PODtPicker_1.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // label5
             // 
@@ -108,6 +110,8 @@
             this.PODtPicker_2.Name = "PODtPicker_2";
             this.PODtPicker_2.Size = new System.Drawing.Size(145, 27);
             this.PODtPicker_2.TabIndex = 43;
+            this.PODtPicker_2.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.PODtPicker_2.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // label1
             // 
@@ -201,6 +205,8 @@
             this.customerCombo.Size = new System.Drawing.Size(311, 26);
             this.customerCombo.TabIndex = 40;
             this.customerCombo.SelectedIndexChanged += new System.EventHandler(this.customerCombo_SelectedIndexChanged);
+            this.customerCombo.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.customerCombo.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // displayButton
             // 
@@ -242,7 +248,9 @@
             this.dataPenerimaanBarang.Size = new System.Drawing.Size(921, 427);
             this.dataPenerimaanBarang.TabIndex = 63;
             this.dataPenerimaanBarang.DoubleClick += new System.EventHandler(this.dataPenerimaanBarang_DoubleClick);
+            this.dataPenerimaanBarang.Enter += new System.EventHandler(this.dataPenerimaanBarang_Enter);
             this.dataPenerimaanBarang.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataPenerimaanBarang_KeyDown);
+            this.dataPenerimaanBarang.Leave += new System.EventHandler(this.dataPenerimaanBarang_Leave);
             // 
             // dataSalesInvoice
             // 
@@ -258,6 +266,8 @@
             this.Name = "dataSalesInvoice";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Activated += new System.EventHandler(this.dataSalesInvoice_Activated);
+            this.Deactivate += new System.EventHandler(this.dataSalesInvoice_Deactivate);
             this.Load += new System.EventHandler(this.dataSalesInvoice_Load);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();

@@ -68,7 +68,9 @@
             this.kategoriProdukDataGridView.Size = new System.Drawing.Size(669, 474);
             this.kategoriProdukDataGridView.TabIndex = 0;
             this.kategoriProdukDataGridView.DoubleClick += new System.EventHandler(this.tagProdukDataGridView_DoubleClick);
+            this.kategoriProdukDataGridView.Enter += new System.EventHandler(this.kategoriProdukDataGridView_Enter);
             this.kategoriProdukDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.kategoriProdukDataGridView_KeyDown);
+            this.kategoriProdukDataGridView.Leave += new System.EventHandler(this.kategoriProdukDataGridView_Leave);
             // 
             // categoryNameTextBox
             // 
@@ -132,6 +134,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "KATEGORI PRODUK";
             this.Activated += new System.EventHandler(this.dataKategoriProdukForm_Activated);
+            this.Deactivate += new System.EventHandler(this.dataKategoriProdukForm_Deactivate);
             this.Load += new System.EventHandler(this.dataKategoriProdukForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.kategoriProdukDataGridView)).EndInit();
             this.ResumeLayout(false);

@@ -79,7 +79,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 354F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 355F));
             this.tableLayoutPanel1.Controls.Add(this.namaProductTextBox, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.kodeProductTextBox, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 1);
@@ -108,7 +108,7 @@
             // 
             this.namaProductTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.namaProductTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaProductTextBox.Location = new System.Drawing.Point(195, 36);
+            this.namaProductTextBox.Location = new System.Drawing.Point(194, 36);
             this.namaProductTextBox.Name = "namaProductTextBox";
             this.namaProductTextBox.ReadOnly = true;
             this.namaProductTextBox.Size = new System.Drawing.Size(347, 27);
@@ -118,7 +118,7 @@
             // 
             this.kodeProductTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.kodeProductTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kodeProductTextBox.Location = new System.Drawing.Point(195, 3);
+            this.kodeProductTextBox.Location = new System.Drawing.Point(194, 3);
             this.kodeProductTextBox.Name = "kodeProductTextBox";
             this.kodeProductTextBox.ReadOnly = true;
             this.kodeProductTextBox.Size = new System.Drawing.Size(297, 27);
@@ -176,7 +176,7 @@
             // 
             this.descriptionTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.descriptionTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.descriptionTextBox.Location = new System.Drawing.Point(195, 140);
+            this.descriptionTextBox.Location = new System.Drawing.Point(194, 140);
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.Size = new System.Drawing.Size(340, 97);
@@ -210,7 +210,7 @@
             // 
             this.jumlahBaruMaskedTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.jumlahBaruMaskedTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.jumlahBaruMaskedTextBox.Location = new System.Drawing.Point(195, 102);
+            this.jumlahBaruMaskedTextBox.Location = new System.Drawing.Point(194, 102);
             this.jumlahBaruMaskedTextBox.Mask = "00000";
             this.jumlahBaruMaskedTextBox.Name = "jumlahBaruMaskedTextBox";
             this.jumlahBaruMaskedTextBox.Size = new System.Drawing.Size(144, 27);
@@ -248,7 +248,7 @@
             // 
             this.jumlahAwalMaskedTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.jumlahAwalMaskedTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.jumlahAwalMaskedTextBox.Location = new System.Drawing.Point(195, 69);
+            this.jumlahAwalMaskedTextBox.Location = new System.Drawing.Point(194, 69);
             this.jumlahAwalMaskedTextBox.Mask = "00000";
             this.jumlahAwalMaskedTextBox.Name = "jumlahAwalMaskedTextBox";
             this.jumlahAwalMaskedTextBox.ReadOnly = true;
@@ -285,6 +285,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PENYESUAIAN STOK";
             this.Activated += new System.EventHandler(this.penyesuaianStokForm_Activated);
+            this.Deactivate += new System.EventHandler(this.penyesuaianStokForm_Deactivate);
             this.Load += new System.EventHandler(this.penyesuaianStokForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

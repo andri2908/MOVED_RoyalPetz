@@ -111,6 +111,8 @@
             this.detailRequestOrderDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.detailRequestOrderDataGridView_CellFormatting);
             this.detailRequestOrderDataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailRequestOrderDataGridView_CellValidated);
             this.detailRequestOrderDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.detailRequestOrderDataGridView_RowsAdded);
+            this.detailRequestOrderDataGridView.Enter += new System.EventHandler(this.detailRequestOrderDataGridView_Enter);
+            this.detailRequestOrderDataGridView.Leave += new System.EventHandler(this.detailRequestOrderDataGridView_Leave);
             // 
             // label2
             // 
@@ -165,6 +167,8 @@
             this.ROExpiredDateTimePicker.Name = "ROExpiredDateTimePicker";
             this.ROExpiredDateTimePicker.Size = new System.Drawing.Size(149, 27);
             this.ROExpiredDateTimePicker.TabIndex = 23;
+            this.ROExpiredDateTimePicker.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.ROExpiredDateTimePicker.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // RODateTimePicker
             // 
@@ -175,6 +179,8 @@
             this.RODateTimePicker.Name = "RODateTimePicker";
             this.RODateTimePicker.Size = new System.Drawing.Size(146, 27);
             this.RODateTimePicker.TabIndex = 22;
+            this.RODateTimePicker.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.RODateTimePicker.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // label7
             // 
@@ -396,6 +402,8 @@
             this.PMDateTimePicker.Name = "PMDateTimePicker";
             this.PMDateTimePicker.Size = new System.Drawing.Size(149, 27);
             this.PMDateTimePicker.TabIndex = 27;
+            this.PMDateTimePicker.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.PMDateTimePicker.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // totalApproved
             // 
@@ -466,6 +474,8 @@
             this.branchToCombo.Size = new System.Drawing.Size(321, 26);
             this.branchToCombo.TabIndex = 1;
             this.branchToCombo.SelectedIndexChanged += new System.EventHandler(this.branchToCombo_SelectedIndexChanged);
+            this.branchToCombo.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.branchToCombo.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // tableLayoutPanel6
             // 
@@ -501,6 +511,8 @@
             this.branchFromCombo.TabIndex = 0;
             this.branchFromCombo.Visible = false;
             this.branchFromCombo.SelectedIndexChanged += new System.EventHandler(this.branchFromCombo_SelectedIndexChanged);
+            this.branchFromCombo.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.branchFromCombo.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // totalLabel
             // 

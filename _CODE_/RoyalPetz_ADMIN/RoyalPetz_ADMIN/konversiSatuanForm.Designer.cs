@@ -54,7 +54,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 89.55823F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 192F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 227F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 228F));
             this.tableLayoutPanel1.Controls.Add(this.convertValueTextBox, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.unit2Combo, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 2, 0);
@@ -72,7 +72,7 @@
             // 
             this.convertValueTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.convertValueTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.convertValueTextBox.Location = new System.Drawing.Point(287, 11);
+            this.convertValueTextBox.Location = new System.Drawing.Point(286, 11);
             this.convertValueTextBox.MaxLength = 13;
             this.convertValueTextBox.Name = "convertValueTextBox";
             this.convertValueTextBox.Size = new System.Drawing.Size(180, 27);
@@ -87,11 +87,13 @@
             this.unit2Combo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.unit2Combo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unit2Combo.FormattingEnabled = true;
-            this.unit2Combo.Location = new System.Drawing.Point(476, 12);
+            this.unit2Combo.Location = new System.Drawing.Point(475, 12);
             this.unit2Combo.Name = "unit2Combo";
             this.unit2Combo.Size = new System.Drawing.Size(204, 26);
             this.unit2Combo.TabIndex = 35;
             this.unit2Combo.SelectedIndexChanged += new System.EventHandler(this.unit2Combo_SelectedIndexChanged);
+            this.unit2Combo.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.unit2Combo.Leave += new System.EventHandler(this.genericControl_Leave);
             this.unit2Combo.Validated += new System.EventHandler(this.unit2Combo_Validated);
             // 
             // label1
@@ -100,7 +102,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(256, 16);
+            this.label1.Location = new System.Drawing.Point(255, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(21, 18);
             this.label1.TabIndex = 10;
@@ -130,6 +132,8 @@
             this.unit1Combo.Size = new System.Drawing.Size(204, 26);
             this.unit1Combo.TabIndex = 9;
             this.unit1Combo.SelectedIndexChanged += new System.EventHandler(this.unit1Combo_SelectedIndexChanged);
+            this.unit1Combo.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.unit1Combo.Leave += new System.EventHandler(this.genericControl_Leave);
             this.unit1Combo.Validated += new System.EventHandler(this.unit1Combo_Validated);
             // 
             // panel1
@@ -195,6 +199,8 @@
             this.dataConvertGridView.Size = new System.Drawing.Size(814, 348);
             this.dataConvertGridView.TabIndex = 34;
             this.dataConvertGridView.DoubleClick += new System.EventHandler(this.dataConvertGridView_DoubleClick);
+            this.dataConvertGridView.Enter += new System.EventHandler(this.dataConvertGridView_Enter);
+            this.dataConvertGridView.Leave += new System.EventHandler(this.dataConvertGridView_Leave);
             // 
             // unit1ComboHidden
             // 
@@ -237,6 +243,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "KONVERSI SATUAN";
             this.Activated += new System.EventHandler(this.konversiSatuanForm_Activated);
+            this.Deactivate += new System.EventHandler(this.konversiSatuanForm_Deactivate);
             this.Load += new System.EventHandler(this.konversiSatuanForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataRequestOrderGridView = new System.Windows.Forms.DataGridView();
             this.displayButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -61,23 +61,23 @@
             this.dataRequestOrderGridView.AllowUserToAddRows = false;
             this.dataRequestOrderGridView.AllowUserToDeleteRows = false;
             this.dataRequestOrderGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataRequestOrderGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataRequestOrderGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataRequestOrderGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataRequestOrderGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataRequestOrderGridView.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataRequestOrderGridView.Location = new System.Drawing.Point(0, 211);
             this.dataRequestOrderGridView.MultiSelect = false;
             this.dataRequestOrderGridView.Name = "dataRequestOrderGridView";
@@ -85,8 +85,10 @@
             this.dataRequestOrderGridView.Size = new System.Drawing.Size(921, 427);
             this.dataRequestOrderGridView.TabIndex = 33;
             this.dataRequestOrderGridView.DoubleClick += new System.EventHandler(this.dataRequestOrderGridView_DoubleClick);
+            this.dataRequestOrderGridView.Enter += new System.EventHandler(this.dataRequestOrderGridView_Enter);
             this.dataRequestOrderGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataRequestOrderGridView_KeyDown);
             this.dataRequestOrderGridView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataRequestOrderGridView_KeyPress);
+            this.dataRequestOrderGridView.Leave += new System.EventHandler(this.dataRequestOrderGridView_Leave);
             // 
             // displayButton
             // 
@@ -119,6 +121,8 @@
             this.RODtPicker_1.Name = "RODtPicker_1";
             this.RODtPicker_1.Size = new System.Drawing.Size(151, 27);
             this.RODtPicker_1.TabIndex = 38;
+            this.RODtPicker_1.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.RODtPicker_1.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // label3
             // 
@@ -146,6 +150,8 @@
             this.branchFromCombo.TabIndex = 40;
             this.branchFromCombo.Visible = false;
             this.branchFromCombo.SelectedIndexChanged += new System.EventHandler(this.branchFromCombo_SelectedIndexChanged);
+            this.branchFromCombo.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.branchFromCombo.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // branchToCombo
             // 
@@ -159,6 +165,8 @@
             this.branchToCombo.Size = new System.Drawing.Size(311, 26);
             this.branchToCombo.TabIndex = 42;
             this.branchToCombo.SelectedIndexChanged += new System.EventHandler(this.branchToCombo_SelectedIndexChanged);
+            this.branchToCombo.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.branchToCombo.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // label4
             // 
@@ -180,6 +188,8 @@
             this.RODtPicker_2.Name = "RODtPicker_2";
             this.RODtPicker_2.Size = new System.Drawing.Size(145, 27);
             this.RODtPicker_2.TabIndex = 43;
+            this.RODtPicker_2.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.RODtPicker_2.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // label5
             // 
@@ -348,6 +358,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DATA PERMINTAAN";
             this.Activated += new System.EventHandler(this.dataPermintaanForm_Activated);
+            this.Deactivate += new System.EventHandler(this.dataPermintaanForm_Deactivate);
             this.Load += new System.EventHandler(this.dataPermintaanForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataRequestOrderGridView)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);

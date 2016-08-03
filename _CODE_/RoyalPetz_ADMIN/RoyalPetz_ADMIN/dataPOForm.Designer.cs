@@ -88,6 +88,8 @@
             this.PODtPicker_1.Name = "PODtPicker_1";
             this.PODtPicker_1.Size = new System.Drawing.Size(144, 27);
             this.PODtPicker_1.TabIndex = 38;
+            this.PODtPicker_1.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.PODtPicker_1.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // label5
             // 
@@ -109,6 +111,8 @@
             this.PODtPicker_2.Name = "PODtPicker_2";
             this.PODtPicker_2.Size = new System.Drawing.Size(145, 27);
             this.PODtPicker_2.TabIndex = 43;
+            this.PODtPicker_2.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.PODtPicker_2.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // label1
             // 
@@ -213,6 +217,8 @@
             this.supplierCombo.Size = new System.Drawing.Size(311, 26);
             this.supplierCombo.TabIndex = 40;
             this.supplierCombo.SelectedIndexChanged += new System.EventHandler(this.supplierCombo_SelectedIndexChanged);
+            this.supplierCombo.Enter += new System.EventHandler(this.genericControl_Enter);
+            this.supplierCombo.Leave += new System.EventHandler(this.genericControl_Leave);
             // 
             // displayButton
             // 
@@ -254,7 +260,9 @@
             this.dataPurchaseOrder.Size = new System.Drawing.Size(921, 427);
             this.dataPurchaseOrder.TabIndex = 52;
             this.dataPurchaseOrder.DoubleClick += new System.EventHandler(this.dataPurchaseOrder_DoubleClick);
+            this.dataPurchaseOrder.Enter += new System.EventHandler(this.dataPurchaseOrder_Enter);
             this.dataPurchaseOrder.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataPurchaseOrder_KeyDown);
+            this.dataPurchaseOrder.Leave += new System.EventHandler(this.dataPurchaseOrder_Leave);
             // 
             // dataPOForm
             // 
@@ -273,6 +281,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DATA PURCHASE ORDER";
             this.Activated += new System.EventHandler(this.dataPOForm_Activated);
+            this.Deactivate += new System.EventHandler(this.dataPOForm_Deactivate);
             this.Load += new System.EventHandler(this.dataPOForm_Load);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
