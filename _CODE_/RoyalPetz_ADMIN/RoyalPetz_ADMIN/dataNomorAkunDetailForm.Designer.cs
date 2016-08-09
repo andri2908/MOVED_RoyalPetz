@@ -38,13 +38,13 @@
             this.DeskripsiTextbox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.errorLabel = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.TipeComboBox = new System.Windows.Forms.ComboBox();
             this.NonactiveCheckbox = new System.Windows.Forms.CheckBox();
             this.ResetButton = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label3
@@ -53,7 +53,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label3.Location = new System.Drawing.Point(3, 40);
+            this.label3.Location = new System.Drawing.Point(11, 57);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(107, 18);
             this.label3.TabIndex = 8;
@@ -65,7 +65,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(3, 73);
+            this.label1.Location = new System.Drawing.Point(11, 90);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(51, 18);
             this.label1.TabIndex = 9;
@@ -77,7 +77,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(175, 7);
+            this.label4.Location = new System.Drawing.Point(186, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(14, 18);
             this.label4.TabIndex = 10;
@@ -89,7 +89,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(175, 40);
+            this.label6.Location = new System.Drawing.Point(186, 57);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(14, 18);
             this.label6.TabIndex = 12;
@@ -101,7 +101,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(175, 73);
+            this.label7.Location = new System.Drawing.Point(186, 90);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(14, 18);
             this.label7.TabIndex = 13;
@@ -112,7 +112,7 @@
             this.kodeTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.kodeTextbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.kodeTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kodeTextbox.Location = new System.Drawing.Point(198, 3);
+            this.kodeTextbox.Location = new System.Drawing.Point(206, 21);
             this.kodeTextbox.Name = "kodeTextbox";
             this.kodeTextbox.Size = new System.Drawing.Size(93, 27);
             this.kodeTextbox.TabIndex = 15;
@@ -121,7 +121,7 @@
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(158, 187);
+            this.saveButton.Location = new System.Drawing.Point(157, 154);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(95, 37);
             this.saveButton.TabIndex = 24;
@@ -134,7 +134,7 @@
             this.DeskripsiTextbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.DeskripsiTextbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.DeskripsiTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DeskripsiTextbox.Location = new System.Drawing.Point(198, 36);
+            this.DeskripsiTextbox.Location = new System.Drawing.Point(206, 54);
             this.DeskripsiTextbox.Name = "DeskripsiTextbox";
             this.DeskripsiTextbox.Size = new System.Drawing.Size(340, 27);
             this.DeskripsiTextbox.TabIndex = 16;
@@ -162,41 +162,13 @@
             this.errorLabel.TabIndex = 1;
             this.errorLabel.Text = "   ";
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0597F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9403F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 359F));
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label6, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.kodeTextbox, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.DeskripsiTextbox, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.TipeComboBox, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.NonactiveCheckbox, 2, 3);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 38);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(555, 128);
-            this.tableLayoutPanel1.TabIndex = 23;
-            // 
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Location = new System.Drawing.Point(3, 7);
+            this.label2.Location = new System.Drawing.Point(11, 24);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 18);
             this.label2.TabIndex = 7;
@@ -210,7 +182,7 @@
             this.TipeComboBox.Items.AddRange(new object[] {
             "Debet",
             "Kredit"});
-            this.TipeComboBox.Location = new System.Drawing.Point(198, 69);
+            this.TipeComboBox.Location = new System.Drawing.Point(206, 87);
             this.TipeComboBox.Name = "TipeComboBox";
             this.TipeComboBox.Size = new System.Drawing.Size(187, 26);
             this.TipeComboBox.TabIndex = 17;
@@ -222,7 +194,7 @@
             // 
             this.NonactiveCheckbox.AutoSize = true;
             this.NonactiveCheckbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NonactiveCheckbox.Location = new System.Drawing.Point(198, 101);
+            this.NonactiveCheckbox.Location = new System.Drawing.Point(206, 119);
             this.NonactiveCheckbox.Name = "NonactiveCheckbox";
             this.NonactiveCheckbox.Size = new System.Drawing.Size(173, 22);
             this.NonactiveCheckbox.TabIndex = 18;
@@ -233,13 +205,35 @@
             // 
             this.ResetButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.ResetButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ResetButton.Location = new System.Drawing.Point(303, 187);
+            this.ResetButton.Location = new System.Drawing.Point(302, 154);
             this.ResetButton.Name = "ResetButton";
             this.ResetButton.Size = new System.Drawing.Size(95, 37);
             this.ResetButton.TabIndex = 27;
             this.ResetButton.Text = "RESET";
             this.ResetButton.UseVisualStyleBackColor = true;
             this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.ResetButton);
+            this.groupBox1.Controls.Add(this.NonactiveCheckbox);
+            this.groupBox1.Controls.Add(this.saveButton);
+            this.groupBox1.Controls.Add(this.TipeComboBox);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.DeskripsiTextbox);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.kodeTextbox);
+            this.groupBox1.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(1, 38);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(555, 201);
+            this.groupBox1.TabIndex = 28;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "DATA NOMOR AKUN";
             // 
             // dataNomorAkunDetailForm
             // 
@@ -250,20 +244,20 @@
             this.Controls.Add(this.ResetButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "dataNomorAkunDetailForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DATA NOMOR AKUN DETAIL";
+            this.Text = "DETAIL DATA NOMOR AKUN";
             this.Activated += new System.EventHandler(this.dataNomorAkunDetailForm_Activated);
             this.Deactivate += new System.EventHandler(this.dataNomorAkunDetailForm_Deactivate);
             this.Load += new System.EventHandler(this.dataNomorAkunDetailForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -278,11 +272,11 @@
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.TextBox DeskripsiTextbox;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ComboBox TipeComboBox;
         private System.Windows.Forms.Button ResetButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox NonactiveCheckbox;
         private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

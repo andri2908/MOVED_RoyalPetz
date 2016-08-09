@@ -100,7 +100,7 @@ namespace RoyalPetz_ADMIN
             navKeyRegistered = false;
         }
 
-        private void loadKategoriData()
+        private void loadKategoriData(int options = 0)
         {
             MySqlDataReader rdr;
             DataTable dt = new DataTable();
@@ -112,13 +112,20 @@ namespace RoyalPetz_ADMIN
 
             categoryNameParam = MySqlHelper.EscapeString(categoryNameTextBox.Text);
             DS.mySqlConnect();
-
-            if (tagnonactiveoption.Checked == true)
+            if (options == 1)
             {
-                sqlCommand = "SELECT CATEGORY_ID, CATEGORY_NAME AS 'NAMA KATEGORI', CATEGORY_DESCRIPTION AS 'DESKRIPSI KATEGORI' FROM MASTER_CATEGORY WHERE CATEGORY_NAME LIKE '%" + categoryNameParam + "%'";
+                sqlCommand = "SELECT CATEGORY_ID, CATEGORY_NAME AS 'NAMA KATEGORI', CATEGORY_DESCRIPTION AS 'DESKRIPSI KATEGORI' FROM MASTER_CATEGORY";
             }
-            else {
-                sqlCommand = "SELECT CATEGORY_ID, CATEGORY_NAME AS 'NAMA KATEGORI', CATEGORY_DESCRIPTION AS 'DESKRIPSI KATEGORI' FROM MASTER_CATEGORY WHERE CATEGORY_ACTIVE = 1 AND CATEGORY_NAME LIKE '%" + categoryNameParam + "%'";
+            else
+            {
+                if (tagnonactiveoption.Checked == true)
+                {
+                    sqlCommand = "SELECT CATEGORY_ID, CATEGORY_NAME AS 'NAMA KATEGORI', CATEGORY_DESCRIPTION AS 'DESKRIPSI KATEGORI' FROM MASTER_CATEGORY WHERE CATEGORY_NAME LIKE '%" + categoryNameParam + "%'";
+                }
+                else
+                {
+                    sqlCommand = "SELECT CATEGORY_ID, CATEGORY_NAME AS 'NAMA KATEGORI', CATEGORY_DESCRIPTION AS 'DESKRIPSI KATEGORI' FROM MASTER_CATEGORY WHERE CATEGORY_ACTIVE = 1 AND CATEGORY_NAME LIKE '%" + categoryNameParam + "%'";
+                }
             }
 
             using (rdr = DS.getData(sqlCommand))
@@ -230,6 +237,11 @@ namespace RoyalPetz_ADMIN
                     displaySpecificForm();
         }
 
+		private void AllButton_Click(object sender, EventArgs e)
+        {
+            loadKategoriData(1);
+        }
+		
         private void dataKategoriProdukForm_Deactivate(object sender, EventArgs e)
         {
             unregisterGlobalHotkey();

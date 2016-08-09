@@ -121,7 +121,7 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        private void loadAccountData(string accountnameParam)
+        private void loadAccountData(string accountnameParam, int options = 0)
         {
             MySqlDataReader rdr;
             DataTable dt = new DataTable();
@@ -129,14 +129,21 @@ namespace RoyalPetz_ADMIN
             string accountName = MySqlHelper.EscapeString(accountnameParam);
 
             DS.mySqlConnect();
-            if (accountnonactiveoption.Checked)
+            if (options == 1)
             {
-                sqlCommand = "SELECT MASTER_ACCOUNT.ID AS 'ID', MASTER_ACCOUNT.ACCOUNT_ID AS 'KODE AKUN', MASTER_ACCOUNT.ACCOUNT_NAME AS 'DESKRIPSI', MASTER_ACCOUNT_TYPE.ACCOUNT_TYPE_NAME AS 'TIPE' FROM MASTER_ACCOUNT, MASTER_ACCOUNT_TYPE WHERE MASTER_ACCOUNT.ACCOUNT_TYPE_ID = MASTER_ACCOUNT_TYPE.ACCOUNT_TYPE_ID AND MASTER_ACCOUNT.ACCOUNT_NAME LIKE '%" + accountName + "%'";
+                sqlCommand = "SELECT MASTER_ACCOUNT.ID AS 'ID', MASTER_ACCOUNT.ACCOUNT_ID AS 'KODE AKUN', MASTER_ACCOUNT.ACCOUNT_NAME AS 'DESKRIPSI', MASTER_ACCOUNT_TYPE.ACCOUNT_TYPE_NAME AS 'TIPE' FROM MASTER_ACCOUNT, MASTER_ACCOUNT_TYPE WHERE MASTER_ACCOUNT.ACCOUNT_TYPE_ID = MASTER_ACCOUNT_TYPE.ACCOUNT_TYPE_ID";
             }
             else
             {
-                sqlCommand = "SELECT MASTER_ACCOUNT.ID AS 'ID', MASTER_ACCOUNT.ACCOUNT_ID AS 'KODE AKUN', MASTER_ACCOUNT.ACCOUNT_NAME AS 'DESKRIPSI', MASTER_ACCOUNT_TYPE.ACCOUNT_TYPE_NAME AS 'TIPE' FROM MASTER_ACCOUNT, MASTER_ACCOUNT_TYPE WHERE MASTER_ACCOUNT.ACCOUNT_ACTIVE = 1 AND MASTER_ACCOUNT.ACCOUNT_TYPE_ID = MASTER_ACCOUNT_TYPE.ACCOUNT_TYPE_ID AND MASTER_ACCOUNT.ACCOUNT_NAME LIKE '%" + accountName + "%'";
-            }
+                if (accountnonactiveoption.Checked)
+                {
+                    sqlCommand = "SELECT MASTER_ACCOUNT.ID AS 'ID', MASTER_ACCOUNT.ACCOUNT_ID AS 'KODE AKUN', MASTER_ACCOUNT.ACCOUNT_NAME AS 'DESKRIPSI', MASTER_ACCOUNT_TYPE.ACCOUNT_TYPE_NAME AS 'TIPE' FROM MASTER_ACCOUNT, MASTER_ACCOUNT_TYPE WHERE MASTER_ACCOUNT.ACCOUNT_TYPE_ID = MASTER_ACCOUNT_TYPE.ACCOUNT_TYPE_ID AND MASTER_ACCOUNT.ACCOUNT_NAME LIKE '%" + accountName + "%'";
+                }
+                else
+                {
+                    sqlCommand = "SELECT MASTER_ACCOUNT.ID AS 'ID', MASTER_ACCOUNT.ACCOUNT_ID AS 'KODE AKUN', MASTER_ACCOUNT.ACCOUNT_NAME AS 'DESKRIPSI', MASTER_ACCOUNT_TYPE.ACCOUNT_TYPE_NAME AS 'TIPE' FROM MASTER_ACCOUNT, MASTER_ACCOUNT_TYPE WHERE MASTER_ACCOUNT.ACCOUNT_ACTIVE = 1 AND MASTER_ACCOUNT.ACCOUNT_TYPE_ID = MASTER_ACCOUNT_TYPE.ACCOUNT_TYPE_ID AND MASTER_ACCOUNT.ACCOUNT_NAME LIKE '%" + accountName + "%'";
+                }
+            }            
             
             using (rdr = DS.getData(sqlCommand))
             {
@@ -233,6 +240,11 @@ namespace RoyalPetz_ADMIN
                 displaySpecificForm();
         }
 
+		private void AllButton_Click(object sender, EventArgs e)
+        {
+            loadAccountData("",1);
+        }
+		
         private void dataNomorAkun_Deactivate(object sender, EventArgs e)
         {
             unregisterGlobalHotkey();

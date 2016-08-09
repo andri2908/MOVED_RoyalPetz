@@ -35,7 +35,10 @@
             this.newButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tagnonactiveoption = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.AllButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.kategoriProdukDataGridView)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // kategoriProdukDataGridView
@@ -60,12 +63,12 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.kategoriProdukDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            this.kategoriProdukDataGridView.Location = new System.Drawing.Point(0, 74);
+            this.kategoriProdukDataGridView.Location = new System.Drawing.Point(0, 152);
             this.kategoriProdukDataGridView.MultiSelect = false;
             this.kategoriProdukDataGridView.Name = "kategoriProdukDataGridView";
             this.kategoriProdukDataGridView.ReadOnly = true;
             this.kategoriProdukDataGridView.RowHeadersVisible = false;
-            this.kategoriProdukDataGridView.Size = new System.Drawing.Size(669, 474);
+            this.kategoriProdukDataGridView.Size = new System.Drawing.Size(669, 396);
             this.kategoriProdukDataGridView.TabIndex = 0;
             this.kategoriProdukDataGridView.DoubleClick += new System.EventHandler(this.tagProdukDataGridView_DoubleClick);
             this.kategoriProdukDataGridView.Enter += new System.EventHandler(this.kategoriProdukDataGridView_Enter);
@@ -76,16 +79,17 @@
             // 
             this.categoryNameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.categoryNameTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.categoryNameTextBox.Location = new System.Drawing.Point(124, 16);
+            this.categoryNameTextBox.Location = new System.Drawing.Point(120, 21);
             this.categoryNameTextBox.Name = "categoryNameTextBox";
-            this.categoryNameTextBox.Size = new System.Drawing.Size(260, 27);
+            this.categoryNameTextBox.Size = new System.Drawing.Size(283, 27);
             this.categoryNameTextBox.TabIndex = 6;
             this.categoryNameTextBox.TextChanged += new System.EventHandler(this.categoryNameTextBox_TextChanged);
             // 
             // newButton
             // 
             this.newButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newButton.Location = new System.Drawing.Point(521, 10);
+            this.newButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.newButton.Location = new System.Drawing.Point(9, 45);
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(95, 37);
             this.newButton.TabIndex = 7;
@@ -98,7 +102,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label1.Location = new System.Drawing.Point(12, 19);
+            this.label1.Location = new System.Drawing.Point(6, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(103, 18);
             this.label1.TabIndex = 5;
@@ -108,7 +112,7 @@
             // 
             this.tagnonactiveoption.AutoSize = true;
             this.tagnonactiveoption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tagnonactiveoption.Location = new System.Drawing.Point(124, 49);
+            this.tagnonactiveoption.Location = new System.Drawing.Point(120, 54);
             this.tagnonactiveoption.Name = "tagnonactiveoption";
             this.tagnonactiveoption.Size = new System.Drawing.Size(191, 19);
             this.tagnonactiveoption.TabIndex = 34;
@@ -116,16 +120,41 @@
             this.tagnonactiveoption.UseVisualStyleBackColor = true;
             this.tagnonactiveoption.CheckedChanged += new System.EventHandler(this.groupnonactiveoption_CheckedChanged);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.AllButton);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.newButton);
+            this.groupBox1.Controls.Add(this.tagnonactiveoption);
+            this.groupBox1.Controls.Add(this.categoryNameTextBox);
+            this.groupBox1.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.ForeColor = System.Drawing.Color.FloralWhite;
+            this.groupBox1.Location = new System.Drawing.Point(128, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(412, 123);
+            this.groupBox1.TabIndex = 35;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "FILTER";
+            // 
+            // AllButton
+            // 
+            this.AllButton.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AllButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.AllButton.Location = new System.Drawing.Point(120, 79);
+            this.AllButton.Name = "AllButton";
+            this.AllButton.Size = new System.Drawing.Size(283, 28);
+            this.AllButton.TabIndex = 35;
+            this.AllButton.Text = "DISPLAY ALL";
+            this.AllButton.UseVisualStyleBackColor = true;
+            this.AllButton.Click += new System.EventHandler(this.AllButton_Click);
+            // 
             // dataKategoriProdukForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(669, 549);
-            this.Controls.Add(this.tagnonactiveoption);
-            this.Controls.Add(this.newButton);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.categoryNameTextBox);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.kategoriProdukDataGridView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -137,8 +166,9 @@
             this.Deactivate += new System.EventHandler(this.dataKategoriProdukForm_Deactivate);
             this.Load += new System.EventHandler(this.dataKategoriProdukForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.kategoriProdukDataGridView)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -149,5 +179,7 @@
         private System.Windows.Forms.Button newButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox tagnonactiveoption;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button AllButton;
     }
 }

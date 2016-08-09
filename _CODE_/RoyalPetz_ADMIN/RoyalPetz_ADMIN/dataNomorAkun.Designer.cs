@@ -35,7 +35,10 @@
             this.dataAccountGridView = new System.Windows.Forms.DataGridView();
             this.newButton = new System.Windows.Forms.Button();
             this.accountnonactiveoption = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.AllButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataAccountGridView)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -43,19 +46,19 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label1.Location = new System.Drawing.Point(7, 19);
+            this.label1.Location = new System.Drawing.Point(6, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 18);
+            this.label1.Size = new System.Drawing.Size(115, 18);
             this.label1.TabIndex = 35;
-            this.label1.Text = "Deskripsi";
+            this.label1.Text = "NAMA AKUN";
             // 
             // namaAccountTextbox
             // 
             this.namaAccountTextbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.namaAccountTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaAccountTextbox.Location = new System.Drawing.Point(100, 14);
+            this.namaAccountTextbox.Location = new System.Drawing.Point(135, 21);
             this.namaAccountTextbox.Name = "namaAccountTextbox";
-            this.namaAccountTextbox.Size = new System.Drawing.Size(260, 27);
+            this.namaAccountTextbox.Size = new System.Drawing.Size(283, 27);
             this.namaAccountTextbox.TabIndex = 36;
             this.namaAccountTextbox.TextChanged += new System.EventHandler(this.namaAccountTextbox_TextChanged);
             // 
@@ -81,12 +84,12 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataAccountGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataAccountGridView.Location = new System.Drawing.Point(0, 72);
+            this.dataAccountGridView.Location = new System.Drawing.Point(0, 138);
             this.dataAccountGridView.MultiSelect = false;
             this.dataAccountGridView.Name = "dataAccountGridView";
             this.dataAccountGridView.ReadOnly = true;
             this.dataAccountGridView.RowHeadersVisible = false;
-            this.dataAccountGridView.Size = new System.Drawing.Size(505, 475);
+            this.dataAccountGridView.Size = new System.Drawing.Size(505, 409);
             this.dataAccountGridView.TabIndex = 33;
             this.dataAccountGridView.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataAccountGridView_CellContentDoubleClick);
             this.dataAccountGridView.DoubleClick += new System.EventHandler(this.dataAccountGridView_DoubleClick);
@@ -97,9 +100,10 @@
             // newButton
             // 
             this.newButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newButton.Location = new System.Drawing.Point(366, 14);
+            this.newButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.newButton.Location = new System.Drawing.Point(9, 45);
             this.newButton.Name = "newButton";
-            this.newButton.Size = new System.Drawing.Size(59, 27);
+            this.newButton.Size = new System.Drawing.Size(112, 37);
             this.newButton.TabIndex = 37;
             this.newButton.Text = "NEW";
             this.newButton.UseVisualStyleBackColor = true;
@@ -109,7 +113,7 @@
             // 
             this.accountnonactiveoption.AutoSize = true;
             this.accountnonactiveoption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.accountnonactiveoption.Location = new System.Drawing.Point(100, 47);
+            this.accountnonactiveoption.Location = new System.Drawing.Point(135, 54);
             this.accountnonactiveoption.Name = "accountnonactiveoption";
             this.accountnonactiveoption.Size = new System.Drawing.Size(172, 19);
             this.accountnonactiveoption.TabIndex = 38;
@@ -117,17 +121,42 @@
             this.accountnonactiveoption.UseVisualStyleBackColor = true;
             this.accountnonactiveoption.CheckedChanged += new System.EventHandler(this.accountnonactiveoption_CheckedChanged);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.AllButton);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.namaAccountTextbox);
+            this.groupBox1.Controls.Add(this.newButton);
+            this.groupBox1.Controls.Add(this.accountnonactiveoption);
+            this.groupBox1.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.ForeColor = System.Drawing.Color.FloralWhite;
+            this.groupBox1.Location = new System.Drawing.Point(40, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(424, 120);
+            this.groupBox1.TabIndex = 39;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "FILTER";
+            // 
+            // AllButton
+            // 
+            this.AllButton.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AllButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.AllButton.Location = new System.Drawing.Point(135, 79);
+            this.AllButton.Name = "AllButton";
+            this.AllButton.Size = new System.Drawing.Size(283, 28);
+            this.AllButton.TabIndex = 39;
+            this.AllButton.Text = "DISPLAY ALL";
+            this.AllButton.UseVisualStyleBackColor = true;
+            this.AllButton.Click += new System.EventHandler(this.AllButton_Click);
+            // 
             // dataNomorAkun
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(505, 549);
-            this.Controls.Add(this.accountnonactiveoption);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.namaAccountTextbox);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataAccountGridView);
-            this.Controls.Add(this.newButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "dataNomorAkun";
@@ -138,8 +167,9 @@
             this.Deactivate += new System.EventHandler(this.dataNomorAkun_Deactivate);
             this.Load += new System.EventHandler(this.dataNomorAkun_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataAccountGridView)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -150,5 +180,7 @@
         private System.Windows.Forms.DataGridView dataAccountGridView;
         private System.Windows.Forms.Button newButton;
         private System.Windows.Forms.CheckBox accountnonactiveoption;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button AllButton;
     }
 }

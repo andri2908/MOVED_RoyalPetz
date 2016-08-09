@@ -91,19 +91,6 @@ namespace RoyalPetz_ADMIN
             newButton.Visible = false;
         }
 
-        private void newButton_Click(object sender, EventArgs e)
-        {
-            if (null == newBranchForm || newBranchForm.IsDisposed)
-                newBranchForm = new dataCabangDetailForm(globalConstants.NEW_BRANCH, 0);
-
-            newBranchForm.Show();
-            newBranchForm.WindowState = FormWindowState.Normal;
-
-            dataCabangGridView.DataSource = null;
-            if (!namaBranchTextbox.Text.Equals(""))
-                loadBranchData(namaBranchTextbox.Text);
-        }
-
         private void loadBranchData(string branchNameParam)
         {
             MySqlDataReader rdr;
@@ -112,13 +99,20 @@ namespace RoyalPetz_ADMIN
             string branchName = MySqlHelper.EscapeString(branchNameParam);
 
             DS.mySqlConnect();
-            if (cabangnonactiveoption.Checked)
+            if (branchNameParam.Equals("All"))
             {
-                sqlCommand = "SELECT BRANCH_ID, BRANCH_NAME AS 'NAMA CABANG', branch_ip4 AS 'ALAMAT IP CABANG' FROM MASTER_BRANCH WHERE BRANCH_NAME LIKE '%" + branchName + "%'";
+                sqlCommand = "SELECT BRANCH_ID, BRANCH_NAME AS 'NAMA CABANG', branch_ip4 AS 'ALAMAT IP CABANG' FROM MASTER_BRANCH";
             }
             else
             {
-                sqlCommand = "SELECT BRANCH_ID, BRANCH_NAME AS 'NAMA CABANG', branch_ip4 AS 'ALAMAT IP CABANG' FROM MASTER_BRANCH WHERE BRANCH_ACTIVE = 1 AND BRANCH_NAME LIKE '%" + branchName + "%'";
+                if (cabangnonactiveoption.Checked)
+                {
+                    sqlCommand = "SELECT BRANCH_ID, BRANCH_NAME AS 'NAMA CABANG', branch_ip4 AS 'ALAMAT IP CABANG' FROM MASTER_BRANCH WHERE BRANCH_NAME LIKE '%" + branchName + "%'";
+                }
+                else
+                {
+                    sqlCommand = "SELECT BRANCH_ID, BRANCH_NAME AS 'NAMA CABANG', branch_ip4 AS 'ALAMAT IP CABANG' FROM MASTER_BRANCH WHERE BRANCH_ACTIVE = 1 AND BRANCH_NAME LIKE '%" + branchName + "%'";
+                }
             }
 
             using (rdr = DS.getData(sqlCommand))
@@ -226,9 +220,18 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        private void dataCabangGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void newButton_Click_1(object sender, EventArgs e)
         {
-
+            dataCabangDetailForm displayedForm = new dataCabangDetailForm(globalConstants.NEW_BRANCH, 0);
+            displayedForm.ShowDialog(this);
+            dataCabangGridView.DataSource = null;
+            if (!namaBranchTextbox.Text.Equals(""))
+                loadBranchData(namaBranchTextbox.Text);
+        }
+		
+		private void AllButton_Click(object sender, EventArgs e)
+        {
+            loadBranchData("ALL");
         }
 
         private void dataCabangForm_Deactivate(object sender, EventArgs e)
@@ -236,6 +239,15 @@ namespace RoyalPetz_ADMIN
             unregisterGlobalHotkey();
         }
 
+		private void newButton_Click_2(object sender, EventArgs e)
+        {
+            dataCabangDetailForm displayedForm = new dataCabangDetailForm(globalConstants.NEW_BRANCH, 0);
+            displayedForm.ShowDialog(this);
+            dataCabangGridView.DataSource = null;
+            if (!namaBranchTextbox.Text.Equals(""))
+                loadBranchData(namaBranchTextbox.Text);
+        }
+		
         private void dataCabangGridView_Enter(object sender, EventArgs e)
         {
             if (navKeyRegistered)
@@ -246,6 +258,11 @@ namespace RoyalPetz_ADMIN
         {
             if (!navKeyRegistered)
                 registerGlobalHotkey();
+        }
+
+        private void dataCabangGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

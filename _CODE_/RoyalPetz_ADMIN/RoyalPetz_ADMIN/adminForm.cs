@@ -376,7 +376,7 @@ namespace RoyalPetz_ADMIN
             //timer1.Start();
 
             welcomeLabel.Text = "WELCOME " + DS.getDataSingleValue("SELECT IFNULL(USER_FULL_NAME, 0) FROM MASTER_USER WHERE ID = " + selectedUserID).ToString();
-            menuStrip1.Renderer = new MyRenderer();
+            MAINMENU_Strip.Renderer = new MyRenderer();
             gutil.reArrangeTabOrder(this);
 
 
@@ -904,22 +904,22 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripMenuItem25_DropDownClosed(object sender, EventArgs e)
         {
-            toolStripMenuItem25.ForeColor = Color.FloralWhite;
+            MENU_DevTools.ForeColor = Color.FloralWhite;
         }
 
         private void toolStripMenuItem25_DropDownOpened(object sender, EventArgs e)
         {
-            toolStripMenuItem25.ForeColor = Color.Black;
+            MENU_DevTools.ForeColor = Color.Black;
         }
 
         private void toolStripMenuItem74_DropDownClosed(object sender, EventArgs e)
         {
-            MAINMENU_TaxModule.ForeColor = Color.FloralWhite;
+            DUMMY_TaxModule.ForeColor = Color.FloralWhite;
         }
 
         private void toolStripMenuItem74_DropDownOpened(object sender, EventArgs e)
         {
-            MAINMENU_TaxModule.ForeColor = Color.Black;
+            DUMMY_TaxModule.ForeColor = Color.Black;
         }
 
         private void informasiToolStripMenuItem_DropDownClosed(object sender, EventArgs e)
@@ -1083,7 +1083,7 @@ namespace RoyalPetz_ADMIN
             setAccessibility(globalConstants.MENU_PEMBAYARAN_HUTANG_SUPPLIER, SHORTCUT_hutang);
             // SUB MENU PENGATURAN LIMIT PAJAK
             setAccessibility(globalConstants.MENU_PENGATURAN_LIMIT_PAJAK, MENU_pengaturanLimitPajak);
-            setAccessibility(globalConstants.MENU_TAX_MODULE, MAINMENU_TaxModule);
+            setAccessibility(globalConstants.MENU_TAX_MODULE, DUMMY_TaxModule);
         }
 
         private void toolStripMenuItem1_Click_1(object sender, EventArgs e)
@@ -1493,6 +1493,14 @@ namespace RoyalPetz_ADMIN
         private void laporanToolStripMenuItem_DropDownClosed(object sender, EventArgs e)
         {
             laporanToolStripMenuItem.ForeColor = Color.FloralWhite;
+        }
+
+        private void uSBToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process p = new Process();
+            p.StartInfo.FileName = "USBLib.exe";
+            p.StartInfo.Arguments = "runAdmin";
+            p.Start();
         }
     }
 }

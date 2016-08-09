@@ -126,9 +126,9 @@ namespace RoyalPetz_ADMIN
         {
             Button[] arrButton = new Button[2];
 
-            arrButton[0] = saveButton;
-            arrButton[1] = button1;
-            gutil.reArrangeButtonPosition(arrButton, 184, this.Width);
+            arrButton[0] = SaveButton;
+            arrButton[1] = ResetButton;
+            gutil.reArrangeButtonPosition(arrButton, SaveButton.Top, this.Width);
 
             gutil.reArrangeTabOrder(this);
         }
@@ -238,47 +238,7 @@ namespace RoyalPetz_ADMIN
 
             return result;
         }
-
-        private void saveButton_Click(object sender, EventArgs e)
-        {           
-            if (saveData())
-            {
-                switch (originModuleID)
-                {
-                    case globalConstants.NEW_GROUP_USER:
-                        gutil.saveUserChangeLog(globalConstants.MENU_MANAJEMEN_USER, globalConstants.CHANGE_LOG_INSERT, "ADD NEW GROUP USER ["+namaGroupTextBox.Text+"]");
-                        break;
-                    case globalConstants.EDIT_GROUP_USER:
-                        if (nonAktifCheckbox.Checked)
-                            gutil.saveUserChangeLog(globalConstants.MENU_MANAJEMEN_USER, globalConstants.CHANGE_LOG_UPDATE, "UPDATE GROUP USER [" + namaGroupTextBox.Text + "] GROUP STATUS NON-AKTIF");
-                        else
-                            gutil.saveUserChangeLog(globalConstants.MENU_MANAJEMEN_USER, globalConstants.CHANGE_LOG_UPDATE, "UPDATE GROUP USER [" + namaGroupTextBox.Text + "] GROUP STATUS AKTIF");
-                        break;
-                }
-
-                if (originModuleID != globalConstants.PENGATURAN_GRUP_AKSES)
-                { 
-                    gutil.showSuccess(options);
-                    gutil.ResetAllControls(this);
-
-                    originModuleID = globalConstants.NEW_GROUP_USER;
-                    options = gutil.INS;
-                }
-                else
-                {
-                    gutil.showSuccess(options);
-                    this.Close();
-                }
-                //MessageBox.Show("SUCCESS");
-                //this.Close();
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            gutil.ResetAllControls(this);
-        }
-
+        
         private void dataGroupDetailForm_Activated(object sender, EventArgs e)
         {
             switch (originModuleID)
@@ -302,6 +262,46 @@ namespace RoyalPetz_ADMIN
         private void dataGroupDetailForm_Deactivate(object sender, EventArgs e)
         {
             unregisterGlobalHotkey();
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            if (saveData())
+            {
+                switch (originModuleID)
+                {
+                    case globalConstants.NEW_GROUP_USER:
+                        gutil.saveUserChangeLog(globalConstants.MENU_MANAJEMEN_USER, globalConstants.CHANGE_LOG_INSERT, "ADD NEW GROUP USER [" + namaGroupTextBox.Text + "]");
+                        break;
+                    case globalConstants.EDIT_GROUP_USER:
+                        if (nonAktifCheckbox.Checked)
+                            gutil.saveUserChangeLog(globalConstants.MENU_MANAJEMEN_USER, globalConstants.CHANGE_LOG_UPDATE, "UPDATE GROUP USER [" + namaGroupTextBox.Text + "] GROUP STATUS NON-AKTIF");
+                        else
+                            gutil.saveUserChangeLog(globalConstants.MENU_MANAJEMEN_USER, globalConstants.CHANGE_LOG_UPDATE, "UPDATE GROUP USER [" + namaGroupTextBox.Text + "] GROUP STATUS AKTIF");
+                        break;
+                }
+
+                if (originModuleID != globalConstants.PENGATURAN_GRUP_AKSES)
+                {
+                    gutil.showSuccess(options);
+                    gutil.ResetAllControls(this);
+
+                    originModuleID = globalConstants.NEW_GROUP_USER;
+                    options = gutil.INS;
+                }
+                else
+                {
+                    gutil.showSuccess(options);
+                    this.Close();
+                }
+                //MessageBox.Show("SUCCESS");
+                //this.Close();
+            }
+        }
+
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            gutil.ResetAllControls(this);
         }
     }
 }
