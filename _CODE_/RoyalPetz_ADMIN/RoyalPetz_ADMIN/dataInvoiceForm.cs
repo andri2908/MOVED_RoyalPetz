@@ -247,12 +247,14 @@ namespace RoyalPetz_ADMIN
                 return;
 
             loadData();
+
             registerGlobalHotkey();
         }
 
         private void dataInvoiceForm_Deactivate(object sender, EventArgs e)
         {
-            unregisterGlobalHotkey();
+            if (navKeyRegistered)
+                unregisterGlobalHotkey();
         }
 
         private void dataInvoiceDataGridView_Enter(object sender, EventArgs e)
@@ -269,7 +271,8 @@ namespace RoyalPetz_ADMIN
 
         private void pelangganCombo_Enter(object sender, EventArgs e)
         {
-            unregisterGlobalHotkey();
+            if (navKeyRegistered)
+                unregisterGlobalHotkey();
         }
 
         private void pelangganCombo_Leave(object sender, EventArgs e)

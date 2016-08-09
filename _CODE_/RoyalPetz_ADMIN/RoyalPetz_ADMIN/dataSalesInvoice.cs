@@ -235,7 +235,8 @@ namespace RoyalPetz_ADMIN
 
         private void genericControl_Enter(object sender, EventArgs e)
         {
-            unregisterGlobalHotkey();
+            if (navKeyRegistered)
+                unregisterGlobalHotkey();
         }
 
         private void dataSalesInvoice_Activated(object sender, EventArgs e)
@@ -245,7 +246,8 @@ namespace RoyalPetz_ADMIN
 
         private void dataSalesInvoice_Deactivate(object sender, EventArgs e)
         {
-            unregisterGlobalHotkey();
+            if (navKeyRegistered)
+                unregisterGlobalHotkey();
         }
 
         private void dataPenerimaanBarang_Enter(object sender, EventArgs e)

@@ -150,6 +150,7 @@
             this.produkJasaCheckbox.TabIndex = 34;
             this.produkJasaCheckbox.Text = "Produk Jasa / Servis (non-inventory)";
             this.produkJasaCheckbox.UseVisualStyleBackColor = true;
+            this.produkJasaCheckbox.CheckedChanged += new System.EventHandler(this.produkJasaCheckbox_CheckedChanged);
             // 
             // namaProdukTextBox
             // 

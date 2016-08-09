@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
-
+using Hotkeys;
 
 namespace RoyalPetz_ADMIN
 {
@@ -29,6 +29,11 @@ namespace RoyalPetz_ADMIN
         dataReturPenjualanForm returPenjualanForm = null;
         dataReturPenjualanForm unknownCustReturPenjualanForm = null;
         pembayaranLumpSumForm pembayaranPiutangLumpSumForm = null;
+
+        private Hotkeys.GlobalHotkey ghk_UP;
+        private Hotkeys.GlobalHotkey ghk_DOWN;
+        private bool navKeyRegistered = false;
+
 
         public dataPelangganForm()
         {
@@ -73,6 +78,52 @@ namespace RoyalPetz_ADMIN
 
             if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
                 unknownCustomerButton.Visible = true;
+        }
+
+        private void captureAll(Keys key)
+        {
+            switch (key)
+            {
+                case Keys.Up:
+                    SendKeys.Send("+{TAB}");
+                    break;
+                case Keys.Down:
+                    SendKeys.Send("{TAB}");
+                    break;
+            }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == Constants.WM_HOTKEY_MSG_ID)
+            {
+                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                int modifier = (int)m.LParam & 0xFFFF;
+
+                if (modifier == Constants.NOMOD)
+                    captureAll(key);
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void registerGlobalHotkey()
+        {
+            ghk_UP = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Up, this);
+            ghk_UP.Register();
+
+            ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
+            ghk_DOWN.Register();
+
+            navKeyRegistered = true;
+        }
+
+        private void unregisterGlobalHotkey()
+        {
+            ghk_UP.Unregister();
+            ghk_DOWN.Unregister();
+
+            navKeyRegistered = false;
         }
 
         private void newButton_Click(object sender, EventArgs e)
@@ -128,6 +179,8 @@ namespace RoyalPetz_ADMIN
             {
                 loadCustomerData();
             }
+
+            registerGlobalHotkey();
         }
 
         private void namaPelangganTextbox_TextChanged(object sender, EventArgs e)
@@ -247,6 +300,24 @@ namespace RoyalPetz_ADMIN
 
             unknownCustReturPenjualanForm.Show();
             unknownCustReturPenjualanForm.WindowState = FormWindowState.Normal;
+        }
+
+        private void dataPelangganForm_Deactivate(object sender, EventArgs e)
+        {
+            if (navKeyRegistered)
+                unregisterGlobalHotkey();
+        }
+
+        private void dataPelangganDataGridView_Enter(object sender, EventArgs e)
+        {
+            if (navKeyRegistered)
+                unregisterGlobalHotkey();
+        }
+
+        private void dataPelangganDataGridView_Leave(object sender, EventArgs e)
+        {
+            if (!navKeyRegistered)
+                registerGlobalHotkey();
         }
     }
 }

@@ -244,7 +244,8 @@ namespace RoyalPetz_ADMIN
 		
         private void dataKategoriProdukForm_Deactivate(object sender, EventArgs e)
         {
-            unregisterGlobalHotkey();
+            if (navKeyRegistered)
+                unregisterGlobalHotkey();
         }
 
         private void kategoriProdukDataGridView_Enter(object sender, EventArgs e)

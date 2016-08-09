@@ -247,7 +247,8 @@ namespace RoyalPetz_ADMIN
 		
         private void dataNomorAkun_Deactivate(object sender, EventArgs e)
         {
-            unregisterGlobalHotkey();
+            if (navKeyRegistered)
+                unregisterGlobalHotkey();
         }
 
         private void dataAccountGridView_Enter(object sender, EventArgs e)

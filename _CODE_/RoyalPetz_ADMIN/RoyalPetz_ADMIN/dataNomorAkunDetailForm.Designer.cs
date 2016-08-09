@@ -121,7 +121,7 @@
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(157, 154);
+            this.saveButton.Location = new System.Drawing.Point(153, 147);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(95, 37);
             this.saveButton.TabIndex = 24;
@@ -205,7 +205,7 @@
             // 
             this.ResetButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.ResetButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ResetButton.Location = new System.Drawing.Point(302, 154);
+            this.ResetButton.Location = new System.Drawing.Point(298, 147);
             this.ResetButton.Name = "ResetButton";
             this.ResetButton.Size = new System.Drawing.Size(95, 37);
             this.ResetButton.TabIndex = 27;
@@ -216,8 +216,8 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.ResetButton);
-            this.groupBox1.Controls.Add(this.NonactiveCheckbox);
             this.groupBox1.Controls.Add(this.saveButton);
+            this.groupBox1.Controls.Add(this.NonactiveCheckbox);
             this.groupBox1.Controls.Add(this.TipeComboBox);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label1);
@@ -241,8 +241,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(557, 244);
-            this.Controls.Add(this.ResetButton);
-            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

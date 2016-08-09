@@ -1060,14 +1060,17 @@ namespace RoyalPetz_ADMIN
 
                         if (originModuleID == 0)  // NORMAL TRANSACTION
                         { 
-                            // REDUCE STOCK QTY AT MASTER PRODUCT
-                            sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value) +
-                                                " WHERE PRODUCT_ID = '" + cashierDataGridView.Rows[i].Cells["productID"].Value.ToString() + "'";
+                            if (!gutil.productIsService(cashierDataGridView.Rows[i].Cells["productID"].Value.ToString()))
+                            { 
+                                // REDUCE STOCK QTY AT MASTER PRODUCT
+                                sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value) +
+                                                    " WHERE PRODUCT_ID = '" + cashierDataGridView.Rows[i].Cells["productID"].Value.ToString() + "'";
 
-                            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "REDUCE STOCK AT MASTER PRODUCT [" + cashierDataGridView.Rows[i].Cells["productID"].Value.ToString() + "]");
-                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                                throw internalEX;
-                        
+                                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "REDUCE STOCK AT MASTER PRODUCT [" + cashierDataGridView.Rows[i].Cells["productID"].Value.ToString() + "]");
+                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                    throw internalEX;
+                            }
+
                             // SAVE OR UPDATE TO CUSTOMER_PRODUCT_DISC
                             if (selectedPelangganID != 0)
                             {
@@ -1379,25 +1382,29 @@ namespace RoyalPetz_ADMIN
                 result = true; // NO PRODUCT SELECTED YET
             else
             {
-                double stockQty = 0;
-                double limitQty = 0;
-
-                stockQty = Convert.ToDouble(DS.getDataSingleValue("SELECT PRODUCT_STOCK_QTY FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
-                limitQty = Convert.ToDouble(DS.getDataSingleValue("SELECT PRODUCT_LIMIT_STOCK FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
-
-                if (stockQty >= qtyRequested)
+                if (gutil.productIsService(productID))
                     result = true;
-
-                if (stockQty - qtyRequested <= limitQty)
-                {
-                    errorLabel.Text = productID + " MENCAPAI LIMIT";
-                }
                 else
-                {
-                    errorLabel.Text = "";
-                }
+                { 
+                    double stockQty = 0;
+                    double limitQty = 0;
 
-                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : CHECK STOCK QTY IS ENOUGH [" + stockQty + ", " + qtyRequested + "]");
+                    stockQty = Convert.ToDouble(DS.getDataSingleValue("SELECT PRODUCT_STOCK_QTY FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
+                    limitQty = Convert.ToDouble(DS.getDataSingleValue("SELECT PRODUCT_LIMIT_STOCK FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
+
+                    if (stockQty >= qtyRequested)
+                        result = true;
+
+                    if (stockQty - qtyRequested <= limitQty)
+                    {
+                        errorLabel.Text = productID + " MENCAPAI LIMIT";
+                    }
+                    else
+                    {
+                        errorLabel.Text = "";
+                    }
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : CHECK STOCK QTY IS ENOUGH [" + stockQty + ", " + qtyRequested + "]");
+                }
             }
 
             return result;

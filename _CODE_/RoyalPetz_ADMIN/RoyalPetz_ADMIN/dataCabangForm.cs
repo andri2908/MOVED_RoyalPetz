@@ -236,7 +236,8 @@ namespace RoyalPetz_ADMIN
 
         private void dataCabangForm_Deactivate(object sender, EventArgs e)
         {
-            unregisterGlobalHotkey();
+            if (navKeyRegistered)
+                unregisterGlobalHotkey();
         }
 
 		private void newButton_Click_2(object sender, EventArgs e)

@@ -478,7 +478,8 @@ namespace RoyalPetz_ADMIN
 
         private void dataProdukForm_Deactivate(object sender, EventArgs e)
         {
-            unregisterGlobalHotkey();
+            if (navKeyRegistered)
+                unregisterGlobalHotkey();
         }
     }
 }

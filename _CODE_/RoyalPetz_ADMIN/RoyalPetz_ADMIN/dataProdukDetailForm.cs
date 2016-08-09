@@ -1044,5 +1044,18 @@ namespace RoyalPetz_ADMIN
         {
             unregisterGlobalHotkey();
         }
+
+        private void produkJasaCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (produkJasaCheckbox.Checked)
+            {
+                // PRODUCT IS SERVICE
+                groupBox2.Visible = false;
+            }
+            else
+            {
+                groupBox2.Visible = true;
+            }
+        }
     }
 }

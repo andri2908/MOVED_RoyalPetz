@@ -257,7 +257,8 @@ namespace RoyalPetz_ADMIN
 		
         private void dataGroupForm_Deactivate(object sender, EventArgs e)
         {
-            unregisterGlobalHotkey();
+            if (navKeyRegistered)
+                unregisterGlobalHotkey();
         }
 
         private void dataUserGroupGridView_Enter(object sender, EventArgs e)

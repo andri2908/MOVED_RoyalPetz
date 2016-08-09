@@ -568,5 +568,17 @@ namespace RoyalPetz_ADMIN
             return result;
         }
 
+        public bool productIsService(string productID)
+        {
+            bool result = false;
+            int isService = 0;
+
+            isService = Convert.ToInt32(DS.getDataSingleValue("SELECT PRODUCT_IS_SERVICE FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
+
+            if (isService == 1)
+                result = true;
+
+            return result;
+        }
     }
 }

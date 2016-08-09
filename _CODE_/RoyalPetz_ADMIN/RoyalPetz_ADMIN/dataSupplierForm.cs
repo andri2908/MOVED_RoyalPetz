@@ -230,7 +230,8 @@ namespace RoyalPetz_ADMIN
 
         private void dataSupplierForm_Deactivate(object sender, EventArgs e)
         {
-            unregisterGlobalHotkey();
+            if (navKeyRegistered)
+                unregisterGlobalHotkey();
         }
 
         private void dataSupplierDataGridView_Enter(object sender, EventArgs e)

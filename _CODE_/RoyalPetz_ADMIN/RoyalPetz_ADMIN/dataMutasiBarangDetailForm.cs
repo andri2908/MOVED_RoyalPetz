@@ -492,7 +492,7 @@ namespace RoyalPetz_ADMIN
             string[] arr = null;
             List<string> arrList = new List<string>();
 
-            sqlCommand = "SELECT PRODUCT_ID FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1";
+            sqlCommand = "SELECT PRODUCT_ID FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 AND PRODUCT_IS_SERVICE = 0";
             rdr = DS.getData(sqlCommand);
 
             if (rdr.HasRows)

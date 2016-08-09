@@ -90,7 +90,9 @@
             this.dataPelangganDataGridView.Size = new System.Drawing.Size(602, 463);
             this.dataPelangganDataGridView.TabIndex = 8;
             this.dataPelangganDataGridView.DoubleClick += new System.EventHandler(this.dataPelangganDataGridView_DoubleClick);
+            this.dataPelangganDataGridView.Enter += new System.EventHandler(this.dataPelangganDataGridView_Enter);
             this.dataPelangganDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataPelangganDataGridView_KeyDown);
+            this.dataPelangganDataGridView.Leave += new System.EventHandler(this.dataPelangganDataGridView_Leave);
             // 
             // newButton
             // 
@@ -146,6 +148,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NAMA PELANGGAN";
             this.Activated += new System.EventHandler(this.dataPelangganForm_Activated);
+            this.Deactivate += new System.EventHandler(this.dataPelangganForm_Deactivate);
             this.Load += new System.EventHandler(this.dataPelangganForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataPelangganDataGridView)).EndInit();
             this.ResumeLayout(false);
