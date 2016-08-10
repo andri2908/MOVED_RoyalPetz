@@ -398,9 +398,17 @@ namespace RoyalPetz_ADMIN
                             nonAktifCheckbox.Checked = true;
                         
                         if (rdr.GetString("PRODUCT_IS_SERVICE").Equals("1"))
+                        { 
                             produkJasaCheckbox.Checked = true;
+                            stokAwalTextBox.Enabled = false;
+                            limitStokTextBox.Enabled = false;
+                        }
                         else
+                        { 
                             produkJasaCheckbox.Checked = false;
+                            stokAwalTextBox.Enabled = true;
+                            limitStokTextBox.Enabled = true;
+                        }
 
                         fileName = rdr.GetString("PRODUCT_PHOTO_1").Trim();
 
@@ -480,6 +488,12 @@ namespace RoyalPetz_ADMIN
             }
 
             produkKategoriTextBox.Text = kategoriName;
+        }
+
+        private void clearUpProductCategory()
+        {
+            produkKategoriTextBox.Clear();
+            currentSelectedKategoriID.Clear();
         }
 
         private void searchUnitButton_Click(object sender, EventArgs e)
@@ -1050,12 +1064,19 @@ namespace RoyalPetz_ADMIN
             if (produkJasaCheckbox.Checked)
             {
                 // PRODUCT IS SERVICE
-                groupBox2.Visible = false;
+                stokAwalTextBox.Enabled = false;
+                limitStokTextBox.Enabled = false;
             }
             else
             {
-                groupBox2.Visible = true;
+                stokAwalTextBox.Enabled = true;
+                limitStokTextBox.Enabled = true;
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            clearUpProductCategory();
         }
     }
 }

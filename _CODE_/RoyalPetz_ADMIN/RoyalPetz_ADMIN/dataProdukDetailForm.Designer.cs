@@ -74,6 +74,7 @@
             this.label22 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -237,7 +238,7 @@
             // 
             this.stokAwalTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.stokAwalTextBox.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stokAwalTextBox.Location = new System.Drawing.Point(133, 27);
+            this.stokAwalTextBox.Location = new System.Drawing.Point(134, 27);
             this.stokAwalTextBox.Name = "stokAwalTextBox";
             this.stokAwalTextBox.Size = new System.Drawing.Size(175, 26);
             this.stokAwalTextBox.TabIndex = 71;
@@ -379,7 +380,7 @@
             this.produkKategoriTextBox.Location = new System.Drawing.Point(133, 134);
             this.produkKategoriTextBox.Name = "produkKategoriTextBox";
             this.produkKategoriTextBox.ReadOnly = true;
-            this.produkKategoriTextBox.Size = new System.Drawing.Size(573, 26);
+            this.produkKategoriTextBox.Size = new System.Drawing.Size(477, 26);
             this.produkKategoriTextBox.TabIndex = 17;
             // 
             // searchKategoriButton
@@ -387,7 +388,7 @@
             this.searchKategoriButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.searchKategoriButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("searchKategoriButton.BackgroundImage")));
             this.searchKategoriButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.searchKategoriButton.Location = new System.Drawing.Point(712, 135);
+            this.searchKategoriButton.Location = new System.Drawing.Point(616, 134);
             this.searchKategoriButton.Name = "searchKategoriButton";
             this.searchKategoriButton.Size = new System.Drawing.Size(26, 26);
             this.searchKategoriButton.TabIndex = 18;
@@ -495,6 +496,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.barcodeTextBox);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.merkTextBox);
@@ -627,6 +629,17 @@
             this.label25.TabIndex = 76;
             this.label25.Text = "HARGA JUAL PARTAI";
             // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(653, 134);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(85, 26);
+            this.button3.TabIndex = 80;
+            this.button3.Text = "CLEAR";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // dataProdukDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -712,5 +725,6 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox barcodeTextBox;
+        private System.Windows.Forms.Button button3;
     }
 }
