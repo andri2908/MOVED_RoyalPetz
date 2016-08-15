@@ -382,9 +382,9 @@ namespace RoyalPetz_ADMIN
 
             //load last known paper size settings from DB
 
-            //activateUserAccessRight();
+            activateUserAccessRight();
 
-            //loadBGimage();
+            loadBGimage();
         }
 
         private void adminForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -999,6 +999,8 @@ namespace RoyalPetz_ADMIN
             setAccessibility(globalConstants.MENU_SINKRONISASI_INFORMASI, MENU_sinkronisasiInformasi);
             setAccessibility(globalConstants.MENU_PENGATURAN_PRINTER, MENU_pengaturanPrinter);
             setAccessibility(globalConstants.MENU_PENGATURAN_GAMBAR_LATAR, MENU_pengaturanGambarLatar);
+
+            setAccessibility(globalConstants.MENU_USB_UTILITY_MODULE, uSBToolStripMenuItem);
 
             // SET ACCESSIBILITY FOR GUDANG MAIN MENU
             // SUB MENU PRODUK
