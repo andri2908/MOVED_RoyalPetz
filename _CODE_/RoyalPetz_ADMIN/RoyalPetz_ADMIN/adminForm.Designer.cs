@@ -1354,6 +1354,7 @@
             this.MENU_DevTools.Name = "MENU_DevTools";
             this.MENU_DevTools.Size = new System.Drawing.Size(58, 20);
             this.MENU_DevTools.Text = "Tools";
+            this.MENU_DevTools.Visible = false;
             this.MENU_DevTools.DropDownClosed += new System.EventHandler(this.toolStripMenuItem25_DropDownClosed);
             this.MENU_DevTools.DropDownOpened += new System.EventHandler(this.toolStripMenuItem25_DropDownOpened);
             // 
@@ -1545,7 +1546,7 @@
             this.developerToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
             this.developerToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
             this.developerToolStripMenuItem.Name = "developerToolStripMenuItem";
-            this.developerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.developerToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.developerToolStripMenuItem.Text = "Developer";
             this.developerToolStripMenuItem.Click += new System.EventHandler(this.developerToolStripMenuItem_Click);
             // 
