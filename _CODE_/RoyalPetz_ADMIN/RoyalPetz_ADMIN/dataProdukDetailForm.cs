@@ -114,7 +114,7 @@ namespace RoyalPetz_ADMIN
             loadUnitIDInformation();
         }
 
-        public void addSelectedKategoriID(int kategoriID)
+        public void addSelectedKategoriID(int kategoriID, bool immediatelyLoad = true)
         {
             bool exist = false;
             for (int i = 0; ((i<currentSelectedKategoriID.Count) && (exist == false));i++)
@@ -126,7 +126,8 @@ namespace RoyalPetz_ADMIN
             if (!exist)
                 currentSelectedKategoriID.Add(kategoriID);
 
-            loadKategoriIDInformation();
+            if (immediatelyLoad == true)
+                loadKategoriIDInformation();
         }
 
         private bool checkRegEx(string textToCheck)
@@ -447,10 +448,13 @@ namespace RoyalPetz_ADMIN
                 {
                     while (rdr.Read())
                     {
-                        addSelectedKategoriID(rdr.GetInt32("CATEGORY_ID"));
+                        addSelectedKategoriID(rdr.GetInt32("CATEGORY_ID"), false);
                     }
                 }
             }
+
+            rdr.Close();
+            loadKategoriIDInformation();
         }
 
         private void loadUnitIDInformation()
