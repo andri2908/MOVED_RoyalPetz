@@ -135,8 +135,6 @@ C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\bin\Debu
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\bin\Debug\MySql.Data.dll
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\bin\Debug\CrystalDecisions.ReportAppServer.DataDefModel.dll
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\bin\Debug\CrystalDecisions.ReportAppServer.ClientDoc.dll
-C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\bin\Debug\CrystalDecisions.ReportAppServer.ReportDefModel.dll
-C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\bin\Debug\CrystalDecisions.ReportAppServer.Controllers.dll
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\bin\Debug\CrystalDecisions.ReportAppServer.CommLayer.dll
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\bin\Debug\CrystalDecisions.ReportAppServer.DataSetConversion.dll
 C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\bin\Debug\CrystalDecisions.ReportAppServer.Prompting.dll
@@ -531,3 +529,34 @@ E:\My Works\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_A
 E:\My Works\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.TabSchemeProvider.resources
 E:\My Works\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.XMLGeneratorForm.resources
 E:\My Works\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.csproj.GenerateResource.Cache
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.adminHelpForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.cashierHelpForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.crReportContainer.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataPenerimaanBarangForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataReturForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataReturPermintaanPrintOutForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataSalesInvoice.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.penerimaanBarangHelpForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.penerimaanBarangPrintOutForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.purchaseOrderPrintOutForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportCreditDueForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportCreditPaidForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportCreditUnpaidForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportDebtDueForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportDebtPaidForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportDebtUnpaidForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportFinanceInForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportFinanceOutForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportFinanceSearchForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportMarginForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportMonthlyBalanceForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportMutationPaidForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportPaymentSearchForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportProductMutationForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportProductStockLimitForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportPurchaseReturnForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportRequestReturnForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportSalesReturnForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportStockDeviationForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportStockInOutSearchForm.resources
+C:\Users\alpha\Documents\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.smallPleaseWait.resources

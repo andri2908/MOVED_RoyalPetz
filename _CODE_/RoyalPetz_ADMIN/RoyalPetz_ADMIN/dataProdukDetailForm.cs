@@ -870,6 +870,13 @@ namespace RoyalPetz_ADMIN
                 options = gUtil.INS;
                 kodeProdukTextBox.Enabled = true;
             }
+            if (originModuleID== globalConstants.NEW_PRODUK)
+            {
+                kodeProdukTextBox.Select();
+            } else
+            {
+                barcodeTextBox.Select();
+            }
         }
 
         private bool productIDExist(string productID)

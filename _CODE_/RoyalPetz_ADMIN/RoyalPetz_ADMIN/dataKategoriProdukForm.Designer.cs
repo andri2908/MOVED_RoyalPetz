@@ -63,12 +63,12 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.kategoriProdukDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            this.kategoriProdukDataGridView.Location = new System.Drawing.Point(0, 152);
+            this.kategoriProdukDataGridView.Location = new System.Drawing.Point(-1, 152);
             this.kategoriProdukDataGridView.MultiSelect = false;
             this.kategoriProdukDataGridView.Name = "kategoriProdukDataGridView";
             this.kategoriProdukDataGridView.ReadOnly = true;
             this.kategoriProdukDataGridView.RowHeadersVisible = false;
-            this.kategoriProdukDataGridView.Size = new System.Drawing.Size(669, 396);
+            this.kategoriProdukDataGridView.Size = new System.Drawing.Size(503, 398);
             this.kategoriProdukDataGridView.TabIndex = 0;
             this.kategoriProdukDataGridView.DoubleClick += new System.EventHandler(this.tagProdukDataGridView_DoubleClick);
             this.kategoriProdukDataGridView.Enter += new System.EventHandler(this.kategoriProdukDataGridView_Enter);
@@ -129,7 +129,7 @@
             this.groupBox1.Controls.Add(this.categoryNameTextBox);
             this.groupBox1.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.FloralWhite;
-            this.groupBox1.Location = new System.Drawing.Point(128, 12);
+            this.groupBox1.Location = new System.Drawing.Point(44, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(412, 123);
             this.groupBox1.TabIndex = 35;
@@ -153,7 +153,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(669, 549);
+            this.ClientSize = new System.Drawing.Size(501, 549);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.kategoriProdukDataGridView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

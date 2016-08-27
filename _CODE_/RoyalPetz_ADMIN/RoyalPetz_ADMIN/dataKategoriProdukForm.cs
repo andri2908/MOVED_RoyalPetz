@@ -107,10 +107,9 @@ namespace RoyalPetz_ADMIN
             string sqlCommand;
             string categoryNameParam;
 
-            if (categoryNameTextBox.Text.Equals(""))
+            if (options !=1 && categoryNameTextBox.Text.Equals(""))
                 return;
 
-            categoryNameParam = MySqlHelper.EscapeString(categoryNameTextBox.Text);
             DS.mySqlConnect();
             if (options == 1)
             {
@@ -118,6 +117,7 @@ namespace RoyalPetz_ADMIN
             }
             else
             {
+                categoryNameParam = MySqlHelper.EscapeString(categoryNameTextBox.Text);
                 if (tagnonactiveoption.Checked == true)
                 {
                     sqlCommand = "SELECT CATEGORY_ID, CATEGORY_NAME AS 'NAMA KATEGORI', CATEGORY_DESCRIPTION AS 'DESKRIPSI KATEGORI' FROM MASTER_CATEGORY WHERE CATEGORY_NAME LIKE '%" + categoryNameParam + "%'";
