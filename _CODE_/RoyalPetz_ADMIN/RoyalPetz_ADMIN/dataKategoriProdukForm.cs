@@ -219,6 +219,7 @@ namespace RoyalPetz_ADMIN
                 newButton.Visible = true;
             else
                 newButton.Visible = false;
+            categoryNameTextBox.Select();
         }
 
         private void groupnonactiveoption_CheckedChanged(object sender, EventArgs e)
@@ -258,6 +259,14 @@ namespace RoyalPetz_ADMIN
         {
             if (!navKeyRegistered)
                 registerGlobalHotkey();
+        }
+
+        private void categoryNameTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                kategoriProdukDataGridView.Select();
+            }
         }
     }
 }

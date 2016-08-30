@@ -58,6 +58,7 @@
             this.unitNameTextBox.Size = new System.Drawing.Size(260, 27);
             this.unitNameTextBox.TabIndex = 31;
             this.unitNameTextBox.TextChanged += new System.EventHandler(this.unitNameTextBox_TextChanged);
+            this.unitNameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.unitNameTextBox_KeyUp);
             // 
             // dataUnitGridView
             // 

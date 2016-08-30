@@ -835,6 +835,16 @@ namespace RoyalPetz_ADMIN
             {
                 gUtil.showSuccess(options);
 
+                if (originModuleID == globalConstants.NEW_PRODUK)
+                {
+                    kodeProdukTextBox.Select();
+                }
+                else
+                {
+                    //barcodeTextBox.Select();
+                    this.Close();
+                }
+
                 if (originModuleID == globalConstants.STOK_PECAH_BARANG)
                 {
                     internalProductID = getInternalProductID(productID);
@@ -873,13 +883,6 @@ namespace RoyalPetz_ADMIN
                 originModuleID = globalConstants.NEW_PRODUK;
                 options = gUtil.INS;
                 kodeProdukTextBox.Enabled = true;
-            }
-            if (originModuleID== globalConstants.NEW_PRODUK)
-            {
-                kodeProdukTextBox.Select();
-            } else
-            {
-                barcodeTextBox.Select();
             }
         }
 
@@ -1088,6 +1091,38 @@ namespace RoyalPetz_ADMIN
         private void button3_Click(object sender, EventArgs e)
         {
             clearUpProductCategory();
+        }
+
+        private void kodeProdukTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                barcodeTextBox.Select();
+            }
+        }
+
+        private void barcodeTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                namaProdukTextBox.Select();
+            }
+        }
+
+        private void produkKategoriTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F11)
+            {
+                searchKategoriButton.PerformClick();
+            }
+        }
+
+        private void unitTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F11)
+            {
+                searchUnitButton.PerformClick();
+            }
         }
     }
 }

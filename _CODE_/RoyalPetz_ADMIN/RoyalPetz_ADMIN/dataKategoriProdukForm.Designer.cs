@@ -84,6 +84,7 @@
             this.categoryNameTextBox.Size = new System.Drawing.Size(283, 27);
             this.categoryNameTextBox.TabIndex = 6;
             this.categoryNameTextBox.TextChanged += new System.EventHandler(this.categoryNameTextBox_TextChanged);
+            this.categoryNameTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.categoryNameTextBox_KeyUp);
             // 
             // newButton
             // 

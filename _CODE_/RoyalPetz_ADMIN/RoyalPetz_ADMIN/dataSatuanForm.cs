@@ -196,6 +196,7 @@ namespace RoyalPetz_ADMIN
         private void dataSatuanForm_Load(object sender, EventArgs e)
         {
             gutil.reArrangeTabOrder(this);
+            unitNameTextBox.Select();
         }
 
         private void dataUnitGridView_KeyDown(object sender, KeyEventArgs e)
@@ -221,6 +222,14 @@ namespace RoyalPetz_ADMIN
         {
             if (!navKeyRegistered)
                 registerGlobalHotkey();
+        }
+
+        private void unitNameTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode==Keys.Enter)
+            {
+                dataUnitGridView.Select();
+            }
         }
     }
 }

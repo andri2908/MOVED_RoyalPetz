@@ -66,6 +66,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.resetbutton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.barcodeTextBox = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -74,7 +75,6 @@
             this.label22 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -127,6 +127,7 @@
             this.kodeProdukTextBox.Size = new System.Drawing.Size(228, 26);
             this.kodeProdukTextBox.TabIndex = 15;
             this.kodeProdukTextBox.TextChanged += new System.EventHandler(this.kodeProdukTextBox_TextChanged);
+            this.kodeProdukTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.kodeProdukTextBox_KeyUp);
             // 
             // label16
             // 
@@ -361,6 +362,7 @@
             this.unitTextBox.ReadOnly = true;
             this.unitTextBox.Size = new System.Drawing.Size(286, 26);
             this.unitTextBox.TabIndex = 17;
+            this.unitTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.unitTextBox_KeyUp);
             // 
             // noRakBarisTextBox
             // 
@@ -382,6 +384,7 @@
             this.produkKategoriTextBox.ReadOnly = true;
             this.produkKategoriTextBox.Size = new System.Drawing.Size(477, 26);
             this.produkKategoriTextBox.TabIndex = 17;
+            this.produkKategoriTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.produkKategoriTextBox_KeyUp);
             // 
             // searchKategoriButton
             // 
@@ -526,6 +529,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ID PRODUK";
             // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(653, 134);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(85, 26);
+            this.button3.TabIndex = 80;
+            this.button3.Text = "CLEAR";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // barcodeTextBox
             // 
             this.barcodeTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -537,6 +551,7 @@
             this.barcodeTextBox.Size = new System.Drawing.Size(174, 26);
             this.barcodeTextBox.TabIndex = 79;
             this.barcodeTextBox.TextChanged += new System.EventHandler(this.barcodeTextBox_TextChanged);
+            this.barcodeTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.barcodeTextBox_KeyUp);
             // 
             // button2
             // 
@@ -628,17 +643,6 @@
             this.label25.Size = new System.Drawing.Size(185, 18);
             this.label25.TabIndex = 76;
             this.label25.Text = "HARGA JUAL PARTAI";
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(653, 134);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(85, 26);
-            this.button3.TabIndex = 80;
-            this.button3.Text = "CLEAR";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // dataProdukDetailForm
             // 
