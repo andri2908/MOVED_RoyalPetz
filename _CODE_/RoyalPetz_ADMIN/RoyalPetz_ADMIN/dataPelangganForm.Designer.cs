@@ -28,15 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.namaPelangganTextbox = new System.Windows.Forms.TextBox();
             this.dataPelangganDataGridView = new System.Windows.Forms.DataGridView();
             this.newButton = new System.Windows.Forms.Button();
             this.pelanggangnonactiveoption = new System.Windows.Forms.CheckBox();
             this.unknownCustomerButton = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.AllButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataPelangganDataGridView)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -44,19 +47,19 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label1.Location = new System.Drawing.Point(12, 19);
+            this.label1.Location = new System.Drawing.Point(6, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 18);
+            this.label1.Size = new System.Drawing.Size(60, 18);
             this.label1.TabIndex = 10;
-            this.label1.Text = "Nama";
+            this.label1.Text = "NAMA";
             // 
             // namaPelangganTextbox
             // 
             this.namaPelangganTextbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.namaPelangganTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.namaPelangganTextbox.Location = new System.Drawing.Point(90, 13);
+            this.namaPelangganTextbox.Location = new System.Drawing.Point(78, 21);
             this.namaPelangganTextbox.Name = "namaPelangganTextbox";
-            this.namaPelangganTextbox.Size = new System.Drawing.Size(260, 27);
+            this.namaPelangganTextbox.Size = new System.Drawing.Size(271, 27);
             this.namaPelangganTextbox.TabIndex = 11;
             this.namaPelangganTextbox.TextChanged += new System.EventHandler(this.namaPelangganTextbox_TextChanged);
             // 
@@ -65,29 +68,29 @@
             this.dataPelangganDataGridView.AllowUserToAddRows = false;
             this.dataPelangganDataGridView.AllowUserToDeleteRows = false;
             this.dataPelangganDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataPelangganDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataPelangganDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataPelangganDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataPelangganDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataPelangganDataGridView.Location = new System.Drawing.Point(0, 85);
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataPelangganDataGridView.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dataPelangganDataGridView.Location = new System.Drawing.Point(0, 142);
             this.dataPelangganDataGridView.MultiSelect = false;
             this.dataPelangganDataGridView.Name = "dataPelangganDataGridView";
             this.dataPelangganDataGridView.ReadOnly = true;
             this.dataPelangganDataGridView.RowHeadersVisible = false;
-            this.dataPelangganDataGridView.Size = new System.Drawing.Size(602, 463);
+            this.dataPelangganDataGridView.Size = new System.Drawing.Size(602, 406);
             this.dataPelangganDataGridView.TabIndex = 8;
             this.dataPelangganDataGridView.DoubleClick += new System.EventHandler(this.dataPelangganDataGridView_DoubleClick);
             this.dataPelangganDataGridView.Enter += new System.EventHandler(this.dataPelangganDataGridView_Enter);
@@ -97,7 +100,8 @@
             // newButton
             // 
             this.newButton.Font = new System.Drawing.Font("Verdana", 11F, System.Drawing.FontStyle.Bold);
-            this.newButton.Location = new System.Drawing.Point(369, 13);
+            this.newButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.newButton.Location = new System.Drawing.Point(9, 49);
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(56, 27);
             this.newButton.TabIndex = 12;
@@ -109,7 +113,7 @@
             // 
             this.pelanggangnonactiveoption.AutoSize = true;
             this.pelanggangnonactiveoption.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pelanggangnonactiveoption.Location = new System.Drawing.Point(90, 46);
+            this.pelanggangnonactiveoption.Location = new System.Drawing.Point(78, 54);
             this.pelanggangnonactiveoption.Name = "pelanggangnonactiveoption";
             this.pelanggangnonactiveoption.Size = new System.Drawing.Size(205, 19);
             this.pelanggangnonactiveoption.TabIndex = 34;
@@ -120,14 +124,44 @@
             // unknownCustomerButton
             // 
             this.unknownCustomerButton.Font = new System.Drawing.Font("Verdana", 11F, System.Drawing.FontStyle.Bold);
-            this.unknownCustomerButton.Location = new System.Drawing.Point(431, 12);
+            this.unknownCustomerButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.unknownCustomerButton.Location = new System.Drawing.Point(355, 21);
             this.unknownCustomerButton.Name = "unknownCustomerButton";
-            this.unknownCustomerButton.Size = new System.Drawing.Size(159, 67);
+            this.unknownCustomerButton.Size = new System.Drawing.Size(122, 86);
             this.unknownCustomerButton.TabIndex = 35;
             this.unknownCustomerButton.Text = "PELANGGAN TIDAK TERDAFTAR";
             this.unknownCustomerButton.UseVisualStyleBackColor = true;
             this.unknownCustomerButton.Visible = false;
             this.unknownCustomerButton.Click += new System.EventHandler(this.unknownCustomerButton_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.AllButton);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.unknownCustomerButton);
+            this.groupBox1.Controls.Add(this.namaPelangganTextbox);
+            this.groupBox1.Controls.Add(this.pelanggangnonactiveoption);
+            this.groupBox1.Controls.Add(this.newButton);
+            this.groupBox1.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.ForeColor = System.Drawing.Color.FloralWhite;
+            this.groupBox1.Location = new System.Drawing.Point(57, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(488, 124);
+            this.groupBox1.TabIndex = 36;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "FILTER";
+            // 
+            // AllButton
+            // 
+            this.AllButton.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AllButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.AllButton.Location = new System.Drawing.Point(78, 79);
+            this.AllButton.Name = "AllButton";
+            this.AllButton.Size = new System.Drawing.Size(271, 28);
+            this.AllButton.TabIndex = 41;
+            this.AllButton.Text = "DISPLAY ALL";
+            this.AllButton.UseVisualStyleBackColor = true;
+            this.AllButton.Click += new System.EventHandler(this.AllButton_Click);
             // 
             // dataPelangganForm
             // 
@@ -135,24 +169,21 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(602, 549);
-            this.Controls.Add(this.unknownCustomerButton);
-            this.Controls.Add(this.pelanggangnonactiveoption);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.namaPelangganTextbox);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataPelangganDataGridView);
-            this.Controls.Add(this.newButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "dataPelangganForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "NAMA PELANGGAN";
+            this.Text = "DATA PELANGGAN";
             this.Activated += new System.EventHandler(this.dataPelangganForm_Activated);
             this.Deactivate += new System.EventHandler(this.dataPelangganForm_Deactivate);
             this.Load += new System.EventHandler(this.dataPelangganForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataPelangganDataGridView)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -164,5 +195,7 @@
         private System.Windows.Forms.Button newButton;
         private System.Windows.Forms.CheckBox pelanggangnonactiveoption;
         private System.Windows.Forms.Button unknownCustomerButton;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button AllButton;
     }
 }

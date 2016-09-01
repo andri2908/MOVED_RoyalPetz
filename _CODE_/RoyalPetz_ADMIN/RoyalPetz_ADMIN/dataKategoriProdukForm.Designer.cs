@@ -63,12 +63,12 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.kategoriProdukDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            this.kategoriProdukDataGridView.Location = new System.Drawing.Point(-1, 152);
+            this.kategoriProdukDataGridView.Location = new System.Drawing.Point(-1, 141);
             this.kategoriProdukDataGridView.MultiSelect = false;
             this.kategoriProdukDataGridView.Name = "kategoriProdukDataGridView";
             this.kategoriProdukDataGridView.ReadOnly = true;
             this.kategoriProdukDataGridView.RowHeadersVisible = false;
-            this.kategoriProdukDataGridView.Size = new System.Drawing.Size(503, 398);
+            this.kategoriProdukDataGridView.Size = new System.Drawing.Size(503, 409);
             this.kategoriProdukDataGridView.TabIndex = 0;
             this.kategoriProdukDataGridView.DoubleClick += new System.EventHandler(this.tagProdukDataGridView_DoubleClick);
             this.kategoriProdukDataGridView.Enter += new System.EventHandler(this.kategoriProdukDataGridView_Enter);
@@ -162,7 +162,7 @@
             this.Name = "dataKategoriProdukForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "KATEGORI PRODUK";
+            this.Text = "DATA KATEGORI PRODUK";
             this.Activated += new System.EventHandler(this.dataKategoriProdukForm_Activated);
             this.Deactivate += new System.EventHandler(this.dataKategoriProdukForm_Deactivate);
             this.Load += new System.EventHandler(this.dataKategoriProdukForm_Load);

@@ -61,7 +61,6 @@
             // 
             // branchAddress2TextBox
             // 
-            this.branchAddress2TextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.branchAddress2TextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.branchAddress2TextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.branchAddress2TextBox.Location = new System.Drawing.Point(170, 129);
@@ -72,7 +71,6 @@
             // 
             // branchAddressCityTextBox
             // 
-            this.branchAddressCityTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.branchAddressCityTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.branchAddressCityTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.branchAddressCityTextBox.Location = new System.Drawing.Point(170, 162);
@@ -83,7 +81,6 @@
             // 
             // branchTelephoneTextBox
             // 
-            this.branchTelephoneTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.branchTelephoneTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.branchTelephoneTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.branchTelephoneTextBox.Location = new System.Drawing.Point(170, 203);
@@ -94,17 +91,15 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.panel1.BackColor = System.Drawing.Color.SteelBlue;
             this.panel1.Controls.Add(this.errorLabel);
-            this.panel1.Location = new System.Drawing.Point(3, 1);
+            this.panel1.Location = new System.Drawing.Point(1, 1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(775, 29);
+            this.panel1.Size = new System.Drawing.Size(777, 29);
             this.panel1.TabIndex = 22;
             // 
             // errorLabel
             // 
-            this.errorLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.errorLabel.AutoSize = true;
             this.errorLabel.BackColor = System.Drawing.Color.White;
             this.errorLabel.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -117,7 +112,6 @@
             // 
             // ip4Textbox
             // 
-            this.ip4Textbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ip4Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.ip4Textbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ip4Textbox.Location = new System.Drawing.Point(386, 57);
@@ -129,7 +123,6 @@
             // 
             // ip3Textbox
             // 
-            this.ip3Textbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ip3Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.ip3Textbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ip3Textbox.Location = new System.Drawing.Point(314, 57);
@@ -142,7 +135,6 @@
             // 
             // label4
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(358, 59);
@@ -153,7 +145,6 @@
             // 
             // ip1Textbox
             // 
-            this.ip1Textbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ip1Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.ip1Textbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ip1Textbox.Location = new System.Drawing.Point(170, 57);
@@ -166,7 +157,6 @@
             // 
             // label3
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Verdana", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(214, 59);
@@ -177,7 +167,6 @@
             // 
             // ip2Textbox
             // 
-            this.ip2Textbox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ip2Textbox.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.ip2Textbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ip2Textbox.Location = new System.Drawing.Point(242, 57);
@@ -190,7 +179,6 @@
             // 
             // label7
             // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(286, 59);
@@ -201,7 +189,6 @@
             // 
             // branchNameTextBox
             // 
-            this.branchNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.branchNameTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.branchNameTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.branchNameTextBox.Location = new System.Drawing.Point(170, 21);
@@ -212,7 +199,6 @@
             // 
             // branchAddress1TextBox
             // 
-            this.branchAddress1TextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.branchAddress1TextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.branchAddress1TextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.branchAddress1TextBox.Location = new System.Drawing.Point(170, 96);
@@ -223,7 +209,6 @@
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -235,7 +220,6 @@
             // 
             // label5
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -247,7 +231,6 @@
             // 
             // label6
             // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -259,7 +242,6 @@
             // 
             // label9
             // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -271,7 +253,6 @@
             // 
             // label17
             // 
-            this.label17.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -283,7 +264,6 @@
             // 
             // label18
             // 
-            this.label18.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -295,7 +275,6 @@
             // 
             // label23
             // 
-            this.label23.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -307,7 +286,6 @@
             // 
             // label30
             // 
-            this.label30.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label30.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -319,7 +297,6 @@
             // 
             // label2
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -331,7 +308,6 @@
             // 
             // nonAktifCheckbox
             // 
-            this.nonAktifCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.nonAktifCheckbox.AutoSize = true;
             this.nonAktifCheckbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nonAktifCheckbox.Location = new System.Drawing.Point(170, 244);
@@ -343,7 +319,6 @@
             // 
             // saveButton
             // 
-            this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveButton.Location = new System.Drawing.Point(267, 284);
             this.saveButton.Name = "saveButton";
@@ -382,14 +357,13 @@
             this.groupBox1.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(3, 36);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(775, 334);
+            this.groupBox1.Size = new System.Drawing.Size(775, 332);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "DATA CABANG";
             // 
             // ResetButton
             // 
-            this.ResetButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.ResetButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ResetButton.Location = new System.Drawing.Point(413, 284);
             this.ResetButton.Name = "ResetButton";
@@ -404,7 +378,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(781, 382);
+            this.ClientSize = new System.Drawing.Size(779, 371);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

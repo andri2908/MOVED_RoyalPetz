@@ -666,7 +666,7 @@
             this.Name = "dataProdukDetailForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DATA PRODUK ";
+            this.Text = "DETAIL DATA PRODUK ";
             this.Activated += new System.EventHandler(this.dataProdukDetailForm_Activated);
             this.Deactivate += new System.EventHandler(this.dataProdukDetailForm_Deactivate);
             this.Load += new System.EventHandler(this.dataProdukDetailForm_Load);

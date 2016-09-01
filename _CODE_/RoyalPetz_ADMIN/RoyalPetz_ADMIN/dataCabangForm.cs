@@ -187,6 +187,8 @@ namespace RoyalPetz_ADMIN
                 newButton.Visible = true;
             else
                 newButton.Visible = false;
+
+            namaBranchTextbox.Select();
         }
 
         private void dataCabangGridView_KeyDown(object sender, KeyEventArgs e)

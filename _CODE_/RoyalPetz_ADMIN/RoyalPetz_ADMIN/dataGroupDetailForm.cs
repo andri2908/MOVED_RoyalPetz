@@ -131,6 +131,7 @@ namespace RoyalPetz_ADMIN
             gutil.reArrangeButtonPosition(arrButton, SaveButton.Top, this.Width);
 
             gutil.reArrangeTabOrder(this);
+            namaGroupTextBox.Select();
         }
 
         private bool dataValidated()

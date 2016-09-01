@@ -319,6 +319,7 @@ namespace RoyalPetz_ADMIN
             gUtil.reArrangeButtonPosition(arrButton, 343, this.Width);
 
             gUtil.reArrangeTabOrder(this);
+            branchNameTextBox.Select();
         }
 
         private void dataCabangDetailForm_Activated(object sender, EventArgs e)

@@ -353,6 +353,7 @@ namespace RoyalPetz_ADMIN
                     gutil.setReadOnlyAllControls(this);
                 }
             }
+            userNameTextBox.Select();
         }
 
         private void resetbutton_Click(object sender, EventArgs e)
@@ -366,6 +367,14 @@ namespace RoyalPetz_ADMIN
         private void dataUserDetailForm_Deactivate(object sender, EventArgs e)
         {
             unregisterGlobalHotkey();
+        }
+
+        private void groupNameTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F11)
+            {
+                searchButton.PerformClick();
+            }
         }
     }
 }

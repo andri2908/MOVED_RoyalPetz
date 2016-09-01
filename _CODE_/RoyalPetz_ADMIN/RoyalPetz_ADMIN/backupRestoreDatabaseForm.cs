@@ -180,6 +180,7 @@ namespace RoyalPetz_ADMIN
         private void backupRestoreDatabaseForm_Load(object sender, EventArgs e)
         {
             gUtil.reArrangeTabOrder(this);
+
         }
         private void backupRestoreDatabaseForm_Activated(object sender, EventArgs e)
         {
@@ -190,6 +191,14 @@ namespace RoyalPetz_ADMIN
         private void backupRestoreDatabaseForm_Deactivate(object sender, EventArgs e)
         {
             unregisterGlobalHotkey();
+        }
+
+        private void fileNameTextbox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F11)
+            {
+                searchButton.PerformClick();
+            }
         }
     }
 }

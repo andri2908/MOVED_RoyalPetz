@@ -83,6 +83,7 @@
             this.fileNameTextbox.ReadOnly = true;
             this.fileNameTextbox.Size = new System.Drawing.Size(340, 27);
             this.fileNameTextbox.TabIndex = 33;
+            this.fileNameTextbox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.fileNameTextbox_KeyUp);
             // 
             // searchButton
             // 

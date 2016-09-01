@@ -36,12 +36,9 @@
             this.detailReturDataGridView = new System.Windows.Forms.DataGridView();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.supplierHiddenCombo = new System.Windows.Forms.ComboBox();
             this.supplierCombo = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.ReturDtPicker_1 = new System.Windows.Forms.DateTimePicker();
             this.noReturTextBox = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
@@ -50,20 +47,18 @@
             this.label17 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.errorLabel = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.detailReturDataGridView)).BeginInit();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label10
             // 
-            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label10.Location = new System.Drawing.Point(3, 95);
+            this.label10.Location = new System.Drawing.Point(10, 89);
             this.label10.Name = "label10";
             this.label10.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label10.Size = new System.Drawing.Size(99, 29);
@@ -119,11 +114,10 @@
             // 
             // label5
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label5.Location = new System.Drawing.Point(239, 52);
+            this.label5.Location = new System.Drawing.Point(124, 51);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(14, 18);
             this.label5.TabIndex = 20;
@@ -131,36 +125,20 @@
             // 
             // label2
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Location = new System.Drawing.Point(3, 52);
+            this.label2.Location = new System.Drawing.Point(10, 51);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(98, 18);
             this.label2.TabIndex = 7;
             this.label2.Text = "SUPPLIER";
             // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.41026F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.58974F));
-            this.tableLayoutPanel3.Controls.Add(this.supplierHiddenCombo, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.supplierCombo, 0, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(261, 44);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 1;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(624, 35);
-            this.tableLayoutPanel3.TabIndex = 22;
-            // 
             // supplierHiddenCombo
             // 
-            this.supplierHiddenCombo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.supplierHiddenCombo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.supplierHiddenCombo.FormattingEnabled = true;
-            this.supplierHiddenCombo.Location = new System.Drawing.Point(355, 4);
+            this.supplierHiddenCombo.Location = new System.Drawing.Point(496, 46);
             this.supplierHiddenCombo.Name = "supplierHiddenCombo";
             this.supplierHiddenCombo.Size = new System.Drawing.Size(266, 26);
             this.supplierHiddenCombo.TabIndex = 1;
@@ -168,12 +146,11 @@
             // 
             // supplierCombo
             // 
-            this.supplierCombo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.supplierCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.supplierCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.supplierCombo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.supplierCombo.FormattingEnabled = true;
-            this.supplierCombo.Location = new System.Drawing.Point(3, 4);
+            this.supplierCombo.Location = new System.Drawing.Point(144, 46);
             this.supplierCombo.Name = "supplierCombo";
             this.supplierCombo.Size = new System.Drawing.Size(346, 26);
             this.supplierCombo.TabIndex = 0;
@@ -184,65 +161,20 @@
             // 
             // label4
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(239, 11);
+            this.label4.Location = new System.Drawing.Point(124, 16);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(14, 18);
             this.label4.TabIndex = 10;
             this.label4.Text = ":";
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.47287F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.527132F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 639F));
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel6, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label16, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label10, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.totalLabel, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label17, 1, 3);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(2, 35);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(897, 137);
-            this.tableLayoutPanel1.TabIndex = 35;
-            // 
-            // tableLayoutPanel6
-            // 
-            this.tableLayoutPanel6.ColumnCount = 4;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 187F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 253F));
-            this.tableLayoutPanel6.Controls.Add(this.ReturDtPicker_1, 3, 0);
-            this.tableLayoutPanel6.Controls.Add(this.noReturTextBox, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.label18, 2, 0);
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(261, 3);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 1;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(624, 35);
-            this.tableLayoutPanel6.TabIndex = 43;
-            // 
             // ReturDtPicker_1
             // 
             this.ReturDtPicker_1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ReturDtPicker_1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.ReturDtPicker_1.Location = new System.Drawing.Point(373, 3);
+            this.ReturDtPicker_1.Location = new System.Drawing.Point(747, 13);
             this.ReturDtPicker_1.Name = "ReturDtPicker_1";
             this.ReturDtPicker_1.Size = new System.Drawing.Size(144, 27);
             this.ReturDtPicker_1.TabIndex = 41;
@@ -251,22 +183,20 @@
             // 
             // noReturTextBox
             // 
-            this.noReturTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.noReturTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.noReturTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noReturTextBox.Location = new System.Drawing.Point(3, 4);
+            this.noReturTextBox.Location = new System.Drawing.Point(144, 13);
             this.noReturTextBox.Name = "noReturTextBox";
-            this.noReturTextBox.Size = new System.Drawing.Size(162, 27);
+            this.noReturTextBox.Size = new System.Drawing.Size(161, 27);
             this.noReturTextBox.TabIndex = 16;
             this.noReturTextBox.TextChanged += new System.EventHandler(this.noReturTextBox_TextChanged);
             // 
             // label18
             // 
-            this.label18.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label18.Location = new System.Drawing.Point(186, 8);
+            this.label18.Location = new System.Drawing.Point(565, 16);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(176, 18);
             this.label18.TabIndex = 20;
@@ -274,11 +204,10 @@
             // 
             // label16
             // 
-            this.label16.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label16.Location = new System.Drawing.Point(3, 11);
+            this.label16.Location = new System.Drawing.Point(6, 16);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(102, 18);
             this.label16.TabIndex = 41;
@@ -286,11 +215,10 @@
             // 
             // totalLabel
             // 
-            this.totalLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.totalLabel.AutoSize = true;
             this.totalLabel.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.totalLabel.Location = new System.Drawing.Point(261, 95);
+            this.totalLabel.Location = new System.Drawing.Point(144, 89);
             this.totalLabel.Name = "totalLabel";
             this.totalLabel.Size = new System.Drawing.Size(83, 29);
             this.totalLabel.TabIndex = 36;
@@ -298,11 +226,10 @@
             // 
             // label17
             // 
-            this.label17.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label17.Location = new System.Drawing.Point(239, 100);
+            this.label17.Location = new System.Drawing.Point(124, 98);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(14, 18);
             this.label17.TabIndex = 42;
@@ -330,15 +257,35 @@
             this.errorLabel.TabIndex = 43;
             this.errorLabel.Text = "   ";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.totalLabel);
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.label17);
+            this.groupBox1.Controls.Add(this.supplierHiddenCombo);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.supplierCombo);
+            this.groupBox1.Controls.Add(this.ReturDtPicker_1);
+            this.groupBox1.Controls.Add(this.label16);
+            this.groupBox1.Controls.Add(this.label18);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.noReturTextBox);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Location = new System.Drawing.Point(2, 38);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(897, 134);
+            this.groupBox1.TabIndex = 41;
+            this.groupBox1.TabStop = false;
+            // 
             // dataReturPermintaanForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(901, 661);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.saveAndPrintButton);
             this.Controls.Add(this.detailReturDataGridView);
-            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -350,13 +297,10 @@
             this.Deactivate += new System.EventHandler(this.dataReturPermintaanForm_Deactivate);
             this.Load += new System.EventHandler(this.dataReturPermintaanForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.detailReturDataGridView)).EndInit();
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.tableLayoutPanel6.ResumeLayout(false);
-            this.tableLayoutPanel6.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -369,12 +313,9 @@
         private System.Windows.Forms.DataGridView detailReturDataGridView;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label totalLabel;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.TextBox noReturTextBox;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label16;
@@ -383,5 +324,6 @@
         private System.Windows.Forms.DateTimePicker ReturDtPicker_1;
         private System.Windows.Forms.ComboBox supplierHiddenCombo;
         private System.Windows.Forms.Label errorLabel;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

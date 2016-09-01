@@ -248,6 +248,7 @@ namespace RoyalPetz_ADMIN
         private void dataGroupForm_Load(object sender, EventArgs e)
         {
             gutil.reArrangeTabOrder(this);
+            namaGroupTextbox.Select();
         }
 
 		private void AllButton_Click(object sender, EventArgs e)
