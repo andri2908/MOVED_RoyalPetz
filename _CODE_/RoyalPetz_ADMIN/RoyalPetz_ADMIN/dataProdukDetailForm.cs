@@ -867,6 +867,7 @@ namespace RoyalPetz_ADMIN
                 }
 
                 gUtil.ResetAllControls(this);
+                clearUpProductCategory();
 
                 stokAwalTextBox.Text = "0";
                 limitStokTextBox.Text = "0";
