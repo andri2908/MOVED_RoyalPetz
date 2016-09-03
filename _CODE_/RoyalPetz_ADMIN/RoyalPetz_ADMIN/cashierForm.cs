@@ -1440,18 +1440,15 @@ namespace RoyalPetz_ADMIN
 
         private void cashierDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
+            // +=
             if ((cashierDataGridView.CurrentCell.OwningColumn.Name == "productID")
                 && e.Control is TextBox)
             {
                 TextBox productIDTextBox = e.Control as TextBox;
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
-                productIDTextBox.TextChanged -= TextBox_TextChanged;
                 productIDTextBox.PreviewKeyDown += Combobox_previewKeyDown;
                 productIDTextBox.KeyUp += Combobox_KeyUp;
                 productIDTextBox.AutoCompleteMode = AutoCompleteMode.None;
-                //productIDTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                //productIDTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                setTextBoxCustomSource(productIDTextBox);
             }
 
             if ((cashierDataGridView.CurrentCell.OwningColumn.Name == "productName")
@@ -1459,7 +1456,6 @@ namespace RoyalPetz_ADMIN
             {
                 TextBox productNameTextBox = e.Control as TextBox;
                 productNameTextBox.CharacterCasing = CharacterCasing.Upper;
-                productNameTextBox.TextChanged -= TextBox_TextChanged;
                 productNameTextBox.PreviewKeyDown += productName_previewKeyDown;
                 productNameTextBox.KeyUp += Combobox_KeyUp;
                 productNameTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -1467,6 +1463,29 @@ namespace RoyalPetz_ADMIN
                 setTextBoxCustomSource(productNameTextBox);
             }
 
+            if (
+                (cashierDataGridView.CurrentCell.OwningColumn.Name == "productPrice" || cashierDataGridView.CurrentCell.OwningColumn.Name == "qty" || cashierDataGridView.CurrentCell.OwningColumn.Name == "disc1" || cashierDataGridView.CurrentCell.OwningColumn.Name == "disc2" || cashierDataGridView.CurrentCell.OwningColumn.Name == "discRP")
+                && e.Control is TextBox)
+            {
+                TextBox textBox = e.Control as TextBox;
+                textBox.TextChanged += TextBox_TextChanged;
+                textBox.AutoCompleteMode = AutoCompleteMode.None;
+            }
+
+            // -=
+            if ((cashierDataGridView.CurrentCell.OwningColumn.Name == "productID")
+                && e.Control is TextBox)
+            {
+                TextBox productIDTextBox = e.Control as TextBox;
+                productIDTextBox.TextChanged -= TextBox_TextChanged;
+            }
+
+            if ((cashierDataGridView.CurrentCell.OwningColumn.Name == "productName")
+                && e.Control is TextBox)
+            {
+                TextBox productNameTextBox = e.Control as TextBox;
+                productNameTextBox.TextChanged -= TextBox_TextChanged;
+            }
 
             if (
                 (cashierDataGridView.CurrentCell.OwningColumn.Name == "productPrice" || cashierDataGridView.CurrentCell.OwningColumn.Name == "qty" || cashierDataGridView.CurrentCell.OwningColumn.Name == "disc1" || cashierDataGridView.CurrentCell.OwningColumn.Name == "disc2" || cashierDataGridView.CurrentCell.OwningColumn.Name == "discRP")
@@ -1474,8 +1493,6 @@ namespace RoyalPetz_ADMIN
             {
                 TextBox textBox = e.Control as TextBox;
                 textBox.PreviewKeyDown -= Combobox_previewKeyDown;
-                textBox.TextChanged += TextBox_TextChanged;
-                textBox.AutoCompleteMode = AutoCompleteMode.None;
             }
         }
 
@@ -1515,6 +1532,8 @@ namespace RoyalPetz_ADMIN
             string currentProductID = "";
             string currentProductName = "";
             bool changed = false;
+
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : updateSomeRowContents");
 
             if (isProductID)
                 numRow = Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'"));
@@ -1617,6 +1636,8 @@ namespace RoyalPetz_ADMIN
 
         private void Combobox_KeyUp(object sender, KeyEventArgs e)
         {
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [" + cashierDataGridView.CurrentCell.OwningColumn.Name + "]");
+
             if (forceUpOneLevel)
             {
                 int pos = cashierDataGridView.CurrentCell.RowIndex;
@@ -1630,6 +1651,8 @@ namespace RoyalPetz_ADMIN
             string currentValue = "";
             int rowSelectedIndex = 0;
             DataGridViewTextBoxEditingControl dataGridViewComboBoxEditingControl = sender as DataGridViewTextBoxEditingControl;
+
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [" + cashierDataGridView.CurrentCell.OwningColumn.Name + "]");
 
             if (cashierDataGridView.CurrentCell.OwningColumn.Name != "productID")
                 return;
@@ -1658,6 +1681,8 @@ namespace RoyalPetz_ADMIN
             string currentValue = "";
             int rowSelectedIndex = 0;
             DataGridViewTextBoxEditingControl dataGridViewComboBoxEditingControl = sender as DataGridViewTextBoxEditingControl;
+
+            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : productName_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [" + cashierDataGridView.CurrentCell.OwningColumn.Name + "]");
 
             if (cashierDataGridView.CurrentCell.OwningColumn.Name != "productName")
                 return;
