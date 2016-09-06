@@ -13,6 +13,7 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Globalization;
 using System.Drawing.Printing;
+using System.Reflection;
 
 namespace RoyalPetz_ADMIN
 {
@@ -624,6 +625,9 @@ namespace RoyalPetz_ADMIN
 
         private void addNewRow(bool isActive = true)
         {
+            //prevent blink
+            cashierDataGridView.SuspendLayout();
+
             int prevValue = 0;
             bool allowToAdd = true;
             int newRowIndex = 0;
@@ -654,6 +658,7 @@ namespace RoyalPetz_ADMIN
             {
                 if (cashierDataGridView.Rows.Count > 0)
                     prevValue = Convert.ToInt32(cashierDataGridView.Rows[cashierDataGridView.Rows.Count - 1].Cells["F8"].Value);
+                
 
                 cashierDataGridView.Rows.Add();
 
@@ -685,6 +690,8 @@ namespace RoyalPetz_ADMIN
                 cashierDataGridView.Focus();
                 cashierDataGridView.CurrentCell = cashierDataGridView.Rows[newRowIndex].Cells["productID"];
             }
+            //prevent blink
+            cashierDataGridView.ResumeLayout();
         }
 
         public void addNewRowFromBarcode(string productID, string productName)
@@ -1446,6 +1453,7 @@ namespace RoyalPetz_ADMIN
             {
                 TextBox productIDTextBox = e.Control as TextBox;
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
+                productIDTextBox.KeyPress += TextBox_KeyPress;
                 productIDTextBox.PreviewKeyDown += Combobox_previewKeyDown;
                 productIDTextBox.KeyUp += Combobox_KeyUp;
                 productIDTextBox.AutoCompleteMode = AutoCompleteMode.None;
@@ -1456,6 +1464,7 @@ namespace RoyalPetz_ADMIN
             {
                 TextBox productNameTextBox = e.Control as TextBox;
                 productNameTextBox.CharacterCasing = CharacterCasing.Upper;
+                productNameTextBox.KeyPress += TextBox_KeyPress;
                 productNameTextBox.PreviewKeyDown += productName_previewKeyDown;
                 productNameTextBox.KeyUp += Combobox_KeyUp;
                 productNameTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -1468,10 +1477,14 @@ namespace RoyalPetz_ADMIN
                 && e.Control is TextBox)
             {
                 TextBox textBox = e.Control as TextBox;
+                textBox.KeyPress += TextBox_KeyPress;
+                textBox.KeyDown += TextBox_KeyDown;
+                textBox.KeyUp += TextBox_KeyUp;
                 textBox.TextChanged += TextBox_TextChanged;
                 textBox.AutoCompleteMode = AutoCompleteMode.None;
             }
 
+            /*
             // -=
             if ((cashierDataGridView.CurrentCell.OwningColumn.Name == "productID")
                 && e.Control is TextBox)
@@ -1494,10 +1507,14 @@ namespace RoyalPetz_ADMIN
                 TextBox textBox = e.Control as TextBox;
                 textBox.PreviewKeyDown -= Combobox_previewKeyDown;
             }
+            */
         }
 
         private void clearUpSomeRowContents(DataGridViewRow selectedRow, int rowSelectedIndex)
         {
+            //prevent blink
+            cashierDataGridView.SuspendLayout();
+
             selectedRow.Cells["productName"].Value = "";
             selectedRow.Cells["hpp"].Value = "0";
             selectedRow.Cells["productPrice"].Value = "0";
@@ -1518,10 +1535,16 @@ namespace RoyalPetz_ADMIN
             jumlahList[rowSelectedIndex] = "0";
 
             calculateTotal();
+
+            //prevent blink
+            cashierDataGridView.ResumeLayout();
         }
 
         private void updateSomeRowContents(DataGridViewRow selectedRow, int rowSelectedIndex, string currentValue, bool isProductID = true)
         {
+            //prevent blink
+            cashierDataGridView.SuspendLayout();
+
             int numRow = 0;
             string selectedProductID = "";
             string selectedProductName = "";
@@ -1632,6 +1655,9 @@ namespace RoyalPetz_ADMIN
             {
                 clearUpSomeRowContents(selectedRow, rowSelectedIndex);
             }
+
+            //prevent blink
+            cashierDataGridView.ResumeLayout();
         }
 
         private void Combobox_KeyUp(object sender, KeyEventArgs e)
@@ -1644,10 +1670,18 @@ namespace RoyalPetz_ADMIN
                 cashierDataGridView.CurrentCell = cashierDataGridView.Rows[pos - 1].Cells["qty"];
                 forceUpOneLevel = false;
             }
+            //blink prevention
+            if (e.KeyCode == Keys.Enter)
+            {
+                cashierDataGridView.ResumeLayout();
+            }
         }
 
         private void Combobox_previewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
+            //blink prevention
+            cashierDataGridView.SuspendLayout();
+
             string currentValue = "";
             int rowSelectedIndex = 0;
             DataGridViewTextBoxEditingControl dataGridViewComboBoxEditingControl = sender as DataGridViewTextBoxEditingControl;
@@ -1676,6 +1710,25 @@ namespace RoyalPetz_ADMIN
             }
         }
 
+
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            //blink prevention
+            cashierDataGridView.ResumeLayout();
+        }
+
+        private void TextBox_KeyDown(Object o, KeyEventArgs e)
+        {
+            //blink prevention
+            cashierDataGridView.SuspendLayout();
+        }
+
+        private void TextBox_KeyPress(Object o, KeyPressEventArgs e)
+        {
+            //blink prevention
+            cashierDataGridView.SuspendLayout();
+        }
+        
         private void productName_previewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             string currentValue = "";
@@ -2022,6 +2075,9 @@ namespace RoyalPetz_ADMIN
                 discJualMaskedTextBox.ReadOnly = true;
                 bayarTextBox.ReadOnly = true;     
             }
+
+            //add double buffer
+            typeof(Control).GetProperty("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(cashierDataGridView, true, null);
         }
 
         private void cashierForm_Activated(object sender, EventArgs e)
@@ -2915,6 +2971,7 @@ namespace RoyalPetz_ADMIN
 
         private void cashierDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
+
             updateRowNumber();
 
             //if (cashierDataGridView.Rows.Count > 0)
