@@ -197,9 +197,12 @@
             this.cashierDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.cashierDataGridView.Size = new System.Drawing.Size(983, 334);
             this.cashierDataGridView.TabIndex = 8;
+            this.cashierDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.cashierDataGridView_CellBeginEdit);
+            this.cashierDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.cashierDataGridView_CellEndEdit);
             this.cashierDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.cashierDataGridView_CellFormatting);
             this.cashierDataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.cashierDataGridView_CellValidated);
             this.cashierDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.cashierDataGridView_CellValueChanged);
+            this.cashierDataGridView.CurrentCellDirtyStateChanged += new System.EventHandler(this.cashierDataGridView_CurrentCellDirtyStateChanged);
             this.cashierDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.cashierDataGridView_RowsAdded);
             this.cashierDataGridView.Enter += new System.EventHandler(this.cashierDataGridView_Enter);
             this.cashierDataGridView.Leave += new System.EventHandler(this.cashierDataGridView_Leave);

@@ -1,0 +1,229 @@
+[] [9/7/2016 14:07] [] USER = ADMIN IS ACTIVE
+[ADMIN] [9/7/2016 14:07] [] USER ID = 1 LOGIN SUCCESSFULLY
+[ADMIN] [9/7/2016 14:07] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [9/7/2016 14:07] [] DISPLAY ADMIN FORM
+[ADMIN] [9/7/2016 14:07] [] adminForm Load
+[ADMIN] [9/7/2016 14:07] [] ACTIVATE USER ACCESS RIGHT
+[] [9/7/2016 14:08] [] USER = ADMIN IS ACTIVE
+[ADMIN] [9/7/2016 14:08] [] USER ID = 1 LOGIN SUCCESSFULLY
+[ADMIN] [9/7/2016 14:08] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [9/7/2016 14:08] [] DISPLAY ADMIN FORM
+[ADMIN] [9/7/2016 14:08] [] adminForm Load
+[ADMIN] [9/7/2016 14:08] [] ACTIVATE USER ACCESS RIGHT
+[] [9/7/2016 14:50] [] USER = ADMIN IS ACTIVE
+[ADMIN] [9/7/2016 14:50] [] USER ID = 1 LOGIN SUCCESSFULLY
+[ADMIN] [9/7/2016 14:50] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [9/7/2016 14:50] [] DISPLAY ADMIN FORM
+[ADMIN] [9/7/2016 14:50] [] adminForm Load
+[ADMIN] [9/7/2016 14:50] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [9/7/2016 14:50] [PENJUALAN] CASHIER FORM : MULTIPLE CASHIER INSTANCE [1]
+[ADMIN] [9/7/2016 14:50] [PENJUALAN] CASHIER FORM : REGISTER HOTKEY
+[ADMIN] [9/7/2016 14:50] [PENJUALAN] CASHIER FORM : cashierForm_Load, ATTEMPT TO LOAD NO FAKTUR
+[ADMIN] [9/7/2016 14:50] [PENJUALAN] CASHIER FORM : loadNoFaktur, noFakturValue [SLO001]
+[ADMIN] [9/7/2016 14:50] [PENJUALAN] CASHIER FORM : cashierForm_Load, ATTEMPT TO addColumnToDataGrid
+[ADMIN] [9/7/2016 14:50] [PENJUALAN] CASHIER FORM : UPDATE ROW NUMBER, TOTAL ROW [1]
+[ADMIN] [9/7/2016 14:50] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [F8]
+[ADMIN] [9/7/2016 14:50] [PENJUALAN] CASHIER FORM : calculateTotal
+[ADMIN] [9/7/2016 14:50] [PENJUALAN] CASHIER FORM : calculateTotal [0]
+[ADMIN] [9/7/2016 14:50] [PENJUALAN] CASHIER FORM : calculateTotal, totalAfterDisc [0]
+[ADMIN] [9/7/2016 14:50] [PENJUALAN] CASHIER FORM : calculateChangeValue, bayarTextBox.Text [0]
+[ADMIN] [9/7/2016 14:50] [PENJUALAN] CASHIER FORM : calculateChangeValue, sisaBayar [0]
+[ADMIN] [9/7/2016 14:50] [PENJUALAN] CASHIER FORM : REGISTER HOTKEY
+[ADMIN] [9/7/2016 14:50] [PENJUALAN] CASHIER FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [9/7/2016 14:50] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [9/7/2016 14:50] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [9/7/2016 14:50] [PENJUALAN] CASHIER FORM : UNREGISTER HOTKEY
+[ADMIN] [9/7/2016 14:50] [PENJUALAN] CASHIER FORM : UNREGISTER HOTKEY
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productID]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productName]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productPrice]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [SOqty]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [disc1]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [disc2]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [discRP]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productID]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productName]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productID]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] updateSomeRowsContent, PRODUCT_BASE_PRICE [34000]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productPrice]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] updateSomeRowsContent, attempt to calculate total
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [SOqty]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [disc1]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [disc2]
+[ADMIN] [9/7/2016 14:50] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [discRP]
+[ADMIN] [9/7/2016 14:51] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 14:51] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 14:51] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 14:51] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 14:51] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 14:51] [RETUR PENJUALAN] SALES PAID STATUS [1]
+[ADMIN] [9/7/2016 14:51] [RETUR PENJUALAN] ATTEMPT TO SAVE DATA
+[] [9/7/2016 14:54] [] USER = ADMIN IS ACTIVE
+[ADMIN] [9/7/2016 14:54] [] USER ID = 1 LOGIN SUCCESSFULLY
+[ADMIN] [9/7/2016 14:54] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [9/7/2016 14:54] [] DISPLAY ADMIN FORM
+[ADMIN] [9/7/2016 14:54] [] adminForm Load
+[ADMIN] [9/7/2016 14:54] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productName]
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productID]
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] updateSomeRowsContent, PRODUCT_BASE_PRICE [34000]
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productPrice]
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] updateSomeRowsContent, attempt to calculate total
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [SOqty]
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [disc1]
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [disc2]
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [discRP]
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] SALES PAID STATUS [1]
+[ADMIN] [9/7/2016 14:54] [RETUR PENJUALAN] ATTEMPT TO SAVE DATA
+[] [9/7/2016 14:59] [] USER = ADMIN IS ACTIVE
+[ADMIN] [9/7/2016 14:59] [] USER ID = 1 LOGIN SUCCESSFULLY
+[ADMIN] [9/7/2016 14:59] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [9/7/2016 14:59] [] DISPLAY ADMIN FORM
+[ADMIN] [9/7/2016 14:59] [] adminForm Load
+[ADMIN] [9/7/2016 14:59] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productName]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productName]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productPrice]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [SOqty]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [disc1]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [disc2]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [discRP]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productName]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productName]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productName]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productID]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] updateSomeRowsContent, PRODUCT_BASE_PRICE [34000]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productPrice]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] updateSomeRowsContent, attempt to calculate total
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [SOqty]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [disc1]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [disc2]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [discRP]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] SALES PAID STATUS [1]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] ATTEMPT TO SAVE DATA
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] INSERT INTO RETURN SALES HEADER [RT-2]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] INSERT INTO RETURN SALES DETAIL [ALPO-P1, 34000, 1, 1]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] UPDATE MASTER PRODUCT QTY [ALPO-P1]
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] CHECK FOR ANY OUTSTANDING AMOUNT FOR THE INVOICE
+[ADMIN] [9/7/2016 14:59] [RETUR PENJUALAN] selectedCreditID [5]
+[] [9/7/2016 15:02] [] USER = ADMIN IS ACTIVE
+[ADMIN] [9/7/2016 15:02] [] USER ID = 1 LOGIN SUCCESSFULLY
+[ADMIN] [9/7/2016 15:02] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [9/7/2016 15:02] [] DISPLAY ADMIN FORM
+[ADMIN] [9/7/2016 15:02] [] adminForm Load
+[ADMIN] [9/7/2016 15:02] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productName]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productName]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productPrice]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [SOqty]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [disc1]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [disc2]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [discRP]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productName]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productName]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productName]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productID]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] updateSomeRowsContent, PRODUCT_BASE_PRICE [34000]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productPrice]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] updateSomeRowsContent, attempt to calculate total
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [SOqty]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [disc1]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [disc2]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [discRP]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] SALES PAID STATUS [1]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] ATTEMPT TO SAVE DATA
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] INSERT INTO RETURN SALES HEADER [RT-2]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] INSERT INTO RETURN SALES DETAIL [ALPO-P1, 34000, 1, 1]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] UPDATE MASTER PRODUCT QTY [ALPO-P1]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] CHECK FOR ANY OUTSTANDING AMOUNT FOR THE INVOICE
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] selectedCreditID [5]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR VALUE LESS THAN OR EQUAL TOTAL CREDIT
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] INSERT INTO PAYMENT CREDIT [5, 34000]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR VALUE BIGGER THAN TOTAL CREDIT VALUE, MEANS FULLY PAID
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] UPDATE SALES HEADER [SLO001-5]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] UPDATE SALES HEADER TAX [SLO001-5]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] UPDATE CREDIT [5]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] printDocument1_PrintPage, print POS size receipt
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] loadInfoToko
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] calculatePageLength, totalLengthPage [373]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] printDocument1_PrintPage, print POS size receipt
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] loadInfoToko
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] CASHIER FORM : loadNamaUser
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productName]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productName]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productPrice]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [SOqty]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [disc1]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [disc2]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [discRP]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productName]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productName]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productName]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productID]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] updateSomeRowsContent, PRODUCT_BASE_PRICE [34000]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [productPrice]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [subtotal]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] updateSomeRowsContent, attempt to calculate total
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [SOqty]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [disc1]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [disc2]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] RETUR PENJUALAN : detailReturDataGridView_CellValueChanged [discRP]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] SALES PAID STATUS [1]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] ATTEMPT TO SAVE DATA
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] dataValidated [NO RETUR TIDAK BOLEH KOSONG]
+[ADMIN] [9/7/2016 15:02] [RETUR PENJUALAN] FAILED TO SAVE
+[ADMIN] [9/7/2016 15:03] [RETUR PENJUALAN] SALES PAID STATUS [1]
+[ADMIN] [9/7/2016 15:03] [RETUR PENJUALAN] ATTEMPT TO SAVE DATA
+[ADMIN] [9/7/2016 15:03] [RETUR PENJUALAN] dataValidated [NILAI RETUR 0]
+[ADMIN] [9/7/2016 15:03] [RETUR PENJUALAN] FAILED TO SAVE
+[ADMIN] [9/7/2016 15:03] [] USER ID = 1LOGOUT

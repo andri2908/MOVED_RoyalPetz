@@ -130,7 +130,7 @@ namespace RoyalPetz_ADMIN
                     pelangganComboHidden.Items.Clear();
                     while (rdr.Read())
                     {
-                        pelangganCombo.Items.Add(rdr.GetString("NAMA PELANGGAN"));
+                        pelangganCombo.Items.Add(rdr.GetString("CUSTOMER_FULL_NAME"));
                         pelangganComboHidden.Items.Add(rdr.GetString("CUSTOMER_ID"));
                     }
                 }
