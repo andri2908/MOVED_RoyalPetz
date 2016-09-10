@@ -197,7 +197,7 @@
             this.tableLayoutPanel4.ColumnCount = 3;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 79.32584F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.67416F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 154F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 155F));
             this.tableLayoutPanel4.Controls.Add(this.durationTextBox, 2, 0);
             this.tableLayoutPanel4.Controls.Add(this.label1, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.supplierCombo, 0, 0);
@@ -212,7 +212,7 @@
             // 
             this.durationTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.durationTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.durationTextBox.Location = new System.Drawing.Point(472, 5);
+            this.durationTextBox.Location = new System.Drawing.Point(471, 5);
             this.durationTextBox.Mask = "000";
             this.durationTextBox.Name = "durationTextBox";
             this.durationTextBox.Size = new System.Drawing.Size(54, 27);
@@ -325,7 +325,7 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.38756F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.61244F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 233F));
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 211F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 212F));
             this.tableLayoutPanel6.Controls.Add(this.prInvoiceTextBox, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.label11, 2, 0);
             this.tableLayoutPanel6.Controls.Add(this.PRDtPicker, 3, 0);
@@ -343,7 +343,7 @@
             this.prInvoiceTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.prInvoiceTextBox.Location = new System.Drawing.Point(3, 4);
             this.prInvoiceTextBox.Name = "prInvoiceTextBox";
-            this.prInvoiceTextBox.Size = new System.Drawing.Size(158, 27);
+            this.prInvoiceTextBox.Size = new System.Drawing.Size(157, 27);
             this.prInvoiceTextBox.TabIndex = 16;
             this.prInvoiceTextBox.TextChanged += new System.EventHandler(this.prInvoiceTextBox_TextChanged);
             // 
@@ -353,7 +353,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label11.Location = new System.Drawing.Point(182, 8);
+            this.label11.Location = new System.Drawing.Point(181, 8);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(224, 18);
             this.label11.TabIndex = 20;
@@ -363,7 +363,7 @@
             // 
             this.PRDtPicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PRDtPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.PRDtPicker.Location = new System.Drawing.Point(415, 3);
+            this.PRDtPicker.Location = new System.Drawing.Point(414, 3);
             this.PRDtPicker.Name = "PRDtPicker";
             this.PRDtPicker.Size = new System.Drawing.Size(147, 27);
             this.PRDtPicker.TabIndex = 39;
@@ -375,7 +375,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.54545F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 132F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 186F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 99F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel2.Controls.Add(this.searchMutasiButton, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.searchPOButton, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.noInvoiceTextBox, 0, 0);
@@ -393,7 +393,7 @@
             this.searchMutasiButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.searchMutasiButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("searchMutasiButton.BackgroundImage")));
             this.searchMutasiButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.searchMutasiButton.Location = new System.Drawing.Point(527, 5);
+            this.searchMutasiButton.Location = new System.Drawing.Point(526, 5);
             this.searchMutasiButton.Name = "searchMutasiButton";
             this.searchMutasiButton.Size = new System.Drawing.Size(24, 24);
             this.searchMutasiButton.TabIndex = 49;
@@ -405,7 +405,7 @@
             this.searchPOButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.searchPOButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("searchPOButton.BackgroundImage")));
             this.searchPOButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.searchPOButton.Location = new System.Drawing.Point(169, 5);
+            this.searchPOButton.Location = new System.Drawing.Point(168, 5);
             this.searchPOButton.Name = "searchPOButton";
             this.searchPOButton.Size = new System.Drawing.Size(24, 24);
             this.searchPOButton.TabIndex = 49;
@@ -420,7 +420,7 @@
             this.noInvoiceTextBox.Location = new System.Drawing.Point(3, 4);
             this.noInvoiceTextBox.Name = "noInvoiceTextBox";
             this.noInvoiceTextBox.ReadOnly = true;
-            this.noInvoiceTextBox.Size = new System.Drawing.Size(160, 27);
+            this.noInvoiceTextBox.Size = new System.Drawing.Size(159, 27);
             this.noInvoiceTextBox.TabIndex = 16;
             // 
             // labelTanggal
@@ -429,7 +429,7 @@
             this.labelTanggal.AutoSize = true;
             this.labelTanggal.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTanggal.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.labelTanggal.Location = new System.Drawing.Point(209, 8);
+            this.labelTanggal.Location = new System.Drawing.Point(208, 8);
             this.labelTanggal.Name = "labelTanggal";
             this.labelTanggal.Size = new System.Drawing.Size(122, 18);
             this.labelTanggal.TabIndex = 20;
@@ -440,7 +440,7 @@
             this.noMutasiTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.noMutasiTextBox.Enabled = false;
             this.noMutasiTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noMutasiTextBox.Location = new System.Drawing.Point(341, 4);
+            this.noMutasiTextBox.Location = new System.Drawing.Point(340, 4);
             this.noMutasiTextBox.Name = "noMutasiTextBox";
             this.noMutasiTextBox.ReadOnly = true;
             this.noMutasiTextBox.Size = new System.Drawing.Size(172, 27);
@@ -543,8 +543,12 @@
             this.detailGridView.RowHeadersVisible = false;
             this.detailGridView.Size = new System.Drawing.Size(979, 299);
             this.detailGridView.TabIndex = 47;
+            this.detailGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.detailGridView_CellBeginEdit);
+            this.detailGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailGridView_CellEndEdit);
             this.detailGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.detailGridView_CellFormatting);
             this.detailGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailGridView_CellValidated);
+            this.detailGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailGridView_CellValueChanged);
+            this.detailGridView.CurrentCellDirtyStateChanged += new System.EventHandler(this.detailGridView_CurrentCellDirtyStateChanged);
             this.detailGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.detailGridView_RowsAdded);
             this.detailGridView.Enter += new System.EventHandler(this.detailGridView_Enter);
             this.detailGridView.Leave += new System.EventHandler(this.detailGridView_Leave);

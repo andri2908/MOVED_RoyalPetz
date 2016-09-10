@@ -503,8 +503,12 @@
             this.detailRequestOrderDataGridView.RowHeadersVisible = false;
             this.detailRequestOrderDataGridView.Size = new System.Drawing.Size(888, 308);
             this.detailRequestOrderDataGridView.TabIndex = 32;
+            this.detailRequestOrderDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.detailRequestOrderDataGridView_CellBeginEdit);
+            this.detailRequestOrderDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailRequestOrderDataGridView_CellEndEdit);
             this.detailRequestOrderDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.detailRequestOrderDataGridView_CellFormatting);
             this.detailRequestOrderDataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailRequestOrderDataGridView_CellValidated);
+            this.detailRequestOrderDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailRequestOrderDataGridView_CellValueChanged);
+            this.detailRequestOrderDataGridView.CurrentCellDirtyStateChanged += new System.EventHandler(this.detailRequestOrderDataGridView_CurrentCellDirtyStateChanged);
             this.detailRequestOrderDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.detailRequestOrderDataGridView_RowsAdded);
             this.detailRequestOrderDataGridView.Enter += new System.EventHandler(this.detailRequestOrderDataGridView_Enter);
             this.detailRequestOrderDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.detailRequestOrderDataGridView_KeyDown);

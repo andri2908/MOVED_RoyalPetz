@@ -573,11 +573,18 @@ namespace RoyalPetz_ADMIN
 
         private void detailReturDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
+            if ((detailReturDataGridView.CurrentCell.OwningColumn.Name == "productID") && e.Control is TextBox)
+            {
+                TextBox productIDTextBox = e.Control as TextBox;
+                productIDTextBox.PreviewKeyDown += TextBox_previewKeyDown;
+                productIDTextBox.CharacterCasing = CharacterCasing.Upper;
+                productIDTextBox.AutoCompleteMode = AutoCompleteMode.None;
+            }
+
             if ((detailReturDataGridView.CurrentCell.OwningColumn.Name == "productName") && e.Control is TextBox)
             {
                 TextBox productIDTextBox = e.Control as TextBox;
-                productIDTextBox.TextChanged -= TextBox_TextChanged;
-                productIDTextBox.PreviewKeyDown += TextBox_previewKeyDown;
+                productIDTextBox.PreviewKeyDown += productName_previewKeyDown;
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
                 productIDTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 productIDTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
@@ -726,6 +733,33 @@ namespace RoyalPetz_ADMIN
                 if (currentValue.Length > 0)
                 {
                     updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
+                    detailReturDataGridView.CurrentCell = selectedRow.Cells["qty"];
+                }
+                else
+                {
+                    clearUpSomeRowContents(selectedRow, rowSelectedIndex);
+                }
+            }
+        }
+
+        private void productName_previewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            string currentValue = "";
+            int rowSelectedIndex = 0;
+            DataGridViewTextBoxEditingControl dataGridViewComboBoxEditingControl = sender as DataGridViewTextBoxEditingControl;
+
+            if (detailReturDataGridView.CurrentCell.OwningColumn.Name != "productName")
+                return;
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                currentValue = dataGridViewComboBoxEditingControl.Text;
+                rowSelectedIndex = detailReturDataGridView.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = detailReturDataGridView.Rows[rowSelectedIndex];
+
+                if (currentValue.Length > 0)
+                {
+                    updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue, false);
                     detailReturDataGridView.CurrentCell = selectedRow.Cells["qty"];
                 }
                 else

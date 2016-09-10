@@ -445,14 +445,14 @@ namespace RoyalPetz_ADMIN
             string[] arr = null;
             List<string> arrList = new List<string>();
 
-            sqlCommand = "SELECT PRODUCT_ID FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1";
+            sqlCommand = "SELECT PRODUCT_NAME FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1";
             rdr = DS.getData(sqlCommand);
 
             if (rdr.HasRows)
             {
                 while (rdr.Read())
                 {
-                    arrList.Add(rdr.GetString("PRODUCT_ID"));
+                    arrList.Add(rdr.GetString("PRODUCT_NAME"));
                 }
                 AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
                 arr = arrList.ToArray();
@@ -469,8 +469,19 @@ namespace RoyalPetz_ADMIN
             if ((detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name == "productID") && e.Control is TextBox)
             {
                 TextBox productIDTextBox = e.Control as TextBox;
-                productIDTextBox.TextChanged -= TextBox_TextChanged;
+                //productIDTextBox.TextChanged -= TextBox_TextChanged;
                 productIDTextBox.PreviewKeyDown += TextBox_previewKeyDown;
+                productIDTextBox.CharacterCasing = CharacterCasing.Upper;
+                productIDTextBox.AutoCompleteMode = AutoCompleteMode.None;
+                //productIDTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                //setTextBoxCustomSource(productIDTextBox);
+            }
+
+            if ((detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name == "productName") && e.Control is TextBox)
+            {
+                TextBox productIDTextBox = e.Control as TextBox;
+                //productIDTextBox.TextChanged -= TextBox_TextChanged;
+                productIDTextBox.PreviewKeyDown += productName_previewKeyDown;
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
                 productIDTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 productIDTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
@@ -480,7 +491,7 @@ namespace RoyalPetz_ADMIN
             if (detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name == "qty" && e.Control is TextBox)
             {
                 TextBox textBox = e.Control as TextBox;
-                textBox.TextChanged += TextBox_TextChanged;
+                //textBox.TextChanged += TextBox_TextChanged;
                 textBox.PreviewKeyDown -= TextBox_previewKeyDown;
                 textBox.AutoCompleteMode = AutoCompleteMode.None;
             }
@@ -499,7 +510,7 @@ namespace RoyalPetz_ADMIN
             isLoading = false;
         }
 
-        private void updateSomeRowContents(DataGridViewRow selectedRow, int rowSelectedIndex, string currentValue)
+        private void updateSomeRowContents(DataGridViewRow selectedRow, int rowSelectedIndex, string currentValue, bool isProductID = true)
         {
             int numRow = 0;
             string selectedProductID = "";
@@ -510,19 +521,31 @@ namespace RoyalPetz_ADMIN
             string currentProductName = "";
             bool changed = false;
 
-            numRow = Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'"));
+            //numRow = Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'"));
+
+            if (isProductID)
+                numRow = Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'"));
+            else
+                numRow = Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_NAME = '" + currentValue + "'"));
 
             if (numRow > 0)
             {
-                selectedProductID = currentValue;
+                if (isProductID)
+                {
+                    selectedProductID = currentValue;
+                    selectedProductName = DS.getDataSingleValue("SELECT IFNULL(PRODUCT_NAME,'') FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'").ToString();
+                }
+                else
+                {
+                    selectedProductName = currentValue;
+                    selectedProductID = DS.getDataSingleValue("SELECT IFNULL(PRODUCT_ID,'') FROM MASTER_PRODUCT WHERE PRODUCT_NAME = '" + currentValue + "'").ToString();
+                }
 
                 if (null != selectedRow.Cells["productID"].Value)
                     currentProductID = selectedRow.Cells["productID"].Value.ToString();
 
                 if (null != selectedRow.Cells["productName"].Value)
                     currentProductName = selectedRow.Cells["productName"].Value.ToString();
-
-                selectedProductName = DS.getDataSingleValue("SELECT IFNULL(PRODUCT_NAME,'') FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'").ToString();
 
                 selectedRow.Cells["productId"].Value = selectedProductID;
                 selectedRow.Cells["productName"].Value = selectedProductName;
@@ -573,6 +596,33 @@ namespace RoyalPetz_ADMIN
                 if (currentValue.Length > 0)
                 {
                     updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
+                    detailRequestOrderDataGridView.CurrentCell = selectedRow.Cells["qty"];
+                }
+                else
+                {
+                    clearUpSomeRowContents(selectedRow, rowSelectedIndex);
+                }
+            }
+        }
+
+        private void productName_previewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            string currentValue = "";
+            int rowSelectedIndex = 0;
+            DataGridViewTextBoxEditingControl dataGridViewComboBoxEditingControl = sender as DataGridViewTextBoxEditingControl;
+
+            if (detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name != "productName")
+                return;
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                currentValue = dataGridViewComboBoxEditingControl.Text;
+                rowSelectedIndex = detailRequestOrderDataGridView.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[rowSelectedIndex];
+
+                if (currentValue.Length > 0)
+                {
+                    updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue, false);
                     detailRequestOrderDataGridView.CurrentCell = selectedRow.Cells["qty"];
                 }
                 else
@@ -1594,26 +1644,26 @@ namespace RoyalPetz_ADMIN
 
         private void detailRequestOrderDataGridView_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
-            var cell = detailRequestOrderDataGridView[e.ColumnIndex, e.RowIndex];
-            DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[e.RowIndex];
+            //var cell = detailRequestOrderDataGridView[e.ColumnIndex, e.RowIndex];
+            //DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[e.RowIndex];
 
-            if (isLoading == true)
-                return;
+            //if (isLoading == true)
+            //    return;
 
-            if (cell.OwningColumn.Name == "productID")
-            {
-                if (null != cell.Value)
-                {
-                    if (cell.Value.ToString().Length > 0)
-                    {
-                        updateSomeRowContents(selectedRow, e.RowIndex, cell.Value.ToString());
-                    }
-                    else
-                    {
-                        clearUpSomeRowContents(selectedRow, e.RowIndex);
-                    }
-                }
-            }
+            //if (cell.OwningColumn.Name == "productID")
+            //{
+            //    if (null != cell.Value)
+            //    {
+            //        if (cell.Value.ToString().Length > 0)
+            //        {
+            //            updateSomeRowContents(selectedRow, e.RowIndex, cell.Value.ToString());
+            //        }
+            //        else
+            //        {
+            //            clearUpSomeRowContents(selectedRow, e.RowIndex);
+            //        }
+            //    }
+            //}
 
         }
 
@@ -1666,6 +1716,138 @@ namespace RoyalPetz_ADMIN
         private void genericControl_Leave(object sender, EventArgs e)
         {
             registerNavigationKey();
+        }
+
+        private void detailRequestOrderDataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            detailRequestOrderDataGridView.SuspendLayout();
+        }
+
+        private void detailRequestOrderDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            detailRequestOrderDataGridView.ResumeLayout();
+        }
+
+        private void detailRequestOrderDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = detailRequestOrderDataGridView[e.ColumnIndex, e.RowIndex];
+            int rowSelectedIndex = 0;
+
+            double subTotal = 0;
+            double productQty = 0;
+            double hppValue = 0;
+            string tempString;
+            string cellValue = "";
+            string columnName = "";
+
+            columnName = cell.OwningColumn.Name;
+            gUtil.saveSystemDebugLog(globalConstants.MENU_REQUEST_ORDER, "REQUEST ORDER : detailRequestOrderDataGridView_CellValueChanged [" + columnName + "]");
+
+            rowSelectedIndex = e.RowIndex;
+            DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[rowSelectedIndex];
+
+            if (null != selectedRow.Cells[columnName].Value)
+                cellValue = selectedRow.Cells[columnName].Value.ToString();
+            else
+                cellValue = "";
+
+            if (cell.OwningColumn.Name == "productName")
+            {
+                if (cellValue.Length > 0)
+                {
+                    updateSomeRowContents(selectedRow, rowSelectedIndex, cellValue, false);
+                    //int pos = cashierDataGridView.CurrentCell.RowIndex;
+
+                    //if (pos > 0)
+                    //    cashierDataGridView.CurrentCell = cashierDataGridView.Rows[pos - 1].Cells["qty"];
+
+                    //forceUpOneLevel = true;
+                }
+            }
+            else if (detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name == "qty")
+            { 
+                if (cellValue.Length <= 0)
+                {
+                    // IF TEXTBOX IS EMPTY, DEFAULT THE VALUE TO 0 AND EXIT THE CHECKING
+                    isLoading = true;
+                    // reset subTotal Value and recalculate total
+                    selectedRow.Cells["subTotal"].Value = 0;
+
+                    if (detailRequestQty.Count >= rowSelectedIndex + 1)
+                        detailRequestQty[rowSelectedIndex] = "0";
+
+                    selectedRow.Cells["qty"].Value = "0";
+
+                    calculateTotal();
+
+                    return;
+                }
+
+                if (detailRequestQty.Count >= rowSelectedIndex + 1)
+                    previousInput = detailRequestQty[rowSelectedIndex];
+                else
+                    previousInput = "0";
+
+                isLoading = true;
+                if (previousInput == "0")
+                {
+                    tempString = cellValue;
+                    if (tempString.IndexOf('0') == 0 && tempString.Length > 1 && tempString.IndexOf("0.") < 0)
+                        selectedRow.Cells["qty"].Value = tempString.Remove(tempString.IndexOf('0'), 1);
+                }
+
+                if (detailRequestQty.Count < rowSelectedIndex + 1)
+                {
+                    if (gUtil.matchRegEx(cellValue, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
+                        && (cellValue.Length > 0))
+                    {
+                        detailRequestQty.Add(cellValue);
+                    }
+                    else
+                    {
+                        selectedRow.Cells["qty"].Value = previousInput;
+                    }
+                }
+                else
+                {
+                    if (gUtil.matchRegEx(cellValue, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
+                        && (cellValue.Length > 0))
+                    {
+                        detailRequestQty[rowSelectedIndex] = cellValue;
+                    }
+                    else
+                    {
+                        selectedRow.Cells["qty"].Value = detailRequestQty[rowSelectedIndex];
+                    }
+                }
+
+                try
+                {
+                    productQty = Convert.ToDouble(cellValue);
+
+                    if (null != selectedRow.Cells["hpp"].Value)
+                    {
+                        hppValue = Convert.ToDouble(selectedRow.Cells["hpp"].Value);
+                        subTotal = Math.Round((hppValue * productQty), 2);
+
+                        selectedRow.Cells["subTotal"].Value = subTotal;
+                    }
+
+                    calculateTotal();
+                }
+                catch (Exception ex)
+                {
+                    //dataGridViewTextBoxEditingControl.Text = previousInput;
+                }
+            }
+        }
+
+        private void detailRequestOrderDataGridView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (detailRequestOrderDataGridView.IsCurrentCellDirty)
+            {
+                detailRequestOrderDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
         }
     }
 }

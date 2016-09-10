@@ -644,7 +644,7 @@ namespace RoyalPetz_ADMIN
 
             namaProduct_textBox.Name = "productName";
             namaProduct_textBox.HeaderText = "NAMA PRODUK";
-            namaProduct_textBox.ReadOnly = true;
+            namaProduct_textBox.DefaultCellStyle.BackColor = Color.LightBlue;
             namaProduct_textBox.Width = 200;
             detailGridView.Columns.Add(namaProduct_textBox);
 
@@ -744,14 +744,14 @@ namespace RoyalPetz_ADMIN
             string[] arr = null;
             List<string> arrList = new List<string>();
 
-            sqlCommand = "SELECT PRODUCT_ID FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1";
+            sqlCommand = "SELECT PRODUCT_NAME FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1";
             rdr = DS.getData(sqlCommand);
 
             if (rdr.HasRows)
             {
                 while (rdr.Read())
                 {
-                    arrList.Add(rdr.GetString("PRODUCT_ID"));
+                    arrList.Add(rdr.GetString("PRODUCT_NAME"));
                 }
                 AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
                 arr = arrList.ToArray();
@@ -768,7 +768,7 @@ namespace RoyalPetz_ADMIN
             if ((detailGridView.CurrentCell.OwningColumn.Name == "hpp" || detailGridView.CurrentCell.OwningColumn.Name == "qtyReceived") && e.Control is TextBox)
             {
                 TextBox textBox = e.Control as TextBox;
-                textBox.TextChanged += TextBox_TextChanged;
+//                textBox.TextChanged += TextBox_TextChanged;
                 textBox.PreviewKeyDown -= TextBox_previewKeyDown;
                 textBox.AutoCompleteMode = AutoCompleteMode.None;
                 textBox.KeyUp += Textbox_KeyUp; 
@@ -777,7 +777,16 @@ namespace RoyalPetz_ADMIN
             if ((detailGridView.CurrentCell.OwningColumn.Name == "productID") && e.Control is TextBox)
             {
                 TextBox productIDTextBox = e.Control as TextBox;
-                productIDTextBox.TextChanged -= TextBox_TextChanged;
+//                productIDTextBox.TextChanged -= TextBox_TextChanged;
+                productIDTextBox.PreviewKeyDown += productName_previewKeyDown;
+                productIDTextBox.CharacterCasing = CharacterCasing.Upper;
+                productIDTextBox.AutoCompleteMode = AutoCompleteMode.None;
+            }
+
+            if ((detailGridView.CurrentCell.OwningColumn.Name == "productName") && e.Control is TextBox)
+            {
+                TextBox productIDTextBox = e.Control as TextBox;
+//                productIDTextBox.TextChanged -= TextBox_TextChanged;
                 productIDTextBox.PreviewKeyDown += TextBox_previewKeyDown;
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
                 productIDTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -806,7 +815,7 @@ namespace RoyalPetz_ADMIN
             isLoading = false;
         }
 
-        private void updateSomeRowContents(DataGridViewRow selectedRow, int rowSelectedIndex, string currentValue)
+        private void updateSomeRowContents(DataGridViewRow selectedRow, int rowSelectedIndex, string currentValue, bool isProductID = true)
         {
             int numRow = 0;
             string selectedProductID = "";
@@ -817,19 +826,31 @@ namespace RoyalPetz_ADMIN
             string currentProductName = "";
             bool changed = false;
 
-            numRow = Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'"));
+            //numRow = Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'"));
+
+            if (isProductID)
+                numRow = Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'"));
+            else
+                numRow = Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_NAME = '" + currentValue + "'"));
 
             if (numRow > 0)
             {
-                selectedProductID = currentValue;
+                if (isProductID)
+                {
+                    selectedProductID = currentValue;
+                    selectedProductName = DS.getDataSingleValue("SELECT IFNULL(PRODUCT_NAME,'') FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'").ToString();
+                }
+                else
+                {
+                    selectedProductName = currentValue;
+                    selectedProductID = DS.getDataSingleValue("SELECT IFNULL(PRODUCT_ID,'') FROM MASTER_PRODUCT WHERE PRODUCT_NAME = '" + currentValue + "'").ToString();
+                }
 
                 if (null != selectedRow.Cells["productID"].Value)
                     currentProductID = selectedRow.Cells["productID"].Value.ToString();
 
                 if (null != selectedRow.Cells["productName"].Value)
                     currentProductName = selectedRow.Cells["productName"].Value.ToString();
-
-                selectedProductName = DS.getDataSingleValue("SELECT IFNULL(PRODUCT_NAME,'') FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'").ToString();
 
                 selectedRow.Cells["productId"].Value = selectedProductID;
                 selectedRow.Cells["productName"].Value = selectedProductName;
@@ -882,6 +903,34 @@ namespace RoyalPetz_ADMIN
                 if (currentValue.Length > 0)
                 {
                     updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
+                    detailGridView.CurrentCell = selectedRow.Cells["qtyReceived"];
+                    forceUpOneLevel = true;
+                }
+                else
+                {
+                    clearUpSomeRowContents(selectedRow, rowSelectedIndex);
+                }
+            }
+        }
+
+        private void productName_previewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            string currentValue = "";
+            int rowSelectedIndex = 0;
+            DataGridViewTextBoxEditingControl dataGridViewComboBoxEditingControl = sender as DataGridViewTextBoxEditingControl;
+
+            if (detailGridView.CurrentCell.OwningColumn.Name != "productName")
+                return;
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                currentValue = dataGridViewComboBoxEditingControl.Text;
+                rowSelectedIndex = detailGridView.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = detailGridView.Rows[rowSelectedIndex];
+
+                if (currentValue.Length > 0)
+                {
+                    updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue, false);
                     detailGridView.CurrentCell = selectedRow.Cells["qtyReceived"];
                     forceUpOneLevel = true;
                 }
@@ -1745,23 +1794,23 @@ namespace RoyalPetz_ADMIN
 
         private void detailGridView_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
-            var cell = detailGridView[e.ColumnIndex, e.RowIndex];
-            DataGridViewRow selectedRow = detailGridView.Rows[e.RowIndex];
+            //var cell = detailGridView[e.ColumnIndex, e.RowIndex];
+            //DataGridViewRow selectedRow = detailGridView.Rows[e.RowIndex];
 
-            if (cell.OwningColumn.Name == "productID")
-            {
-                if (null != cell.Value)
-                {
-                    if (cell.Value.ToString().Length > 0)
-                    {
-                        updateSomeRowContents(selectedRow, e.RowIndex, cell.Value.ToString());
-                    }
-                    else
-                    {
-                        clearUpSomeRowContents(selectedRow, e.RowIndex);
-                    }
-                }
-            }
+            //if (cell.OwningColumn.Name == "productID")
+            //{
+            //    if (null != cell.Value)
+            //    {
+            //        if (cell.Value.ToString().Length > 0)
+            //        {
+            //            updateSomeRowContents(selectedRow, e.RowIndex, cell.Value.ToString());
+            //        }
+            //        else
+            //        {
+            //            clearUpSomeRowContents(selectedRow, e.RowIndex);
+            //        }
+            //    }
+            //}
         }
 
         private void detailGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -1794,6 +1843,162 @@ namespace RoyalPetz_ADMIN
                 registerNavigationKey();
 
             unregisterDelKey();
+        }
+
+        private void detailGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = detailGridView[e.ColumnIndex, e.RowIndex];
+            int rowSelectedIndex = 0;
+
+            double subTotal = 0;
+            double productQty = 0;
+            double hppValue = 0;
+            string tempString;
+            string cellValue = "";
+            string columnName = "";
+
+            columnName = cell.OwningColumn.Name;
+            gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "PENERIMAAN BARANG : detailGridView_CellValueChanged [" + columnName + "]");
+
+            rowSelectedIndex = e.RowIndex;
+            DataGridViewRow selectedRow = detailGridView.Rows[rowSelectedIndex];
+
+            if (null != selectedRow.Cells[columnName].Value)
+                cellValue = selectedRow.Cells[columnName].Value.ToString();
+            else
+                cellValue = "";
+
+            if (cell.OwningColumn.Name == "productName")
+            {
+                if (cellValue.Length > 0)
+                {
+                    updateSomeRowContents(selectedRow, rowSelectedIndex, cellValue, false);
+                    //int pos = cashierDataGridView.CurrentCell.RowIndex;
+
+                    //if (pos > 0)
+                    //    cashierDataGridView.CurrentCell = cashierDataGridView.Rows[pos - 1].Cells["qty"];
+
+                    //forceUpOneLevel = true;
+                }
+            }
+            else if (detailGridView.CurrentCell.OwningColumn.Name == "hpp" ||
+                detailGridView.CurrentCell.OwningColumn.Name == "qtyReceived")
+            { 
+                if (cellValue.Length <= 0)
+                {
+                    // IF TEXTBOX IS EMPTY, DEFAULT THE VALUE TO 0 AND EXIT THE CHECKING
+                    isLoading = true;
+                    // reset subTotal Value and recalculate total
+                    selectedRow.Cells["subTotal"].Value = 0;
+                    subtotalList[rowSelectedIndex] = "0";
+
+                    if (detailRequestQty.Count >= rowSelectedIndex + 1)
+                        if (detailGridView.CurrentCell.OwningColumn.Name == "hpp")
+                            detailHpp[rowSelectedIndex] = "0";
+                        else
+                            detailRequestQty[rowSelectedIndex] = "0";
+
+                    selectedRow.Cells[columnName].Value = "0";
+
+                    calculateTotal();
+
+                    return;
+                }
+
+                if (detailRequestQty.Count >= rowSelectedIndex + 1)
+                    if (detailGridView.CurrentCell.OwningColumn.Name == "hpp")
+                        previousInput = detailHpp[rowSelectedIndex];
+                    else
+                        previousInput = detailRequestQty[rowSelectedIndex];
+                else
+                    previousInput = "0";
+
+                if (previousInput == "0")
+                {
+                    tempString = cellValue;
+                    if (tempString.IndexOf('0') == 0 && tempString.Length > 1 && tempString.IndexOf("0.") < 0)
+                        selectedRow.Cells[columnName].Value = tempString.Remove(tempString.IndexOf('0'), 1);
+                }
+
+                if (detailRequestQty.Count < rowSelectedIndex + 1)
+                {
+                    if (gUtil.matchRegEx(cellValue, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
+                        && (cellValue.Length > 0))
+                    {
+                        if (detailGridView.CurrentCell.OwningColumn.Name == "hpp")
+                            detailHpp.Add(cellValue);
+                        else
+                            detailRequestQty.Add(cellValue);
+                    }
+                    else
+                    {
+                        selectedRow.Cells[columnName].Value = previousInput;
+                    }
+                }
+                else
+                {
+                    if (gUtil.matchRegEx(cellValue, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
+                        && (cellValue.Length > 0))
+                    {
+                        if (detailGridView.CurrentCell.OwningColumn.Name == "hpp")
+                            detailHpp[rowSelectedIndex] = cellValue;
+                        else
+                            detailRequestQty[rowSelectedIndex] = cellValue;
+                    }
+                    else
+                    {
+                        if (detailGridView.CurrentCell.OwningColumn.Name == "hpp")
+                            selectedRow.Cells[columnName].Value = detailHpp[rowSelectedIndex];
+                        else
+                            selectedRow.Cells[columnName].Value = detailRequestQty[rowSelectedIndex];
+                    }
+                }
+
+                try
+                {
+                    if (detailGridView.CurrentCell.OwningColumn.Name == "hpp")
+                    {
+                        //changes on hpp
+                        hppValue = Convert.ToDouble(cellValue);
+                        productQty = Convert.ToDouble(detailRequestQty[rowSelectedIndex]);
+                    }
+                    else
+                    {
+                        //changes on qty
+                        productQty = Convert.ToDouble(cellValue);
+                        hppValue = Convert.ToDouble(detailHpp[rowSelectedIndex]);
+                    }
+
+                    subTotal = Math.Round((hppValue * productQty), 2);
+
+                    selectedRow.Cells["subtotal"].Value = subTotal;
+                    subtotalList[rowSelectedIndex] = subTotal.ToString();
+
+                    calculateTotal();
+                }
+                catch (Exception ex)
+                {
+                    //dataGridViewTextBoxEditingControl.Text = previousInput;
+                }
+            }
+        }
+
+        private void detailGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            detailGridView.SuspendLayout();
+        }
+
+        private void detailGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            detailGridView.ResumeLayout();
+        }
+
+        private void detailGridView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (detailGridView.IsCurrentCellDirty)
+            {
+                detailGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
         }
     }
 }
