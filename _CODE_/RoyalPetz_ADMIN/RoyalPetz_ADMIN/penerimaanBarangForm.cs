@@ -946,7 +946,7 @@ namespace RoyalPetz_ADMIN
             if (forceUpOneLevel)
             {
                 int pos = detailGridView.CurrentCell.RowIndex;
-                detailGridView.CurrentCell = detailGridView.Rows[pos - 1].Cells["qty"];
+                detailGridView.CurrentCell = detailGridView.Rows[pos - 1].Cells["qtyReceived"];
                 forceUpOneLevel = false;
             }
         }
@@ -1868,7 +1868,7 @@ namespace RoyalPetz_ADMIN
             else
                 cellValue = "";
 
-            if (cell.OwningColumn.Name == "productName")
+            if (columnName == "productName")
             {
                 if (cellValue.Length > 0)
                 {
@@ -1881,8 +1881,8 @@ namespace RoyalPetz_ADMIN
                     //forceUpOneLevel = true;
                 }
             }
-            else if (detailGridView.CurrentCell.OwningColumn.Name == "hpp" ||
-                detailGridView.CurrentCell.OwningColumn.Name == "qtyReceived")
+            else if (columnName == "hpp" ||
+                columnName == "qtyReceived")
             { 
                 if (cellValue.Length <= 0)
                 {

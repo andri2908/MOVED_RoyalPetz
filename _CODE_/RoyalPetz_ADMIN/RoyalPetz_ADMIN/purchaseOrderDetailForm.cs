@@ -1536,7 +1536,7 @@ namespace RoyalPetz_ADMIN
             else
                 cellValue = "";
 
-            if (cell.OwningColumn.Name == "productName")
+            if (columnName == "productName")
             {
                 if (cellValue.Length > 0)
                 {
@@ -1549,7 +1549,7 @@ namespace RoyalPetz_ADMIN
                     //forceUpOneLevel = true;
                 }
             }
-            else if (detailPODataGridView.CurrentCell.OwningColumn.Name == "HPP" && detailPODataGridView.CurrentCell.OwningColumn.Name == "qty")
+            else if (columnName == "HPP" && columnName == "qty")
             {
                 if (cellValue.Length <= 0)
                 {

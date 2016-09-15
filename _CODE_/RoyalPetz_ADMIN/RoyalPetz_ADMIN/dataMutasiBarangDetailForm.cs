@@ -1913,7 +1913,7 @@ namespace RoyalPetz_ADMIN
             else
                 cellValue = "";
 
-            if (cell.OwningColumn.Name == "productName")
+            if (columnName == "productName")
             {
                 if (cellValue.Length > 0)
                 {
@@ -1926,7 +1926,7 @@ namespace RoyalPetz_ADMIN
                     //forceUpOneLevel = true;
                 }
             }
-            else if (cell.OwningColumn.Name == "qty")
+            else if (columnName == "qty")
             { 
                 // Condition to check
                 // - empty string
