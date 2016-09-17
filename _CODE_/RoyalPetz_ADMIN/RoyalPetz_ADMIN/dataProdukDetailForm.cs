@@ -549,25 +549,25 @@ namespace RoyalPetz_ADMIN
                 return false;
             }
 
-            if (hppTextBox.Text.Length <= 0 || Convert.ToInt32(hppTextBox.Text) == 0)
+            if (hppTextBox.Text.Length <= 0 || Convert.ToDouble(hppTextBox.Text) == 0)
             {
                 errorLabel.Text = "HARGA POKOK TIDAK BOLEH 0 / KOSONG";
                 return false;
             }
 
-            if (hargaEcerTextBox.Text.Length <= 0 || Convert.ToInt32(hargaEcerTextBox.Text) == 0)
+            if (hargaEcerTextBox.Text.Length <= 0 || Convert.ToDouble(hargaEcerTextBox.Text) == 0)
             {
                 errorLabel.Text = "HARGA ECER TIDAK BOLEH 0 / KOSONG";
                 return false;
             }
 
-            if (hargaGrosirTextBox.Text.Length <= 0 || Convert.ToInt32(hargaGrosirTextBox.Text) == 0)
+            if (hargaGrosirTextBox.Text.Length <= 0 || Convert.ToDouble(hargaGrosirTextBox.Text) == 0)
             {
                 errorLabel.Text = "HARGA PARTAI TIDAK BOLEH 0 / KOSONG";
                 return false;
             }
 
-            if (hargaPartaiTextBox.Text.Length <= 0 || Convert.ToInt32(hargaPartaiTextBox.Text) == 0)
+            if (hargaPartaiTextBox.Text.Length <= 0 || Convert.ToDouble(hargaPartaiTextBox.Text) == 0)
             {
                 errorLabel.Text = "HARGA GROSIR TIDAK BOLEH 0 / KOSONG";
                 return false;
