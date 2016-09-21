@@ -2028,6 +2028,14 @@ namespace RoyalPetz_ADMIN
         private void detailRequestOrderDataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             detailRequestOrderDataGridView.SuspendLayout();
+
+            if (navKeyRegistered)
+            {
+                unregisterNavigationKey();
+            }
+
+            if (!delKeyRegistered)
+                registerDelKey();
         }
 
         private void detailRequestOrderDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)

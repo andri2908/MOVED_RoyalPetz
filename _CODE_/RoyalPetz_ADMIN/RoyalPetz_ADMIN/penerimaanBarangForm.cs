@@ -778,7 +778,7 @@ namespace RoyalPetz_ADMIN
             {
                 TextBox productIDTextBox = e.Control as TextBox;
 //                productIDTextBox.TextChanged -= TextBox_TextChanged;
-                productIDTextBox.PreviewKeyDown += productName_previewKeyDown;
+                productIDTextBox.PreviewKeyDown += TextBox_previewKeyDown;
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
                 productIDTextBox.AutoCompleteMode = AutoCompleteMode.None;
             }
@@ -787,7 +787,7 @@ namespace RoyalPetz_ADMIN
             {
                 TextBox productIDTextBox = e.Control as TextBox;
 //                productIDTextBox.TextChanged -= TextBox_TextChanged;
-                productIDTextBox.PreviewKeyDown += TextBox_previewKeyDown;
+                productIDTextBox.PreviewKeyDown += productName_previewKeyDown;
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
                 productIDTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 productIDTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
@@ -1986,6 +1986,14 @@ namespace RoyalPetz_ADMIN
         private void detailGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             detailGridView.SuspendLayout();
+
+            if (navKeyRegistered)
+            {
+                unregisterNavigationKey();
+            }
+
+            if (!delKeyRegistered)
+                registerDelKey();
         }
 
         private void detailGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)

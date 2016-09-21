@@ -2811,11 +2811,12 @@ namespace RoyalPetz_ADMIN
             productPriceList.Add("0");
             jumlahList.Add("0");
 
-            if (navKeyRegistered)
-            { 
-                unregisterNavigationKey();
-                registerDelKey();
-            }
+            //if (cashierDataGridView.Focused)
+            //    if (navKeyRegistered)
+            //    { 
+            //        unregisterNavigationKey();
+            //        registerDelKey();
+            //    }
         }
 
         private void bayarTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -2924,7 +2925,7 @@ namespace RoyalPetz_ADMIN
         private void cashierDataGridView_Enter(object sender, EventArgs e)
         {
             if (navKeyRegistered)
-            { 
+            {
                 unregisterNavigationKey();
             }
             registerDelKey();
@@ -3129,11 +3130,24 @@ namespace RoyalPetz_ADMIN
         private void cashierDataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             cashierDataGridView.SuspendLayout();
+
+            if (navKeyRegistered)
+            {
+                unregisterNavigationKey();
+            }
+
+            if (!delKeyRegistered)
+                registerDelKey();
         }
 
         private void cashierDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             cashierDataGridView.ResumeLayout();
+        }
+
+        private void cashierDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+  
         }
     }
 }

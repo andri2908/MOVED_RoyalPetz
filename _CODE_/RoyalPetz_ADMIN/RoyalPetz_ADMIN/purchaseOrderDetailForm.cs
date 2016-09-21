@@ -1506,6 +1506,14 @@ namespace RoyalPetz_ADMIN
         private void detailPODataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             detailPODataGridView.SuspendLayout();
+
+            if (navKeyRegistered)
+            {
+                unregisterNavigationKey();
+            }
+
+            if (!delKeyRegistered)
+                registerDelKey();
         }
 
         private void detailPODataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)

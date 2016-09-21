@@ -2153,6 +2153,15 @@ namespace RoyalPetz_ADMIN
         private void detailReturDataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             detailReturDataGridView.SuspendLayout();
+
+            if (navKeyRegistered)
+            {
+                unregisterNavigationKey();
+            }
+
+            if (!delKeyRegistered)
+                registerDelKey();
+
         }
 
         private void detailReturDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)

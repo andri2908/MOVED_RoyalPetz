@@ -205,6 +205,7 @@
             this.cashierDataGridView.CurrentCellDirtyStateChanged += new System.EventHandler(this.cashierDataGridView_CurrentCellDirtyStateChanged);
             this.cashierDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.cashierDataGridView_RowsAdded);
             this.cashierDataGridView.Enter += new System.EventHandler(this.cashierDataGridView_Enter);
+            this.cashierDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cashierDataGridView_KeyDown);
             this.cashierDataGridView.Leave += new System.EventHandler(this.cashierDataGridView_Leave);
             // 
             // panel5
