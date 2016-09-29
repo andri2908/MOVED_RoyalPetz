@@ -1079,7 +1079,7 @@ namespace RoyalPetz_ADMIN
         private void calculateTotal()
         {
             double total = 0;
-            for (int i =0;i<detailGridView.Rows.Count-1;i++)
+            for (int i =0;i<detailGridView.Rows.Count;i++)
             {
                 total = total + Convert.ToDouble(subtotalList[i]);
             }

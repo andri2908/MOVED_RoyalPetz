@@ -774,11 +774,15 @@ namespace RoyalPetz_ADMIN
             }
 
             selectedRow.Cells["jumlah"].Value = calculateSubTotal(rowSelectedIndex, Convert.ToDouble(selectedRow.Cells["productPrice"].Value));
+            jumlahList[rowSelectedIndex] = selectedRow.Cells["jumlah"].Value.ToString();
             calculateTotal();
+
             cashierDataGridView.CurrentCell = selectedRow.Cells["qty"];
             cashierDataGridView.AllowUserToAddRows = true;
             //comboSelectedIndexChangeMethod(rowSelectedIndex, i, selectedRow);
             //cashierDataGridView.CurrentCell = cashierDataGridView.Rows[rowSelectedIndex].Cells["qty"];
+
+            cashierDataGridView.Select();
         }
 
         private bool productIDValid(string productID)
@@ -1330,7 +1334,7 @@ namespace RoyalPetz_ADMIN
             double totalAfterDisc = 0;
 
             gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : calculateTotal");
-            for (int i = 0; i < cashierDataGridView.Rows.Count-1; i++)
+            for (int i = 0; i < cashierDataGridView.Rows.Count; i++)
             {
                 if (null != cashierDataGridView.Rows[i].Cells["jumlah"].Value)
                     total = total + Convert.ToDouble(jumlahList[i]);

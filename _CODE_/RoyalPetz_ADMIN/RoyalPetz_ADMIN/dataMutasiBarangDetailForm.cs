@@ -415,6 +415,8 @@ namespace RoyalPetz_ADMIN
                 {
                     detailRequestOrderDataGridView.Rows.Add();
                     detailRequestQtyApproved.Add("0");
+                    productPriceList.Add("0");
+                    subtotalList.Add("0");
                     rowSelectedIndex = detailRequestOrderDataGridView.Rows.Count - 1;
                 }
             }
@@ -440,18 +442,21 @@ namespace RoyalPetz_ADMIN
 
             subTotal = Math.Round((hpp * currQty), 2);
             selectedRow.Cells["subTotal"].Value = subTotal;
+            subtotalList[rowSelectedIndex] = subTotal.ToString();
 
             calculateTotal();
 
             detailRequestOrderDataGridView.CurrentCell = selectedRow.Cells["qty"];
             detailRequestOrderDataGridView.AllowUserToAddRows = true;
+
+            detailRequestOrderDataGridView.Select();
         }
 
         private void calculateTotal()
         {
             double total = 0;
 
-            for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count-1; i++)
+            for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count; i++)
             {
                 total = total + Convert.ToDouble(subtotalList[i]);// Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subtotal"].Value);
             }

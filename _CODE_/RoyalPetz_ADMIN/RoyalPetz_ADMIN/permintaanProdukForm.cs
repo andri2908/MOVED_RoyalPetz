@@ -429,9 +429,10 @@ namespace RoyalPetz_ADMIN
         {
             double total = 0;
 
-            for (int i = 0; i<detailRequestOrderDataGridView.Rows.Count-1;i++)
+            for (int i = 0; i<detailRequestOrderDataGridView.Rows.Count;i++)
             {
-                total = total + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value);
+                if (null != detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value)
+                    total = total + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value);
             }
 
             globalTotalValue = total;
