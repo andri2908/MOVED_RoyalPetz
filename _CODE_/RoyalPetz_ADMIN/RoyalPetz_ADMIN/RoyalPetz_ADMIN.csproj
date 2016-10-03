@@ -219,6 +219,18 @@
     <Compile Include="dataPelangganForm.Designer.cs">
       <DependentUpon>dataPelangganForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="dataReturPenjualanPrintOut.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dataReturPenjualanPrintOut.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dataReturPenjualanPrintOutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dataReturPenjualanPrintOutForm.Designer.cs">
+      <DependentUpon>dataReturPenjualanPrintOutForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="dataReturPermintaanForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1136,6 +1148,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dataPelangganForm.resx">
       <DependentUpon>dataPelangganForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataReturPenjualanPrintOut.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>dataReturPenjualanPrintOut.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dataReturPenjualanPrintOutForm.resx">
+      <DependentUpon>dataReturPenjualanPrintOutForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dataReturPermintaanForm.resx">
       <DependentUpon>dataReturPermintaanForm.cs</DependentUpon>

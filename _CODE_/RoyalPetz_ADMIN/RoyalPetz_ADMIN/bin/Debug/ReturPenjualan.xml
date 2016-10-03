@@ -1,0 +1,31 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="SALES_INVOICE" type="xs:string" minOccurs="0" />
+                <xs:element name="PRODUCT_NAME" type="xs:string" minOccurs="0" />
+                <xs:element name="PRODUCT_SALES_PRICE" type="xs:double" minOccurs="0" />
+                <xs:element name="PRODUCT_RETURN_QTY" type="xs:double" minOccurs="0" />
+                <xs:element name="RS_DESCRIPTION" type="xs:string" minOccurs="0" />
+                <xs:element name="RS_SUBTOTAL" type="xs:double" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <SALES_INVOICE>SLO001-7</SALES_INVOICE>
+    <PRODUCT_NAME>ALPO PUPPY 1 KG</PRODUCT_NAME>
+    <PRODUCT_SALES_PRICE>34000</PRODUCT_SALES_PRICE>
+    <PRODUCT_RETURN_QTY>1</PRODUCT_RETURN_QTY>
+    <RS_DESCRIPTION xml:space="preserve"> </RS_DESCRIPTION>
+    <RS_SUBTOTAL>34000</RS_SUBTOTAL>
+  </Table>
+</NewDataSet>
