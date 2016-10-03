@@ -142,3 +142,5 @@ E:\My Works\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\bin\Debug\CrystalDeci
 E:\My Works\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\bin\Debug\stdole.dll
 E:\My Works\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.exe
 E:\My Works\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pdb
+E:\My Works\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.csprojResolveAssemblyReference.cache
+E:\My Works\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.dataReturPenjualanPrintOutForm.resources

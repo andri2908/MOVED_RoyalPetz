@@ -68,7 +68,7 @@
             this.newButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.newButton.Location = new System.Drawing.Point(10, 48);
             this.newButton.Name = "newButton";
-            this.newButton.Size = new System.Drawing.Size(56, 27);
+            this.newButton.Size = new System.Drawing.Size(56, 37);
             this.newButton.TabIndex = 17;
             this.newButton.Text = "NEW";
             this.newButton.UseVisualStyleBackColor = true;

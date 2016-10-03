@@ -500,5 +500,6 @@ namespace RoyalPetz_ADMIN
         {
             unregisterGlobalHotkey();
         }
+        
     }
 }

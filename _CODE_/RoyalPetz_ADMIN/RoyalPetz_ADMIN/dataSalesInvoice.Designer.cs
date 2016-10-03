@@ -56,16 +56,16 @@
             // 
             this.noInvoiceTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.noInvoiceTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noInvoiceTextBox.Location = new System.Drawing.Point(130, 13);
+            this.noInvoiceTextBox.Location = new System.Drawing.Point(130, 10);
             this.noInvoiceTextBox.Name = "noInvoiceTextBox";
-            this.noInvoiceTextBox.Size = new System.Drawing.Size(210, 27);
+            this.noInvoiceTextBox.Size = new System.Drawing.Size(257, 27);
             this.noInvoiceTextBox.TabIndex = 36;
             // 
             // PODtPicker_1
             // 
             this.PODtPicker_1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PODtPicker_1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.PODtPicker_1.Location = new System.Drawing.Point(594, 10);
+            this.PODtPicker_1.Location = new System.Drawing.Point(575, 10);
             this.PODtPicker_1.Name = "PODtPicker_1";
             this.PODtPicker_1.Size = new System.Drawing.Size(144, 27);
             this.PODtPicker_1.TabIndex = 38;
@@ -77,7 +77,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label5.Location = new System.Drawing.Point(744, 16);
+            this.label5.Location = new System.Drawing.Point(725, 16);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(16, 18);
             this.label5.TabIndex = 44;
@@ -87,7 +87,7 @@
             // 
             this.PODtPicker_2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PODtPicker_2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.PODtPicker_2.Location = new System.Drawing.Point(770, 10);
+            this.PODtPicker_2.Location = new System.Drawing.Point(745, 10);
             this.PODtPicker_2.Name = "PODtPicker_2";
             this.PODtPicker_2.Size = new System.Drawing.Size(145, 27);
             this.PODtPicker_2.TabIndex = 43;
@@ -99,7 +99,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label1.Location = new System.Drawing.Point(9, 16);
+            this.label1.Location = new System.Drawing.Point(6, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(101, 18);
             this.label1.TabIndex = 35;
@@ -120,7 +120,7 @@
             this.showAllCheckBox.AutoSize = true;
             this.showAllCheckBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showAllCheckBox.ForeColor = System.Drawing.Color.FloralWhite;
-            this.showAllCheckBox.Location = new System.Drawing.Point(130, 80);
+            this.showAllCheckBox.Location = new System.Drawing.Point(130, 75);
             this.showAllCheckBox.Name = "showAllCheckBox";
             this.showAllCheckBox.Size = new System.Drawing.Size(101, 22);
             this.showAllCheckBox.TabIndex = 47;
@@ -132,7 +132,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label2.Location = new System.Drawing.Point(425, 16);
+            this.label2.Location = new System.Drawing.Point(421, 13);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(148, 18);
             this.label2.TabIndex = 37;
@@ -143,7 +143,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FloralWhite;
-            this.label3.Location = new System.Drawing.Point(12, 48);
+            this.label3.Location = new System.Drawing.Point(6, 46);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(93, 18);
             this.label3.TabIndex = 39;
@@ -155,9 +155,9 @@
             this.customerCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.customerCombo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customerCombo.FormattingEnabled = true;
-            this.customerCombo.Location = new System.Drawing.Point(130, 48);
+            this.customerCombo.Location = new System.Drawing.Point(130, 43);
             this.customerCombo.Name = "customerCombo";
-            this.customerCombo.Size = new System.Drawing.Size(284, 26);
+            this.customerCombo.Size = new System.Drawing.Size(257, 26);
             this.customerCombo.TabIndex = 40;
             this.customerCombo.SelectedIndexChanged += new System.EventHandler(this.customerCombo_SelectedIndexChanged);
             this.customerCombo.Enter += new System.EventHandler(this.genericControl_Enter);
@@ -166,7 +166,7 @@
             // displayButton
             // 
             this.displayButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.displayButton.Location = new System.Drawing.Point(413, 107);
+            this.displayButton.Location = new System.Drawing.Point(401, 98);
             this.displayButton.Name = "displayButton";
             this.displayButton.Size = new System.Drawing.Size(95, 37);
             this.displayButton.TabIndex = 64;
@@ -219,9 +219,9 @@
             this.groupBox1.Controls.Add(this.noInvoiceTextBox);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(0, 3);
+            this.groupBox1.Location = new System.Drawing.Point(12, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(921, 150);
+            this.groupBox1.Size = new System.Drawing.Size(896, 150);
             this.groupBox1.TabIndex = 68;
             this.groupBox1.TabStop = false;
             // 
