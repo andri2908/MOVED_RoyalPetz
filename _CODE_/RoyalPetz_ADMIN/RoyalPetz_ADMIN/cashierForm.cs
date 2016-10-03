@@ -2298,8 +2298,19 @@ namespace RoyalPetz_ADMIN
             {
                 if (rdr.HasRows)
                 {
+                    int i = 0;
                     while (rdr.Read())
                     {
+                        if (i == 0)
+                        {
+                            Offset = Offset + add_offset;
+                        }
+                        else
+                        {
+                            i = 1;
+                            Offset = Offset + add_offset + Offsetplus;
+                        }
+                    
                         Offset = Offset + add_offset;
                         Offset = Offset + add_offset;
                     }

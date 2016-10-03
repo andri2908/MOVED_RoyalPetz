@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.CustomercomboBox = new System.Windows.Forms.ComboBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.ErrorLabel2 = new System.Windows.Forms.Label();
             this.LabelOptions2 = new System.Windows.Forms.Label();
             this.nonactivecheckbox2 = new System.Windows.Forms.CheckBox();
@@ -42,15 +45,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.datetoPicker = new System.Windows.Forms.DateTimePicker();
             this.datefromPicker = new System.Windows.Forms.DateTimePicker();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.CustomercomboBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.CustomercomboBox);
             this.groupBox1.Controls.Add(this.checkBox2);
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.ErrorLabel2);
@@ -60,12 +59,13 @@
             this.groupBox1.Controls.Add(this.ProductcomboBox);
             this.groupBox1.Controls.Add(this.nonactivecheckbox1);
             this.groupBox1.Controls.Add(this.CariButton);
-            this.groupBox1.Controls.Add(this.SupplierNameCombobox);
             this.groupBox1.Controls.Add(this.LabelOptions1);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.datetoPicker);
             this.groupBox1.Controls.Add(this.datefromPicker);
+            this.groupBox1.Controls.Add(this.CustomercomboBox);
+            this.groupBox1.Controls.Add(this.SupplierNameCombobox);
             this.groupBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
@@ -73,6 +73,40 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Kriteria Pencarian Data Mutasi dan Retur";
+            // 
+            // CustomercomboBox
+            // 
+            this.CustomercomboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.CustomercomboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.CustomercomboBox.FormattingEnabled = true;
+            this.CustomercomboBox.Location = new System.Drawing.Point(204, 58);
+            this.CustomercomboBox.Name = "CustomercomboBox";
+            this.CustomercomboBox.Size = new System.Drawing.Size(200, 26);
+            this.CustomercomboBox.TabIndex = 13;
+            this.CustomercomboBox.Text = "Customer";
+            this.CustomercomboBox.Visible = false;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(183, 96);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(15, 14);
+            this.checkBox2.TabIndex = 12;
+            this.checkBox2.Tag = "";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(183, 66);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(15, 14);
+            this.checkBox1.TabIndex = 11;
+            this.checkBox1.Tag = "";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // ErrorLabel2
             // 
@@ -157,6 +191,8 @@
             this.SupplierNameCombobox.Name = "SupplierNameCombobox";
             this.SupplierNameCombobox.Size = new System.Drawing.Size(200, 26);
             this.SupplierNameCombobox.TabIndex = 1;
+            this.SupplierNameCombobox.Text = "Supplier";
+            this.SupplierNameCombobox.Visible = false;
             // 
             // LabelOptions1
             // 
@@ -200,39 +236,6 @@
             this.datefromPicker.Name = "datefromPicker";
             this.datefromPicker.Size = new System.Drawing.Size(200, 27);
             this.datefromPicker.TabIndex = 0;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(183, 66);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 11;
-            this.checkBox1.Tag = "";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(183, 96);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(15, 14);
-            this.checkBox2.TabIndex = 12;
-            this.checkBox2.Tag = "";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
-            // 
-            // CustomercomboBox
-            // 
-            this.CustomercomboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.CustomercomboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.CustomercomboBox.FormattingEnabled = true;
-            this.CustomercomboBox.Location = new System.Drawing.Point(204, 58);
-            this.CustomercomboBox.Name = "CustomercomboBox";
-            this.CustomercomboBox.Size = new System.Drawing.Size(200, 26);
-            this.CustomercomboBox.TabIndex = 13;
-            this.CustomercomboBox.Visible = false;
             // 
             // ReportStockInOutSearchForm
             // 

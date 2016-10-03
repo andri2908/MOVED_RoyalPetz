@@ -298,45 +298,5 @@ namespace RoyalPetz_ADMIN
                 loadProduct();
             }
         }
-
-        private void ProductcomboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CustNameCombobox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void LabelOptions_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void datetoPicker_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void datefromPicker_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

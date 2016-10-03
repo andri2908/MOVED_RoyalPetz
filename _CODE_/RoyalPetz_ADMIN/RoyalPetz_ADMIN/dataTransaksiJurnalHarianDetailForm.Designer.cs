@@ -155,7 +155,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label8.Location = new System.Drawing.Point(229, 39);
+            this.label8.Location = new System.Drawing.Point(241, 39);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(14, 18);
             this.label8.TabIndex = 45;
@@ -290,9 +290,9 @@
             // 
             this.TanggalTransaksi.CalendarFont = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TanggalTransaksi.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TanggalTransaksi.Location = new System.Drawing.Point(260, 35);
+            this.TanggalTransaksi.Location = new System.Drawing.Point(271, 35);
             this.TanggalTransaksi.Name = "TanggalTransaksi";
-            this.TanggalTransaksi.Size = new System.Drawing.Size(399, 27);
+            this.TanggalTransaksi.Size = new System.Drawing.Size(388, 27);
             this.TanggalTransaksi.TabIndex = 46;
             this.TanggalTransaksi.ValueChanged += new System.EventHandler(this.TanggalTransaksi_ValueChanged);
             this.TanggalTransaksi.Enter += new System.EventHandler(this.genericControl_Enter);
