@@ -93,7 +93,7 @@ namespace RoyalPetz_ADMIN
                             "FROM CASHIER_LOG CL, SALES_HEADER SH, MASTER_USER MU " +
                             "WHERE SH.SALES_DATE >= CL.DATE_LOGIN AND SH.SALES_DATE <= CL.DATE_LOGOUT " +
                             "AND DATE_FORMAT(CL.DATE_LOGIN, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(CL.DATE_LOGIN, '%Y%m%d')  <= '" + dateTo + "' " +
-                            "AND CL.USER_ID = MU.ID " + user_id + " " +
+                            "AND CL.USER_ID = MU.ID " + user_id + 
                             "GROUP BY INVOICE " +
                             "ORDER BY TGLTRANS ASC";
             DS.writeXML(sqlCommandx, globalConstants.CashierLogXML);

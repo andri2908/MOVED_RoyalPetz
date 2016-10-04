@@ -38,11 +38,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.datetoPicker = new System.Windows.Forms.DateTimePicker();
             this.datefromPicker = new System.Windows.Forms.DateTimePicker();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.ProductcomboBox);
             this.groupBox1.Controls.Add(this.nonactivecheckbox);
             this.groupBox1.Controls.Add(this.CariButton);
@@ -77,9 +79,9 @@
             this.nonactivecheckbox.AutoSize = true;
             this.nonactivecheckbox.Location = new System.Drawing.Point(417, 62);
             this.nonactivecheckbox.Name = "nonactivecheckbox";
-            this.nonactivecheckbox.Size = new System.Drawing.Size(98, 22);
+            this.nonactivecheckbox.Size = new System.Drawing.Size(138, 22);
             this.nonactivecheckbox.TabIndex = 5;
-            this.nonactivecheckbox.Text = "show all";
+            this.nonactivecheckbox.Text = "show hidden";
             this.nonactivecheckbox.UseVisualStyleBackColor = true;
             this.nonactivecheckbox.CheckedChanged += new System.EventHandler(this.nonactivecheckbox_CheckedChanged);
             // 
@@ -150,6 +152,16 @@
             this.datefromPicker.Size = new System.Drawing.Size(200, 27);
             this.datefromPicker.TabIndex = 0;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(183, 66);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(15, 14);
+            this.checkBox1.TabIndex = 7;
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // ReportSalesSummarySearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -178,5 +190,6 @@
         private System.Windows.Forms.Label LabelOptions;
         private System.Windows.Forms.CheckBox nonactivecheckbox;
         private System.Windows.Forms.ComboBox ProductcomboBox;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
