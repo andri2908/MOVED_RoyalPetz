@@ -127,8 +127,8 @@ namespace RoyalPetz_ADMIN
             {
                 if (rdr.HasRows)
                 {
-                    SupplierNameCombobox.Visible = true;
-                    nonactivecheckbox1.Visible = true;
+                    ProductcomboBox.Visible = true;
+                    nonactivecheckbox2.Visible = true;
                     ErrorLabel2.Visible = false;
                     dt.Load(rdr);
                     ProductcomboBox.DataSource = dt;
@@ -139,7 +139,7 @@ namespace RoyalPetz_ADMIN
                 else
                 {
                     ProductcomboBox.Visible = false;
-                    nonactivecheckbox1.Visible = false;
+                    nonactivecheckbox2.Visible = false;
                     ErrorLabel2.Visible = true;
 
                 }
@@ -183,9 +183,10 @@ namespace RoyalPetz_ADMIN
                     break;
                 case globalConstants.REPORT_REQUEST_RETURN:
                     checkBox1.Visible = false;
+                    nonactivecheckbox1.Visible = false;
+                    LabelOptions1.Visible = false;
                     SupplierNameCombobox.Visible= false;
                     CustomercomboBox.Visible = false;
-                    nonactivecheckbox1.Visible = false;
                     checkBox2.Visible = true;
                     ProductcomboBox.Visible = true;
                     nonactivecheckbox2.Visible = true;
@@ -193,9 +194,10 @@ namespace RoyalPetz_ADMIN
                     break;
                 case globalConstants.REPORT_PRODUCT_MUTATION:
                     checkBox1.Visible = false;
+                    nonactivecheckbox1.Visible = false;
+                    LabelOptions1.Visible = false;
                     SupplierNameCombobox.Visible = false;
                     CustomercomboBox.Visible = false;
-                    nonactivecheckbox1.Visible = false;
                     checkBox2.Visible = true;
                     ProductcomboBox.Visible = true;
                     nonactivecheckbox2.Visible = true;
@@ -203,9 +205,10 @@ namespace RoyalPetz_ADMIN
                     break;
                 case globalConstants.REPORT_STOCK_DEVIATION:
                     checkBox1.Visible = false;
+                    nonactivecheckbox1.Visible = false;
+                    LabelOptions1.Visible = false;
                     SupplierNameCombobox.Visible = false;
                     CustomercomboBox.Visible = false;
-                    nonactivecheckbox1.Visible = false;
                     checkBox2.Visible = true;
                     ProductcomboBox.Visible = true;
                     nonactivecheckbox2.Visible = true;
