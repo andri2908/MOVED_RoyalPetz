@@ -486,10 +486,14 @@ namespace RoyalPetz_ADMIN
             disc2.Add("0");
             discRP.Add("0");
 
-
             selectedPelangganID = 0;
             globalTotalValue = 0;
             discValue = 0;
+            sisaBayar = 0;
+            bayarAmount = 0;
+            bayarAmountText = "0";
+            discAmountText = "0";
+        
             totalLabel.Text = globalTotalValue.ToString("C0", culture);
             gutil.ResetAllControls(this);
 
