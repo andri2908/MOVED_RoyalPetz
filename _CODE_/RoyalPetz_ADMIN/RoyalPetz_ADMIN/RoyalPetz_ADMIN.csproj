@@ -876,6 +876,12 @@
     <Compile Include="ReportSalesSummarySearchForm.Designer.cs">
       <DependentUpon>ReportSalesSummarySearchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportStock.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportStock.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportStockDeviation.cs">
       <DependentUpon>ReportStockDeviation.rpt</DependentUpon>
       <SubType>Component</SubType>
@@ -887,6 +893,12 @@
     </Compile>
     <Compile Include="ReportStockDeviationForm.Designer.cs">
       <DependentUpon>ReportStockDeviationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportStockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportStockForm.Designer.cs">
+      <DependentUpon>ReportStockForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ReportStockInOutSearchForm.cs">
       <SubType>Form</SubType>
@@ -1515,12 +1527,19 @@
     <EmbeddedResource Include="ReportSalesSummarySearchForm.resx">
       <DependentUpon>ReportSalesSummarySearchForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportStock.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportStock.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportStockDeviation.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportStockDeviation.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportStockDeviationForm.resx">
       <DependentUpon>ReportStockDeviationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportStockForm.resx">
+      <DependentUpon>ReportStockForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportStockInOutSearchForm.resx">
       <DependentUpon>ReportStockInOutSearchForm.cs</DependentUpon>

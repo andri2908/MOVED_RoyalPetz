@@ -45,11 +45,13 @@
             this.datefromPicker = new System.Windows.Forms.DateTimePicker();
             this.CustomercomboBox = new System.Windows.Forms.ComboBox();
             this.SupplierNameCombobox = new System.Windows.Forms.ComboBox();
+            this.TagsComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.TagsComboBox);
             this.groupBox1.Controls.Add(this.checkBox2);
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.ErrorLabel2);
@@ -237,6 +239,17 @@
             this.SupplierNameCombobox.Text = "Supplier";
             this.SupplierNameCombobox.Visible = false;
             // 
+            // TagsComboBox
+            // 
+            this.TagsComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.TagsComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.TagsComboBox.FormattingEnabled = true;
+            this.TagsComboBox.Location = new System.Drawing.Point(204, 60);
+            this.TagsComboBox.Name = "TagsComboBox";
+            this.TagsComboBox.Size = new System.Drawing.Size(200, 26);
+            this.TagsComboBox.TabIndex = 14;
+            this.TagsComboBox.Visible = false;
+            // 
             // ReportStockInOutSearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -271,5 +284,6 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ComboBox CustomercomboBox;
+        private System.Windows.Forms.ComboBox TagsComboBox;
     }
 }

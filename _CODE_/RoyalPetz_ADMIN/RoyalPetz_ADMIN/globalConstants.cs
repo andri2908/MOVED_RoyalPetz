@@ -160,7 +160,6 @@ namespace RoyalPetz_ADMIN
         public const int CHANGE_LOG_PAYMENT_CREDIT = 8;
         public const int CHANGE_LOG_PAYMENT_DEBT = 9;
 
-
         //mode laporan
         public const int MENU_REPORT_USER = 601;
 
@@ -182,6 +181,7 @@ namespace RoyalPetz_ADMIN
         public const int REPORT_REQUEST_RETURN = 722;
         public const int REPORT_PRODUCT_MUTATION = 723;
         public const int REPORT_STOCK_DEVIATION = 724;
+        public const int REPORT_STOCK = 725;
 
         public const int REPORT_DEBT_PAYMENT = 731;
         public const int REPORT_CREDIT_PAYMENT = 732;
@@ -228,6 +228,7 @@ namespace RoyalPetz_ADMIN
         //public const string DailyBalanceXML = "DailyBalance.xml";
         public const string MonthlyBalanceXML = "MonthlyBalance.xml";
 
+        public const string StockXML = "Stock.xml";
         public const string SalesReturnXML = "SalesReturn.xml";
         public const string PurchaseReturnXML = "PurchaseReturn.xml";
         public const string RequestReturnXML = "RequestReturn.xml";

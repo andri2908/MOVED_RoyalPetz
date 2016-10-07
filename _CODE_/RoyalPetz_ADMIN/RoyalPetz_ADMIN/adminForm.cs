@@ -1504,5 +1504,11 @@ namespace RoyalPetz_ADMIN
             p.StartInfo.Arguments = "runAdmin";
             p.Start();
         }
+
+        private void stokProdukToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm(globalConstants.REPORT_STOCK);
+            displayedForm.ShowDialog(this);
+        }
     }
 }

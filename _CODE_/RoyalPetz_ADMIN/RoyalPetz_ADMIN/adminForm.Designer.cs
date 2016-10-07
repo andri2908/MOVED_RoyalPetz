@@ -182,6 +182,7 @@
             this.SHORTCUT_returBeli = new System.Windows.Forms.ToolStripButton();
             this.SHORTCUT_returJual = new System.Windows.Forms.ToolStripButton();
             this.timerMessage = new System.Windows.Forms.Timer(this.components);
+            this.stokProdukToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MAINMENU_Strip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.MAINMENU_ShortCut.SuspendLayout();
@@ -967,6 +968,7 @@
             this.pembayaranPiutangToolStripMenuItem,
             this.Separator_7,
             this.deviasiAdjustmentStokToolStripMenuItem,
+            this.stokProdukToolStripMenuItem,
             this.stokDibawahLimitToolStripMenuItem,
             this.returBarangToolStripMenuItem,
             this.Separator_9,
@@ -1720,6 +1722,15 @@
             this.timerMessage.Interval = 3600000;
             this.timerMessage.Tick += new System.EventHandler(this.timerMessage_Tick);
             // 
+            // stokProdukToolStripMenuItem
+            // 
+            this.stokProdukToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.stokProdukToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.stokProdukToolStripMenuItem.Name = "stokProdukToolStripMenuItem";
+            this.stokProdukToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
+            this.stokProdukToolStripMenuItem.Text = "Stok Produk";
+            this.stokProdukToolStripMenuItem.Click += new System.EventHandler(this.stokProdukToolStripMenuItem_Click);
+            // 
             // adminForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1910,6 +1921,7 @@
         private System.Windows.Forms.ToolStripMenuItem MENU_CopyNota;
         private System.Windows.Forms.ToolStripMenuItem uSBToolStripMenuItem;
         private System.Windows.Forms.Timer timerMessage;
+        private System.Windows.Forms.ToolStripMenuItem stokProdukToolStripMenuItem;
         //private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
     }
 }
