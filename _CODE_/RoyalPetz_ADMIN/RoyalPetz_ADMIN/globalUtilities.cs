@@ -513,12 +513,21 @@ namespace RoyalPetz_ADMIN
 
         public void renameLogFile()
         {
-            if (!Directory.Exists(Application.StartupPath + "\\LOG_FILE"))
+             if (!Directory.Exists(Application.StartupPath + "\\LOG_FILE"))
                 Directory.CreateDirectory(Application.StartupPath + "\\LOG_FILE");
 
             string oldPath = Application.StartupPath + "\\" + logFileName;
             string dateTimeValue = String.Format(culture, "{0:ddMMyyyyHHmm}", DateTime.Now);
             string newPath = Application.StartupPath + "\\LOG_FILE\\logFile_" + dateTimeValue + ".log";
+
+            // ADD CHECKING TO ENSURE UNIQUE NEW FILE NAME
+            int counter = 1;
+            while (File.Exists(newPath))
+            { 
+                newPath = Application.StartupPath + "\\LOG_FILE\\logFile_" + dateTimeValue + "_" + counter + ".log";
+                counter++;
+            }
+
             if (File.Exists(oldPath))
                 File.Move(oldPath, newPath);
         }
