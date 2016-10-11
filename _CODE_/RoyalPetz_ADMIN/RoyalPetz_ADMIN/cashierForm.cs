@@ -115,6 +115,8 @@ namespace RoyalPetz_ADMIN
 
         private void captureAll(Keys key)
         {
+            int posindex = 0;
+            int rowcount = 0;
             switch (key)
             {
                 case Keys.F1:
@@ -179,12 +181,21 @@ namespace RoyalPetz_ADMIN
                                 reprintInvoice();
                     break;
 
-                case Keys.F8: // NOT USED
+                case Keys.F8: // USED
                     if (originModuleID != globalConstants.COPY_NOTA)
                     {
                         gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : HOTKEY TO ADD NEW ROW PRESSED");
-
-                        addNewRow();
+                        //focus to row below
+                        rowcount = cashierDataGridView.RowCount;
+                        if (rowcount > 1)
+                        {
+                            posindex = cashierDataGridView.CurrentCell.RowIndex;
+                            if (posindex < rowcount - 1)
+                            {
+                                cashierDataGridView.CurrentCell = cashierDataGridView.Rows[posindex + 1].Cells["productID"];
+                            }
+                        }
+                        //addNewRow();
                     }
                     break;
 
@@ -344,8 +355,8 @@ namespace RoyalPetz_ADMIN
             ghk_F7 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F7, this);
             ghk_F7.Register();
 
-            //ghk_F8 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F8, this);
-            //ghk_F8.Register();
+            ghk_F8 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F8, this);
+            ghk_F8.Register();
 
             ghk_F9 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F9, this);
             ghk_F9.Register();
@@ -422,7 +433,7 @@ namespace RoyalPetz_ADMIN
             ghk_F4.Unregister();
             //ghk_F5.Unregister();
             ghk_F7.Unregister();
-            //ghk_F8.Unregister();
+            ghk_F8.Unregister();
             ghk_F9.Unregister();
             ghk_F11.Unregister();
 
