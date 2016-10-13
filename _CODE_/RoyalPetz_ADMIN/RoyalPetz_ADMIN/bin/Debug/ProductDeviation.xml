@@ -1,0 +1,92 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="DATE" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="ID" type="xs:string" minOccurs="0" />
+                <xs:element name="NAMA_x0020_PRODUK" type="xs:string" minOccurs="0" />
+                <xs:element name="DESKRIPSI" type="xs:string" minOccurs="0" />
+                <xs:element name="MERK" type="xs:string" minOccurs="0" />
+                <xs:element name="NOMOR_x0020_RAK" type="xs:string" minOccurs="0" />
+                <xs:element name="STOK" type="xs:double" minOccurs="0" />
+                <xs:element name="SATUAN" type="xs:string" minOccurs="0" />
+                <xs:element name="DEVIASI" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <DATE>2016-07-19T00:00:00+07:00</DATE>
+    <ID>AA-007</ID>
+    <NAMA_x0020_PRODUK>AA-007 SISIR</NAMA_x0020_PRODUK>
+    <DESKRIPSI />
+    <MERK />
+    <NOMOR_x0020_RAK>--00</NOMOR_x0020_RAK>
+    <STOK>100</STOK>
+    <SATUAN>PCS</SATUAN>
+    <DEVIASI>POSITIVE</DEVIASI>
+  </Table>
+  <Table>
+    <DATE>2016-07-20T00:00:00+07:00</DATE>
+    <ID>ALPO-P1</ID>
+    <NAMA_x0020_PRODUK>ALPO PUPPY 1 KG</NAMA_x0020_PRODUK>
+    <DESKRIPSI xml:space="preserve"> </DESKRIPSI>
+    <MERK xml:space="preserve"> </MERK>
+    <NOMOR_x0020_RAK>--00</NOMOR_x0020_RAK>
+    <STOK>9900</STOK>
+    <SATUAN>KG</SATUAN>
+    <DEVIASI>POSITIVE</DEVIASI>
+  </Table>
+  <Table>
+    <DATE>2016-07-19T00:00:00+07:00</DATE>
+    <ID>ALPO-P1</ID>
+    <NAMA_x0020_PRODUK>ALPO PUPPY 1 KG</NAMA_x0020_PRODUK>
+    <DESKRIPSI xml:space="preserve"> </DESKRIPSI>
+    <MERK xml:space="preserve"> </MERK>
+    <NOMOR_x0020_RAK>--00</NOMOR_x0020_RAK>
+    <STOK>10</STOK>
+    <SATUAN>KG</SATUAN>
+    <DEVIASI>POSITIVE</DEVIASI>
+  </Table>
+  <Table>
+    <DATE>2016-07-20T00:00:00+07:00</DATE>
+    <ID>APRO-P1</ID>
+    <NAMA_x0020_PRODUK>A PRO PUPPY 1 KG</NAMA_x0020_PRODUK>
+    <DESKRIPSI />
+    <MERK />
+    <NOMOR_x0020_RAK>--00</NOMOR_x0020_RAK>
+    <STOK>100</STOK>
+    <SATUAN>KG</SATUAN>
+    <DEVIASI>POSITIVE</DEVIASI>
+  </Table>
+  <Table>
+    <DATE>2016-07-20T00:00:00+07:00</DATE>
+    <ID>ANF-P1</ID>
+    <NAMA_x0020_PRODUK>ANF PUPPY 1 KG</NAMA_x0020_PRODUK>
+    <DESKRIPSI />
+    <MERK />
+    <NOMOR_x0020_RAK>--00</NOMOR_x0020_RAK>
+    <STOK>100</STOK>
+    <SATUAN>KG</SATUAN>
+    <DEVIASI>POSITIVE</DEVIASI>
+  </Table>
+  <Table>
+    <DATE>2016-07-20T00:00:00+07:00</DATE>
+    <ID>ALPO-P1</ID>
+    <NAMA_x0020_PRODUK>ALPO PUPPY 1 KG</NAMA_x0020_PRODUK>
+    <DESKRIPSI xml:space="preserve"> </DESKRIPSI>
+    <MERK xml:space="preserve"> </MERK>
+    <NOMOR_x0020_RAK>--00</NOMOR_x0020_RAK>
+    <STOK>100</STOK>
+    <SATUAN>KG</SATUAN>
+    <DEVIASI>POSITIVE</DEVIASI>
+  </Table>
+</NewDataSet>

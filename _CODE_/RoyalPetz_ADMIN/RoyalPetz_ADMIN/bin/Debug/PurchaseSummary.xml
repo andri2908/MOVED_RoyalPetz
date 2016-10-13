@@ -1,0 +1,53 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="TGL" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="TERIMA" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="INVOICE" type="xs:string" minOccurs="0" />
+                <xs:element name="SUPPLIER" type="xs:string" minOccurs="0" />
+                <xs:element name="TOTAL" type="xs:double" minOccurs="0" />
+                <xs:element name="TOP" type="xs:string" minOccurs="0" />
+                <xs:element name="HARI" type="xs:double" minOccurs="0" />
+                <xs:element name="STATUS" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <TGL>2016-07-22T00:00:00+07:00</TGL>
+    <TERIMA>2016-07-22T00:00:00+07:00</TERIMA>
+    <INVOICE>PR-1</INVOICE>
+    <SUPPLIER>SANDY</SUPPLIER>
+    <TOTAL>255115</TOTAL>
+    <TOP>KREDIT</TOP>
+    <HARI>1</HARI>
+    <STATUS>BELUM LUNAS</STATUS>
+  </Table>
+  <Table>
+    <TGL>2016-07-22T00:00:00+07:00</TGL>
+    <INVOICE>PO-1</INVOICE>
+    <SUPPLIER>SANDY</SUPPLIER>
+    <TOTAL>35711.68</TOTAL>
+    <TOP>TUNAI</TOP>
+    <HARI>0</HARI>
+    <STATUS>LUNAS</STATUS>
+  </Table>
+  <Table>
+    <TGL>2016-07-22T00:00:00+07:00</TGL>
+    <INVOICE>PO-2</INVOICE>
+    <SUPPLIER>HI PET</SUPPLIER>
+    <TOTAL>36625</TOTAL>
+    <TOP>TUNAI</TOP>
+    <HARI>0</HARI>
+    <STATUS>LUNAS</STATUS>
+  </Table>
+</NewDataSet>

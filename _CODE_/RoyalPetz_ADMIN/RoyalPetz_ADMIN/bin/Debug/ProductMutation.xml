@@ -1,0 +1,147 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="INVOICE" type="xs:string" minOccurs="0" />
+                <xs:element name="TANGGAL" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="DARI" type="xs:string" minOccurs="0" />
+                <xs:element name="KE" type="xs:string" minOccurs="0" />
+                <xs:element name="TOTAL" type="xs:double" minOccurs="0" />
+                <xs:element name="STATUS" type="xs:string" minOccurs="0" />
+                <xs:element name="PRODUK" type="xs:string" minOccurs="0" />
+                <xs:element name="HPP" type="xs:double" minOccurs="0" />
+                <xs:element name="QTY" type="xs:double" minOccurs="0" />
+                <xs:element name="SUBTOTAL" type="xs:double" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <INVOICE>PM-1</INVOICE>
+    <TANGGAL>2016-07-20T00:00:00+07:00</TANGGAL>
+    <DARI>PUSAT</DARI>
+    <KE>CABANG SOBA</KE>
+    <TOTAL>109250</TOTAL>
+    <STATUS>BELUM DITERIMA</STATUS>
+    <PRODUK>ALPO PUPPY 1 KG</PRODUK>
+    <HPP>26.625</HPP>
+    <QTY>2</QTY>
+    <SUBTOTAL>53.25</SUBTOTAL>
+  </Table>
+  <Table>
+    <INVOICE>PM-1</INVOICE>
+    <TANGGAL>2016-07-20T00:00:00+07:00</TANGGAL>
+    <DARI>PUSAT</DARI>
+    <KE>CABANG SOBA</KE>
+    <TOTAL>109250</TOTAL>
+    <STATUS>BELUM DITERIMA</STATUS>
+    <PRODUK>ANF PUPPY 1 KG</PRODUK>
+    <HPP>28</HPP>
+    <QTY>2</QTY>
+    <SUBTOTAL>56</SUBTOTAL>
+  </Table>
+  <Table>
+    <INVOICE>PM-2</INVOICE>
+    <TANGGAL>2016-07-20T00:00:00+07:00</TANGGAL>
+    <DARI>PUSAT</DARI>
+    <KE>CABANG SOBA</KE>
+    <TOTAL>26625</TOTAL>
+    <STATUS>BELUM DITERIMA</STATUS>
+    <PRODUK>ALPO PUPPY 1 KG</PRODUK>
+    <HPP>26.625</HPP>
+    <QTY>1</QTY>
+    <SUBTOTAL>26.625</SUBTOTAL>
+  </Table>
+  <Table>
+    <INVOICE>PM-3</INVOICE>
+    <TANGGAL>2016-07-20T00:00:00+07:00</TANGGAL>
+    <DARI>PUSAT</DARI>
+    <KE>CABANG SOBA</KE>
+    <TOTAL>0</TOTAL>
+    <STATUS>BELUM DITERIMA</STATUS>
+    <PRODUK>ALPO PUPPY 1 KG</PRODUK>
+    <HPP>26.625</HPP>
+    <QTY>1</QTY>
+    <SUBTOTAL>26.625</SUBTOTAL>
+  </Table>
+  <Table>
+    <INVOICE>PM-4</INVOICE>
+    <TANGGAL>2016-07-22T00:00:00+07:00</TANGGAL>
+    <DARI>PUSAT</DARI>
+    <KE>CABANG SOBA</KE>
+    <TOTAL>88250</TOTAL>
+    <STATUS>DITERIMA</STATUS>
+    <PRODUK>ALPO PUPPY 1 KG</PRODUK>
+    <HPP>26625</HPP>
+    <QTY>2</QTY>
+    <SUBTOTAL>53250</SUBTOTAL>
+  </Table>
+  <Table>
+    <INVOICE>PM-4</INVOICE>
+    <TANGGAL>2016-07-22T00:00:00+07:00</TANGGAL>
+    <DARI>PUSAT</DARI>
+    <KE>CABANG SOBA</KE>
+    <TOTAL>88250</TOTAL>
+    <STATUS>DITERIMA</STATUS>
+    <PRODUK>SD PUPPY SMALL BITE 1 KG</PRODUK>
+    <HPP>35000</HPP>
+    <QTY>1</QTY>
+    <SUBTOTAL>35000</SUBTOTAL>
+  </Table>
+  <Table>
+    <INVOICE>PM-5</INVOICE>
+    <TANGGAL>2016-07-22T00:00:00+07:00</TANGGAL>
+    <DARI>PUSAT</DARI>
+    <KE>CABANG SOBA</KE>
+    <TOTAL>82625</TOTAL>
+    <STATUS>BELUM DITERIMA</STATUS>
+    <PRODUK>ALPO PUPPY 1 KG</PRODUK>
+    <HPP>26625</HPP>
+    <QTY>1</QTY>
+    <SUBTOTAL>26625</SUBTOTAL>
+  </Table>
+  <Table>
+    <INVOICE>PM-5</INVOICE>
+    <TANGGAL>2016-07-22T00:00:00+07:00</TANGGAL>
+    <DARI>PUSAT</DARI>
+    <KE>CABANG SOBA</KE>
+    <TOTAL>82625</TOTAL>
+    <STATUS>BELUM DITERIMA</STATUS>
+    <PRODUK>ANF PUPPY 1 KG</PRODUK>
+    <HPP>28000</HPP>
+    <QTY>2</QTY>
+    <SUBTOTAL>56000</SUBTOTAL>
+  </Table>
+  <Table>
+    <INVOICE>PM-6</INVOICE>
+    <TANGGAL>2016-07-22T00:00:00+07:00</TANGGAL>
+    <DARI>PUSAT</DARI>
+    <KE>CABANG SOBA</KE>
+    <TOTAL>28000</TOTAL>
+    <STATUS>BELUM DITERIMA</STATUS>
+    <PRODUK>ANF PUPPY 1 KG</PRODUK>
+    <HPP>28000</HPP>
+    <QTY>1</QTY>
+    <SUBTOTAL>28000</SUBTOTAL>
+  </Table>
+  <Table>
+    <INVOICE>PM-7</INVOICE>
+    <TANGGAL>2016-07-23T00:00:00+07:00</TANGGAL>
+    <DARI>PUSAT</DARI>
+    <KE>CABANG SOBA</KE>
+    <TOTAL>32216250</TOTAL>
+    <STATUS>BELUM DITERIMA</STATUS>
+    <PRODUK>ALPO PUPPY 1 KG</PRODUK>
+    <HPP>26625</HPP>
+    <QTY>1210</QTY>
+    <SUBTOTAL>32216250</SUBTOTAL>
+  </Table>
+</NewDataSet>
