@@ -3003,7 +3003,10 @@ namespace RoyalPetz_ADMIN
             double productPrice = 0;
             double subTotal = 0;
             string columnName = "";
-            
+
+            if (isLoading)
+                return;
+
             columnName = cell.OwningColumn.Name;
             gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : cashierDataGridView_CellValueChanged [" + columnName + "]");
 
@@ -3035,10 +3038,6 @@ namespace RoyalPetz_ADMIN
                     gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : cashierDataGridView_CellValueChanged, empty texbox, reset [" + columnName + "] value to 0");
                     isLoading = true;
 
-                    // reset subTotal Value and recalculate total
-                    selectedRow.Cells["jumlah"].Value = 0;
-                    jumlahList[rowSelectedIndex] = "0";
-
                     switch (columnName)
                     {
                         case "qty":
@@ -3059,10 +3058,28 @@ namespace RoyalPetz_ADMIN
                     }
 
                     selectedRow.Cells[columnName].Value = "0";
-                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : cashierDataGridView_CellValueChanged, recalculate total value");
+
+                    if (columnName == "qty" || columnName == "productPrice")
+                    {
+                        // reset subTotal Value and recalculate total
+                        selectedRow.Cells["jumlah"].Value = 0;
+                        jumlahList[rowSelectedIndex] = "0";
+                    }
+                    else
+                    {
+                        productPrice = Convert.ToDouble(selectedRow.Cells["productPrice"].Value);
+
+                        subTotal = calculateSubTotal(rowSelectedIndex, productPrice);
+                        gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : TextBox_TextChanged, subtotal value [" + subTotal + "]");
+                        selectedRow.Cells["jumlah"].Value = subTotal;
+                        jumlahList[rowSelectedIndex] = subTotal.ToString();
+                    }
+
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : TextBox_TextChanged, recalculate total value");
                     calculateTotal();
 
-                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : cashierDataGridView_CellValueChanged, set the cursor to end of textbox");
+                    isLoading = false;
+
                     return;
                 }
 
@@ -3147,6 +3164,8 @@ namespace RoyalPetz_ADMIN
                 gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : cashierDataGridView_CellValueChanged, attempt to calculate total value");
                 calculateTotal();
             }
+
+            isLoading = false;
         }
 
         private void cashierDataGridView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
