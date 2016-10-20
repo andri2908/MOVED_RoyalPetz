@@ -105,18 +105,17 @@ namespace RoyalPetz_ADMIN
             DataTable dt = new DataTable();
             string sqlCommand;
             string unitNameParam = "";
-
-            if (unitNameTextBox.Text.Equals(""))
-                return;
-
+            
             unitNameParam = MySqlHelper.EscapeString(unitNameTextBox.Text);
             DS.mySqlConnect();
             if (options == 1)
             {
                 sqlCommand = "SELECT UNIT_ID, UNIT_NAME AS 'NAMA UNIT', UNIT_DESCRIPTION AS 'DESKRIPSI UNIT' FROM MASTER_UNIT";
             }
-            else
-            {
+            else            {
+
+                if (unitNameTextBox.Text.Equals(""))
+                    return;
                 if (satuannonactiveoption.Checked == true)
                 {
                     sqlCommand = "SELECT UNIT_ID, UNIT_NAME AS 'NAMA UNIT', UNIT_DESCRIPTION AS 'DESKRIPSI UNIT' FROM MASTER_UNIT WHERE UNIT_NAME LIKE '%" + unitNameParam + "%'";

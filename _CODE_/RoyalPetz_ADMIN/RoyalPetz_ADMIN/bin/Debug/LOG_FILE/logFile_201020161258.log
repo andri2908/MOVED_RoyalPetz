@@ -1,0 +1,103 @@
+[] [17/10/2016 15.33] [] USER = ADMIN IS ACTIVE
+[ADMIN] [17/10/2016 15.33] [] USER ID = 1 LOGIN SUCCESSFULLY
+[ADMIN] [17/10/2016 15.33] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [17/10/2016 15.33] [] DISPLAY ADMIN FORM
+[ADMIN] [17/10/2016 15.33] [] adminForm Load
+[ADMIN] [17/10/2016 15.33] [] ACTIVATE USER ACCESS RIGHT
+[] [19/10/2016 23.25] [] USER = ADMIN IS ACTIVE
+[ADMIN] [19/10/2016 23.25] [] USER ID = 1 LOGIN SUCCESSFULLY
+[ADMIN] [19/10/2016 23.25] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [19/10/2016 23.25] [] DISPLAY ADMIN FORM
+[ADMIN] [19/10/2016 23.25] [] adminForm Load
+[ADMIN] [19/10/2016 23.25] [] ACTIVATE USER ACCESS RIGHT
+[] [19/10/2016 23.29] [] USER = ADMIN IS ACTIVE
+[ADMIN] [19/10/2016 23.29] [] USER ID = 1 LOGIN SUCCESSFULLY
+[ADMIN] [19/10/2016 23.29] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [19/10/2016 23.29] [] DISPLAY ADMIN FORM
+[ADMIN] [19/10/2016 23.29] [] adminForm Load
+[ADMIN] [19/10/2016 23.29] [] ACTIVATE USER ACCESS RIGHT
+[] [20/10/2016 12.44] [] USER = ADMIN IS ACTIVE
+[ADMIN] [20/10/2016 12.44] [] USER ID = 1 LOGIN SUCCESSFULLY
+[ADMIN] [20/10/2016 12.44] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [20/10/2016 12.44] [] DISPLAY ADMIN FORM
+[ADMIN] [20/10/2016 12.44] [] adminForm Load
+[ADMIN] [20/10/2016 12.44] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : MULTIPLE CASHIER INSTANCE [1]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : REGISTER HOTKEY
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierForm_Load, ATTEMPT TO LOAD NO FAKTUR
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : loadNoFaktur, noFakturValue [SLO001]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierForm_Load, ATTEMPT TO addColumnToDataGrid
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : UPDATE ROW NUMBER, TOTAL ROW [1]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [F8]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : calculateTotal
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : calculateTotal [0]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : calculateTotal, totalAfterDisc [0]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : calculateChangeValue, bayarTextBox.Text [0]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : calculateChangeValue, sisaBayar [0]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : REGISTER HOTKEY
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : UPDATE ROW NUMBER, TOTAL ROW [2]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [F8]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : cashierDataGridView_CellValueChanged [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_previewKeyDown, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : HOTKEY TO ADD NEW ROW PRESSED
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : HOTKEY TO ADD NEW ROW PRESSED
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : HOTKEY TO ADD NEW ROW PRESSED
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.44] [PENJUALAN] CASHIER FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [productID]
+[ADMIN] [20/10/2016 12.58] [PENJUALAN] CASHIER FORM : UNREGISTER HOTKEY
+[ADMIN] [20/10/2016 12.58] [PENJUALAN] CASHIER FORM : UNREGISTER HOTKEY
+[ADMIN] [20/10/2016 12.58] [] USER ID = 1LOGOUT

@@ -76,6 +76,7 @@ namespace RoyalPetz_ADMIN
 
         private void captureAll(Keys key)
         {
+            int rowcount = 0;
             switch (key)
             {
                 case Keys.F1:
@@ -97,8 +98,10 @@ namespace RoyalPetz_ADMIN
                     break;
 
                 case Keys.F8:
-                    detailRequestOrderDataGridView.Focus();
-                    addNewRow();
+                    //detailRequestOrderDataGridView.Focus();
+                    rowcount = detailRequestOrderDataGridView.RowCount;
+                    detailRequestOrderDataGridView.CurrentCell = detailRequestOrderDataGridView.Rows[rowcount - 1].Cells["productID"];
+                    //addNewRow();
                     break;
 
                 case Keys.F9:
@@ -182,8 +185,8 @@ namespace RoyalPetz_ADMIN
             ghk_F2 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F2, this);
             ghk_F2.Register();
 
-            //ghk_F8 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F8, this);
-            //ghk_F8.Register();
+            ghk_F8 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F8, this);
+            ghk_F8.Register();
 
             ghk_F9 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F9, this);
             ghk_F9.Register();
@@ -207,7 +210,7 @@ namespace RoyalPetz_ADMIN
         {
             ghk_F1.Unregister();
             ghk_F2.Unregister();
-            //ghk_F8.Unregister();
+            ghk_F8.Unregister();
             ghk_F9.Unregister();
             ghk_F11.Unregister();
             //ghk_DEL.Unregister();

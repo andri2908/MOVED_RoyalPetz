@@ -253,7 +253,7 @@ namespace RoyalPetz_ADMIN
             arrButton[0] = displayButton;
             arrButton[1] = newButton;
             arrButton[2] = importButton;
-            gutil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
+            //gutil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
 
             gutil.reArrangeTabOrder(this);
         }

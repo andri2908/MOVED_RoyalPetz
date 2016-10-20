@@ -131,6 +131,7 @@ namespace RoyalPetz_ADMIN
 
         private void captureAll(Keys key)
         {
+            int rowcount = 0;
             switch (key)
             {
                 case Keys.F1:
@@ -160,8 +161,10 @@ namespace RoyalPetz_ADMIN
                 case Keys.F8:
                     if (directMutasiBarang)
                     {
-                        detailRequestOrderDataGridView.Focus();
-                        addNewRow();
+                        //tailRequestOrderDataGridView.Select();
+                        rowcount = detailRequestOrderDataGridView.RowCount;
+                        detailRequestOrderDataGridView.CurrentCell = detailRequestOrderDataGridView.Rows[rowcount - 1].Cells["productID"];
+                        //addNewRow();
                     }
                     break;
 
@@ -247,8 +250,8 @@ namespace RoyalPetz_ADMIN
             ghk_F2 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F2, this);
             ghk_F2.Register();
 
-            //ghk_F8 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F8, this);
-            //ghk_F8.Register();
+            ghk_F8 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F8, this);
+            ghk_F8.Register();
 
             ghk_F9 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F9, this);
             ghk_F9.Register();

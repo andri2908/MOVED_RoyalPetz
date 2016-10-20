@@ -187,14 +187,15 @@ namespace RoyalPetz_ADMIN
                         gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : HOTKEY TO ADD NEW ROW PRESSED");
                         //focus to row below
                         rowcount = cashierDataGridView.RowCount;
-                        if (rowcount > 1)
-                        {
-                            posindex = cashierDataGridView.CurrentCell.RowIndex;
-                            if (posindex < rowcount - 1)
-                            {
-                                cashierDataGridView.CurrentCell = cashierDataGridView.Rows[posindex + 1].Cells["productID"];
-                            }
-                        }
+                        cashierDataGridView.CurrentCell = cashierDataGridView.Rows[rowcount - 1].Cells["productID"];
+                        //if (rowcount > 1)
+                        //{
+                        //    posindex = cashierDataGridView.CurrentCell.RowIndex;
+                        //    if (posindex < rowcount - 1)
+                        //    {
+                        //        cashierDataGridView.CurrentCell = cashierDataGridView.Rows[posindex + 1].Cells["productID"];
+                        //    }
+                        //}
                         //addNewRow();
                     }
                     break;

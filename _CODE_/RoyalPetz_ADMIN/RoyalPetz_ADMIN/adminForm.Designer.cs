@@ -137,6 +137,7 @@
             this.pembayaranPiutangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Separator_7 = new System.Windows.Forms.ToolStripSeparator();
             this.deviasiAdjustmentStokToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stokProdukToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stokDibawahLimitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.returBarangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pembelianToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -182,7 +183,6 @@
             this.SHORTCUT_returBeli = new System.Windows.Forms.ToolStripButton();
             this.SHORTCUT_returJual = new System.Windows.Forms.ToolStripButton();
             this.timerMessage = new System.Windows.Forms.Timer(this.components);
-            this.stokProdukToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MAINMENU_Strip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.MAINMENU_ShortCut.SuspendLayout();
@@ -1273,6 +1273,15 @@
             this.deviasiAdjustmentStokToolStripMenuItem.Text = "Deviasi (Adjustment) Stok";
             this.deviasiAdjustmentStokToolStripMenuItem.Click += new System.EventHandler(this.deviasiAdjustmentStokToolStripMenuItem_Click);
             // 
+            // stokProdukToolStripMenuItem
+            // 
+            this.stokProdukToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.stokProdukToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.stokProdukToolStripMenuItem.Name = "stokProdukToolStripMenuItem";
+            this.stokProdukToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
+            this.stokProdukToolStripMenuItem.Text = "Stok Produk";
+            this.stokProdukToolStripMenuItem.Click += new System.EventHandler(this.stokProdukToolStripMenuItem_Click);
+            // 
             // stokDibawahLimitToolStripMenuItem
             // 
             this.stokDibawahLimitToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
@@ -1721,15 +1730,6 @@
             this.timerMessage.Enabled = true;
             this.timerMessage.Interval = 3600000;
             this.timerMessage.Tick += new System.EventHandler(this.timerMessage_Tick);
-            // 
-            // stokProdukToolStripMenuItem
-            // 
-            this.stokProdukToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
-            this.stokProdukToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
-            this.stokProdukToolStripMenuItem.Name = "stokProdukToolStripMenuItem";
-            this.stokProdukToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
-            this.stokProdukToolStripMenuItem.Text = "Stok Produk";
-            this.stokProdukToolStripMenuItem.Click += new System.EventHandler(this.stokProdukToolStripMenuItem_Click);
             // 
             // adminForm
             // 

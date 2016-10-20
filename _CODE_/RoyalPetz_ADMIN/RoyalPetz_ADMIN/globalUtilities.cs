@@ -354,10 +354,16 @@ namespace RoyalPetz_ADMIN
             return false;
         }
 
-        public void reArrangeTabOrder(Control form)
+        public void reArrangeTabOrder(Control form, int mode = 0)
         {
             TabOrderManager.TabScheme scheme;
-            scheme = TabOrderManager.TabScheme.DownFirst;
+            if (mode == 0 )
+            {
+                scheme = TabOrderManager.TabScheme.DownFirst;
+            } else
+            {
+                scheme = TabOrderManager.TabScheme.AcrossFirst;
+            }
             TabOrderManager tom = new TabOrderManager(form);
             tom.SetTabOrder(scheme);
 

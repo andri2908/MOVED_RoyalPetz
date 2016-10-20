@@ -91,6 +91,7 @@ namespace RoyalPetz_ADMIN
         private void captureAll(Keys key)
         {
             string searchParam = "";
+            int rowcount = 0;
             switch (key)
             {
                 case Keys.F1:
@@ -120,8 +121,10 @@ namespace RoyalPetz_ADMIN
                 case Keys.F8:
                     if (detailReturDataGridView.ReadOnly == false)
                     { 
-                        detailReturDataGridView.Focus();
-                        addNewRow();
+                        //detailReturDataGridView.Focus();
+                        rowcount = detailReturDataGridView.RowCount;
+                        detailReturDataGridView.CurrentCell = detailReturDataGridView.Rows[rowcount - 1].Cells["productID"];
+                        //addNewRow();
                     }
                     break;
 
@@ -209,8 +212,8 @@ namespace RoyalPetz_ADMIN
             ghk_F2 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F2, this);
             ghk_F2.Register();
 
-            //ghk_F8 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F8, this);
-            //ghk_F8.Register();
+            ghk_F8 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F8, this);
+            ghk_F8.Register();
 
             ghk_F9 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F9, this);
             ghk_F9.Register();
@@ -235,7 +238,7 @@ namespace RoyalPetz_ADMIN
         {
             ghk_F1.Unregister();
             ghk_F2.Unregister();
-            //ghk_F8.Unregister();
+            ghk_F8.Unregister();
             ghk_F9.Unregister();
             ghk_F11.Unregister();
 

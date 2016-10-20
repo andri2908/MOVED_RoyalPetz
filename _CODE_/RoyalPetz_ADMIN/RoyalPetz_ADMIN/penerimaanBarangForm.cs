@@ -67,6 +67,7 @@ namespace RoyalPetz_ADMIN
 
         private void captureAll(Keys key)
         {
+            int rowcount = 0;
             switch (key)
             {
                 case Keys.F1:
@@ -95,10 +96,14 @@ namespace RoyalPetz_ADMIN
 
                 case Keys.F8:
                     if (detailGridView.ReadOnly == false)
-                        //if (originModuleId != globalConstants.PENERIMAAN_BARANG_DARI_PO && originModuleId != globalConstants.PENERIMAAN_BARANG_DARI_MUTASI)
-                        {
-                            addNewRow();
-                        }
+                    {
+                        rowcount = detailGridView.RowCount;
+                        detailGridView.CurrentCell = detailGridView.Rows[rowcount - 1].Cells["productID"];
+                    }
+                    //if (originModuleId != globalConstants.PENERIMAAN_BARANG_DARI_PO && originModuleId != globalConstants.PENERIMAAN_BARANG_DARI_MUTASI)
+                    //{
+                    //    addNewRow();
+                    //}
                     break;
 
                 case Keys.F9:
