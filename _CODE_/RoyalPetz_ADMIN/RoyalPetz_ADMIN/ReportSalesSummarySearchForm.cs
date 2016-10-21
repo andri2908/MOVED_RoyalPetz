@@ -154,6 +154,8 @@ namespace RoyalPetz_ADMIN
             string dateFrom, dateTo;
             string query_product = "";
             string query_customer = "";
+            string query_union_customer = "";
+            string query_tax = "";
             int cust_id = 0;
             string prod_id = "";
             bool result;
@@ -161,9 +163,10 @@ namespace RoyalPetz_ADMIN
             dateTo = String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(datetoPicker.Value));
             DS.mySqlConnect();
             string sqlCommandx = "";
+            
             switch (originModuleID)
             {
-                    case globalConstants.REPORT_SALES_SUMMARY:
+                case globalConstants.REPORT_SALES_SUMMARY:
                     //result = int.TryParse(CustNameCombobox.SelectedValue.ToString(), out cust_id);
                     //if (result)
                     //{
@@ -194,64 +197,86 @@ namespace RoyalPetz_ADMIN
                                             "WHERE DATE_FORMAT(S.SALES_DATE, '%Y%m%d') >= '" + dateFrom + "' AND DATE_FORMAT(S.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "' AND S.CUSTOMER_ID = 0";
                     }
                     DS.writeXML(sqlCommandx, globalConstants.SalesSummaryXML);
-                        ReportSalesSummaryForm displayedForm1 = new ReportSalesSummaryForm();
-                        displayedForm1.ShowDialog(this);
-                        break;
-                    case globalConstants.REPORT_SALES_DETAILED:
+                    ReportSalesSummaryForm displayedForm1 = new ReportSalesSummaryForm();
+                    displayedForm1.ShowDialog(this);
+                    break;
+
+                case globalConstants.REPORT_SALES_DETAILED:
                     // result = int.TryParse(CustNameCombobox.Items[CustNameCombobox.SelectedIndex].ToString(), out cust_id);
-                    result = int.TryParse(CustNameCombobox.SelectedValue.ToString(), out cust_id);
                     if (checkBox1.Checked == false)
                     {
-                        query_customer = "' AND SH.CUSTOMER_ID = " + cust_id;
-                    }
-                    if (cust_id > 0)
-                        {
-                        if (taxModule == false)
-                        {
-                            sqlCommandx = "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', MC.CUSTOMER_FULL_NAME AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', PRODUCT_QTY AS 'QTY', " +
-                                    "PRODUCT_SALES_PRICE AS 'PRICE', ROUND((PRODUCT_QTY * PRODUCT_SALES_PRICE) - SALES_SUBTOTAL, 2) AS 'POTONGAN', SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
-                                    "FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT M, MASTER_CUSTOMER MC " +
-                                    "WHERE SH.CUSTOMER_ID = MC.CUSTOMER_ID AND SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + query_customer;
-                        }
-                        else
-                        {
-                            sqlCommandx = "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', MC.CUSTOMER_FULL_NAME AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', PRODUCT_QTY AS 'QTY', " +
-                                    "PRODUCT_SALES_PRICE AS 'PRICE', ROUND((PRODUCT_QTY * PRODUCT_SALES_PRICE) - SALES_SUBTOTAL, 2) AS 'POTONGAN', SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
-                                    "FROM SALES_HEADER_TAX SH, SALES_DETAIL_TAX SD, MASTER_PRODUCT M, MASTER_CUSTOMER MC " +
-                                    "WHERE SH.CUSTOMER_ID = MC.CUSTOMER_ID AND SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + query_customer;
-                        }
-                    }
-                    else
-                        {
-                        cust_id = 0;
-                        if (taxModule == false)
-                        {
-                            sqlCommandx = "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', PRODUCT_QTY AS 'QTY', " +
-                                    "PRODUCT_SALES_PRICE AS 'PRICE', ROUND((PRODUCT_QTY * PRODUCT_SALES_PRICE) - SALES_SUBTOTAL, 2) AS 'POTONGAN', SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
-                                    "FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT M " +
-                                    "WHERE SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + query_customer;
-                        }
-                        else
-                        {
-                            sqlCommandx = "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', PRODUCT_QTY AS 'QTY', " +
-                                    "PRODUCT_SALES_PRICE AS 'PRICE', ROUND((PRODUCT_QTY * PRODUCT_SALES_PRICE) - SALES_SUBTOTAL, 2) AS 'POTONGAN', SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
+                        result = int.TryParse(CustNameCombobox.SelectedValue.ToString(), out cust_id);
+                        query_customer = " AND SH.CUSTOMER_ID = " + cust_id;
+                    } else
+                    {
+                        //all
+                        query_union_customer = " UNION " +
+                            "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', SD.PRODUCT_QTY AS 'QTY', " +
+                                    "SD.PRODUCT_SALES_PRICE AS 'PRICE', ROUND((SD.PRODUCT_QTY * SD.PRODUCT_SALES_PRICE) - SD.SALES_SUBTOTAL, 2) AS 'POTONGAN', SD.SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_DISCOUNT_FINAL AS 'DISC', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
                                     "FROM SALES_HEADER_TAX SH, SALES_DETAIL_TAX SD, MASTER_PRODUCT M " +
-                                    "WHERE SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + query_customer;
-                        }
+                                    "WHERE SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "' AND SH.CUSTOMER_ID = 0";
                     }
-                    //sqlCommandx = "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', IFNULL(MC.CUSTOMER_FULL_NAME, 'P-UMUM') AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', PRODUCT_QTY AS 'QTY', " +
-                    //            "PRODUCT_SALES_PRICE AS 'PRICE', ROUND((PRODUCT_QTY * PRODUCT_SALES_PRICE) - SALES_SUBTOTAL, 2) AS 'POTONGAN', SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
-                    //            "FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT M, MASTER_CUSTOMER MC " +
-                    //            "WHERE SH.CUSTOMER_ID = MC.CUSTOMER_ID AND SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "' AND SH.CUSTOMER_ID = " + cust_id;
-                                    //" UNION " +
-                                    //"SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', PRODUCT_QTY AS 'QTY', PRODUCT_SALES_PRICE AS 'PRICE', " +
-                                    //"ROUND((PRODUCT_QTY * PRODUCT_SALES_PRICE) - SALES_SUBTOTAL, 2) AS 'POTONGAN', SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
-                                    //"FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT M " +
-                                    //"WHERE SH.CUSTOMER_ID = MC.CUSTOMER_ID AND SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND SH.CUSTOMER_ID = 0 AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "'";
+                    if (taxModule == false)
+                    {
+                        query_tax = "SALES_HEADER SH, SALES_DETAIL SD, ";
+                    } else
+                    {
+                        query_tax = "SALES_HEADER_TAX SH, SALES_DETAIL_TAX SD, ";
+                    }
+                    sqlCommandx = "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', MC.CUSTOMER_FULL_NAME AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', SD.PRODUCT_QTY AS 'QTY', " +
+                        "SD.PRODUCT_SALES_PRICE AS 'PRICE', ROUND((SD.PRODUCT_QTY * SD.PRODUCT_SALES_PRICE) - SD.SALES_SUBTOTAL, 2) AS 'POTONGAN', SD.SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_DISCOUNT_FINAL AS 'DISC', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
+                        "FROM " + query_tax + "MASTER_PRODUCT M, MASTER_CUSTOMER MC " +
+                        "WHERE SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "'"+ query_customer + query_union_customer;
+                        
+                    //if (cust_id > 0)
+                        //{
+                        //    if (taxModule == false)
+                        //    {
+                        //        sqlCommandx = "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', MC.CUSTOMER_FULL_NAME AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', SD.PRODUCT_QTY AS 'QTY', " +
+                        //                "SD.PRODUCT_SALES_PRICE AS 'PRICE', ROUND((SD.PRODUCT_QTY * SD.PRODUCT_SALES_PRICE) - SD.SALES_SUBTOTAL, 2) AS 'POTONGAN', SD.SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_DISCOUNT_FINAL AS 'DISC', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
+                        //                "FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT M, MASTER_CUSTOMER MC " +
+                        //                "WHERE SH.CUSTOMER_ID = MC.CUSTOMER_ID AND SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + query_customer;
+                        //    }
+                        //    else
+                        //    {
+                        //        sqlCommandx = "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', MC.CUSTOMER_FULL_NAME AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', SD.PRODUCT_QTY AS 'QTY', " +
+                        //                "SD.PRODUCT_SALES_PRICE AS 'PRICE', ROUND((SD.PRODUCT_QTY * SD.PRODUCT_SALES_PRICE) - SD.SALES_SUBTOTAL, 2) AS 'POTONGAN', SD.SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_DISCOUNT_FINAL AS 'DISC', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
+                        //                "FROM SALES_HEADER_TAX SH, SALES_DETAIL_TAX SD, MASTER_PRODUCT M, MASTER_CUSTOMER MC " +
+                        //                "WHERE SH.CUSTOMER_ID = MC.CUSTOMER_ID AND SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + query_customer;
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    cust_id = 0;
+                        //    if (taxModule == false)
+                        //    {
+                        //        sqlCommandx = "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', SD.PRODUCT_QTY AS 'QTY', " +
+                        //                "SD.PRODUCT_SALES_PRICE AS 'PRICE', ROUND((SD.PRODUCT_QTY * SD.PRODUCT_SALES_PRICE) - SD.SALES_SUBTOTAL, 2) AS 'POTONGAN', SD.SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_DISCOUNT_FINAL AS 'DISC', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
+                        //                "FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT M " +
+                        //                "WHERE SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + query_customer;
+                        //    }
+                        //    else
+                        //    {
+                        //        sqlCommandx = "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', SD.PRODUCT_QTY AS 'QTY', " +
+                        //                "SD.PRODUCT_SALES_PRICE AS 'PRICE', ROUND((SD.PRODUCT_QTY * SD.PRODUCT_SALES_PRICE) - SD.SALES_SUBTOTAL, 2) AS 'POTONGAN', SD.SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_DISCOUNT_FINAL AS 'DISC', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
+                        //                "FROM SALES_HEADER_TAX SH, SALES_DETAIL_TAX SD, MASTER_PRODUCT M " +
+                        //                "WHERE SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + query_customer;
+                        //    }
+                        //}
+                        //sqlCommandx = "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', IFNULL(MC.CUSTOMER_FULL_NAME, 'P-UMUM') AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', PRODUCT_QTY AS 'QTY', " +
+                        //            "PRODUCT_SALES_PRICE AS 'PRICE', ROUND((PRODUCT_QTY * PRODUCT_SALES_PRICE) - SALES_SUBTOTAL, 2) AS 'POTONGAN', SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
+                        //            "FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT M, MASTER_CUSTOMER MC " +
+                        //            "WHERE SH.CUSTOMER_ID = MC.CUSTOMER_ID AND SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "' AND SH.CUSTOMER_ID = " + cust_id;
+                        //" UNION " +
+                        //"SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', PRODUCT_QTY AS 'QTY', PRODUCT_SALES_PRICE AS 'PRICE', " +
+                        //"ROUND((PRODUCT_QTY * PRODUCT_SALES_PRICE) - SALES_SUBTOTAL, 2) AS 'POTONGAN', SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
+                        //"FROM SALES_HEADER SH, SALES_DETAIL SD, MASTER_PRODUCT M " +
+                        //"WHERE SH.CUSTOMER_ID = MC.CUSTOMER_ID AND SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND SH.CUSTOMER_ID = 0 AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "'";
                         DS.writeXML(sqlCommandx, globalConstants.SalesDetailedXML);
                         ReportSalesDetailedForm displayedForm2 = new ReportSalesDetailedForm();
                         displayedForm2.ShowDialog(this);
                         break;
+
                 case globalConstants.REPORT_SALES_PRODUCT:
                     prod_id = ProductcomboBox.SelectedValue.ToString();                    
                     if (checkBox1.Checked == false)

@@ -16,6 +16,7 @@
                 <xs:element name="PRICE" type="xs:double" minOccurs="0" />
                 <xs:element name="POTONGAN" type="xs:double" minOccurs="0" />
                 <xs:element name="SUBTOTAL" type="xs:double" minOccurs="0" />
+                <xs:element name="DISC" type="xs:double" minOccurs="0" />
                 <xs:element name="PAYMENT" type="xs:double" minOccurs="0" />
                 <xs:element name="CHANGE" type="xs:double" minOccurs="0" />
               </xs:sequence>
