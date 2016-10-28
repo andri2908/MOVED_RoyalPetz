@@ -123,12 +123,14 @@ namespace RoyalPetz_ADMIN
                     CustNameCombobox.Visible = false;
                     ProductcomboBox.Visible = false;
                     nonactivecheckbox.Visible = false;
+                    checkBox1.Visible = false;
                     break;
                 case globalConstants.REPORT_SALES_PRODUCT:
                     LabelOptions.Text = "Produk";
                     CustNameCombobox.Visible = false;
                     ProductcomboBox.Visible = true;
                     nonactivecheckbox.Visible = false;
+                    checkBox1.Visible = true;
                     loadProduct();
                     break;
                 case globalConstants.REPORT_SALES_SUMMARY:
@@ -136,12 +138,14 @@ namespace RoyalPetz_ADMIN
                     nonactivecheckbox.Visible = false;
                     CustNameCombobox.Visible = false;
                     ProductcomboBox.Visible = false;
+                    checkBox1.Visible = false;
                     loadcustomer();
                     break;
                 default:
                     LabelOptions.Text = "Pelanggan";
                     CustNameCombobox.Visible = true;
                     ProductcomboBox.Visible = false;
+                    checkBox1.Visible = true;
                     loadcustomer();
                     break;
                 
