@@ -36,6 +36,8 @@ namespace RoyalPetz_ADMIN
         private Hotkeys.GlobalHotkey ghk_UP;
         private Hotkeys.GlobalHotkey ghk_DOWN;
 
+        private bool navKeyRegistered = false;
+
         public dataPelangganDetailForm()
         {
             InitializeComponent();
@@ -90,12 +92,18 @@ namespace RoyalPetz_ADMIN
 
             ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
             ghk_DOWN.Register();
+
+            navKeyRegistered = true;
         }
 
         private void unregisterGlobalHotkey()
         {
+            if (navKeyRegistered == false)
+                return;
+
             ghk_UP.Unregister();
             ghk_DOWN.Unregister();
+            navKeyRegistered = false;
         }
 
         private void loadCustomerData()

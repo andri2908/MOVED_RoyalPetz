@@ -1196,7 +1196,7 @@ namespace RoyalPetz_ADMIN
         {
             string message = "";
 
-            if (printoutCheckBox.Checked == true)
+            if (printoutCheckBox.Checked == false)
                 message = "SAVE AND PRINT OUT ?";
             else
                 message = "SAVE DATA ?";
