@@ -207,6 +207,14 @@ namespace RoyalPetz_ADMIN
 
                 case globalConstants.REPORT_SALES_DETAILED:
                     // result = int.TryParse(CustNameCombobox.Items[CustNameCombobox.SelectedIndex].ToString(), out cust_id);
+                    if (taxModule == false)
+                    {
+                        query_tax = "SALES_HEADER SH, SALES_DETAIL SD, ";
+                    }
+                    else
+                    {
+                        query_tax = "SALES_HEADER_TAX SH, SALES_DETAIL_TAX SD, ";
+                    }
                     if (checkBox1.Checked == false)
                     {
                         result = int.TryParse(CustNameCombobox.SelectedValue.ToString(), out cust_id);
@@ -217,20 +225,23 @@ namespace RoyalPetz_ADMIN
                         query_union_customer = " UNION " +
                             "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', SD.PRODUCT_QTY AS 'QTY', " +
                                     "SD.PRODUCT_SALES_PRICE AS 'PRICE', ROUND((SD.PRODUCT_QTY * SD.PRODUCT_SALES_PRICE) - SD.SALES_SUBTOTAL, 2) AS 'POTONGAN', SD.SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_DISCOUNT_FINAL AS 'DISC', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
-                                    "FROM SALES_HEADER_TAX SH, SALES_DETAIL_TAX SD, MASTER_PRODUCT M " +
+                                    "FROM " + query_tax + "MASTER_PRODUCT M " +
                                     "WHERE SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "' AND SH.CUSTOMER_ID = 0";
                     }
-                    if (taxModule == false)
+                    if (cust_id > 0 )
                     {
-                        query_tax = "SALES_HEADER SH, SALES_DETAIL SD, ";
-                    } else
-                    {
-                        query_tax = "SALES_HEADER_TAX SH, SALES_DETAIL_TAX SD, ";
-                    }
-                    sqlCommandx = "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', MC.CUSTOMER_FULL_NAME AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', SD.PRODUCT_QTY AS 'QTY', " +
+                        sqlCommandx = "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', MC.CUSTOMER_FULL_NAME AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', SD.PRODUCT_QTY AS 'QTY', " +
                         "SD.PRODUCT_SALES_PRICE AS 'PRICE', ROUND((SD.PRODUCT_QTY * SD.PRODUCT_SALES_PRICE) - SD.SALES_SUBTOTAL, 2) AS 'POTONGAN', SD.SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_DISCOUNT_FINAL AS 'DISC', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
                         "FROM " + query_tax + "MASTER_PRODUCT M, MASTER_CUSTOMER MC " +
-                        "WHERE SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "'"+ query_customer + query_union_customer;
+                        "WHERE SH.CUSTOMER_ID = MC.CUSTOMER_ID AND SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "'" + query_customer + query_union_customer;
+                    } else
+                    {
+                        sqlCommandx = "SELECT SD.ID, SH.SALES_DATE AS 'DATE', SD.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', M.PRODUCT_NAME AS 'PRODUCT', SD.PRODUCT_QTY AS 'QTY', " +
+                        "SD.PRODUCT_SALES_PRICE AS 'PRICE', ROUND((SD.PRODUCT_QTY * SD.PRODUCT_SALES_PRICE) - SD.SALES_SUBTOTAL, 2) AS 'POTONGAN', SD.SALES_SUBTOTAL AS 'SUBTOTAL', SH.SALES_DISCOUNT_FINAL AS 'DISC', SH.SALES_PAYMENT AS 'PAYMENT', SH.SALES_PAYMENT_CHANGE AS 'CHANGE' " +
+                        "FROM " + query_tax + "MASTER_PRODUCT M " +
+                        "WHERE SD.PRODUCT_ID = M.PRODUCT_ID AND SD.SALES_INVOICE = SH.SALES_INVOICE AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d')  <= '" + dateTo + "'" + query_customer + query_union_customer;
+                    }
+                    
                         
                     //if (cust_id > 0)
                         //{
