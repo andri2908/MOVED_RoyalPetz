@@ -305,8 +305,8 @@
             this.groupPelangganCombo.FormattingEnabled = true;
             this.groupPelangganCombo.Items.AddRange(new object[] {
             "Ecer",
-            "Partai",
-            "Grosir"});
+            "Grosir",
+            "Partai"});
             this.groupPelangganCombo.Location = new System.Drawing.Point(224, 284);
             this.groupPelangganCombo.Name = "groupPelangganCombo";
             this.groupPelangganCombo.Size = new System.Drawing.Size(213, 26);
