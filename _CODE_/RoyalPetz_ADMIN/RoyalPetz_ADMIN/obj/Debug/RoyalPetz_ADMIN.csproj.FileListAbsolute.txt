@@ -437,6 +437,3 @@ E:\Shared\WORKS\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.TabSch
 E:\Shared\WORKS\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.XMLGeneratorForm.resources
 E:\Shared\WORKS\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.csproj.GenerateResource.Cache
 E:\My Works\Project Royale\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.ReportStockForm.resources
-D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\bin\Debug\RoyalPetz_ADMIN.exe.config
-D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.exe
-D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz_ADMIN\obj\Debug\RoyalPetz_ADMIN.pdb

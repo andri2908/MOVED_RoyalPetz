@@ -326,7 +326,10 @@ namespace RoyalPetz_ADMIN
             }
             else
             {
-                sqlCommand = "SELECT ID, PRODUCT_ID AS 'PRODUK ID', PRODUCT_NAME AS 'NAMA PRODUK', PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 AND PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND PRODUCT_NAME LIKE '%" + namaProductParam + "%'";
+                if (globalFeatureList.EXPIRY_MODULE == 1)
+                    sqlCommand = "SELECT PE.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', DATE_FORMAT(PE.PRODUCT_EXPIRY_DATE, '%d-%M-%Y') AS 'TGL KADALUARSA' FROM MASTER_PRODUCT MP, PRODUCT_EXPIRY PE WHERE PE.PRODUCT_ID = MP.PRODUCT_ID AND MP.PRODUCT_ACTIVE = 1 AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'";
+                else
+                    sqlCommand = "SELECT ID, PRODUCT_ID AS 'PRODUK ID', PRODUCT_NAME AS 'NAMA PRODUK', PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 AND PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND PRODUCT_NAME LIKE '%" + namaProductParam + "%'";
             }
 
             if (originModuleID == globalConstants.STOK_PECAH_BARANG)
@@ -344,7 +347,7 @@ namespace RoyalPetz_ADMIN
                     dataProdukGridView.Columns["ID"].Visible = false;
                     dataProdukGridView.Columns["PRODUK ID"].Width = 200;
                     dataProdukGridView.Columns["NAMA PRODUK"].Width = 200;
-                    dataProdukGridView.Columns["DESKRIPSI PRODUK"].Width = 300;                    
+                   // dataProdukGridView.Columns["DESKRIPSI PRODUK"].Width = 300;                    
                 }
             }
         }

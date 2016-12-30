@@ -37,15 +37,17 @@
             this.searchKategoriButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.detailImportDataGrid = new System.Windows.Forms.DataGridView();
-            this.productID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productRealQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.importButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.exportDate = new System.Windows.Forms.Label();
+            this.productID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tglExpired = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tglExpiredValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productRealQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.detailImportDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -121,6 +123,8 @@
             this.productID,
             this.productBarcode,
             this.productName,
+            this.tglExpired,
+            this.tglExpiredValue,
             this.productQty,
             this.productRealQty,
             this.description});
@@ -139,43 +143,6 @@
             this.detailImportDataGrid.TabIndex = 44;
             this.detailImportDataGrid.Enter += new System.EventHandler(this.detailImportDataGrid_Enter);
             this.detailImportDataGrid.Leave += new System.EventHandler(this.detailImportDataGrid_Leave);
-            // 
-            // productID
-            // 
-            this.productID.HeaderText = "KODE";
-            this.productID.Name = "productID";
-            this.productID.ReadOnly = true;
-            // 
-            // productBarcode
-            // 
-            this.productBarcode.HeaderText = "BARCODE";
-            this.productBarcode.Name = "productBarcode";
-            this.productBarcode.ReadOnly = true;
-            // 
-            // productName
-            // 
-            this.productName.HeaderText = "NAMA PRODUK";
-            this.productName.Name = "productName";
-            this.productName.ReadOnly = true;
-            this.productName.Width = 200;
-            // 
-            // productQty
-            // 
-            this.productQty.HeaderText = "JUMLAH";
-            this.productQty.Name = "productQty";
-            this.productQty.ReadOnly = true;
-            // 
-            // productRealQty
-            // 
-            this.productRealQty.HeaderText = "JUMLAH RIIL";
-            this.productRealQty.Name = "productRealQty";
-            this.productRealQty.ReadOnly = true;
-            // 
-            // description
-            // 
-            this.description.HeaderText = "DESCRIPTION";
-            this.description.Name = "description";
-            this.description.Width = 200;
             // 
             // importButton
             // 
@@ -203,6 +170,54 @@
             this.exportDate.Size = new System.Drawing.Size(87, 18);
             this.exportDate.TabIndex = 46;
             this.exportDate.Text = "FILE CSV";
+            // 
+            // productID
+            // 
+            this.productID.HeaderText = "KODE";
+            this.productID.Name = "productID";
+            this.productID.ReadOnly = true;
+            // 
+            // productBarcode
+            // 
+            this.productBarcode.HeaderText = "BARCODE";
+            this.productBarcode.Name = "productBarcode";
+            this.productBarcode.ReadOnly = true;
+            // 
+            // productName
+            // 
+            this.productName.HeaderText = "NAMA PRODUK";
+            this.productName.Name = "productName";
+            this.productName.ReadOnly = true;
+            this.productName.Width = 200;
+            // 
+            // tglExpired
+            // 
+            this.tglExpired.HeaderText = "TGL EXP";
+            this.tglExpired.Name = "tglExpired";
+            // 
+            // tglExpiredValue
+            // 
+            this.tglExpiredValue.HeaderText = "tglExpiredValue";
+            this.tglExpiredValue.Name = "tglExpiredValue";
+            this.tglExpiredValue.Visible = false;
+            // 
+            // productQty
+            // 
+            this.productQty.HeaderText = "JUMLAH";
+            this.productQty.Name = "productQty";
+            this.productQty.ReadOnly = true;
+            // 
+            // productRealQty
+            // 
+            this.productRealQty.HeaderText = "JUMLAH RIIL";
+            this.productRealQty.Name = "productRealQty";
+            this.productRealQty.ReadOnly = true;
+            // 
+            // description
+            // 
+            this.description.HeaderText = "DESCRIPTION";
+            this.description.Name = "description";
+            this.description.Width = 200;
             // 
             // importDataCSVForm
             // 
@@ -242,12 +257,14 @@
         private System.Windows.Forms.DataGridView detailImportDataGrid;
         private System.Windows.Forms.Button importButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label exportDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn productID;
         private System.Windows.Forms.DataGridViewTextBoxColumn productBarcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn productName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tglExpired;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tglExpiredValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn productQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn productRealQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
-        private System.Windows.Forms.Label exportDate;
     }
 }

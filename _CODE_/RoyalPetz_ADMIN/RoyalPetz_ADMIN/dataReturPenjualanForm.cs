@@ -56,9 +56,12 @@ namespace RoyalPetz_ADMIN
         private Data_Access DS = new Data_Access();
         private globalUtilities gutil = new globalUtilities();
         private CultureInfo culture = new CultureInfo("id-ID");
+        private expiryModuleUtil expUtil = new expiryModuleUtil();
 
         barcodeForm displayBarcodeForm = null;
         dataProdukForm browseProdukForm = null;
+
+        DateTimePicker oDateTimePicker = new DateTimePicker();
 
         public dataReturPenjualanForm()
         {
@@ -472,6 +475,23 @@ namespace RoyalPetz_ADMIN
             subtotalColumn.ReadOnly = true;
             detailReturDataGridView.Columns.Add(subtotalColumn);
 
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+            {
+                DataGridViewTextBoxColumn expiryDate_textBox = new DataGridViewTextBoxColumn();
+                expiryDate_textBox.Name = "expiryDate";
+                expiryDate_textBox.HeaderText = "KADALUARSA";
+                expiryDate_textBox.ReadOnly = true;
+                expiryDate_textBox.Width = 150;
+                detailReturDataGridView.Columns.Add(expiryDate_textBox);
+
+                DataGridViewTextBoxColumn expiryDateValue_textBox = new DataGridViewTextBoxColumn();
+                expiryDateValue_textBox.Name = "expiryDateValue";
+                expiryDateValue_textBox.HeaderText = "KADALUARSA";
+                expiryDateValue_textBox.ReadOnly = true;
+                expiryDateValue_textBox.Width = 150;
+                expiryDateValue_textBox.Visible = false;
+                detailReturDataGridView.Columns.Add(expiryDateValue_textBox);
+            }
         }
 
         private bool noReturExist()
@@ -1019,6 +1039,35 @@ namespace RoyalPetz_ADMIN
                 return false;
             }
 
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+            {
+                bool dataValid = true;
+                DateTime checkDate;
+                string productID = "";
+                // CHECK VALIDITY OF EXPIRED DATE 
+                for (i = 0; i < detailReturDataGridView.Rows.Count && dataValid; i++)
+                {
+                    if (null != detailReturDataGridView.Rows[i].Cells["expiryDateValue"].Value)
+                        dataValid = true;
+                    else
+                        dataValid = false;
+
+                    if (dataValid)
+                    {
+                        productID = detailReturDataGridView.Rows[i].Cells["expiryDateValue"].Value.ToString();
+                        checkDate = Convert.ToDateTime(detailReturDataGridView.Rows[i].Cells["expiryDateValue"].Value);
+                        if (!expUtil.isExpiryDateExist(checkDate, productID))
+                            dataValid = false;
+                    }
+                }
+
+                if (!dataValid)
+                {
+                    errorLabel.Text = "TANGGAL KADALUARSA PADA BARIS [" + i + "] INVALID";
+                    return false;
+                }
+            }
+
             //for (i = 0; i < detailReturDataGridView.Rows.Count && dataExist; i++)
             //{
             //    if (null != detailReturDataGridView.Rows[i].Cells["productID"].Value)
@@ -1128,6 +1177,21 @@ namespace RoyalPetz_ADMIN
                     gutil.saveSystemDebugLog(globalConstants.MENU_RETUR_PENJUALAN, "UPDATE MASTER PRODUCT QTY ["+ detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString() + "]");
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
+
+                    if (globalFeatureList.EXPIRY_MODULE == 1)
+                    {
+                        // UPDATE PRODUCT EXPIRY TABLE
+                        DateTime expiryDate;
+                        int lotID = 0;
+                        string productID = detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString();
+                        expiryDate = Convert.ToDateTime(detailReturDataGridView.Rows[i].Cells["expiryDateValue"].Value);
+                        lotID = expUtil.getLotIDBasedOnExpiryDate(expiryDate, productID);
+                        sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = PRODUCT_AMOUNT + " + qtyValue + " WHERE ID = " + lotID;
+
+                        gutil.saveSystemDebugLog(globalConstants.MENU_RETUR_PENJUALAN, "UPDATE PRODUCT EXPIRY QTY [" + detailReturDataGridView.Rows[i].Cells["expiryDateValue"].Value.ToString() + "]");
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
+                    }
                 }
 
                 extraAmount = 0;
@@ -1639,6 +1703,9 @@ namespace RoyalPetz_ADMIN
             returnQty.Add("0");
             productPriceList.Add("0");
             subtotalList.Add("0");
+
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+                oDateTimePicker.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         }
 
         private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
@@ -2213,6 +2280,75 @@ namespace RoyalPetz_ADMIN
             gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "RETUR PENJUALAN FORM : ChangePrinterButton_Click, DISPLAY PRINTER SELECTION FORM");
             SetPrinterForm displayedForm = new SetPrinterForm();
             displayedForm.ShowDialog(this);
+        }
+
+        private void addDateTimePickerToDataGrid(int columnIndex, int rowIndex)
+        {
+            detailReturDataGridView.Controls.Add(oDateTimePicker);
+            oDateTimePicker.Visible = false;
+            oDateTimePicker.Format = DateTimePickerFormat.Custom;
+            oDateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+            oDateTimePicker.TextChanged += new EventHandler(oDateTimePicker_OnTextChanged);
+            if (null != detailReturDataGridView.Rows[rowIndex].Cells["expiryDateValue"].Value)
+                oDateTimePicker.Value = Convert.ToDateTime(detailReturDataGridView.Rows[rowIndex].Cells["expiryDateValue"].Value);
+
+            oDateTimePicker.Visible = true;
+
+            Rectangle oRectangle = detailReturDataGridView.GetCellDisplayRectangle(columnIndex, rowIndex, true);
+            oDateTimePicker.Size = new Size(oRectangle.Width, oRectangle.Height);
+            oDateTimePicker.Location = new Point(oRectangle.X, oRectangle.Y);
+            oDateTimePicker.CloseUp += new EventHandler(oDateTimePicker_CloseUp);
+        }
+
+        private void detailReturDataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = detailReturDataGridView[e.ColumnIndex, e.RowIndex];
+            string columnName = "";
+
+            if (detailReturDataGridView.Rows.Count <= 0)
+                return;
+
+            columnName = cell.OwningColumn.Name;
+
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+            {
+                if (columnName == "expiryDate")
+                {
+                    addDateTimePickerToDataGrid(e.ColumnIndex, e.RowIndex);
+                }
+            }
+        }
+
+        private void detailReturDataGridView_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = detailReturDataGridView[e.ColumnIndex, e.RowIndex];
+            string columnName = "";
+
+            if (detailReturDataGridView.Rows.Count <= 0)
+                return;
+
+            columnName = cell.OwningColumn.Name;
+
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+            {
+                if (columnName == "expiryDate")
+                {
+                    oDateTimePicker.Visible = false;
+                }
+            }
+        }
+
+        private void oDateTimePicker_OnTextChanged(object sender, EventArgs e)
+        {
+            int rowIndex = detailReturDataGridView.CurrentCell.RowIndex;
+
+            detailReturDataGridView.CurrentCell.Value = oDateTimePicker.Text.ToString();
+            detailReturDataGridView.Rows[rowIndex].Cells["expiryDateValue"].Value = oDateTimePicker.Value.ToString();
+        }
+
+        private void oDateTimePicker_CloseUp(object sender, EventArgs e)
+        {
+            oDateTimePicker.Visible = false;
         }
     }
 }

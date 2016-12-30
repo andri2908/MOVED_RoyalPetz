@@ -1,0 +1,16 @@
+Versi Tgl: 17 jUNI 2004
+--------------------------
+
+Lihat keterangannya di buku catatan,
+halaman 1 & 2, Tgl; 17 JUNI.
+
+Info tambahan ::
+1. Ada tambahan field pada cust  :: stacust c (10)
+   terdiri dari : Ecer, Grosir, Partai
+
+2. Ada tambahan field pada barang  :: 
+   hrgJual2 currency,hrgJual3 currency
+
+3. Tambahan Variabel Public  : pcStsCust
+
+TeamProgress 

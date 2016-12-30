@@ -182,6 +182,8 @@ namespace RoyalPetz_ADMIN
         public const int REPORT_PRODUCT_MUTATION = 723;
         public const int REPORT_STOCK_DEVIATION = 724;
         public const int REPORT_STOCK = 725;
+        public const int REPORT_STOCK_EXPIRY = 726;
+        public const int REPORT_STOCK_AGING = 727;
 
         public const int REPORT_DEBT_PAYMENT = 731;
         public const int REPORT_CREDIT_PAYMENT = 732;
@@ -232,6 +234,8 @@ namespace RoyalPetz_ADMIN
         public const string SalesReturnXML = "SalesReturn.xml";
         public const string PurchaseReturnXML = "PurchaseReturn.xml";
         public const string RequestReturnXML = "RequestReturn.xml";
+        public const string StockExpiryXML = "StockExpiry.xml";
+        public const string StockAgingXML = "StockAging.xml";
 
         public const string DebtUnpaidXML = "DebtUnpaid.xml";
         public const string DebtPaidXML = "DebtPaid.xml";

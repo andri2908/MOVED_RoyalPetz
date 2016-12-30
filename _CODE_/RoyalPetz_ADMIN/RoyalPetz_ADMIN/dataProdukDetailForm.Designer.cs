@@ -75,6 +75,8 @@
             this.label22 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
+            this.expDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.expLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -644,12 +646,36 @@
             this.label25.TabIndex = 76;
             this.label25.Text = "HARGA JUAL PARTAI";
             // 
+            // expDatePicker
+            // 
+            this.expDatePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.expDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.expDatePicker.Location = new System.Drawing.Point(596, 410);
+            this.expDatePicker.Name = "expDatePicker";
+            this.expDatePicker.Size = new System.Drawing.Size(144, 27);
+            this.expDatePicker.TabIndex = 78;
+            this.expDatePicker.Visible = false;
+            // 
+            // expLabel
+            // 
+            this.expLabel.AutoSize = true;
+            this.expLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.expLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.expLabel.Location = new System.Drawing.Point(542, 413);
+            this.expLabel.Name = "expLabel";
+            this.expLabel.Size = new System.Drawing.Size(59, 18);
+            this.expLabel.TabIndex = 79;
+            this.expLabel.Text = "EXP : ";
+            this.expLabel.Visible = false;
+            // 
             // dataProdukDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(756, 609);
+            this.Controls.Add(this.expDatePicker);
+            this.Controls.Add(this.expLabel);
             this.Controls.Add(this.nonAktifCheckbox);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label15);
@@ -730,5 +756,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox barcodeTextBox;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.DateTimePicker expDatePicker;
+        private System.Windows.Forms.Label expLabel;
     }
 }

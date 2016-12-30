@@ -107,7 +107,9 @@
             this.detailReturDataGridView.TabIndex = 38;
             this.detailReturDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.detailReturDataGridView_CellBeginEdit);
             this.detailReturDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailReturDataGridView_CellEndEdit);
+            this.detailReturDataGridView.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailReturDataGridView_CellEnter);
             this.detailReturDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.detailReturDataGridView_CellFormatting);
+            this.detailReturDataGridView.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailReturDataGridView_CellLeave);
             this.detailReturDataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailReturDataGridView_CellValidated);
             this.detailReturDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailReturDataGridView_CellValueChanged);
             this.detailReturDataGridView.CurrentCellDirtyStateChanged += new System.EventHandler(this.detailReturDataGridView_CurrentCellDirtyStateChanged);

@@ -183,6 +183,9 @@
             this.SHORTCUT_returBeli = new System.Windows.Forms.ToolStripButton();
             this.SHORTCUT_returJual = new System.Windows.Forms.ToolStripButton();
             this.timerMessage = new System.Windows.Forms.Timer(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.MAINMENU_Strip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.MAINMENU_ShortCut.SuspendLayout();
@@ -969,6 +972,7 @@
             this.Separator_7,
             this.deviasiAdjustmentStokToolStripMenuItem,
             this.stokProdukToolStripMenuItem,
+            this.toolStripMenuItem1,
             this.stokDibawahLimitToolStripMenuItem,
             this.returBarangToolStripMenuItem,
             this.Separator_9,
@@ -1731,6 +1735,35 @@
             this.timerMessage.Interval = 3600000;
             this.timerMessage.Tick += new System.EventHandler(this.timerMessage_Tick);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem2,
+            this.toolStripMenuItem3});
+            this.toolStripMenuItem1.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(276, 22);
+            this.toolStripMenuItem1.Text = "Stok Produk Expiry";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem2.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(233, 22);
+            this.toolStripMenuItem2.Text = "Berdasarkan Kategori";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click_1);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.BackColor = System.Drawing.Color.SteelBlue;
+            this.toolStripMenuItem3.ForeColor = System.Drawing.Color.FloralWhite;
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(233, 22);
+            this.toolStripMenuItem3.Text = "Laporan Aging Stok";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click_2);
+            // 
             // adminForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1922,6 +1955,9 @@
         private System.Windows.Forms.ToolStripMenuItem uSBToolStripMenuItem;
         private System.Windows.Forms.Timer timerMessage;
         private System.Windows.Forms.ToolStripMenuItem stokProdukToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         //private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
     }
 }

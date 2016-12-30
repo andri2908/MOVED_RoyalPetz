@@ -324,11 +324,12 @@ namespace RoyalPetz_ADMIN
                 switch (originModuleID)
                 {
                     case globalConstants.REPORT_STOCK:
+                    case globalConstants.REPORT_STOCK_EXPIRY:
                         result = int.TryParse(TagsComboBox.SelectedValue.ToString(), out tags_id);
                         if (tags_id > 0)
                         {
                             tags = "AND PC.CATEGORY_ID";
-                            tags = " = " + tags_id + " ";
+                            tags += " = " + tags_id + " ";
                         }
                         break;
                     default :
@@ -424,13 +425,22 @@ namespace RoyalPetz_ADMIN
                     displayedForm5.ShowDialog(this);
                     break;
                 case globalConstants.REPORT_STOCK:
-                    sqlCommandx = "SELECT MP.PRODUCT_NAME, MP.PRODUCT_STOCK_QTY, MU.UNIT_NAME, MC.CATEGORY_NAME " + 
-                                    "FROM MASTER_PRODUCT MP, PRODUCT_CATEGORY PC, MASTER_CATEGORY MC, MASTER_UNIT MU " +
-                                    "WHERE MP.PRODUCT_IS_SERVICE = 0 AND MP.PRODUCT_ACTIVE = 1 AND MP.UNIT_ID = MU.UNIT_ID " +
-                                    "AND MP.PRODUCT_ID = PC.PRODUCT_ID AND PC.CATEGORY_ID = MC.CATEGORY_ID" + tags;
-                    DS.writeXML(sqlCommandx, globalConstants.StockXML);
-                    ReportStockForm displayedForm6 = new ReportStockForm();
-                    displayedForm6.ShowDialog(this);
+                        sqlCommandx = "SELECT MP.PRODUCT_NAME, MP.PRODUCT_STOCK_QTY, MU.UNIT_NAME, MC.CATEGORY_NAME " +
+                                        "FROM MASTER_PRODUCT MP, PRODUCT_CATEGORY PC, MASTER_CATEGORY MC, MASTER_UNIT MU " +
+                                        "WHERE MP.PRODUCT_IS_SERVICE = 0 AND MP.PRODUCT_ACTIVE = 1 AND MP.UNIT_ID = MU.UNIT_ID " +
+                                        "AND MP.PRODUCT_ID = PC.PRODUCT_ID AND PC.CATEGORY_ID = MC.CATEGORY_ID" + tags;
+                        DS.writeXML(sqlCommandx, globalConstants.StockXML);
+                        ReportStockForm displayedForm6 = new ReportStockForm();
+                        displayedForm6.ShowDialog(this);
+                    break;
+                case globalConstants.REPORT_STOCK_EXPIRY:
+                    sqlCommandx = "SELECT MP.PRODUCT_NAME, PE.PRODUCT_AMOUNT, PE.PRODUCT_EXPIRY_DATE, MU.UNIT_NAME, MC.CATEGORY_NAME " +
+                                        "FROM MASTER_PRODUCT MP, PRODUCT_CATEGORY PC, MASTER_CATEGORY MC, MASTER_UNIT MU, PRODUCT_EXPIRY PE " +
+                                        "WHERE PE.PRODUCT_ID = MP.PRODUCT_ID AND MP.PRODUCT_IS_SERVICE = 0 AND MP.PRODUCT_ACTIVE = 1 AND MP.UNIT_ID = MU.UNIT_ID " +
+                                        "AND MP.PRODUCT_ID = PC.PRODUCT_ID AND PC.CATEGORY_ID = MC.CATEGORY_ID" + tags;
+                    DS.writeXML(sqlCommandx, globalConstants.StockExpiryXML);
+                    ReportStockForm displayedForm6Expiry = new ReportStockForm(globalConstants.REPORT_STOCK_EXPIRY);
+                    displayedForm6Expiry.ShowDialog(this);
                     break;
             }
         }

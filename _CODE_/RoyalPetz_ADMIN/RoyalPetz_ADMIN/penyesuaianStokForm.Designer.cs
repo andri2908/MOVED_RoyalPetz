@@ -44,9 +44,11 @@
             this.jumlahAwalMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
             this.saveButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.expDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.expLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -58,7 +60,7 @@
             this.panel1.Controls.Add(this.errorLabel);
             this.panel1.Location = new System.Drawing.Point(1, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(549, 29);
+            this.panel1.Size = new System.Drawing.Size(564, 29);
             this.panel1.TabIndex = 16;
             // 
             // errorLabel
@@ -80,7 +82,7 @@
             this.namaProductTextBox.Location = new System.Drawing.Point(204, 46);
             this.namaProductTextBox.Name = "namaProductTextBox";
             this.namaProductTextBox.ReadOnly = true;
-            this.namaProductTextBox.Size = new System.Drawing.Size(347, 27);
+            this.namaProductTextBox.Size = new System.Drawing.Size(354, 27);
             this.namaProductTextBox.TabIndex = 20;
             // 
             // kodeProductTextBox
@@ -131,7 +133,7 @@
             this.descriptionTextBox.Location = new System.Drawing.Point(204, 145);
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
-            this.descriptionTextBox.Size = new System.Drawing.Size(340, 97);
+            this.descriptionTextBox.Size = new System.Drawing.Size(354, 97);
             this.descriptionTextBox.TabIndex = 17;
             // 
             // label3
@@ -216,6 +218,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.expDatePicker);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.saveButton);
             this.groupBox1.Controls.Add(this.label1);
@@ -232,33 +235,13 @@
             this.groupBox1.Controls.Add(this.jumlahAwalMaskedTextBox);
             this.groupBox1.Controls.Add(this.jumlahBaruMaskedTextBox);
             this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.expLabel);
             this.groupBox1.Location = new System.Drawing.Point(1, 37);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(549, 303);
+            this.groupBox1.Size = new System.Drawing.Size(564, 303);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label9.Location = new System.Drawing.Point(184, 82);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(14, 18);
-            this.label9.TabIndex = 45;
-            this.label9.Text = ":";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label10.Location = new System.Drawing.Point(185, 115);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(14, 18);
-            this.label10.TabIndex = 46;
-            this.label10.Text = ":";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // label7
             // 
@@ -271,12 +254,56 @@
             this.label7.TabIndex = 47;
             this.label7.Text = ":";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label10.Location = new System.Drawing.Point(185, 115);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(14, 18);
+            this.label10.TabIndex = 46;
+            this.label10.Text = ":";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label9.Location = new System.Drawing.Point(184, 82);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(14, 18);
+            this.label9.TabIndex = 45;
+            this.label9.Text = ":";
+            // 
+            // expDatePicker
+            // 
+            this.expDatePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.expDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.expDatePicker.Location = new System.Drawing.Point(414, 112);
+            this.expDatePicker.Name = "expDatePicker";
+            this.expDatePicker.Size = new System.Drawing.Size(144, 27);
+            this.expDatePicker.TabIndex = 48;
+            this.expDatePicker.Visible = false;
+            // 
+            // expLabel
+            // 
+            this.expLabel.AutoSize = true;
+            this.expLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.expLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.expLabel.Location = new System.Drawing.Point(360, 115);
+            this.expLabel.Name = "expLabel";
+            this.expLabel.Size = new System.Drawing.Size(59, 18);
+            this.expLabel.TabIndex = 49;
+            this.expLabel.Text = "EXP : ";
+            this.expLabel.Visible = false;
+            // 
             // penyesuaianStokForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(552, 345);
+            this.ClientSize = new System.Drawing.Size(566, 345);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -317,5 +344,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DateTimePicker expDatePicker;
+        private System.Windows.Forms.Label expLabel;
     }
 }

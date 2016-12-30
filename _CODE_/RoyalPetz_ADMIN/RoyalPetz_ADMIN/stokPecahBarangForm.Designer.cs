@@ -75,6 +75,8 @@
             this.saveButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.expDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.expLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -547,6 +549,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.expDatePicker);
+            this.groupBox1.Controls.Add(this.expLabel);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.label40);
             this.groupBox1.Controls.Add(this.label38);
@@ -593,6 +597,28 @@
             this.groupBox1.Size = new System.Drawing.Size(933, 448);
             this.groupBox1.TabIndex = 42;
             this.groupBox1.TabStop = false;
+            // 
+            // expDatePicker
+            // 
+            this.expDatePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.expDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.expDatePicker.Location = new System.Drawing.Point(711, 406);
+            this.expDatePicker.Name = "expDatePicker";
+            this.expDatePicker.Size = new System.Drawing.Size(144, 27);
+            this.expDatePicker.TabIndex = 50;
+            this.expDatePicker.Visible = false;
+            // 
+            // expLabel
+            // 
+            this.expLabel.AutoSize = true;
+            this.expLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.expLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.expLabel.Location = new System.Drawing.Point(611, 409);
+            this.expLabel.Name = "expLabel";
+            this.expLabel.Size = new System.Drawing.Size(104, 18);
+            this.expLabel.TabIndex = 51;
+            this.expLabel.Text = "EXPIRED : ";
+            this.expLabel.Visible = false;
             // 
             // stokPecahBarangForm
             // 
@@ -669,5 +695,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox actualQtyTextBox;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DateTimePicker expDatePicker;
+        private System.Windows.Forms.Label expLabel;
     }
 }

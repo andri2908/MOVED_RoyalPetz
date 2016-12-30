@@ -196,6 +196,7 @@ namespace RoyalPetz_ADMIN
             string adjusmentDate = "";
             string productDescription = "";
             int i = 0;
+            string productExpDate = "";
             MySqlException internalEX = null;
 
             DS.beginTransaction();
@@ -224,13 +225,49 @@ namespace RoyalPetz_ADMIN
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
 
-                        sqlCommand = "INSERT INTO PRODUCT_ADJUSTMENT (PRODUCT_ID, PRODUCT_ADJUSTMENT_DATE, PRODUCT_OLD_STOCK_QTY, PRODUCT_NEW_STOCK_QTY, PRODUCT_ADJUSTMENT_DESCRIPTION) " +
-                                            "VALUES " +
-                                            "('" + productID + "', STR_TO_DATE('" + adjusmentDate + "', '%d-%m-%Y'), " + productOldQty + ", " + productQty + ", '" + productDescription + "')";
+                        if (globalFeatureList.EXPIRY_MODULE == 1)
+                        {
+                            // INSERT TO PRODUCT_EXPIRY
+                            //DateTime productExpiryDateValue = Convert.ToDateTime(detailGridView.Rows[i].Cells["expiryDateValue"].Value.ToString());
+                            productExpDate = detailImportDataGrid.Rows[i].Cells["tglExpired"].Value.ToString();
+                            int lotID = 0;
+                            expiryModuleUtil expUtil = new expiryModuleUtil();
+                            double adjustmentQty = Convert.ToDouble(productQty);
 
-                        gutil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "INSERT INTO PRODUCT ADJUSTMENT [" + productID + ", " + productOldQty + ", " + productQty + "]");
-                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                            throw internalEX;
+                            // CHECK WHETHER THE PRODUCT WITH SAME EXPIRY DATE EXIST
+                            lotID = expUtil.getLotIDBasedOnExpiryDate(Convert.ToDateTime(productExpDate), productID);
+
+                            if (lotID == 0)
+                            {
+                                //sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT, PR_INVOICE) VALUES ( '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", '" + PRInvoice + "')";
+                                sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT) VALUES ( '" + productID + "', STR_TO_DATE('" + productExpDate + "', '%d-%m-%Y'), " + adjustmentQty + ")";
+                            }
+                            else
+                                sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = " + adjustmentQty + " WHERE ID = " + lotID;
+
+                            gutil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "INSERT TO PRODUCT EXPIRY [" + productID + "]");
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+
+                            // INSERT INTO PRODUCT ADJUSTMENT WITH EXP DATE INFORMATION
+                            sqlCommand = "INSERT INTO PRODUCT_ADJUSTMENT (PRODUCT_ID, PRODUCT_ADJUSTMENT_DATE, PRODUCT_OLD_STOCK_QTY, PRODUCT_NEW_STOCK_QTY, PRODUCT_ADJUSTMENT_DESCRIPTION, PRODUCT_EXPIRY_DATE) " +
+                                                "VALUES " +
+                                                "('" + productID + "', STR_TO_DATE('" + adjusmentDate + "', '%d-%m-%Y'), " + productOldQty + ", " + productQty + ", '" + productDescription + "', STR_TO_DATE('" + productExpDate + "', '%d-%m-%Y'))";
+
+                            gutil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "INSERT INTO PRODUCT ADJUSTMENT [" + productID + ", " + productOldQty + ", " + productQty + "]");
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+                        }
+                        else
+                        {
+                            sqlCommand = "INSERT INTO PRODUCT_ADJUSTMENT (PRODUCT_ID, PRODUCT_ADJUSTMENT_DATE, PRODUCT_OLD_STOCK_QTY, PRODUCT_NEW_STOCK_QTY, PRODUCT_ADJUSTMENT_DESCRIPTION) " +
+                                                "VALUES " +
+                                                "('" + productID + "', STR_TO_DATE('" + adjusmentDate + "', '%d-%m-%Y'), " + productOldQty + ", " + productQty + ", '" + productDescription + "')";
+
+                            gutil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "INSERT INTO PRODUCT ADJUSTMENT [" + productID + ", " + productOldQty + ", " + productQty + "]");
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+                        }
                     }
 
                     i += 1;
@@ -286,6 +323,9 @@ namespace RoyalPetz_ADMIN
             importButton.Enabled = false;
             exportDate.Text = "";
             gutil.reArrangeTabOrder(this);
+
+            if (globalFeatureList.EXPIRY_MODULE == 0)
+                detailImportDataGrid.Columns["tglExpired"].Visible = false;
         }
 
         private void importDataCSVForm_Activated(object sender, EventArgs e)

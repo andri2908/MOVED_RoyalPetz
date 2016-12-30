@@ -1092,6 +1092,40 @@ namespace RoyalPetz_ADMIN
                                 gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "REDUCE STOCK AT MASTER PRODUCT [" + cashierDataGridView.Rows[i].Cells["productID"].Value.ToString() + "]");
                                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                     throw internalEX;
+
+                                // REDUCE FROM PRODUCT EXPIRY
+                                if (globalFeatureList.EXPIRY_MODULE == 1)
+                                {
+                                    // GET THE NEAREST PRODUCT LOT THAT'S GOING TO EXPIRE
+                                    expiryModuleUtil expiryUtil = new expiryModuleUtil();
+                                    int[] listOfLotID;
+                                    double currentLotAmount = 0;
+                                    string expiryProductID = cashierDataGridView.Rows[i].Cells["productID"].Value.ToString();
+                                    double expiryProductAmt = Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value);
+                                    listOfLotID = expiryUtil.getListOfLotProductID(expiryProductID, expiryProductAmt);
+
+                                    // UPDATE THE PRODUCT AMOUNT
+                                    for (int j =0; j<listOfLotID.Count();j++)
+                                    {
+                                        // get current LOT amount 
+                                        sqlCommand = "SELECT PRODUCT_AMOUNT FROM PRODUCT_EXPIRY WHERE ID = " + listOfLotID[j];
+                                        currentLotAmount = Convert.ToInt32(DS.getDataSingleValue(sqlCommand));
+
+                                        if (currentLotAmount <= expiryProductAmt)
+                                        {
+                                            expiryProductAmt = expiryProductAmt - currentLotAmount;
+                                            currentLotAmount = 0;
+                                        }
+                                        else
+                                            currentLotAmount = currentLotAmount - expiryProductAmt;
+
+                                        sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = " + currentLotAmount + " WHERE ID = " + listOfLotID[j];
+
+                                        gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "REDUCE STOCK AT PRODUCT_EXPIRY LOT [" + listOfLotID[j] + "]");
+                                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                            throw internalEX;
+                                    }
+                                }
                             }
 
                             // SAVE OR UPDATE TO CUSTOMER_PRODUCT_DISC

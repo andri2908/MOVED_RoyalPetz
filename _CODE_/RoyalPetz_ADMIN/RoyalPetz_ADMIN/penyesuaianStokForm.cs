@@ -19,9 +19,10 @@ namespace RoyalPetz_ADMIN
     public partial class penyesuaianStokForm : Form
     {
         private int selectedProductID = 0;
+        private int selectedLotID = 0;
         private double selectedProductLimitStock = 0;
 
-        private globalUtilities gutil = new globalUtilities();
+        private globalUtilities gUtil = new globalUtilities();
         private Data_Access DS = new Data_Access();
         private CultureInfo culture = new CultureInfo("id-ID");
 
@@ -36,7 +37,11 @@ namespace RoyalPetz_ADMIN
         public penyesuaianStokForm(int productID)
         {
             InitializeComponent();
-            selectedProductID = productID;
+
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+                selectedLotID = productID;
+            else
+                selectedProductID = productID;
         }
 
         private void captureAll(Keys key)
@@ -86,29 +91,49 @@ namespace RoyalPetz_ADMIN
             MySqlDataReader rdr;
             string sqlCommand;
 
-            sqlCommand = "SELECT * FROM MASTER_PRODUCT WHERE ID = " + selectedProductID;
-            using(rdr = DS.getData(sqlCommand))
+            if (globalFeatureList.EXPIRY_MODULE == 1)
             {
-                if (rdr.HasRows)
+                sqlCommand = "SELECT MP.PRODUCT_ID, MP.PRODUCT_NAME, PE.PRODUCT_AMOUNT, MP.PRODUCT_LIMIT_STOCK, PE.PRODUCT_EXPIRY_DATE FROM MASTER_PRODUCT MP, PRODUCT_EXPIRY PE WHERE PE.PRODUCT_ID = MP.PRODUCT_ID AND PE.ID = " + selectedLotID;
+                using (rdr = DS.getData(sqlCommand))
                 {
-                    rdr.Read();
+                    if (rdr.HasRows)
+                    {
+                        rdr.Read();
 
-                    kodeProductTextBox.Text = rdr.GetString("PRODUCT_ID");
-                    namaProductTextBox.Text = rdr.GetString("PRODUCT_NAME");
-                    jumlahAwalMaskedTextBox.Text = rdr.GetString("PRODUCT_STOCK_QTY");
-                    selectedProductLimitStock = rdr.GetDouble("PRODUCT_LIMIT_STOCK");
+                        kodeProductTextBox.Text = rdr.GetString("PRODUCT_ID");
+                        namaProductTextBox.Text = rdr.GetString("PRODUCT_NAME");
+                        jumlahAwalMaskedTextBox.Text = rdr.GetString("PRODUCT_AMOUNT");
+                        selectedProductLimitStock = rdr.GetDouble("PRODUCT_LIMIT_STOCK");
+                        expDatePicker.Value = rdr.GetDateTime("PRODUCT_EXPIRY_DATE");
+                    }
+                }
+            }
+            else
+            {
+                sqlCommand = "SELECT * FROM MASTER_PRODUCT WHERE ID = " + selectedProductID;
+                using (rdr = DS.getData(sqlCommand))
+                {
+                    if (rdr.HasRows)
+                    {
+                        rdr.Read();
+
+                        kodeProductTextBox.Text = rdr.GetString("PRODUCT_ID");
+                        namaProductTextBox.Text = rdr.GetString("PRODUCT_NAME");
+                        jumlahAwalMaskedTextBox.Text = rdr.GetString("PRODUCT_STOCK_QTY");
+                        selectedProductLimitStock = rdr.GetDouble("PRODUCT_LIMIT_STOCK");
+                    }
                 }
             }
         }
 
         private void resetbutton_Click(object sender, EventArgs e)
         {
-            gutil.ResetAllControls(this);
+            gUtil.ResetAllControls(this);
         }
 
         private void jumlahBaruMaskedTextBox_TextChanged(object sender, EventArgs e)
         {
-            jumlahBaruMaskedTextBox.Text = gutil.allTrim(jumlahBaruMaskedTextBox.Text);
+            jumlahBaruMaskedTextBox.Text = gUtil.allTrim(jumlahBaruMaskedTextBox.Text);
         }
 
 
@@ -140,6 +165,7 @@ namespace RoyalPetz_ADMIN
             double newStockQty = 0;
             string adjustmentDate;
             string descriptionParam;
+            string productExpiryDate;
 
             MySqlException internalEX = null;
 
@@ -160,24 +186,60 @@ namespace RoyalPetz_ADMIN
                 // UPDATE MASTER PRODUCT WITH THE NEW QTY
                 sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = " + newStockQty + " WHERE ID = " + selectedProductID;
 
-                gutil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "UPDATE STOCK QTY [" + selectedProductID + "]");
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "UPDATE STOCK QTY [" + selectedProductID + "]");
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
 
-                // INSERT INTO PRODUCT ADJUSTMENT TABLE
-                sqlCommand = "INSERT INTO PRODUCT_ADJUSTMENT (PRODUCT_ID, PRODUCT_ADJUSTMENT_DATE, PRODUCT_OLD_STOCK_QTY, PRODUCT_NEW_STOCK_QTY, PRODUCT_ADJUSTMENT_DESCRIPTION) VALUES " +
-                                    "('" + kodeProductTextBox.Text + "', STR_TO_DATE('" + adjustmentDate + "', '%d-%m-%Y'), " + jumlahAwalMaskedTextBox.Text + ", " + jumlahBaruMaskedTextBox.Text + ", '" + descriptionParam + "')";
+                if (globalFeatureList.EXPIRY_MODULE == 1)
+                {
+                    productExpiryDate = String.Format(culture, "{0:dd-MM-yyyy}", expDatePicker.Value);
+                    // INSERT INTO PRODUCT ADJUSTMENT TABLE
+                    sqlCommand = "INSERT INTO PRODUCT_ADJUSTMENT (PRODUCT_ID, PRODUCT_ADJUSTMENT_DATE, PRODUCT_OLD_STOCK_QTY, PRODUCT_NEW_STOCK_QTY, PRODUCT_ADJUSTMENT_DESCRIPTION, PRODUCT_EXPIRY_DATE) VALUES " +
+                                        "('" + kodeProductTextBox.Text + "', STR_TO_DATE('" + adjustmentDate + "', '%d-%m-%Y'), " + jumlahAwalMaskedTextBox.Text + ", " + jumlahBaruMaskedTextBox.Text + ", '" + descriptionParam + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'))";
+                }
+                else
+                {
+                    // INSERT INTO PRODUCT ADJUSTMENT TABLE
+                    sqlCommand = "INSERT INTO PRODUCT_ADJUSTMENT (PRODUCT_ID, PRODUCT_ADJUSTMENT_DATE, PRODUCT_OLD_STOCK_QTY, PRODUCT_NEW_STOCK_QTY, PRODUCT_ADJUSTMENT_DESCRIPTION) VALUES " +
+                                        "('" + kodeProductTextBox.Text + "', STR_TO_DATE('" + adjustmentDate + "', '%d-%m-%Y'), " + jumlahAwalMaskedTextBox.Text + ", " + jumlahBaruMaskedTextBox.Text + ", '" + descriptionParam + "')";
+                }
 
-                gutil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "INSERT INTO PRODUCT ADJUSTMENT TABLE [" + kodeProductTextBox.Text + ", " + jumlahAwalMaskedTextBox.Text + ", " + jumlahBaruMaskedTextBox.Text + "]");
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "INSERT INTO PRODUCT ADJUSTMENT TABLE [" + kodeProductTextBox.Text + ", " + jumlahAwalMaskedTextBox.Text + ", " + jumlahBaruMaskedTextBox.Text + "]");
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
+
+                if (globalFeatureList.EXPIRY_MODULE == 1)
+                {
+                    // INSERT TO PRODUCT_EXPIRY
+                    //DateTime productExpiryDateValue = Convert.ToDateTime(detailGridView.Rows[i].Cells["expiryDateValue"].Value.ToString());
+                    productExpiryDate = String.Format(culture, "{0:dd-MM-yyyy}", expDatePicker.Value);
+                    int lotID = 0;
+                    string productID = kodeProductTextBox.Text;
+                    expiryModuleUtil expUtil = new expiryModuleUtil();
+                    double adjustmentQty = Convert.ToDouble(jumlahBaruMaskedTextBox.Text);
+
+                    // CHECK WHETHER THE PRODUCT WITH SAME EXPIRY DATE EXIST
+                    lotID = expUtil.getLotIDBasedOnExpiryDate(expDatePicker.Value, productID);
+
+                    if (lotID == 0)
+                    {
+                       //sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT, PR_INVOICE) VALUES ( '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", '" + PRInvoice + "')";
+                       sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT) VALUES ( '" + kodeProductTextBox.Text + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + adjustmentQty + ")";
+                    }
+                    else
+                        sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = " + adjustmentQty + " WHERE ID = " + lotID;
+
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "INSERT TO PRODUCT EXPIRY [" + productID + "]");
+                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        throw internalEX;
+                }
 
                 DS.commit();
                 result = true;
             }
             catch (Exception e)
             {
-                gutil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "EXCEPTION THROWN [" + e.Message + "]");
+                gUtil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "EXCEPTION THROWN [" + e.Message + "]");
                 try
                 {
                     DS.rollBack();
@@ -185,10 +247,10 @@ namespace RoyalPetz_ADMIN
                 catch (MySqlException ex)
                 {
                     if (DS.getMyTransConnection() != null)
-                        gutil.showDBOPError(ex, "ROLLBACK");
+                        gUtil.showDBOPError(ex, "ROLLBACK");
                 }
 
-                gutil.showDBOPError(e, "INSERT");
+                gUtil.showDBOPError(e, "INSERT");
                 result = false;
             }
             finally
@@ -221,11 +283,11 @@ namespace RoyalPetz_ADMIN
         
         private void saveButton_Click(object sender, EventArgs e)
         {
-            gutil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "TRY TO DO MANUAL STOCK ADJUSTMENT");
+            gUtil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "TRY TO DO MANUAL STOCK ADJUSTMENT");
             if (saveData())
             {
-                gutil.saveUserChangeLog(globalConstants.MENU_PENYESUAIAN_STOK, globalConstants.CHANGE_LOG_UPDATE, "PENYESUAIAN STOK PRODUK [" + namaProductTextBox.Text + "] " + jumlahAwalMaskedTextBox.Text + "/" + jumlahBaruMaskedTextBox.Text);
-                gutil.showSuccess(gutil.INS);
+                gUtil.saveUserChangeLog(globalConstants.MENU_PENYESUAIAN_STOK, globalConstants.CHANGE_LOG_UPDATE, "PENYESUAIAN STOK PRODUK [" + namaProductTextBox.Text + "] " + jumlahAwalMaskedTextBox.Text + "/" + jumlahBaruMaskedTextBox.Text);
+                gUtil.showSuccess(gUtil.INS);
                 saveButton.Enabled = false;
                 errorLabel.Text = "";
             }
@@ -235,7 +297,16 @@ namespace RoyalPetz_ADMIN
         {
             loadProductData();
             errorLabel.Text = "";
-            gutil.reArrangeTabOrder(this);
+            gUtil.reArrangeTabOrder(this);
+
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+            {
+                expLabel.Visible = true;
+                expDatePicker.Visible = true;
+
+                expDatePicker.Format = DateTimePickerFormat.Custom;
+                expDatePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+            }
         }
 
         private void penyesuaianStokForm_Activated(object sender, EventArgs e)
@@ -255,6 +326,11 @@ namespace RoyalPetz_ADMIN
         private void penyesuaianStokForm_Deactivate(object sender, EventArgs e)
         {
             unregisterGlobalHotkey();
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

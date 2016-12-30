@@ -55,9 +55,12 @@ namespace RoyalPetz_ADMIN
 
         private globalUtilities gUtil = new globalUtilities();
         private CultureInfo culture = new CultureInfo("id-ID");
+        private expiryModuleUtil expUtil = new expiryModuleUtil();
 
         barcodeForm displayBarcodeForm = null;
         dataProdukForm browseProdukForm = null;
+
+        DateTimePicker oDateTimePicker = new DateTimePicker();
 
         public dataMutasiBarangDetailForm()
         {
@@ -485,6 +488,25 @@ namespace RoyalPetz_ADMIN
             return result;
         }
 
+        private bool expiryStockIsEnough(string productID, double qtyRequested, DateTime expiryDate)
+        {
+            bool result = false;
+            int lotID = 0;
+            double stockQty = 0;
+
+            //stockQty = Convert.ToDouble(DS.getDataSingleValue("SELECT (PRODUCT_STOCK_QTY - PRODUCT_LIMIT_STOCK) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
+
+            //if (stockQty >= qtyRequested)
+            //    result = true;
+            lotID = expUtil.getLotIDBasedOnExpiryDate(expiryDate, productID);
+            stockQty = expUtil.getProductAmountFromLotID(lotID);
+
+            if (stockQty >= qtyRequested)
+                result = true;
+
+            return result;
+        }
+
         private double getHPP(string productID)
         {
             double result = 0;
@@ -762,9 +784,21 @@ namespace RoyalPetz_ADMIN
 
                     // check if there's a product ID for that particular row
                     if (null != selectedRow.Cells["productID"].Value)
-                        if (stockIsEnough(selectedRow.Cells["productID"].Value.ToString(), productQty))
-                            validInput = true;
-
+                    {
+                        if (globalFeatureList.EXPIRY_MODULE == 1)
+                        {
+                            if (selectedRow.Cells["expiryDateValue"].Value != null)
+                            {
+                                if (expiryStockIsEnough(selectedRow.Cells["productID"].Value.ToString(), productQty, Convert.ToDateTime(selectedRow.Cells["expiryDateValue"].Value)))
+                                    validInput = true;
+                            }
+                        }
+                        else
+                        {
+                            if (stockIsEnough(selectedRow.Cells["productID"].Value.ToString(), productQty))
+                                validInput = true;
+                        }
+                    }
                     // input match RegEx, and Stock is enough
                     if (validInput)
                     {
@@ -1078,6 +1112,24 @@ namespace RoyalPetz_ADMIN
             subtotalColumn.ReadOnly = true;
             detailRequestOrderDataGridView.Columns.Add(subtotalColumn);
 
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+            {
+                DataGridViewTextBoxColumn expiryDate_textBox = new DataGridViewTextBoxColumn();
+                expiryDate_textBox.Name = "expiryDate";
+                expiryDate_textBox.HeaderText = "KADALUARSA";
+                expiryDate_textBox.ReadOnly = true;
+                expiryDate_textBox.Width = 150;
+                detailRequestOrderDataGridView.Columns.Add(expiryDate_textBox);
+
+                DataGridViewTextBoxColumn expiryDateValue_textBox = new DataGridViewTextBoxColumn();
+                expiryDateValue_textBox.Name = "expiryDateValue";
+                expiryDateValue_textBox.HeaderText = "KADALUARSA";
+                expiryDateValue_textBox.ReadOnly = true;
+                expiryDateValue_textBox.Width = 150;
+                expiryDateValue_textBox.Visible = false;
+                detailRequestOrderDataGridView.Columns.Add(expiryDateValue_textBox);
+            }
+
         }
 
         private void dataMutasiBarangDetailForm_Load(object sender, EventArgs e)
@@ -1245,6 +1297,30 @@ namespace RoyalPetz_ADMIN
                                 gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "ADD DETAIL NEW MUTASI [" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + ", " + qtyApproved + "]");
                                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                     throw internalEX;
+
+                                // REDUCE GLOBAL STOCK
+                                sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + qtyApproved + " WHERE PRODUCT_ID = '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "'";
+
+                                gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "REDUCE MASTER PRODUCT [" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + ", " + qtyApproved + "]");
+                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                    throw internalEX;
+
+                                if (globalFeatureList.EXPIRY_MODULE == 1)
+                                {
+                                    // REDUCE STOCK AT TABLE PRODUCT EXPIRY
+                                    int lotID;
+                                    string expiryProductID = detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString();
+                                    double expiryProductAmt = qtyApproved;
+
+                                    lotID = expUtil.getLotIDBasedOnExpiryDate(Convert.ToDateTime(detailRequestOrderDataGridView.Rows[i].Cells["expiryDateValue"]), detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString());
+
+                                    // REDUCE GLOBAL STOCK
+                                    sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = PRODUCT_AMOUNT - " + qtyApproved + " WHERE ID = " + lotID;
+
+                                    gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "REDUCE PRODUCT EXPIRY [" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + ", " + qtyApproved + "]");
+                                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                        throw internalEX;
+                                }
                             }
                         }
 
@@ -1330,6 +1406,35 @@ namespace RoyalPetz_ADMIN
             {
                 errorLabel.Text = "TIDAK ADA PRODUCT YANG DIPILIH";
                 return false;
+            }
+
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+            {
+                bool dataValid = true;
+                DateTime checkDate;
+                string productID = "";
+                // CHECK VALIDITY OF EXPIRED DATE 
+                for (i = 0; i < detailRequestOrderDataGridView.Rows.Count && dataValid; i++)
+                {
+                    if (null != detailRequestOrderDataGridView.Rows[i].Cells["expiryDateValue"].Value)
+                        dataValid = true;
+                    else
+                        dataValid = false;
+
+                    if (dataValid)
+                    {
+                        productID = detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString();
+                        checkDate = Convert.ToDateTime(detailRequestOrderDataGridView.Rows[i].Cells["expiryDateValue"].Value);
+                        if (!expUtil.isExpiryDateExist(checkDate, productID))
+                            dataValid = false;
+                    }
+                }
+
+                if (!dataValid)
+                {
+                    errorLabel.Text = "TANGGAL KADALUARSA PADA BARIS [" + i + "] INVALID";
+                    return false;
+                }
             }
 
             //for (i = 0; i < detailRequestOrderDataGridView.Rows.Count && dataExist; i++)
@@ -1980,8 +2085,21 @@ namespace RoyalPetz_ADMIN
 
                         // check if there's a product ID for that particular row
                         if (null != selectedRow.Cells["productID"].Value)
-                            if (stockIsEnough(selectedRow.Cells["productID"].Value.ToString(), productQty))
-                                validInput = true;
+                        { 
+                            if (globalFeatureList.EXPIRY_MODULE == 1)
+                            {
+                                if (selectedRow.Cells["expiryDateValue"].Value != null)
+                                {
+                                    if (expiryStockIsEnough(selectedRow.Cells["productID"].Value.ToString(), productQty, Convert.ToDateTime(selectedRow.Cells["expiryDateValue"].Value)))
+                                        validInput = true;
+                                }
+                            }
+                            else
+                            {
+                                if (stockIsEnough(selectedRow.Cells["productID"].Value.ToString(), productQty))
+                                    validInput = true;
+                            }
+                        }
 
                         // input match RegEx, and Stock is enough
                         if (validInput)
@@ -2049,6 +2167,92 @@ namespace RoyalPetz_ADMIN
         private void detailRequestOrderDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             detailRequestOrderDataGridView.ResumeLayout();
+        }
+
+        private void addDateTimePickerToDataGrid(int columnIndex, int rowIndex)
+        {
+            detailRequestOrderDataGridView.Controls.Add(oDateTimePicker);
+            oDateTimePicker.Visible = false;
+            oDateTimePicker.Format = DateTimePickerFormat.Custom;
+            oDateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+            oDateTimePicker.TextChanged += new EventHandler(oDateTimePicker_OnTextChanged);
+            if (null != detailRequestOrderDataGridView.Rows[rowIndex].Cells["expiryDateValue"].Value)
+                oDateTimePicker.Value = Convert.ToDateTime(detailRequestOrderDataGridView.Rows[rowIndex].Cells["expiryDateValue"].Value);
+
+            oDateTimePicker.Visible = true;
+
+            Rectangle oRectangle = detailRequestOrderDataGridView.GetCellDisplayRectangle(columnIndex, rowIndex, true);
+            oDateTimePicker.Size = new Size(oRectangle.Width, oRectangle.Height);
+            oDateTimePicker.Location = new Point(oRectangle.X, oRectangle.Y);
+            oDateTimePicker.CloseUp += new EventHandler(oDateTimePicker_CloseUp);
+        }
+
+        private void oDateTimePicker_OnTextChanged(object sender, EventArgs e)
+        {
+            int rowIndex = detailRequestOrderDataGridView.CurrentCell.RowIndex;
+            DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[rowIndex];
+            bool validInput = false;
+
+            detailRequestOrderDataGridView.CurrentCell.Value = oDateTimePicker.Text.ToString();
+            selectedRow.Cells["expiryDateValue"].Value = oDateTimePicker.Value.ToString();
+
+            if (selectedRow.Cells["qty"].Value != null)
+            {
+                if (expiryStockIsEnough(selectedRow.Cells["productID"].Value.ToString(), Convert.ToInt32(selectedRow.Cells["qty"].Value), Convert.ToDateTime(selectedRow.Cells["expiryDateValue"].Value)))
+                    validInput = true;
+
+                if (!validInput)
+                {
+                    // if stock is not enough
+                    if (null != selectedRow.Cells["productID"].Value)
+                        errorLabel.Text = "JUMLAH STOK TIDAK MENCUKUPI";
+
+                    detailRequestOrderDataGridView.CurrentCell = selectedRow.Cells["qty"];
+                }
+            }
+        }
+
+        private void oDateTimePicker_CloseUp(object sender, EventArgs e)
+        {
+            oDateTimePicker.Visible = false;
+        }
+
+        private void detailRequestOrderDataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = detailRequestOrderDataGridView[e.ColumnIndex, e.RowIndex];
+            string columnName = "";
+
+            if (detailRequestOrderDataGridView.Rows.Count <= 0)
+                return;
+
+            columnName = cell.OwningColumn.Name;
+
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+            {
+                if (columnName == "expiryDate")
+                {
+                    addDateTimePickerToDataGrid(e.ColumnIndex, e.RowIndex);
+                }
+            }
+        }
+
+        private void detailRequestOrderDataGridView_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = detailRequestOrderDataGridView[e.ColumnIndex, e.RowIndex];
+            string columnName = "";
+
+            if (detailRequestOrderDataGridView.Rows.Count <= 0)
+                return;
+
+            columnName = cell.OwningColumn.Name;
+
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+            {
+                if (columnName == "expiryDate")
+                {
+                    oDateTimePicker.Visible = false;
+                }
+            }
         }
     }
 }

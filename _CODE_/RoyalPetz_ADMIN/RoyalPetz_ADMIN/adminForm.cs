@@ -1510,5 +1510,17 @@ namespace RoyalPetz_ADMIN
             ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm(globalConstants.REPORT_STOCK);
             displayedForm.ShowDialog(this);
         }
+
+        private void toolStripMenuItem2_Click_1(object sender, EventArgs e)
+        {
+            ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm(globalConstants.REPORT_STOCK_EXPIRY);
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem3_Click_2(object sender, EventArgs e)
+        {
+            ReportProductForm displayedform = new ReportProductForm(globalConstants.REPORT_STOCK_AGING);
+            displayedform.ShowDialog(this);
+        }
     }
 }

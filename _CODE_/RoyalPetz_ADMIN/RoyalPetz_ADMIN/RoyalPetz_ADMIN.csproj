@@ -298,6 +298,7 @@
       <DependentUpon>dummyReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="expiryModuleUtil.cs" />
     <Compile Include="exportStockOpnameForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -305,6 +306,7 @@
       <DependentUpon>exportStockOpnameForm.cs</DependentUpon>
     </Compile>
     <Compile Include="globalCryptographyMethod.cs" />
+    <Compile Include="globalFeatureList.cs" />
     <Compile Include="messagingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -702,6 +704,12 @@
       <DependentUpon>ReportProduct.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportProductAging.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportProductAging.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportProductCategory.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -893,6 +901,12 @@
     </Compile>
     <Compile Include="ReportStockDeviationForm.Designer.cs">
       <DependentUpon>ReportStockDeviationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportStockExpiry.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportStockExpiry.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ReportStockForm.cs">
       <SubType>Form</SubType>
@@ -1427,6 +1441,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportProduct.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportProductAging.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportProductAging.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportProductCategory.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportProductCategory.cs</LastGenOutput>
@@ -1537,6 +1555,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportStockDeviationForm.resx">
       <DependentUpon>ReportStockDeviationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportStockExpiry.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportStockExpiry.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportStockForm.resx">
       <DependentUpon>ReportStockForm.cs</DependentUpon>

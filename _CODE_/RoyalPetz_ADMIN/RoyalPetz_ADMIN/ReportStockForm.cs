@@ -16,10 +16,17 @@ namespace RoyalPetz_ADMIN
     public partial class ReportStockForm : Form
     {
         private globalUtilities gutil = new globalUtilities();
+        private int originModuleID = 0;
 
         public ReportStockForm()
         {
             InitializeComponent();
+        }
+
+        public ReportStockForm(int moduleID)
+        {
+            InitializeComponent();
+            originModuleID = moduleID;
         }
 
         private void ReportStockForm_Load(object sender, EventArgs e)
@@ -30,12 +37,26 @@ namespace RoyalPetz_ADMIN
             {
                 string appPath = Directory.GetCurrentDirectory() + "\\" + globalConstants.StockXML;
                 dsTempReport.ReadXml(@appPath);
+                CrystalDecisions.CrystalReports.Engine.TextObject txtReportHeader1, txtReportHeader2;
 
                 //prepare report for preview
-                ReportStock rptXMLReport = new ReportStock();
-                CrystalDecisions.CrystalReports.Engine.TextObject txtReportHeader1, txtReportHeader2;
-                txtReportHeader1 = rptXMLReport.ReportDefinition.ReportObjects["NamaTokoLabel"] as TextObject;
-                txtReportHeader2 = rptXMLReport.ReportDefinition.ReportObjects["InfoTokoLabel"] as TextObject;
+                if (originModuleID == globalConstants.REPORT_STOCK_EXPIRY)
+                { 
+                    ReportStockExpiry rptXMLReportExpiry = new ReportStockExpiry();
+                    txtReportHeader1 = rptXMLReportExpiry.ReportDefinition.ReportObjects["NamaTokoLabel"] as TextObject;
+                    txtReportHeader2 = rptXMLReportExpiry.ReportDefinition.ReportObjects["InfoTokoLabel"] as TextObject;
+                    rptXMLReportExpiry.Database.Tables[0].SetDataSource(dsTempReport.Tables[0]);
+                    crystalReportViewer1.ReportSource = rptXMLReportExpiry;
+                }
+                else
+                { 
+                    ReportStock rptXMLReport = new ReportStock();
+                    txtReportHeader1 = rptXMLReport.ReportDefinition.ReportObjects["NamaTokoLabel"] as TextObject;
+                    txtReportHeader2 = rptXMLReport.ReportDefinition.ReportObjects["InfoTokoLabel"] as TextObject;
+                    rptXMLReport.Database.Tables[0].SetDataSource(dsTempReport.Tables[0]);
+                    crystalReportViewer1.ReportSource = rptXMLReport;
+                }
+
                 //baca database untuk nama toko
                 String nama, alamat, telepon, email;
                 if (!gutil.loadinfotoko(2, out nama, out alamat, out telepon, out email))
@@ -52,9 +73,8 @@ namespace RoyalPetz_ADMIN
                 txtReportHeader1.Text = nama;
                 txtReportHeader2.Text = alamat + Environment.NewLine + telepon + Environment.NewLine + email;
                 //rptXMLReport.SetDataSource(dsTempReport);
-                rptXMLReport.Database.Tables[0].SetDataSource(dsTempReport.Tables[0]);
-                crystalReportViewer1.DisplayGroupTree = false;
-                crystalReportViewer1.ReportSource = rptXMLReport;
+
+                //crystalReportViewer1.DisplayGroupTree = false;
                 crystalReportViewer1.Refresh();
             }
             catch (Exception ex)

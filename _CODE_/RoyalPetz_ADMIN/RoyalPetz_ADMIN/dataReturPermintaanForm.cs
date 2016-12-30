@@ -43,12 +43,15 @@ namespace RoyalPetz_ADMIN
         private Hotkeys.GlobalHotkey ghk_DOWN;
 
         private Data_Access DS = new Data_Access();
-        private globalUtilities GUTIL = new globalUtilities();
+        private globalUtilities gUtil = new globalUtilities();
+        private expiryModuleUtil expUtil = new expiryModuleUtil();
         private bool navKeyRegistered = false;
         private bool delKeyRegistered = false;
 
         barcodeForm displayBarcodeForm = null;
         dataProdukForm browseProdukForm = null;
+
+        DateTimePicker oDateTimePicker = new DateTimePicker();
 
         public dataReturPermintaanForm()
         {
@@ -156,6 +159,24 @@ namespace RoyalPetz_ADMIN
             detailReturDataGridView.Columns.Add(descriptionColumn);
 
             detailQty.Add("0");
+
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+            {
+                DataGridViewTextBoxColumn expiryDate_textBox = new DataGridViewTextBoxColumn();
+                expiryDate_textBox.Name = "expiryDate";
+                expiryDate_textBox.HeaderText = "KADALUARSA";
+                expiryDate_textBox.ReadOnly = true;
+                expiryDate_textBox.Width = 150;
+                detailReturDataGridView.Columns.Add(expiryDate_textBox);
+
+                DataGridViewTextBoxColumn expiryDateValue_textBox = new DataGridViewTextBoxColumn();
+                expiryDateValue_textBox.Name = "expiryDateValue";
+                expiryDateValue_textBox.HeaderText = "KADALUARSA";
+                expiryDateValue_textBox.ReadOnly = true;
+                expiryDateValue_textBox.Width = 150;
+                expiryDateValue_textBox.Visible = false;
+                detailReturDataGridView.Columns.Add(expiryDateValue_textBox);
+            }
         }
 
         private void captureAll(Keys key)
@@ -344,7 +365,7 @@ namespace RoyalPetz_ADMIN
             {
                 if (null != detailReturDataGridView.Rows[i].Cells["productID"].Value)
                 {
-                    if (!GUTIL.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString()))
+                    if (!gUtil.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString()))
                     {
                         allowToAdd = false;
                         newRowIndex = i;
@@ -394,7 +415,7 @@ namespace RoyalPetz_ADMIN
                 if (
                     null != detailReturDataGridView.Rows[i].Cells["productName"].Value && 
                     null != detailReturDataGridView.Rows[i].Cells["productID"].Value 
-                    && GUTIL.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString())
+                    && gUtil.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString())
                     )               
                {
                     if (detailReturDataGridView.Rows[i].Cells["productName"].Value.ToString() == productName)
@@ -602,7 +623,7 @@ namespace RoyalPetz_ADMIN
                     return;
 
                 hpp = getHPPValue(selectedProductID);
-                GUTIL.saveSystemDebugLog(globalConstants.MENU_RETUR_PERMINTAAN, "updateSomeRowsContent, PRODUCT_BASE_PRICE [" + hpp + "]");
+                gUtil.saveSystemDebugLog(globalConstants.MENU_RETUR_PERMINTAAN, "updateSomeRowsContent, PRODUCT_BASE_PRICE [" + hpp + "]");
                 selectedRow.Cells["hpp"].Value = hpp.ToString();
                 productPriceList[rowSelectedIndex] = hpp.ToString();
 
@@ -612,7 +633,7 @@ namespace RoyalPetz_ADMIN
                 selectedRow.Cells["subTotal"].Value = 0;
                 subtotalList[rowSelectedIndex] = "0";
 
-                GUTIL.saveSystemDebugLog(globalConstants.MENU_RETUR_PERMINTAAN, "updateSomeRowsContent, attempt to calculate total");
+                gUtil.saveSystemDebugLog(globalConstants.MENU_RETUR_PERMINTAAN, "updateSomeRowsContent, attempt to calculate total");
 
                 calculateTotal();
             }
@@ -730,7 +751,7 @@ namespace RoyalPetz_ADMIN
 
             if (detailQty.Count < rowSelectedIndex + 1)
             {
-                if (GUTIL.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
+                if (gUtil.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
                     && (dataGridViewTextBoxEditingControl.Text.Length > 0))
                 {
                     detailQty.Add(dataGridViewTextBoxEditingControl.Text);
@@ -742,7 +763,7 @@ namespace RoyalPetz_ADMIN
             }
             else
             {
-                if (GUTIL.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
+                if (gUtil.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
                     && (dataGridViewTextBoxEditingControl.Text.Length > 0))
                 {
                         detailQty[rowSelectedIndex] = dataGridViewTextBoxEditingControl.Text;
@@ -796,7 +817,7 @@ namespace RoyalPetz_ADMIN
 
             addColumnToDataGrid();
 
-            GUTIL.reArrangeTabOrder(this);
+            gUtil.reArrangeTabOrder(this);
 
             detailQty.Add("0");
             productPriceList.Add("0");
@@ -859,21 +880,50 @@ namespace RoyalPetz_ADMIN
                 return false;
             }
 
-            //for (i = 0; i < detailReturDataGridView.Rows.Count && dataExist; i++)
-            //{
-            //    if (null != detailReturDataGridView.Rows[i].Cells["productID"].Value)
-            //        dataExist = GUTIL.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString());
-            //    else
-            //        dataExist = false;
-            //}
-            //if (!dataExist)
-            //{
-            //    i = i + 1;
-            //    errorLabel.Text = "PRODUCT ID PADA BARIS [" + i + "] INVALID";
-            //    return false;
-            //}
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+            {
+                bool dataValid = true;
+                DateTime checkDate;
+                string productID = "";
 
-            return true;
+                // CHECK VALIDITY OF EXPIRED DATE 
+                for (i = 0; i < detailReturDataGridView.Rows.Count && dataValid; i++)
+                {
+                    if (null != detailReturDataGridView.Rows[i].Cells["expiryDateValue"].Value)
+                        dataValid = true;
+                    else
+                        dataValid = false;
+
+                    if (dataValid)
+                    {
+                        productID = detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString();
+                        checkDate = Convert.ToDateTime(detailReturDataGridView.Rows[i].Cells["expiryDateValue"].Value);
+                        if (!expUtil.isExpiryDateExist(checkDate, productID))
+                            dataValid = false;
+                    }
+                }
+
+                if (!dataValid)
+                {
+                    errorLabel.Text = "TANGGAL KADALUARSA PADA BARIS [" + i + "] INVALID";
+                    return false;
+                }
+            }
+                //for (i = 0; i < detailReturDataGridView.Rows.Count && dataExist; i++)
+                //{
+                //    if (null != detailReturDataGridView.Rows[i].Cells["productID"].Value)
+                //        dataExist = gUtil.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString());
+                //    else
+                //        dataExist = false;
+                //}
+                //if (!dataExist)
+                //{
+                //    i = i + 1;
+                //    errorLabel.Text = "PRODUCT ID PADA BARIS [" + i + "] INVALID";
+                //    return false;
+                //}
+
+                return true;
         }
 
         private bool saveDataTransaction()
@@ -908,14 +958,14 @@ namespace RoyalPetz_ADMIN
                 // SAVE HEADER TABLE
                 sqlCommand = "INSERT INTO RETURN_PURCHASE_HEADER (RP_ID, SUPPLIER_ID, RP_DATE, RP_TOTAL, RP_PROCESSED) VALUES " +
                                     "('" + returID + "', " + supplierID + ", STR_TO_DATE('" + ReturDateTime + "', '%d-%m-%Y'), " + returTotal + ", 1)";
-                GUTIL.saveSystemDebugLog(globalConstants.MENU_RETUR_PEMBELIAN, "INSERT TO RETURN PURCHASE HEADER");                    
+                gUtil.saveSystemDebugLog(globalConstants.MENU_RETUR_PEMBELIAN, "INSERT TO RETURN PURCHASE HEADER");                    
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                       throw internalEX;
 
                 // SAVE DETAIL TABLE
                 for (int i = 0; i < detailReturDataGridView.Rows.Count-1; i++)
                 {
-                    if (null != detailReturDataGridView.Rows[i].Cells["productID"].Value && GUTIL.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString()))
+                    if (null != detailReturDataGridView.Rows[i].Cells["productID"].Value && gUtil.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString()))
                     { 
                        hppValue = Convert.ToDouble(productPriceList[i]);
                        qtyValue = Convert.ToDouble(detailQty[i]);
@@ -930,15 +980,32 @@ namespace RoyalPetz_ADMIN
                        }
                        sqlCommand = "INSERT INTO RETURN_PURCHASE_DETAIL (RP_ID, PRODUCT_ID, PRODUCT_BASEPRICE, PRODUCT_QTY, RP_DESCRIPTION, RP_SUBTOTAL) VALUES " +
                                            "('" + returID + "', '" + detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " +hppValue  + ", " + qtyValue + ", '" + MySqlHelper.EscapeString(descriptionValue) + "', " + Convert.ToDouble(subtotalList[i]) + ")";
-                        GUTIL.saveSystemDebugLog(globalConstants.MENU_RETUR_PEMBELIAN, "INSERT TO RETURN PURCHASE DETAIL");
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_RETUR_PEMBELIAN, "INSERT TO RETURN PURCHASE DETAIL");
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                            throw internalEX;
 
                        // UPDATE MASTER PRODUCT
                        sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + qtyValue + " WHERE PRODUCT_ID = '" + detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString() + "'";
-                       GUTIL.saveSystemDebugLog(globalConstants.MENU_RETUR_PEMBELIAN, "UPDATE MASTER PRODUCT");
+                       gUtil.saveSystemDebugLog(globalConstants.MENU_RETUR_PEMBELIAN, "UPDATE MASTER PRODUCT");
                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                          throw internalEX;
+
+                       if (globalFeatureList.EXPIRY_MODULE == 1)
+                       {
+                            // UPDATE PRODUCT EXPIRY TABLE
+                            DateTime expiryDate;
+                            int lotID = 0;
+                            string productID = detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString();
+
+                            expiryDate = Convert.ToDateTime(detailReturDataGridView.Rows[i].Cells["expiryDateValue"].Value);
+
+                            lotID = expUtil.getLotIDBasedOnExpiryDate(expiryDate, productID);
+                            sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = PRODUCT_AMOUNT + " + qtyValue + " WHERE ID = " + lotID;
+
+                            gUtil.saveSystemDebugLog(globalConstants.MENU_RETUR_PENJUALAN, "UPDATE PRODUCT EXPIRY QTY [" + detailReturDataGridView.Rows[i].Cells["expiryDateValue"].Value.ToString() + "]");
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+                        }
                     }
                 }
               
@@ -947,7 +1014,7 @@ namespace RoyalPetz_ADMIN
             }
             catch (Exception e)
             {
-                GUTIL.saveSystemDebugLog(globalConstants.MENU_RETUR_PEMBELIAN, "EXCEPTION THROWN [" + e.Message + "]");
+                gUtil.saveSystemDebugLog(globalConstants.MENU_RETUR_PEMBELIAN, "EXCEPTION THROWN [" + e.Message + "]");
                 try
                 {
                     DS.rollBack();
@@ -956,11 +1023,11 @@ namespace RoyalPetz_ADMIN
                 {
                     if (DS.getMyTransConnection() != null)
                     {
-                        GUTIL.showDBOPError(ex, "ROLLBACK");
+                        gUtil.showDBOPError(ex, "ROLLBACK");
                     }
                 }
 
-                GUTIL.showDBOPError(e, "INSERT");
+                gUtil.showDBOPError(e, "INSERT");
                 result = false;
             }
             finally
@@ -1013,18 +1080,18 @@ namespace RoyalPetz_ADMIN
 
         private void saveAndPrintButton_Click(object sender, EventArgs e)
         {
-            GUTIL.saveSystemDebugLog(globalConstants.MENU_RETUR_PEMBELIAN, "ATTEMPT TO SAVE TO LOCAL DATA FIRST");
+            gUtil.saveSystemDebugLog(globalConstants.MENU_RETUR_PEMBELIAN, "ATTEMPT TO SAVE TO LOCAL DATA FIRST");
             if (saveData())
             {
                 if (originModuleID == globalConstants.RETUR_PEMBELIAN_KE_SUPPLIER)
-                    GUTIL.saveUserChangeLog(globalConstants.MENU_RETUR_PEMBELIAN, globalConstants.CHANGE_LOG_INSERT, "CREATE NEW RETUR PEMBELIAN [" + noReturTextBox.Text + "] KE SUPPLIER [" + supplierCombo.Text + "]");
+                    gUtil.saveUserChangeLog(globalConstants.MENU_RETUR_PEMBELIAN, globalConstants.CHANGE_LOG_INSERT, "CREATE NEW RETUR PEMBELIAN [" + noReturTextBox.Text + "] KE SUPPLIER [" + supplierCombo.Text + "]");
                 else
-                    GUTIL.saveUserChangeLog(globalConstants.MENU_RETUR_PERMINTAAN, globalConstants.CHANGE_LOG_INSERT, "CREATE NEW RETUR PERMINTAAN [" + noReturTextBox.Text + "]");
+                    gUtil.saveUserChangeLog(globalConstants.MENU_RETUR_PERMINTAAN, globalConstants.CHANGE_LOG_INSERT, "CREATE NEW RETUR PERMINTAAN [" + noReturTextBox.Text + "]");
 
                 printOutReturPermintaan();
 
-                GUTIL.showSuccess(GUTIL.INS);
-                GUTIL.ResetAllControls(this);
+                gUtil.showSuccess(gUtil.INS);
+                gUtil.ResetAllControls(this);
                 detailReturDataGridView.Rows.Clear();
                 globalTotalValue = 0;
                 totalLabel.Text = globalTotalValue.ToString("C0", culture);
@@ -1193,7 +1260,7 @@ namespace RoyalPetz_ADMIN
             string columnName = "";
 
             columnName = cell.OwningColumn.Name;
-            GUTIL.saveSystemDebugLog(globalConstants.MENU_RETUR_PERMINTAAN, "RETUR PERMINTAAN : detailReturDataGridView_CellValueChanged [" + columnName + "]");
+            gUtil.saveSystemDebugLog(globalConstants.MENU_RETUR_PERMINTAAN, "RETUR PERMINTAAN : detailReturDataGridView_CellValueChanged [" + columnName + "]");
 
             rowSelectedIndex = e.RowIndex;
             DataGridViewRow selectedRow = detailReturDataGridView.Rows[rowSelectedIndex];
@@ -1248,7 +1315,7 @@ namespace RoyalPetz_ADMIN
 
                 if (detailQty.Count < rowSelectedIndex + 1)
                 {
-                    if (GUTIL.matchRegEx(cellValue, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
+                    if (gUtil.matchRegEx(cellValue, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
                         && (cellValue.Length > 0))
                     {
                         detailQty.Add(cellValue);
@@ -1260,7 +1327,7 @@ namespace RoyalPetz_ADMIN
                 }
                 else
                 {
-                    if (GUTIL.matchRegEx(cellValue, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
+                    if (gUtil.matchRegEx(cellValue, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
                         && (cellValue.Length > 0))
                     {
                         detailQty[rowSelectedIndex] = cellValue;
@@ -1298,6 +1365,75 @@ namespace RoyalPetz_ADMIN
             {
                 detailReturDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
             }
+        }
+
+        private void oDateTimePicker_OnTextChanged(object sender, EventArgs e)
+        {
+            int rowIndex = detailReturDataGridView.CurrentCell.RowIndex;
+
+            detailReturDataGridView.CurrentCell.Value = oDateTimePicker.Text.ToString();
+            detailReturDataGridView.Rows[rowIndex].Cells["expiryDateValue"].Value = oDateTimePicker.Value.ToString();
+        }
+
+        private void oDateTimePicker_CloseUp(object sender, EventArgs e)
+        {
+            oDateTimePicker.Visible = false;
+        }
+
+        private void detailReturDataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = detailReturDataGridView[e.ColumnIndex, e.RowIndex];
+            string columnName = "";
+
+            if (detailReturDataGridView.Rows.Count <= 0)
+                return;
+
+            columnName = cell.OwningColumn.Name;
+
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+            {
+                if (columnName == "expiryDate")
+                {
+                    addDateTimePickerToDataGrid(e.ColumnIndex, e.RowIndex);
+                }
+            }
+        }
+
+        private void detailReturDataGridView_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = detailReturDataGridView[e.ColumnIndex, e.RowIndex];
+            string columnName = "";
+
+            if (detailReturDataGridView.Rows.Count <= 0)
+                return;
+
+            columnName = cell.OwningColumn.Name;
+
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+            {
+                if (columnName == "expiryDate")
+                {
+                    oDateTimePicker.Visible = false;
+                }
+            }
+        }
+
+        private void addDateTimePickerToDataGrid(int columnIndex, int rowIndex)
+        {
+            detailReturDataGridView.Controls.Add(oDateTimePicker);
+            oDateTimePicker.Visible = false;
+            oDateTimePicker.Format = DateTimePickerFormat.Custom;
+            oDateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+            oDateTimePicker.TextChanged += new EventHandler(oDateTimePicker_OnTextChanged);
+            if (null != detailReturDataGridView.Rows[rowIndex].Cells["expiryDateValue"].Value)
+                oDateTimePicker.Value = Convert.ToDateTime(detailReturDataGridView.Rows[rowIndex].Cells["expiryDateValue"].Value);
+
+            oDateTimePicker.Visible = true;
+
+            Rectangle oRectangle = detailReturDataGridView.GetCellDisplayRectangle(columnIndex, rowIndex, true);
+            oDateTimePicker.Size = new Size(oRectangle.Width, oRectangle.Height);
+            oDateTimePicker.Location = new Point(oRectangle.X, oRectangle.Y);
+            oDateTimePicker.CloseUp += new EventHandler(oDateTimePicker_CloseUp);
         }
     }
 }

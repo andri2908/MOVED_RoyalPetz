@@ -172,6 +172,8 @@
             this.supplierCombo.Size = new System.Drawing.Size(345, 26);
             this.supplierCombo.TabIndex = 41;
             this.supplierCombo.SelectedIndexChanged += new System.EventHandler(this.supplierCombo_SelectedIndexChanged);
+            this.supplierCombo.Enter += new System.EventHandler(this.supplierCombo_Enter);
+            this.supplierCombo.Leave += new System.EventHandler(this.supplierCombo_Leave);
             // 
             // labelAsal_1
             // 
@@ -362,7 +364,7 @@
             this.panel1.Controls.Add(this.errorLabel);
             this.panel1.Location = new System.Drawing.Point(2, 1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(932, 29);
+            this.panel1.Size = new System.Drawing.Size(958, 29);
             this.panel1.TabIndex = 45;
             // 
             // errorLabel
@@ -403,11 +405,14 @@
             this.detailGridView.Location = new System.Drawing.Point(2, 273);
             this.detailGridView.Name = "detailGridView";
             this.detailGridView.RowHeadersVisible = false;
-            this.detailGridView.Size = new System.Drawing.Size(979, 331);
+            this.detailGridView.Size = new System.Drawing.Size(958, 331);
             this.detailGridView.TabIndex = 47;
             this.detailGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.detailGridView_CellBeginEdit);
+            this.detailGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailGridView_CellClick);
             this.detailGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailGridView_CellEndEdit);
+            this.detailGridView.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailGridView_CellEnter);
             this.detailGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.detailGridView_CellFormatting);
+            this.detailGridView.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailGridView_CellLeave);
             this.detailGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailGridView_CellValidated);
             this.detailGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailGridView_CellValueChanged);
             this.detailGridView.CurrentCellDirtyStateChanged += new System.EventHandler(this.detailGridView_CurrentCellDirtyStateChanged);
@@ -443,7 +448,7 @@
             // 
             this.supplierHiddenCombo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.supplierHiddenCombo.FormattingEnabled = true;
-            this.supplierHiddenCombo.Location = new System.Drawing.Point(661, 357);
+            this.supplierHiddenCombo.Location = new System.Drawing.Point(613, 357);
             this.supplierHiddenCombo.Name = "supplierHiddenCombo";
             this.supplierHiddenCombo.Size = new System.Drawing.Size(311, 26);
             this.supplierHiddenCombo.TabIndex = 56;
@@ -493,7 +498,7 @@
             this.groupBox1.Controls.Add(this.labelNo);
             this.groupBox1.Location = new System.Drawing.Point(2, 36);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(932, 231);
+            this.groupBox1.Size = new System.Drawing.Size(958, 231);
             this.groupBox1.TabIndex = 58;
             this.groupBox1.TabStop = false;
             // 
@@ -513,7 +518,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(936, 661);
+            this.ClientSize = new System.Drawing.Size(964, 661);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.reprintButton);
             this.Controls.Add(this.supplierHiddenCombo);

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.Globalization;
 
 using System.Text.RegularExpressions;
 using Hotkeys;
@@ -44,6 +45,7 @@ namespace RoyalPetz_ADMIN
 
         private Hotkeys.GlobalHotkey ghk_UP;
         private Hotkeys.GlobalHotkey ghk_DOWN;
+        private CultureInfo culture = new CultureInfo("id-ID");
 
         public dataProdukDetailForm()
         {
@@ -742,7 +744,30 @@ namespace RoyalPetz_ADMIN
                                 throw internalEX;
                         }
                         break;
-                    
+
+                        if (globalFeatureList.EXPIRY_MODULE == 1)
+                        {
+                            // INSERT TO PRODUCT_EXPIRY
+                            DateTime productExpiryDateValue = expDatePicker.Value;
+                            string productExpiryDate = String.Format(culture, "{0:dd-MM-yyyy}", productExpiryDateValue);
+                            int lotID = 0;
+                            string productID = kodeProdukTextBox.Text;
+                            expiryModuleUtil expUtil = new expiryModuleUtil();
+
+                            // CHECK WHETHER THE PRODUCT WITH SAME EXPIRY DATE EXIST
+                            lotID = expUtil.getLotIDBasedOnExpiryDate(productExpiryDateValue, productID);
+
+                            if (lotID == 0)
+                                //sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT, PR_INVOICE) VALUES ( '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", '" + PRInvoice + "')";
+                                sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT) VALUES ( '" + productID + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + produkQty + ")";
+                            else
+                                sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = PRODUCT_AMOUNT + " + produkQty + " WHERE ID = " + lotID;
+
+                            gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "INSERT TO PRODUCT EXPIRY [" + productID + "]");
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+                        }
+
                 }
 
                 if (!selectedPhoto.Equals("PRODUCT_PHOTO/" + produkPhoto) && !selectedPhoto.Equals(""))// && result == true)
@@ -985,6 +1010,12 @@ namespace RoyalPetz_ADMIN
 
             errorLabel.Text = "";
 
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+            {
+                expLabel.Visible = true;
+                expDatePicker.Visible = true;
+            }
+
             isLoading = true;
             loadProdukData();
 
@@ -1022,6 +1053,12 @@ namespace RoyalPetz_ADMIN
                 if (userAccessOption != 4 && userAccessOption != 6)
                 {
                     gUtil.setReadOnlyAllControls(this);
+                }
+
+                if (globalFeatureList.EXPIRY_MODULE == 1)
+                {
+                    expLabel.Visible = false;
+                    expDatePicker.Visible = false;
                 }
             }
 

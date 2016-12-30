@@ -101,7 +101,9 @@
             this.detailRequestOrderDataGridView.TabIndex = 39;
             this.detailRequestOrderDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.detailRequestOrderDataGridView_CellBeginEdit);
             this.detailRequestOrderDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailRequestOrderDataGridView_CellEndEdit);
+            this.detailRequestOrderDataGridView.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailRequestOrderDataGridView_CellEnter);
             this.detailRequestOrderDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.detailRequestOrderDataGridView_CellFormatting);
+            this.detailRequestOrderDataGridView.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailRequestOrderDataGridView_CellLeave);
             this.detailRequestOrderDataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailRequestOrderDataGridView_CellValidated);
             this.detailRequestOrderDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.detailRequestOrderDataGridView_CellValueChanged);
             this.detailRequestOrderDataGridView.CurrentCellDirtyStateChanged += new System.EventHandler(this.detailRequestOrderDataGridView_CurrentCellDirtyStateChanged);
@@ -138,7 +140,7 @@
             this.ROExpiredDateTimePicker.Enabled = false;
             this.ROExpiredDateTimePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ROExpiredDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.ROExpiredDateTimePicker.Location = new System.Drawing.Point(734, 73);
+            this.ROExpiredDateTimePicker.Location = new System.Drawing.Point(680, 73);
             this.ROExpiredDateTimePicker.Name = "ROExpiredDateTimePicker";
             this.ROExpiredDateTimePicker.Size = new System.Drawing.Size(149, 27);
             this.ROExpiredDateTimePicker.TabIndex = 23;
@@ -162,7 +164,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(530, 79);
+            this.label7.Location = new System.Drawing.Point(476, 79);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(178, 18);
             this.label7.TabIndex = 24;
@@ -173,7 +175,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label5.Location = new System.Drawing.Point(714, 79);
+            this.label5.Location = new System.Drawing.Point(660, 79);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(14, 18);
             this.label5.TabIndex = 20;

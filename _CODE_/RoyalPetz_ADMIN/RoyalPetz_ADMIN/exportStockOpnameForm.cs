@@ -47,7 +47,12 @@ namespace RoyalPetz_ADMIN
 
             //localDate = String.Format(culture, "{0:dd-MMM-yyyy}", DateTime.Now);
 
-            sqlCommand = "SELECT PRODUCT_ID, PRODUCT_BARCODE, PRODUCT_NAME, PRODUCT_STOCK_QTY, 0 AS PRODUCT_ACTUAL_QTY, '' AS DESCRIPTION FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 ORDER BY ID";
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+            {
+                sqlCommand = "SELECT MP.PRODUCT_ID, MP.PRODUCT_BARCODE, MP.PRODUCT_NAME, PE.PRODUCT_EXPIRY_DATE, PE.PRODUCT_AMOUNT, 0 AS PRODUCT_ACTUAL_QTY, '' AS DESCRIPTION FROM MASTER_PRODUCT MP, PRODUCT_EXPIRY PE WHERE MP.PRODUCT_ACTIVE = 1 PE.PRODUCT_ID = MP.PRODUCT_ID ORDER BY MP.ID";
+            }
+            else
+                sqlCommand = "SELECT PRODUCT_ID, PRODUCT_BARCODE, PRODUCT_NAME, PRODUCT_STOCK_QTY, 0 AS PRODUCT_ACTUAL_QTY, '' AS DESCRIPTION FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 ORDER BY ID";
 
             using (rdr = DS.getData(sqlCommand))
             {
@@ -69,6 +74,11 @@ namespace RoyalPetz_ADMIN
                     builder.Append(",");
                     builder.Append("NAMA PRODUK");
                     builder.Append(",");
+                    if (globalFeatureList.EXPIRY_MODULE == 1)
+                    {
+                        builder.Append("TGL EXPIRED");
+                        builder.Append(",");
+                    }
                     builder.Append("QTY PRODUK");
                     builder.Append(",");
                     builder.Append("QTY RIIL");
