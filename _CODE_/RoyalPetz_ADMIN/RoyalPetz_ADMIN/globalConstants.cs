@@ -194,6 +194,8 @@ namespace RoyalPetz_ADMIN
         public const int REPORT_MARGIN = 743;
         public const int REPORT_MONTHLY_BALANCE = 744;
 
+        public const int VIEW_SUPPLIER = 800;
+
         //XML file
         public const string AccountXML = "MasterAccount.xml";
         public const string BranchXML = "MasterBranch.xml";

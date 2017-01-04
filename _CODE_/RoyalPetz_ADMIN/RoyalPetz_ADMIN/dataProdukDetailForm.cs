@@ -41,6 +41,7 @@ namespace RoyalPetz_ADMIN
         private stokPecahBarangForm parentForm;
 
         dataKategoriProdukForm selectKategoriForm = null;
+        SupplierHistoryForm HistoryForm = null;
         dataSatuanForm selectSatuanForm = null;
 
         private Hotkeys.GlobalHotkey ghk_UP;
@@ -385,7 +386,7 @@ namespace RoyalPetz_ADMIN
                         hargaEcerTextBox.Text = rdr.GetString("PRODUCT_RETAIL_PRICE");
                         hargaPartaiTextBox.Text = rdr.GetString("PRODUCT_BULK_PRICE");
                         hargaGrosirTextBox.Text = rdr.GetString("PRODUCT_WHOLESALE_PRICE"); ;
-                        merkTextBox.Text = rdr.GetString("PRODUCT_BRAND");
+                        SupplierTextBox.Text = rdr.GetString("PRODUCT_BRAND");
                         stokAwalTextBox.Text = rdr.GetString("PRODUCT_STOCK_QTY");
                         limitStokTextBox.Text = rdr.GetString("PRODUCT_LIMIT_STOCK");
 
@@ -629,7 +630,7 @@ namespace RoyalPetz_ADMIN
             string produkHargaPartai = hargaPartaiTextBox.Text;
             string produkHargaGrosir = hargaGrosirTextBox.Text;
 
-            string produkBrand = merkTextBox.Text.Trim();
+            string produkBrand = SupplierTextBox.Text.Trim();
             if (produkBrand.Equals(""))
                 produkBrand = " ";
             else
@@ -1003,6 +1004,24 @@ namespace RoyalPetz_ADMIN
             }
         }
 
+        private void LoadLastSupplier()
+        {
+            string sqlCommand;
+            string supplierName = "";
+            DS.mySqlConnect();
+
+            sqlCommand = "SELECT IFNULL(M.SUPPLIER_FULL_NAME, '') AS 'NAMA SUPPLIER' FROM MASTER_SUPPLIER M, SUPPLIER_HISTORY H WHERE H.PRODUCT_ID = '" + kodeProdukTextBox.Text + "' AND M.SUPPLIER_ID = H.SUPPLIER_ID" ;
+            try
+            {
+                supplierName = DS.getDataSingleValue(sqlCommand).ToString();
+            }
+            catch (NullReferenceException ex)
+            {
+            }
+
+            SupplierTextBox.Text = supplierName;
+        }
+
         private void dataProdukDetailForm_Load(object sender, EventArgs e)
         {
             int userAccessOption = 0;
@@ -1024,6 +1043,8 @@ namespace RoyalPetz_ADMIN
             loadProductCategoryData();
 
             loadKategoriIDInformation();
+
+            LoadLastSupplier();
 
             switch (originModuleID)
             {
@@ -1161,6 +1182,16 @@ namespace RoyalPetz_ADMIN
             {
                 searchUnitButton.PerformClick();
             }
+        }
+
+        private void SupplierHistoryButton_Click(object sender, EventArgs e)
+        {
+            //TAMPILKAN LIST OF SUPPLIER HISTORY FORM
+            if (null == HistoryForm || HistoryForm.IsDisposed)
+                HistoryForm = new SupplierHistoryForm(kodeProdukTextBox.Text);
+
+            HistoryForm.Show();
+            HistoryForm.WindowState = FormWindowState.Normal;
         }
     }
 }

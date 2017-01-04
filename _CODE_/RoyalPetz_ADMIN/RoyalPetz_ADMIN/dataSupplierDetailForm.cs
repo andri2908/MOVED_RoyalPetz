@@ -338,6 +338,19 @@ namespace RoyalPetz_ADMIN
                     nonAktifCheckbox.Enabled = true;
                     loadSupplierData();
                     break;
+                case globalConstants.VIEW_SUPPLIER:
+                    supplierNameTextBox.Enabled = false;
+                    supplierAddress1TextBox.Enabled = false;
+                    supplierAddress2TextBox.Enabled = false;
+                    supplierAddressCityTextBox.Enabled = false;
+                    supplierEmailTextBox.Enabled = false;
+                    supplierFaxTextBox.Enabled = false;
+                    supplierPhoneTextBox.Enabled = false;
+                    nonAktifCheckbox.Enabled = false;
+                    saveButton.Enabled = false;
+                    resetbutton.Enabled = false;
+                    loadSupplierData();
+                    break;
             }
             registerGlobalHotkey();
         }

@@ -1082,6 +1082,12 @@
     <Compile Include="dataKategoriProdukForm.Designer.cs">
       <DependentUpon>dataKategoriProdukForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SupplierHistoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SupplierHistoryForm.Designer.cs">
+      <DependentUpon>SupplierHistoryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabOrderManager.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -1655,6 +1661,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dataKategoriProdukForm.resx">
       <DependentUpon>dataKategoriProdukForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SupplierHistoryForm.resx">
+      <DependentUpon>SupplierHistoryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabSchemeProvider.resx" />
     <EmbeddedResource Include="XMLGeneratorForm.resx">

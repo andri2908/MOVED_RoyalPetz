@@ -1366,6 +1366,9 @@ namespace RoyalPetz_ADMIN
                         sqlCommand = "INSERT INTO PRODUCTS_RECEIVED_DETAIL (PR_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, PRODUCT_QTY, PRODUCT_ACTUAL_QTY, PR_SUBTOTAL, PRODUCT_PRICE_CHANGE) VALUES " +
                                             "('" + PRInvoice + "', '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + newHPP + ", " +  qtyRequest + ", " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailGridView.Rows[i].Cells["subtotal"].Value)) + ", " + priceChange + ")";
 
+                        //ADD SUPPLIER HISTORY
+                        saveSupplierHistory(selectedFromID.ToString(), detailGridView.Rows[i].Cells["productID"].Value.ToString(),PRDateTime);
+                        
                         gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "SAVE DETAIL PENERIMAAN [" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + ", "+newHPP+", " +qtyRequest+"]");
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
@@ -1647,6 +1650,60 @@ namespace RoyalPetz_ADMIN
             DS.writeXML(sqlCommandx, globalConstants.penerimaanBarangXML);
             penerimaanBarangPrintOutForm displayForm = new penerimaanBarangPrintOutForm();
             displayForm.ShowDialog(this);
+        }
+
+        private Boolean saveSupplierHistory(string supplierID, string productID, string tgltrans)
+        {
+            //Cek if exist update else update
+            bool result = false;
+            string sqlcommand = "";
+            MySqlException internalEX = null;
+            tgltrans = "";
+            sqlcommand = "SELECT LAST_SUPPLY from SUPPLIER_HISTORY WHERE SUPPLIER_ID = " + supplierID + " AND PRODUCT_ID = '" + productID + "'";
+            DS.mySqlConnect();
+            String tmp = DS.getDataSingleValue(sqlcommand).ToString();
+            if (tmp.Equals(""))
+            {
+                //insert 
+                sqlcommand = "INSERT INTO SUPPLIER_HISTORY (PRODUCT_ID,SUPPLIER_ID,LAST_SUPPLY) VALUES ('" + productID + "'," + supplierID + "STR_TO_DATE('" + tgltrans + "', '%d-%m-%Y')";
+            } else
+            {
+                //update
+                sqlcommand = "UPDATE SUPPLIER_HISTORY SET LAST_SUPPLY = " + "STR_TO_DATE('" + tgltrans + "', '%d-%m-%Y')" + " WHERE PRODUCT_ID = " + productID + " AND SUPPLIER_ID = " + supplierID;
+            }
+
+            DS.beginTransaction();
+            try
+            {
+                DS.mySqlConnect();
+                if (!DS.executeNonQueryCommand(sqlcommand, ref internalEX))
+                    throw internalEX;
+
+                DS.commit();
+                result = true;
+            }
+            catch (Exception e)
+            {
+                try
+                {
+                    DS.rollBack();
+                }
+                catch (MySqlException ex)
+                {
+                    if (DS.getMyTransConnection() != null)
+                    {
+                        gUtil.showDBOPError(ex, "ROLLBACK");
+                    }
+                }
+
+                gUtil.showDBOPError(e, "INSERT");
+                result = false;
+            }
+            finally
+            {
+                DS.mySqlClose();
+            }
+            return result;
         }
 
         private void saveButton_Click(object sender, EventArgs e)
