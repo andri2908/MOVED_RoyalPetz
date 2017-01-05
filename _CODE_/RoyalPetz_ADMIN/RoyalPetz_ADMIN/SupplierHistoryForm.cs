@@ -35,11 +35,11 @@ namespace RoyalPetz_ADMIN
             MySqlDataReader rdr;
             DataTable dt = new DataTable();
             string sqlCommand;
-            
+
             DS.mySqlConnect();
 
-            sqlCommand = "SELECT M.SUPPLIER_ID AS ID, IFNULL(M.SUPPLIER_FULL_NAME,'') AS NAME FROM MASTER_SUPPLIER M, SUPPLIER_HISTORY H WHERE M.SUPPLIER_ID = H.SUPPLIER_ID AND H.PRODUCT_ID = '" + kodeproduk +"'";
-            
+            sqlCommand = "SELECT M.SUPPLIER_ID AS ID, IFNULL(M.SUPPLIER_FULL_NAME,'') AS SUPPLIER, H.LAST_SUPPLY AS 'TANGGAL' FROM MASTER_SUPPLIER M, SUPPLIER_HISTORY H WHERE M.SUPPLIER_ID = H.SUPPLIER_ID AND H.PRODUCT_ID = '" + kodeproduk + "' ORDER BY TANGGAL DESC";
+
             using (rdr = DS.getData(sqlCommand))
             {
                 if (rdr.HasRows)
@@ -48,7 +48,8 @@ namespace RoyalPetz_ADMIN
 
                     supplierHistoryGridView.DataSource = dt;
                     supplierHistoryGridView.Columns["ID"].Visible = false;
-                    supplierHistoryGridView.Columns["NAME"].Width = 500;
+                    supplierHistoryGridView.Columns["SUPPLIER"].Width = 390;
+                    supplierHistoryGridView.Columns["TANGGAL"].Width = 125;
                 }
             }
         }
@@ -65,8 +66,8 @@ namespace RoyalPetz_ADMIN
 
             int selectedrowindex = supplierHistoryGridView.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = supplierHistoryGridView.Rows[selectedrowindex];
-            int selectedSupplierID = Convert.ToInt32(selectedRow.Cells["SUPPLIER_ID"].Value);
-            viewSupplierForm = new dataSupplierDetailForm(globalConstants.EDIT_SUPPLIER, selectedSupplierID);
+            int selectedSupplierID = Convert.ToInt32(selectedRow.Cells["ID"].Value);
+            viewSupplierForm = new dataSupplierDetailForm(globalConstants.VIEW_SUPPLIER, selectedSupplierID);
 
             viewSupplierForm.Show();
             viewSupplierForm.WindowState = FormWindowState.Normal;

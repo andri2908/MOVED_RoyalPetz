@@ -1031,19 +1031,29 @@ namespace RoyalPetz_ADMIN
         private void LoadLastSupplier()
         {
             string sqlCommand;
+            MySqlDataReader rdr;
             string supplierName = "";
             DS.mySqlConnect();
 
-            sqlCommand = "SELECT IFNULL(M.SUPPLIER_FULL_NAME, '') AS 'NAMA SUPPLIER' FROM MASTER_SUPPLIER M, SUPPLIER_HISTORY H WHERE H.PRODUCT_ID = '" + kodeProdukTextBox.Text + "' AND M.SUPPLIER_ID = H.SUPPLIER_ID" ;
-            try
+            sqlCommand = "SELECT IFNULL(M.SUPPLIER_FULL_NAME, '') AS 'NAMA SUPPLIER', H.LAST_SUPPLY AS TANGGAL FROM MASTER_SUPPLIER M, SUPPLIER_HISTORY H WHERE H.PRODUCT_ID = '" + kodeProdukTextBox.Text + "' AND M.SUPPLIER_ID = H.SUPPLIER_ID ORDER BY TANGGAL DESC LIMIT 1";
+    
+            using (rdr = DS.getData(sqlCommand))
             {
-                supplierName = DS.getDataSingleValue(sqlCommand).ToString();
-            }
-            catch (NullReferenceException ex)
-            {
+                if (rdr.HasRows)
+                {
+                    rdr.Read();
+                    supplierName = rdr.GetString("NAMA SUPPLIER");
+                }
             }
 
-            SupplierTextBox.Text = supplierName;
+            if (supplierName.Equals(""))
+            {
+                SupplierHistoryButton.Enabled = false;
+            }
+            else
+            {
+                SupplierTextBox.Text = supplierName;
+            }
         }
 
         private void dataProdukDetailForm_Load(object sender, EventArgs e)
