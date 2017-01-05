@@ -24,6 +24,7 @@ namespace RoyalPetz_ADMIN
 
         private int originModuleID = 0;
         private int selectedInternalProductID = 0;
+        private int selectedProductExpiryID = 0;
         private string productID = "";
         private int selectedUnitID;
         private string photoFileName = "";
@@ -143,10 +144,21 @@ namespace RoyalPetz_ADMIN
 
         public dataProdukDetailForm(int moduleID, int productID)
         {
+            string selectedProductID = "";
             InitializeComponent();
 
             originModuleID = moduleID;
-            selectedInternalProductID = productID;
+
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+            {
+                selectedProductExpiryID = productID;
+                selectedProductID = DS.getDataSingleValue("SELECT PRODUCT_ID FROM PRODUCT_EXPIRY WHERE ID = "+productID).ToString();
+                selectedInternalProductID = Convert.ToInt32(DS.getDataSingleValue("SELECT ID FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + selectedProductID + "'"));
+            }
+            else
+            { 
+                selectedInternalProductID = productID;
+            }
         }
 
         private void stokAwalTextBox_TextChanged(object sender, EventArgs e)
@@ -368,8 +380,12 @@ namespace RoyalPetz_ADMIN
             DataTable dt = new DataTable();
             string productShelves = "";
             string fileName = "";
+            double productExpiryAmount = 0;
 
             DS.mySqlConnect();
+
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+                productExpiryAmount = Convert.ToDouble(DS.getDataSingleValue("SELECT PRODUCT_AMOUNT FROM PRODUCT_EXPIRY WHERE ID = " + selectedProductExpiryID));
 
             // LOAD PRODUCT DATA
             using (rdr = DS.getData("SELECT * FROM MASTER_PRODUCT WHERE ID =  " + selectedInternalProductID))
@@ -387,7 +403,15 @@ namespace RoyalPetz_ADMIN
                         hargaPartaiTextBox.Text = rdr.GetString("PRODUCT_BULK_PRICE");
                         hargaGrosirTextBox.Text = rdr.GetString("PRODUCT_WHOLESALE_PRICE"); ;
                         SupplierTextBox.Text = rdr.GetString("PRODUCT_BRAND");
-                        stokAwalTextBox.Text = rdr.GetString("PRODUCT_STOCK_QTY");
+
+                        if (globalFeatureList.EXPIRY_MODULE == 1)
+                        {
+                            stokAwalTextBox.Text = productExpiryAmount.ToString();
+                        }
+                        else
+                        {
+                            stokAwalTextBox.Text = rdr.GetString("PRODUCT_STOCK_QTY");
+                        }
                         limitStokTextBox.Text = rdr.GetString("PRODUCT_LIMIT_STOCK");
 
                         productShelves = rdr.GetString("PRODUCT_SHELVES");

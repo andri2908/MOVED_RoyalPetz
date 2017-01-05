@@ -341,6 +341,9 @@ namespace RoyalPetz_ADMIN
             {
                 if (foundEmptyRow)
                 {
+                    if (detailGridView.Rows.Count <= 1)
+                        detailGridView.Rows.Add();
+
                     detailRequestQty[emptyRowIndex] = "0";
                     detailHpp[emptyRowIndex] = "0";
                     subtotalList[emptyRowIndex] = "0";
@@ -382,6 +385,7 @@ namespace RoyalPetz_ADMIN
             calculateTotal();
 
             detailGridView.CurrentCell = selectedRow.Cells["qtyReceived"];
+            detailGridView.Focus();
         }
 
         public void setSelectedInvoice(string invoiceNo)
