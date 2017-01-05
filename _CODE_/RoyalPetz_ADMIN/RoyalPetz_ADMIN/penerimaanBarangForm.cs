@@ -1171,10 +1171,13 @@ namespace RoyalPetz_ADMIN
             { 
                 for (i = 0; i < detailGridView.Rows.Count && dataExist; i++)
                 {
-                    if (null != detailGridView.Rows[i].Cells["expiryDateValue"].Value)
-                        dataExist = true;
-                    else
-                        dataExist = false;
+                    if (null != detailGridView.Rows[i].Cells["productID"].Value)
+                    { 
+                        if (null != detailGridView.Rows[i].Cells["expiryDateValue"].Value)
+                            dataExist = true;
+                        else
+                            dataExist = false;
+                    }
                 }
 
                 if (!dataExist)
@@ -1662,51 +1665,52 @@ namespace RoyalPetz_ADMIN
             bool result = false;
             string sqlcommand = "";
             MySqlException internalEX = null;
-            tgltrans = "";
-            sqlcommand = "SELECT LAST_SUPPLY from SUPPLIER_HISTORY WHERE SUPPLIER_ID = " + supplierID + " AND PRODUCT_ID = '" + productID + "'";
-            DS.mySqlConnect();
-            String tmp = DS.getDataSingleValue(sqlcommand).ToString();
-            if (tmp.Equals(""))
+
+            sqlcommand = "SELECT EXISTS(SELECT 1 FROM SUPPLIER_HISTORY WHERE SUPPLIER_ID = " + supplierID + " AND PRODUCT_ID = '" + productID + "')";//"SELECT LAST_SUPPLY from SUPPLIER_HISTORY WHERE SUPPLIER_ID = " + supplierID + " AND PRODUCT_ID = '" + productID + "'";
+//            DS.mySqlConnect();
+
+            bool tmp = Convert.ToBoolean(DS.getDataSingleValue(sqlcommand));
+            if (!tmp)
             {
                 //insert 
-                sqlcommand = "INSERT INTO SUPPLIER_HISTORY (PRODUCT_ID,SUPPLIER_ID,LAST_SUPPLY) VALUES ('" + productID + "'," + supplierID + "STR_TO_DATE('" + tgltrans + "', '%d-%m-%Y')";
+                sqlcommand = "INSERT INTO SUPPLIER_HISTORY (PRODUCT_ID,SUPPLIER_ID,LAST_SUPPLY) VALUES ('" + productID + "'," + supplierID + ", STR_TO_DATE('" + tgltrans + "', '%d-%m-%Y'))";
             } else
             {
                 //update
                 sqlcommand = "UPDATE SUPPLIER_HISTORY SET LAST_SUPPLY = " + "STR_TO_DATE('" + tgltrans + "', '%d-%m-%Y')" + " WHERE PRODUCT_ID = " + productID + " AND SUPPLIER_ID = " + supplierID;
             }
 
-            DS.beginTransaction();
-            try
-            {
-                DS.mySqlConnect();
+            //DS.beginTransaction();
+            //try
+            //{
+                //DS.mySqlConnect();
                 if (!DS.executeNonQueryCommand(sqlcommand, ref internalEX))
                     throw internalEX;
 
-                DS.commit();
-                result = true;
-            }
-            catch (Exception e)
-            {
-                try
-                {
-                    DS.rollBack();
-                }
-                catch (MySqlException ex)
-                {
-                    if (DS.getMyTransConnection() != null)
-                    {
-                        gUtil.showDBOPError(ex, "ROLLBACK");
-                    }
-                }
+//                DS.commit();
+            //    result = true;
+            //}
+            //catch (Exception e)
+            //{
+            //    try
+            //    {
+            //        DS.rollBack();
+            //    }
+            //    catch (MySqlException ex)
+            //    {
+            //        if (DS.getMyTransConnection() != null)
+            //        {
+            //            gUtil.showDBOPError(ex, "ROLLBACK");
+            //        }
+            //    }
 
-                gUtil.showDBOPError(e, "INSERT");
-                result = false;
-            }
-            finally
-            {
-                DS.mySqlClose();
-            }
+            //    gUtil.showDBOPError(e, "INSERT");
+            //    result = false;
+            //}
+            //finally
+            //{
+            //    DS.mySqlClose();
+            //}
             return result;
         }
 

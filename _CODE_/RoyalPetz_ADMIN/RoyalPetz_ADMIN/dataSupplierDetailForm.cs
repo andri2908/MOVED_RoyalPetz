@@ -127,6 +127,33 @@ namespace RoyalPetz_ADMIN
         {
             Button[] arrButton = new Button[2];
 
+            errorLabel.Text = "";
+            switch (originModuleID)
+            {
+                case globalConstants.NEW_SUPPLIER:
+                    options = gUtil.INS;
+                    nonAktifCheckbox.Enabled = false;
+                    break;
+                case globalConstants.EDIT_SUPPLIER:
+                    options = gUtil.UPD;
+                    nonAktifCheckbox.Enabled = true;
+                    loadSupplierData();
+                    break;
+                case globalConstants.VIEW_SUPPLIER:
+                    loadSupplierData();
+                    supplierNameTextBox.Enabled = false;
+                    supplierAddress1TextBox.Enabled = false;
+                    supplierAddress2TextBox.Enabled = false;
+                    supplierAddressCityTextBox.Enabled = false;
+                    supplierEmailTextBox.Enabled = false;
+                    supplierFaxTextBox.Enabled = false;
+                    supplierPhoneTextBox.Enabled = false;
+                    nonAktifCheckbox.Enabled = false;
+                    saveButton.Enabled = false;
+                    resetbutton.Enabled = false;
+                    break;
+            }
+
             arrButton[0] = saveButton;
             arrButton[1] = resetbutton;
             gUtil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
@@ -326,32 +353,6 @@ namespace RoyalPetz_ADMIN
         {
             /*if (selectedSupplierID != 0)  //old code
                 loadSupplierData(); */
-            errorLabel.Text = "";
-            switch (originModuleID)
-            {
-                case globalConstants.NEW_SUPPLIER:
-                    options = gUtil.INS;
-                    nonAktifCheckbox.Enabled = false;
-                    break;
-                case globalConstants.EDIT_SUPPLIER:
-                    options = gUtil.UPD;
-                    nonAktifCheckbox.Enabled = true;
-                    loadSupplierData();
-                    break;
-                case globalConstants.VIEW_SUPPLIER:
-                    supplierNameTextBox.Enabled = false;
-                    supplierAddress1TextBox.Enabled = false;
-                    supplierAddress2TextBox.Enabled = false;
-                    supplierAddressCityTextBox.Enabled = false;
-                    supplierEmailTextBox.Enabled = false;
-                    supplierFaxTextBox.Enabled = false;
-                    supplierPhoneTextBox.Enabled = false;
-                    nonAktifCheckbox.Enabled = false;
-                    saveButton.Enabled = false;
-                    resetbutton.Enabled = false;
-                    loadSupplierData();
-                    break;
-            }
             registerGlobalHotkey();
         }
 
