@@ -288,6 +288,9 @@ namespace RoyalPetz_ADMIN
                     dataPenerimaanBarang.Columns["TANGGAL PENERIMAAN"].Width = 200;
                     dataPenerimaanBarang.Columns["ASAL"].Width = 200;
                     dataPenerimaanBarang.Columns["TOTAL"].Width = 200;
+
+                    dataPenerimaanBarang.Columns["TOTAL"].DefaultCellStyle.FormatProvider = culture;
+                    dataPenerimaanBarang.Columns["TOTAL"].DefaultCellStyle.Format = "C2"; 
                 }
 
                 rdr.Close();

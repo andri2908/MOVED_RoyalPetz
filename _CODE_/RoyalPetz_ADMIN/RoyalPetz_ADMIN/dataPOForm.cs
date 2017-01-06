@@ -208,6 +208,10 @@ namespace RoyalPetz_ADMIN
                     dataPurchaseOrder.Columns["MODE PEMBAYARAN"].Width = 200;
                     dataPurchaseOrder.Columns["NAMA SUPPLIER"].Width = 200;
                     dataPurchaseOrder.Columns["TOTAL"].Width = 200;
+
+                    dataPurchaseOrder.Columns["TOTAL"].DefaultCellStyle.FormatProvider = culture;
+                    dataPurchaseOrder.Columns["TOTAL"].DefaultCellStyle.Format = "C2";
+
                 }
 
                 rdr.Close();

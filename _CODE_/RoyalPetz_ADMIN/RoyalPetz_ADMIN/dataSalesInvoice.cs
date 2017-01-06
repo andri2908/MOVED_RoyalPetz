@@ -164,6 +164,9 @@ namespace RoyalPetz_ADMIN
                     dataPenerimaanBarang.Columns["TGL INVOICE"].Width = 200;
                     dataPenerimaanBarang.Columns["CUSTOMER"].Width = 200;
                     dataPenerimaanBarang.Columns["TOTAL"].Width = 200;
+
+                    dataPenerimaanBarang.Columns["TOTAL"].DefaultCellStyle.FormatProvider = culture;
+                    dataPenerimaanBarang.Columns["TOTAL"].DefaultCellStyle.Format = "C2";
                 }
 
                 rdr.Close();

@@ -213,6 +213,10 @@ namespace RoyalPetz_ADMIN
                     dataRequestOrderGridView.Columns["TUJUAN MUTASI"].Width = 200;
                     dataRequestOrderGridView.Columns["TOTAL"].Width = 200;
                     dataRequestOrderGridView.Columns["NO PERMINTAAN"].Width = 200;
+
+                    dataRequestOrderGridView.Columns["TOTAL"].DefaultCellStyle.FormatProvider = culture;
+                    dataRequestOrderGridView.Columns["TOTAL"].DefaultCellStyle.Format = "C2";
+
                 }
 
                 rdr.Close();
