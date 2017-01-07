@@ -296,49 +296,54 @@ namespace RoyalPetz_ADMIN
             string sqlCommand = "";
             string namaProductParam = "";
             string kodeProductParam = "";
-
+            string showactive = "";
             DS.mySqlConnect();
 
             //if (namaProdukTextBox.Text.Equals(""))
             //    return;
             namaProductParam = MySqlHelper.EscapeString(namaProdukTextBox.Text);
-            kodeProductParam = MySqlHelper.EscapeString(textBox1.Text);
+            kodeProductParam = MySqlHelper.EscapeString(kodeProductTextBox.Text);
+
+            if (produknonactiveoption.Checked == false)
+            {
+                showactive = "AND MP.PRODUCT_ACTIVE = 1 ";
+            }
 
             if (originModuleID == globalConstants.RETUR_PENJUALAN)
             {
-                sqlCommand = "SELECT M.ID, M.PRODUCT_ID AS 'PRODUK ID', M.PRODUCT_NAME AS 'NAMA PRODUK', M.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' " +
-                                    "FROM MASTER_PRODUCT M, SALES_DETAIL SD " +
-                                    "WHERE SD.SALES_INVOICE = '" + returJualSearchParam + "' AND SD.PRODUCT_ID = M.PRODUCT_ID AND PRODUCT_IS_SERVICE = 0 " +
-                                    "AND M.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND M.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" +
-                                    " GROUP BY M.PRODUCT_ID";
+                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' " +
+                                    "FROM MASTER_PRODUCT MP, SALES_DETAIL SD " +
+                                    "WHERE SD.SALES_INVOICE = '" + returJualSearchParam + "' AND SD.PRODUCT_ID = MP.PRODUCT_ID AND MP.PRODUCT_IS_SERVICE = 0 " + showactive +
+                                    "AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" +
+                                    " GROUP BY MP.PRODUCT_ID";
             }
             else if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
             {
-                sqlCommand = "SELECT M.ID, M.PRODUCT_ID AS 'PRODUK ID', M.PRODUCT_NAME AS 'NAMA PRODUK', M.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' " +
-                                    "FROM MASTER_PRODUCT M, SALES_DETAIL SD, SALES_HEADER SH " +
-                                    "WHERE PRODUCT_ACTIVE = 1 AND SH.SALES_INVOICE = SD.SALES_INVOICE AND SD.PRODUCT_ID = M.PRODUCT_ID AND SH.CUSTOMER_ID = " + Convert.ToInt32(returJualSearchParam) + " AND PRODUCT_IS_SERVICE = 0 " +
-                                    "AND M.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND M.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" +
-                                    " GROUP BY M.PRODUCT_ID";
+                sqlCommand = "SELECT M.ID, M.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' " +
+                                    "FROM MASTER_PRODUCT MP, SALES_DETAIL SD, SALES_HEADER SH " +
+                                    "WHERE SH.SALES_INVOICE = SD.SALES_INVOICE AND SD.PRODUCT_ID = MP.PRODUCT_ID AND SH.CUSTOMER_ID = " + Convert.ToInt32(returJualSearchParam) + " AND MP.PRODUCT_IS_SERVICE = 0 " + showactive +
+                                    "AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" +
+                                    " GROUP BY MP.PRODUCT_ID";
             }
             else if (originModuleID == globalConstants.RETUR_PEMBELIAN)
             {
-                sqlCommand = "SELECT ID, PRODUCT_ID AS 'PRODUK ID', PRODUCT_NAME AS 'NAMA PRODUK', PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 AND PRODUCT_IS_SERVICE = 0 AND (PRODUCT_STOCK_QTY - PRODUCT_LIMIT_STOCK > 0) ORDER BY PRODUCT_NAME ASC";
+                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_IS_SERVICE = 0 " + showactive + "AND (MP.PRODUCT_STOCK_QTY - MP.PRODUCT_LIMIT_STOCK > 0) ORDER BY MP.PRODUCT_NAME ASC";
             }
             else if (originModuleID == globalConstants.PENERIMAAN_BARANG)
             {
-                sqlCommand = "SELECT ID, PRODUCT_ID AS 'PRODUK ID', PRODUCT_NAME AS 'NAMA PRODUK', PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 AND PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND PRODUCT_NAME LIKE '%" + namaProductParam + "%'";
+                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
             }
             else
             {
                 if (globalFeatureList.EXPIRY_MODULE == 1)
-                    sqlCommand = "SELECT PE.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', DATE_FORMAT(PE.PRODUCT_EXPIRY_DATE, '%d-%M-%Y') AS 'TGL KADALUARSA' FROM MASTER_PRODUCT MP, PRODUCT_EXPIRY PE WHERE PE.PRODUCT_ID = MP.PRODUCT_ID AND MP.PRODUCT_ACTIVE = 1 AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'";
+                    sqlCommand = "SELECT PE.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', DATE_FORMAT(PE.PRODUCT_EXPIRY_DATE, '%d-%M-%Y') AS 'TGL KADALUARSA' FROM MASTER_PRODUCT MP, PRODUCT_EXPIRY PE WHERE PE.PRODUCT_ID = MP.PRODUCT_ID " + showactive + "AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'";
                 else
-                    sqlCommand = "SELECT ID, PRODUCT_ID AS 'PRODUK ID', PRODUCT_NAME AS 'NAMA PRODUK', PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 AND PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND PRODUCT_NAME LIKE '%" + namaProductParam + "%'";
+                    sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
             }
 
             if (originModuleID == globalConstants.STOK_PECAH_BARANG)
             {
-                sqlCommand = sqlCommand + " AND PRODUCT_IS_SERVICE = 0";
+                sqlCommand = sqlCommand + " AND MP.PRODUCT_IS_SERVICE = 0";
             }
             
             using (rdr = DS.getData(sqlCommand))
@@ -350,7 +355,11 @@ namespace RoyalPetz_ADMIN
 
                     dataProdukGridView.Columns["ID"].Visible = false;
                     dataProdukGridView.Columns["PRODUK ID"].Width = 200;
-                    dataProdukGridView.Columns["NAMA PRODUK"].Width = 200;
+                    dataProdukGridView.Columns["NAMA PRODUK"].Width = 284;
+                    if (globalFeatureList.EXPIRY_MODULE == 1)
+                    {
+                        dataProdukGridView.Columns["TGL KADALUARSA"].Width = 180;
+                    }
                    // dataProdukGridView.Columns["DESKRIPSI PRODUK"].Width = 300;                    
                 }
             }
@@ -418,7 +427,9 @@ namespace RoyalPetz_ADMIN
         private void produknonactiveoption_CheckedChanged(object sender, EventArgs e)
         {
             dataProdukGridView.DataSource = null;
-            if (!namaProdukTextBox.Text.Equals(""))
+            if (namaProdukTextBox.Text.Equals("") && kodeProductTextBox.Text.Equals(""))
+            {             
+            } else
             {
                 loadProdukData();
             }
@@ -447,7 +458,7 @@ namespace RoyalPetz_ADMIN
 
             gutil.reArrangeTabOrder(this);
 
-            textBox1.Select();
+            kodeProductTextBox.Select();
         }
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)

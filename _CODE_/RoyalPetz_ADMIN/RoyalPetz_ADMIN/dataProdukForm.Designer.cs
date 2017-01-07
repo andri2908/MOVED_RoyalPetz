@@ -36,7 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.produknonactiveoption = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.kodeProductTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataProdukGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,16 +131,16 @@
             this.label2.TabIndex = 36;
             this.label2.Text = "Kode Produk";
             // 
-            // textBox1
+            // kodeProductTextBox
             // 
-            this.textBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(140, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(260, 27);
-            this.textBox1.TabIndex = 37;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
-            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.kodeProductTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.kodeProductTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kodeProductTextBox.Location = new System.Drawing.Point(140, 12);
+            this.kodeProductTextBox.Name = "kodeProductTextBox";
+            this.kodeProductTextBox.Size = new System.Drawing.Size(260, 27);
+            this.kodeProductTextBox.TabIndex = 37;
+            this.kodeProductTextBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            this.kodeProductTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // dataProdukForm
             // 
@@ -149,7 +149,7 @@
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(669, 549);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.kodeProductTextBox);
             this.Controls.Add(this.produknonactiveoption);
             this.Controls.Add(this.newButton);
             this.Controls.Add(this.label1);
@@ -178,6 +178,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox produknonactiveoption;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox kodeProductTextBox;
     }
 }
