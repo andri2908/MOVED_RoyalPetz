@@ -147,6 +147,7 @@ namespace RoyalPetz_ADMIN
         public const int MENU_MODULE_MESSAGING = 50;
         public const int MENU_TAX_MODULE = 51;
         public const int MENU_USB_UTILITY_MODULE = 52;
+        public const int MENU_PRODUCT_EXPIRY = 53;
 
 
         // CONSTANTS FOR USER CHANGE LOG

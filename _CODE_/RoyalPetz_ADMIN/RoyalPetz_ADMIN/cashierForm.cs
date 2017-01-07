@@ -706,7 +706,7 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        public void addNewRowFromBarcode(string productID, string productName)
+        public void addNewRowFromBarcode(string productID, string productName, int rowIndex = -1)
         {
             int i = 0;
             bool found = false;
@@ -719,38 +719,45 @@ namespace RoyalPetz_ADMIN
 
             cashierDataGridView.AllowUserToAddRows = false;
 
-            // CHECK FOR EXISTING SELECTED ITEM
-            for (i = 0;i<cashierDataGridView.Rows.Count && !found && !foundEmptyRow;i++)
+            if (rowIndex >= 0)
             {
-                if (null!= cashierDataGridView.Rows[i].Cells["productName"].Value && null != cashierDataGridView.Rows[i].Cells["productID"].Value && productIDValid(cashierDataGridView.Rows[i].Cells["productID"].Value.ToString()))
-                { 
-                    if (cashierDataGridView.Rows[i].Cells["productName"].Value.ToString() == productName)
+                rowSelectedIndex = rowIndex;
+            }
+            else
+            {
+                // CHECK FOR EXISTING SELECTED ITEM
+                for (i = 0; i < cashierDataGridView.Rows.Count && !found && !foundEmptyRow; i++)
+                {
+                    if (null != cashierDataGridView.Rows[i].Cells["productName"].Value && null != cashierDataGridView.Rows[i].Cells["productID"].Value && productIDValid(cashierDataGridView.Rows[i].Cells["productID"].Value.ToString()))
                     {
-                        found = true;
-                        rowSelectedIndex = i;
+                        if (cashierDataGridView.Rows[i].Cells["productName"].Value.ToString() == productName)
+                        {
+                            found = true;
+                            rowSelectedIndex = i;
 
-                        gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : EXISTING ROW FOUND [" + rowSelectedIndex + "]");
+                            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : EXISTING ROW FOUND [" + rowSelectedIndex + "]");
+                        }
+                    }
+                    else
+                    {
+                        foundEmptyRow = true;
+                        emptyRowIndex = i;
                     }
                 }
-                else
-                {
-                    foundEmptyRow = true;
-                    emptyRowIndex = i;
-                }
-            }
 
-            if (!found)
-            {
-                if (!foundEmptyRow)
-                { 
-                    addNewRow(false);
-                    rowSelectedIndex = cashierDataGridView.Rows.Count - 1;
-
-                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : NEW ROW ADDED [" + rowSelectedIndex + "]");
-                }
-                else
+                if (!found)
                 {
-                    rowSelectedIndex = emptyRowIndex;
+                    if (!foundEmptyRow)
+                    {
+                        addNewRow(false);
+                        rowSelectedIndex = cashierDataGridView.Rows.Count - 1;
+
+                        gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : NEW ROW ADDED [" + rowSelectedIndex + "]");
+                    }
+                    else
+                    {
+                        rowSelectedIndex = emptyRowIndex;
+                    }
                 }
             }
 
@@ -795,10 +802,11 @@ namespace RoyalPetz_ADMIN
 
             cashierDataGridView.CurrentCell = selectedRow.Cells["qty"];
             cashierDataGridView.AllowUserToAddRows = true;
+            cashierDataGridView.Select();
+            cashierDataGridView.BeginEdit(true);
+
             //comboSelectedIndexChangeMethod(rowSelectedIndex, i, selectedRow);
             //cashierDataGridView.CurrentCell = cashierDataGridView.Rows[rowSelectedIndex].Cells["qty"];
-
-            cashierDataGridView.Select();
         }
 
         private bool productIDValid(string productID)
@@ -1523,9 +1531,9 @@ namespace RoyalPetz_ADMIN
                 productNameTextBox.KeyPress += TextBox_KeyPress;
                 productNameTextBox.PreviewKeyDown += productName_previewKeyDown;
                 productNameTextBox.KeyUp += Combobox_KeyUp;
-                productNameTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                productNameTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                setTextBoxCustomSource(productNameTextBox);
+                productNameTextBox.AutoCompleteMode = AutoCompleteMode.None;//SuggestAppend;
+//                productNameTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+//                setTextBoxCustomSource(productNameTextBox);
             }
 
             if (
@@ -1740,13 +1748,16 @@ namespace RoyalPetz_ADMIN
 
                 if (currentValue.Length > 0)
                 {
-                    updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
-                    cashierDataGridView.CurrentCell = selectedRow.Cells["qty"];
+                    // CALL DATA PRODUK FORM WITH PARAMETER 
+                    dataProdukForm browseProduk = new dataProdukForm(globalConstants.CASHIER_MODULE, this, currentValue, "", rowSelectedIndex);
+                    browseProduk.ShowDialog(this);
+                    //updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
+                    //cashierDataGridView.CurrentCell = selectedRow.Cells["qty"];
                     forceUpOneLevel = true;
                 }
                 else
                 {
-                    clearUpSomeRowContents(selectedRow, rowSelectedIndex);
+                    //clearUpSomeRowContents(selectedRow, rowSelectedIndex);
                 }
             }
         }
@@ -1782,13 +1793,16 @@ namespace RoyalPetz_ADMIN
 
                 if (currentValue.Length > 0)
                 {
-                    updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue, false);
-                    cashierDataGridView.CurrentCell = selectedRow.Cells["qty"];
+                    // CALL DATA PRODUK FORM WITH PARAMETER 
+                    dataProdukForm browseProduk = new dataProdukForm(globalConstants.CASHIER_MODULE, this, "", currentValue, rowSelectedIndex);
+                    browseProduk.ShowDialog(this);
+                    //updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue, false);
+                    //cashierDataGridView.CurrentCell = selectedRow.Cells["qty"];
                     forceUpOneLevel = true;
                 }
                 else
                 {
-                    clearUpSomeRowContents(selectedRow, rowSelectedIndex);
+//                    clearUpSomeRowContents(selectedRow, rowSelectedIndex);
                 }
             }
         }

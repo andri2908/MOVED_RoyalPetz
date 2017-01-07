@@ -20,6 +20,7 @@ namespace RoyalPetz_ADMIN
         private int selectedProductID = 0;
         private string selectedkodeProduct = "";
         private string selectedProductName = "";
+        private int selectedRowIndex = -1;
 
         private stokPecahBarangForm parentForm;
         private cashierForm parentCashierForm;
@@ -154,6 +155,23 @@ namespace RoyalPetz_ADMIN
             newButton.Visible = false;
         }
 
+        public dataProdukForm(int moduleID, cashierForm thisParentForm, string productID = "", string productName = "", int rowIndex = -1)
+        {
+            InitializeComponent();
+
+            originModuleID = moduleID;
+            parentCashierForm = thisParentForm;
+
+            // accessed from other form other than Master -> Data Produk
+            // it means that this form is only displayed for browsing / searching purpose only
+            newButton.Visible = false;
+
+            namaProdukTextBox.Text = productName;
+            kodeProductTextBox.Text = productID;
+            selectedRowIndex = rowIndex;
+        }
+
+
         private void captureAll(Keys key)
         {
             switch (key)
@@ -226,7 +244,7 @@ namespace RoyalPetz_ADMIN
                     break;
 
                 case globalConstants.CASHIER_MODULE:
-                    parentCashierForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName);
+                    parentCashierForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName, selectedRowIndex);
                     this.Close();
                     break;
 
@@ -297,6 +315,7 @@ namespace RoyalPetz_ADMIN
             string namaProductParam = "";
             string kodeProductParam = "";
             string showactive = "";
+            bool displayExpiredDate = false;
             DS.mySqlConnect();
 
             //if (namaProdukTextBox.Text.Equals(""))
@@ -333,12 +352,19 @@ namespace RoyalPetz_ADMIN
             {
                 sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
             }
+            else if (originModuleID == globalConstants.CASHIER_MODULE)
+            {
+                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_STOCK_QTY > 0 AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
+            }
             else
             {
                 if (globalFeatureList.EXPIRY_MODULE == 1)
+                {
                     sqlCommand = "SELECT PE.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', DATE_FORMAT(PE.PRODUCT_EXPIRY_DATE, '%d-%M-%Y') AS 'TGL KADALUARSA' FROM MASTER_PRODUCT MP, PRODUCT_EXPIRY PE WHERE PE.PRODUCT_ID = MP.PRODUCT_ID " + showactive + "AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'";
+                    displayExpiredDate = true;
+                }
                 else
-                    sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
+                    sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_STOCK_QTY > 0 AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
             }
 
             if (originModuleID == globalConstants.STOK_PECAH_BARANG)
@@ -356,7 +382,7 @@ namespace RoyalPetz_ADMIN
                     dataProdukGridView.Columns["ID"].Visible = false;
                     dataProdukGridView.Columns["PRODUK ID"].Width = 200;
                     dataProdukGridView.Columns["NAMA PRODUK"].Width = 284;
-                    if (globalFeatureList.EXPIRY_MODULE == 1)
+                    if (displayExpiredDate)
                     {
                         dataProdukGridView.Columns["TGL KADALUARSA"].Width = 180;
                     }

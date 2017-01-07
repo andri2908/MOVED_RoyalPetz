@@ -16,6 +16,8 @@ namespace RoyalPetz_ADMIN
 {
     public partial class messagingForm : Form
     {
+        private const int DAYS_TO_EXPIRED = 7;
+
         private CultureInfo culture = new CultureInfo("id-ID");
         private Data_Access DS = new Data_Access();
         private globalUtilities gutil = new globalUtilities();
@@ -30,6 +32,7 @@ namespace RoyalPetz_ADMIN
             MySqlDataReader rdr;
             string param1;
             string param2;
+            string productID;
             bool newData = false;
             double jumlahPembayaran;
             string deskripsiPembayaran;
@@ -83,7 +86,15 @@ namespace RoyalPetz_ADMIN
                                     break;
 
                                 case globalConstants.MENU_PRODUK:
-                                    messageContent = "PRODUCT_ID [" + param1 + "] SUDAH MENDEKATI LIMIT";
+                                    messageContent = "[" + param1 + "] SUDAH MENDEKATI LIMIT";
+                                    productID = rdr.GetString("PRODUCT_ID");
+                                    param1 = productID;
+                                    break;
+
+                                case globalConstants.MENU_PRODUCT_EXPIRY:
+                                    messageContent = "[" + param1 + "] EXPIRED PADA TGL " + param2;
+                                    productID = rdr.GetString("PRODUCT_ID");
+                                    param1 = productID;
                                     break;
                             }
 
@@ -156,7 +167,13 @@ namespace RoyalPetz_ADMIN
 
             // PULL PRODUCT_ID THAT ALREADY HIT LIMIT STOCK
             moduleID = globalConstants.MENU_PRODUK;
-            sqlCommand = "SELECT PRODUCT_ID AS 'PARAM_1', PRODUCT_LIMIT_STOCK AS 'PARAM_2' FROM  MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 AND PRODUCT_IS_SERVICE = 0 AND PRODUCT_STOCK_QTY <= PRODUCT_LIMIT_STOCK AND PRODUCT_ID NOT IN (SELECT IDENTIFIER_NO FROM MASTER_MESSAGE WHERE MODULE_ID = " + moduleID + " AND STATUS = 0)";
+            //sqlCommand = "SELECT PRODUCT_ID AS 'PARAM_1', PRODUCT_LIMIT_STOCK AS 'PARAM_2' FROM  MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 AND PRODUCT_IS_SERVICE = 0 AND PRODUCT_STOCK_QTY <= PRODUCT_LIMIT_STOCK AND PRODUCT_ID NOT IN (SELECT IDENTIFIER_NO FROM MASTER_MESSAGE WHERE MODULE_ID = " + moduleID + " AND STATUS = 0)";
+            sqlCommand = "SELECT PRODUCT_ID, PRODUCT_NAME AS 'PARAM_1', PRODUCT_LIMIT_STOCK AS 'PARAM_2' FROM  MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 AND PRODUCT_IS_SERVICE = 0 AND PRODUCT_STOCK_QTY <= PRODUCT_LIMIT_STOCK AND PRODUCT_ID NOT IN (SELECT IDENTIFIER_NO FROM MASTER_MESSAGE WHERE MODULE_ID = " + moduleID + " AND STATUS = 0)";
+            newData |= pullDetailMessageAndSaveToTable(moduleID, sqlCommand);
+
+            moduleID = globalConstants.MENU_PRODUCT_EXPIRY;
+            //sqlCommand = "SELECT MP.PRODUCT_ID, MP.PRODUCT_NAME AS 'PARAM_1' FROM  MASTER_PRODUCT MP, PRODUCT_EXPIRY PE WHERE MP.PRODUCT_ACTIVE = 1 AND MP.PRODUCT_IS_SERVICE = 0 AND PRODUCT_STOCK_QTY <= PRODUCT_LIMIT_STOCK AND PRODUCT_ID NOT IN (SELECT IDENTIFIER_NO FROM MASTER_MESSAGE WHERE MODULE_ID = " + moduleID + " AND STATUS = 0)";
+            sqlCommand = "SELECT MP.PRODUCT_ID, MP.PRODUCT_NAME AS 'PARAM_1', DATE_FORMAT(PE.PRODUCT_EXPIRY_DATE, '%d-%M-%Y') AS 'PARAM_2' FROM MASTER_PRODUCT MP, PRODUCT_EXPIRY PE WHERE PE.PRODUCT_ID = MP.PRODUCT_ID AND PRODUCT_EXPIRY_DATE <= DATE_ADD(NOW(), INTERVAL 7 DAY) AND PE.PRODUCT_AMOUNT > 0 AND MP.PRODUCT_ID NOT IN (SELECT IDENTIFIER_NO FROM MASTER_MESSAGE WHERE MODULE_ID = " + moduleID + " AND STATUS = 0)";
             newData |= pullDetailMessageAndSaveToTable(moduleID, sqlCommand);
 
             return newData;                
