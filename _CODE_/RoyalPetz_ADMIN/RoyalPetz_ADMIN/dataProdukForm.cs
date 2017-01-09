@@ -171,6 +171,101 @@ namespace RoyalPetz_ADMIN
             selectedRowIndex = rowIndex;
         }
 
+        public dataProdukForm(int moduleID, dataMutasiBarangDetailForm thisParentForm, string productID = "", string productName = "", int rowIndex = -1)
+        {
+            InitializeComponent();
+
+            originModuleID = moduleID;
+            parentMutasiForm = thisParentForm;
+
+            // accessed from other form other than Master -> Data Produk
+            // it means that this form is only displayed for browsing / searching purpose only
+            newButton.Visible = false;
+
+            namaProdukTextBox.Text = productName;
+            kodeProductTextBox.Text = productID;
+            selectedRowIndex = rowIndex;
+        }
+
+        public dataProdukForm(int moduleID, dataReturPenjualanForm thisParentForm, string productID = "", string productName = "", int rowIndex = -1)
+        {
+            InitializeComponent();
+
+            originModuleID = moduleID;
+            parentReturJualForm = thisParentForm;
+
+            // accessed from other form other than Master -> Data Produk
+            // it means that this form is only displayed for browsing / searching purpose only
+            newButton.Visible = false;
+
+            namaProdukTextBox.Text = productName;
+            kodeProductTextBox.Text = productID;
+            selectedRowIndex = rowIndex;
+        }
+
+        public dataProdukForm(int moduleID, dataReturPermintaanForm thisParentForm, string productID = "", string productName = "", int rowIndex = -1)
+        {
+            InitializeComponent();
+
+            originModuleID = moduleID;
+            parentReturBeliForm = thisParentForm;
+
+            // accessed from other form other than Master -> Data Produk
+            // it means that this form is only displayed for browsing / searching purpose only
+            newButton.Visible = false;
+
+            namaProdukTextBox.Text = productName;
+            kodeProductTextBox.Text = productID;
+            selectedRowIndex = rowIndex;
+        }
+
+        public dataProdukForm(int moduleID, penerimaanBarangForm thisParentForm, string productID = "", string productName = "", int rowIndex = -1)
+        {
+            InitializeComponent();
+
+            originModuleID = moduleID;
+            parentPenerimaanBarangForm = thisParentForm;
+
+            // accessed from other form other than Master -> Data Produk
+            // it means that this form is only displayed for browsing / searching purpose only
+            newButton.Visible = false;
+
+            namaProdukTextBox.Text = productName;
+            kodeProductTextBox.Text = productID;
+            selectedRowIndex = rowIndex;
+        }
+
+        public dataProdukForm(int moduleID, purchaseOrderDetailForm thisParentForm, string productID = "", string productName = "", int rowIndex = -1)
+        {
+            InitializeComponent();
+
+            originModuleID = moduleID;
+            parentPOForm = thisParentForm;
+
+            // accessed from other form other than Master -> Data Produk
+            // it means that this form is only displayed for browsing / searching purpose only
+            newButton.Visible = false;
+
+            namaProdukTextBox.Text = productName;
+            kodeProductTextBox.Text = productID;
+            selectedRowIndex = rowIndex;
+        }
+
+        public dataProdukForm(int moduleID, permintaanProdukForm thisParentForm, string productID = "", string productName = "", int rowIndex = -1)
+        {
+            InitializeComponent();
+
+            originModuleID = moduleID;
+            parentRequestForm = thisParentForm;
+
+            // accessed from other form other than Master -> Data Produk
+            // it means that this form is only displayed for browsing / searching purpose only
+            newButton.Visible = false;
+
+            namaProdukTextBox.Text = productName;
+            kodeProductTextBox.Text = productID;
+            selectedRowIndex = rowIndex;
+        }
 
         private void captureAll(Keys key)
         {
@@ -249,34 +344,41 @@ namespace RoyalPetz_ADMIN
                     break;
 
                 case globalConstants.PENERIMAAN_BARANG:
-                    parentPenerimaanBarangForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName);
+                    parentPenerimaanBarangForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName, selectedRowIndex);
                     this.Close();
                     break;
 
                 case globalConstants.NEW_PURCHASE_ORDER:
-                    parentPOForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName);
+                    parentPOForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName, selectedRowIndex);
                     this.Close();
                     break;
 
                 case globalConstants.MUTASI_BARANG:
-                    parentMutasiForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName);
+                    if (globalFeatureList.EXPIRY_MODULE == 1)
+                    {
+                        parentMutasiForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName, selectedRowIndex, selectedProductID);
+                    }
+                    else
+                    { 
+                        parentMutasiForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName, selectedRowIndex);
+                    }
                     this.Close();
                     break;
 
                 case globalConstants.NEW_REQUEST_ORDER:
-                    parentRequestForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName);
+                    parentRequestForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName, selectedRowIndex);
                     this.Close();
                     break;
 
                 case globalConstants.RETUR_PENJUALAN:
                 case globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT:
-                    parentReturJualForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName);
+                    parentReturJualForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName, selectedRowIndex);
                     this.Close();
                     break;
 
                 case globalConstants.RETUR_PEMBELIAN_KE_PUSAT:
                 case globalConstants.RETUR_PEMBELIAN_KE_SUPPLIER:
-                    parentReturBeliForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName);
+                    parentReturBeliForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName, selectedRowIndex);
                     this.Close();
                     break;
 
@@ -360,7 +462,7 @@ namespace RoyalPetz_ADMIN
             {
                 if (globalFeatureList.EXPIRY_MODULE == 1)
                 {
-                    sqlCommand = "SELECT PE.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', DATE_FORMAT(PE.PRODUCT_EXPIRY_DATE, '%d-%M-%Y') AS 'TGL KADALUARSA' FROM MASTER_PRODUCT MP, PRODUCT_EXPIRY PE WHERE PE.PRODUCT_ID = MP.PRODUCT_ID " + showactive + "AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'";
+                    sqlCommand = "SELECT PE.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', DATE_FORMAT(PE.PRODUCT_EXPIRY_DATE, '%d-%M-%Y') AS 'TGL KADALUARSA' FROM MASTER_PRODUCT MP, PRODUCT_EXPIRY PE WHERE PE.PRODUCT_AMOUNT > 0 AND PE.PRODUCT_ID = MP.PRODUCT_ID " + showactive + "AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'";
                     displayExpiredDate = true;
                 }
                 else

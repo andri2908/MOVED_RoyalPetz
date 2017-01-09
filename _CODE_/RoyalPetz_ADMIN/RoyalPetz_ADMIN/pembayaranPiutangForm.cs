@@ -32,6 +32,7 @@ namespace RoyalPetz_ADMIN
 
         private Hotkeys.GlobalHotkey ghk_UP;
         private Hotkeys.GlobalHotkey ghk_DOWN;
+        private bool hotkeyRegistered = false;
 
         public pembayaranPiutangForm()
         {
@@ -79,12 +80,19 @@ namespace RoyalPetz_ADMIN
 
             ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
             ghk_DOWN.Register();
+
+            hotkeyRegistered = true;
         }
 
         private void unregisterGlobalHotkey()
         {
-            ghk_UP.Unregister();
-            ghk_DOWN.Unregister();
+            if (hotkeyRegistered)
+            { 
+                ghk_UP.Unregister();
+                ghk_DOWN.Unregister();
+
+                hotkeyRegistered = false;
+            }
         }
 
         private void loadDataHeaderSO()

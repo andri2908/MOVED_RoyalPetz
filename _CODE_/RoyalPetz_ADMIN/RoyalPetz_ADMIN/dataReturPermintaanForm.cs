@@ -393,7 +393,7 @@ namespace RoyalPetz_ADMIN
             detailReturDataGridView.CurrentCell = detailReturDataGridView.Rows[newRowIndex].Cells["productID"];
         }
 
-        public void addNewRowFromBarcode(string productID, string productName)
+        public void addNewRowFromBarcode(string productID, string productName, int rowIndex = -1)
         {
             int i = 0;
             bool found = false;
@@ -409,40 +409,47 @@ namespace RoyalPetz_ADMIN
 
             detailReturDataGridView.Focus();
 
-            // CHECK FOR EXISTING SELECTED ITEM
-            for (i = 0; i < detailReturDataGridView.Rows.Count && !found && !foundEmptyRow; i++)
+            if (rowIndex >= 0)
             {
-                if (
-                    null != detailReturDataGridView.Rows[i].Cells["productName"].Value && 
-                    null != detailReturDataGridView.Rows[i].Cells["productID"].Value 
-                    && gUtil.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString())
-                    )               
-               {
-                    if (detailReturDataGridView.Rows[i].Cells["productName"].Value.ToString() == productName)
+                rowSelectedIndex = rowIndex;
+            }
+            else
+            {
+                // CHECK FOR EXISTING SELECTED ITEM
+                for (i = 0; i < detailReturDataGridView.Rows.Count && !found && !foundEmptyRow; i++)
+                {
+                    if (
+                        null != detailReturDataGridView.Rows[i].Cells["productName"].Value &&
+                        null != detailReturDataGridView.Rows[i].Cells["productID"].Value
+                        && gUtil.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString())
+                        )
                     {
-                        found = true;
-                        rowSelectedIndex = i;
+                        if (detailReturDataGridView.Rows[i].Cells["productName"].Value.ToString() == productName)
+                        {
+                            found = true;
+                            rowSelectedIndex = i;
+                        }
+                    }
+                    else
+                    {
+                        foundEmptyRow = true;
+                        emptyRowIndex = i;
                     }
                 }
-                else
-                {
-                    foundEmptyRow = true;
-                    emptyRowIndex = i;
-                }
-            }
 
-            if (!found)
-            {
-                if (foundEmptyRow)
+                if (!found)
                 {
-                    detailQty[emptyRowIndex] = "0";
-                    rowSelectedIndex = emptyRowIndex;
-                }
-                else
-                {
-                    detailReturDataGridView.Rows.Add();
-                    detailQty.Add("0");
-                    rowSelectedIndex = detailReturDataGridView.Rows.Count - 1;
+                    if (foundEmptyRow)
+                    {
+                        detailQty[emptyRowIndex] = "0";
+                        rowSelectedIndex = emptyRowIndex;
+                    }
+                    else
+                    {
+                        detailReturDataGridView.Rows.Add();
+                        detailQty.Add("0");
+                        rowSelectedIndex = detailReturDataGridView.Rows.Count - 1;
+                    }
                 }
             }
 
@@ -544,9 +551,10 @@ namespace RoyalPetz_ADMIN
                 //productIDTextBox.TextChanged -= TextBox_TextChanged;
                 productIDTextBox.PreviewKeyDown += productName_previewKeyDown;
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
-                productIDTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                productIDTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                setTextBoxCustomSource(productIDTextBox);
+                productIDTextBox.AutoCompleteMode = AutoCompleteMode.None;
+                //productIDTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                //productIDTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                //setTextBoxCustomSource(productIDTextBox);
             }
 
             if (detailReturDataGridView.CurrentCell.OwningColumn.Name == "qty" && e.Control is TextBox)
@@ -660,12 +668,15 @@ namespace RoyalPetz_ADMIN
 
                 if (currentValue.Length > 0)
                 {
-                    updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
-                    detailReturDataGridView.CurrentCell = selectedRow.Cells["qty"];
+                    //updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
+                    //detailReturDataGridView.CurrentCell = selectedRow.Cells["qty"];
+                    // CALL DATA PRODUK FORM WITH PARAMETER 
+                    dataProdukForm browseProduk = new dataProdukForm(originModuleID, this, currentValue, "", rowSelectedIndex);
+                    browseProduk.ShowDialog(this);
                 }
                 else
                 {
-                    clearUpSomeRowContents(selectedRow, rowSelectedIndex);
+                    //clearUpSomeRowContents(selectedRow, rowSelectedIndex);
                 }
             }
         }
@@ -687,12 +698,15 @@ namespace RoyalPetz_ADMIN
 
                 if (currentValue.Length > 0)
                 {
-                    updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue, false);
-                    detailReturDataGridView.CurrentCell = selectedRow.Cells["qty"];
+                    //updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue, false);
+                    //detailReturDataGridView.CurrentCell = selectedRow.Cells["qty"];
+                    // CALL DATA PRODUK FORM WITH PARAMETER 
+                    dataProdukForm browseProduk = new dataProdukForm(originModuleID, this, "", currentValue, rowSelectedIndex);
+                    browseProduk.ShowDialog(this);
                 }
                 else
                 {
-                    clearUpSomeRowContents(selectedRow, rowSelectedIndex);
+                    //clearUpSomeRowContents(selectedRow, rowSelectedIndex);
                 }
             }
         }

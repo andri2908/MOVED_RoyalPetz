@@ -303,7 +303,7 @@ namespace RoyalPetz_ADMIN
             detailGridView.CurrentCell = detailGridView.Rows[newRowIndex].Cells["productID"];
         }
 
-        public void addNewRowFromBarcode(string productID, string productName)
+        public void addNewRowFromBarcode(string productID, string productName, int rowIndex = -1)
         {
             int i = 0;
             bool found = false;
@@ -317,45 +317,52 @@ namespace RoyalPetz_ADMIN
             if (detailGridView.ReadOnly == true)
                 return;
 
-            // CHECK FOR EXISTING SELECTED ITEM
-            for (i = 0; i < detailGridView.Rows.Count && !found && !foundEmptyRow; i++)
+            if (rowIndex >= 0)
             {
-                if (null != detailGridView.Rows[i].Cells["productName"].Value &&
-                    null != detailGridView.Rows[i].Cells["productID"].Value &&
-                    gUtil.isProductIDExist(detailGridView.Rows[i].Cells["productID"].Value.ToString()))
-                { 
-                    if (detailGridView.Rows[i].Cells["productName"].Value.ToString() == productName)
+                rowSelectedIndex = rowIndex;
+            }
+            else
+            {
+                // CHECK FOR EXISTING SELECTED ITEM
+                for (i = 0; i < detailGridView.Rows.Count && !found && !foundEmptyRow; i++)
+                {
+                    if (null != detailGridView.Rows[i].Cells["productName"].Value &&
+                        null != detailGridView.Rows[i].Cells["productID"].Value &&
+                        gUtil.isProductIDExist(detailGridView.Rows[i].Cells["productID"].Value.ToString()))
                     {
-                        found = true;
-                        rowSelectedIndex = i;
+                        if (detailGridView.Rows[i].Cells["productName"].Value.ToString() == productName)
+                        {
+                            found = true;
+                            rowSelectedIndex = i;
+                        }
+                    }
+                    else
+                    {
+                        foundEmptyRow = true;
+                        emptyRowIndex = i;
                     }
                 }
-                else
-                {
-                    foundEmptyRow = true;
-                    emptyRowIndex = i;
-                }
-            }
 
-            if (!found)
-            {
-                if (foundEmptyRow)
+                if (!found)
                 {
-                    if (detailGridView.Rows.Count <= 1)
+                    if (foundEmptyRow)
+                    {
+                        if (detailGridView.Rows.Count <= 1)
+                            detailGridView.Rows.Add();
+
+                        detailRequestQty[emptyRowIndex] = "0";
+                        detailHpp[emptyRowIndex] = "0";
+                        subtotalList[emptyRowIndex] = "0";
+                        rowSelectedIndex = emptyRowIndex;
+                    }
+                    else
+                    {
                         detailGridView.Rows.Add();
-
-                    detailRequestQty[emptyRowIndex] = "0";
-                    detailHpp[emptyRowIndex] = "0";
-                    subtotalList[emptyRowIndex] = "0";
-                    rowSelectedIndex = emptyRowIndex;
-                }
-                else
-                { 
-                    detailGridView.Rows.Add();
-                    detailRequestQty.Add("0");
-                    detailHpp.Add("0");
-                    subtotalList.Add("0");
-                    rowSelectedIndex = detailGridView.Rows.Count - 1;
+                        detailRequestQty.Add("0");
+                        detailHpp.Add("0");
+                        subtotalList.Add("0");
+                        rowSelectedIndex = detailGridView.Rows.Count - 1;
+                    }
                 }
             }
 
@@ -809,7 +816,8 @@ namespace RoyalPetz_ADMIN
             if ((detailGridView.CurrentCell.OwningColumn.Name == "productID") && e.Control is TextBox)
             {
                 TextBox productIDTextBox = e.Control as TextBox;
-//                productIDTextBox.TextChanged -= TextBox_TextChanged;
+                //                productIDTextBox.TextChanged -= TextBox_TextChanged;
+                productIDTextBox.PreviewKeyDown -= TextBox_previewKeyDown;
                 productIDTextBox.PreviewKeyDown += TextBox_previewKeyDown;
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
                 productIDTextBox.AutoCompleteMode = AutoCompleteMode.None;
@@ -819,6 +827,7 @@ namespace RoyalPetz_ADMIN
             {
                 TextBox productIDTextBox = e.Control as TextBox;
 //                productIDTextBox.TextChanged -= TextBox_TextChanged;
+                productIDTextBox.PreviewKeyDown -= productName_previewKeyDown;
                 productIDTextBox.PreviewKeyDown += productName_previewKeyDown;
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
                 productIDTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -934,13 +943,18 @@ namespace RoyalPetz_ADMIN
 
                 if (currentValue.Length > 0)
                 {
-                    updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
-                    detailGridView.CurrentCell = selectedRow.Cells["qtyReceived"];
+                    //updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
+                    //detailGridView.CurrentCell = selectedRow.Cells["qtyReceived"];
+                    
+                    // CALL DATA PRODUK FORM WITH PARAMETER 
+                    dataProdukForm browseProduk = new dataProdukForm(globalConstants.MUTASI_BARANG, this, currentValue, "",rowSelectedIndex);
+                    browseProduk.ShowDialog(this);
+
                     forceUpOneLevel = true;
                 }
                 else
                 {
-                    clearUpSomeRowContents(selectedRow, rowSelectedIndex);
+                    //clearUpSomeRowContents(selectedRow, rowSelectedIndex);
                 }
             }
         }
@@ -962,13 +976,18 @@ namespace RoyalPetz_ADMIN
 
                 if (currentValue.Length > 0)
                 {
-                    updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue, false);
-                    detailGridView.CurrentCell = selectedRow.Cells["qtyReceived"];
+                    //updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue, false);
+                    //detailGridView.CurrentCell = selectedRow.Cells["qtyReceived"];
+
+                    // CALL DATA PRODUK FORM WITH PARAMETER 
+                    dataProdukForm browseProduk = new dataProdukForm(globalConstants.MUTASI_BARANG, this, "", currentValue, rowSelectedIndex);
+                    browseProduk.ShowDialog(this);
+
                     forceUpOneLevel = true;
                 }
                 else
                 {
-                    clearUpSomeRowContents(selectedRow, rowSelectedIndex);
+                    //clearUpSomeRowContents(selectedRow, rowSelectedIndex);
                 }
             }
         }

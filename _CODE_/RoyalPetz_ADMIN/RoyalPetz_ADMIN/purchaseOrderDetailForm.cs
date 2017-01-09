@@ -304,7 +304,7 @@ namespace RoyalPetz_ADMIN
             detailPODataGridView.CurrentCell = detailPODataGridView.Rows[newRowIndex].Cells["productID"];
         }
 
-        public void addNewRowFromBarcode(string productID, string productName)
+        public void addNewRowFromBarcode(string productID, string productName, int rowIndex = -1)
         {
             int i = 0;
             bool found = false;
@@ -322,41 +322,48 @@ namespace RoyalPetz_ADMIN
 
             detailPODataGridView.Focus();
 
-            // CHECK FOR EXISTING SELECTED ITEM
-            for (i = 0; i < detailPODataGridView.Rows.Count && !found && !foundEmptyRow; i++)
+            if (rowIndex >= 0)
             {
-                if (null != detailPODataGridView.Rows[i].Cells["productName"].Value && 
-                    null != detailPODataGridView.Rows[i].Cells["productID"].Value && gUtil.isProductIDExist(detailPODataGridView.Rows[i].Cells["productID"].Value.ToString()))
+                rowSelectedIndex = rowIndex;
+            }
+            else
+            {
+                // CHECK FOR EXISTING SELECTED ITEM
+                for (i = 0; i < detailPODataGridView.Rows.Count && !found && !foundEmptyRow; i++)
                 {
-                    if (detailPODataGridView.Rows[i].Cells["productName"].Value.ToString() == productName)
+                    if (null != detailPODataGridView.Rows[i].Cells["productName"].Value &&
+                        null != detailPODataGridView.Rows[i].Cells["productID"].Value && gUtil.isProductIDExist(detailPODataGridView.Rows[i].Cells["productID"].Value.ToString()))
                     {
-                        found = true;
-                        rowSelectedIndex = i;
+                        if (detailPODataGridView.Rows[i].Cells["productName"].Value.ToString() == productName)
+                        {
+                            found = true;
+                            rowSelectedIndex = i;
+                        }
+                    }
+                    else
+                    {
+                        foundEmptyRow = true;
+                        emptyRowIndex = i;
                     }
                 }
-                else
-                {
-                    foundEmptyRow = true;
-                    emptyRowIndex = i;
-                }
-            }
 
-            if (!found)
-            {
-                if (foundEmptyRow)
+                if (!found)
                 {
-                    detailQty[emptyRowIndex] = "0";
-                    detailHpp[emptyRowIndex] = "0";
-                    subtotalList[emptyRowIndex] = "0";
-                    rowSelectedIndex = emptyRowIndex;
-                }
-                else
-                {
-                    detailPODataGridView.Rows.Add();
-                    detailQty.Add("0");
-                    detailHpp.Add("0");
-                    subtotalList.Add("0");
-                    rowSelectedIndex = detailPODataGridView.Rows.Count - 1;
+                    if (foundEmptyRow)
+                    {
+                        detailQty[emptyRowIndex] = "0";
+                        detailHpp[emptyRowIndex] = "0";
+                        subtotalList[emptyRowIndex] = "0";
+                        rowSelectedIndex = emptyRowIndex;
+                    }
+                    else
+                    {
+                        detailPODataGridView.Rows.Add();
+                        detailQty.Add("0");
+                        detailHpp.Add("0");
+                        subtotalList.Add("0");
+                        rowSelectedIndex = detailPODataGridView.Rows.Count - 1;
+                    }
                 }
             }
 
@@ -505,6 +512,7 @@ namespace RoyalPetz_ADMIN
             {
                 TextBox productIDTextBox = e.Control as TextBox;
                 //productIDTextBox.TextChanged -= TextBox_TextChanged;
+                productIDTextBox.PreviewKeyDown -= TextBox_previewKeyDown;
                 productIDTextBox.PreviewKeyDown += TextBox_previewKeyDown;
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
                 productIDTextBox.AutoCompleteMode = AutoCompleteMode.None;
@@ -516,11 +524,13 @@ namespace RoyalPetz_ADMIN
             {
                 TextBox productIDTextBox = e.Control as TextBox;
                 //productIDTextBox.TextChanged -= TextBox_TextChanged;
+                productIDTextBox.PreviewKeyDown -= productName_previewKeyDown;
                 productIDTextBox.PreviewKeyDown += productName_previewKeyDown;
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
-                productIDTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                productIDTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                setTextBoxCustomSource(productIDTextBox);
+                productIDTextBox.AutoCompleteMode = AutoCompleteMode.None;
+                //productIDTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                //productIDTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                //setTextBoxCustomSource(productIDTextBox);
             }
         }
 
@@ -650,12 +660,15 @@ namespace RoyalPetz_ADMIN
 
                 if (currentValue.Length > 0)
                 {
-                    updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
-                    detailPODataGridView.CurrentCell = selectedRow.Cells["qty"];
+                    //updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
+                    //detailPODataGridView.CurrentCell = selectedRow.Cells["qty"];
+                    // CALL DATA PRODUK FORM WITH PARAMETER 
+                    dataProdukForm browseProduk = new dataProdukForm(globalConstants.NEW_PURCHASE_ORDER, this, currentValue, "", rowSelectedIndex);
+                    browseProduk.ShowDialog(this);
                 }
                 else
                 {
-                    clearUpSomeRowContents(selectedRow, rowSelectedIndex);
+                    //clearUpSomeRowContents(selectedRow, rowSelectedIndex);
                 }
             }
         }
@@ -677,12 +690,15 @@ namespace RoyalPetz_ADMIN
 
                 if (currentValue.Length > 0)
                 {
-                    updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue, false);
-                    detailPODataGridView.CurrentCell = selectedRow.Cells["qty"];
+                    //updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue, false);
+                    //detailPODataGridView.CurrentCell = selectedRow.Cells["qty"];
+                    // CALL DATA PRODUK FORM WITH PARAMETER 
+                    dataProdukForm browseProduk = new dataProdukForm(globalConstants.NEW_PURCHASE_ORDER, this, "", currentValue, rowSelectedIndex);
+                    browseProduk.ShowDialog(this);
                 }
                 else
                 {
-                    clearUpSomeRowContents(selectedRow, rowSelectedIndex);
+                    //clearUpSomeRowContents(selectedRow, rowSelectedIndex);
                 }
             }
         }
