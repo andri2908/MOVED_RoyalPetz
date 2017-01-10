@@ -187,7 +187,7 @@ namespace RoyalPetz_ADMIN
             selectedRowIndex = rowIndex;
         }
 
-        public dataProdukForm(int moduleID, dataReturPenjualanForm thisParentForm, string productID = "", string productName = "", int rowIndex = -1)
+        public dataProdukForm(int moduleID, dataReturPenjualanForm thisParentForm, string productID = "", string productName = "", int rowIndex = -1, string searchParam = "")
         {
             InitializeComponent();
 
@@ -201,6 +201,7 @@ namespace RoyalPetz_ADMIN
             namaProdukTextBox.Text = productName;
             kodeProductTextBox.Text = productID;
             selectedRowIndex = rowIndex;
+            returJualSearchParam = searchParam;
         }
 
         public dataProdukForm(int moduleID, dataReturPermintaanForm thisParentForm, string productID = "", string productName = "", int rowIndex = -1)
@@ -378,7 +379,7 @@ namespace RoyalPetz_ADMIN
 
                 case globalConstants.RETUR_PEMBELIAN_KE_PUSAT:
                 case globalConstants.RETUR_PEMBELIAN_KE_SUPPLIER:
-                    parentReturBeliForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName, selectedRowIndex);
+                    parentReturBeliForm.addNewRowFromBarcode(selectedkodeProduct, selectedProductName, selectedRowIndex, selectedProductID);
                     this.Close();
                     break;
 
@@ -454,7 +455,7 @@ namespace RoyalPetz_ADMIN
             {
                 sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
             }
-            else if (originModuleID == globalConstants.CASHIER_MODULE)
+            else if ((originModuleID == globalConstants.CASHIER_MODULE) || (originModuleID == globalConstants.NEW_PURCHASE_ORDER) || (originModuleID == globalConstants.NEW_REQUEST_ORDER))
             {
                 sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_STOCK_QTY > 0 AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
             }

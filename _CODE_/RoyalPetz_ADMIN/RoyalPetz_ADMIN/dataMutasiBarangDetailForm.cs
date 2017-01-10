@@ -26,6 +26,7 @@ namespace RoyalPetz_ADMIN
         private int selectedBranchToID = 0;
         private string selectedROInvoice = "";
         private bool isLoading = false;
+        private bool forceUpOneLevel = false;
         private double globalTotalValue = 0;
         private bool directMutasiBarang = false;
         private string previousInput = "";
@@ -338,45 +339,6 @@ namespace RoyalPetz_ADMIN
             return result;
         }
 
-        //public void addNewRow()
-        //{
-        //    int newRowIndex = 0;
-        //    bool allowToAdd = true;
-
-        //    for (int i = 0; i < detailRequestOrderDataGridView.Rows.Count && allowToAdd; i++)
-        //    {
-        //        if (null != detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value)
-        //        {
-        //            if (!gUtil.isProductIDExist(detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString()))
-        //            {
-        //                allowToAdd = false;
-        //                newRowIndex = i;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            allowToAdd = false;
-        //            newRowIndex = i;
-        //        }
-        //    }
-
-        //    if (allowToAdd)
-        //    {
-        //        detailRequestOrderDataGridView.Rows.Add();
-        //        detailRequestQtyApproved.Add("0");
-        //        productPriceList.Add("0");
-        //        subtotalList.Add("0");
-        //        newRowIndex = detailRequestOrderDataGridView.Rows.Count - 1;
-        //    }
-        //    else
-        //    {
-        //        DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[newRowIndex];
-        //        clearUpSomeRowContents(selectedRow, newRowIndex);
-        //    }
-
-        //    detailRequestOrderDataGridView.CurrentCell = detailRequestOrderDataGridView.Rows[newRowIndex].Cells["productID"];
-        //}
-
         public void addNewRowFromBarcode(string productID, string productName, int rowIndex = -1, int lotID = 0)
         {
             int i = 0;
@@ -475,6 +437,7 @@ namespace RoyalPetz_ADMIN
 
             detailRequestOrderDataGridView.CurrentCell = selectedRow.Cells["qty"];
             detailRequestOrderDataGridView.AllowUserToAddRows = true;
+            detailRequestOrderDataGridView.BeginEdit(true);
 
             detailRequestOrderDataGridView.Select();
 
@@ -539,32 +502,6 @@ namespace RoyalPetz_ADMIN
             return result;
         }
 
-        private void setTextBoxCustomSource(TextBox textBox)
-        {
-            MySqlDataReader rdr;
-            string sqlCommand = "";
-            string[] arr = null;
-            List<string> arrList = new List<string>();
-
-            sqlCommand = "SELECT PRODUCT_NAME FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 AND PRODUCT_IS_SERVICE = 0";
-            rdr = DS.getData(sqlCommand);
-
-            if (rdr.HasRows)
-            {
-                while (rdr.Read())
-                {
-                    arrList.Add(rdr.GetString("PRODUCT_NAME"));
-                }
-                AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
-                arr = arrList.ToArray();
-                collection.AddRange(arr);
-
-                textBox.AutoCompleteCustomSource = collection;
-            }
-
-            rdr.Close();
-        }
-
         private void detailRequestOrderDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             if ((detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name == "productID") && e.Control is TextBox)
@@ -573,6 +510,8 @@ namespace RoyalPetz_ADMIN
                 //productIDTextBox.TextChanged -= TextBox_TextChanged;
                 productIDTextBox.PreviewKeyDown -= TextBox_previewKeyDown;
                 productIDTextBox.PreviewKeyDown += TextBox_previewKeyDown;
+                productIDTextBox.KeyUp -= TextBox_KeyUp;
+                productIDTextBox.KeyUp += TextBox_KeyUp;
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
                 productIDTextBox.AutoCompleteMode = AutoCompleteMode.None;
             }
@@ -583,6 +522,8 @@ namespace RoyalPetz_ADMIN
                 //productIDTextBox.TextChanged -= TextBox_TextChanged;
                 productNameTextBox.PreviewKeyDown -= productName_previewKeyDown;
                 productNameTextBox.PreviewKeyDown += productName_previewKeyDown;
+                productNameTextBox.KeyUp -= TextBox_KeyUp;
+                productNameTextBox.KeyUp += TextBox_KeyUp;
                 productNameTextBox.CharacterCasing = CharacterCasing.Upper;
                 productNameTextBox.AutoCompleteMode = AutoCompleteMode.None;
                 //productNameTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -710,6 +651,8 @@ namespace RoyalPetz_ADMIN
                     // CALL DATA PRODUK FORM WITH PARAMETER 
                     dataProdukForm browseProduk = new dataProdukForm(globalConstants.MUTASI_BARANG, this, currentValue, "", rowSelectedIndex);
                     browseProduk.ShowDialog(this);
+
+                    forceUpOneLevel = true;
                 }
                 else
                 {
@@ -741,6 +684,7 @@ namespace RoyalPetz_ADMIN
                     // CALL DATA PRODUK FORM WITH PARAMETER 
                     dataProdukForm browseProduk = new dataProdukForm(globalConstants.MUTASI_BARANG, this, "", currentValue, rowSelectedIndex);
                     browseProduk.ShowDialog(this);
+                    forceUpOneLevel = true;
                 }
                 else
                 {
@@ -749,132 +693,20 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        //private void TextBox_TextChanged(object sender, EventArgs e)
-        //{
-        //    int rowSelectedIndex = 0;
-        //    double productQty = 0;
-        //    double hppValue = 0;
-        //    double subTotal = 0;
-        //    bool validInput = false;
-        //    string tempString = "";
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            gUtil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "MUTASI FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [" + detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name + "]");
 
-    
-        //    if (detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name != "qty")
-        //        return;
+            if (forceUpOneLevel)
+            {
+                int pos = detailRequestOrderDataGridView.CurrentCell.RowIndex;
 
-        //    DataGridViewTextBoxEditingControl dataGridViewTextBoxEditingControl = sender as DataGridViewTextBoxEditingControl;
+                if (pos > 0)
+                    detailRequestOrderDataGridView.CurrentCell = detailRequestOrderDataGridView.Rows[pos - 1].Cells["qty"];
 
-        //    rowSelectedIndex = detailRequestOrderDataGridView.SelectedCells[0].RowIndex;
-        //    DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[rowSelectedIndex];
-
-        //    // Condition to check
-        //    // - empty string
-        //    // - non numeric input
-        //    if (dataGridViewTextBoxEditingControl.Text.Length <= 0)
-        //    {
-        //        // IF TEXTBOX IS EMPTY, DEFAULT THE VALUE TO 0 AND EXIT THE CHECKING
-
-        //        isLoading = true;
-        //        // reset subTotal Value and recalculate total
-        //        selectedRow.Cells["subTotal"].Value = 0;
-        //        subtotalList[rowSelectedIndex] = "0";
-
-        //        if (detailRequestQtyApproved.Count >= rowSelectedIndex + 1)
-        //            detailRequestQtyApproved[rowSelectedIndex] = "0";
-
-        //        dataGridViewTextBoxEditingControl.Text = "0";
-
-        //        calculateTotal();
-
-        //        dataGridViewTextBoxEditingControl.SelectionStart = dataGridViewTextBoxEditingControl.Text.Length;
-
-        //        isLoading = false;
-        //        return;
-        //    }
-
-        //    isLoading = true;
-        //    // get value for previous input
-        //    if (detailRequestQtyApproved.Count >= rowSelectedIndex + 1)
-        //    {
-        //        previousInput = detailRequestQtyApproved[rowSelectedIndex];
-        //    }
-        //    else
-        //        previousInput = "0";
-
-        //    if (previousInput == "0")
-        //    {
-        //        tempString = dataGridViewTextBoxEditingControl.Text;
-        //        if (tempString.IndexOf('0') == 0 && tempString.Length > 1 && tempString.IndexOf("0.") < 0)
-        //            dataGridViewTextBoxEditingControl.Text = tempString.Remove(tempString.IndexOf('0'), 1);
-        //    }
-
-        //    if (gUtil.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL))
-        //    {
-        //        // if input match RegEx
-        //        try
-        //        {
-        //            productQty = Convert.ToDouble(dataGridViewTextBoxEditingControl.Text);
-
-        //            // check if there's a product ID for that particular row
-        //            if (null != selectedRow.Cells["productID"].Value)
-        //            {
-        //                if (globalFeatureList.EXPIRY_MODULE == 1)
-        //                {
-        //                    if (selectedRow.Cells["expiryDateValue"].Value != null)
-        //                    {
-        //                        if (expiryStockIsEnough(selectedRow.Cells["productID"].Value.ToString(), productQty, Convert.ToDateTime(selectedRow.Cells["expiryDateValue"].Value)))
-        //                            validInput = true;
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    if (stockIsEnough(selectedRow.Cells["productID"].Value.ToString(), productQty))
-        //                        validInput = true;
-        //                }
-        //            }
-        //            // input match RegEx, and Stock is enough
-        //            if (validInput)
-        //            {
-        //                errorLabel.Text = "";
-        //                // check whether it's a new row or not
-        //                if (detailRequestQtyApproved.Count < rowSelectedIndex + 1)
-        //                    detailRequestQtyApproved.Add(dataGridViewTextBoxEditingControl.Text); // NEW ROW
-        //                else
-        //                    detailRequestQtyApproved[rowSelectedIndex] = dataGridViewTextBoxEditingControl.Text; // EXISTING ROW
-
-        //                previousInput = dataGridViewTextBoxEditingControl.Text;
-
-        //                hppValue = Convert.ToDouble(productPriceList[rowSelectedIndex]);
-        //                subTotal = Math.Round((hppValue * productQty), 2);
-
-        //                selectedRow.Cells["subTotal"].Value = subTotal.ToString();
-        //                subtotalList[rowSelectedIndex] = subTotal.ToString();
-
-        //                calculateTotal();
-        //            }
-        //            else
-        //            {
-        //                // if stock is not enough
-        //                dataGridViewTextBoxEditingControl.Text = previousInput;
-        //                if (null != selectedRow.Cells["productID"].Value)
-        //                    errorLabel.Text = "JUMLAH STOK TIDAK MENCUKUPI";
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            dataGridViewTextBoxEditingControl.Text = previousInput;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        // if input doesn't match RegEx
-        //        dataGridViewTextBoxEditingControl.Text = previousInput;
-        //    }
-
-        //    dataGridViewTextBoxEditingControl.SelectionStart = dataGridViewTextBoxEditingControl.Text.Length;
-
-        //    isLoading = false;
-        //}
+                forceUpOneLevel = false;
+            }
+        }
 
         private void loadDataHeaderRO()
         {
@@ -909,7 +741,7 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-       private void loadDataHeaderPM()
+        private void loadDataHeaderPM()
         {
             MySqlDataReader rdr;
             string sqlCommand = "";
@@ -1127,20 +959,20 @@ namespace RoyalPetz_ADMIN
 
             qtyColumn.Name = "qty";
             qtyColumn.HeaderText = "QTY";
-            qtyColumn.Width = 150;
+            qtyColumn.Width = 100;
             if (originModuleID != globalConstants.VIEW_PRODUCT_MUTATION && originModuleID != globalConstants.REPRINT_PERMINTAAN_BARANG)
                 qtyColumn.DefaultCellStyle.BackColor = Color.LightBlue;
             detailRequestOrderDataGridView.Columns.Add(qtyColumn);
 
             hppColumn.Name = "hpp";
             hppColumn.HeaderText = "HARGA POKOK";
-            hppColumn.Width = 200;
+            hppColumn.Width = 150;
             hppColumn.ReadOnly = true;
             detailRequestOrderDataGridView.Columns.Add(hppColumn);
 
             subtotalColumn.Name = "subtotal";
             subtotalColumn.HeaderText = "SUBTOTAL";
-            subtotalColumn.Width = 200;
+            subtotalColumn.Width = 150;
             subtotalColumn.ReadOnly = true;
             detailRequestOrderDataGridView.Columns.Add(subtotalColumn);
 

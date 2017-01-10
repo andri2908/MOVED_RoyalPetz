@@ -28,6 +28,7 @@ namespace RoyalPetz_ADMIN
 
         private CultureInfo culture = new CultureInfo("id-ID");
         string previousInput = "";
+        private bool forceUpOneLevel = false;
 
         private Hotkeys.GlobalHotkey ghk_F1;
         private Hotkeys.GlobalHotkey ghk_F2;
@@ -394,6 +395,10 @@ namespace RoyalPetz_ADMIN
 
             detailPODataGridView.CurrentCell = selectedRow.Cells["qty"];
             detailPODataGridView.AllowUserToAddRows = true;
+            detailPODataGridView.Select();
+            detailPODataGridView.BeginEdit(true);
+
+            detailPODataGridView.Focus();
         }
 
         private void fillInSupplierCombo()
@@ -514,6 +519,10 @@ namespace RoyalPetz_ADMIN
                 //productIDTextBox.TextChanged -= TextBox_TextChanged;
                 productIDTextBox.PreviewKeyDown -= TextBox_previewKeyDown;
                 productIDTextBox.PreviewKeyDown += TextBox_previewKeyDown;
+
+                productIDTextBox.KeyUp -= Textbox_KeyUp;
+                productIDTextBox.KeyUp += Textbox_KeyUp;
+
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
                 productIDTextBox.AutoCompleteMode = AutoCompleteMode.None;
                 //productIDTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
@@ -526,6 +535,10 @@ namespace RoyalPetz_ADMIN
                 //productIDTextBox.TextChanged -= TextBox_TextChanged;
                 productIDTextBox.PreviewKeyDown -= productName_previewKeyDown;
                 productIDTextBox.PreviewKeyDown += productName_previewKeyDown;
+
+                productIDTextBox.KeyUp -= Textbox_KeyUp;
+                productIDTextBox.KeyUp += Textbox_KeyUp;
+
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
                 productIDTextBox.AutoCompleteMode = AutoCompleteMode.None;
                 //productIDTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -643,6 +656,16 @@ namespace RoyalPetz_ADMIN
             }
         }
 
+        private void Textbox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (forceUpOneLevel)
+            {
+                int pos = detailPODataGridView.CurrentCell.RowIndex;
+                detailPODataGridView.CurrentCell = detailPODataGridView.Rows[pos - 1].Cells["qty"];
+                forceUpOneLevel = false;
+            }
+        }
+
         private void TextBox_previewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             string currentValue = "";
@@ -665,6 +688,8 @@ namespace RoyalPetz_ADMIN
                     // CALL DATA PRODUK FORM WITH PARAMETER 
                     dataProdukForm browseProduk = new dataProdukForm(globalConstants.NEW_PURCHASE_ORDER, this, currentValue, "", rowSelectedIndex);
                     browseProduk.ShowDialog(this);
+
+                    forceUpOneLevel = true;
                 }
                 else
                 {
@@ -695,6 +720,7 @@ namespace RoyalPetz_ADMIN
                     // CALL DATA PRODUK FORM WITH PARAMETER 
                     dataProdukForm browseProduk = new dataProdukForm(globalConstants.NEW_PURCHASE_ORDER, this, "", currentValue, rowSelectedIndex);
                     browseProduk.ShowDialog(this);
+                    forceUpOneLevel = true;
                 }
                 else
                 {

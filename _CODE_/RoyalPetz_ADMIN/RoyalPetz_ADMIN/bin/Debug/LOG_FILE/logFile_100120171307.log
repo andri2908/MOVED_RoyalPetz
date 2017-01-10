@@ -1,0 +1,34 @@
+[] [1/10/2017 13:05] [] USER = ADMIN IS ACTIVE
+[ADMIN] [1/10/2017 13:05] [] USER ID = 1 LOGIN SUCCESSFULLY
+[ADMIN] [1/10/2017 13:05] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [1/10/2017 13:05] [] DISPLAY ADMIN FORM
+[ADMIN] [1/10/2017 13:05] [] adminForm Load
+[ADMIN] [1/10/2017 13:05] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [1/10/2017 13:05] [PURCHASE ORDER] PURCHASE ORDER : detailPODataGridView_CellValueChanged [productID]
+[ADMIN] [1/10/2017 13:05] [PURCHASE ORDER] PURCHASE ORDER : detailPODataGridView_CellValueChanged [productID]
+[ADMIN] [1/10/2017 13:05] [PURCHASE ORDER] PURCHASE ORDER : detailPODataGridView_CellValueChanged [productID]
+[ADMIN] [1/10/2017 13:05] [PURCHASE ORDER] PURCHASE ORDER : detailPODataGridView_CellValueChanged [productName]
+[ADMIN] [1/10/2017 13:05] [PURCHASE ORDER] updateSomeRowsContent, PRODUCT_BASE_PRICE [25000]
+[ADMIN] [1/10/2017 13:05] [PURCHASE ORDER] PURCHASE ORDER : detailPODataGridView_CellValueChanged [HPP]
+[ADMIN] [1/10/2017 13:05] [PURCHASE ORDER] PURCHASE ORDER : detailPODataGridView_CellValueChanged [qty]
+[ADMIN] [1/10/2017 13:05] [PURCHASE ORDER] PURCHASE ORDER : detailPODataGridView_CellValueChanged [subTotal]
+[ADMIN] [1/10/2017 13:05] [PURCHASE ORDER] updateSomeRowsContent, attempt to calculate total
+[ADMIN] [1/10/2017 13:05] [PURCHASE ORDER] PURCHASE ORDER : detailPODataGridView_CellValueChanged [qty]
+[ADMIN] [1/10/2017 13:05] [PURCHASE ORDER] PURCHASE ORDER : detailPODataGridView_CellValueChanged [subTotal]
+[ADMIN] [1/10/2017 13:05] [PURCHASE ORDER] PURCHASE ORDER : detailPODataGridView_CellValueChanged [qty]
+[ADMIN] [1/10/2017 13:06] [RETUR PERMINTAAN KE PUSAT] RETUR PERMINTAAN : detailReturDataGridView_CellValueChanged [productID]
+[ADMIN] [1/10/2017 13:06] [RETUR PERMINTAAN KE PUSAT] RETUR PERMINTAAN : detailReturDataGridView_CellValueChanged [productID]
+[ADMIN] [1/10/2017 13:06] [RETUR PERMINTAAN KE PUSAT] RETUR PERMINTAAN : detailReturDataGridView_CellValueChanged [productName]
+[ADMIN] [1/10/2017 13:06] [RETUR PERMINTAAN KE PUSAT] updateSomeRowsContent, PRODUCT_BASE_PRICE [26625]
+[ADMIN] [1/10/2017 13:06] [RETUR PERMINTAAN KE PUSAT] RETUR PERMINTAAN : detailReturDataGridView_CellValueChanged [HPP]
+[ADMIN] [1/10/2017 13:06] [RETUR PERMINTAAN KE PUSAT] RETUR PERMINTAAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [1/10/2017 13:06] [RETUR PERMINTAAN KE PUSAT] RETUR PERMINTAAN : detailReturDataGridView_CellValueChanged [subTotal]
+[ADMIN] [1/10/2017 13:06] [RETUR PERMINTAAN KE PUSAT] updateSomeRowsContent, attempt to calculate total
+[ADMIN] [1/10/2017 13:06] [RETUR PERMINTAAN KE PUSAT] RETUR PERMINTAAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [1/10/2017 13:06] [RETUR PERMINTAAN KE PUSAT] RETUR PERMINTAAN : detailReturDataGridView_CellValueChanged [subTotal]
+[ADMIN] [1/10/2017 13:06] [RETUR PERMINTAAN KE PUSAT] RETUR PERMINTAAN : detailReturDataGridView_CellValueChanged [productID]
+[ADMIN] [1/10/2017 13:07] [RETUR PERMINTAAN KE PUSAT] RETUR PERMINTAAN : detailReturDataGridView_CellValueChanged [productName]
+[ADMIN] [1/10/2017 13:07] [RETUR PERMINTAAN KE PUSAT] RETUR PERMINTAAN : detailReturDataGridView_CellValueChanged [HPP]
+[ADMIN] [1/10/2017 13:07] [RETUR PERMINTAAN KE PUSAT] RETUR PERMINTAAN : detailReturDataGridView_CellValueChanged [subTotal]
+[ADMIN] [1/10/2017 13:07] [RETUR PERMINTAAN KE PUSAT] RETUR PERMINTAAN : detailReturDataGridView_CellValueChanged [qty]
+[ADMIN] [1/10/2017 13:07] [] USER ID = 1LOGOUT

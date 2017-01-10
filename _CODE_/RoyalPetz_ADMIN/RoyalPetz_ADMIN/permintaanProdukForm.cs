@@ -24,6 +24,7 @@ namespace RoyalPetz_ADMIN
         private string previousInput = "";
         private double globalTotalValue = 0;
         private bool isLoading = false;
+        private bool forceUpOneLevel = false;
 
         private int selectedROID = 0;
         private string selectedROInvoice = "";
@@ -375,6 +376,10 @@ namespace RoyalPetz_ADMIN
             calculateTotal();
 
             detailRequestOrderDataGridView.CurrentCell = selectedRow.Cells["qty"];
+            detailRequestOrderDataGridView.Select();
+            detailRequestOrderDataGridView.BeginEdit(true);
+
+            detailRequestOrderDataGridView.Focus();
         }
 
         private void loadDataHeaderRO()
@@ -449,32 +454,6 @@ namespace RoyalPetz_ADMIN
             totalLabel.Text = total.ToString("C2", culture);
         }
 
-        private void setTextBoxCustomSource(TextBox textBox)
-        {
-            MySqlDataReader rdr;
-            string sqlCommand = "";
-            string[] arr = null;
-            List<string> arrList = new List<string>();
-
-            sqlCommand = "SELECT PRODUCT_NAME FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1";
-            rdr = DS.getData(sqlCommand);
-
-            if (rdr.HasRows)
-            {
-                while (rdr.Read())
-                {
-                    arrList.Add(rdr.GetString("PRODUCT_NAME"));
-                }
-                AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
-                arr = arrList.ToArray();
-                collection.AddRange(arr);
-
-                textBox.AutoCompleteCustomSource = collection;
-            }
-
-            rdr.Close();
-        }
-
         private void detailRequestOrderDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             if ((detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name == "productID") && e.Control is TextBox)
@@ -483,6 +462,10 @@ namespace RoyalPetz_ADMIN
                 //productIDTextBox.TextChanged -= TextBox_TextChanged;
                 productIDTextBox.PreviewKeyDown -= TextBox_previewKeyDown;
                 productIDTextBox.PreviewKeyDown += TextBox_previewKeyDown;
+
+                productIDTextBox.KeyUp -= Textbox_KeyUp;
+                productIDTextBox.KeyUp += Textbox_KeyUp;
+
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
                 productIDTextBox.AutoCompleteMode = AutoCompleteMode.None;
                 //productIDTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
@@ -495,6 +478,10 @@ namespace RoyalPetz_ADMIN
                 //productIDTextBox.TextChanged -= TextBox_TextChanged;
                 productIDTextBox.PreviewKeyDown -= productName_previewKeyDown;
                 productIDTextBox.PreviewKeyDown += productName_previewKeyDown;
+
+                productIDTextBox.KeyUp -= Textbox_KeyUp;
+                productIDTextBox.KeyUp += Textbox_KeyUp;
+
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
                 productIDTextBox.AutoCompleteMode = AutoCompleteMode.None;
                 //productIDTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -592,6 +579,16 @@ namespace RoyalPetz_ADMIN
             }
         }
 
+        private void Textbox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (forceUpOneLevel)
+            {
+                int pos = detailRequestOrderDataGridView.CurrentCell.RowIndex;
+                detailRequestOrderDataGridView.CurrentCell = detailRequestOrderDataGridView.Rows[pos - 1].Cells["qty"];
+                forceUpOneLevel = false;
+            }
+        }
+
         private void TextBox_previewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             string currentValue = "";
@@ -614,6 +611,7 @@ namespace RoyalPetz_ADMIN
                     // CALL DATA PRODUK FORM WITH PARAMETER 
                     dataProdukForm browseProduk = new dataProdukForm(globalConstants.NEW_REQUEST_ORDER, this, currentValue, "", rowSelectedIndex);
                     browseProduk.ShowDialog(this);
+                    forceUpOneLevel = true;
                 }
                 else
                 {
@@ -644,112 +642,13 @@ namespace RoyalPetz_ADMIN
                     // CALL DATA PRODUK FORM WITH PARAMETER 
                     dataProdukForm browseProduk = new dataProdukForm(globalConstants.NEW_REQUEST_ORDER, this, "", currentValue, rowSelectedIndex);
                     browseProduk.ShowDialog(this);
+                    forceUpOneLevel = true;
                 }
                 else
                 {
                    // clearUpSomeRowContents(selectedRow, rowSelectedIndex);
                 }
             }
-        }
-
-        private void TextBox_TextChanged(object sender, EventArgs e)
-        {
-            int rowSelectedIndex = 0;
-            double productQty = 0;
-            double hppValue = 0;
-            double subTotal = 0;
-            string tempString = "";
-
-            if (isLoading)
-                return;
-
-            if (detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name != "qty")
-                return;
-
-            DataGridViewTextBoxEditingControl dataGridViewTextBoxEditingControl = sender as DataGridViewTextBoxEditingControl;
-            
-            rowSelectedIndex = detailRequestOrderDataGridView.SelectedCells[0].RowIndex;
-            DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[rowSelectedIndex];
-
-            if (dataGridViewTextBoxEditingControl.Text.Length <= 0)
-            {
-                // IF TEXTBOX IS EMPTY, DEFAULT THE VALUE TO 0 AND EXIT THE CHECKING
-                isLoading = true;
-                // reset subTotal Value and recalculate total
-                selectedRow.Cells["subTotal"].Value = 0;
-
-                if (detailRequestQty.Count >= rowSelectedIndex + 1)
-                    detailRequestQty[rowSelectedIndex] = "0";
-
-                dataGridViewTextBoxEditingControl.Text = "0";
-
-                calculateTotal();
-
-                dataGridViewTextBoxEditingControl.SelectionStart = dataGridViewTextBoxEditingControl.Text.Length;
-
-                isLoading = false;
-                return;
-            }
-
-            if (detailRequestQty.Count >= rowSelectedIndex + 1)
-                previousInput = detailRequestQty[rowSelectedIndex];
-            else
-                previousInput = "0";
-
-            isLoading = true;
-            if (previousInput == "0")
-            {
-                tempString = dataGridViewTextBoxEditingControl.Text;
-                if (tempString.IndexOf('0') == 0 && tempString.Length > 1 && tempString.IndexOf("0.") < 0)
-                    dataGridViewTextBoxEditingControl.Text = tempString.Remove(tempString.IndexOf('0'), 1);
-            }
-
-            if ( detailRequestQty.Count < rowSelectedIndex+1 )
-            {
-                if (gUtil.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
-                    && (dataGridViewTextBoxEditingControl.Text.Length > 0))
-                {
-                    detailRequestQty.Add(dataGridViewTextBoxEditingControl.Text);
-                }
-                else
-                {
-                    dataGridViewTextBoxEditingControl.Text = previousInput;
-                }
-            }
-            else
-            {
-                if (gUtil.matchRegEx(dataGridViewTextBoxEditingControl.Text, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL) 
-                    && (dataGridViewTextBoxEditingControl.Text.Length > 0))
-                {
-                    detailRequestQty[rowSelectedIndex] = dataGridViewTextBoxEditingControl.Text;
-                }
-                else
-                {
-                    dataGridViewTextBoxEditingControl.Text = detailRequestQty[rowSelectedIndex];
-                }
-            }
-
-            try
-            {
-                productQty = Convert.ToDouble(dataGridViewTextBoxEditingControl.Text);
-
-                if (null != selectedRow.Cells["hpp"].Value)
-                {
-                    hppValue = Convert.ToDouble(selectedRow.Cells["hpp"].Value);
-                    subTotal = Math.Round((hppValue * productQty), 2);
-
-                    selectedRow.Cells["subTotal"].Value = subTotal;
-                }
-
-                calculateTotal();
-            }
-            catch (Exception ex)
-            {
-                //dataGridViewTextBoxEditingControl.Text = previousInput;
-            }
-
-            dataGridViewTextBoxEditingControl.SelectionStart = dataGridViewTextBoxEditingControl.Text.Length;
-            isLoading = false;
         }
 
         private bool exportDataRO(string exportedFileName= "")

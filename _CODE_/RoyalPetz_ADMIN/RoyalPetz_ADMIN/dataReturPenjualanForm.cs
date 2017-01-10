@@ -26,6 +26,7 @@ namespace RoyalPetz_ADMIN
         private double globalTotalValue = 0;
         private bool isLoading = false;
         private bool returnCash = false;
+        private bool forceUpOneLevel = false;
 
         private List<string> returnQty = new List<string>();
         private List<string> productPriceList = new List<string>();
@@ -409,6 +410,9 @@ namespace RoyalPetz_ADMIN
             calculateTotal();
 
             detailReturDataGridView.CurrentCell = selectedRow.Cells["qty"];
+            detailReturDataGridView.BeginEdit(true);
+
+            detailReturDataGridView.Select();
         }
 
         private void addDataGridColumn()
@@ -606,8 +610,13 @@ namespace RoyalPetz_ADMIN
             if ((detailReturDataGridView.CurrentCell.OwningColumn.Name == "productID") && e.Control is TextBox)
             {
                 TextBox productIDTextBox = e.Control as TextBox;
+
                 productIDTextBox.PreviewKeyDown -= TextBox_previewKeyDown;
                 productIDTextBox.PreviewKeyDown += TextBox_previewKeyDown;
+
+                productIDTextBox.KeyUp -= TextBox_KeyUp;
+                productIDTextBox.KeyUp += TextBox_KeyUp;
+
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
                 productIDTextBox.AutoCompleteMode = AutoCompleteMode.None;
             }
@@ -617,11 +626,12 @@ namespace RoyalPetz_ADMIN
                 TextBox productIDTextBox = e.Control as TextBox;
                 productIDTextBox.PreviewKeyDown -= productName_previewKeyDown;
                 productIDTextBox.PreviewKeyDown += productName_previewKeyDown;
+
+                productIDTextBox.KeyUp -= TextBox_KeyUp;
+                productIDTextBox.KeyUp += TextBox_KeyUp;
+
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
                 productIDTextBox.AutoCompleteMode = AutoCompleteMode.None;
-                //productIDTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                //productIDTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                //setTextBoxCustomSource(productIDTextBox);
             }
 
             if (detailReturDataGridView.CurrentCell.OwningColumn.Name == "qty" && e.Control is TextBox)
@@ -748,10 +758,24 @@ namespace RoyalPetz_ADMIN
             }
         }
 
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (forceUpOneLevel)
+            {
+                int pos = detailReturDataGridView.CurrentCell.RowIndex;
+
+                if (pos > 0)
+                    detailReturDataGridView.CurrentCell = detailReturDataGridView.Rows[pos - 1].Cells["qty"];
+
+                forceUpOneLevel = false;
+            }
+        }
+
         private void TextBox_previewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             string currentValue = "";
             int rowSelectedIndex = 0;
+            string searchParam = "";
             DataGridViewTextBoxEditingControl dataGridViewComboBoxEditingControl = sender as DataGridViewTextBoxEditingControl;
 
             if (detailReturDataGridView.CurrentCell.OwningColumn.Name != "productID")
@@ -767,9 +791,16 @@ namespace RoyalPetz_ADMIN
                 {
                     //updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
                     //detailReturDataGridView.CurrentCell = selectedRow.Cells["qty"];
+                    if (originModuleID == globalConstants.RETUR_PENJUALAN)
+                        searchParam = selectedSalesInvoice;
+                    else if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
+                        searchParam = selectedCustomerID.ToString();
+
                     // CALL DATA PRODUK FORM WITH PARAMETER 
-                    dataProdukForm browseProduk = new dataProdukForm(originModuleID, this, currentValue, "", rowSelectedIndex);
+                    dataProdukForm browseProduk = new dataProdukForm(originModuleID, this, currentValue, "", rowSelectedIndex, searchParam);
                     browseProduk.ShowDialog(this);
+
+                    forceUpOneLevel = true;
                 }
                 else
                 {
@@ -781,7 +812,9 @@ namespace RoyalPetz_ADMIN
         private void productName_previewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             string currentValue = "";
+            string searchParam = "";
             int rowSelectedIndex = 0;
+
             DataGridViewTextBoxEditingControl dataGridViewComboBoxEditingControl = sender as DataGridViewTextBoxEditingControl;
 
             if (detailReturDataGridView.CurrentCell.OwningColumn.Name != "productName")
@@ -798,8 +831,17 @@ namespace RoyalPetz_ADMIN
                     //updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue, false);
                     //detailReturDataGridView.CurrentCell = selectedRow.Cells["qty"];
                     // CALL DATA PRODUK FORM WITH PARAMETER 
-                    dataProdukForm browseProduk = new dataProdukForm(originModuleID, this, "", currentValue, rowSelectedIndex);
+
+                    if (originModuleID == globalConstants.RETUR_PENJUALAN)
+                        searchParam = selectedSalesInvoice;
+                    else if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
+                        searchParam = selectedCustomerID.ToString();
+
+
+                    dataProdukForm browseProduk = new dataProdukForm(originModuleID, this, "", currentValue, rowSelectedIndex, searchParam);
                     browseProduk.ShowDialog(this);
+
+                    forceUpOneLevel = true;
                 }
                 else
                 {

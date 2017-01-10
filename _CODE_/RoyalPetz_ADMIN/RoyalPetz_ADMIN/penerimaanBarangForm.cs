@@ -392,6 +392,9 @@ namespace RoyalPetz_ADMIN
             calculateTotal();
 
             detailGridView.CurrentCell = selectedRow.Cells["qtyReceived"];
+            detailGridView.Select();
+            detailGridView.BeginEdit(true);
+
             detailGridView.Focus();
         }
 
@@ -947,7 +950,7 @@ namespace RoyalPetz_ADMIN
                     //detailGridView.CurrentCell = selectedRow.Cells["qtyReceived"];
                     
                     // CALL DATA PRODUK FORM WITH PARAMETER 
-                    dataProdukForm browseProduk = new dataProdukForm(globalConstants.MUTASI_BARANG, this, currentValue, "",rowSelectedIndex);
+                    dataProdukForm browseProduk = new dataProdukForm(globalConstants.PENERIMAAN_BARANG, this, currentValue, "",rowSelectedIndex);
                     browseProduk.ShowDialog(this);
 
                     forceUpOneLevel = true;
@@ -980,7 +983,7 @@ namespace RoyalPetz_ADMIN
                     //detailGridView.CurrentCell = selectedRow.Cells["qtyReceived"];
 
                     // CALL DATA PRODUK FORM WITH PARAMETER 
-                    dataProdukForm browseProduk = new dataProdukForm(globalConstants.MUTASI_BARANG, this, "", currentValue, rowSelectedIndex);
+                    dataProdukForm browseProduk = new dataProdukForm(globalConstants.PENERIMAAN_BARANG, this, "", currentValue, rowSelectedIndex);
                     browseProduk.ShowDialog(this);
 
                     forceUpOneLevel = true;
