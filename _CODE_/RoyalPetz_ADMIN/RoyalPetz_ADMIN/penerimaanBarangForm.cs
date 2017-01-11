@@ -1000,7 +1000,9 @@ namespace RoyalPetz_ADMIN
             if (forceUpOneLevel)
             {
                 int pos = detailGridView.CurrentCell.RowIndex;
-                detailGridView.CurrentCell = detailGridView.Rows[pos - 1].Cells["qtyReceived"];
+
+                if (pos > 0)
+                    detailGridView.CurrentCell = detailGridView.Rows[pos - 1].Cells["qtyReceived"];
                 forceUpOneLevel = false;
             }
         }
@@ -1743,7 +1745,7 @@ namespace RoyalPetz_ADMIN
             if (saveData())
             {
                 gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "PENERIMAAN BARANG SAVED");
-
+                errorLabel.Text = "";
                 if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_MUTASI)
                 {
                     gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "PENERIMAAN BARANG FROM MUTASI, UPDATE HQ DATA");

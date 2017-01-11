@@ -66,6 +66,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.resetbutton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.SupplierHistoryButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.barcodeTextBox = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -77,7 +78,6 @@
             this.label25 = new System.Windows.Forms.Label();
             this.expDatePicker = new System.Windows.Forms.DateTimePicker();
             this.expLabel = new System.Windows.Forms.Label();
-            this.SupplierHistoryButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -535,6 +535,18 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ID PRODUK";
             // 
+            // SupplierHistoryButton
+            // 
+            this.SupplierHistoryButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.SupplierHistoryButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SupplierHistoryButton.BackgroundImage")));
+            this.SupplierHistoryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.SupplierHistoryButton.Location = new System.Drawing.Point(425, 198);
+            this.SupplierHistoryButton.Name = "SupplierHistoryButton";
+            this.SupplierHistoryButton.Size = new System.Drawing.Size(26, 26);
+            this.SupplierHistoryButton.TabIndex = 81;
+            this.SupplierHistoryButton.UseVisualStyleBackColor = true;
+            this.SupplierHistoryButton.Click += new System.EventHandler(this.SupplierHistoryButton_Click);
+            // 
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -654,7 +666,7 @@
             // 
             this.expDatePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.expDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.expDatePicker.Location = new System.Drawing.Point(596, 410);
+            this.expDatePicker.Location = new System.Drawing.Point(604, 410);
             this.expDatePicker.Name = "expDatePicker";
             this.expDatePicker.Size = new System.Drawing.Size(144, 27);
             this.expDatePicker.TabIndex = 78;
@@ -671,18 +683,6 @@
             this.expLabel.TabIndex = 79;
             this.expLabel.Text = "EXP : ";
             this.expLabel.Visible = false;
-            // 
-            // SupplierHistoryButton
-            // 
-            this.SupplierHistoryButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.SupplierHistoryButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SupplierHistoryButton.BackgroundImage")));
-            this.SupplierHistoryButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.SupplierHistoryButton.Location = new System.Drawing.Point(425, 198);
-            this.SupplierHistoryButton.Name = "SupplierHistoryButton";
-            this.SupplierHistoryButton.Size = new System.Drawing.Size(26, 26);
-            this.SupplierHistoryButton.TabIndex = 81;
-            this.SupplierHistoryButton.UseVisualStyleBackColor = true;
-            this.SupplierHistoryButton.Click += new System.EventHandler(this.SupplierHistoryButton_Click);
             // 
             // dataProdukDetailForm
             // 

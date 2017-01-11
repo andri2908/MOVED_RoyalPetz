@@ -25,6 +25,9 @@ namespace RoyalPetz_ADMIN
         private int originModuleID = 0;
         private int selectedInternalProductID = 0;
         private int selectedProductExpiryID = 0;
+        private double selectedProductOriginalQty = 0;
+        private double selectedProductOriginalTotalQty = 0;
+
         private string productID = "";
         private int selectedUnitID;
         private string photoFileName = "";
@@ -385,8 +388,11 @@ namespace RoyalPetz_ADMIN
             DS.mySqlConnect();
 
             if (globalFeatureList.EXPIRY_MODULE == 1)
+            { 
                 productExpiryAmount = Convert.ToDouble(DS.getDataSingleValue("SELECT PRODUCT_AMOUNT FROM PRODUCT_EXPIRY WHERE ID = " + selectedProductExpiryID));
-
+                expDatePicker.Value = Convert.ToDateTime(DS.getDataSingleValue("SELECT PRODUCT_EXPIRY_DATE FROM PRODUCT_EXPIRY WHERE ID = " + selectedProductExpiryID));
+            }
+            
             // LOAD PRODUCT DATA
             using (rdr = DS.getData("SELECT * FROM MASTER_PRODUCT WHERE ID =  " + selectedInternalProductID))
             {
@@ -407,6 +413,8 @@ namespace RoyalPetz_ADMIN
                         if (globalFeatureList.EXPIRY_MODULE == 1)
                         {
                             stokAwalTextBox.Text = productExpiryAmount.ToString();
+                            selectedProductOriginalQty = productExpiryAmount;
+                            selectedProductOriginalTotalQty = rdr.GetDouble("PRODUCT_STOCK_QTY");
                         }
                         else
                         {
@@ -664,6 +672,16 @@ namespace RoyalPetz_ADMIN
             if (produkQty.Equals(""))
                 produkQty = "0";
 
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+            {
+                double newProdukQty = Convert.ToDouble(produkQty);
+                double deltaQty = newProdukQty - selectedProductOriginalQty;
+
+                selectedProductOriginalTotalQty = selectedProductOriginalTotalQty + deltaQty;
+
+                produkQty = selectedProductOriginalTotalQty.ToString();
+            }
+
             string limitStock = limitStokTextBox.Text;
             if (limitStock.Equals(""))
                 limitStock = "0";
@@ -769,30 +787,29 @@ namespace RoyalPetz_ADMIN
                                 throw internalEX;
                         }
                         break;
+                }
 
-                        if (globalFeatureList.EXPIRY_MODULE == 1)
-                        {
-                            // INSERT TO PRODUCT_EXPIRY
-                            DateTime productExpiryDateValue = expDatePicker.Value;
-                            string productExpiryDate = String.Format(culture, "{0:dd-MM-yyyy}", productExpiryDateValue);
-                            int lotID = 0;
-                            string productID = kodeProdukTextBox.Text;
-                            expiryModuleUtil expUtil = new expiryModuleUtil();
+                if (globalFeatureList.EXPIRY_MODULE == 1)
+                {
+                    // INSERT TO PRODUCT_EXPIRY
+                    DateTime productExpiryDateValue = expDatePicker.Value;
+                    string productExpiryDate = String.Format(culture, "{0:dd-MM-yyyy}", productExpiryDateValue);
+                    int lotID = 0;
+                    string productID = kodeProdukTextBox.Text;
+                    expiryModuleUtil expUtil = new expiryModuleUtil();
 
-                            // CHECK WHETHER THE PRODUCT WITH SAME EXPIRY DATE EXIST
-                            lotID = expUtil.getLotIDBasedOnExpiryDate(productExpiryDateValue, productID);
+                    // CHECK WHETHER THE PRODUCT WITH SAME EXPIRY DATE EXIST
+                    lotID = expUtil.getLotIDBasedOnExpiryDate(productExpiryDateValue, productID);
 
-                            if (lotID == 0)
-                                //sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT, PR_INVOICE) VALUES ( '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", '" + PRInvoice + "')";
-                                sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT) VALUES ( '" + productID + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + produkQty + ")";
-                            else
-                                sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = PRODUCT_AMOUNT + " + produkQty + " WHERE ID = " + lotID;
+                    if (lotID == 0)
+                        //sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT, PR_INVOICE) VALUES ( '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", '" + PRInvoice + "')";
+                        sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT) VALUES ( '" + productID + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + produkQty + ")";
+                    else
+                        sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = " + produkQty + " WHERE ID = " + lotID;
 
-                            gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "INSERT TO PRODUCT EXPIRY [" + productID + "]");
-                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                                throw internalEX;
-                        }
-
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "INSERT TO PRODUCT EXPIRY [" + productID + "]");
+                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        throw internalEX;
                 }
 
                 if (!selectedPhoto.Equals("PRODUCT_PHOTO/" + produkPhoto) && !selectedPhoto.Equals(""))// && result == true)
@@ -1112,14 +1129,18 @@ namespace RoyalPetz_ADMIN
 
                 if (globalFeatureList.EXPIRY_MODULE == 1)
                 {
-                    expLabel.Visible = false;
-                    expDatePicker.Visible = false;
+                    //                    expLabel.Visible = false;
+                    //                    expDatePicker.Visible = false;
+                    expDatePicker.Enabled = false;
                 }
             }
 
             arrButton[0] = saveButton;
             arrButton[1] = resetbutton;
             gUtil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
+
+            expDatePicker.Format = DateTimePickerFormat.Custom;
+            expDatePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
 
             gUtil.reArrangeTabOrder(this);
         }

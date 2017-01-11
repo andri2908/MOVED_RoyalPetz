@@ -978,20 +978,23 @@ namespace RoyalPetz_ADMIN
 
             if (globalFeatureList.EXPIRY_MODULE == 1)
             {
-                DataGridViewTextBoxColumn expiryDate_textBox = new DataGridViewTextBoxColumn();
-                expiryDate_textBox.Name = "expiryDate";
-                expiryDate_textBox.HeaderText = "KADALUARSA";
-                expiryDate_textBox.ReadOnly = true;
-                expiryDate_textBox.Width = 150;
-                detailRequestOrderDataGridView.Columns.Add(expiryDate_textBox);
+                if (originModuleID != globalConstants.CEK_DATA_MUTASI)
+                {
+                    DataGridViewTextBoxColumn expiryDate_textBox = new DataGridViewTextBoxColumn();
+                    expiryDate_textBox.Name = "expiryDate";
+                    expiryDate_textBox.HeaderText = "KADALUARSA";
+                    expiryDate_textBox.ReadOnly = true;
+                    expiryDate_textBox.Width = 150;
+                    detailRequestOrderDataGridView.Columns.Add(expiryDate_textBox);
 
-                DataGridViewTextBoxColumn expiryDateValue_textBox = new DataGridViewTextBoxColumn();
-                expiryDateValue_textBox.Name = "expiryDateValue";
-                expiryDateValue_textBox.HeaderText = "KADALUARSA";
-                expiryDateValue_textBox.ReadOnly = true;
-                expiryDateValue_textBox.Width = 150;
-                expiryDateValue_textBox.Visible = false;
-                detailRequestOrderDataGridView.Columns.Add(expiryDateValue_textBox);
+                    DataGridViewTextBoxColumn expiryDateValue_textBox = new DataGridViewTextBoxColumn();
+                    expiryDateValue_textBox.Name = "expiryDateValue";
+                    expiryDateValue_textBox.HeaderText = "KADALUARSA";
+                    expiryDateValue_textBox.ReadOnly = true;
+                    expiryDateValue_textBox.Width = 150;
+                    expiryDateValue_textBox.Visible = false;
+                    detailRequestOrderDataGridView.Columns.Add(expiryDateValue_textBox);
+                }
             }
 
         }
@@ -1277,27 +1280,31 @@ namespace RoyalPetz_ADMIN
                 bool dataValid = true;
                 DateTime checkDate;
                 string productID = "";
-                // CHECK VALIDITY OF EXPIRED DATE 
-                for (i = 0; i < detailRequestOrderDataGridView.Rows.Count && dataValid; i++)
+              
+                if (originModuleID != globalConstants.CEK_DATA_MUTASI)
                 {
-                    if (null != detailRequestOrderDataGridView.Rows[i].Cells["expiryDateValue"].Value)
-                        dataValid = true;
-                    else
-                        dataValid = false;
-
-                    if (dataValid)
+                    // CHECK VALIDITY OF EXPIRED DATE 
+                    for (i = 0; i < detailRequestOrderDataGridView.Rows.Count && dataValid; i++)
                     {
-                        productID = detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString();
-                        checkDate = Convert.ToDateTime(detailRequestOrderDataGridView.Rows[i].Cells["expiryDateValue"].Value);
-                        if (!expUtil.isExpiryDateExist(checkDate, productID))
+                        if (null != detailRequestOrderDataGridView.Rows[i].Cells["expiryDateValue"].Value)
+                            dataValid = true;
+                        else
                             dataValid = false;
-                    }
-                }
 
-                if (!dataValid)
-                {
-                    errorLabel.Text = "TANGGAL KADALUARSA PADA BARIS [" + i + "] INVALID";
-                    return false;
+                        if (dataValid)
+                        {
+                            productID = detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString();
+                            checkDate = Convert.ToDateTime(detailRequestOrderDataGridView.Rows[i].Cells["expiryDateValue"].Value);
+                            if (!expUtil.isExpiryDateExist(checkDate, productID))
+                                dataValid = false;
+                        }
+                    }
+
+                    if (!dataValid)
+                    {
+                        errorLabel.Text = "TANGGAL KADALUARSA PADA BARIS [" + i + "] INVALID";
+                        return false;
+                    }
                 }
             }
 

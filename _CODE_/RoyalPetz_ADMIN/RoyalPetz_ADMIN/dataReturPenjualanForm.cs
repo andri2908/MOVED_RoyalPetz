@@ -634,13 +634,13 @@ namespace RoyalPetz_ADMIN
                 productIDTextBox.AutoCompleteMode = AutoCompleteMode.None;
             }
 
-            if (detailReturDataGridView.CurrentCell.OwningColumn.Name == "qty" && e.Control is TextBox)
-            {
-                TextBox textBox = e.Control as TextBox;
-           //     textBox.TextChanged += TextBox_TextChanged;
-           //     textBox.PreviewKeyDown -= TextBox_previewKeyDown;
-                textBox.AutoCompleteMode = AutoCompleteMode.None;
-            }
+           // if (detailReturDataGridView.CurrentCell.OwningColumn.Name == "qty" && e.Control is TextBox)
+           // {
+           //     TextBox textBox = e.Control as TextBox;
+           ////     textBox.TextChanged += TextBox_TextChanged;
+           ////     textBox.PreviewKeyDown -= TextBox_previewKeyDown;
+           //     textBox.AutoCompleteMode = AutoCompleteMode.None;
+           // }
         }
 
         private void clearUpSomeRowContents(DataGridViewRow selectedRow, int rowSelectedIndex)
