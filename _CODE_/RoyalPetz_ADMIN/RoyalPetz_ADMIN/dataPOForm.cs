@@ -321,7 +321,7 @@ namespace RoyalPetz_ADMIN
                     }
                 }
 
-                loadPOData();
+       //         loadPOData();
             }
         }
 
@@ -375,7 +375,7 @@ namespace RoyalPetz_ADMIN
                 printOutPurchaseOrder(selectedPurchaseInvoice);
             }
 
-            loadPOData();
+          //  loadPOData();
         }
 
         private void dataPOForm_Activated(object sender, EventArgs e)

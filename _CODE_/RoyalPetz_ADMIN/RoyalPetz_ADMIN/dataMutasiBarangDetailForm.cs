@@ -76,6 +76,7 @@ namespace RoyalPetz_ADMIN
                     //reprintButton.Visible = false;
                     exportButton.Visible = false;
                     acceptedButton.Visible = false;
+                    directMutasiBarang = true;
                     break;
 
                 case globalConstants.REPRINT_PERMINTAAN_BARANG:
@@ -955,6 +956,15 @@ namespace RoyalPetz_ADMIN
                 productNameColumn.HeaderText = "NAMA PRODUK";
                 productNameColumn.Width = 300;
                 detailRequestOrderDataGridView.Columns.Add(productNameColumn);
+
+                if (originModuleID == globalConstants.CEK_DATA_MUTASI)
+                { 
+                    qtyReqColumn.Name = "qtyRequest";
+                    qtyReqColumn.HeaderText = "QTY REQ";
+                    qtyReqColumn.ReadOnly = true;
+                    qtyReqColumn.Width = 150;
+                    detailRequestOrderDataGridView.Columns.Add(qtyReqColumn);
+                }
             }
 
             qtyColumn.Name = "qty";
@@ -978,25 +988,21 @@ namespace RoyalPetz_ADMIN
 
             if (globalFeatureList.EXPIRY_MODULE == 1)
             {
-                if (originModuleID != globalConstants.CEK_DATA_MUTASI)
-                {
-                    DataGridViewTextBoxColumn expiryDate_textBox = new DataGridViewTextBoxColumn();
-                    expiryDate_textBox.Name = "expiryDate";
-                    expiryDate_textBox.HeaderText = "KADALUARSA";
-                    expiryDate_textBox.ReadOnly = true;
-                    expiryDate_textBox.Width = 150;
-                    detailRequestOrderDataGridView.Columns.Add(expiryDate_textBox);
+                DataGridViewTextBoxColumn expiryDate_textBox = new DataGridViewTextBoxColumn();
+                expiryDate_textBox.Name = "expiryDate";
+                expiryDate_textBox.HeaderText = "KADALUARSA";
+                expiryDate_textBox.ReadOnly = true;
+                expiryDate_textBox.Width = 150;
+                detailRequestOrderDataGridView.Columns.Add(expiryDate_textBox);
 
-                    DataGridViewTextBoxColumn expiryDateValue_textBox = new DataGridViewTextBoxColumn();
-                    expiryDateValue_textBox.Name = "expiryDateValue";
-                    expiryDateValue_textBox.HeaderText = "KADALUARSA";
-                    expiryDateValue_textBox.ReadOnly = true;
-                    expiryDateValue_textBox.Width = 150;
-                    expiryDateValue_textBox.Visible = false;
-                    detailRequestOrderDataGridView.Columns.Add(expiryDateValue_textBox);
-                }
+                DataGridViewTextBoxColumn expiryDateValue_textBox = new DataGridViewTextBoxColumn();
+                expiryDateValue_textBox.Name = "expiryDateValue";
+                expiryDateValue_textBox.HeaderText = "KADALUARSA";
+                expiryDateValue_textBox.ReadOnly = true;
+                expiryDateValue_textBox.Width = 150;
+                expiryDateValue_textBox.Visible = false;
+                detailRequestOrderDataGridView.Columns.Add(expiryDateValue_textBox);
             }
-
         }
 
         private void dataMutasiBarangDetailForm_Load(object sender, EventArgs e)
@@ -1015,8 +1021,8 @@ namespace RoyalPetz_ADMIN
             {
                 if (originModuleID == globalConstants.VIEW_PRODUCT_MUTATION)
                     loadDataHeaderPM();
-                else
-                    loadDataHeaderRO();
+                //else
+                //    loadDataHeaderRO();
 
                 if (originModuleID != globalConstants.VIEW_PRODUCT_MUTATION && isNewRORequest())
                 {
@@ -1050,11 +1056,32 @@ namespace RoyalPetz_ADMIN
             }
             else
             {
-                subModuleID = globalConstants.NEW_PRODUCT_MUTATION;
-                branchToCombo.Enabled = true;
-                fillInBranchCombo(branchToCombo, branchToComboHidden);
+                if (originModuleID == globalConstants.CEK_DATA_MUTASI)
+                {
+                    loadDataHeaderRO();
+                    if (isNewRORequest())
+                    {
+                        subModuleID = globalConstants.NEW_PRODUCT_MUTATION;
 
-                label3.Text = "TUJUAN MUTASI";
+                        approveButton.Visible = true;
+                        createPOButton.Visible = true;
+                        PMDateTimePicker.Focus();
+                    }
+
+                    branchToCombo.Text = getBranchName(selectedBranchToID);
+                    branchFromCombo.Enabled = false;
+                    branchToCombo.Enabled = false;
+
+                    loadDataDetail();
+                }
+                else
+                { 
+                    subModuleID = globalConstants.NEW_PRODUCT_MUTATION;
+                    branchToCombo.Enabled = true;
+                    fillInBranchCombo(branchToCombo, branchToComboHidden);
+
+                    label3.Text = "TUJUAN MUTASI";
+                }
             }
 
             isLoading = false;
@@ -1179,7 +1206,7 @@ namespace RoyalPetz_ADMIN
                                     string expiryProductID = detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString();
                                     double expiryProductAmt = qtyApproved;
 
-                                    lotID = expUtil.getLotIDBasedOnExpiryDate(Convert.ToDateTime(detailRequestOrderDataGridView.Rows[i].Cells["expiryDateValue"]), detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString());
+                                    lotID = expUtil.getLotIDBasedOnExpiryDate(Convert.ToDateTime(detailRequestOrderDataGridView.Rows[i].Cells["expiryDateValue"].Value), detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString());
 
                                     // REDUCE GLOBAL STOCK
                                     sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = PRODUCT_AMOUNT - " + qtyApproved + " WHERE ID = " + lotID;
@@ -1191,7 +1218,7 @@ namespace RoyalPetz_ADMIN
                             }
                         }
 
-                        if (!directMutasiBarang)
+                        if (originModuleID == globalConstants.CEK_DATA_MUTASI)//(!directMutasiBarang)
                         { 
                             // UPDATE REQUEST ORDER HEADER TABLE
                             sqlCommand = "UPDATE REQUEST_ORDER_HEADER SET RO_ACTIVE = 0 WHERE RO_INVOICE = '" + roInvoice + "'";
@@ -1251,7 +1278,6 @@ namespace RoyalPetz_ADMIN
 
         private bool dataValidated()
         {
-            bool dataExist = true;
             int i = 0;
 
             if (subModuleID == globalConstants.REJECT_PRODUCT_MUTATION)
@@ -1281,30 +1307,28 @@ namespace RoyalPetz_ADMIN
                 DateTime checkDate;
                 string productID = "";
               
-                if (originModuleID != globalConstants.CEK_DATA_MUTASI)
+                // CHECK VALIDITY OF EXPIRED DATE 
+                for (i = 0; i < detailRequestOrderDataGridView.Rows.Count-1 && dataValid; i++)
                 {
-                    // CHECK VALIDITY OF EXPIRED DATE 
-                    for (i = 0; i < detailRequestOrderDataGridView.Rows.Count && dataValid; i++)
+                    if (null != detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value)
                     {
+                        productID = detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString();
                         if (null != detailRequestOrderDataGridView.Rows[i].Cells["expiryDateValue"].Value)
-                            dataValid = true;
-                        else
-                            dataValid = false;
-
-                        if (dataValid)
                         {
-                            productID = detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString();
                             checkDate = Convert.ToDateTime(detailRequestOrderDataGridView.Rows[i].Cells["expiryDateValue"].Value);
+
                             if (!expUtil.isExpiryDateExist(checkDate, productID))
                                 dataValid = false;
                         }
+                        else
+                            dataValid = false;
                     }
+                }
 
-                    if (!dataValid)
-                    {
-                        errorLabel.Text = "TANGGAL KADALUARSA PADA BARIS [" + i + "] INVALID";
-                        return false;
-                    }
+                if (!dataValid)
+                {
+                    errorLabel.Text = "TANGGAL KADALUARSA PADA BARIS [" + i + "] INVALID";
+                    return false;
                 }
             }
 
@@ -2090,6 +2114,8 @@ namespace RoyalPetz_ADMIN
 
                     detailRequestOrderDataGridView.CurrentCell = selectedRow.Cells["qty"];
                 }
+                else
+                    errorLabel.Text = "";
             }
         }
 

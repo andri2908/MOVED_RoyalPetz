@@ -1054,7 +1054,7 @@ namespace RoyalPetz_ADMIN
                         gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "PURCHASE HEADER FROM REQUEST ORDER");
                         // SAVE HEADER TABLE
                         sqlCommand = "INSERT INTO PURCHASE_HEADER (PURCHASE_INVOICE, SUPPLIER_ID, PURCHASE_DATETIME, PURCHASE_TOTAL, PURCHASE_TERM_OF_PAYMENT, PURCHASE_TERM_OF_PAYMENT_DURATION, PURCHASE_PAID) VALUES " +
-                                            "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(POTotal) + ", " + termOfPayment + ", " + termOfPaymentDuration + ", '" + purchasePaid + ")";
+                                            "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(POTotal) + ", " + termOfPayment + ", " + termOfPaymentDuration + ", " + purchasePaid + ")";
 
                         gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "INSERT PURCHASE HEADER DATA ["+ POInvoice + "]");
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
@@ -1063,7 +1063,7 @@ namespace RoyalPetz_ADMIN
                         if (addToTaxTable)
                         {
                             sqlCommand = "INSERT INTO PURCHASE_HEADER_TAX (PURCHASE_INVOICE, SUPPLIER_ID, PURCHASE_DATETIME, PURCHASE_TOTAL, PURCHASE_TERM_OF_PAYMENT, PURCHASE_TERM_OF_PAYMENT_DURATION, PURCHASE_PAID) VALUES " +
-                                                "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(POTotal) + ", " + termOfPayment + ", " + termOfPaymentDuration + ", '" + purchasePaid + ")";
+                                                "('" + POInvoice + "', " + supplierID + ", STR_TO_DATE('" + PODateTime + "', '%d-%m-%Y'), " + gUtil.validateDecimalNumericInput(POTotal) + ", " + termOfPayment + ", " + termOfPaymentDuration + ", " + purchasePaid + ")";
 
                             gUtil.saveSystemDebugLog(globalConstants.MENU_PURCHASE_ORDER, "INSERT PURCHASE HEADER TAX DATA [" + POInvoice + "]");
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))

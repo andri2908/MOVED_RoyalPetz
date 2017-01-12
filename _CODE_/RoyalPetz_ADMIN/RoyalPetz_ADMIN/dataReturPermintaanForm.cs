@@ -806,18 +806,19 @@ namespace RoyalPetz_ADMIN
                 string productID = "";
 
                 // CHECK VALIDITY OF EXPIRED DATE 
-                for (i = 0; i < detailReturDataGridView.Rows.Count && dataValid; i++)
+                for (i = 0; i < detailReturDataGridView.Rows.Count-1 && dataValid; i++)
                 {
-                    if (null != detailReturDataGridView.Rows[i].Cells["expiryDateValue"].Value)
-                        dataValid = true;
-                    else
-                        dataValid = false;
-
-                    if (dataValid)
+                    if (null != detailReturDataGridView.Rows[i].Cells["productID"].Value)
                     {
                         productID = detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString();
-                        checkDate = Convert.ToDateTime(detailReturDataGridView.Rows[i].Cells["expiryDateValue"].Value);
-                        if (!expUtil.isExpiryDateExist(checkDate, productID))
+
+                        if (null != detailReturDataGridView.Rows[i].Cells["expiryDateValue"].Value)
+                        {
+                            checkDate = Convert.ToDateTime(detailReturDataGridView.Rows[i].Cells["expiryDateValue"].Value);
+                            if (!expUtil.isExpiryDateExist(checkDate, productID))
+                                dataValid = false;
+                        }
+                        else
                             dataValid = false;
                     }
                 }
@@ -888,16 +889,22 @@ namespace RoyalPetz_ADMIN
                     { 
                        hppValue = Convert.ToDouble(productPriceList[i]);
                        qtyValue = Convert.ToDouble(detailQty[i]);
-                      
-                       try
-                       {
-                            descriptionValue = detailReturDataGridView.Rows[i].Cells["description"].Value.ToString();
-                       }
-                       catch(Exception ex)
-                       {
+
+                        //try
+                        //{
+                        //     descriptionValue = detailReturDataGridView.Rows[i].Cells["description"].Value.ToString();
+                        //}
+                        //catch(Exception ex)
+                        //{
+                        //     descriptionValue = " ";
+                        //}
+
+                        if (null == detailReturDataGridView.Rows[i].Cells["description"].Value)
                             descriptionValue = " ";
-                       }
-                       sqlCommand = "INSERT INTO RETURN_PURCHASE_DETAIL (RP_ID, PRODUCT_ID, PRODUCT_BASEPRICE, PRODUCT_QTY, RP_DESCRIPTION, RP_SUBTOTAL) VALUES " +
+                        else
+                            descriptionValue = detailReturDataGridView.Rows[i].Cells["description"].Value.ToString();
+
+                        sqlCommand = "INSERT INTO RETURN_PURCHASE_DETAIL (RP_ID, PRODUCT_ID, PRODUCT_BASEPRICE, PRODUCT_QTY, RP_DESCRIPTION, RP_SUBTOTAL) VALUES " +
                                            "('" + returID + "', '" + detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " +hppValue  + ", " + qtyValue + ", '" + MySqlHelper.EscapeString(descriptionValue) + "', " + Convert.ToDouble(subtotalList[i]) + ")";
                         gUtil.saveSystemDebugLog(globalConstants.MENU_RETUR_PEMBELIAN, "INSERT TO RETURN PURCHASE DETAIL");
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
@@ -988,7 +995,7 @@ namespace RoyalPetz_ADMIN
             else
                 moduleType = "RETUR PERMINTAAN";
 
-            sqlCommandx = "SELECT '"+ moduleType + "' AS MODULE_TYPE, RPH.RP_ID, IFNULL(MS.SUPPLIER_FULL_NAME, 'HQ PUSAT'), RPH.RP_DATE, RPH.RP_TOTAL, MP.PRODUCT_NAME, RPD.PRODUCT_BASEPRICE, RPD.PRODUCT_QTY, RPD.RP_DESCRIPTION, RPD.RP_SUBTOTAL " +
+            sqlCommandx = "SELECT '"+ moduleType + "' AS MODULE_TYPE, RPH.RP_ID as 'NO_RETUR', IFNULL(MS.SUPPLIER_FULL_NAME, 'HQ PUSAT') AS 'NAME', RPH.RP_DATE AS 'RETUR_DATE', RPH.RP_TOTAL AS 'RETUR_TOTAL', MP.PRODUCT_NAME AS 'PRODUCT_NAME', RPD.PRODUCT_BASEPRICE AS 'PRICE', RPD.PRODUCT_QTY AS 'QTY', RPD.RP_DESCRIPTION AS 'DESC', RPD.RP_SUBTOTAL AS 'SUBTOTAL' " +
                                      "FROM RETURN_PURCHASE_HEADER RPH LEFT OUTER JOIN MASTER_SUPPLIER MS ON RPH.SUPPLIER_ID = MS.SUPPLIER_ID, MASTER_PRODUCT MP, RETURN_PURCHASE_DETAIL RPD " +
                                      "WHERE RPD.RP_ID = RPH.RP_ID AND RPD.PRODUCT_ID = MP.PRODUCT_ID AND RPH.RP_ID = '"+returNo+"'";
            

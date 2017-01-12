@@ -133,7 +133,7 @@ namespace RoyalPetz_ADMIN
                     break;
             }
 
-            loadROdata();
+            //loadROdata();
         }
 
         private void dataSalesDataGridView_DoubleClick(object sender, EventArgs e)

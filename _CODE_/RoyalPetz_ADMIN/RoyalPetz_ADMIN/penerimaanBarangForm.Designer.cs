@@ -298,7 +298,7 @@
             this.labelTanggal.AutoSize = true;
             this.labelTanggal.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTanggal.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.labelTanggal.Location = new System.Drawing.Point(490, 52);
+            this.labelTanggal.Location = new System.Drawing.Point(493, 52);
             this.labelTanggal.Name = "labelTanggal";
             this.labelTanggal.Size = new System.Drawing.Size(116, 18);
             this.labelTanggal.TabIndex = 20;
