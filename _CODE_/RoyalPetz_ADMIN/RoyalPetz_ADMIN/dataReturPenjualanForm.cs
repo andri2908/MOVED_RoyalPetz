@@ -83,8 +83,9 @@ namespace RoyalPetz_ADMIN
                 invoiceTotalLabelValue.Visible = false;
                 invoiceSignLabel.Visible = false;
                 selectedCustomerID = customerID;
+                label2.Visible = false;
 
-                invoiceInfoLabel.Text = "NAMA PELANGGAN";
+                invoiceInfoLabel.Text = "PELANGGAN";
             }
             else
             {
@@ -1103,18 +1104,19 @@ namespace RoyalPetz_ADMIN
                 DateTime checkDate;
                 string productID = "";
                 // CHECK VALIDITY OF EXPIRED DATE 
-                for (i = 0; i < detailReturDataGridView.Rows.Count && dataValid; i++)
+                for (i = 0; i < detailReturDataGridView.Rows.Count-1 && dataValid; i++)
                 {
-                    if (null != detailReturDataGridView.Rows[i].Cells["expiryDateValue"].Value)
-                        dataValid = true;
-                    else
-                        dataValid = false;
-
-                    if (dataValid)
+                    if (null != detailReturDataGridView.Rows[i].Cells["productID"].Value)
                     {
-                        productID = detailReturDataGridView.Rows[i].Cells["expiryDateValue"].Value.ToString();
-                        checkDate = Convert.ToDateTime(detailReturDataGridView.Rows[i].Cells["expiryDateValue"].Value);
-                        if (!expUtil.isExpiryDateExist(checkDate, productID))
+                        if (null != detailReturDataGridView.Rows[i].Cells["expiryDateValue"].Value)
+                        {
+                            productID = detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString();
+                            checkDate = Convert.ToDateTime(detailReturDataGridView.Rows[i].Cells["expiryDateValue"].Value);
+
+                            if (!expUtil.isExpiryDateExist(checkDate, productID))
+                                dataValid = false;
+                        }
+                        else
                             dataValid = false;
                     }
                 }
@@ -1337,7 +1339,7 @@ namespace RoyalPetz_ADMIN
 
                         if (dt.Rows.Count > 0)
                         {
-                            gutil.saveSystemDebugLog(globalConstants.MENU_RETUR_PENJUALAN, "AMOUNT OF RETUR ["+ returNominal + "] NUM OF OUTSTANDING CREDIT [" + dt.Rows.Count + "]");
+                            gutil.saveSystemDebugLog(globalConstants.MENU_RETUR_PENJUALAN, "AMOUNT OF RETUR [" + returNominal + "] NUM OF OUTSTANDING CREDIT [" + dt.Rows.Count + "]");
                             rowCounter = 0;
                             while (returNominal > 0 && rowCounter < dt.Rows.Count)
                             {
@@ -1377,13 +1379,13 @@ namespace RoyalPetz_ADMIN
                                         throw internalEX;
 
                                     // UPDATE SALES HEADER TABLE
-                                    sqlCommand = "UPDATE SALES_HEADER SET SALES_PAID = 1 WHERE SALES_INVOICE = " + currentSalesInvoice;
+                                    sqlCommand = "UPDATE SALES_HEADER SET SALES_PAID = 1 WHERE SALES_INVOICE = '" + currentSalesInvoice + "'";
                                     gutil.saveSystemDebugLog(globalConstants.MENU_RETUR_PENJUALAN, "UPDATE SALES_HEADER [" + currentSalesInvoice + "] TO FULLY PAID");
                                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                         throw internalEX;
 
                                     // UPDATE SALES HEADER TAX TABLE
-                                    sqlCommand = "UPDATE SALES_HEADER_TAX SET SALES_PAID = 1 WHERE ORIGIN_SALES_INVOICE = " + currentSalesInvoice;
+                                    sqlCommand = "UPDATE SALES_HEADER_TAX SET SALES_PAID = 1 WHERE ORIGIN_SALES_INVOICE = '" + currentSalesInvoice + "'";
                                     gutil.saveSystemDebugLog(globalConstants.MENU_RETUR_PENJUALAN, "UPDATE SALES_HEADER_TAX [" + currentSalesInvoice + "] TO FULLY PAID");
                                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                         throw internalEX;
@@ -1395,7 +1397,10 @@ namespace RoyalPetz_ADMIN
                                 rowCounter += 1;
                                 gutil.saveSystemDebugLog(globalConstants.MENU_RETUR_PENJUALAN, "rowCounter [" + rowCounter + "]");
                             }
+                            extraAmount = returNominal;
                         }
+                        else
+                            extraAmount = globalTotalValue;
                     }
                 }
 
@@ -1658,6 +1663,7 @@ namespace RoyalPetz_ADMIN
                 DialogResult result;
                 printPreviewDialog1.Width = 512;
                 printPreviewDialog1.Height = 768;
+
                 result = printPreviewDialog1.ShowDialog();
                 if (result == DialogResult.OK)
                 {
@@ -1703,7 +1709,12 @@ namespace RoyalPetz_ADMIN
 
             if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
             {
-                if (DialogResult.Yes == MessageBox.Show("RETUR BERUPA UANG CASH?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                if (selectedCustomerID != 0)
+                {
+                    if (DialogResult.Yes == MessageBox.Show("RETUR BERUPA UANG CASH?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                        returnCash = true;
+                }
+                else
                     returnCash = true;
 
                 gutil.saveSystemDebugLog(globalConstants.MENU_RETUR_PENJUALAN_STOK, "RETURN CASH [" + returnCash.ToString() + "]");
@@ -1851,9 +1862,9 @@ namespace RoyalPetz_ADMIN
 
             DS.mySqlConnect();
             //load customer id
-            sqlCommand = "SELECT RS.RS_INVOICE, IFNULL(RS.SALES_INVOICE, '') AS 'INVOICE', C.CUSTOMER_FULL_NAME AS 'CUSTOMER', DATE_FORMAT(RS.RS_DATETIME, '%d-%M-%Y') AS 'DATE', RS.RS_TOTAL AS 'TOTAL', IF(C.CUSTOMER_GROUP=1,'RETAIL',IF(C.CUSTOMER_GROUP=2,'GROSIR','PARTAI')) AS 'GROUP' FROM RETURN_SALES_HEADER RS,MASTER_CUSTOMER C WHERE RS.CUSTOMER_ID = C.CUSTOMER_ID AND RS.RS_INVOICE = '" + returID + "'" +
+            sqlCommand = "SELECT RS.RS_INVOICE, IFNULL(RS.SALES_INVOICE, ' ') AS 'INVOICE', C.CUSTOMER_FULL_NAME AS 'CUSTOMER', DATE_FORMAT(RS.RS_DATETIME, '%d-%M-%Y') AS 'DATE', RS.RS_TOTAL AS 'TOTAL', IF(C.CUSTOMER_GROUP=1,'RETAIL',IF(C.CUSTOMER_GROUP=2,'GROSIR','PARTAI')) AS 'GROUP' FROM RETURN_SALES_HEADER RS,MASTER_CUSTOMER C WHERE RS.CUSTOMER_ID = C.CUSTOMER_ID AND RS.RS_INVOICE = '" + returID + "'" +
                 " UNION " +
-                "SELECT RS.RS_INVOICE, RS.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', DATE_FORMAT(RS.RS_DATETIME, '%d-%M-%Y') AS 'DATE', RS.RS_TOTAL AS 'TOTAL', 'RETAIL' AS 'GROUP' FROM RETURN_SALES_HEADER RS WHERE RS.CUSTOMER_ID = 0 AND RS.RS_INVOICE = '" + returID+ "'" +
+                "SELECT RS.RS_INVOICE, IFNULL(RS.SALES_INVOICE, ' ') AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', DATE_FORMAT(RS.RS_DATETIME, '%d-%M-%Y') AS 'DATE', RS.RS_TOTAL AS 'TOTAL', 'RETAIL' AS 'GROUP' FROM RETURN_SALES_HEADER RS WHERE RS.CUSTOMER_ID = 0 AND RS.RS_INVOICE = '" + returID+ "'" +
                 "ORDER BY DATE ASC";
             using (rdr = DS.getData(sqlCommand))
             {

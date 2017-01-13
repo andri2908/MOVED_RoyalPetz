@@ -641,6 +641,7 @@ namespace RoyalPetz_ADMIN
 
         private void TextBox_KeyUp(object sender, KeyEventArgs e)
         {
+
             if (forceUpOneLevel)
             {
                 int pos = detailReturDataGridView.CurrentCell.RowIndex;

@@ -197,11 +197,11 @@ namespace RoyalPetz_ADMIN
             // accessed from other form other than Master -> Data Produk
             // it means that this form is only displayed for browsing / searching purpose only
             newButton.Visible = false;
+            returJualSearchParam = searchParam;
 
             namaProdukTextBox.Text = productName;
             kodeProductTextBox.Text = productID;
             selectedRowIndex = rowIndex;
-            returJualSearchParam = searchParam;
         }
 
         public dataProdukForm(int moduleID, dataReturPermintaanForm thisParentForm, string productID = "", string productName = "", int rowIndex = -1)
@@ -441,7 +441,7 @@ namespace RoyalPetz_ADMIN
             }
             else if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
             {
-                sqlCommand = "SELECT M.ID, M.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' " +
+                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' " +
                                     "FROM MASTER_PRODUCT MP, SALES_DETAIL SD, SALES_HEADER SH " +
                                     "WHERE SH.SALES_INVOICE = SD.SALES_INVOICE AND SD.PRODUCT_ID = MP.PRODUCT_ID AND SH.CUSTOMER_ID = " + Convert.ToInt32(returJualSearchParam) + " AND MP.PRODUCT_IS_SERVICE = 0 " + showactive +
                                     "AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" +

@@ -805,6 +805,8 @@ namespace RoyalPetz_ADMIN
             cashierDataGridView.Select();
             cashierDataGridView.BeginEdit(true);
 
+            //Force_KeyUp();
+
             //comboSelectedIndexChangeMethod(rowSelectedIndex, i, selectedRow);
             //cashierDataGridView.CurrentCell = cashierDataGridView.Rows[rowSelectedIndex].Cells["qty"];
         }
@@ -1489,7 +1491,6 @@ namespace RoyalPetz_ADMIN
             {
                 TextBox productIDTextBox = e.Control as TextBox;
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
-                productIDTextBox.KeyPress += TextBox_KeyPress;
                 productIDTextBox.PreviewKeyDown += Combobox_previewKeyDown;
                 productIDTextBox.KeyUp += Combobox_KeyUp;
                 productIDTextBox.AutoCompleteMode = AutoCompleteMode.None;
@@ -1500,50 +1501,11 @@ namespace RoyalPetz_ADMIN
             {
                 TextBox productNameTextBox = e.Control as TextBox;
                 productNameTextBox.CharacterCasing = CharacterCasing.Upper;
-                productNameTextBox.KeyPress += TextBox_KeyPress;
                 productNameTextBox.PreviewKeyDown += productName_previewKeyDown;
-                productNameTextBox.KeyUp += Combobox_KeyUp;
                 productNameTextBox.AutoCompleteMode = AutoCompleteMode.None;//SuggestAppend;
-//                productNameTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-//                setTextBoxCustomSource(productNameTextBox);
-            }
 
-            if (
-                (cashierDataGridView.CurrentCell.OwningColumn.Name == "productPrice" || cashierDataGridView.CurrentCell.OwningColumn.Name == "qty" || cashierDataGridView.CurrentCell.OwningColumn.Name == "disc1" || cashierDataGridView.CurrentCell.OwningColumn.Name == "disc2" || cashierDataGridView.CurrentCell.OwningColumn.Name == "discRP")
-                && e.Control is TextBox)
-            {
-                TextBox textBox = e.Control as TextBox;
-                //textBox.KeyPress += TextBox_KeyPress;
-                //textBox.KeyDown += TextBox_KeyDown;
-                //textBox.KeyUp += TextBox_KeyUp;
-                //textBox.TextChanged += QTY_textBox_TextChanged;
-                textBox.AutoCompleteMode = AutoCompleteMode.None;
+                productNameTextBox.KeyUp += Combobox_KeyUp;
             }
-
-            /*
-            // -=
-            if ((cashierDataGridView.CurrentCell.OwningColumn.Name == "productID")
-                && e.Control is TextBox)
-            {
-                TextBox productIDTextBox = e.Control as TextBox;
-                productIDTextBox.TextChanged -= TextBox_TextChanged;
-            }
-
-            if ((cashierDataGridView.CurrentCell.OwningColumn.Name == "productName")
-                && e.Control is TextBox)
-            {
-                TextBox productNameTextBox = e.Control as TextBox;
-                productNameTextBox.TextChanged -= TextBox_TextChanged;
-            }
-
-            if (
-                (cashierDataGridView.CurrentCell.OwningColumn.Name == "productPrice" || cashierDataGridView.CurrentCell.OwningColumn.Name == "qty" || cashierDataGridView.CurrentCell.OwningColumn.Name == "disc1" || cashierDataGridView.CurrentCell.OwningColumn.Name == "disc2" || cashierDataGridView.CurrentCell.OwningColumn.Name == "discRP")
-                && e.Control is TextBox)
-            {
-                TextBox textBox = e.Control as TextBox;
-                textBox.PreviewKeyDown -= Combobox_previewKeyDown;
-            }
-            */
         }
 
         private void clearUpSomeRowContents(DataGridViewRow selectedRow, int rowSelectedIndex)
@@ -1690,11 +1652,11 @@ namespace RoyalPetz_ADMIN
         {
             gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [" + cashierDataGridView.CurrentCell.OwningColumn.Name + "]");
 
-            if (forceUpOneLevel)
+            if (forceUpOneLevel && e.KeyCode == Keys.Enter)
             {
                 int pos = cashierDataGridView.CurrentCell.RowIndex;
 
-                if (pos>0)
+                if (pos > 0)
                     cashierDataGridView.CurrentCell = cashierDataGridView.Rows[pos - 1].Cells["qty"];
 
                 forceUpOneLevel = false;
@@ -1720,12 +1682,15 @@ namespace RoyalPetz_ADMIN
 
                 if (currentValue.Length > 0)
                 {
+                    forceUpOneLevel = true;
+
                     // CALL DATA PRODUK FORM WITH PARAMETER 
                     dataProdukForm browseProduk = new dataProdukForm(globalConstants.CASHIER_MODULE, this, currentValue, "", rowSelectedIndex);
                     browseProduk.ShowDialog(this);
                     //updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
                     //cashierDataGridView.CurrentCell = selectedRow.Cells["qty"];
-                    forceUpOneLevel = true;
+
+                    //Force_KeyUp(rowSelectedIndex);
                 }
                 else
                 {
@@ -1734,10 +1699,6 @@ namespace RoyalPetz_ADMIN
             }
         }
 
-        private void TextBox_KeyPress(Object o, KeyPressEventArgs e)
-        {
-        }
-        
         private void productName_previewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             string currentValue = "";
@@ -1757,12 +1718,15 @@ namespace RoyalPetz_ADMIN
 
                 if (currentValue.Length > 0)
                 {
+                    forceUpOneLevel = true;
+
                     // CALL DATA PRODUK FORM WITH PARAMETER 
                     dataProdukForm browseProduk = new dataProdukForm(globalConstants.CASHIER_MODULE, this, "", currentValue, rowSelectedIndex);
                     browseProduk.ShowDialog(this);
                     //updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue, false);
                     //cashierDataGridView.CurrentCell = selectedRow.Cells["qty"];
-                    forceUpOneLevel = true;
+
+                    //Force_KeyUp(rowSelectedIndex);
                 }
                 else
                 {
