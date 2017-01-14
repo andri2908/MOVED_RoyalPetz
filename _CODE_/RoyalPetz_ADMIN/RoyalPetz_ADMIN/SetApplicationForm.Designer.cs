@@ -324,6 +324,7 @@
             this.AlamatTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AlamatTextbox.Location = new System.Drawing.Point(6, 19);
             this.AlamatTextbox.Name = "AlamatTextbox";
+            this.AlamatTextbox.ReadOnly = true;
             this.AlamatTextbox.Size = new System.Drawing.Size(414, 27);
             this.AlamatTextbox.TabIndex = 2;
             // 
@@ -344,6 +345,7 @@
             this.NamaTokoTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NamaTokoTextbox.Location = new System.Drawing.Point(6, 19);
             this.NamaTokoTextbox.Name = "NamaTokoTextbox";
+            this.NamaTokoTextbox.ReadOnly = true;
             this.NamaTokoTextbox.Size = new System.Drawing.Size(414, 27);
             this.NamaTokoTextbox.TabIndex = 2;
             // 

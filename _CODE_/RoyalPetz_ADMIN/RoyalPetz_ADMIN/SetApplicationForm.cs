@@ -105,6 +105,7 @@ namespace RoyalPetz_ADMIN
                 serverIPRadioButton.Checked = true;
             }*/
         }
+
         private bool checkActiveSetting(int opt)
         {
             bool rslt = false;
@@ -122,6 +123,7 @@ namespace RoyalPetz_ADMIN
             }
             return rslt;
         }
+
         private void loadSettingDB(int opt)
         {
             MySqlDataReader rdr;
