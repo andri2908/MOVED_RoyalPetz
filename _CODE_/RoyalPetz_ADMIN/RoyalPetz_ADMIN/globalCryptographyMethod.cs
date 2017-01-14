@@ -93,7 +93,93 @@ namespace RoyalPetz_ADMIN
                 return null;
             }
         }
-		
+
+        public byte[] RSADecrypt(byte[] DataToDecrypt, bool DoOAEPPadding, RSACryptoServiceProvider rsaProvider)
+        {
+            try
+            {
+                byte[] decryptedData;
+                //RSA = GetKeyFromContainer("POS_CONTAINER");
+                //Create a new instance of RSACryptoServiceProvider.
+                //using ()
+                {
+                    //Import the RSA Key information. This needs
+                    //to include the private key information.
+
+                    //Decrypt the passed byte array and specify OAEP padding.  
+                    //OAEP padding is only available on Microsoft Windows XP or
+                    //later.  
+                    decryptedData = rsaProvider.Decrypt(DataToDecrypt, DoOAEPPadding);
+                }
+                return decryptedData;
+            }
+            //Catch and display a CryptographicException  
+            //to the console.
+            catch (CryptographicException e)
+            {
+                Console.WriteLine(e.ToString());
+
+                return null;
+            }
+        }
+
+        public bool checkVolumeLicense(string filePath, ref string storeName, ref string storeAddress)
+        {
+            bool result = false;
+            byte[] encryptedData;
+            byte[] decryptedData;
+            CspParameters cspParams = null;
+            RSACryptoServiceProvider rsaProvider = null;
+            StreamReader privateKeyFile = null;
+            string privateKeyText = "";
+            string decryptedKeyword;
+            string decryptedName;
+            string decryptedAddress;
+
+            // Select target CSP
+            cspParams = new CspParameters();
+            cspParams.ProviderType = 1; // PROV_RSA_FULL
+
+            //cspParams.ProviderName; // CSP name
+            rsaProvider = new RSACryptoServiceProvider(cspParams);
+
+            // Read private/public key pair from file
+            privateKeyFile = File.OpenText("privateKey.xml");
+            privateKeyText = privateKeyFile.ReadToEnd();
+
+            // Import private/public key pair
+            rsaProvider.FromXmlString(privateKeyText);
+
+            UnicodeEncoding ByteConverter = new UnicodeEncoding();
+            try
+            {
+                encryptedData = File.ReadAllBytes(filePath);
+                decryptedData = RSADecrypt(encryptedData, false, rsaProvider);
+
+                string[] decryptedText = ByteConverter.GetString(decryptedData).Split('#');
+
+                decryptedKeyword = decryptedText[0];
+                decryptedName = decryptedText[1];
+                decryptedAddress = decryptedText[2];
+
+                if (decryptedKeyword == globalConstants.VOL_LICENSE_KEYWORD)
+                {
+                    //gUtil.setStoreInformationFromLicense(decryptedName, decryptedAddress);
+                    storeName = decryptedName;
+                    storeAddress = decryptedAddress;
+                    result = true;
+                }
+                else
+                    result = false;
+            }
+            catch (Exception e)
+            {
+                result = false;
+            }
+
+            return result;
+        }
+
 		public bool checkLicenseFile(string filePath)
         {
             byte[] encryptedData;
@@ -102,6 +188,7 @@ namespace RoyalPetz_ADMIN
             bool result = false;
 			RSAParameters rsaKeyInfo;	
             UnicodeEncoding ByteConverter = new UnicodeEncoding();
+
             try
             {
                 encryptedData = File.ReadAllBytes(filePath);
@@ -119,7 +206,7 @@ namespace RoyalPetz_ADMIN
             catch(Exception e)
             {
             }
-
+            
             return result;
         }
 		

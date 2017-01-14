@@ -8,7 +8,10 @@ namespace RoyalPetz_ADMIN
 {
     class globalFeatureList
     {
-        public const int EXPIRY_MODULE = 1;
+        public const int VOLUME_LICENSE = 1;
 
+
+
+        public const int EXPIRY_MODULE = 1;
     }
 }

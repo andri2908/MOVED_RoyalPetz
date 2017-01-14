@@ -595,5 +595,37 @@ namespace RoyalPetz_ADMIN
 
             return result;
         }
+
+        public void setStoreInformationFromLicense(string storeName, string storeAddress)
+        {
+            string sqlCommand = "SELECT COUNT(1) FROM SYS_CONFIG";
+            int rowCount = 0;
+
+            DS.mySqlConnect();
+
+            rowCount = Convert.ToInt32(DS.getDataSingleValue(sqlCommand));
+            if (rowCount <2)
+            {
+                // INSERT STORE INFORMATION FROM LICENSE FILE
+                sqlCommand = "INSERT INTO SYS_CONFIG (STORE_NAME, STORE_ADDRESS) VALUES ('" + storeName + "', '" + storeAddress + "')";
+            }
+            else
+            {
+                sqlCommand = "UPDATE SYS_CONFIG SET STORE_NAME = '" + storeName + "', STORE_ADDRESS = '" + storeAddress + "' WHERE ID = 2";
+            }
+
+            DS.beginTransaction();
+            try
+            {
+                DS.executeNonQueryCommand(sqlCommand);
+
+                DS.commit();
+            }
+            catch (Exception ex)
+            {
+                saveSystemDebugLog(0, "SAVE STORE INFORMATION FROM LICENSE ERROR [" + ex.Message + "]");
+            }
+
+        }
     }
 }

@@ -21,6 +21,8 @@ namespace RoyalPetz_ADMIN
         private globalCryptographyMethod gCrypto = new globalCryptographyMethod();
         private string licenseFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\license.lic";//Application.StartupPath + "\\license.lic";
 
+        private string decryptedName = "", decryptedAddress = "";
+
         private int selectedUserID = 0;
         private int selectedUserGroupID = 0;
         private int originModuleID = 0;
@@ -219,10 +221,21 @@ namespace RoyalPetz_ADMIN
 
             gutil.reArrangeTabOrder(this);
 
-            if (!gCrypto.checkLicenseFile(licenseFilePath))
+            if (globalFeatureList.VOLUME_LICENSE == 1)
             {
-                gutil.showError("LICENSE FILE NOT FOUND");
-                Application.Exit();
+                if (!gCrypto.checkVolumeLicense(licenseFilePath, ref decryptedName, ref decryptedAddress))
+                {
+                    gutil.showError("LICENSE FILE NOT FOUND");
+                    Application.Exit();
+                }
+            }
+            else
+            { 
+                if (!gCrypto.checkLicenseFile(licenseFilePath))
+                {
+                    gutil.showError("LICENSE FILE NOT FOUND");
+                    Application.Exit();
+                }
             }
 
             if (!DS.firstMySqlConnect()) //one time checked at load application
@@ -232,6 +245,8 @@ namespace RoyalPetz_ADMIN
                 createConfigFileForm displayedForm = new createConfigFileForm();
                 displayedForm.ShowDialog();
             }
+
+            gutil.setStoreInformationFromLicense(decryptedName, decryptedAddress);
         }
         
         private void userNameTextBox_KeyPress(object sender, KeyPressEventArgs e)
