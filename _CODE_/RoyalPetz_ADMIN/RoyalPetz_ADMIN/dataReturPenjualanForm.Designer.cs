@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(dataReturPenjualanForm));
             this.label4 = new System.Windows.Forms.Label();
             this.invoiceInfoLabel = new System.Windows.Forms.Label();
@@ -58,9 +58,11 @@
             this.ChangePrinterButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.detailReturDataGridView)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label4
@@ -68,7 +70,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(142, 16);
+            this.label4.Location = new System.Drawing.Point(191, 49);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(14, 18);
             this.label4.TabIndex = 10;
@@ -79,17 +81,17 @@
             this.invoiceInfoLabel.AutoSize = true;
             this.invoiceInfoLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.invoiceInfoLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.invoiceInfoLabel.Location = new System.Drawing.Point(6, 49);
+            this.invoiceInfoLabel.Location = new System.Drawing.Point(6, 61);
             this.invoiceInfoLabel.Name = "invoiceInfoLabel";
-            this.invoiceInfoLabel.Size = new System.Drawing.Size(118, 18);
+            this.invoiceInfoLabel.Size = new System.Drawing.Size(77, 18);
             this.invoiceInfoLabel.TabIndex = 19;
-            this.invoiceInfoLabel.Text = "NO INVOICE";
+            this.invoiceInfoLabel.Text = "NOMOR";
             // 
             // noReturTextBox
             // 
             this.noReturTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.noReturTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noReturTextBox.Location = new System.Drawing.Point(170, 13);
+            this.noReturTextBox.Location = new System.Drawing.Point(211, 46);
             this.noReturTextBox.Name = "noReturTextBox";
             this.noReturTextBox.Size = new System.Drawing.Size(225, 27);
             this.noReturTextBox.TabIndex = 16;
@@ -100,7 +102,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label11.Location = new System.Drawing.Point(491, 16);
+            this.label11.Location = new System.Drawing.Point(6, 16);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(160, 18);
             this.label11.TabIndex = 20;
@@ -111,7 +113,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label12.Location = new System.Drawing.Point(6, 16);
+            this.label12.Location = new System.Drawing.Point(6, 49);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(102, 18);
             this.label12.TabIndex = 29;
@@ -122,7 +124,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(142, 49);
+            this.label6.Location = new System.Drawing.Point(115, 64);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(14, 18);
             this.label6.TabIndex = 12;
@@ -132,7 +134,7 @@
             // 
             this.rsDateTimePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rsDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.rsDateTimePicker.Location = new System.Drawing.Point(696, 13);
+            this.rsDateTimePicker.Location = new System.Drawing.Point(211, 13);
             this.rsDateTimePicker.Name = "rsDateTimePicker";
             this.rsDateTimePicker.Size = new System.Drawing.Size(178, 27);
             this.rsDateTimePicker.TabIndex = 55;
@@ -142,7 +144,7 @@
             // invoiceInfoTextBox
             // 
             this.invoiceInfoTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoiceInfoTextBox.Location = new System.Drawing.Point(170, 46);
+            this.invoiceInfoTextBox.Location = new System.Drawing.Point(135, 58);
             this.invoiceInfoTextBox.Name = "invoiceInfoTextBox";
             this.invoiceInfoTextBox.ReadOnly = true;
             this.invoiceInfoTextBox.Size = new System.Drawing.Size(225, 27);
@@ -153,19 +155,19 @@
             this.invoiceDateLabel.AutoSize = true;
             this.invoiceDateLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.invoiceDateLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.invoiceDateLabel.Location = new System.Drawing.Point(491, 49);
+            this.invoiceDateLabel.Location = new System.Drawing.Point(6, 27);
             this.invoiceDateLabel.Name = "invoiceDateLabel";
-            this.invoiceDateLabel.Size = new System.Drawing.Size(176, 18);
+            this.invoiceDateLabel.Size = new System.Drawing.Size(93, 18);
             this.invoiceDateLabel.TabIndex = 20;
-            this.invoiceDateLabel.Text = "TANGGAL INVOICE\r\n";
+            this.invoiceDateLabel.Text = "TANGGAL";
             // 
             // invoiceDateTextBox
             // 
             this.invoiceDateTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.invoiceDateTextBox.Location = new System.Drawing.Point(696, 46);
+            this.invoiceDateTextBox.Location = new System.Drawing.Point(135, 24);
             this.invoiceDateTextBox.Name = "invoiceDateTextBox";
             this.invoiceDateTextBox.ReadOnly = true;
-            this.invoiceDateTextBox.Size = new System.Drawing.Size(178, 27);
+            this.invoiceDateTextBox.Size = new System.Drawing.Size(225, 27);
             this.invoiceDateTextBox.TabIndex = 21;
             // 
             // invoiceTotalLabelValue
@@ -173,7 +175,7 @@
             this.invoiceTotalLabelValue.AutoSize = true;
             this.invoiceTotalLabelValue.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.invoiceTotalLabelValue.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.invoiceTotalLabelValue.Location = new System.Drawing.Point(162, 84);
+            this.invoiceTotalLabelValue.Location = new System.Drawing.Point(135, 88);
             this.invoiceTotalLabelValue.Name = "invoiceTotalLabelValue";
             this.invoiceTotalLabelValue.Size = new System.Drawing.Size(83, 29);
             this.invoiceTotalLabelValue.TabIndex = 49;
@@ -205,23 +207,23 @@
             // 
             this.detailReturDataGridView.AllowUserToDeleteRows = false;
             this.detailReturDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.detailReturDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.detailReturDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.detailReturDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.detailReturDataGridView.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.detailReturDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.detailReturDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.detailReturDataGridView.Location = new System.Drawing.Point(2, 208);
             this.detailReturDataGridView.MultiSelect = false;
@@ -246,7 +248,7 @@
             this.invoiceTotalLabel.AutoSize = true;
             this.invoiceTotalLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.invoiceTotalLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.invoiceTotalLabel.Location = new System.Drawing.Point(6, 93);
+            this.invoiceTotalLabel.Location = new System.Drawing.Point(6, 97);
             this.invoiceTotalLabel.Name = "invoiceTotalLabel";
             this.invoiceTotalLabel.Size = new System.Drawing.Size(68, 18);
             this.invoiceTotalLabel.TabIndex = 51;
@@ -257,7 +259,7 @@
             this.invoiceSignLabel.AutoSize = true;
             this.invoiceSignLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.invoiceSignLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.invoiceSignLabel.Location = new System.Drawing.Point(142, 93);
+            this.invoiceSignLabel.Location = new System.Drawing.Point(115, 97);
             this.invoiceSignLabel.Name = "invoiceSignLabel";
             this.invoiceSignLabel.Size = new System.Drawing.Size(14, 18);
             this.invoiceSignLabel.TabIndex = 52;
@@ -268,7 +270,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label8.Location = new System.Drawing.Point(142, 131);
+            this.label8.Location = new System.Drawing.Point(191, 86);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(14, 18);
             this.label8.TabIndex = 54;
@@ -279,7 +281,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label7.Location = new System.Drawing.Point(6, 131);
+            this.label7.Location = new System.Drawing.Point(6, 86);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(135, 18);
             this.label7.TabIndex = 53;
@@ -290,7 +292,7 @@
             this.totalLabel.AutoSize = true;
             this.totalLabel.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.totalLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.totalLabel.Location = new System.Drawing.Point(162, 122);
+            this.totalLabel.Location = new System.Drawing.Point(211, 77);
             this.totalLabel.Name = "totalLabel";
             this.totalLabel.Size = new System.Drawing.Size(83, 29);
             this.totalLabel.TabIndex = 55;
@@ -325,24 +327,16 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.ChangePrinterButton);
             this.groupBox1.Controls.Add(this.totalLabel);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.invoiceTotalLabelValue);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.invoiceDateTextBox);
-            this.groupBox1.Controls.Add(this.invoiceSignLabel);
-            this.groupBox1.Controls.Add(this.invoiceTotalLabel);
             this.groupBox1.Controls.Add(this.rsDateTimePicker);
-            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.invoiceDateLabel);
-            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.invoiceInfoTextBox);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.noReturTextBox);
-            this.groupBox1.Controls.Add(this.invoiceInfoLabel);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Location = new System.Drawing.Point(2, 37);
             this.groupBox1.Name = "groupBox1";
@@ -354,7 +348,7 @@
             // 
             this.ChangePrinterButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChangePrinterButton.ForeColor = System.Drawing.Color.Black;
-            this.ChangePrinterButton.Location = new System.Drawing.Point(494, 115);
+            this.ChangePrinterButton.Location = new System.Drawing.Point(6, 125);
             this.ChangePrinterButton.Name = "ChangePrinterButton";
             this.ChangePrinterButton.Size = new System.Drawing.Size(158, 34);
             this.ChangePrinterButton.TabIndex = 54;
@@ -367,7 +361,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Location = new System.Drawing.Point(676, 49);
+            this.label2.Location = new System.Drawing.Point(115, 27);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(14, 18);
             this.label2.TabIndex = 31;
@@ -378,11 +372,30 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(676, 16);
+            this.label1.Location = new System.Drawing.Point(191, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(14, 18);
             this.label1.TabIndex = 30;
             this.label1.Text = ":";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.invoiceDateLabel);
+            this.groupBox2.Controls.Add(this.invoiceInfoTextBox);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.invoiceTotalLabelValue);
+            this.groupBox2.Controls.Add(this.invoiceDateTextBox);
+            this.groupBox2.Controls.Add(this.invoiceInfoLabel);
+            this.groupBox2.Controls.Add(this.invoiceSignLabel);
+            this.groupBox2.Controls.Add(this.invoiceTotalLabel);
+            this.groupBox2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(511, 13);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(374, 133);
+            this.groupBox2.TabIndex = 56;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "INVOICE";
             // 
             // dataReturPenjualanForm
             // 
@@ -408,6 +421,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.detailReturDataGridView)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -441,5 +456,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button ChangePrinterButton;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
