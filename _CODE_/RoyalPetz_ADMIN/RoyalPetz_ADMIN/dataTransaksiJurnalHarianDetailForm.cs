@@ -90,10 +90,13 @@ namespace RoyalPetz_ADMIN
 
         private void unregisterGlobalHotkey()
         {
-            ghk_UP.Unregister();
-            ghk_DOWN.Unregister();
+            if (navKeyRegistered)
+            { 
+                ghk_UP.Unregister();
+                ghk_DOWN.Unregister();
 
-            navKeyRegistered = false;
+                navKeyRegistered = false;
+            }
         }
 
         private void loadtypeaccount()

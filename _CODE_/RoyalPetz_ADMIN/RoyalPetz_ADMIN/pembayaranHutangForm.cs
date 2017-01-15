@@ -30,6 +30,8 @@ namespace RoyalPetz_ADMIN
         private bool isPaymentExceed = false;
         private int purchasePaid = 0;
 
+        private bool isNavKeyRegistered = false;
+
         private Hotkeys.GlobalHotkey ghk_UP;
         private Hotkeys.GlobalHotkey ghk_DOWN;
 
@@ -78,12 +80,19 @@ namespace RoyalPetz_ADMIN
 
             ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
             ghk_DOWN.Register();
+
+            isNavKeyRegistered = true;
         }
 
         private void unregisterGlobalHotkey()
         {
-            ghk_UP.Unregister();
-            ghk_DOWN.Unregister();
+            if (isNavKeyRegistered)
+            {
+                ghk_UP.Unregister();
+                ghk_DOWN.Unregister();
+
+                isNavKeyRegistered = false;
+            }
         }
 
         private void fillInPaymentMethod()

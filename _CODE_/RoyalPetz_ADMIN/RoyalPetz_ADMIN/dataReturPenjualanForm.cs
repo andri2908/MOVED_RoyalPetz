@@ -268,10 +268,13 @@ namespace RoyalPetz_ADMIN
 
         private void unregisterNavigationKey()
         {
-            ghk_UP.Unregister();
-            ghk_DOWN.Unregister();
+            if (navKeyRegistered)
+            { 
+                ghk_UP.Unregister();
+                ghk_DOWN.Unregister();
 
-            navKeyRegistered = false;
+                navKeyRegistered = false;
+            }
         }
 
         private void registerDelKey()
@@ -284,9 +287,12 @@ namespace RoyalPetz_ADMIN
 
         private void unregisterDelKey()
         {
-            ghk_DEL.Unregister();
+            if (delKeyRegistered)
+            { 
+                ghk_DEL.Unregister();
 
-            delKeyRegistered = false;
+                delKeyRegistered = false;
+            }
         }
 
         public void addNewRow()

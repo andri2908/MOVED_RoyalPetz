@@ -27,6 +27,8 @@ namespace RoyalPetz_ADMIN
         private bool isLoading = false;
         private double changeAmount = 0;
 
+        private bool isNavKeyRegistered = false;
+
         private Data_Access DS = new Data_Access();
         private globalUtilities gutil = new globalUtilities();
         private CultureInfo culture = new CultureInfo("id-ID");
@@ -96,12 +98,19 @@ namespace RoyalPetz_ADMIN
 
             ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
             ghk_DOWN.Register();
+
+            isNavKeyRegistered = true;
         }
 
         private void unregisterGlobalHotkey()
         {
-            ghk_UP.Unregister();
-            ghk_DOWN.Unregister();
+            if (isNavKeyRegistered)
+            { 
+                ghk_UP.Unregister();
+                ghk_DOWN.Unregister();
+
+                isNavKeyRegistered = false;
+            }
         }
 
         private void loadDataBranch()

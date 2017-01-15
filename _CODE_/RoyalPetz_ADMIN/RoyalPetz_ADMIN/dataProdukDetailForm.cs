@@ -388,9 +388,12 @@ namespace RoyalPetz_ADMIN
             DS.mySqlConnect();
 
             if (globalFeatureList.EXPIRY_MODULE == 1)
-            { 
-                productExpiryAmount = Convert.ToDouble(DS.getDataSingleValue("SELECT PRODUCT_AMOUNT FROM PRODUCT_EXPIRY WHERE ID = " + selectedProductExpiryID));
-                expDatePicker.Value = Convert.ToDateTime(DS.getDataSingleValue("SELECT PRODUCT_EXPIRY_DATE FROM PRODUCT_EXPIRY WHERE ID = " + selectedProductExpiryID));
+            {
+                if (selectedProductExpiryID > 0)
+                {
+                    productExpiryAmount = Convert.ToDouble(DS.getDataSingleValue("SELECT PRODUCT_AMOUNT FROM PRODUCT_EXPIRY WHERE ID = " + selectedProductExpiryID));
+                    expDatePicker.Value = Convert.ToDateTime(DS.getDataSingleValue("SELECT PRODUCT_EXPIRY_DATE FROM PRODUCT_EXPIRY WHERE ID = " + selectedProductExpiryID));
+                }
             }
             
             // LOAD PRODUCT DATA

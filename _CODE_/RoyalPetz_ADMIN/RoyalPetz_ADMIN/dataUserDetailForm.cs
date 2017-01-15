@@ -130,7 +130,8 @@ namespace RoyalPetz_ADMIN
             string groupName = "";
             DS.mySqlConnect();
             
-            groupName = DS.getDataSingleValue("SELECT GROUP_USER_NAME FROM MASTER_GROUP WHERE GROUP_ID = " + selectedGroupID).ToString();
+            if (selectedGroupID > 0)
+                groupName = DS.getDataSingleValue("SELECT GROUP_USER_NAME FROM MASTER_GROUP WHERE GROUP_ID = " + selectedGroupID).ToString();
 
             groupNameTextBox.Text = groupName;
         }
