@@ -826,11 +826,17 @@ namespace RoyalPetz_ADMIN
                         productPriceList[detailRequestOrderDataGridView.Rows.Count - 2] = rdr.GetString("PRODUCT_BASE_PRICE");
                         subtotalList[detailRequestOrderDataGridView.Rows.Count - 2] = rdr.GetString("PM_SUBTOTAL");
 
+
                         if (globalFeatureList.EXPIRY_MODULE == 1)
                         {
-
+                            if (detailRequestOrderDataGridView.Rows.Count >= 2)
+                            {
+                                string productExpiryDateValue = rdr.GetString("PRODUCT_EXPIRY_DATE");
+                                DataGridViewRow selectedRow = detailRequestOrderDataGridView.Rows[detailRequestOrderDataGridView.Rows.Count - 2];
+                                selectedRow.Cells["expiryDateValue"].Value = productExpiryDateValue;
+                                detailRequestOrderDataGridView.CurrentCell = selectedRow.Cells["expiryDate"];
+                            }
                         }
-
                     }
                 }
 
@@ -1717,7 +1723,7 @@ namespace RoyalPetz_ADMIN
                             string productExpiryDate = String.Format(culture, "{0:dd-MM-yyyy}", productExpiryDateValue);
 
                             sqlCommand = "INSERT INTO PRODUCTS_MUTATION_DETAIL (PM_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, PRODUCT_QTY, PM_SUBTOTAL, PRODUCT_EXPIRY_DATE) VALUES " +
-                                                "('" + noMutasi + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["hpp"].Value) + ", " + qtyApproved + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value)) + ", STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'))";
+                                                "('" + noMutasi + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(productPriceList[i]) + ", " + Convert.ToDouble(detailRequestQtyApproved[i]) + ", " + Convert.ToDouble(subtotalList[i]) + ", STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'))";
                         }
                         else
                         {

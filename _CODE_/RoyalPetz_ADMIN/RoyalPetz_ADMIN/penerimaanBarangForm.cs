@@ -575,6 +575,18 @@ namespace RoyalPetz_ADMIN
                                 detailRequestQty[detailGridView.Rows.Count - 2] = rdr.GetString("PRODUCT_QTY");
                                 detailHpp[detailGridView.Rows.Count - 2] = rdr.GetString("PRODUCT_BASE_PRICE");
                                 subtotalList[detailGridView.Rows.Count - 2] = rdr.GetString("PM_SUBTOTAL");
+
+                                if (globalFeatureList.EXPIRY_MODULE == 1)
+                                {
+                                    if (detailGridView.Rows.Count >= 2)
+                                    {
+                                        string productExpiryDateValue = rdr.GetString("PRODUCT_EXPIRY_DATE");
+                                        DataGridViewRow selectedRow = detailGridView.Rows[detailGridView.Rows.Count - 2];
+                                        selectedRow.Cells["expiryDateValue"].Value = productExpiryDateValue;
+                                        detailGridView.CurrentCell = selectedRow.Cells["expiryDate"];
+                                    }
+                                }
+
                             }
                         }
                     }
