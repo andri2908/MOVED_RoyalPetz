@@ -826,6 +826,11 @@ namespace RoyalPetz_ADMIN
                         productPriceList[detailRequestOrderDataGridView.Rows.Count - 2] = rdr.GetString("PRODUCT_BASE_PRICE");
                         subtotalList[detailRequestOrderDataGridView.Rows.Count - 2] = rdr.GetString("PM_SUBTOTAL");
 
+                        if (globalFeatureList.EXPIRY_MODULE == 1)
+                        {
+
+                        }
+
                     }
                 }
 
@@ -1184,9 +1189,21 @@ namespace RoyalPetz_ADMIN
                                 qtyApproved = 0;
 
                             if (qtyApproved > 0)
-                            { 
-                                sqlCommand = "INSERT INTO PRODUCTS_MUTATION_DETAIL (PM_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, PRODUCT_QTY, PM_SUBTOTAL) VALUES " +
-                                                    "('" + noMutasi + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["hpp"].Value) + ", " + qtyApproved + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value)) + ")";
+                            {
+
+                                if (globalFeatureList.EXPIRY_MODULE == 1)
+                                {
+                                    DateTime productExpiryDateValue = Convert.ToDateTime(detailRequestOrderDataGridView.Rows[i].Cells["expiryDateValue"].Value.ToString());
+                                    string productExpiryDate = String.Format(culture, "{0:dd-MM-yyyy}", productExpiryDateValue);
+
+                                    sqlCommand = "INSERT INTO PRODUCTS_MUTATION_DETAIL (PM_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, PRODUCT_QTY, PM_SUBTOTAL, PRODUCT_EXPIRY_DATE) VALUES " +
+                                                        "('" + noMutasi + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["hpp"].Value) + ", " + qtyApproved + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value)) + ", STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'))";
+                                }
+                                else
+                                {
+                                    sqlCommand = "INSERT INTO PRODUCTS_MUTATION_DETAIL (PM_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, PRODUCT_QTY, PM_SUBTOTAL) VALUES " +
+                                                        "('" + noMutasi + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["hpp"].Value) + ", " + qtyApproved + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value)) + ")";
+                                }
 
                                 gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "ADD DETAIL NEW MUTASI [" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + ", " + qtyApproved + "]");
                                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
@@ -1694,9 +1711,19 @@ namespace RoyalPetz_ADMIN
                 {
                     if (null != detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value)
                     {
-                        sqlCommand = "INSERT INTO PRODUCTS_MUTATION_DETAIL (PM_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, PRODUCT_QTY, PM_SUBTOTAL) VALUES " +
-                                            "('" + noMutasi + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(productPriceList[i]) + ", " + Convert.ToDouble(detailRequestQtyApproved[i]) + ", " + Convert.ToDouble(subtotalList[i]) + ")";
+                        if (globalFeatureList.EXPIRY_MODULE == 1)
+                        {
+                            DateTime productExpiryDateValue = Convert.ToDateTime(detailRequestOrderDataGridView.Rows[i].Cells["expiryDateValue"].Value.ToString());
+                            string productExpiryDate = String.Format(culture, "{0:dd-MM-yyyy}", productExpiryDateValue);
 
+                            sqlCommand = "INSERT INTO PRODUCTS_MUTATION_DETAIL (PM_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, PRODUCT_QTY, PM_SUBTOTAL, PRODUCT_EXPIRY_DATE) VALUES " +
+                                                "('" + noMutasi + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["hpp"].Value) + ", " + qtyApproved + ", " + gUtil.validateDecimalNumericInput(Convert.ToDouble(detailRequestOrderDataGridView.Rows[i].Cells["subTotal"].Value)) + ", STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'))";
+                        }
+                        else
+                        {
+                            sqlCommand = "INSERT INTO PRODUCTS_MUTATION_DETAIL (PM_INVOICE, PRODUCT_ID, PRODUCT_BASE_PRICE, PRODUCT_QTY, PM_SUBTOTAL) VALUES " +
+                                                "('" + noMutasi + "', '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "', " + Convert.ToDouble(productPriceList[i]) + ", " + Convert.ToDouble(detailRequestQtyApproved[i]) + ", " + Convert.ToDouble(subtotalList[i]) + ")";
+                        }
                         using (StreamWriter outputFile = new StreamWriter(exportedFileName, true))
                         {
                             outputFile.WriteLine(sqlCommand);

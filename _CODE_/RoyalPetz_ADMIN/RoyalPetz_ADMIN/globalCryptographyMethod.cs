@@ -144,7 +144,7 @@ namespace RoyalPetz_ADMIN
             rsaProvider = new RSACryptoServiceProvider(cspParams);
 
             // Read private/public key pair from file
-            privateKeyFile = File.OpenText("privateKey.xml");
+            privateKeyFile = File.OpenText(filePath + "privateKey.xml");
             privateKeyText = privateKeyFile.ReadToEnd();
 
             // Import private/public key pair
@@ -153,7 +153,7 @@ namespace RoyalPetz_ADMIN
             UnicodeEncoding ByteConverter = new UnicodeEncoding();
             try
             {
-                encryptedData = File.ReadAllBytes(filePath);
+                encryptedData = File.ReadAllBytes(filePath + "license.lic");
                 decryptedData = RSADecrypt(encryptedData, false, rsaProvider);
 
                 string[] decryptedText = ByteConverter.GetString(decryptedData).Split('#');

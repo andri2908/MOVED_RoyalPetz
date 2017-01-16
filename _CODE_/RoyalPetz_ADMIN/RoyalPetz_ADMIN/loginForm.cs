@@ -19,7 +19,10 @@ namespace RoyalPetz_ADMIN
         private Data_Access DS = new Data_Access();
         private globalUtilities gutil = new globalUtilities();
         private globalCryptographyMethod gCrypto = new globalCryptographyMethod();
+
         private string licenseFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\license.lic";//Application.StartupPath + "\\license.lic";
+        private string VolumeLicenseFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AlphaSoft\\";//Application.StartupPath + "\\license.lic";
+
 
         private string decryptedName = "", decryptedAddress = "";
 
@@ -223,7 +226,7 @@ namespace RoyalPetz_ADMIN
 
             if (globalFeatureList.VOLUME_LICENSE == 1)
             {
-                if (!gCrypto.checkVolumeLicense(licenseFilePath, ref decryptedName, ref decryptedAddress))
+                if (!gCrypto.checkVolumeLicense(VolumeLicenseFilePath, ref decryptedName, ref decryptedAddress))
                 {
                     gutil.showError("LICENSE FILE NOT FOUND");
                     Application.Exit();

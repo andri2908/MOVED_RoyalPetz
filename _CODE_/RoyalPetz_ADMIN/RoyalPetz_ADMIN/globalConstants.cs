@@ -8,7 +8,7 @@ namespace RoyalPetz_ADMIN
 {
     public static class globalConstants
     {
-        public const string VOL_LICENSE_KEYWORD = "alphasoft";
+        public const string VOL_LICENSE_KEYWORD = "AlphaSoft";
 
         // module ID to be used in the application       
         public const int TAMBAH_HAPUS_GROUP_USER = 2;
