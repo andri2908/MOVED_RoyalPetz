@@ -7,10 +7,10 @@
           <xs:element name="Table">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="TYPE" type="xs:string" minOccurs="0" />
-                <xs:element name="ORIGIN_INVOICE" type="xs:string" minOccurs="0" />
                 <xs:element name="TGL" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="TERIMA" type="xs:dateTime" minOccurs="0" />
                 <xs:element name="INVOICE" type="xs:string" minOccurs="0" />
+                <xs:element name="SUPPLIER" type="xs:string" minOccurs="0" />
                 <xs:element name="PRODUK" type="xs:string" minOccurs="0" />
                 <xs:element name="HARGA" type="xs:double" minOccurs="0" />
                 <xs:element name="QTY" type="xs:double" minOccurs="0" />
@@ -22,14 +22,4 @@
       </xs:complexType>
     </xs:element>
   </xs:schema>
-  <Table>
-    <TYPE>2</TYPE>
-    <ORIGIN_INVOICE>PR_13JAN</ORIGIN_INVOICE>
-    <TGL>2017-01-13T00:00:00+07:00</TGL>
-    <INVOICE>PR_13JAN</INVOICE>
-    <PRODUK>PRODUK 11 JAN</PRODUK>
-    <HARGA>10000</HARGA>
-    <QTY>200</QTY>
-    <SUBTOTAL>2000000</SUBTOTAL>
-  </Table>
 </NewDataSet>

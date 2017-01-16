@@ -113,7 +113,16 @@ namespace RoyalPetz_ADMIN
 
             DS.mySqlConnect();
 
-            using (rdr = DS.getData("SELECT * FROM MASTER_CUSTOMER WHERE CUSTOMER_ID =  " + selectedCustomerID))
+            using (rdr = DS.getData("SELECT CUSTOMER_JOINED_DATE, IFNULL(CUSTOMER_FULL_NAME, '') AS CUSTOMER_FULL_NAME, " +
+                                                "IFNULL(CUSTOMER_FULL_NAME, '') AS CUSTOMER_FULL_NAME, " +
+                                                "IFNULL(CUSTOMER_ADDRESS1, '') AS CUSTOMER_ADDRESS1, " +
+                                                "IFNULL(CUSTOMER_ADDRESS2, '') AS CUSTOMER_ADDRESS2, " +
+                                                "IFNULL(CUSTOMER_ADDRESS_CITY, '') AS CUSTOMER_ADDRESS_CITY, " +
+                                                "IFNULL(CUSTOMER_PHONE, '') AS CUSTOMER_PHONE, " +
+                                                "IFNULL(CUSTOMER_FAX, '') AS CUSTOMER_FAX, " +
+                                                "IFNULL(CUSTOMER_EMAIL, '') AS CUSTOMER_EMAIL, " +
+                                                "IFNULL(CUSTOMER_TOTAL_SALES_COUNT, '') AS CUSTOMER_TOTAL_SALES_COUNT, CUSTOMER_GROUP, CUSTOMER_ACTIVE " +
+                                                "FROM MASTER_CUSTOMER WHERE CUSTOMER_ID =  " + selectedCustomerID))
             {
                 if (rdr.HasRows)
                 {
