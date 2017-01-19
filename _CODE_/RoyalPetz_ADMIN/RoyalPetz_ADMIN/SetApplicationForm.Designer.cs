@@ -46,7 +46,6 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.EmailTextbox = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.TeleponTextbox = new System.Windows.Forms.MaskedTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.AlamatTextbox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -61,6 +60,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.branchIDBox = new System.Windows.Forms.GroupBox();
             this.BranchIDTextbox = new System.Windows.Forms.MaskedTextBox();
+            this.TeleponTextbox = new System.Windows.Forms.TextBox();
             this.ConModeBox.SuspendLayout();
             this.ipServerBox.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -297,16 +297,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Telepon";
             // 
-            // TeleponTextbox
-            // 
-            this.TeleponTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TeleponTextbox.Location = new System.Drawing.Point(6, 21);
-            this.TeleponTextbox.Mask = "999999999999999999";
-            this.TeleponTextbox.Name = "TeleponTextbox";
-            this.TeleponTextbox.Size = new System.Drawing.Size(414, 27);
-            this.TeleponTextbox.TabIndex = 3;
-            this.TeleponTextbox.Enter += new System.EventHandler(this.TeleponTextbox_Enter);
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.AlamatTextbox);
@@ -467,6 +457,16 @@
             this.BranchIDTextbox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.BranchIDTextbox.Enter += new System.EventHandler(this.BranchIDTextbox_Enter);
             // 
+            // TeleponTextbox
+            // 
+            this.TeleponTextbox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TeleponTextbox.Location = new System.Drawing.Point(6, 21);
+            this.TeleponTextbox.MaxLength = 20;
+            this.TeleponTextbox.Name = "TeleponTextbox";
+            this.TeleponTextbox.Size = new System.Drawing.Size(414, 27);
+            this.TeleponTextbox.TabIndex = 3;
+            this.TeleponTextbox.Enter += new System.EventHandler(this.TeleponTextbox_Enter);
+            // 
             // SetApplicationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -540,7 +540,7 @@
         private System.Windows.Forms.TextBox AlamatTextbox;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox NamaTokoTextbox;
-        private System.Windows.Forms.MaskedTextBox TeleponTextbox;
         private System.Windows.Forms.MaskedTextBox BranchIDTextbox;
+        private System.Windows.Forms.TextBox TeleponTextbox;
     }
 }

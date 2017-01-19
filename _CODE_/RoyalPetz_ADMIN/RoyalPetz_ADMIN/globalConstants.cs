@@ -83,6 +83,9 @@ namespace RoyalPetz_ADMIN
         public const int NEW_DJ = 503;
         public const int EDIT_DJ = 504;
         public const int COPY_NOTA = 505;
+        public const int MENU_PRODUCT_EXPIRY = 504;
+        public const int REVISI_NOTA = 504;
+
 
         // THESE CONSTANTS ARE USED TO CHECK GROUP ACCESS MODULE
         // THE VALUES MUST BE TIED TO THE VALUES INSIDE THE DATABASE TABLE
@@ -149,7 +152,7 @@ namespace RoyalPetz_ADMIN
         public const int MENU_MODULE_MESSAGING = 50;
         public const int MENU_TAX_MODULE = 51;
         public const int MENU_USB_UTILITY_MODULE = 52;
-        public const int MENU_PRODUCT_EXPIRY = 53;
+        public const int MENU_REVISI_SALES_ORDER = 53;
 
 
         // CONSTANTS FOR USER CHANGE LOG

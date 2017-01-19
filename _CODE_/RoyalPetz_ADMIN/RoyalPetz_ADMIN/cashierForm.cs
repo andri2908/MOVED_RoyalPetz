@@ -105,10 +105,10 @@ namespace RoyalPetz_ADMIN
             titleLabel.Text = posTitle;
         }
 
-        public cashierForm(string noInvoice)
+        public cashierForm(string noInvoice, int moduleID = 0)
         {
             InitializeComponent();
-            originModuleID = globalConstants.COPY_NOTA;
+            originModuleID = moduleID; //globalConstants.COPY_NOTA;
             selectedsalesinvoice = noInvoice;
             titleLabel.Text = posTitle;
         }
@@ -937,6 +937,13 @@ namespace RoyalPetz_ADMIN
             string salesDateValue = "";
             bool addToTaxTable = false;
 
+            double previousSOCashAmount = 0;
+            int loopIndex = 0;
+            MySqlDataReader rdr;
+            double prevProductAmount;
+            string prevProductID;
+            int prevLotID;
+
             //SODateTime = String.Format(culture, "{0:dd-MM-yyyy HH:mm}", DateTime.Now);
             SODateTime = gutil.getCustomStringFormatDate(DateTime.Now);
 
@@ -1041,8 +1048,89 @@ namespace RoyalPetz_ADMIN
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
                 }
+                else if (originModuleID == globalConstants.REVISI_NOTA)
+                {
+                    salesInvoice = selectedsalesinvoice;
+                    if (salesTop == 1 && selectedPaymentMethod == 0)
+                    {
+                        // GET THE PREVIOUS AMOUNT FOR DAILY JOURNAL INFORMATION
+                        previousSOCashAmount = Convert.ToDouble(DS.getDataSingleValue("SELECT SALES_TOTAL FROM SALES_HEADER WHERE SALES_INVOICE = '" + selectedsalesinvoice + "'"));
+                    }
 
-                if (addToTaxTable)
+                    // UPDATE HEADER TABLE
+                    sqlCommand = "UPDATE SALES_HEADER SET CUSTOMER_ID = " + selectedPelangganID + ", " +
+                                                                                        "SALES_DATE = STR_TO_DATE('" + SODateTime + "', '%d-%m-%Y %H:%i'), " +
+                                                                                        "SALES_TOTAL = " + gutil.validateDecimalNumericInput(globalTotalValue) + ", " +
+                                                                                        "SALES_DISCOUNT_FINAL = " + gutil.validateDecimalNumericInput(Convert.ToDouble(salesDiscountFinal)) + ", " +
+                                                                                        "SALES_TOP = " + salesTop + ", " +
+                                                                                        "SALES_TOP_DATE = STR_TO_DATE('" + SODueDateTime + "', '%d-%m-%Y'), " +
+                                                                                        "SALES_PAID = " + salesPaid + ", " +
+                                                                                        "SALES_PAYMENT = " + gutil.validateDecimalNumericInput(bayarAmount) + ", " +
+                                                                                        "SALES_PAYMENT_CHANGE = " + gutil.validateDecimalNumericInput(sisaBayar) + ", " +
+                                                                                        "SALES_PAYMENT_METHOD = " + selectedPaymentMethod + " " +
+                                                                                        "WHERE SALES_INVOICE = '" + selectedsalesinvoice + "'";
+
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "UPDATE SALES HEADER [" + selectedsalesinvoice + "]");
+                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        throw internalEX;
+
+                    if (globalFeatureList.EXPIRY_MODULE == 1)
+                    {
+                        // RETURN ALL PREVIOUS PRODUCT INTO EACH OWN PRODUCT EXPIRY AMOUNT
+                        sqlCommand = "SELECT * FROM SALES_DETAIL_EXPIRY WHERE SALES_INVOICE = '" + selectedsalesinvoice + "'";
+
+                        rdr = DS.getData(sqlCommand);
+                        if (rdr.HasRows)
+                        {
+                            while (rdr.Read())
+                            {
+                                prevProductID = rdr.GetString("PRODUCT_ID");
+                                prevProductAmount = rdr.GetDouble("PRODUCT_AMOUNT");
+                                prevLotID = rdr.GetInt32("LOT_ID");
+
+                                sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = PRODUCT_AMOUNT + " + prevProductAmount + " WHERE PRODUCT_ID = '" + prevProductID + "' AND ID = " + prevLotID;
+
+                                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "RETURN SALES DETAIL EXPIRY AMOUNT [" + selectedsalesinvoice + "]");
+                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                    throw internalEX;
+                            }
+                        }
+
+                        // DELETE PRODUCT EXPIRY INFORMATION
+                        sqlCommand = "DELETE FROM SALES_DETAIL_EXPIRY WHERE SALES_INVOICE = '" + selectedsalesinvoice + "'";
+                        gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "DELETE SALES DETAIL EXPIRY [" + selectedsalesinvoice + "]");
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
+                    }
+
+                    // RETURN ALL GLOBAL STOCK AMOUNT TO MASTER PRODUCT
+                    sqlCommand = "SELECT PRODUCT_ID, PRODUCT_QTY FROM SALES_DETAIL WHERE SALES_INVOICE = '" + selectedsalesinvoice + "'";
+
+                    rdr = DS.getData(sqlCommand);
+                    if (rdr.HasRows)
+                    {
+                        while (rdr.Read())
+                        {
+                            prevProductID = rdr.GetString("PRODUCT_ID");
+                            prevProductAmount = rdr.GetDouble("PRODUCT_QTY");
+
+                            sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY + " + prevProductAmount + " WHERE PRODUCT_ID = '" + prevProductID + "'";
+
+                            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "RETURN SALES DETAIL AMOUNT [" + selectedsalesinvoice + "]");
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+                        }
+                    }
+
+                    // DELETE DETAIL TABLE
+                    sqlCommand = "DELETE FROM SALES_DETAIL WHERE SALES_INVOICE = '" + selectedsalesinvoice + "'";
+
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "DELETE SALES DETAIL[" + selectedsalesinvoice + "]");
+                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        throw internalEX;
+                }
+
+                if (addToTaxTable && originModuleID != globalConstants.REVISI_NOTA)
                 {
                     salesInvoiceTax = getSalesInvoiceID(false);
                     selectedsalesinvoiceTax = salesInvoiceTax;
@@ -1065,7 +1153,7 @@ namespace RoyalPetz_ADMIN
                         discRP = Convert.ToDouble(cashierDataGridView.Rows[i].Cells["discRP"].Value);
                         productID = cashierDataGridView.Rows[i].Cells["productID"].Value.ToString();
 
-                        if (originModuleID == 0) // NORMAL TRANSACTION
+                        if (originModuleID == 0 || originModuleID == globalConstants.REVISI_NOTA) // NORMAL TRANSACTION
                         {
                             sqlCommand = "INSERT INTO SALES_DETAIL (SALES_INVOICE, PRODUCT_ID, PRODUCT_PRICE, PRODUCT_SALES_PRICE, PRODUCT_QTY, PRODUCT_DISC1, PRODUCT_DISC2, PRODUCT_DISC_RP, SALES_SUBTOTAL) " +
                                                 "VALUES " +
@@ -1079,7 +1167,7 @@ namespace RoyalPetz_ADMIN
                                 throw internalEX;
                         }
 
-                        if (addToTaxTable)
+                        if (addToTaxTable && originModuleID != globalConstants.REVISI_NOTA)
                         {
                             sqlCommand = "INSERT INTO SALES_DETAIL_TAX (SALES_INVOICE, PRODUCT_ID, PRODUCT_PRICE, PRODUCT_SALES_PRICE, PRODUCT_QTY, PRODUCT_DISC1, PRODUCT_DISC2, PRODUCT_DISC_RP, SALES_SUBTOTAL) " +
                                                 "VALUES " +
@@ -1112,6 +1200,7 @@ namespace RoyalPetz_ADMIN
                                     double currentLotAmount = 0;
                                     string expiryProductID = cashierDataGridView.Rows[i].Cells["productID"].Value.ToString();
                                     double expiryProductAmt = Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value);
+                                    double reducedProductAmount = 0;
                                     listOfLotID = expiryUtil.getListOfLotProductID(expiryProductID, expiryProductAmt);
 
                                     // UPDATE THE PRODUCT AMOUNT
@@ -1124,14 +1213,26 @@ namespace RoyalPetz_ADMIN
                                         if (currentLotAmount <= expiryProductAmt)
                                         {
                                             expiryProductAmt = expiryProductAmt - currentLotAmount;
+                                            reducedProductAmount = currentLotAmount;
                                             currentLotAmount = 0;
                                         }
                                         else
+                                        {
+                                            reducedProductAmount = expiryProductAmt;
                                             currentLotAmount = currentLotAmount - expiryProductAmt;
+                                        }
 
                                         sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = " + currentLotAmount + " WHERE ID = " + listOfLotID[j];
 
                                         gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "REDUCE STOCK AT PRODUCT_EXPIRY LOT [" + listOfLotID[j] + "]");
+                                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                            throw internalEX;
+
+                                        // INSERT INTO SALES DETAIL EXPIRY
+                                        sqlCommand = "INSERT INTO SALES_DETAIL_EXPIRY (SALES_INVOICE, PRODUCT_ID, LOT_ID, PRODUCT_AMOUNT) VALUES " +
+                                                               "('" + salesInvoice + "', '" + expiryProductID + "', " + listOfLotID[j] + ", " + reducedProductAmount + ")";
+
+                                        gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "SAVE PRODUCT LOT INFORMATION FOR EACH ITEM AND AMOUNT");
                                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                             throw internalEX;
                                     }
@@ -1180,6 +1281,35 @@ namespace RoyalPetz_ADMIN
                         sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
                                                        "VALUES (1, STR_TO_DATE('" + SODateTime + "', '%d-%m-%Y %H:%i')" + ", " + gutil.validateDecimalNumericInput(globalTotalValue) + ", 'PEMBAYARAN " + salesInvoice + "', '" + gutil.getUserID() + "', 1)";
                         gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "INSERT TO DAILY JOURNAL TABLE [" + gutil.validateDecimalNumericInput(globalTotalValue) + "]");
+
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
+                    }
+                }
+                else if (originModuleID == globalConstants.REVISI_NOTA)
+                {
+                    // UPDATE CREDIT TABLE
+                    sqlCommand = "UPDATE CREDIT SET CREDIT_DUE_DATE = STR_TO_DATE('" + SODueDateTime + "', '%d-%m-%Y'), " +
+                                                                          "CREDIT_NOMINAL = " + gutil.validateDecimalNumericInput(globalTotalValue) + ", " +
+                                                                          "CREDIT_PAID = " + salesPaid + " " +
+                                                                          "WHERE SALES_INVOICE = '" + selectedsalesinvoice + "'";
+
+                    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "UPDATE CREDIT TABLE [" + selectedsalesinvoice + "]");
+                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        throw internalEX;
+
+                    if (salesTop == 1 && selectedPaymentMethod == 0)
+                    {
+                        double revisionCashAmountDifference = 0;
+
+                        revisionCashAmountDifference = globalTotalValue - previousSOCashAmount;
+
+                        // PAYMENT IN CASH THEREFORE ADDING THE AMOUNT OF CASH IN THE CASH REGISTER
+                        // ADD A NEW ENTRY ON THE DAILY JOURNAL TO KEEP TRACK THE ADDITIONAL CASH AMOUNT 
+                        sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
+                                                       "VALUES (1, STR_TO_DATE('" + SODateTime + "', '%d-%m-%Y %H:%i')" + ", " + gutil.validateDecimalNumericInput(revisionCashAmountDifference) + ", 'SELISIH REVISI " + salesInvoice + "', '" + gutil.getUserID() + "', 1)";
+
+                        gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "INSERT TO DAILY JOURNAL TABLE [" + gutil.validateDecimalNumericInput(revisionCashAmountDifference) + "]");
 
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
@@ -1813,7 +1943,7 @@ namespace RoyalPetz_ADMIN
             rdr.Close();
 
             // PULL DETAIL DATA               
-            sqlCommand = "SELECT M.PRODUCT_ID AS KODE_PRODUK, M.PRODUCT_NAME AS NAMA_PRODUK, SD.PRODUCT_PRICE AS HPP, SD.PRODUCT_SALES_PRICE AS HARGA_PRODUK, SD.PRODUCT_QTY AS QTY, SD.PRODUCT_DISC1, SD.PRODUCT_DISC2, SD.PRODUCT_DISC_RP, SD.SALES_SUBTOTAL AS SUBTOTAL " +
+            sqlCommand = "SELECT SD.ID, M.PRODUCT_ID AS KODE_PRODUK, M.PRODUCT_NAME AS NAMA_PRODUK, SD.PRODUCT_PRICE AS HPP, SD.PRODUCT_SALES_PRICE AS HARGA_PRODUK, SD.PRODUCT_QTY AS QTY, SD.PRODUCT_DISC1, SD.PRODUCT_DISC2, SD.PRODUCT_DISC_RP, SD.SALES_SUBTOTAL AS SUBTOTAL " +
                     "FROM SALES_DETAIL SD, MASTER_PRODUCT M WHERE SD.SALES_INVOICE = '" + selectedsalesinvoice + "' AND SD.PRODUCT_ID = M.PRODUCT_ID";
             rdr = DS.getData(sqlCommand);
             if (rdr.HasRows)
@@ -1838,6 +1968,12 @@ namespace RoyalPetz_ADMIN
                     cashierDataGridView.Rows[rowPos].Cells["disc2"].Value = rdr.GetString("PRODUCT_DISC2");
                     cashierDataGridView.Rows[rowPos].Cells["discRP"].Value = rdr.GetString("PRODUCT_DISC_RP");
                     cashierDataGridView.Rows[rowPos].Cells["hpp"].Value = rdr.GetString("HPP");
+
+                    //if (originModuleID == globalConstants.REVISI_NOTA)
+                    //{
+                    //    cashierDataGridView.Rows[rowPos].Cells["ID"].Value = rdr.GetString("ID");
+                    //    cashierDataGridView.Rows[rowPos].Cells["changed"].Value = 0;
+                    //}
 
                     salesQty[rowPos] = rdr.GetString("QTY");
                     cashierDataGridView.Rows[rowPos].Cells["jumlah"].Value = rdr.GetString("SUBTOTAL");
@@ -1876,12 +2012,13 @@ namespace RoyalPetz_ADMIN
 
             userStatusLabel.Text = "Welcome, " + DS.getDataSingleValue("SELECT IFNULL(USER_FULL_NAME, 0) FROM MASTER_USER WHERE ID = " + gutil.getUserID()).ToString();
 
-           
+
+            if (selectedsalesinvoice != "")
+                loadInvoiceData();
+
             if (originModuleID == globalConstants.COPY_NOTA && selectedsalesinvoice != "")
             {
                 cashierDataGridView.AllowUserToAddRows = false;
-
-                loadInvoiceData();
 
                 errorLabel.Text = "COPY NOTA";
 
@@ -1946,6 +2083,11 @@ namespace RoyalPetz_ADMIN
             DataGridViewTextBoxColumn disc2Column = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn discRPColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn subTotalColumn = new DataGridViewTextBoxColumn();
+
+            DataGridViewTextBoxColumn lineIDColumn = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn changedColumn = new DataGridViewTextBoxColumn();
+
+            isLoading = true;
 
             // F8 COLUMN
             F8Column.HeaderText = "F8";
@@ -2013,6 +2155,22 @@ namespace RoyalPetz_ADMIN
             productHPPColumn.Visible = false;
             cashierDataGridView.Columns.Add(productHPPColumn);
 
+            //if (originModuleID == globalConstants.REVISI_NOTA)
+            //{
+            //    lineIDColumn.HeaderText = "ID";
+            //    lineIDColumn.Name = "id";
+            //    lineIDColumn.Width = 200;
+            //    lineIDColumn.Visible = false;
+            //    cashierDataGridView.Columns.Add(lineIDColumn);
+
+            //    changedColumn.HeaderText = "changed";
+            //    changedColumn.Name = "changed";
+            //    changedColumn.Width = 20;
+            //    changedColumn.Visible = true;
+            //    cashierDataGridView.Columns.Add(changedColumn);
+            //}
+
+            isLoading = false;
         }
 
         private void deleteCurrentRow()

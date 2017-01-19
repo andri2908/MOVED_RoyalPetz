@@ -1060,6 +1060,7 @@ namespace RoyalPetz_ADMIN
             setAccessibility(globalConstants.MENU_TRANSAKSI_PENJUALAN, MENU_transaksiPenjualan);
             setAccessibility(globalConstants.MENU_TRANSAKSI_PENJUALAN, SHORTCUT_jual);
             setAccessibility(globalConstants.MENU_SET_NO_FAKTUR, MENU_setNoFaktur);
+            setAccessibility(globalConstants.MENU_REVISI_SALES_ORDER, MENU_revisiNota);
             // SUB MENU RETUR PENJUALAN
             setAccessibility(globalConstants.MENU_RETUR_PENJUALAN, MENU_returPenjualan);
             setAccessibility(globalConstants.MENU_RETUR_PENJUALAN_INVOICE, MENU_returByInvoice);
@@ -1521,6 +1522,16 @@ namespace RoyalPetz_ADMIN
         {
             ReportProductForm displayedform = new ReportProductForm(globalConstants.REPORT_STOCK_AGING);
             displayedform.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem4_Click_2(object sender, EventArgs e)
+        {
+            if (null == copyNotaForm || copyNotaForm.IsDisposed)
+                copyNotaForm = new dataSalesInvoice(globalConstants.REVISI_NOTA);
+
+            copyNotaForm.Show();
+            copyNotaForm.WindowState = FormWindowState.Normal;
+
         }
     }
 }

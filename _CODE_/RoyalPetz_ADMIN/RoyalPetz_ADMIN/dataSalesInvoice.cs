@@ -32,6 +32,13 @@ namespace RoyalPetz_ADMIN
         public dataSalesInvoice()
         {
             InitializeComponent();
+            originModuleID = globalConstants.COPY_NOTA;
+        }
+
+        public dataSalesInvoice(int moduleID)
+        {
+            InitializeComponent();
+            originModuleID = moduleID;
         }
 
         private void captureAll(Keys key)
@@ -209,7 +216,7 @@ namespace RoyalPetz_ADMIN
             DataGridViewRow selectedRow = dataPenerimaanBarang.Rows[rowSelectedIndex];
             noInvoice = selectedRow.Cells["NO INVOICE"].Value.ToString();
 
-            cashierForm cashierFormDisplay = new cashierForm(noInvoice);
+            cashierForm cashierFormDisplay = new cashierForm(noInvoice, originModuleID);
             cashierFormDisplay.ShowDialog(this);
         }
 
@@ -226,7 +233,7 @@ namespace RoyalPetz_ADMIN
                 DataGridViewRow selectedRow = dataPenerimaanBarang.Rows[rowSelectedIndex];
                 noInvoice = selectedRow.Cells["NO INVOICE"].Value.ToString();
 
-                cashierForm cashierFormDisplay = new cashierForm(noInvoice);
+                cashierForm cashierFormDisplay = new cashierForm(noInvoice, originModuleID);
                 cashierFormDisplay.ShowDialog(this);
             }
         }
