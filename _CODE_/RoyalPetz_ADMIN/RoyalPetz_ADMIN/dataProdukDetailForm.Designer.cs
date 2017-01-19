@@ -78,6 +78,9 @@
             this.label25 = new System.Windows.Forms.Label();
             this.expDatePicker = new System.Windows.Forms.DateTimePicker();
             this.expLabel = new System.Windows.Forms.Label();
+            this.grosirMargin = new System.Windows.Forms.TextBox();
+            this.partaiMargin = new System.Windows.Forms.TextBox();
+            this.ecerMargin = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -90,7 +93,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label15.Location = new System.Drawing.Point(403, 370);
+            this.label15.Location = new System.Drawing.Point(467, 392);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(158, 18);
             this.label15.TabIndex = 77;
@@ -174,7 +177,7 @@
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Location = new System.Drawing.Point(567, 367);
+            this.button1.Location = new System.Drawing.Point(631, 395);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(26, 26);
             this.button1.TabIndex = 39;
@@ -185,7 +188,7 @@
             // 
             this.panelImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panelImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelImage.Location = new System.Drawing.Point(406, 394);
+            this.panelImage.Location = new System.Drawing.Point(470, 416);
             this.panelImage.Name = "panelImage";
             this.panelImage.Size = new System.Drawing.Size(120, 120);
             this.panelImage.TabIndex = 40;
@@ -195,7 +198,7 @@
             this.nonAktifCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.nonAktifCheckbox.AutoSize = true;
             this.nonAktifCheckbox.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nonAktifCheckbox.Location = new System.Drawing.Point(2, 528);
+            this.nonAktifCheckbox.Location = new System.Drawing.Point(8, 529);
             this.nonAktifCheckbox.Name = "nonAktifCheckbox";
             this.nonAktifCheckbox.Size = new System.Drawing.Size(152, 22);
             this.nonAktifCheckbox.TabIndex = 51;
@@ -455,7 +458,7 @@
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(271, 548);
+            this.saveButton.Location = new System.Drawing.Point(268, 555);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(95, 37);
             this.saveButton.TabIndex = 8;
@@ -468,7 +471,7 @@
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.panel1.BackColor = System.Drawing.Color.SteelBlue;
             this.panel1.Controls.Add(this.errorLabel);
-            this.panel1.Location = new System.Drawing.Point(2, 2);
+            this.panel1.Location = new System.Drawing.Point(2, 8);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(753, 29);
             this.panel1.TabIndex = 10;
@@ -494,7 +497,7 @@
             // 
             this.resetbutton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.resetbutton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetbutton.Location = new System.Drawing.Point(416, 548);
+            this.resetbutton.Location = new System.Drawing.Point(413, 555);
             this.resetbutton.Name = "resetbutton";
             this.resetbutton.Size = new System.Drawing.Size(95, 37);
             this.resetbutton.TabIndex = 11;
@@ -609,7 +612,7 @@
             this.groupBox3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(2, 358);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(395, 165);
+            this.groupBox3.Size = new System.Drawing.Size(451, 165);
             this.groupBox3.TabIndex = 43;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "HARGA PRODUK";
@@ -666,7 +669,7 @@
             // 
             this.expDatePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.expDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.expDatePicker.Location = new System.Drawing.Point(604, 410);
+            this.expDatePicker.Location = new System.Drawing.Point(529, 358);
             this.expDatePicker.Name = "expDatePicker";
             this.expDatePicker.Size = new System.Drawing.Size(144, 27);
             this.expDatePicker.TabIndex = 78;
@@ -677,21 +680,60 @@
             this.expLabel.AutoSize = true;
             this.expLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.expLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.expLabel.Location = new System.Drawing.Point(542, 413);
+            this.expLabel.Location = new System.Drawing.Point(467, 361);
             this.expLabel.Name = "expLabel";
             this.expLabel.Size = new System.Drawing.Size(59, 18);
             this.expLabel.TabIndex = 79;
             this.expLabel.Text = "EXP : ";
             this.expLabel.Visible = false;
             // 
+            // grosirMargin
+            // 
+            this.grosirMargin.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.grosirMargin.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grosirMargin.Location = new System.Drawing.Point(381, 482);
+            this.grosirMargin.Name = "grosirMargin";
+            this.grosirMargin.ReadOnly = true;
+            this.grosirMargin.Size = new System.Drawing.Size(66, 27);
+            this.grosirMargin.TabIndex = 77;
+            this.grosirMargin.Text = "0";
+            this.grosirMargin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // partaiMargin
+            // 
+            this.partaiMargin.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.partaiMargin.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.partaiMargin.Location = new System.Drawing.Point(381, 449);
+            this.partaiMargin.Name = "partaiMargin";
+            this.partaiMargin.ReadOnly = true;
+            this.partaiMargin.Size = new System.Drawing.Size(66, 27);
+            this.partaiMargin.TabIndex = 78;
+            this.partaiMargin.Text = "0";
+            this.partaiMargin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // ecerMargin
+            // 
+            this.ecerMargin.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ecerMargin.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ecerMargin.Location = new System.Drawing.Point(381, 416);
+            this.ecerMargin.Name = "ecerMargin";
+            this.ecerMargin.ReadOnly = true;
+            this.ecerMargin.Size = new System.Drawing.Size(66, 27);
+            this.ecerMargin.TabIndex = 79;
+            this.ecerMargin.Text = "0";
+            this.ecerMargin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // dataProdukDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(756, 609);
+            this.ClientSize = new System.Drawing.Size(756, 621);
+            this.Controls.Add(this.grosirMargin);
             this.Controls.Add(this.expDatePicker);
+            this.Controls.Add(this.partaiMargin);
             this.Controls.Add(this.expLabel);
+            this.Controls.Add(this.ecerMargin);
             this.Controls.Add(this.nonAktifCheckbox);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label15);
@@ -775,5 +817,8 @@
         private System.Windows.Forms.DateTimePicker expDatePicker;
         private System.Windows.Forms.Label expLabel;
         private System.Windows.Forms.Button SupplierHistoryButton;
+        private System.Windows.Forms.TextBox grosirMargin;
+        private System.Windows.Forms.TextBox partaiMargin;
+        private System.Windows.Forms.TextBox ecerMargin;
     }
 }

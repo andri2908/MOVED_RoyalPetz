@@ -272,6 +272,25 @@ namespace RoyalPetz_ADMIN
             isLoading = false;
         }
 
+        private double calculateMargin(string baseValue, string newValue)
+        {
+            double result = 0;
+            double basePrice = 0;
+            double salesPrice = 0;
+            double difference = 0;
+
+            if ((baseValue.Length > 0) && (newValue.Length > 0))
+            {
+                basePrice = Convert.ToDouble(baseValue);
+                salesPrice = Convert.ToDouble(newValue);
+
+                difference = salesPrice - basePrice;
+                result = Math.Round(difference / basePrice * 100, 2);
+            }
+
+            return result;
+        }
+
         private void hargaEcerTextBox_TextChanged(object sender, EventArgs e)
         {
             string tempString;
@@ -304,6 +323,9 @@ namespace RoyalPetz_ADMIN
                 hargaEcerTextBox.Text = hargaEcerValueText;
 
             hargaEcerTextBox.SelectionStart = hargaEcerTextBox.Text.Length;
+
+            ecerMargin.Text = calculateMargin(hppTextBox.Text, hargaEcerTextBox.Text).ToString() + "%";
+
             isLoading = false;
         }
 
@@ -339,6 +361,9 @@ namespace RoyalPetz_ADMIN
                 hargaPartaiTextBox.Text = hargaPartaiText;
 
             hargaPartaiTextBox.SelectionStart = hargaPartaiTextBox.Text.Length;
+
+            partaiMargin.Text = calculateMargin(hppTextBox.Text, hargaPartaiTextBox.Text).ToString() + "%";
+
             isLoading = false;
         }
 
@@ -374,6 +399,8 @@ namespace RoyalPetz_ADMIN
                 hargaGrosirTextBox.Text = hargaGrosirValueText;
 
             hargaGrosirTextBox.SelectionStart = hargaGrosirTextBox.Text.Length;
+            grosirMargin.Text = calculateMargin(hppTextBox.Text, hargaGrosirTextBox.Text).ToString() + "%";
+
             isLoading = false;
         }
 
@@ -410,8 +437,13 @@ namespace RoyalPetz_ADMIN
                         hppTextBox.Text = rdr.GetString("PRODUCT_BASE_PRICE");
                         hargaEcerTextBox.Text = rdr.GetString("PRODUCT_RETAIL_PRICE");
                         hargaPartaiTextBox.Text = rdr.GetString("PRODUCT_BULK_PRICE");
-                        hargaGrosirTextBox.Text = rdr.GetString("PRODUCT_WHOLESALE_PRICE"); ;
+                        hargaGrosirTextBox.Text = rdr.GetString("PRODUCT_WHOLESALE_PRICE"); 
                         SupplierTextBox.Text = rdr.GetString("PRODUCT_BRAND");
+
+                        ecerMargin.Text = calculateMargin(hppTextBox.Text, hargaEcerTextBox.Text).ToString() + "%";
+                        partaiMargin.Text = calculateMargin(hppTextBox.Text, hargaPartaiTextBox.Text).ToString() + "%";
+                        grosirMargin.Text = calculateMargin(hppTextBox.Text, hargaGrosirTextBox.Text).ToString() + "%";
+
 
                         if (globalFeatureList.EXPIRY_MODULE == 1)
                         {
