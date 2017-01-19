@@ -1942,23 +1942,8 @@ namespace RoyalPetz_ADMIN
 
         private void cashierForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            string sqlCommand = "";
-            MySqlException internalEX = null;
-
             unregisterGlobalHotkey();
 
-            DS.beginTransaction();
-            try
-            {
-                sqlCommand = "UPDATE SALES_HEADER SET IN_EDIT_MODE = 0 WHERE SALES_INVOICE = '" + selectedsalesinvoice + "'";
-
-                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                    throw internalEX;
-
-                DS.commit();
-            }
-            catch (Exception ex)
-            {}
         }
 
         private void creditRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -3471,6 +3456,28 @@ namespace RoyalPetz_ADMIN
         private void cashierDataGridView_KeyDown(object sender, KeyEventArgs e)
         {
   
+        }
+
+        private void cashierForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (originModuleID == globalConstants.REVISI_NOTA)
+            {
+                string sqlCommand = "";
+                MySqlException internalEX = null;
+
+                DS.beginTransaction();
+                try
+                {
+                    sqlCommand = "UPDATE SALES_HEADER SET IN_EDIT_MODE = 0 WHERE SALES_INVOICE = '" + selectedsalesinvoice + "'";
+
+                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        throw internalEX;
+
+                    DS.commit();
+                }
+                catch (Exception ex)
+                { }
+            }
         }
     }
 }
