@@ -1,0 +1,38 @@
+ROYAL PETZ ORI DATA
+===================
+Data Produk
+Data Customer
+Data Supplier
+
+barang.dbf
+jenis.dbf
+cust.dbf
+vendor.dbf
+
+export to 'FILENAME' type xls
+
+urutan customer
+ECER
+GROSIR
+PARTAI
+
+
+ROYAL PETZ 
+===============
+MASTER PRODUCT
+MASTER CATEGORY
+MASTER UNIT
+
+MASTER SUPPLIER
+MASTER CUSTOMER
+
+
+split into columns
+adjust single quote
+split into different tables
+
+
+
+
+
+

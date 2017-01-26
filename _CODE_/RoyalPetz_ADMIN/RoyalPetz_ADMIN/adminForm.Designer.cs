@@ -88,6 +88,7 @@
             this.MENU_modulKasir = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_setNoFaktur = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_CopyNota = new System.Windows.Forms.ToolStripMenuItem();
+            this.MENU_revisiNota = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_returPenjualan = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_returByInvoice = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_returByStokAdjustment = new System.Windows.Forms.ToolStripMenuItem();
@@ -186,7 +187,6 @@
             this.SHORTCUT_returBeli = new System.Windows.Forms.ToolStripButton();
             this.SHORTCUT_returJual = new System.Windows.Forms.ToolStripButton();
             this.timerMessage = new System.Windows.Forms.Timer(this.components);
-            this.MENU_revisiNota = new System.Windows.Forms.ToolStripMenuItem();
             this.MAINMENU_Strip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.MAINMENU_ShortCut.SuspendLayout();
@@ -790,6 +790,15 @@
             this.MENU_CopyNota.Size = new System.Drawing.Size(174, 22);
             this.MENU_CopyNota.Text = "Copy Nota";
             this.MENU_CopyNota.Click += new System.EventHandler(this.toolStripMenuItem11_Click_1);
+            // 
+            // MENU_revisiNota
+            // 
+            this.MENU_revisiNota.BackColor = System.Drawing.Color.SteelBlue;
+            this.MENU_revisiNota.ForeColor = System.Drawing.Color.FloralWhite;
+            this.MENU_revisiNota.Name = "MENU_revisiNota";
+            this.MENU_revisiNota.Size = new System.Drawing.Size(174, 22);
+            this.MENU_revisiNota.Text = "Revisi Nota";
+            this.MENU_revisiNota.Click += new System.EventHandler(this.toolStripMenuItem4_Click_2);
             // 
             // MENU_returPenjualan
             // 
@@ -1763,17 +1772,8 @@
             // timerMessage
             // 
             this.timerMessage.Enabled = true;
-            this.timerMessage.Interval = 3600000;
+            this.timerMessage.Interval = 360000;
             this.timerMessage.Tick += new System.EventHandler(this.timerMessage_Tick);
-            // 
-            // MENU_revisiNota
-            // 
-            this.MENU_revisiNota.BackColor = System.Drawing.Color.SteelBlue;
-            this.MENU_revisiNota.ForeColor = System.Drawing.Color.FloralWhite;
-            this.MENU_revisiNota.Name = "MENU_revisiNota";
-            this.MENU_revisiNota.Size = new System.Drawing.Size(174, 22);
-            this.MENU_revisiNota.Text = "Revisi Nota";
-            this.MENU_revisiNota.Click += new System.EventHandler(this.toolStripMenuItem4_Click_2);
             // 
             // adminForm
             // 

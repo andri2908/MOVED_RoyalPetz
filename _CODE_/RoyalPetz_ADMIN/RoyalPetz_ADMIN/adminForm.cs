@@ -715,11 +715,17 @@ namespace RoyalPetz_ADMIN
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            if (null == purchaseOrderForm || purchaseOrderForm.IsDisposed)
-                purchaseOrderForm = new dataPOForm();
+            //if (null == purchaseOrderForm || purchaseOrderForm.IsDisposed)
+            //purchaseOrderForm = new dataPOForm();
 
-            purchaseOrderForm.Show();
-            purchaseOrderForm.WindowState = FormWindowState.Normal;
+            //purchaseOrderForm.Show();
+            //purchaseOrderForm.WindowState = FormWindowState.Normal;
+
+            if (null == penerimaanBarangForm || penerimaanBarangForm.IsDisposed)
+                penerimaanBarangForm = new dataPenerimaanBarangForm();
+
+            penerimaanBarangForm.Show();
+            penerimaanBarangForm.WindowState = FormWindowState.Normal;           
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)

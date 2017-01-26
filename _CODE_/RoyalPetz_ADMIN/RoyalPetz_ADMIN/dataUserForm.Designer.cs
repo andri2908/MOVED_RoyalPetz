@@ -176,6 +176,7 @@
             this.CetakButton.TabIndex = 8;
             this.CetakButton.Text = "CETAK";
             this.CetakButton.UseVisualStyleBackColor = true;
+            this.CetakButton.Visible = false;
             this.CetakButton.Click += new System.EventHandler(this.CetakButton_Click);
             // 
             // dataUserForm
