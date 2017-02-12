@@ -1,0 +1,35 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="TGL" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="TERIMA" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="INVOICE" type="xs:string" minOccurs="0" />
+                <xs:element name="SUPPLIER" type="xs:string" minOccurs="0" />
+                <xs:element name="PRODUK" type="xs:string" minOccurs="0" />
+                <xs:element name="HARGA" type="xs:double" minOccurs="0" />
+                <xs:element name="QTY" type="xs:double" minOccurs="0" />
+                <xs:element name="SUBTOTAL" type="xs:double" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <TGL>2017-02-10T00:00:00+07:00</TGL>
+    <TERIMA>2017-02-10T00:00:00+07:00</TERIMA>
+    <INVOICE>PO-1</INVOICE>
+    <SUPPLIER>SANDY</SUPPLIER>
+    <PRODUK>ALPO ADLT DOG 1 KG</PRODUK>
+    <HARGA>24900</HARGA>
+    <QTY>23</QTY>
+    <SUBTOTAL>572700</SUBTOTAL>
+  </Table>
+</NewDataSet>

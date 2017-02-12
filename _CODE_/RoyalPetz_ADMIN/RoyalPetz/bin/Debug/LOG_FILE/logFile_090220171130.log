@@ -1,0 +1,29 @@
+[] [2/8/2017 15:36] [] USER = ADMIN IS ACTIVE
+[ADMIN] [2/8/2017 15:36] [] USER ID = 1 LOGIN SUCCESSFULLY
+[ADMIN] [2/8/2017 15:36] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [2/8/2017 15:36] [] DISPLAY ADMIN FORM
+[ADMIN] [2/8/2017 15:36] [] adminForm Load
+[ADMIN] [2/8/2017 15:36] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [2/8/2017 15:37] [MUTASI BARANG] MUTASI BARANG : detailRequestOrderDataGridView_CellValueChanged [productName]
+[ADMIN] [2/8/2017 15:37] [MUTASI BARANG] MUTASI BARANG : detailRequestOrderDataGridView_CellValueChanged [productName]
+[ADMIN] [2/8/2017 15:37] [MUTASI BARANG] MUTASI BARANG : detailRequestOrderDataGridView_CellValueChanged [hpp]
+[ADMIN] [2/8/2017 15:37] [MUTASI BARANG] MUTASI BARANG : detailRequestOrderDataGridView_CellValueChanged [subtotal]
+[ADMIN] [2/8/2017 15:37] [MUTASI BARANG] MUTASI BARANG : detailRequestOrderDataGridView_CellValueChanged [qty]
+[ADMIN] [2/8/2017 15:37] [PENJUALAN] MUTASI FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [productName]
+[ADMIN] [2/8/2017 15:37] [MUTASI BARANG] MUTASI BARANG : detailRequestOrderDataGridView_CellValueChanged [productName]
+[ADMIN] [2/8/2017 15:37] [MUTASI BARANG] MUTASI BARANG : detailRequestOrderDataGridView_CellValueChanged [productName]
+[ADMIN] [2/8/2017 15:37] [PENJUALAN] MUTASI FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [productName]
+[ADMIN] [2/8/2017 15:37] [MUTASI BARANG] MUTASI BARANG : detailRequestOrderDataGridView_CellValueChanged [productID]
+[ADMIN] [2/8/2017 15:37] [MUTASI BARANG] MUTASI BARANG : detailRequestOrderDataGridView_CellValueChanged [productName]
+[ADMIN] [2/8/2017 15:37] [MUTASI BARANG] updateSomeRowsContent, PRODUCT_BASE_PRICE [140000]
+[ADMIN] [2/8/2017 15:37] [MUTASI BARANG] MUTASI BARANG : detailRequestOrderDataGridView_CellValueChanged [hpp]
+[ADMIN] [2/8/2017 15:37] [MUTASI BARANG] MUTASI BARANG : detailRequestOrderDataGridView_CellValueChanged [qty]
+[ADMIN] [2/8/2017 15:37] [MUTASI BARANG] MUTASI BARANG : detailRequestOrderDataGridView_CellValueChanged [subtotal]
+[ADMIN] [2/8/2017 15:37] [MUTASI BARANG] updateSomeRowsContent, attempt to calculate total
+[] [2/9/2017 11:20] [] USER = ADMIN IS ACTIVE
+[ADMIN] [2/9/2017 11:20] [] USER ID = 1 LOGIN SUCCESSFULLY
+[ADMIN] [2/9/2017 11:20] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [2/9/2017 11:20] [] DISPLAY ADMIN FORM
+[ADMIN] [2/9/2017 11:20] [] adminForm Load
+[ADMIN] [2/9/2017 11:20] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [2/9/2017 11:29] [] USER ID = 1LOGOUT

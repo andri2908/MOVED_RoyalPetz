@@ -1,0 +1,39 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="MODULE_TYPE" type="xs:string" minOccurs="0" />
+                <xs:element name="NO_RETUR" type="xs:string" minOccurs="0" />
+                <xs:element name="NAME" type="xs:string" minOccurs="0" />
+                <xs:element name="RETUR_DATE" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="RETUR_TOTAL" type="xs:double" minOccurs="0" />
+                <xs:element name="PRODUCT_NAME" type="xs:string" minOccurs="0" />
+                <xs:element name="PRICE" type="xs:double" minOccurs="0" />
+                <xs:element name="QTY" type="xs:double" minOccurs="0" />
+                <xs:element name="DESC" type="xs:string" minOccurs="0" />
+                <xs:element name="SUBTOTAL" type="xs:double" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <MODULE_TYPE>RETUR PENJUALAN</MODULE_TYPE>
+    <NO_RETUR>RT-1</NO_RETUR>
+    <NAME />
+    <RETUR_DATE>2017-02-11T00:00:00+07:00</RETUR_DATE>
+    <RETUR_TOTAL>310000</RETUR_TOTAL>
+    <PRODUCT_NAME>B-4104  KANDANG HAMSTER</PRODUCT_NAME>
+    <PRICE>155000</PRICE>
+    <QTY>2</QTY>
+    <DESC xml:space="preserve"> </DESC>
+    <SUBTOTAL>310000</SUBTOTAL>
+  </Table>
+</NewDataSet>
