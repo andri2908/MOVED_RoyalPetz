@@ -141,6 +141,13 @@ namespace AlphaSoft
                     branchCombobox.ValueMember = "ID";
                     branchCombobox.DisplayMember = "NAME";
                 }
+                else
+                {
+                    DataRow workRow = dt.NewRow();
+                    workRow["ID"] = "0";
+                    workRow["NAME"] = "PUSAT";
+                    dt.Rows.Add(workRow);
+                }
             }
             //branchCombobox.Items.Add(new { Text = "PUSAT", Value = "0" });
             branchCombobox.SelectedValue = branchCombobox.Items.Count;
@@ -168,7 +175,7 @@ namespace AlphaSoft
 
                 int branch_id = 0;// Int32.Parse(branchCombobox.SelectedValue.ToString());
 
-                if (Int32.TryParse(gutil.allTrim(branchCombobox.SelectedValue.ToString()), out branch_id))
+                if ((branchCombobox.SelectedValue.ToString().Length > 0) && (Int32.TryParse(gutil.allTrim(branchCombobox.SelectedValue.ToString()), out branch_id)))
                 {
                 }
                 else
@@ -178,12 +185,14 @@ namespace AlphaSoft
                 }
 
                 //tryparse
-                if (Double.TryParse(gutil.allTrim(NominalTextbox.Text), out nominalakun))
+                if ((NominalTextbox.Text.Length > 0) && Double.TryParse(gutil.allTrim(NominalTextbox.Text), out nominalakun))
                 {
                 }
                 else
                 {
-                    errorLabel.Text = "NOMINAL TIDAK BOLEH MENGANDUNG HURUF";
+                    //errorLabel.Text = "NOMINAL TIDAK BOLEH MENGANDUNG HURUF";
+                    errorLabel.Text = "NOMINAL TIDAK BOLEH KOSONG";
+                    nominalakun = 0;
                 }
                 //check debet/credit
                 if (nominalakun < 0) //memastikan input positif
@@ -199,7 +208,7 @@ namespace AlphaSoft
                 }
                
                 TglTrans = String.Format(culture, "{0:dd-MM-yyyy}", selectedDate);
-                jamTrans = String.Format(culture, "{0:HH:mm}", DateTime.Now);
+                jamTrans = gutil.getCustomStringFormatTime(DateTime.Now);//String.Format(culture, "{0:HH:mm}", DateTime.Now);
 
                 TglTrans = TglTrans + " " + jamTrans;
                 //must add function to update content
@@ -241,7 +250,7 @@ namespace AlphaSoft
 
                 selectedrowindex = -1;
                 saveButton.Text = "TAMBAH";
-
+                selectedDJID = 0;
             }
         }
 
@@ -360,11 +369,12 @@ namespace AlphaSoft
 
             for (int rows = 0; rows < TransaksiAccountGridView.Rows.Count; rows++)
             {
-                TglTrans = String.Format(culture, "{0:dd-MM-yyyy}", TransaksiAccountGridView.Rows[rows].Cells[1].Value.ToString());
-                timeTrans = gutil.getCustomStringFormatTime(DateTime.Now);
+                //TglTrans = String.Format(culture, "{0:dd-MM-yyyy}", TransaksiAccountGridView.Rows[rows].Cells[1].Value.ToString());
+                //timeTrans = gutil.getCustomStringFormatTime(DateTime.Now);
 
-                TglTrans = TglTrans + " " + timeTrans;
+                //TglTrans = TglTrans + " " + timeTrans;
 
+                TglTrans = TransaksiAccountGridView.Rows[rows].Cells[1].Value.ToString();
                 Account_ID = Int32.Parse(TransaksiAccountGridView.Rows[rows].Cells[2].Value.ToString());
                 pm_id = Int32.Parse(TransaksiAccountGridView.Rows[rows].Cells[6].Value.ToString());
                 Double debet, credit;
@@ -385,9 +395,12 @@ namespace AlphaSoft
                 }
                 deskripsiakun = TransaksiAccountGridView.Rows[rows].Cells[10].Value.ToString();
                 user_id = selectedUserID;
+
                 selectedDJID = 0;
                 selectedDJID = Int32.Parse(TransaksiAccountGridView.Rows[rows].Cells[0].Value.ToString());
+
                 originModuleID = globalConstants.NEW_DJ;
+
                 if (selectedDJID > 0)
                 {
                     originModuleID = globalConstants.EDIT_DJ;
@@ -512,6 +525,8 @@ namespace AlphaSoft
             int pm_id;
             Double debet;
             Double credit;
+            string journalDateTime = "";
+
             if (checkDataTransaksi(TglTrans))
             {
                 //modeupdate
@@ -522,7 +537,7 @@ namespace AlphaSoft
                 MySqlDataReader rdr;
 
                 //DS.mySqlConnect();
-                sqlCommand = "SELECT JOURNAL_ID, ACCOUNT_ID, JOURNAL_NOMINAL, IFNULL(BRANCH_ID, 0) AS BRANCH_ID, JOURNAL_DESCRIPTION, USER_ID, PM_ID FROM DAILY_JOURNAL WHERE JOURNAL_DATETIME >= STR_TO_DATE('"+TglTrans+ " 00:00:00', '%d-%m-%Y %k:%i:%s') AND JOURNAL_DATETIME <= STR_TO_DATE('" + TglTrans + " 23:59:59', '%d-%m-%Y %k:%i:%s')";
+                sqlCommand = "SELECT JOURNAL_ID, ACCOUNT_ID, JOURNAL_NOMINAL, IFNULL(BRANCH_ID, 0) AS BRANCH_ID, JOURNAL_DESCRIPTION, USER_ID, PM_ID, DATE_FORMAT(JOURNAL_DATETIME, '%d-%m-%Y %H:%i') AS JOURNAL_DATETIME_VALUE FROM DAILY_JOURNAL WHERE JOURNAL_DATETIME >= STR_TO_DATE('" + TglTrans+ " 00:00:00', '%d-%m-%Y %k:%i:%s') AND JOURNAL_DATETIME <= STR_TO_DATE('" + TglTrans + " 23:59:59', '%d-%m-%Y %k:%i:%s')";
                     //SELECT JOURNAL_ID as 'ID' FROM DAILY_JOURNAL WHERE 
                 using (rdr = DS.getData(sqlCommand))
                 {
@@ -539,16 +554,22 @@ namespace AlphaSoft
                             nmakun = NamaAkunTextbox.Text;
                             pm_id = rdr.GetInt32("PM_ID");
                             carabayarcombobox.SelectedValue = pm_id;
+                            carabayarcombobox.Text = carabayarcombobox.GetItemText(carabayarcombobox.SelectedItem);
                             deskripsiakun = rdr.GetString("JOURNAL_DESCRIPTION");
                             DeskripsiAkunTextbox.Text = deskripsiakun;
                             nominalakun = 0;
-                            pembayaran = carabayarcombobox.GetItemText(carabayarcombobox.SelectedItem);
+                            pembayaran = carabayarcombobox.Text;
+
+                            journalDateTime = rdr.GetString("JOURNAL_DATETIME_VALUE");
 
                             branch_id = rdr.GetInt32("BRANCH_ID");
-                            if (branch_id != 0)
+
+                            if (branch_id >= 0)
                             {
                                 branchCombobox.SelectedValue = branch_id;
-                                cabang = branchCombobox.GetItemText(branchCombobox.SelectedItem);
+                                branchCombobox.Text = branchCombobox.GetItemText(branchCombobox.SelectedItem);
+                                cabang = branchCombobox.Text;
+
                             }
 
                             nominalakun = rdr.GetDouble("JOURNAL_NOMINAL");
@@ -556,11 +577,13 @@ namespace AlphaSoft
                             //check debet/credit
                             debet = nominalakun;
                             credit = 0;
+
                             if (selectedTipeAkun == 2) //credit
                             {
                                 credit = nominalakun;
                                 debet = 0;
                             }
+
                             if (debet>0)
                             {
                                 NominalTextbox.Text = debet.ToString();
@@ -569,7 +592,8 @@ namespace AlphaSoft
                                 nominalakun = -nominalakun;
                                 NominalTextbox.Text = nominalakun.ToString();
                             }
-                            TransaksiAccountGridView.Rows.Add(selectedDJID, TglTrans, selectedAccountID, nmakun, branch_id, cabang, pm_id, pembayaran, debet, credit, deskripsiakun);
+                            //TransaksiAccountGridView.Rows.Add(selectedDJID, TglTrans, selectedAccountID, nmakun, branch_id, cabang, pm_id, pembayaran, debet, credit, deskripsiakun);
+                            TransaksiAccountGridView.Rows.Add(selectedDJID, journalDateTime, selectedAccountID, nmakun, branch_id, cabang, pm_id, pembayaran, debet, credit, deskripsiakun);
                         }
                     }
                 }

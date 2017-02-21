@@ -40,17 +40,6 @@
             this.errorLabel = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.TransaksiAccountGridView = new System.Windows.Forms.DataGridView();
-            this.journal_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tanggal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kode_akun = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nama_Akun = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.branch_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.branch_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PaymentMethodID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PaymentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.debet = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kredit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deskripsi_akun = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.searchButton = new System.Windows.Forms.Button();
             this.TanggalTransaksi = new System.Windows.Forms.DateTimePicker();
             this.commitButton = new System.Windows.Forms.Button();
@@ -68,6 +57,17 @@
             this.branchCombobox = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.NominalTextbox = new System.Windows.Forms.MaskedTextBox();
+            this.journal_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tanggal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kode_akun = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nama_Akun = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.branch_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.branch_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PaymentMethodID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PaymentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.debet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kredit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deskripsi_akun = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TransaksiAccountGridView)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -165,6 +165,7 @@
             // 
             this.TransaksiAccountGridView.AllowUserToAddRows = false;
             this.TransaksiAccountGridView.AllowUserToDeleteRows = false;
+            this.TransaksiAccountGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.TransaksiAccountGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -204,75 +205,6 @@
             this.TransaksiAccountGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.TransaksiAccountGridView_CellFormatting);
             this.TransaksiAccountGridView.Enter += new System.EventHandler(this.TransaksiAccountGridView_Enter);
             this.TransaksiAccountGridView.Leave += new System.EventHandler(this.TransaksiAccountGridView_Leave);
-            // 
-            // journal_id
-            // 
-            this.journal_id.HeaderText = "KODE JOURNAL";
-            this.journal_id.Name = "journal_id";
-            this.journal_id.Visible = false;
-            // 
-            // Tanggal
-            // 
-            this.Tanggal.HeaderText = "TANGGAL";
-            this.Tanggal.MinimumWidth = 90;
-            this.Tanggal.Name = "Tanggal";
-            this.Tanggal.Width = 90;
-            // 
-            // Kode_akun
-            // 
-            this.Kode_akun.HeaderText = "KODE AKUN";
-            this.Kode_akun.Name = "Kode_akun";
-            this.Kode_akun.Visible = false;
-            // 
-            // Nama_Akun
-            // 
-            this.Nama_Akun.HeaderText = "NAMA AKUN";
-            this.Nama_Akun.MinimumWidth = 160;
-            this.Nama_Akun.Name = "Nama_Akun";
-            this.Nama_Akun.ReadOnly = true;
-            this.Nama_Akun.Width = 200;
-            // 
-            // branch_id
-            // 
-            this.branch_id.HeaderText = "KODE CABANG";
-            this.branch_id.Name = "branch_id";
-            this.branch_id.Visible = false;
-            // 
-            // branch_name
-            // 
-            this.branch_name.HeaderText = "CABANG";
-            this.branch_name.Name = "branch_name";
-            // 
-            // PaymentMethodID
-            // 
-            this.PaymentMethodID.HeaderText = "KODE BAYAR";
-            this.PaymentMethodID.Name = "PaymentMethodID";
-            this.PaymentMethodID.Visible = false;
-            // 
-            // PaymentMethod
-            // 
-            this.PaymentMethod.HeaderText = "PEMBAYARAN";
-            this.PaymentMethod.MinimumWidth = 125;
-            this.PaymentMethod.Name = "PaymentMethod";
-            this.PaymentMethod.Width = 125;
-            // 
-            // debet
-            // 
-            this.debet.HeaderText = "DEBET";
-            this.debet.MinimumWidth = 100;
-            this.debet.Name = "debet";
-            // 
-            // kredit
-            // 
-            this.kredit.HeaderText = "KREDIT";
-            this.kredit.MinimumWidth = 100;
-            this.kredit.Name = "kredit";
-            // 
-            // deskripsi_akun
-            // 
-            this.deskripsi_akun.HeaderText = "DESKRIPSI";
-            this.deskripsi_akun.Name = "deskripsi_akun";
-            this.deskripsi_akun.Visible = false;
             // 
             // searchButton
             // 
@@ -482,6 +414,81 @@
             this.NominalTextbox.TabIndex = 50;
             this.NominalTextbox.Enter += new System.EventHandler(this.NominalTextbox_Enter);
             // 
+            // journal_id
+            // 
+            this.journal_id.HeaderText = "KODE JOURNAL";
+            this.journal_id.Name = "journal_id";
+            this.journal_id.Visible = false;
+            this.journal_id.Width = 141;
+            // 
+            // Tanggal
+            // 
+            this.Tanggal.HeaderText = "TANGGAL";
+            this.Tanggal.MinimumWidth = 90;
+            this.Tanggal.Name = "Tanggal";
+            this.Tanggal.Width = 109;
+            // 
+            // Kode_akun
+            // 
+            this.Kode_akun.HeaderText = "KODE AKUN";
+            this.Kode_akun.Name = "Kode_akun";
+            this.Kode_akun.Visible = false;
+            this.Kode_akun.Width = 131;
+            // 
+            // Nama_Akun
+            // 
+            this.Nama_Akun.HeaderText = "NAMA AKUN";
+            this.Nama_Akun.MinimumWidth = 160;
+            this.Nama_Akun.Name = "Nama_Akun";
+            this.Nama_Akun.ReadOnly = true;
+            this.Nama_Akun.Width = 160;
+            // 
+            // branch_id
+            // 
+            this.branch_id.HeaderText = "KODE CABANG";
+            this.branch_id.Name = "branch_id";
+            this.branch_id.Visible = false;
+            this.branch_id.Width = 153;
+            // 
+            // branch_name
+            // 
+            this.branch_name.HeaderText = "CABANG";
+            this.branch_name.Name = "branch_name";
+            this.branch_name.Width = 101;
+            // 
+            // PaymentMethodID
+            // 
+            this.PaymentMethodID.HeaderText = "KODE BAYAR";
+            this.PaymentMethodID.Name = "PaymentMethodID";
+            this.PaymentMethodID.Visible = false;
+            this.PaymentMethodID.Width = 138;
+            // 
+            // PaymentMethod
+            // 
+            this.PaymentMethod.HeaderText = "PEMBAYARAN";
+            this.PaymentMethod.MinimumWidth = 125;
+            this.PaymentMethod.Name = "PaymentMethod";
+            this.PaymentMethod.Width = 142;
+            // 
+            // debet
+            // 
+            this.debet.HeaderText = "DEBET";
+            this.debet.MinimumWidth = 100;
+            this.debet.Name = "debet";
+            // 
+            // kredit
+            // 
+            this.kredit.HeaderText = "KREDIT";
+            this.kredit.MinimumWidth = 100;
+            this.kredit.Name = "kredit";
+            // 
+            // deskripsi_akun
+            // 
+            this.deskripsi_akun.HeaderText = "DESKRIPSI";
+            this.deskripsi_akun.Name = "deskripsi_akun";
+            this.deskripsi_akun.Visible = false;
+            this.deskripsi_akun.Width = 121;
+            // 
             // dataTransaksiJurnalHarianDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -543,6 +550,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox branchCombobox;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.MaskedTextBox NominalTextbox;
         private System.Windows.Forms.DataGridViewTextBoxColumn journal_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tanggal;
         private System.Windows.Forms.DataGridViewTextBoxColumn Kode_akun;
@@ -554,6 +562,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn debet;
         private System.Windows.Forms.DataGridViewTextBoxColumn kredit;
         private System.Windows.Forms.DataGridViewTextBoxColumn deskripsi_akun;
-        private System.Windows.Forms.MaskedTextBox NominalTextbox;
     }
 }
