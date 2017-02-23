@@ -337,6 +337,7 @@ namespace AlphaSoft
             loadtypeaccount();
             LoadBranchInfo();
             loadTransaksi();
+            errorLabel.Text = "";
         }
 
         private void dataTransaksiJurnalHarianDetailForm_Activated(object sender, EventArgs e)

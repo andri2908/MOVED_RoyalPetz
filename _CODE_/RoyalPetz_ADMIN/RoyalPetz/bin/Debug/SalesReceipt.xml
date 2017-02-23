@@ -1,0 +1,43 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="SALES_DISCOUNT_FINAL" type="xs:double" minOccurs="0" />
+                <xs:element name="ID" type="xs:unsignedInt" minOccurs="0" />
+                <xs:element name="DATE" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="INVOICE" type="xs:string" minOccurs="0" />
+                <xs:element name="CUSTOMER" type="xs:string" minOccurs="0" />
+                <xs:element name="PRODUCT" type="xs:string" minOccurs="0" />
+                <xs:element name="QTY" type="xs:double" minOccurs="0" />
+                <xs:element name="PRICE" type="xs:double" minOccurs="0" />
+                <xs:element name="POTONGAN" type="xs:double" minOccurs="0" />
+                <xs:element name="SUBTOTAL" type="xs:double" minOccurs="0" />
+                <xs:element name="PAYMENT" type="xs:double" minOccurs="0" />
+                <xs:element name="CHANGE" type="xs:double" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <SALES_DISCOUNT_FINAL>10000</SALES_DISCOUNT_FINAL>
+    <ID>1</ID>
+    <DATE>2017-02-24T00:33:00+07:00</DATE>
+    <INVOICE>SLO001-1</INVOICE>
+    <CUSTOMER>P-UMUM</CUSTOMER>
+    <PRODUCT>RISHY ADLT DOG 1 KG</PRODUCT>
+    <QTY>1</QTY>
+    <PRICE>22000</PRICE>
+    <POTONGAN>0</POTONGAN>
+    <SUBTOTAL>22000</SUBTOTAL>
+    <PAYMENT>12000</PAYMENT>
+    <CHANGE>0</CHANGE>
+  </Table>
+</NewDataSet>

@@ -113,7 +113,7 @@ namespace AlphaSoft
                         selectedCustomerID = rdr.GetInt32("CUSTOMER_ID");
                         salesDate = rdr.GetDateTime("SALES_DATE");
                         invoiceDateTextBox.Text = String.Format(culture, "{0:dd MMM yyyy}", salesDate);
-                        globalTotalValue = rdr.GetDouble("SALES_TOTAL");
+                        globalTotalValue = rdr.GetDouble("SALES_TOTAL") - rdr.GetDouble("SALES_DISCOUNT_FINAL");
                     }
                }
             }
@@ -231,7 +231,7 @@ namespace AlphaSoft
             { 
                 if (globalCalculation)
                 {
-                    globalTotalValue = Convert.ToDouble(DS.getDataSingleValue("SELECT SALES_TOTAL FROM SALES_HEADER WHERE SALES_INVOICE = '" + selectedSOInvoice+"'"));
+                    globalTotalValue = Convert.ToDouble(DS.getDataSingleValue("SELECT (SALES_TOTAL-SALES_DISCOUNT_FINAL) FROM SALES_HEADER WHERE SALES_INVOICE = '" + selectedSOInvoice+ "'"));// AND REV_NO = " + selectedSORev));
                 }
             
                 totalPayment = Convert.ToDouble(DS.getDataSingleValue("SELECT IFNULL(SUM(PAYMENT_NOMINAL), 0) AS PAYMENT FROM PAYMENT_CREDIT WHERE PAYMENT_INVALID = 0 AND CREDIT_ID = " + selectedCreditID));
