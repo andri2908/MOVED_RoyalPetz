@@ -82,6 +82,7 @@
             this.partaiMargin = new System.Windows.Forms.TextBox();
             this.ecerMargin = new System.Windows.Forms.TextBox();
             this.expiredCheckBox = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -94,7 +95,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label15.Location = new System.Drawing.Point(467, 412);
+            this.label15.Location = new System.Drawing.Point(479, 412);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(158, 18);
             this.label15.TabIndex = 77;
@@ -178,7 +179,7 @@
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Location = new System.Drawing.Point(631, 439);
+            this.button1.Location = new System.Drawing.Point(643, 439);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(26, 26);
             this.button1.TabIndex = 39;
@@ -189,7 +190,7 @@
             // 
             this.panelImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panelImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelImage.Location = new System.Drawing.Point(470, 439);
+            this.panelImage.Location = new System.Drawing.Point(482, 439);
             this.panelImage.Name = "panelImage";
             this.panelImage.Size = new System.Drawing.Size(148, 137);
             this.panelImage.TabIndex = 40;
@@ -260,7 +261,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label13.Location = new System.Drawing.Point(-214, 72);
+            this.label13.Location = new System.Drawing.Point(-200, 72);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(145, 18);
             this.label13.TabIndex = 70;
@@ -331,7 +332,7 @@
             // 
             this.noRakKolomTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.noRakKolomTextBox.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noRakKolomTextBox.Location = new System.Drawing.Point(624, 294);
+            this.noRakKolomTextBox.Location = new System.Drawing.Point(636, 294);
             this.noRakKolomTextBox.Mask = "00";
             this.noRakKolomTextBox.Name = "noRakKolomTextBox";
             this.noRakKolomTextBox.Size = new System.Drawing.Size(33, 26);
@@ -344,7 +345,7 @@
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label19.Location = new System.Drawing.Point(470, 297);
+            this.label19.Location = new System.Drawing.Point(482, 297);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(118, 18);
             this.label19.TabIndex = 21;
@@ -378,7 +379,7 @@
             this.noRakBarisTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.noRakBarisTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.noRakBarisTextBox.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noRakBarisTextBox.Location = new System.Drawing.Point(584, 294);
+            this.noRakBarisTextBox.Location = new System.Drawing.Point(596, 294);
             this.noRakBarisTextBox.MaxLength = 2;
             this.noRakBarisTextBox.Name = "noRakBarisTextBox";
             this.noRakBarisTextBox.Size = new System.Drawing.Size(34, 26);
@@ -585,6 +586,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.limitStokTextBox);
             this.groupBox2.Controls.Add(this.stokAwalTextBox);
             this.groupBox2.Controls.Add(this.label13);
@@ -592,7 +594,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(2, 284);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(451, 121);
+            this.groupBox2.Size = new System.Drawing.Size(465, 121);
             this.groupBox2.TabIndex = 42;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "STOK PRODUK";
@@ -600,9 +602,12 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.hargaGrosirTextBox);
+            this.groupBox3.Controls.Add(this.grosirMargin);
             this.groupBox3.Controls.Add(this.hargaPartaiTextBox);
+            this.groupBox3.Controls.Add(this.partaiMargin);
             this.groupBox3.Controls.Add(this.hargaEcerTextBox);
             this.groupBox3.Controls.Add(this.hppTextBox);
+            this.groupBox3.Controls.Add(this.ecerMargin);
             this.groupBox3.Controls.Add(this.label21);
             this.groupBox3.Controls.Add(this.label22);
             this.groupBox3.Controls.Add(this.label24);
@@ -610,7 +615,7 @@
             this.groupBox3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(2, 411);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(451, 165);
+            this.groupBox3.Size = new System.Drawing.Size(465, 165);
             this.groupBox3.TabIndex = 43;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "HARGA PRODUK";
@@ -667,7 +672,7 @@
             // 
             this.expDatePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.expDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.expDatePicker.Location = new System.Drawing.Point(532, 363);
+            this.expDatePicker.Location = new System.Drawing.Point(544, 363);
             this.expDatePicker.Name = "expDatePicker";
             this.expDatePicker.Size = new System.Drawing.Size(144, 27);
             this.expDatePicker.TabIndex = 78;
@@ -678,7 +683,7 @@
             this.expLabel.AutoSize = true;
             this.expLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.expLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.expLabel.Location = new System.Drawing.Point(470, 366);
+            this.expLabel.Location = new System.Drawing.Point(482, 366);
             this.expLabel.Name = "expLabel";
             this.expLabel.Size = new System.Drawing.Size(59, 18);
             this.expLabel.TabIndex = 79;
@@ -689,10 +694,10 @@
             // 
             this.grosirMargin.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.grosirMargin.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grosirMargin.Location = new System.Drawing.Point(381, 502);
+            this.grosirMargin.Location = new System.Drawing.Point(379, 124);
             this.grosirMargin.Name = "grosirMargin";
             this.grosirMargin.ReadOnly = true;
-            this.grosirMargin.Size = new System.Drawing.Size(66, 27);
+            this.grosirMargin.Size = new System.Drawing.Size(80, 27);
             this.grosirMargin.TabIndex = 77;
             this.grosirMargin.Text = "0";
             this.grosirMargin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -701,10 +706,10 @@
             // 
             this.partaiMargin.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.partaiMargin.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.partaiMargin.Location = new System.Drawing.Point(381, 469);
+            this.partaiMargin.Location = new System.Drawing.Point(379, 91);
             this.partaiMargin.Name = "partaiMargin";
             this.partaiMargin.ReadOnly = true;
-            this.partaiMargin.Size = new System.Drawing.Size(66, 27);
+            this.partaiMargin.Size = new System.Drawing.Size(80, 27);
             this.partaiMargin.TabIndex = 78;
             this.partaiMargin.Text = "0";
             this.partaiMargin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -713,10 +718,10 @@
             // 
             this.ecerMargin.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.ecerMargin.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ecerMargin.Location = new System.Drawing.Point(381, 436);
+            this.ecerMargin.Location = new System.Drawing.Point(379, 58);
             this.ecerMargin.Name = "ecerMargin";
             this.ecerMargin.ReadOnly = true;
-            this.ecerMargin.Size = new System.Drawing.Size(66, 27);
+            this.ecerMargin.Size = new System.Drawing.Size(80, 27);
             this.ecerMargin.TabIndex = 79;
             this.ecerMargin.Text = "0";
             this.ecerMargin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -728,13 +733,25 @@
             this.expiredCheckBox.Checked = true;
             this.expiredCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.expiredCheckBox.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.expiredCheckBox.Location = new System.Drawing.Point(473, 335);
+            this.expiredCheckBox.Location = new System.Drawing.Point(485, 335);
             this.expiredCheckBox.Name = "expiredCheckBox";
             this.expiredCheckBox.Size = new System.Drawing.Size(165, 22);
             this.expiredCheckBox.TabIndex = 80;
             this.expiredCheckBox.Text = "Produk Kadaluarsa";
             this.expiredCheckBox.UseVisualStyleBackColor = true;
             this.expiredCheckBox.CheckedChanged += new System.EventHandler(this.expiredCheckBox_CheckedChanged);
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label4.Location = new System.Drawing.Point(6, 72);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(109, 18);
+            this.label4.TabIndex = 73;
+            this.label4.Text = "LIMIT STOK";
             // 
             // dataProdukDetailForm
             // 
@@ -743,11 +760,8 @@
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(756, 661);
             this.Controls.Add(this.expiredCheckBox);
-            this.Controls.Add(this.grosirMargin);
             this.Controls.Add(this.expDatePicker);
-            this.Controls.Add(this.partaiMargin);
             this.Controls.Add(this.expLabel);
-            this.Controls.Add(this.ecerMargin);
             this.Controls.Add(this.nonAktifCheckbox);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label15);
@@ -838,5 +852,6 @@
         private System.Windows.Forms.TextBox partaiMargin;
         private System.Windows.Forms.TextBox ecerMargin;
         private System.Windows.Forms.CheckBox expiredCheckBox;
+        private System.Windows.Forms.Label label4;
     }
 }

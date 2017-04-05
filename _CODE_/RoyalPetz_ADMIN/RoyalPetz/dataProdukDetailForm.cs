@@ -1192,7 +1192,7 @@ namespace AlphaSoft
                 {
                     //                    expLabel.Visible = false;
                     //                    expDatePicker.Visible = false;
-                    expDatePicker.Enabled = false;
+                    //expDatePicker.Enabled = false;
                 }
             }
 
