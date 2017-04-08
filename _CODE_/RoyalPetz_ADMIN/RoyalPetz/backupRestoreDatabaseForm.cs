@@ -105,7 +105,7 @@ namespace AlphaSoft
             
             ipServer = DS.getIPServer();
             proc.StartInfo.FileName = "CMD.exe";
-            proc.StartInfo.Arguments = "/C " + "mysqldump -h " + ipServer + " -u SYS_POS_ADMIN -ppass123 sys_pos > \"" + fileName + "\"";
+            proc.StartInfo.Arguments = "/C " + "mysqldump -h " + ipServer + " -uSYS_POS_ADMIN -ppass123 sys_pos > \"" + fileName + "\"";
             proc.Exited += new EventHandler(ProcessExited);
             proc.EnableRaisingEvents = true;
             gUtil.saveSystemDebugLog(0, "BACKUP DATABASE PROCESS STARTED [" + fileName + "]");
@@ -147,7 +147,7 @@ namespace AlphaSoft
             ipServer = DS.getIPServer();
 
             proc.StartInfo.FileName = "CMD.exe";
-            proc.StartInfo.Arguments = "/C " + "mysql -h " + ipServer + " -u SYS_POS_ADMIN -ppass123 sys_pos < \"" + fileName + "\"";
+            proc.StartInfo.Arguments = "/C " + "mysql -h " + ipServer + " -uSYS_POS_ADMIN -ppass123 sys_pos < \"" + fileName + "\"";
             proc.Exited += new EventHandler(ProcessExited);
             proc.EnableRaisingEvents = true;
             gUtil.saveSystemDebugLog(0, "RESTORE DATABASE PROCESS STARTED [" + fileName + "]");

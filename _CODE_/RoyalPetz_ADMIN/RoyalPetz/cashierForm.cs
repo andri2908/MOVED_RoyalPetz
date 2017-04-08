@@ -3512,5 +3512,10 @@ namespace AlphaSoft
                 }
             }
         }
+
+        private void cashierForm_Resize(object sender, EventArgs e)
+        {
+            cashierDataGridView.ResumeLayout();
+        }
     }
 }

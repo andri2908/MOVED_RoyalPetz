@@ -2059,7 +2059,7 @@ namespace AlphaSoft
                     subtotalList[rowSelectedIndex] = "0";
 
                     if (detailRequestQty.Count >= rowSelectedIndex + 1)
-                        if (detailGridView.CurrentCell.OwningColumn.Name == "hpp")
+                        if (columnName == "hpp")
                             detailHpp[rowSelectedIndex] = "0";
                         else
                             detailRequestQty[rowSelectedIndex] = "0";
@@ -2072,7 +2072,7 @@ namespace AlphaSoft
                 }
 
                 if (detailRequestQty.Count >= rowSelectedIndex + 1)
-                    if (detailGridView.CurrentCell.OwningColumn.Name == "hpp")
+                    if (columnName == "hpp")
                         previousInput = detailHpp[rowSelectedIndex];
                     else
                         previousInput = detailRequestQty[rowSelectedIndex];
@@ -2106,14 +2106,14 @@ namespace AlphaSoft
                     if (gUtil.matchRegEx(cellValue, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
                         && (cellValue.Length > 0))
                     {
-                        if (detailGridView.CurrentCell.OwningColumn.Name == "hpp")
+                        if (columnName == "hpp")
                             detailHpp[rowSelectedIndex] = cellValue;
                         else
                             detailRequestQty[rowSelectedIndex] = cellValue;
                     }
                     else
                     {
-                        if (detailGridView.CurrentCell.OwningColumn.Name == "hpp")
+                        if (columnName == "hpp")
                             selectedRow.Cells[columnName].Value = detailHpp[rowSelectedIndex];
                         else
                             selectedRow.Cells[columnName].Value = detailRequestQty[rowSelectedIndex];
@@ -2122,7 +2122,7 @@ namespace AlphaSoft
 
                 try
                 {
-                    if (detailGridView.CurrentCell.OwningColumn.Name == "hpp")
+                    if (columnName == "hpp")
                     {
                         //changes on hpp
                         hppValue = Convert.ToDouble(cellValue);
