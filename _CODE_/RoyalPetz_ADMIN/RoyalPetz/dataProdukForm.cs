@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using Hotkeys;
+using System.Drawing.Printing;
+using System.Reflection;
 
 namespace AlphaSoft
 {
@@ -484,6 +486,9 @@ namespace AlphaSoft
             {
                 if (rdr.HasRows)
                 {
+                    dataProdukGridView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing; //or even better .DisableResizing. Most time consumption enum is DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+                   // dataProdukGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.None;
+                    
                     dt.Load(rdr);
                     dataProdukGridView.DataSource = dt;
 
@@ -494,7 +499,8 @@ namespace AlphaSoft
                     {
                         dataProdukGridView.Columns["TGL KADALUARSA"].Width = 180;
                     }
-                   // dataProdukGridView.Columns["DESKRIPSI PRODUK"].Width = 300;                    
+                    // dataProdukGridView.Columns["DESKRIPSI PRODUK"].Width = 300;                    
+                    //dataProdukGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
                 }
             }
         }
@@ -593,6 +599,7 @@ namespace AlphaSoft
             gutil.reArrangeTabOrder(this);
 
             kodeProductTextBox.Select();
+            typeof(Control).GetProperty("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(dataProdukGridView, true, null);
         }
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
