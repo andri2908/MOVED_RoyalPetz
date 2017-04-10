@@ -132,6 +132,8 @@ namespace AlphaSoft
                 }
             }
 
+            sqlCommand = sqlCommand + " ORDER BY SUPPLIER_FULL_NAME ASC";
+
             using (rdr = DS.getData(sqlCommand))
             {
                 dataSupplierDataGridView.DataSource = null;

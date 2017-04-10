@@ -44,10 +44,10 @@
             this.jumlahAwalMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
             this.saveButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.expDatePicker = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.expDatePicker = new System.Windows.Forms.DateTimePicker();
             this.expLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -60,7 +60,7 @@
             this.panel1.Controls.Add(this.errorLabel);
             this.panel1.Location = new System.Drawing.Point(1, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(564, 29);
+            this.panel1.Size = new System.Drawing.Size(638, 29);
             this.panel1.TabIndex = 16;
             // 
             // errorLabel
@@ -133,7 +133,7 @@
             this.descriptionTextBox.Location = new System.Drawing.Point(204, 145);
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
-            this.descriptionTextBox.Size = new System.Drawing.Size(354, 97);
+            this.descriptionTextBox.Size = new System.Drawing.Size(425, 97);
             this.descriptionTextBox.TabIndex = 17;
             // 
             // label3
@@ -208,7 +208,7 @@
             // saveButton
             // 
             this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(227, 253);
+            this.saveButton.Location = new System.Drawing.Point(286, 255);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(95, 37);
             this.saveButton.TabIndex = 18;
@@ -238,10 +238,20 @@
             this.groupBox1.Controls.Add(this.expLabel);
             this.groupBox1.Location = new System.Drawing.Point(1, 37);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(564, 303);
+            this.groupBox1.Size = new System.Drawing.Size(638, 303);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // expDatePicker
+            // 
+            this.expDatePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.expDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.expDatePicker.Location = new System.Drawing.Point(414, 112);
+            this.expDatePicker.Name = "expDatePicker";
+            this.expDatePicker.Size = new System.Drawing.Size(215, 27);
+            this.expDatePicker.TabIndex = 48;
+            this.expDatePicker.Visible = false;
             // 
             // label7
             // 
@@ -276,16 +286,6 @@
             this.label9.TabIndex = 45;
             this.label9.Text = ":";
             // 
-            // expDatePicker
-            // 
-            this.expDatePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.expDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.expDatePicker.Location = new System.Drawing.Point(414, 112);
-            this.expDatePicker.Name = "expDatePicker";
-            this.expDatePicker.Size = new System.Drawing.Size(144, 27);
-            this.expDatePicker.TabIndex = 48;
-            this.expDatePicker.Visible = false;
-            // 
             // expLabel
             // 
             this.expLabel.AutoSize = true;
@@ -303,7 +303,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(566, 345);
+            this.ClientSize = new System.Drawing.Size(642, 345);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

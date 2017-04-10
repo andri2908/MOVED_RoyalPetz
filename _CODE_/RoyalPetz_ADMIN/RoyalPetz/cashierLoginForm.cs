@@ -78,16 +78,46 @@ namespace AlphaSoft
 
         private bool dataValidated()
         {
-            if (startAmountBox.Text.Length <= 0 && loginState == 0)
+            //if (startAmountBox.Text.Length <= 0 && loginState == 0)
+            string textInput = "";
+
+            if (loginState == 0)
             {
-                errorLabel.Text = "START AMOUNT TIDAK BOLEH KOSONG";
-                return false;
+                if (textBox1.Text.Length <= 0)
+                {
+                    errorLabel.Text = "START AMOUNT TIDAK BOLEH KOSONG";
+                    return false;
+                }
+
+                textInput = gUtil.allTrim(textBox1.Text);
+                textInput = textInput.Replace(",", "");
+                textInput = textInput.Replace(".", "");
+
+                if (!gUtil.matchRegEx(textInput, globalUtilities.REGEX_NUMBER_ONLY))
+                {
+                    errorLabel.Text = "INPUT START AMOUNT SALAH";
+                    return false;
+                }
             }
 
-            if (endAmountBox.Text.Length <= 0 && loginState == 1)
+            //if (endAmountBox.Text.Length <= 0 && loginState == 1)
+            if (loginState == 1)
             {
-                errorLabel.Text = "END AMOUNT TIDAK BOLEH KOSONG";
-                return false;
+                if (textBox2.Text.Length <= 0 )
+                {
+                    errorLabel.Text = "END AMOUNT TIDAK BOLEH KOSONG";
+                    return false;
+                }
+
+                textInput = gUtil.allTrim(textBox2.Text);
+                textInput = textInput.Replace(",", "");
+                textInput = textInput.Replace(".", "");
+
+                if (!gUtil.matchRegEx(textInput, globalUtilities.REGEX_NUMBER_ONLY))
+                {
+                    errorLabel.Text = "INPUT END AMOUNT SALAH";
+                    return false;
+                }
             }
 
             return true;
@@ -105,6 +135,11 @@ namespace AlphaSoft
             double totalNonCashTransaction = 0;
             double totalOtherTransaction = 0;
             MySqlException internalEX = null;
+            double startAmount = 0;
+            string startAmountInput = "";
+
+            double endAmount = 0;
+            string endAmountInput = "";
 
             DS.beginTransaction();
 
@@ -114,18 +149,29 @@ namespace AlphaSoft
 
                 if (loginState == 0)
                 {
+                    //startAmount = Convert.ToDouble(gUtil.allTrim(startAmountBox.Text));
+                    startAmountInput = gUtil.allTrim(textBox1.Text);
+                    startAmountInput = startAmountInput.Replace(",", "");
+                    startAmountInput = startAmountInput.Replace(".", "");
+                    startAmount = Convert.ToDouble(startAmountInput);
+
                     dateLogin = gUtil.getCustomStringFormatDate(DateTime.Now);//String.Format(culture, "{0:dd-M-yyyy HH:mm}", DateTime.Now);
 
                     // INSERT TO CASHIER LOG
-                    sqlCommand = "INSERT INTO CASHIER_LOG (USER_ID, DATE_LOGIN, AMOUNT_START) VALUES (" + gUtil.getUserID() + ", STR_TO_DATE('" + dateLogin + "', '%d-%m-%Y %H:%i'), "+startAmountBox.Text+")";
+                    sqlCommand = "INSERT INTO CASHIER_LOG (USER_ID, DATE_LOGIN, AMOUNT_START) VALUES (" + gUtil.getUserID() + ", STR_TO_DATE('" + dateLogin + "', '%d-%m-%Y %H:%i'), "+ startAmount + ")";
 
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
 
-                    gUtil.saveSystemDebugLog(0, "INSERT DATA FOR A NEW CASHIER SESSION, SA="+startAmountBox.Text);
+                    gUtil.saveSystemDebugLog(0, "INSERT DATA FOR A NEW CASHIER SESSION, SA="+ startAmount);
                 }
                 else if (loginState == 1)
                 {
+                    endAmountInput = gUtil.allTrim(textBox2.Text);
+                    endAmountInput = endAmountInput.Replace(",", "");
+                    endAmountInput = endAmountInput.Replace(".", "");
+                    endAmount = Convert.ToDouble(endAmountInput);
+
                     dateLogOut = gUtil.getCustomStringFormatDate(DateTime.Now); //String.Format(culture, "{0:dd-M-yyyy HH:mm}", DateTime.Now);
 
                     dateTimeFrom = String.Format(culture, "{0:yyyyMMddHHmm}", dateTimeLogin);
@@ -152,11 +198,11 @@ namespace AlphaSoft
                                            "AND DATE_FORMAT(JOURNAL_DATETIME, '%Y%m%d%H%i') <= '" + dateTimeTo + "'";
                     totalOtherTransaction = Convert.ToDouble(DS.getDataSingleValue(sqlCommand));
 
-                    sqlCommand = "UPDATE CASHIER_LOG SET DATE_LOGOUT = STR_TO_DATE('" + dateLogOut + "', '%d-%m-%Y %H:%i'), AMOUNT_END = " + endAmountBox.Text + ", COMMENT = '" + remarkTextBox.Text + "', TOTAL_CASH_TRANSACTION = " + totalCashTransaction + ", TOTAL_NON_CASH_TRANSACTION = " + totalNonCashTransaction + ", TOTAL_OTHER_TRANSACTION = " + totalOtherTransaction + " WHERE ID = " + logEntryID;
+                    sqlCommand = "UPDATE CASHIER_LOG SET DATE_LOGOUT = STR_TO_DATE('" + dateLogOut + "', '%d-%m-%Y %H:%i'), AMOUNT_END = " + endAmount + ", COMMENT = '" + remarkTextBox.Text + "', TOTAL_CASH_TRANSACTION = " + totalCashTransaction + ", TOTAL_NON_CASH_TRANSACTION = " + totalNonCashTransaction + ", TOTAL_OTHER_TRANSACTION = " + totalOtherTransaction + " WHERE ID = " + logEntryID;
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
 
-                    gUtil.saveSystemDebugLog(0, "UPDATE DATA FOR CASHIER END SESSION, EA="+ endAmountBox.Text+", TC = "+totalCashTransaction+", TN="+totalNonCashTransaction+", TO="+totalOtherTransaction);
+                    gUtil.saveSystemDebugLog(0, "UPDATE DATA FOR CASHIER END SESSION, EA="+ endAmount + ", TC = " +totalCashTransaction+", TN="+totalNonCashTransaction+", TO="+totalOtherTransaction);
 
                 }
 
@@ -193,7 +239,16 @@ namespace AlphaSoft
 
         private void continueButton_Click(object sender, EventArgs e)
         {
-            if (DialogResult.Yes == MessageBox.Show("WARNING", "SHIFT KASIR BERAKHIR?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            string messagePrompt = "";
+
+            if (loginState == 0)
+                messagePrompt = "SHIFT KASIR MULAI?";
+            if (loginState == 2)
+                messagePrompt = "SHIFT KASIR DILANJUTKAN";
+            else
+                messagePrompt = "SHIFT KASIR BERAKHIR?";
+
+           // if (DialogResult.Yes == MessageBox.Show("WARNING", messagePrompt, MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
                 if (saveData())
                 { 
@@ -224,7 +279,7 @@ namespace AlphaSoft
                 }
                 else
                 {
-                    this.Close();
+                   // this.Close();
                 }
             }
         }
@@ -250,8 +305,10 @@ namespace AlphaSoft
                 // KEY IN THE STARTING AMOUNT FOR CASHIER MONEY
                 gUtil.saveSystemDebugLog(0, "DISPLAY CASHIER LOG SCREEN FOR CASHIER LOGIN");
 
-                startAmountBox.ReadOnly = false;
-                endAmountBox.ReadOnly = true;
+                //startAmountBox.ReadOnly = false;
+                //endAmountBox.ReadOnly = true;
+                textBox1.ReadOnly = false;
+                textBox2.ReadOnly = true;
                 remarkTextBox.ReadOnly = true;
 
                 startTimeValue = String.Format(culture, "{0:dd-M-yyyy HH:mm}", DateTime.Now);
@@ -262,8 +319,10 @@ namespace AlphaSoft
                 // KEY IN THE END AMOUNT FOR CASHIER MONEY
                 gUtil.saveSystemDebugLog(0, "DISPLAY CASHIER LOG SCREEN FOR CASHIER LOGOUT");
 
-                startAmountBox.ReadOnly = true;
-                endAmountBox.ReadOnly = false;
+                //startAmountBox.ReadOnly = true;
+                //endAmountBox.ReadOnly = false;
+                textBox1.ReadOnly = true;
+                textBox2.ReadOnly = false;
                 remarkTextBox.ReadOnly = false;
 
                 endTimeValue = String.Format(culture, "{0:dd-M-yyyy HH:mm}", DateTime.Now);
@@ -273,7 +332,10 @@ namespace AlphaSoft
                 startTimeValue = String.Format(culture, "{0:dd-M-yyyy HH:mm}", dateTimeLogin);
                 startTimeTextBox.Text = startTimeValue;
 
-                startAmountBox.Text = DS.getDataSingleValue("SELECT IFNULL(AMOUNT_START, 0) FROM CASHIER_LOG WHERE ISNULL(DATE_LOGOUT) AND USER_ID = " + gUtil.getUserID() + " ORDER BY DATE_LOGIN DESC LIMIT 1").ToString();
+                //startAmountBox.Text = DS.getDataSingleValue("SELECT IFNULL(AMOUNT_START, 0) FROM CASHIER_LOG WHERE ISNULL(DATE_LOGOUT) AND USER_ID = " + gUtil.getUserID() + " ORDER BY DATE_LOGIN DESC LIMIT 1").ToString();
+                textBox1.Text = DS.getDataSingleValue("SELECT IFNULL(AMOUNT_START, 0) FROM CASHIER_LOG WHERE ISNULL(DATE_LOGOUT) AND USER_ID = " + gUtil.getUserID() + " ORDER BY DATE_LOGIN DESC LIMIT 1").ToString();
+                genericKeyUp(textBox1);
+
                 logEntryID = Convert.ToInt32(DS.getDataSingleValue("SELECT IFNULL(ID, 0) FROM CASHIER_LOG WHERE ISNULL(DATE_LOGOUT) AND USER_ID = " + gUtil.getUserID() + " ORDER BY DATE_LOGIN DESC LIMIT 1"));
 
                 // LOGOUT or USER HASN'T LOGGED OUT YET
@@ -283,7 +345,8 @@ namespace AlphaSoft
                     if (DialogResult.Yes == MessageBox.Show("USER BELUM LOG OUT, CONTINUE ?", "WARNING", MessageBoxButtons.YesNo))
                     {
                         loginState = 2;
-                        endAmountBox.ReadOnly = true;
+                        //endAmountBox.ReadOnly = true;
+                        textBox2.ReadOnly = true;
                         remarkTextBox.ReadOnly = true;
                         endTimeTextBox.Text = "";
 
@@ -317,6 +380,82 @@ namespace AlphaSoft
         private void cashierLoginForm_Deactivate(object sender, EventArgs e)
         {
             unregisterGlobalHotkey(); 
+        }
+
+        private void genericKeyUp(TextBox textBoxInput)
+        {
+            string textInput = gUtil.allTrim(textBoxInput.Text);
+            textInput = textInput.Replace(",", "");
+            textInput = textInput.Replace(".", "");
+            double startAmount = 0;
+
+            if (gUtil.matchRegEx(textInput, globalUtilities.REGEX_NUMBER_ONLY))
+            {
+                startAmount = Convert.ToDouble(textInput);
+                textBoxInput.Text = startAmount.ToString(globalUtilities.CELL_FORMATTING_NUMERIC_FORMAT);
+
+                textBoxInput.Select(textBoxInput.Text.Length, 1);
+                errorLabel.Text = "";
+            }
+            else if (textInput.Length >0)
+            {
+                errorLabel.Text = "INPUT SALAH";
+            }
+        }
+
+        private void genericKeyDown(TextBox textBoxInput)
+        {
+            string textInput = gUtil.allTrim(textBoxInput.Text);
+            textInput = textInput.Replace(",", "");
+            textInput = textInput.Replace(".", "");
+
+            textBoxInput.Text = textInput;
+
+            textBoxInput.Select(textInput.Length, 1);
+        }
+
+        private void textBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Left && e.KeyCode != Keys.Right)
+                genericKeyUp(textBox1);
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Left && e.KeyCode != Keys.Right)
+                genericKeyDown(textBox1);
+        }
+
+        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Left && e.KeyCode != Keys.Right)
+                genericKeyDown(textBox2);
+        }
+
+        private void textBox2_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Left && e.KeyCode != Keys.Right)
+                genericKeyUp(textBox2);
+        }
+
+        private void textBox1_Enter(object sender, EventArgs e)
+        {
+            //genericKeyDown(textBox1);
+        }
+
+        private void textBox2_Enter(object sender, EventArgs e)
+        {
+            //genericKeyDown(textBox2);
+        }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            genericKeyUp(textBox1);
+        }
+
+        private void textBox2_Leave(object sender, EventArgs e)
+        {
+            genericKeyUp(textBox2);
         }
     }
 }

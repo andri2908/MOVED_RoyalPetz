@@ -1255,11 +1255,15 @@ namespace AlphaSoft
                 // PRODUCT IS SERVICE
                 stokAwalTextBox.Enabled = false;
                 limitStokTextBox.Enabled = false;
+                expDatePicker.Enabled = false;
+                expiredCheckBox.Enabled = false;
             }
             else
             {
                 stokAwalTextBox.Enabled = true;
                 limitStokTextBox.Enabled = true;
+                expDatePicker.Enabled = true;
+                expiredCheckBox.Enabled = true;
             }
         }
 

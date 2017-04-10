@@ -89,7 +89,7 @@ namespace AlphaSoft
             MySqlDataReader rdr;
             string sqlCommand;
 
-            sqlCommand = "SELECT SUPPLIER_ID, SUPPLIER_FULL_NAME FROM MASTER_SUPPLIER WHERE SUPPLIER_ACTIVE = 1";
+            sqlCommand = "SELECT SUPPLIER_ID, SUPPLIER_FULL_NAME FROM MASTER_SUPPLIER WHERE SUPPLIER_ACTIVE = 1 ORDER BY SUPPLIER_FULL_NAME ASC";
 
             supplierCombo.Items.Clear();
             supplierHiddenCombo.Items.Clear();
