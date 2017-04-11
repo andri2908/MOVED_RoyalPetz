@@ -235,7 +235,7 @@
             // continueButton
             // 
             this.continueButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.continueButton.Location = new System.Drawing.Point(177, 251);
+            this.continueButton.Location = new System.Drawing.Point(167, 242);
             this.continueButton.Name = "continueButton";
             this.continueButton.Size = new System.Drawing.Size(133, 37);
             this.continueButton.TabIndex = 68;
@@ -302,7 +302,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(466, 326);
+            this.ClientSize = new System.Drawing.Size(468, 326);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);

@@ -1723,7 +1723,7 @@ namespace AlphaSoft
             } else
             {
                 //update
-                sqlcommand = "UPDATE SUPPLIER_HISTORY SET LAST_SUPPLY = " + "STR_TO_DATE('" + tgltrans + "', '%d-%m-%Y')" + " WHERE PRODUCT_ID = " + productID + " AND SUPPLIER_ID = " + supplierID;
+                sqlcommand = "UPDATE SUPPLIER_HISTORY SET LAST_SUPPLY = " + "STR_TO_DATE('" + tgltrans + "', '%d-%m-%Y')" + " WHERE PRODUCT_ID = '" + productID + "' AND SUPPLIER_ID = " + supplierID;
             }
 
             //DS.beginTransaction();

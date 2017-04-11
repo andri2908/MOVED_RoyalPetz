@@ -2007,24 +2007,28 @@ namespace AlphaSoft
             if (salesEditStatus == 0)
             {
                 DS.beginTransaction();
-                try
-                {
-                    sqlCommand = "UPDATE SALES_HEADER SET IN_EDIT_MODE = 1 WHERE SALES_INVOICE = '" + selectedsalesinvoice + "'";
 
-                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                        throw internalEX;
-
-                    DS.commit();
-                    validToContinue = true;
-                }
-                catch(Exception e)
-                {
-                    validToContinue = false;
-                }
-
-                if (!validToContinue)
+                if (originModuleID == globalConstants.REVISI_NOTA)
                 { 
-                    return;
+                    try
+                    {
+                        sqlCommand = "UPDATE SALES_HEADER SET IN_EDIT_MODE = 1 WHERE SALES_INVOICE = '" + selectedsalesinvoice + "'";
+
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
+
+                        DS.commit();
+                        validToContinue = true;
+                    }
+                    catch(Exception e)
+                    {
+                        validToContinue = false;
+                    }
+
+                    if (!validToContinue)
+                    { 
+                        return;
+                    }
                 }
 
                 // PULL HEADER DATA
