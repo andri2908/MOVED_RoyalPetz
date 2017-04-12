@@ -97,6 +97,9 @@ namespace AlphaSoft
             customerCombo.Items.Clear();
             customerHiddenCombo.Items.Clear();
 
+            customerCombo.Items.Add("P-UMUM");
+            customerHiddenCombo.Items.Add(0);
+
             using (rdr = DS.getData(sqlCommand))
             {
                 if (rdr.HasRows)
@@ -128,7 +131,7 @@ namespace AlphaSoft
                                        "FROM SALES_HEADER SH, MASTER_CUSTOMER MC " +
                                        "WHERE SH.CUSTOMER_ID = MC.CUSTOMER_ID";
 
-           sqlClause2 = "SELECT ID, SALES_INVOICE AS 'NO INVOICE', '' AS 'CUSTOMER', DATE_FORMAT(SALES_DATE, '%d-%M-%Y') AS 'TGL INVOICE', (SALES_TOTAL - SALES_DISCOUNT_FINAL) AS 'TOTAL' " +
+           sqlClause2 = "SELECT ID, SALES_INVOICE AS 'NO INVOICE', 'P-UMUM' AS 'CUSTOMER', DATE_FORMAT(SALES_DATE, '%d-%M-%Y') AS 'TGL INVOICE', (SALES_TOTAL - SALES_DISCOUNT_FINAL) AS 'TOTAL' " +
                                        "FROM SALES_HEADER SH " +
                                        "WHERE SH.CUSTOMER_ID = 0";
            
@@ -146,7 +149,7 @@ namespace AlphaSoft
 
                 if (customerID > 0)
                 {
-                        sqlCommand = sqlClause1 + whereClause1 + " AND AND SH.CUSTOMER_ID = " + customerID;
+                        sqlCommand = sqlClause1 + whereClause1 + " AND SH.CUSTOMER_ID = " + customerID;
                 }
                 else
                 {
@@ -218,6 +221,26 @@ namespace AlphaSoft
 
             cashierForm cashierFormDisplay = new cashierForm(noInvoice, originModuleID);
             cashierFormDisplay.ShowDialog(this);
+
+            if (originModuleID == globalConstants.REVISI_NOTA)
+            {
+                string sqlCommand = "";
+                MySqlException internalEX = null;
+
+                DS.beginTransaction();
+                try
+                {
+                    sqlCommand = "UPDATE SALES_HEADER SET IN_EDIT_MODE = 0 WHERE SALES_INVOICE = '" + noInvoice + "'";
+
+                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        throw internalEX;
+
+                    DS.commit();
+                }
+                catch (Exception ex)
+                { }
+
+            }
         }
 
         private void dataPenerimaanBarang_KeyDown(object sender, KeyEventArgs e)
