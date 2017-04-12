@@ -18,7 +18,7 @@ namespace AlphaSoft
         private PrintDocument printdoc = new PrintDocument();
         private globalUtilities gutil = new globalUtilities();
 
-        private int[] arrPaperSize = { globalUtilities.PAPER_HALF_KWARTO, globalUtilities.PAPER_FULL_KWARTO };
+        private int[] arrPaperSize = { globalUtilities.PAPER_POS_RECEIPT, globalUtilities.PAPER_HALF_KWARTO, globalUtilities.PAPER_FULL_KWARTO };
 
         public SetPrinterForm()
         {
