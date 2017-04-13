@@ -1,0 +1,49 @@
+IF NEEDED
+=========
+- EXPORT PRODUCTS_RECEIVED_HEADER
+- EXPORT PRODUCTS_RECEIVED_DETAIL
+- EXPORT PURCHASE_ORDER_HEADER
+- EXPORT PURCHASE_ORDER_DETAIL
+- EXPORT PRODUCT_EXPIRY
+
+SEMUA SAVE AS ; SEMICOLON
+
+cust.csv
+========
+- stacust (harus replace)
+urutan customer
+ECER - 1
+GROSIR - 2
+PARTAI - 3
+
+check tgl masuk for 
+CHIKA PET SHOP
+
+vendor.csv
+==========
+
+product_category
+================
+check duplicate for
+5436040711036
+3336024707111-1
+
+jenis.csv
+=========
+
+barang.csv
+==========
+In Excel file
+cari tanda '', replace dengan '
+Format Kode to Text
+
+setelah import, edit manual
+
+check for
+CL-3022 SS OVAL CHOKE CHAIN 22
+
+
+Check for Price
+4710969871585
+
+

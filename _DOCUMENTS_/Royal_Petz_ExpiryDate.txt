@@ -1,0 +1,15 @@
+Perlu tanggal expired
+- Retur Jual D
+- Retur Beli D
+- Mutasi D
+- Penyesuaian D
+- Export/Import CSV D
+- Pecah Satuan Produk D
+- New Produk D
+
+Perlu tambahan 
+- Laporan Stok dengan Expired Date D
+- Laporan Aging Stok, stok habis tidak ditampilkan
+- Reminder untuk Stok yg mau Expired -30 hari
+
+Date Input for Export/Import CSV

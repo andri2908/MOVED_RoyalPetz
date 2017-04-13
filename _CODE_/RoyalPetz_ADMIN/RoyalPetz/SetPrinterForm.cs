@@ -17,13 +17,16 @@ namespace AlphaSoft
         public PrinterSettings ps = new PrinterSettings();
         private PrintDocument printdoc = new PrintDocument();
         private globalUtilities gutil = new globalUtilities();
+        private int originModuleID = 0;
 
         private int[] arrPaperSize = { globalUtilities.PAPER_POS_RECEIPT, globalUtilities.PAPER_HALF_KWARTO, globalUtilities.PAPER_FULL_KWARTO };
 
-        public SetPrinterForm()
+        public SetPrinterForm(int moduleID = 0)
         {
             InitializeComponent();
             listAllPrinters();
+
+            originModuleID = moduleID;
         }
 
         public static class myPrinters
@@ -58,6 +61,14 @@ namespace AlphaSoft
         {
             sizeComboBox.SelectedIndex = gutil.getPaper();
             PrinterlistBox.SelectedItem = PrinterlistBox.Items[0];
+
+            switch(originModuleID)
+            {
+                case globalConstants.PENERIMAAN_BARANG:
+                    label7.Visible = false;
+                    sizeComboBox.Visible = false;
+                    break;
+            }
         }
 
         private void PrinterlistBox_SelectedValueChanged(object sender, EventArgs e)

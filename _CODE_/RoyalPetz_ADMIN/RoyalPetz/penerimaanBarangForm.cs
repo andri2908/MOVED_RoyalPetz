@@ -2274,5 +2274,21 @@ namespace AlphaSoft
             if (!navKeyRegistered)
                 registerNavigationKey();
         }
+
+        private void ChangePrinterButton_Click(object sender, EventArgs e)
+        {
+            gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "PENERIMAAN FORM : ChangePrinterButton_Click, DISPLAY PRINTER SELECTION FORM");
+            SetPrinterForm displayedForm = new SetPrinterForm(globalConstants.PENERIMAAN_BARANG);
+
+            displayedForm.ShowDialog(this);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dataSupplierDetailForm newSupplierForm = new dataSupplierDetailForm(globalConstants.NEW_SUPPLIER);
+            newSupplierForm.ShowDialog(this);
+
+            fillInSupplierCombo();
+        }
     }
 }

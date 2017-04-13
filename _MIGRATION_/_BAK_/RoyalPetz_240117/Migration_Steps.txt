@@ -1,0 +1,60 @@
+SEMUA SAVE AS ; SEMICOLON
+
+cust.csv
+========
+kolom yg dipakai
+- namacust
+- alamat1
+- alamat2
+- kota
+- telp
+- fax
+- tglmasuk
+- stacust (harus replace)
+urutan customer
+ECER - 1
+GROSIR - 2
+PARTAI - 3
+- cusaktif
+
+change format cell untuk tgl masuk menjadi mm/dd/yy
+
+
+vendor.csv
+==========
+kolom yg dipakai
+- kode
+- namavendor
+- alamat1
+- alamat2
+- kota
+- telp
+- fax
+
+
+jenis.csv
+=========
+kolom yg dipakai
+- id
+- nama
+
+barang.csv
+==========
+kolom yg dipakai
+- kode
+- diskripsi
+- satuan
+- jml awal
+- hpp
+- hrgjual1
+- hrgjual2
+- hrgjual3
+- noninv
+- barcode
+- dept (for category)
+
+In Excel file
+cari tanda '', replace dengan '
+Format Kode to Text
+
+setelah import, edit manual
