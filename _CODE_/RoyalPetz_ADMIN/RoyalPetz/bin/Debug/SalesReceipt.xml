@@ -19,6 +19,9 @@
                 <xs:element name="SUBTOTAL" type="xs:double" minOccurs="0" />
                 <xs:element name="PAYMENT" type="xs:double" minOccurs="0" />
                 <xs:element name="CHANGE" type="xs:double" minOccurs="0" />
+                <xs:element name="PRODUCT_DISC1" type="xs:double" minOccurs="0" />
+                <xs:element name="PRODUCT_DISC2" type="xs:double" minOccurs="0" />
+                <xs:element name="PRODUCT_DISC_RP" type="xs:double" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -27,17 +30,20 @@
     </xs:element>
   </xs:schema>
   <Table>
-    <SALES_DISCOUNT_FINAL>10000</SALES_DISCOUNT_FINAL>
-    <ID>1</ID>
-    <DATE>2017-02-24T00:33:00+07:00</DATE>
-    <INVOICE>SLO001-1</INVOICE>
+    <SALES_DISCOUNT_FINAL>0</SALES_DISCOUNT_FINAL>
+    <ID>10</ID>
+    <DATE>2017-04-13T12:26:00+07:00</DATE>
+    <INVOICE>SLO001-2</INVOICE>
     <CUSTOMER>P-UMUM</CUSTOMER>
-    <PRODUCT>RISHY ADLT DOG 1 KG</PRODUCT>
-    <QTY>1</QTY>
-    <PRICE>22000</PRICE>
-    <POTONGAN>0</POTONGAN>
-    <SUBTOTAL>22000</SUBTOTAL>
-    <PAYMENT>12000</PAYMENT>
-    <CHANGE>0</CHANGE>
+    <PRODUCT>PF-102 TEMPAT MAKAN</PRODUCT>
+    <QTY>1000</QTY>
+    <PRICE>99000000</PRICE>
+    <POTONGAN>99098999010</POTONGAN>
+    <SUBTOTAL>-98999010</SUBTOTAL>
+    <PAYMENT>1</PAYMENT>
+    <CHANGE>98999011</CHANGE>
+    <PRODUCT_DISC1>99.99</PRODUCT_DISC1>
+    <PRODUCT_DISC2>99.99</PRODUCT_DISC2>
+    <PRODUCT_DISC_RP>99000000</PRODUCT_DISC_RP>
   </Table>
 </NewDataSet>

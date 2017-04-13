@@ -704,17 +704,17 @@ namespace AlphaSoft
 
         private void TextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            gUtil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "MUTASI FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [" + detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name + "]");
+            //gUtil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "MUTASI FORM : Combobox_KeyUp, cashierDataGridView.CurrentCell.OwningColumn.Name  [" + detailRequestOrderDataGridView.CurrentCell.OwningColumn.Name + "]");
 
-            if (forceUpOneLevel)
-            {
-                int pos = detailRequestOrderDataGridView.CurrentCell.RowIndex;
+            //if (forceUpOneLevel)
+            //{
+            //    int pos = detailRequestOrderDataGridView.CurrentCell.RowIndex;
 
-                if (pos > 0)
-                    detailRequestOrderDataGridView.CurrentCell = detailRequestOrderDataGridView.Rows[pos - 1].Cells["qty"];
+            //    if (pos > 0)
+            //        detailRequestOrderDataGridView.CurrentCell = detailRequestOrderDataGridView.Rows[pos - 1].Cells["qty"];
 
-                forceUpOneLevel = false;
-            }
+            //    forceUpOneLevel = false;
+            //}
         }
 
         private void loadDataHeaderRO()

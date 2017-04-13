@@ -581,12 +581,12 @@ namespace AlphaSoft
 
         private void Textbox_KeyUp(object sender, KeyEventArgs e)
         {
-            if (forceUpOneLevel)
-            {
-                int pos = detailRequestOrderDataGridView.CurrentCell.RowIndex;
-                detailRequestOrderDataGridView.CurrentCell = detailRequestOrderDataGridView.Rows[pos - 1].Cells["qty"];
-                forceUpOneLevel = false;
-            }
+            //if (forceUpOneLevel)
+            //{
+            //    int pos = detailRequestOrderDataGridView.CurrentCell.RowIndex;
+            //    detailRequestOrderDataGridView.CurrentCell = detailRequestOrderDataGridView.Rows[pos - 1].Cells["qty"];
+            //    forceUpOneLevel = false;
+            //}
         }
 
         private void TextBox_previewKeyDown(object sender, PreviewKeyDownEventArgs e)

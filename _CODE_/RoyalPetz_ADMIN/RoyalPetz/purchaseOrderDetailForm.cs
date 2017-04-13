@@ -665,15 +665,15 @@ namespace AlphaSoft
 
         private void Textbox_KeyUp(object sender, KeyEventArgs e)
         {
-            if (forceUpOneLevel)
-            {
-                int pos = detailPODataGridView.CurrentCell.RowIndex;
-                if (pos > 1)
-                { 
-                    detailPODataGridView.CurrentCell = detailPODataGridView.Rows[pos - 1].Cells["qty"];
-                }
-                forceUpOneLevel = false;
-            }
+            //if (forceUpOneLevel)
+            //{
+            //    int pos = detailPODataGridView.CurrentCell.RowIndex;
+            //    if (pos > 1)
+            //    { 
+            //        detailPODataGridView.CurrentCell = detailPODataGridView.Rows[pos - 1].Cells["qty"];
+            //    }
+            //    forceUpOneLevel = false;
+            //}
         }
 
         private void TextBox_previewKeyDown(object sender, PreviewKeyDownEventArgs e)

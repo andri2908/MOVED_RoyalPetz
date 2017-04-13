@@ -648,7 +648,7 @@ namespace AlphaSoft
             if (rowCount <2)
             {
                 // INSERT STORE INFORMATION FROM LICENSE FILE
-                sqlCommand = "INSERT INTO SYS_CONFIG (ID, STORE_NAME, STORE_ADDRESS) VALUES (2, '" + storeName + "', '" + storeAddress + "')";
+                sqlCommand = "INSERT INTO SYS_CONFIG (ID, NO_FAKTUR, BRANCH_ID, HQ_IP4, STORE_NAME, STORE_ADDRESS) VALUES (2, 'SLO001', 0, '127.0.0.1', '" + storeName + "', '" + storeAddress + "')";
             }
             else
             {

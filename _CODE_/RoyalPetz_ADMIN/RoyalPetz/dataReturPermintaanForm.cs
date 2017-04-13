@@ -644,15 +644,15 @@ namespace AlphaSoft
         private void TextBox_KeyUp(object sender, KeyEventArgs e)
         {
 
-            if (forceUpOneLevel)
-            {
-                int pos = detailReturDataGridView.CurrentCell.RowIndex;
+            //if (forceUpOneLevel)
+            //{
+            //    int pos = detailReturDataGridView.CurrentCell.RowIndex;
 
-                if (pos > 0)
-                    detailReturDataGridView.CurrentCell = detailReturDataGridView.Rows[pos - 1].Cells["qty"];
+            //    if (pos > 0)
+            //        detailReturDataGridView.CurrentCell = detailReturDataGridView.Rows[pos - 1].Cells["qty"];
 
-                forceUpOneLevel = false;
-            }
+            //    forceUpOneLevel = false;
+            //}
         }
 
         private void TextBox_previewKeyDown(object sender, PreviewKeyDownEventArgs e)

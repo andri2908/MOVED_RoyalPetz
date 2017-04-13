@@ -145,8 +145,12 @@ namespace AlphaSoft
                 {                    
                     while (rdr.Read())
                     {
-                        BranchIDTextbox.Text = rdr.GetString("BRANCH_ID");
-                        branchCombo.SelectedIndex = rdr.GetInt32("BRANCH_ID");
+                    //    if (rdr.GetInt32("BRANCH_ID") > 0)
+                        { 
+                            BranchIDTextbox.Text = rdr.GetString("BRANCH_ID");
+                            branchCombo.SelectedIndex = rdr.GetInt32("BRANCH_ID");
+                        }
+
                         string tmp = rdr.GetString("IP");
                         int pos = tmp.IndexOf(".");
                         string tmp2 = tmp.Substring(0, pos);

@@ -1012,14 +1012,14 @@ namespace AlphaSoft
 
         private void Textbox_KeyUp(object sender, KeyEventArgs e)
         {
-            if (forceUpOneLevel)
-            {
-                int pos = detailGridView.CurrentCell.RowIndex;
+            //if (forceUpOneLevel)
+            //{
+            //    int pos = detailGridView.CurrentCell.RowIndex;
 
-                if (pos > 0)
-                    detailGridView.CurrentCell = detailGridView.Rows[pos - 1].Cells["qtyReceived"];
-                forceUpOneLevel = false;
-            }
+            //    if (pos > 0)
+            //        detailGridView.CurrentCell = detailGridView.Rows[pos - 1].Cells["qtyReceived"];
+            //    forceUpOneLevel = false;
+            //}
         }
 
         private void TextBox_TextChanged(object sender, EventArgs e)
