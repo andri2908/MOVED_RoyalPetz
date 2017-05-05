@@ -467,14 +467,14 @@ namespace AlphaSoft
             {
                 if (globalFeatureList.EXPIRY_MODULE == 1)
                 {
-                    sqlCommand = "SELECT PE.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', PE.PRODUCT_AMOUNT AS 'QTY', DATE_FORMAT(PE.PRODUCT_EXPIRY_DATE, '%d-%M-%Y') AS 'TGL KADALUARSA' FROM MASTER_PRODUCT MP, PRODUCT_EXPIRY PE WHERE MP.PRODUCT_EXPIRABLE = 1 AND PE.PRODUCT_AMOUNT > 0 AND PE.PRODUCT_ID = MP.PRODUCT_ID " + showactive + "AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'";
-                    sqlCommand2 = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', '' AS 'TGL KADALUARSA' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_STOCK_QTY > 0 AND PRODUCT_EXPIRABLE = 0 AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
+                    sqlCommand = "SELECT PE.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', PE.PRODUCT_AMOUNT AS 'QTY', DATE_FORMAT(PE.PRODUCT_EXPIRY_DATE, '%d-%M-%Y') AS 'TGL KADALUARSA' FROM MASTER_PRODUCT MP, PRODUCT_EXPIRY PE WHERE MP.PRODUCT_EXPIRABLE = 1 AND PE.PRODUCT_ID = MP.PRODUCT_ID " + showactive + "AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'";
+                    sqlCommand2 = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', '' AS 'TGL KADALUARSA' FROM MASTER_PRODUCT MP WHERE PRODUCT_EXPIRABLE = 0 AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
                     displayExpiredDate = true;
 
                     sqlCommand = sqlCommand + " UNION " + sqlCommand2;
                 }
                 else
-                    sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_STOCK_QTY > 0 AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
+                    sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
             }
 
             if (originModuleID == globalConstants.STOK_PECAH_BARANG)

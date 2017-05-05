@@ -1,0 +1,31 @@
+[] [5/5/2017 23:24] [] USER = ADMIN IS ACTIVE
+[ADMIN] [5/5/2017 23:24] [] USER ID = 1 LOGIN SUCCESSFULLY
+[ADMIN] [5/5/2017 23:24] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [5/5/2017 23:24] [] DISPLAY ADMIN FORM
+[ADMIN] [5/5/2017 23:24] [] adminForm Load
+[ADMIN] [5/5/2017 23:24] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [productName]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [productName]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [hpp]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [subtotal]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [subtotal]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [qtyReceived]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [subtotal]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [productName]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [productName]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [subtotal]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [productName]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [productName]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [productName]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [productName]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [productName]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [productName]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [productName]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [productID]
+[ADMIN] [5/5/2017 23:25] [PENJUALAN] CASHIER FORM : ComboBox_SelectedIndexChanged, PRODUCT_BASE_PRICE [25455]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [hpp]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [subtotal]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [qtyReceived]
+[ADMIN] [5/5/2017 23:25] [PENERIMAAN BARANG] PENERIMAAN BARANG : detailGridView_CellValueChanged [subtotal]
+[ADMIN] [5/5/2017 23:25] [PENJUALAN] CASHIER FORM : ComboBox_SelectedIndexChanged, attempt to calculate total
+[ADMIN] [5/5/2017 23:25] [] USER ID = 1LOGOUT

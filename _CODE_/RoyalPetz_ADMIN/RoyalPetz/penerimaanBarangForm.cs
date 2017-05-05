@@ -848,9 +848,9 @@ namespace AlphaSoft
                 productIDTextBox.PreviewKeyDown -= productName_previewKeyDown;
                 productIDTextBox.PreviewKeyDown += productName_previewKeyDown;
                 productIDTextBox.CharacterCasing = CharacterCasing.Upper;
-                productIDTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                productIDTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                setTextBoxCustomSource(productIDTextBox);
+                productIDTextBox.AutoCompleteMode = AutoCompleteMode.None;
+                //productIDTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                //setTextBoxCustomSource(productIDTextBox);
             }
         }
 
