@@ -8,7 +8,8 @@
             <xs:complexType>
               <xs:sequence>
                 <xs:element name="USERID" type="xs:string" minOccurs="0" />
-                <xs:element name="LOGIN" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="LOGIN" type="xs:string" minOccurs="0" />
+                <xs:element name="DLOGIN" type="xs:dateTime" minOccurs="0" />
                 <xs:element name="LOGOUT" type="xs:dateTime" minOccurs="0" />
                 <xs:element name="START" type="xs:double" minOccurs="0" />
                 <xs:element name="END" type="xs:double" minOccurs="0" />
@@ -28,18 +29,51 @@
     </xs:element>
   </xs:schema>
   <Table>
-    <USERID>KASIR</USERID>
-    <LOGIN>2017-02-07T13:57:00+07:00</LOGIN>
-    <LOGOUT>2017-02-07T13:58:00+07:00</LOGOUT>
-    <START>2000</START>
-    <END>22000</END>
+    <USERID>ANITA CUUNET</USERID>
+    <LOGIN>201705162319</LOGIN>
+    <DLOGIN>2017-05-16T23:19:00+07:00</DLOGIN>
+    <LOGOUT>2017-05-16T23:19:00+07:00</LOGOUT>
+    <START>11111</START>
+    <END>22222</END>
     <COMMENT />
-    <CASH>70000</CASH>
+    <CASH>0</CASH>
     <NONCASH>0</NONCASH>
     <OTHER>0</OTHER>
     <INVOICE>SLO001-1</INVOICE>
-    <TGLTRANS>2017-02-07T13:58:00+07:00</TGLTRANS>
+    <TGLTRANS>2017-05-16T23:19:00+07:00</TGLTRANS>
     <TOP>TUNAI</TOP>
-    <TOTAL>70000</TOTAL>
+    <TOTAL>2050000</TOTAL>
+  </Table>
+  <Table>
+    <USERID>ANITA CUUNET</USERID>
+    <LOGIN>201705162322</LOGIN>
+    <DLOGIN>2017-05-16T23:22:00+07:00</DLOGIN>
+    <LOGOUT>2017-05-16T23:25:00+07:00</LOGOUT>
+    <START>444444</START>
+    <END>555555</END>
+    <COMMENT />
+    <CASH>0</CASH>
+    <NONCASH>0</NONCASH>
+    <OTHER>0</OTHER>
+    <INVOICE>SLO001-2</INVOICE>
+    <TGLTRANS>2017-05-16T23:22:00+07:00</TGLTRANS>
+    <TOP>TUNAI</TOP>
+    <TOTAL>1095000</TOTAL>
+  </Table>
+  <Table>
+    <USERID>ANITA CUUNET</USERID>
+    <LOGIN>201705162322</LOGIN>
+    <DLOGIN>2017-05-16T23:22:00+07:00</DLOGIN>
+    <LOGOUT>2017-05-16T23:25:00+07:00</LOGOUT>
+    <START>444444</START>
+    <END>555555</END>
+    <COMMENT />
+    <CASH>0</CASH>
+    <NONCASH>0</NONCASH>
+    <OTHER>0</OTHER>
+    <INVOICE>SLO001-3</INVOICE>
+    <TGLTRANS>2017-05-16T23:23:00+07:00</TGLTRANS>
+    <TOP>TUNAI</TOP>
+    <TOTAL>20000000</TOTAL>
   </Table>
 </NewDataSet>

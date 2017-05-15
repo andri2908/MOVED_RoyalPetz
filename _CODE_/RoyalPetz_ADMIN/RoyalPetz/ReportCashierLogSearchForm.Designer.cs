@@ -80,6 +80,8 @@
             this.nonactivecheckbox.TabIndex = 5;
             this.nonactivecheckbox.Text = "show all";
             this.nonactivecheckbox.UseVisualStyleBackColor = true;
+            this.nonactivecheckbox.Visible = false;
+            this.nonactivecheckbox.CheckedChanged += new System.EventHandler(this.nonactivecheckbox_CheckedChanged);
             // 
             // CariButton
             // 

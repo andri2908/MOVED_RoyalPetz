@@ -47,7 +47,7 @@ namespace AlphaSoft
                 if (rdr.HasRows)
                 {
                     UserIDCombobox.Visible = true;
-                    nonactivecheckbox.Visible = true;
+                   // nonactivecheckbox.Visible = true;
                     ErrorLabel.Visible = false;
                     dt.Load(rdr);
                     UserIDCombobox.DataSource = dt;
@@ -58,7 +58,7 @@ namespace AlphaSoft
                 else
                 {
                     UserIDCombobox.Visible = false;
-                    nonactivecheckbox.Visible = false;
+                   // nonactivecheckbox.Visible = false;
                     ErrorLabel.Visible = true;
                 }
             }
@@ -87,17 +87,22 @@ namespace AlphaSoft
             {
                 user_id = "AND CL.USER_ID = " + UserIDCombobox.SelectedValue + " ";
             }
-            sqlCommandx = "SELECT MU.USER_FULL_NAME AS 'USERID', CL.DATE_LOGIN AS 'LOGIN',CL.DATE_LOGOUT AS 'LOGOUT', CL.AMOUNT_START AS 'START', CL.AMOUNT_END AS 'END', " +
+            sqlCommandx = "SELECT MU.USER_FULL_NAME AS 'USERID', DATE_FORMAT(CL.DATE_LOGIN, '%Y%m%d%H%i') as 'LOGIN', CL.DATE_LOGIN AS 'DLOGIN',CL.DATE_LOGOUT AS 'LOGOUT', CL.AMOUNT_START AS 'START', CL.AMOUNT_END AS 'END', " +
                             "CL.COMMENT AS 'COMMENT', CL.TOTAL_CASH_TRANSACTION AS 'CASH', CL.TOTAL_NON_CASH_TRANSACTION AS 'NONCASH',CL.TOTAL_OTHER_TRANSACTION AS 'OTHER', " +
                             "SH.SALES_INVOICE AS 'INVOICE', SH.SALES_DATE AS 'TGLTRANS', IF(SH.SALES_TOP = 1, 'TUNAI', IF(SH.SALES_TOP = 0, 'CREDIT', '')) AS 'TOP', SH.SALES_TOTAL AS 'TOTAL' " +
-                            "FROM CASHIER_LOG CL LEFT OUTER JOIN SALES_HEADER SH ON (SH.SALES_DATE >= CL.DATE_LOGIN AND SH.SALES_DATE <= CL.DATE_LOGOUT), MASTER_USER MU " +
+                            "FROM CASHIER_LOG CL LEFT OUTER JOIN SALES_HEADER SH ON (DATE_FORMAT(SH.SALES_DATE, '%Y%m%d%H%i') >= DATE_FORMAT(CL.DATE_LOGIN, '%Y%m%d%H%i') AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d%H%i') <= DATE_FORMAT(CL.DATE_LOGOUT, '%Y%m%d%H%i')), MASTER_USER MU " +
                             "WHERE DATE_FORMAT(CL.DATE_LOGIN, '%Y%m%d')  >= '" + dateFrom + "' AND DATE_FORMAT(CL.DATE_LOGIN, '%Y%m%d')  <= '" + dateTo + "' " +
                             "AND CL.USER_ID = MU.ID " + user_id + " " +
-                            "GROUP BY INVOICE " +
-                            "ORDER BY TGLTRANS ASC";
+//                            "GROUP BY USERID, LOGIN " +
+                            "ORDER BY USERID, LOGIN, TGLTRANS ASC";
             DS.writeXML(sqlCommandx, globalConstants.CashierLogXML);
             ReportCashierLogForm displayedForm1 = new ReportCashierLogForm();
             displayedForm1.ShowDialog(this);
+        }
+
+        private void nonactivecheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
