@@ -44,6 +44,10 @@
             // 
             this.dataProdukGridView.AllowUserToAddRows = false;
             this.dataProdukGridView.AllowUserToDeleteRows = false;
+            this.dataProdukGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataProdukGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataProdukGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -67,7 +71,7 @@
             this.dataProdukGridView.Name = "dataProdukGridView";
             this.dataProdukGridView.ReadOnly = true;
             this.dataProdukGridView.RowHeadersVisible = false;
-            this.dataProdukGridView.Size = new System.Drawing.Size(669, 445);
+            this.dataProdukGridView.Size = new System.Drawing.Size(872, 457);
             this.dataProdukGridView.TabIndex = 0;
             this.dataProdukGridView.DoubleClick += new System.EventHandler(this.tagProdukDataGridView_DoubleClick);
             this.dataProdukGridView.Enter += new System.EventHandler(this.dataProdukGridView_Enter);
@@ -147,7 +151,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(669, 549);
+            this.ClientSize = new System.Drawing.Size(872, 561);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.kodeProductTextBox);
             this.Controls.Add(this.produknonactiveoption);
@@ -156,7 +160,6 @@
             this.Controls.Add(this.namaProdukTextBox);
             this.Controls.Add(this.dataProdukGridView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
             this.Name = "dataProdukForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
