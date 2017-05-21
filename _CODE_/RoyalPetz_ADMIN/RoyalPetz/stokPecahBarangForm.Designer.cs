@@ -503,14 +503,14 @@
             this.newProductIDTextBox.Location = new System.Drawing.Point(281, 310);
             this.newProductIDTextBox.Name = "newProductIDTextBox";
             this.newProductIDTextBox.ReadOnly = true;
-            this.newProductIDTextBox.Size = new System.Drawing.Size(170, 27);
+            this.newProductIDTextBox.Size = new System.Drawing.Size(448, 27);
             this.newProductIDTextBox.TabIndex = 49;
             // 
             // browseProdukButton
             // 
             this.browseProdukButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("browseProdukButton.BackgroundImage")));
             this.browseProdukButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.browseProdukButton.Location = new System.Drawing.Point(468, 280);
+            this.browseProdukButton.Location = new System.Drawing.Point(735, 310);
             this.browseProdukButton.Name = "browseProdukButton";
             this.browseProdukButton.Size = new System.Drawing.Size(28, 27);
             this.browseProdukButton.TabIndex = 50;
@@ -520,9 +520,9 @@
             // newProdukButton
             // 
             this.newProdukButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newProdukButton.Location = new System.Drawing.Point(517, 277);
+            this.newProdukButton.Location = new System.Drawing.Point(769, 308);
             this.newProdukButton.Name = "newProdukButton";
-            this.newProdukButton.Size = new System.Drawing.Size(195, 28);
+            this.newProdukButton.Size = new System.Drawing.Size(151, 28);
             this.newProdukButton.TabIndex = 51;
             this.newProdukButton.Text = "PRODUK BARU";
             this.newProdukButton.UseVisualStyleBackColor = true;
@@ -602,7 +602,7 @@
             // 
             this.expDatePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.expDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.expDatePicker.Location = new System.Drawing.Point(711, 406);
+            this.expDatePicker.Location = new System.Drawing.Point(721, 409);
             this.expDatePicker.Name = "expDatePicker";
             this.expDatePicker.Size = new System.Drawing.Size(144, 27);
             this.expDatePicker.TabIndex = 50;
@@ -613,7 +613,7 @@
             this.expLabel.AutoSize = true;
             this.expLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.expLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.expLabel.Location = new System.Drawing.Point(611, 409);
+            this.expLabel.Location = new System.Drawing.Point(611, 412);
             this.expLabel.Name = "expLabel";
             this.expLabel.Size = new System.Drawing.Size(104, 18);
             this.expLabel.TabIndex = 51;

@@ -455,7 +455,7 @@ namespace AlphaSoft
             {
                 sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_IS_SERVICE = 0 " + showactive + "AND (MP.PRODUCT_STOCK_QTY - MP.PRODUCT_LIMIT_STOCK > 0) ORDER BY MP.PRODUCT_NAME ASC";
             }
-            else if (originModuleID == globalConstants.PENERIMAAN_BARANG)
+            else if (originModuleID == globalConstants.PENERIMAAN_BARANG || originModuleID == globalConstants.BROWSE_STOK_PECAH_BARANG)
             {
                 sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
             }
