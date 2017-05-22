@@ -1,0 +1,151 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="INVOICE" type="xs:string" minOccurs="0" />
+                <xs:element name="CUSTOMER" type="xs:string" minOccurs="0" />
+                <xs:element name="DATE" type="xs:string" minOccurs="0" />
+                <xs:element name="TOTAL" type="xs:double" minOccurs="0" />
+                <xs:element name="GROUP" type="xs:string" minOccurs="0" />
+                <xs:element name="PEMBAYARAN" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Table>
+    <INVOICE>SLO001-8</INVOICE>
+    <CUSTOMER>IRA KUMALA DEWI</CUSTOMER>
+    <DATE>15-May-2017</DATE>
+    <TOTAL>60000</TOTAL>
+    <GROUP>GROSIR</GROUP>
+    <PEMBAYARAN>TUNAI</PEMBAYARAN>
+  </Table>
+  <Table>
+    <INVOICE>SLO001-9</INVOICE>
+    <CUSTOMER>ANDHY SUTOMO</CUSTOMER>
+    <DATE>15-May-2017</DATE>
+    <TOTAL>350000</TOTAL>
+    <GROUP>GROSIR</GROUP>
+    <PEMBAYARAN>TUNAI</PEMBAYARAN>
+  </Table>
+  <Table>
+    <INVOICE>SLO001-11</INVOICE>
+    <CUSTOMER>HOHO</CUSTOMER>
+    <DATE>15-May-2017</DATE>
+    <TOTAL>41000</TOTAL>
+    <GROUP>PARTAI</GROUP>
+    <PEMBAYARAN>TUNAI</PEMBAYARAN>
+  </Table>
+  <Table>
+    <INVOICE>SLO001-12</INVOICE>
+    <CUSTOMER>HOHO</CUSTOMER>
+    <DATE>15-May-2017</DATE>
+    <TOTAL>67000</TOTAL>
+    <GROUP>PARTAI</GROUP>
+    <PEMBAYARAN>TUNAI</PEMBAYARAN>
+  </Table>
+  <Table>
+    <INVOICE>SLO001-14</INVOICE>
+    <CUSTOMER>TONNY SOBA</CUSTOMER>
+    <DATE>16-May-2017</DATE>
+    <TOTAL>165000</TOTAL>
+    <GROUP>GROSIR</GROUP>
+    <PEMBAYARAN>TUNAI</PEMBAYARAN>
+  </Table>
+  <Table>
+    <INVOICE>SLO001-1</INVOICE>
+    <CUSTOMER>P-UMUM</CUSTOMER>
+    <DATE>09-May-2017</DATE>
+    <TOTAL>22000</TOTAL>
+    <GROUP>RETAIL</GROUP>
+    <PEMBAYARAN>TUNAI</PEMBAYARAN>
+  </Table>
+  <Table>
+    <INVOICE>SLO001-2</INVOICE>
+    <CUSTOMER>P-UMUM</CUSTOMER>
+    <DATE>15-May-2017</DATE>
+    <TOTAL>26000</TOTAL>
+    <GROUP>RETAIL</GROUP>
+    <PEMBAYARAN>TUNAI</PEMBAYARAN>
+  </Table>
+  <Table>
+    <INVOICE>SLO001-3</INVOICE>
+    <CUSTOMER>P-UMUM</CUSTOMER>
+    <DATE>15-May-2017</DATE>
+    <TOTAL>104000</TOTAL>
+    <GROUP>RETAIL</GROUP>
+    <PEMBAYARAN>TUNAI</PEMBAYARAN>
+  </Table>
+  <Table>
+    <INVOICE>SLO001-4</INVOICE>
+    <CUSTOMER>P-UMUM</CUSTOMER>
+    <DATE>15-May-2017</DATE>
+    <TOTAL>15000</TOTAL>
+    <GROUP>RETAIL</GROUP>
+    <PEMBAYARAN>TUNAI</PEMBAYARAN>
+  </Table>
+  <Table>
+    <INVOICE>SLO001-5</INVOICE>
+    <CUSTOMER>P-UMUM</CUSTOMER>
+    <DATE>15-May-2017</DATE>
+    <TOTAL>4000</TOTAL>
+    <GROUP>RETAIL</GROUP>
+    <PEMBAYARAN>TUNAI</PEMBAYARAN>
+  </Table>
+  <Table>
+    <INVOICE>SLO001-6</INVOICE>
+    <CUSTOMER>P-UMUM</CUSTOMER>
+    <DATE>15-May-2017</DATE>
+    <TOTAL>272000</TOTAL>
+    <GROUP>RETAIL</GROUP>
+    <PEMBAYARAN>TUNAI</PEMBAYARAN>
+  </Table>
+  <Table>
+    <INVOICE>SLO001-7</INVOICE>
+    <CUSTOMER>P-UMUM</CUSTOMER>
+    <DATE>15-May-2017</DATE>
+    <TOTAL>14000</TOTAL>
+    <GROUP>RETAIL</GROUP>
+    <PEMBAYARAN>TUNAI</PEMBAYARAN>
+  </Table>
+  <Table>
+    <INVOICE>SLO001-10</INVOICE>
+    <CUSTOMER>P-UMUM</CUSTOMER>
+    <DATE>15-May-2017</DATE>
+    <TOTAL>40000</TOTAL>
+    <GROUP>RETAIL</GROUP>
+    <PEMBAYARAN>TUNAI</PEMBAYARAN>
+  </Table>
+  <Table>
+    <INVOICE>SLO001-13</INVOICE>
+    <CUSTOMER>P-UMUM</CUSTOMER>
+    <DATE>15-May-2017</DATE>
+    <TOTAL>25000</TOTAL>
+    <GROUP>RETAIL</GROUP>
+    <PEMBAYARAN>TUNAI</PEMBAYARAN>
+  </Table>
+  <Table>
+    <INVOICE>SLO001-15</INVOICE>
+    <CUSTOMER>P-UMUM</CUSTOMER>
+    <DATE>16-May-2017</DATE>
+    <TOTAL>28000</TOTAL>
+    <GROUP>RETAIL</GROUP>
+    <PEMBAYARAN>TUNAI</PEMBAYARAN>
+  </Table>
+  <Table>
+    <INVOICE>SLO001-16</INVOICE>
+    <CUSTOMER>P-UMUM</CUSTOMER>
+    <DATE>16-May-2017</DATE>
+    <TOTAL>22000</TOTAL>
+    <GROUP>RETAIL</GROUP>
+    <PEMBAYARAN>TUNAI</PEMBAYARAN>
+  </Table>
+</NewDataSet>
