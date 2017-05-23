@@ -78,6 +78,7 @@ namespace AlphaSoft
                 int branch_id = gutil.loadbranchID(2, out namacabang);
                 txtReportHeader4.Text = namacabang;
                 rptXMLReport.Database.Tables[0].SetDataSource(dsTempReport.Tables[0]);
+                                             
                 crystalReportViewer1.ReportSource = rptXMLReport;
                 crystalReportViewer1.Refresh();
             }

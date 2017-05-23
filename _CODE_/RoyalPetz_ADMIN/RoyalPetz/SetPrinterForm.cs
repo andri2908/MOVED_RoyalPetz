@@ -38,9 +38,18 @@ namespace AlphaSoft
 
         private void listAllPrinters()
         {
+            String namaprinter = "";
+            System.Drawing.Printing.PrintDocument doctoprint = new System.Drawing.Printing.PrintDocument();
+            int i = 0;
             foreach (var item in PrinterSettings.InstalledPrinters)
             {
-                this.PrinterlistBox.Items.Add(item.ToString());
+                namaprinter = item.ToString();
+                this.PrinterlistBox.Items.Add(namaprinter);
+                if (namaprinter.Equals(doctoprint.PrinterSettings.PrinterName))
+                {
+                    this.PrinterlistBox.SelectedIndex = i;
+                }
+                i++;
             }
         }
 
@@ -60,9 +69,9 @@ namespace AlphaSoft
         private void SetPrinterForm_Load(object sender, EventArgs e)
         {
             sizeComboBox.SelectedIndex = gutil.getPaper();
-            PrinterlistBox.SelectedItem = PrinterlistBox.Items[0];
+            //PrinterlistBox.SelectedItem = PrinterlistBox.Items[0];
 
-            switch(originModuleID)
+            switch (originModuleID)
             {
                 case globalConstants.PENERIMAAN_BARANG:
                     label7.Visible = false;
@@ -87,6 +96,7 @@ namespace AlphaSoft
             gutil.saveSystemDebugLog(globalConstants.MENU_PENGATURAN_PRINTER, "DEFAULT PRINTER CHANGED [" + pname + "]");
 
             MessageBox.Show("Pengaturan printer telah diubah!");
+            this.Close();
         }
     }
 }

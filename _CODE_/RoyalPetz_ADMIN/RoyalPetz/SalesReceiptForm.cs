@@ -67,6 +67,24 @@ namespace AlphaSoft
             //}
 
             //rptClientDoc.PrintOutputController.ModifyPrintOptions(newOpts);
+            int i = 0;
+            System.Drawing.Printing.PrintDocument doctoprint = new System.Drawing.Printing.PrintDocument();
+            int rawKind = 0;
+            for (i = 0; i <= doctoprint.PrinterSettings.PaperSizes.Count - 1; i++)
+            {
+                if (doctoprint.PrinterSettings.PaperSizes[i].PaperName == "Half Kuarto")
+                {
+                    rawKind = Convert.ToInt32(doctoprint.PrinterSettings.PaperSizes[i].GetType().GetField("kind", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(doctoprint.PrinterSettings.PaperSizes[i]));
+                    // break;
+                    // }
+                    //}
+                    //rawKind = GetPaperSizeID();
+                    SalesReceipt1.PrintOptions.PrinterName = doctoprint.PrinterSettings.PrinterName;
+                    SalesReceipt1.PrintOptions.PaperSize = (CrystalDecisions.Shared.PaperSize)rawKind;
+                    SalesReceipt1.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
+                    //crystalReportViewer1.ReportSource = SalesReceipt1;
+                }
+            }
         }
     
 
@@ -113,13 +131,41 @@ namespace AlphaSoft
                 int branch_id = gutil.loadbranchID(2, out namacabang);
                 txtReportHeader4.Text = namacabang;
                 rptXMLReport.Database.Tables[0].SetDataSource(dsTempReport.Tables[0]);
+
+                int i = 0;
+                System.Drawing.Printing.PrintDocument doctoprint = new System.Drawing.Printing.PrintDocument();
+                int rawKind = 0;
+                for (i = 0; i <= doctoprint.PrinterSettings.PaperSizes.Count - 1; i++)
+                {
+                    if (doctoprint.PrinterSettings.PaperSizes[i].PaperName == "Half Kuarto")
+                    {
+                        rawKind = Convert.ToInt32(doctoprint.PrinterSettings.PaperSizes[i].GetType().GetField("kind", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(doctoprint.PrinterSettings.PaperSizes[i]));
+                        // break;
+                        // }
+                        //}
+                        //rawKind = GetPaperSizeID();
+                        rptXMLReport.PrintOptions.PrinterName = doctoprint.PrinterSettings.PrinterName;
+                        rptXMLReport.PrintOptions.PaperSize = (CrystalDecisions.Shared.PaperSize)rawKind;
+                        rptXMLReport.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;                        
+                    }
+                }
+
                 crystalReportViewer1.ReportSource = rptXMLReport;
                 crystalReportViewer1.Refresh();
+                //crystalReportViewer1.PrintReport();
+
+                rptXMLReport.PrintToPrinter(1, false, 0, 0);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void SalesReceiptForm_Activated(object sender, EventArgs e)
+        {            
+            //SalesReceipt1.PrintToPrinter(1, true, 0, 0);
+            this.Close();
         }
     }
 }
