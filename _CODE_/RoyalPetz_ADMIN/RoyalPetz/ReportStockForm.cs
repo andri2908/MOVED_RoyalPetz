@@ -37,6 +37,7 @@ namespace AlphaSoft
             {
                 string appPath = Directory.GetCurrentDirectory() + "\\" + globalConstants.StockXML;
                 dsTempReport.ReadXml(@appPath);
+                globalPrinterUtility gPrinter = new globalPrinterUtility();
                 CrystalDecisions.CrystalReports.Engine.TextObject txtReportHeader1, txtReportHeader2;
 
                 //prepare report for preview
@@ -46,6 +47,11 @@ namespace AlphaSoft
                     txtReportHeader1 = rptXMLReportExpiry.ReportDefinition.ReportObjects["NamaTokoLabel"] as TextObject;
                     txtReportHeader2 = rptXMLReportExpiry.ReportDefinition.ReportObjects["InfoTokoLabel"] as TextObject;
                     rptXMLReportExpiry.Database.Tables[0].SetDataSource(dsTempReport.Tables[0]);
+
+                    rptXMLReportExpiry.PrintOptions.PrinterName = gPrinter.getConfigPrinterName(2);
+                    rptXMLReportExpiry.PrintOptions.PaperSize = (CrystalDecisions.Shared.PaperSize)gPrinter.getReportPaperSize(globalPrinterUtility.LETTER_PAPER_SIZE);
+                    rptXMLReportExpiry.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
+
                     crystalReportViewer1.ReportSource = rptXMLReportExpiry;
                 }
                 else
@@ -54,6 +60,11 @@ namespace AlphaSoft
                     txtReportHeader1 = rptXMLReport.ReportDefinition.ReportObjects["NamaTokoLabel"] as TextObject;
                     txtReportHeader2 = rptXMLReport.ReportDefinition.ReportObjects["InfoTokoLabel"] as TextObject;
                     rptXMLReport.Database.Tables[0].SetDataSource(dsTempReport.Tables[0]);
+
+                    rptXMLReport.PrintOptions.PrinterName = gPrinter.getConfigPrinterName(2);
+                    rptXMLReport.PrintOptions.PaperSize = (CrystalDecisions.Shared.PaperSize)gPrinter.getReportPaperSize(globalPrinterUtility.LETTER_PAPER_SIZE);
+                    rptXMLReport.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
+
                     crystalReportViewer1.ReportSource = rptXMLReport;
                 }
 

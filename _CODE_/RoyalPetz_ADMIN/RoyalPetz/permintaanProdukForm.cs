@@ -608,9 +608,25 @@ namespace AlphaSoft
                 {
                     //updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
                     //detailRequestOrderDataGridView.CurrentCell = selectedRow.Cells["qty"];
-                    // CALL DATA PRODUK FORM WITH PARAMETER 
-                    dataProdukForm browseProduk = new dataProdukForm(globalConstants.NEW_REQUEST_ORDER, this, currentValue, "", rowSelectedIndex);
-                    browseProduk.ShowDialog(this);
+
+                    string sqlCommand = "";
+                    string productName = "";
+                    sqlCommand = "SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'";
+
+                    if (Convert.ToInt32(DS.getDataSingleValue(sqlCommand)) > 0)
+                    {
+                        sqlCommand = "SELECT PRODUCT_NAME FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'";
+
+                        productName = DS.getDataSingleValue(sqlCommand).ToString();
+
+                        addNewRowFromBarcode(currentValue, productName, rowSelectedIndex);
+                    }
+                    else
+                    { 
+                        // CALL DATA PRODUK FORM WITH PARAMETER 
+                        dataProdukForm browseProduk = new dataProdukForm(globalConstants.NEW_REQUEST_ORDER, this, currentValue, "", rowSelectedIndex);
+                        browseProduk.ShowDialog(this);
+                    }
                     forceUpOneLevel = true;
                 }
                 else

@@ -16,6 +16,7 @@ namespace AlphaSoft
     public partial class dataReturPenjualanPrintOutForm : Form
     {
         private globalUtilities gUtil = new globalUtilities();
+        private globalPrinterUtility gPrinter = new globalPrinterUtility();
 
         public dataReturPenjualanPrintOutForm()
         {
@@ -50,6 +51,14 @@ namespace AlphaSoft
                 txtReportHeader1.Text = nama;
                 txtReportHeader2.Text = alamat + Environment.NewLine + telepon + Environment.NewLine + email;
                 rptXMLReport.Database.Tables[0].SetDataSource(dsTempReport.Tables[0]);
+
+                rptXMLReport.PrintOptions.PrinterName = gPrinter.getConfigPrinterName(2);
+                if (gUtil.getPaper() == 1)
+                    rptXMLReport.PrintOptions.PaperSize = (CrystalDecisions.Shared.PaperSize)gPrinter.getReportPaperSize(globalPrinterUtility.HALF_KUARTO_PAPER_SIZE);
+                else
+                    rptXMLReport.PrintOptions.PaperSize = (CrystalDecisions.Shared.PaperSize)gPrinter.getReportPaperSize(globalPrinterUtility.LETTER_PAPER_SIZE);
+                rptXMLReport.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
+
                 crystalReportViewer1.ReportSource = rptXMLReport;
                 crystalReportViewer1.Refresh();
             }

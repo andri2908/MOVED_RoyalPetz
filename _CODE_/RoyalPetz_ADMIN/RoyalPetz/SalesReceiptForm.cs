@@ -20,6 +20,8 @@ namespace AlphaSoft
     {
         private globalUtilities gutil = new globalUtilities();
         private Data_Access DS = new Data_Access();
+        private globalPrinterUtility gPrinter = new globalPrinterUtility();
+
         public SalesReceiptForm()
         {
             InitializeComponent();
@@ -132,23 +134,29 @@ namespace AlphaSoft
                 txtReportHeader4.Text = namacabang;
                 rptXMLReport.Database.Tables[0].SetDataSource(dsTempReport.Tables[0]);
 
-                int i = 0;
-                System.Drawing.Printing.PrintDocument doctoprint = new System.Drawing.Printing.PrintDocument();
-                int rawKind = 0;
-                for (i = 0; i <= doctoprint.PrinterSettings.PaperSizes.Count - 1; i++)
-                {
-                    if (doctoprint.PrinterSettings.PaperSizes[i].PaperName == "Half Kuarto")
-                    {
-                        rawKind = Convert.ToInt32(doctoprint.PrinterSettings.PaperSizes[i].GetType().GetField("kind", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(doctoprint.PrinterSettings.PaperSizes[i]));
-                        // break;
-                        // }
-                        //}
-                        //rawKind = GetPaperSizeID();
-                        rptXMLReport.PrintOptions.PrinterName = doctoprint.PrinterSettings.PrinterName;
-                        rptXMLReport.PrintOptions.PaperSize = (CrystalDecisions.Shared.PaperSize)rawKind;
-                        rptXMLReport.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;                        
-                    }
-                }
+
+                //System.Drawing.Printing.PrintDocument doctoprint = new System.Drawing.Printing.PrintDocument();
+                //rptXMLReport.PrintOptions.PrinterName = doctoprint.PrinterSettings.PrinterName;
+                rptXMLReport.PrintOptions.PrinterName = gPrinter.getConfigPrinterName(2);
+                rptXMLReport.PrintOptions.PaperSize = (CrystalDecisions.Shared.PaperSize)gPrinter.getReportPaperSize(globalPrinterUtility.HALF_KUARTO_PAPER_SIZE);
+                rptXMLReport.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
+                
+                //int i = 0;
+                //int rawKind = 0;
+                //for (i = 0; i <= doctoprint.PrinterSettings.PaperSizes.Count - 1; i++)
+                //{
+                //    if (doctoprint.PrinterSettings.PaperSizes[i].PaperName == "Half Kuarto")
+                //    {
+                //        rawKind = Convert.ToInt32(doctoprint.PrinterSettings.PaperSizes[i].GetType().GetField("kind", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(doctoprint.PrinterSettings.PaperSizes[i]));
+                //        // break;
+                //        // }
+                //        //}
+                //        //rawKind = GetPaperSizeID();
+                //        
+                //        
+                //                                
+                //    }
+                //}
 
                 crystalReportViewer1.ReportSource = rptXMLReport;
                 crystalReportViewer1.Refresh();

@@ -310,6 +310,7 @@
     </Compile>
     <Compile Include="globalCryptographyMethod.cs" />
     <Compile Include="globalFeatureList.cs" />
+    <Compile Include="globalPrinterUtility.cs" />
     <Compile Include="messagingForm.cs">
       <SubType>Form</SubType>
     </Compile>

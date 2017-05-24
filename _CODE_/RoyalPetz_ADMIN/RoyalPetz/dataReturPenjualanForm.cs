@@ -1664,7 +1664,8 @@ namespace AlphaSoft
         private void printReceipt()
         {
             string sqlCommandx;
-            int papermode = gutil.getPaper();
+            int papermode = comboBox1.SelectedIndex;//gutil.getPaper();
+            gutil.setPaper(papermode);
 
             if (papermode == 0) //kertas POS
             {

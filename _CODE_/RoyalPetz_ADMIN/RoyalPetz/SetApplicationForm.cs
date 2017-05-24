@@ -18,6 +18,7 @@ namespace AlphaSoft
     public partial class SetApplicationForm : Form
     {
         private globalUtilities gutil = new globalUtilities();
+        private globalPrinterUtility gPrint = new globalPrinterUtility();
         private string appPath = Application.StartupPath;
         private string selectedIP = "";
         private string ip1, ip2, ip3, ip4;
@@ -240,10 +241,40 @@ namespace AlphaSoft
             }
         }
 
+        private void fillInPrinterCombo()
+        {
+            List<string> printerName = new List<string>();
+            int posPrinterIndex = 0;
+            int kuartoPrinterIndex = 0;
+
+            if (gPrint.getListOfPrinter(ref printerName) > 0)
+            {
+                posReceiptPrinter.Items.Clear();
+                kuartoPrinter.Items.Clear();
+
+                for (int i = 0;i<printerName.Count;i++)
+                {
+                    posReceiptPrinter.Items.Add(printerName[i]);
+                    kuartoPrinter.Items.Add(printerName[i]);
+
+                    if (gPrint.getConfigPrinterName(1) == printerName[i])
+                        posPrinterIndex = i;
+
+                    if (gPrint.getConfigPrinterName(2) == printerName[i])
+                        kuartoPrinterIndex = i;
+                }
+
+                posReceiptPrinter.SelectedIndex = posPrinterIndex;
+                kuartoPrinter.SelectedIndex = kuartoPrinterIndex;
+            }
+        }
+
         private void setDatabaseLocationForm_Load(object sender, EventArgs e)
         {
             gutil.reArrangeTabOrder(this);
             fillInBranchCombo();
+
+            fillInPrinterCombo();
 
             errorLabel.Text = "";
             if (checkconfig())
@@ -452,8 +483,8 @@ namespace AlphaSoft
                 switch (mode)
                 {
                     case 1:
-                        sqlCommand = "INSERT INTO SYS_CONFIG (ID, NO_FAKTUR, BRANCH_ID, HQ_IP4, STORE_NAME, STORE_ADDRESS, STORE_PHONE, STORE_EMAIL) " +
-                                            "VALUES (2, '', '" + branchID + "', '" + HQIP + "', '" + nama_toko + "', '" + alamat_toko + "', '" + telepon_toko + "', '" + email_toko + "')";
+                        sqlCommand = "INSERT INTO SYS_CONFIG (ID, NO_FAKTUR, BRANCH_ID, HQ_IP4, STORE_NAME, STORE_ADDRESS, STORE_PHONE, STORE_EMAIL, POS_RECEIPT_PRINTER, KUARTO_PRINTER) " +
+                                            "VALUES (2, '', '" + branchID + "', '" + HQIP + "', '" + nama_toko + "', '" + alamat_toko + "', '" + telepon_toko + "', '" + email_toko + "', '" + posReceiptPrinter.Text + "', '" + kuartoPrinter.Text + "')";
                         options = gutil.INS;
                         gutil.saveSystemDebugLog(0, "INSERT DATA ID 2 TO SYS_CONFIG");
 
@@ -465,7 +496,9 @@ namespace AlphaSoft
                                             "STORE_NAME = '" + nama_toko + "', " +
                                             "STORE_ADDRESS = '" + alamat_toko + "', " +
                                             "STORE_PHONE = '" + telepon_toko + "', " +
-                                            "STORE_EMAIL = '" + email_toko + "' " +                                        
+                                            "STORE_EMAIL = '" + email_toko + "', " +
+                                            "POS_RECEIPT_PRINTER = '" + posReceiptPrinter.Text + "', " +
+                                            "KUARTO_PRINTER = '" + kuartoPrinter.Text + "' " +
                                             "WHERE ID = " + id;
                         options = gutil.UPD;
                         gutil.saveSystemDebugLog(0, "UPDATE DATA ID 2");

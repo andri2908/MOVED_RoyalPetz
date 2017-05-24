@@ -53,6 +53,12 @@ namespace AlphaSoft
                 txtReportHeader3.Text = "LAPORAN DAFTAR JENIS SATUAN PRODUK";
                 //rptXMLReport.SetDataSource(dsTempReport);
                 rptXMLReport.Database.Tables[0].SetDataSource(dsTempReport.Tables[0]);
+
+                globalPrinterUtility gPrinter = new globalPrinterUtility();
+                rptXMLReport.PrintOptions.PrinterName = gPrinter.getConfigPrinterName(2);
+                rptXMLReport.PrintOptions.PaperSize = (CrystalDecisions.Shared.PaperSize)gPrinter.getReportPaperSize(globalPrinterUtility.LETTER_PAPER_SIZE);
+                rptXMLReport.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
+
                 crystalReportViewer1.ReportSource = rptXMLReport;
                 crystalReportViewer1.Refresh();
             }

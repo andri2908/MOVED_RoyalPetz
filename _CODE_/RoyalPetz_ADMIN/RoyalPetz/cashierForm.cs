@@ -43,6 +43,7 @@ namespace AlphaSoft
         private Data_Access DS = new Data_Access();
 
         private globalUtilities gutil = new globalUtilities();
+        private globalPrinterUtility gPrinter = new globalPrinterUtility();
         private CultureInfo culture = new CultureInfo("id-ID");
         private List<string> salesQty = new List<string>();
         private List<string> productPriceList = new List<string>();
@@ -1894,6 +1895,7 @@ namespace AlphaSoft
         {
             string currentValue = "";
             int rowSelectedIndex = 0;
+
             DataGridViewTextBoxEditingControl dataGridViewComboBoxEditingControl = sender as DataGridViewTextBoxEditingControl;
 
             if (cashierDataGridView.CurrentCell.OwningColumn.Name != "productID")
@@ -1911,12 +1913,26 @@ namespace AlphaSoft
                 {
                     forceUpOneLevel = true;
 
-                    // CALL DATA PRODUK FORM WITH PARAMETER 
-                    dataProdukForm browseProduk = new dataProdukForm(globalConstants.CASHIER_MODULE, this, currentValue, "", rowSelectedIndex);
-                    browseProduk.ShowDialog(this);
-                    //updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
-                    //cashierDataGridView.CurrentCell = selectedRow.Cells["qty"];
+                    string sqlCommand = "";
+                    string productName = "";
+                    sqlCommand = "SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" +currentValue+ "'";
 
+                    if (Convert.ToInt32(DS.getDataSingleValue(sqlCommand)) > 0)
+                    {
+                        sqlCommand = "SELECT PRODUCT_NAME FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" +currentValue+ "'";
+
+                        productName = DS.getDataSingleValue(sqlCommand).ToString();
+
+                        addNewRowFromBarcode(currentValue, productName, rowSelectedIndex);
+                    }
+                    else
+                    {
+                        // CALL DATA PRODUK FORM WITH PARAMETER 
+                        dataProdukForm browseProduk = new dataProdukForm(globalConstants.CASHIER_MODULE, this, currentValue, "", rowSelectedIndex);
+                        browseProduk.ShowDialog(this);
+                        //updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
+                        //cashierDataGridView.CurrentCell = selectedRow.Cells["qty"];
+                    }
                     //Force_KeyUp(rowSelectedIndex);
                 }
                 else
@@ -2478,7 +2494,9 @@ namespace AlphaSoft
             //Font font = new Font("Courier New", 15);
 
             //cek paper mode
-            int papermode = gutil.getPaper();
+            int papermode = comboBox1.SelectedIndex; //gutil.getPaper();
+            gutil.setPaper(papermode);
+
             int paperLength = 0;
 
             gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : PrintReceipt");
@@ -2490,13 +2508,14 @@ namespace AlphaSoft
                 //width, height
                 paperLength = calculatePageLength();
                 PaperSize psize = new PaperSize("Custom", 255, paperLength);//820); //change paper size receipt width x height
-                printDocument1.DefaultPageSettings.PaperSize = psize;
                 DialogResult result;
                 printPreviewDialog1.Width = 512;
                 printPreviewDialog1.Height = 768;
                 //result = printPreviewDialog1.ShowDialog();
                 //if (result == DialogResult.OK)
                 {
+                    printDocument1.DefaultPageSettings.PaperSize = psize;
+                    printDocument1.PrinterSettings.PrinterName = gPrinter.getConfigPrinterName(1);
                     printDocument1.Print();
                 }
             } else
@@ -3524,6 +3543,10 @@ namespace AlphaSoft
         private void cashierForm_Resize(object sender, EventArgs e)
         {
             cashierDataGridView.ResumeLayout();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
         }
     }
 }

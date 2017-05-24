@@ -963,11 +963,24 @@ namespace AlphaSoft
                 {
                     //updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
                     //detailGridView.CurrentCell = selectedRow.Cells["qtyReceived"];
-                    
-                    // CALL DATA PRODUK FORM WITH PARAMETER 
-                    dataProdukForm browseProduk = new dataProdukForm(globalConstants.PENERIMAAN_BARANG, this, currentValue, "",rowSelectedIndex);
-                    browseProduk.ShowDialog(this);
+                    string sqlCommand = "";
+                    string productName = "";
+                    sqlCommand = "SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'";
 
+                    if (Convert.ToInt32(DS.getDataSingleValue(sqlCommand)) > 0)
+                    {
+                        sqlCommand = "SELECT PRODUCT_NAME FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'";
+
+                        productName = DS.getDataSingleValue(sqlCommand).ToString();
+
+                        addNewRowFromBarcode(currentValue, productName, rowSelectedIndex);
+                    }
+                    else
+                    { 
+                        // CALL DATA PRODUK FORM WITH PARAMETER 
+                        dataProdukForm browseProduk = new dataProdukForm(globalConstants.PENERIMAAN_BARANG, this, currentValue, "",rowSelectedIndex);
+                        browseProduk.ShowDialog(this);
+                    }
                     forceUpOneLevel = true;
                 }
                 else
@@ -1680,6 +1693,9 @@ namespace AlphaSoft
         private void printReport(string invoiceNo)
         {
             string sqlCommandx = "";
+
+            gUtil.setPaper(comboBox1.SelectedIndex + 1);
+
             if (originModuleId == globalConstants.PENERIMAAN_BARANG_DARI_MUTASI)
             {
                 sqlCommandx = "SELECT '1' AS TYPE, '"+noMutasiTextBox.Text+"' AS ORIGIN_INVOICE, DATE(PH.PR_DATE) AS 'TGL', PH.PR_INVOICE AS 'INVOICE', MP.PRODUCT_NAME AS 'PRODUK', PD.PRODUCT_BASE_PRICE AS 'HARGA', PD.PRODUCT_ACTUAL_QTY AS 'QTY', PD.PR_SUBTOTAL AS 'SUBTOTAL' " +

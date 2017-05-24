@@ -59,6 +59,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.ChangePrinterButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.detailReturDataGridView)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -327,6 +330,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.ChangePrinterButton);
             this.groupBox1.Controls.Add(this.totalLabel);
@@ -378,12 +384,13 @@
             // 
             this.ChangePrinterButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChangePrinterButton.ForeColor = System.Drawing.Color.Black;
-            this.ChangePrinterButton.Location = new System.Drawing.Point(6, 125);
+            this.ChangePrinterButton.Location = new System.Drawing.Point(311, 78);
             this.ChangePrinterButton.Name = "ChangePrinterButton";
             this.ChangePrinterButton.Size = new System.Drawing.Size(158, 34);
             this.ChangePrinterButton.TabIndex = 54;
             this.ChangePrinterButton.Text = "SET PRINTER";
             this.ChangePrinterButton.UseVisualStyleBackColor = true;
+            this.ChangePrinterButton.Visible = false;
             this.ChangePrinterButton.Click += new System.EventHandler(this.ChangePrinterButton_Click);
             // 
             // label1
@@ -396,6 +403,42 @@
             this.label1.Size = new System.Drawing.Size(14, 18);
             this.label1.TabIndex = 30;
             this.label1.Text = ":";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "POS RECEIPT",
+            "1/2 KUARTO",
+            "KUARTO"});
+            this.comboBox1.Location = new System.Drawing.Point(211, 125);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(183, 26);
+            this.comboBox1.TabIndex = 54;
+            this.comboBox1.Text = "POS RECEIPT";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label3.Location = new System.Drawing.Point(10, 128);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(160, 18);
+            this.label3.TabIndex = 57;
+            this.label3.Text = "UKURAN KERTAS";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label5.Location = new System.Drawing.Point(191, 128);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(14, 18);
+            this.label5.TabIndex = 58;
+            this.label5.Text = ":";
             // 
             // dataReturPenjualanForm
             // 
@@ -457,5 +500,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button ChangePrinterButton;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -61,6 +61,12 @@ namespace AlphaSoft
                 txtReportHeader2.Text = alamat + Environment.NewLine + telepon + Environment.NewLine + email;
                 txtReportHeader3.Text = "LAPORAN LABA/RUGI BULAN " + report_month.ToUpper();
                 rptXMLReport.Database.Tables[0].SetDataSource(dsTempReport.Tables[0]);
+
+                globalPrinterUtility gPrinter = new globalPrinterUtility();
+                rptXMLReport.PrintOptions.PrinterName = gPrinter.getConfigPrinterName(2);
+                rptXMLReport.PrintOptions.PaperSize = (CrystalDecisions.Shared.PaperSize)gPrinter.getReportPaperSize(globalPrinterUtility.LETTER_PAPER_SIZE);
+                rptXMLReport.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
+
                 crystalReportViewer1.ReportSource = rptXMLReport;
                 crystalReportViewer1.Refresh();
             }

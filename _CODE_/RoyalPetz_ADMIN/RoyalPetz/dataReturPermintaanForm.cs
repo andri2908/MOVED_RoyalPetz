@@ -999,6 +999,8 @@ namespace AlphaSoft
             string sqlCommandx = "";
             string moduleType = "RETUR PEMBELIAN";
 
+            gUtil.setPaper(comboBox1.SelectedIndex + 1);
+
             if (originModuleID == globalConstants.RETUR_PEMBELIAN_KE_SUPPLIER)
                 moduleType = "RETUR PEMBELIAN";
             else

@@ -695,10 +695,24 @@ namespace AlphaSoft
                 {
                     //updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
                     //detailPODataGridView.CurrentCell = selectedRow.Cells["qty"];
-                    // CALL DATA PRODUK FORM WITH PARAMETER 
-                    dataProdukForm browseProduk = new dataProdukForm(globalConstants.NEW_PURCHASE_ORDER, this, currentValue, "", rowSelectedIndex);
-                    browseProduk.ShowDialog(this);
+                    string sqlCommand = "";
+                    string productName = "";
+                    sqlCommand = "SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'";
 
+                    if (Convert.ToInt32(DS.getDataSingleValue(sqlCommand)) > 0)
+                    {
+                        sqlCommand = "SELECT PRODUCT_NAME FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'";
+
+                        productName = DS.getDataSingleValue(sqlCommand).ToString();
+
+                        addNewRowFromBarcode(currentValue, productName, rowSelectedIndex);
+                    }
+                    else
+                    { 
+                        // CALL DATA PRODUK FORM WITH PARAMETER 
+                        dataProdukForm browseProduk = new dataProdukForm(globalConstants.NEW_PURCHASE_ORDER, this, currentValue, "", rowSelectedIndex);
+                        browseProduk.ShowDialog(this);
+                    }
                     forceUpOneLevel = true;
                 }
                 else
@@ -1437,6 +1451,8 @@ namespace AlphaSoft
         private void printOutPurchaseOrder()
         {
             string PONo = POinvoiceTextBox.Text;
+
+            gUtil.setPaper(comboBox1.SelectedIndex + 1);
 
             string sqlCommandx = "SELECT PH.PURCHASE_DATETIME AS 'TGL', PH.PURCHASE_DATE_RECEIVED AS 'TERIMA', PH.PURCHASE_INVOICE AS 'INVOICE', MS.SUPPLIER_FULL_NAME AS 'SUPPLIER', MP.PRODUCT_NAME AS 'PRODUK', PD.PRODUCT_PRICE AS 'HARGA', PD.PRODUCT_QTY AS 'QTY', PD.PURCHASE_SUBTOTAL AS 'SUBTOTAL' " +
                                         "FROM PURCHASE_HEADER PH, PURCHASE_DETAIL PD, MASTER_SUPPLIER MS, MASTER_PRODUCT MP " +

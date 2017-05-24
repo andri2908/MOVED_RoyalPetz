@@ -654,14 +654,28 @@ namespace AlphaSoft
 
                 if (currentValue.Length > 0)
                 {
-                    //updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
-                    //detailRequestOrderDataGridView.CurrentCell = selectedRow.Cells["qty"];
+                    string sqlCommand = "";
+                    string productName = "";
+                    sqlCommand = "SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'";
 
-                    // CALL DATA PRODUK FORM WITH PARAMETER 
-                    dataProdukForm browseProduk = new dataProdukForm(globalConstants.MUTASI_BARANG, this, currentValue, "", rowSelectedIndex);
-                    browseProduk.ShowDialog(this);
+                    if (Convert.ToInt32(DS.getDataSingleValue(sqlCommand)) > 0)
+                    {
+                        sqlCommand = "SELECT PRODUCT_NAME FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + currentValue + "'";
 
-                    forceUpOneLevel = true;
+                        productName = DS.getDataSingleValue(sqlCommand).ToString();
+
+                        addNewRowFromBarcode(currentValue, productName, rowSelectedIndex);
+                    }
+                    else
+                    { 
+                        //updateSomeRowContents(selectedRow, rowSelectedIndex, currentValue);
+                        //detailRequestOrderDataGridView.CurrentCell = selectedRow.Cells["qty"];
+
+                        // CALL DATA PRODUK FORM WITH PARAMETER 
+                        dataProdukForm browseProduk = new dataProdukForm(globalConstants.MUTASI_BARANG, this, currentValue, "", rowSelectedIndex);
+                        browseProduk.ShowDialog(this);
+                    }
+                    //forceUpOneLevel = true;
                 }
                 else
                 {
