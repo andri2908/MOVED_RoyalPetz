@@ -61,6 +61,9 @@ namespace AlphaSoft
 
                 crystalReportViewer1.ReportSource = rptXMLReport;
                 crystalReportViewer1.Refresh();
+
+                if (gUtil.getPaper() == 1)
+                    rptXMLReport.PrintToPrinter(1, false, 0, 0);
             }
             catch (Exception ex)
             {

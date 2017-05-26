@@ -520,6 +520,9 @@ namespace AlphaSoft
             paymentComboBox.SelectedIndex = 0;
             paymentComboBox.Text = paymentComboBox.Items[0].ToString();
 
+            comboBox1.SelectedIndex = gutil.getPaper();
+            comboBox1.Text = comboBox1.Items[comboBox1.SelectedIndex].ToString();
+
             cashRadioButton.Checked = true;
             creditRadioButton.Checked = false;
         }

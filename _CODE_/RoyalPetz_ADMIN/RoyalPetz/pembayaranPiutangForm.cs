@@ -34,6 +34,8 @@ namespace AlphaSoft
         private Hotkeys.GlobalHotkey ghk_DOWN;
         private bool hotkeyRegistered = false;
 
+        private globalPrinterUtility gPrinter = new globalPrinterUtility();
+
         public pembayaranPiutangForm()
         {
             InitializeComponent();
@@ -448,6 +450,7 @@ namespace AlphaSoft
             DialogResult result;
             printPreviewDialog1.Width = 512;
             printPreviewDialog1.Height = 768;
+            printDocument1.PrinterSettings.PrinterName = gPrinter.getConfigPrinterName(1);
             result = printPreviewDialog1.ShowDialog();
             if (result == DialogResult.OK)
             {
