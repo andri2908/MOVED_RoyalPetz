@@ -80,7 +80,7 @@ namespace AlphaSoft
                 case Keys.F2:
                     if (detailGridView.ReadOnly == false)
                     {
-                        PRDtPicker.Focus();
+                        noInvoiceTextBox.Focus();
 
                         if (null == displayBarcodeForm || displayBarcodeForm.IsDisposed)
                         { 
@@ -317,6 +317,11 @@ namespace AlphaSoft
             if (detailGridView.ReadOnly == true)
                 return;
 
+            if (null == displayBarcodeForm || displayBarcodeForm.IsDisposed)
+                detailGridView.Focus();
+
+            detailGridView.AllowUserToAddRows = false;
+
             if (rowIndex >= 0)
             {
                 rowSelectedIndex = rowIndex;
@@ -391,11 +396,16 @@ namespace AlphaSoft
 
             calculateTotal();
 
-            detailGridView.CurrentCell = selectedRow.Cells["qtyReceived"];
-            detailGridView.Select();
-            detailGridView.BeginEdit(true);
+            if (null == displayBarcodeForm || displayBarcodeForm.IsDisposed)
+            {
+                detailGridView.CurrentCell = selectedRow.Cells["qtyReceived"];
+                detailGridView.Select();
+                detailGridView.BeginEdit(true);
 
-            detailGridView.Focus();
+                detailGridView.Focus();
+            }
+
+            detailGridView.AllowUserToAddRows = true;
         }
 
         public void setSelectedInvoice(string invoiceNo)

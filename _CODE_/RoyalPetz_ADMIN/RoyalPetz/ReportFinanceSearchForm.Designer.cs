@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.MonthPicker = new System.Windows.Forms.DateTimePicker();
             this.CariButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.datetoPicker = new System.Windows.Forms.DateTimePicker();
             this.datefromPicker = new System.Windows.Forms.DateTimePicker();
-            this.MonthPicker = new System.Windows.Forms.DateTimePicker();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,12 +48,21 @@
             this.groupBox1.Controls.Add(this.datetoPicker);
             this.groupBox1.Controls.Add(this.datefromPicker);
             this.groupBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(13, 10);
+            this.groupBox1.Location = new System.Drawing.Point(12, 36);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(663, 123);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Kriteria Pencarian Data Keuangan";
+            // 
+            // MonthPicker
+            // 
+            this.MonthPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.MonthPicker.Location = new System.Drawing.Point(205, 25);
+            this.MonthPicker.Name = "MonthPicker";
+            this.MonthPicker.Size = new System.Drawing.Size(234, 27);
+            this.MonthPicker.TabIndex = 5;
+            this.MonthPicker.Visible = false;
             // 
             // CariButton
             // 
@@ -97,22 +107,27 @@
             this.datefromPicker.Size = new System.Drawing.Size(200, 27);
             this.datefromPicker.TabIndex = 0;
             // 
-            // MonthPicker
+            // panel1
             // 
-            this.MonthPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.MonthPicker.Location = new System.Drawing.Point(205, 25);
-            this.MonthPicker.Name = "MonthPicker";
-            this.MonthPicker.Size = new System.Drawing.Size(234, 27);
-            this.MonthPicker.TabIndex = 5;
-            this.MonthPicker.Visible = false;
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel1.Location = new System.Drawing.Point(2, 1);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(684, 29);
+            this.panel1.TabIndex = 46;
             // 
             // ReportFinanceSearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(688, 139);
+            this.BackColor = System.Drawing.Color.FloralWhite;
+            this.ClientSize = new System.Drawing.Size(688, 166);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "ReportFinanceSearchForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Laporan Keuangan";
             this.Load += new System.EventHandler(this.ReportFinanceSearchForm_Load);
             this.groupBox1.ResumeLayout(false);
@@ -130,5 +145,6 @@
         private System.Windows.Forms.DateTimePicker datetoPicker;
         private System.Windows.Forms.DateTimePicker datefromPicker;
         private System.Windows.Forms.DateTimePicker MonthPicker;
+        private System.Windows.Forms.Panel panel1;
     }
 }

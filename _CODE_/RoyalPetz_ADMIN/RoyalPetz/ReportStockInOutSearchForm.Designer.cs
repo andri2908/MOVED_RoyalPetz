@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.TagsComboBox = new System.Windows.Forms.ComboBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.ErrorLabel2 = new System.Windows.Forms.Label();
@@ -45,13 +46,12 @@
             this.datefromPicker = new System.Windows.Forms.DateTimePicker();
             this.CustomercomboBox = new System.Windows.Forms.ComboBox();
             this.SupplierNameCombobox = new System.Windows.Forms.ComboBox();
-            this.TagsComboBox = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.TagsComboBox);
             this.groupBox1.Controls.Add(this.checkBox2);
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.ErrorLabel2);
@@ -66,15 +66,27 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.datetoPicker);
             this.groupBox1.Controls.Add(this.datefromPicker);
-            this.groupBox1.Controls.Add(this.CustomercomboBox);
             this.groupBox1.Controls.Add(this.SupplierNameCombobox);
+            this.groupBox1.Controls.Add(this.TagsComboBox);
+            this.groupBox1.Controls.Add(this.CustomercomboBox);
             this.groupBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 37);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(663, 181);
+            this.groupBox1.Size = new System.Drawing.Size(730, 181);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Kriteria Pencarian Data Mutasi dan Retur";
+            // 
+            // TagsComboBox
+            // 
+            this.TagsComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.TagsComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.TagsComboBox.FormattingEnabled = true;
+            this.TagsComboBox.Location = new System.Drawing.Point(204, 60);
+            this.TagsComboBox.Name = "TagsComboBox";
+            this.TagsComboBox.Size = new System.Drawing.Size(376, 26);
+            this.TagsComboBox.TabIndex = 14;
+            this.TagsComboBox.Visible = false;
             // 
             // checkBox2
             // 
@@ -122,7 +134,7 @@
             // nonactivecheckbox2
             // 
             this.nonactivecheckbox2.AutoSize = true;
-            this.nonactivecheckbox2.Location = new System.Drawing.Point(417, 62);
+            this.nonactivecheckbox2.Location = new System.Drawing.Point(586, 62);
             this.nonactivecheckbox2.Name = "nonactivecheckbox2";
             this.nonactivecheckbox2.Size = new System.Drawing.Size(138, 22);
             this.nonactivecheckbox2.TabIndex = 8;
@@ -148,13 +160,13 @@
             this.ProductcomboBox.FormattingEnabled = true;
             this.ProductcomboBox.Location = new System.Drawing.Point(204, 60);
             this.ProductcomboBox.Name = "ProductcomboBox";
-            this.ProductcomboBox.Size = new System.Drawing.Size(200, 26);
+            this.ProductcomboBox.Size = new System.Drawing.Size(376, 26);
             this.ProductcomboBox.TabIndex = 6;
             // 
             // nonactivecheckbox1
             // 
             this.nonactivecheckbox1.AutoSize = true;
-            this.nonactivecheckbox1.Location = new System.Drawing.Point(417, 95);
+            this.nonactivecheckbox1.Location = new System.Drawing.Point(586, 95);
             this.nonactivecheckbox1.Name = "nonactivecheckbox1";
             this.nonactivecheckbox1.Size = new System.Drawing.Size(138, 22);
             this.nonactivecheckbox1.TabIndex = 5;
@@ -164,7 +176,7 @@
             // 
             // CariButton
             // 
-            this.CariButton.Location = new System.Drawing.Point(294, 141);
+            this.CariButton.Location = new System.Drawing.Point(329, 134);
             this.CariButton.Name = "CariButton";
             this.CariButton.Size = new System.Drawing.Size(75, 34);
             this.CariButton.TabIndex = 4;
@@ -222,7 +234,7 @@
             this.CustomercomboBox.FormattingEnabled = true;
             this.CustomercomboBox.Location = new System.Drawing.Point(204, 91);
             this.CustomercomboBox.Name = "CustomercomboBox";
-            this.CustomercomboBox.Size = new System.Drawing.Size(200, 26);
+            this.CustomercomboBox.Size = new System.Drawing.Size(376, 26);
             this.CustomercomboBox.TabIndex = 13;
             this.CustomercomboBox.Text = "Customer";
             this.CustomercomboBox.Visible = false;
@@ -234,27 +246,28 @@
             this.SupplierNameCombobox.FormattingEnabled = true;
             this.SupplierNameCombobox.Location = new System.Drawing.Point(204, 91);
             this.SupplierNameCombobox.Name = "SupplierNameCombobox";
-            this.SupplierNameCombobox.Size = new System.Drawing.Size(200, 26);
+            this.SupplierNameCombobox.Size = new System.Drawing.Size(376, 26);
             this.SupplierNameCombobox.TabIndex = 1;
             this.SupplierNameCombobox.Text = "Supplier";
             this.SupplierNameCombobox.Visible = false;
             // 
-            // TagsComboBox
+            // panel1
             // 
-            this.TagsComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.TagsComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.TagsComboBox.FormattingEnabled = true;
-            this.TagsComboBox.Location = new System.Drawing.Point(204, 60);
-            this.TagsComboBox.Name = "TagsComboBox";
-            this.TagsComboBox.Size = new System.Drawing.Size(200, 26);
-            this.TagsComboBox.TabIndex = 14;
-            this.TagsComboBox.Visible = false;
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel1.Location = new System.Drawing.Point(0, 2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(753, 29);
+            this.panel1.TabIndex = 47;
             // 
             // ReportStockInOutSearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(687, 201);
+            this.BackColor = System.Drawing.Color.FloralWhite;
+            this.ClientSize = new System.Drawing.Size(754, 230);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.Name = "ReportStockInOutSearchForm";
             this.Text = "Laporan Mutasi dan Retur";
@@ -285,5 +298,6 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ComboBox CustomercomboBox;
         private System.Windows.Forms.ComboBox TagsComboBox;
+        private System.Windows.Forms.Panel panel1;
     }
 }

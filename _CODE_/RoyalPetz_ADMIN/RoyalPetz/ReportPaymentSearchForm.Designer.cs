@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.BranchcomboBox = new System.Windows.Forms.ComboBox();
             this.ErrorLabel = new System.Windows.Forms.Label();
             this.CustomercomboBox = new System.Windows.Forms.ComboBox();
             this.nonactivecheckbox = new System.Windows.Forms.CheckBox();
@@ -39,8 +41,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.datetoPicker = new System.Windows.Forms.DateTimePicker();
             this.datefromPicker = new System.Windows.Forms.DateTimePicker();
-            this.BranchcomboBox = new System.Windows.Forms.ComboBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,12 +60,34 @@
             this.groupBox1.Controls.Add(this.datetoPicker);
             this.groupBox1.Controls.Add(this.datefromPicker);
             this.groupBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 36);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(685, 146);
+            this.groupBox1.Size = new System.Drawing.Size(685, 168);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Kriteria Pencarian Data Pembayaran";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(209, 64);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(15, 14);
+            this.checkBox1.TabIndex = 9;
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // BranchcomboBox
+            // 
+            this.BranchcomboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.BranchcomboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.BranchcomboBox.FormattingEnabled = true;
+            this.BranchcomboBox.Location = new System.Drawing.Point(230, 58);
+            this.BranchcomboBox.Name = "BranchcomboBox";
+            this.BranchcomboBox.Size = new System.Drawing.Size(440, 26);
+            this.BranchcomboBox.TabIndex = 8;
+            this.BranchcomboBox.Text = "SEMUA";
+            this.BranchcomboBox.Visible = false;
             // 
             // ErrorLabel
             // 
@@ -84,7 +107,7 @@
             this.CustomercomboBox.FormattingEnabled = true;
             this.CustomercomboBox.Location = new System.Drawing.Point(230, 58);
             this.CustomercomboBox.Name = "CustomercomboBox";
-            this.CustomercomboBox.Size = new System.Drawing.Size(200, 26);
+            this.CustomercomboBox.Size = new System.Drawing.Size(440, 26);
             this.CustomercomboBox.TabIndex = 6;
             this.CustomercomboBox.Text = "SEMUA";
             this.CustomercomboBox.Visible = false;
@@ -92,7 +115,7 @@
             // nonactivecheckbox
             // 
             this.nonactivecheckbox.AutoSize = true;
-            this.nonactivecheckbox.Location = new System.Drawing.Point(443, 62);
+            this.nonactivecheckbox.Location = new System.Drawing.Point(209, 90);
             this.nonactivecheckbox.Name = "nonactivecheckbox";
             this.nonactivecheckbox.Size = new System.Drawing.Size(138, 22);
             this.nonactivecheckbox.TabIndex = 5;
@@ -101,7 +124,7 @@
             // 
             // CariButton
             // 
-            this.CariButton.Location = new System.Drawing.Point(294, 99);
+            this.CariButton.Location = new System.Drawing.Point(305, 124);
             this.CariButton.Name = "CariButton";
             this.CariButton.Size = new System.Drawing.Size(75, 34);
             this.CariButton.TabIndex = 4;
@@ -164,35 +187,26 @@
             this.datefromPicker.Size = new System.Drawing.Size(200, 27);
             this.datefromPicker.TabIndex = 0;
             // 
-            // BranchcomboBox
+            // panel1
             // 
-            this.BranchcomboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.BranchcomboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.BranchcomboBox.FormattingEnabled = true;
-            this.BranchcomboBox.Location = new System.Drawing.Point(230, 58);
-            this.BranchcomboBox.Name = "BranchcomboBox";
-            this.BranchcomboBox.Size = new System.Drawing.Size(200, 26);
-            this.BranchcomboBox.TabIndex = 8;
-            this.BranchcomboBox.Text = "SEMUA";
-            this.BranchcomboBox.Visible = false;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(209, 64);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 9;
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel1.Location = new System.Drawing.Point(-2, 1);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(713, 29);
+            this.panel1.TabIndex = 46;
             // 
             // ReportPaymentSearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(709, 168);
+            this.BackColor = System.Drawing.Color.FloralWhite;
+            this.ClientSize = new System.Drawing.Size(709, 213);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.Name = "ReportPaymentSearchForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Laporan Pembayaran Hutang dan Piutang";
             this.Load += new System.EventHandler(this.ReportPaymentSearchForm_Load);
             this.groupBox1.ResumeLayout(false);
@@ -216,5 +230,6 @@
         private System.Windows.Forms.DateTimePicker datefromPicker;
         private System.Windows.Forms.ComboBox BranchcomboBox;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Panel panel1;
     }
 }

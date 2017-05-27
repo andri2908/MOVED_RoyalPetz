@@ -735,6 +735,9 @@ namespace AlphaSoft
 
             cashierDataGridView.AllowUserToAddRows = false;
 
+            if (null == displayBarcodeForm || displayBarcodeForm.IsDisposed)
+                cashierDataGridView.Focus();
+
             if (rowIndex >= 0)
             {
                 rowSelectedIndex = rowIndex;
@@ -816,10 +819,13 @@ namespace AlphaSoft
             jumlahList[rowSelectedIndex] = selectedRow.Cells["jumlah"].Value.ToString();
             calculateTotal();
 
-            cashierDataGridView.CurrentCell = selectedRow.Cells["qty"];
+             if (null == displayBarcodeForm || displayBarcodeForm.IsDisposed)
+            {
+                cashierDataGridView.CurrentCell = selectedRow.Cells["qty"];
+                cashierDataGridView.Select();
+                cashierDataGridView.BeginEdit(true);
+            }
             cashierDataGridView.AllowUserToAddRows = true;
-            cashierDataGridView.Select();
-            cashierDataGridView.BeginEdit(true);
 
             //Force_KeyUp();
 

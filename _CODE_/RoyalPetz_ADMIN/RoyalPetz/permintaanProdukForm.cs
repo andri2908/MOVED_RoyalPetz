@@ -87,7 +87,9 @@ namespace AlphaSoft
 
                 case Keys.F2:
                     if (null == displayBarcodeForm || displayBarcodeForm.IsDisposed)
-                    { 
+                    {
+                        ROinvoiceTextBox.Focus();
+
                         displayBarcodeForm = new barcodeForm(this, globalConstants.NEW_REQUEST_ORDER);
 
                         displayBarcodeForm.Top = this.Top + 5;
@@ -307,7 +309,10 @@ namespace AlphaSoft
             if (detailRequestOrderDataGridView.ReadOnly == true)
                 return;
 
-            detailRequestOrderDataGridView.Focus();
+            detailRequestOrderDataGridView.AllowUserToAddRows = false;
+
+            if (null == displayBarcodeForm || displayBarcodeForm.IsDisposed)
+                detailRequestOrderDataGridView.Focus();
 
             if (rowIndex >= 0)
             {
@@ -375,11 +380,16 @@ namespace AlphaSoft
 
             calculateTotal();
 
-            detailRequestOrderDataGridView.CurrentCell = selectedRow.Cells["qty"];
-            detailRequestOrderDataGridView.Select();
-            detailRequestOrderDataGridView.BeginEdit(true);
+            if (null == displayBarcodeForm || displayBarcodeForm.IsDisposed)
+            {
+                detailRequestOrderDataGridView.CurrentCell = selectedRow.Cells["qty"];
+                detailRequestOrderDataGridView.Select();
+                detailRequestOrderDataGridView.BeginEdit(true);
 
-            detailRequestOrderDataGridView.Focus();
+                detailRequestOrderDataGridView.Focus();
+            }
+
+            detailRequestOrderDataGridView.AllowUserToAddRows = true;
         }
 
         private void loadDataHeaderRO()

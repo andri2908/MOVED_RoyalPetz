@@ -163,7 +163,10 @@ namespace AlphaSoft
         {
             ErrorLabel.Visible = false;
 
+            datefromPicker.Format = DateTimePickerFormat.Custom;
             datefromPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+
+            datetoPicker.Format = DateTimePickerFormat.Custom;
             datetoPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
 
             if (originModuleID != globalConstants.REPORT_PURCHASE_ByPRODUCT)

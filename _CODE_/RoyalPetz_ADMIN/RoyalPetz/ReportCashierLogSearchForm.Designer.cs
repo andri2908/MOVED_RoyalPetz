@@ -38,6 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.datetoPicker = new System.Windows.Forms.DateTimePicker();
             this.datefromPicker = new System.Windows.Forms.DateTimePicker();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,7 +54,7 @@
             this.groupBox1.Controls.Add(this.datetoPicker);
             this.groupBox1.Controls.Add(this.datefromPicker);
             this.groupBox1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(13, 12);
+            this.groupBox1.Location = new System.Drawing.Point(13, 37);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(663, 146);
             this.groupBox1.TabIndex = 3;
@@ -74,7 +75,7 @@
             // nonactivecheckbox
             // 
             this.nonactivecheckbox.AutoSize = true;
-            this.nonactivecheckbox.Location = new System.Drawing.Point(417, 62);
+            this.nonactivecheckbox.Location = new System.Drawing.Point(546, 59);
             this.nonactivecheckbox.Name = "nonactivecheckbox";
             this.nonactivecheckbox.Size = new System.Drawing.Size(98, 22);
             this.nonactivecheckbox.TabIndex = 5;
@@ -100,7 +101,7 @@
             this.UserIDCombobox.FormattingEnabled = true;
             this.UserIDCombobox.Location = new System.Drawing.Point(204, 58);
             this.UserIDCombobox.Name = "UserIDCombobox";
-            this.UserIDCombobox.Size = new System.Drawing.Size(200, 26);
+            this.UserIDCombobox.Size = new System.Drawing.Size(336, 26);
             this.UserIDCombobox.TabIndex = 1;
             this.UserIDCombobox.Text = "P-UMUM";
             this.UserIDCombobox.Visible = false;
@@ -150,12 +151,24 @@
             this.datefromPicker.Size = new System.Drawing.Size(200, 27);
             this.datefromPicker.TabIndex = 0;
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel1.Location = new System.Drawing.Point(2, 2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(684, 29);
+            this.panel1.TabIndex = 45;
+            // 
             // ReportCashierLogSearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(688, 166);
+            this.BackColor = System.Drawing.Color.FloralWhite;
+            this.ClientSize = new System.Drawing.Size(688, 197);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ReportCashierLogSearchForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -179,5 +192,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker datetoPicker;
         private System.Windows.Forms.DateTimePicker datefromPicker;
+        private System.Windows.Forms.Panel panel1;
     }
 }

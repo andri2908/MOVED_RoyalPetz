@@ -199,6 +199,12 @@ namespace AlphaSoft
             ErrorLabel2.Visible = false;
             gutil.reArrangeTabOrder(this);
 
+            datefromPicker.Format = DateTimePickerFormat.Custom;
+            datefromPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+
+            datetoPicker.Format = DateTimePickerFormat.Custom;
+            datetoPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+
             //LabelOptions1.Text = "Supplier";
             //SupplierNameCombobox.Visible = true;
             //LabelOptions2.Text = "Produk";

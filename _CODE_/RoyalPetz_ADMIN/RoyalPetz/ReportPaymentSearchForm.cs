@@ -153,6 +153,13 @@ namespace AlphaSoft
         private void ReportPaymentSearchForm_Load(object sender, EventArgs e)
         {
             ErrorLabel.Visible = false;
+
+            datefromPicker.Format = DateTimePickerFormat.Custom;
+            datefromPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+
+            datetoPicker.Format = DateTimePickerFormat.Custom;
+            datetoPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+
             switch (originModuleID)
             {
                 case globalConstants.REPORT_DEBT_PAYMENT:

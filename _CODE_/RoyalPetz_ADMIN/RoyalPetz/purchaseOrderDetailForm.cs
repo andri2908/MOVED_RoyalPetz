@@ -321,7 +321,8 @@ namespace AlphaSoft
 
             detailPODataGridView.AllowUserToAddRows = false;
 
-            detailPODataGridView.Focus();
+            if (null == displayBarcodeForm || displayBarcodeForm.IsDisposed)
+                detailPODataGridView.Focus();
 
             if (rowIndex >= 0)
             {
@@ -393,12 +394,16 @@ namespace AlphaSoft
 
             calculateTotal();
 
-            detailPODataGridView.CurrentCell = selectedRow.Cells["qty"];
-            detailPODataGridView.AllowUserToAddRows = true;
-            detailPODataGridView.Select();
-            detailPODataGridView.BeginEdit(true);
+            if (null == displayBarcodeForm || displayBarcodeForm.IsDisposed)
+            {
+                detailPODataGridView.CurrentCell = selectedRow.Cells["qty"];
+                detailPODataGridView.Select();
+                detailPODataGridView.BeginEdit(true);
 
-            detailPODataGridView.Focus();
+                detailPODataGridView.Focus();
+            }
+
+            detailPODataGridView.AllowUserToAddRows = true;
         }
 
         private void fillInSupplierCombo()

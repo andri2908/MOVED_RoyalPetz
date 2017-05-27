@@ -175,6 +175,13 @@ namespace AlphaSoft
         private void ReportFinanceSearchForm_Load(object sender, EventArgs e)
         {
             gutil.reArrangeTabOrder(this);
+
+            datefromPicker.Format = DateTimePickerFormat.Custom;
+            datefromPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+
+            datetoPicker.Format = DateTimePickerFormat.Custom;
+            datetoPicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+
             if (originModuleID == globalConstants.REPORT_MONTHLY_BALANCE)
             {
                 label2.Visible = false;

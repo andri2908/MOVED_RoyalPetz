@@ -410,6 +410,8 @@ namespace AlphaSoft
             if (detailReturDataGridView.ReadOnly == true)
                 return;
 
+            detailReturDataGridView.AllowUserToAddRows = false;
+
             productLotID = lotID;
 
             if (rowIndex >= 0)
@@ -490,11 +492,16 @@ namespace AlphaSoft
 
             calculateTotal();
 
-            detailReturDataGridView.CurrentCell = selectedRow.Cells["qty"];
-            detailReturDataGridView.BeginEdit(true);
+            if (null == displayBarcodeForm || displayBarcodeForm.IsDisposed)
+            {
+                detailReturDataGridView.CurrentCell = selectedRow.Cells["qty"];
+                detailReturDataGridView.BeginEdit(true);
 
-            detailReturDataGridView.Select();
-            detailReturDataGridView.Focus();
+                detailReturDataGridView.Select();
+                detailReturDataGridView.Focus();
+            }
+
+            detailReturDataGridView.AllowUserToAddRows = true;
         }
 
         private double getHPPValue(string productID)
@@ -1033,6 +1040,9 @@ namespace AlphaSoft
                 globalTotalValue = 0;
                 totalLabel.Text = globalTotalValue.ToString("C0", culture);
                 ReturDtPicker_1.Value = DateTime.Now;
+
+                comboBox1.SelectedIndex = gUtil.getPaper() - 1;
+                comboBox1.Text = comboBox1.Items[comboBox1.SelectedIndex].ToString();
             }
         }
 
