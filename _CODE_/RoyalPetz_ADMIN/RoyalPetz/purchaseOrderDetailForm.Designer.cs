@@ -58,6 +58,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.detailPODataGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -67,7 +68,7 @@
             // 
             this.supplierHiddenCombo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.supplierHiddenCombo.FormattingEnabled = true;
-            this.supplierHiddenCombo.Location = new System.Drawing.Point(613, 52);
+            this.supplierHiddenCombo.Location = new System.Drawing.Point(614, 52);
             this.supplierHiddenCombo.Name = "supplierHiddenCombo";
             this.supplierHiddenCombo.Size = new System.Drawing.Size(278, 26);
             this.supplierHiddenCombo.TabIndex = 19;
@@ -365,6 +366,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.comboBox1);
@@ -415,6 +417,18 @@
             this.comboBox1.Size = new System.Drawing.Size(183, 26);
             this.comboBox1.TabIndex = 64;
             this.comboBox1.Text = "1/2 KUARTO";
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Location = new System.Drawing.Point(614, 51);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(30, 27);
+            this.button1.TabIndex = 66;
+            this.button1.Text = "+";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // purchaseOrderDetailForm
             // 
@@ -473,5 +487,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button1;
     }
 }

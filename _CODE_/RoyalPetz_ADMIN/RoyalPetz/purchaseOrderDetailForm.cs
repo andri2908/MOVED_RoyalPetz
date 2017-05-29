@@ -1700,5 +1700,13 @@ namespace AlphaSoft
                 detailPODataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dataSupplierDetailForm newSupplierForm = new dataSupplierDetailForm(globalConstants.NEW_SUPPLIER);
+            newSupplierForm.ShowDialog(this);
+
+            fillInSupplierCombo();
+        }
     }
 }

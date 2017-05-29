@@ -140,7 +140,7 @@ namespace AlphaSoft
 
             DS.mySqlConnect();
             //1 load default 2 setting user
-            using (rdr = DS.getData("SELECT IFNULL(BRANCH_ID,0) AS 'BRANCH_ID', IFNULL(HQ_IP4,'') AS 'IP', IFNULL(STORE_NAME,'') AS 'NAME', IFNULL(STORE_ADDRESS,'') AS 'ADDRESS', IFNULL(STORE_PHONE,'') AS 'PHONE', IFNULL(STORE_EMAIL,'') AS 'EMAIL' FROM SYS_CONFIG WHERE ID =  " + opt))
+            using (rdr = DS.getData("SELECT IFNULL(BRANCH_ID,0) AS 'BRANCH_ID', IFNULL(HQ_IP4,'') AS 'IP', IFNULL(STORE_NAME,'') AS 'NAME', IFNULL(STORE_ADDRESS,'') AS 'ADDRESS', IFNULL(STORE_PHONE,'') AS 'PHONE', IFNULL(STORE_EMAIL,'') AS 'EMAIL', POS_RECEIPT_PRINTER, KUARTO_PRINTER FROM SYS_CONFIG WHERE ID =  " + opt))
             {
                 if (rdr.HasRows)
                 {                    
@@ -558,6 +558,7 @@ namespace AlphaSoft
 
             return result;
         }
+
         private void saveButton_Click_1(object sender, EventArgs e)
         {
             //save to setting 

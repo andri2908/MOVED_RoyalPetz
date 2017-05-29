@@ -204,14 +204,28 @@ namespace AlphaSoft
             return retVal;
         }
 
+        private int getCurrentMode()
+        {
+            int result = NEW_CONVERSION;
+            string sqlCommand = "";
+
+            sqlCommand = "SELECT COUNT(1) FROM UNIT_CONVERT WHERE CONVERT_UNIT_ID_1 = " + selectedUnit1_ID + " AND CONVERT_UNIT_ID_2 = " + selectedUnit2_ID;
+
+            if (Convert.ToInt32(DS.getDataSingleValue(sqlCommand)) > 0)
+                result = EDIT_CONVERSION;
+
+            return result;
+        }
+
         private bool saveDataTransaction()
         {
             bool result = false;
             string sqlCommand = "";
             MySqlException internalEX = null;
+            int prevMode = 0;
 
             double unitConversion = getConvertValue();
-            
+
             DS.beginTransaction();
 
             try
@@ -281,6 +295,16 @@ namespace AlphaSoft
 
         private void newButton_Click(object sender, EventArgs e)
         {
+            int prevMode = currentMode;
+            // FINAL CHECK ON CURRENT MODE
+            currentMode = getCurrentMode();
+
+            if (currentMode == EDIT_CONVERSION && prevMode == NEW_CONVERSION) // AUTO UPDATE WARNING
+            {
+                if (DialogResult.No == MessageBox.Show("DATA KONVERSI SUDAH ADA, DIGANTI?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    return;
+            }
+
             if (saveData())
             {
                 gUtil.saveUserChangeLog(globalConstants.MENU_SATUAN, globalConstants.CHANGE_LOG_UPDATE, "SET KONVERSI SATUAN [" + unit1Combo.Text + " = " + convertValueTextBox.Text + " " + unit2Combo.Text + "]");

@@ -1116,7 +1116,7 @@ namespace AlphaSoft
                 DS.mySqlConnect();
 
                 if (originModuleID == 0)   // NORMAL TRANSACTION
-                { 
+                {
                     salesInvoice = getSalesInvoiceID();
                     //pass thru to receipt generator
                     selectedsalesinvoice = salesInvoice;
@@ -3259,6 +3259,8 @@ namespace AlphaSoft
 
         private void cashierDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            bool tempIsLoading = isLoading;
+
             if ((cashierDataGridView.Columns[e.ColumnIndex].Name == "productPrice" || cashierDataGridView.Columns[e.ColumnIndex].Name == "qty" || cashierDataGridView.Columns[e.ColumnIndex].Name == "discRP" || cashierDataGridView.Columns[e.ColumnIndex].Name == "jumlah")
                 && e.RowIndex != this.cashierDataGridView.NewRowIndex && null != e.Value)
             {
@@ -3267,6 +3269,8 @@ namespace AlphaSoft
                 e.Value = d.ToString(globalUtilities.CELL_FORMATTING_NUMERIC_FORMAT);
                 isLoading = false;    
             }
+
+            isLoading = tempIsLoading;
         }
 
         private void cashierDataGridView_Enter(object sender, EventArgs e)
