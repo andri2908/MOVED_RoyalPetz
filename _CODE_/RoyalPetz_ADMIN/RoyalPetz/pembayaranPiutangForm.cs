@@ -178,7 +178,7 @@ namespace AlphaSoft
             DataTable dt = new DataTable();
             string sqlCommand = "";
 
-            sqlCommand = "SELECT PAYMENT_INVALID, PAYMENT_ID, PM_NAME AS 'TIPE', IF(PAYMENT_CONFIRMED = 1, 'Y', 'N') AS STATUS, DATE_FORMAT(PAYMENT_DUE_DATE, '%d-%M-%Y') AS 'TANGGAL PEMBAYARAN', PAYMENT_NOMINAL AS 'NOMINAL', PAYMENT_DESCRIPTION AS 'DESKRIPSI' FROM PAYMENT_CREDIT PC, PAYMENT_METHOD PM WHERE PC.PM_ID = PM.PM_ID AND CREDIT_ID = " + selectedCreditID;
+            sqlCommand = "SELECT PAYMENT_INVALID, PAYMENT_ID, PM_NAME AS 'TIPE', IF(PAYMENT_CONFIRMED = 1, 'Y', 'N') AS STATUS, DATE_FORMAT(PAYMENT_DUE_DATE, '%d-%M-%Y') AS 'TANGGAL PEMBAYARAN', PAYMENT_NOMINAL AS 'NOMINAL', PAYMENT_DESCRIPTION AS 'DESKRIPSI' FROM PAYMENT_CREDIT PC, PAYMENT_METHOD PM WHERE (PC.PM_ID - 1) = PM.PM_ID AND CREDIT_ID = " + selectedCreditID;
             using (rdr = DS.getData(sqlCommand))
             {
                 detailPaymentInfoDataGrid.DataSource = null;

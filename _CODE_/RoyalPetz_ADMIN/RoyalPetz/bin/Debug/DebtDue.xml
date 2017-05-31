@@ -7,6 +7,7 @@
           <xs:element name="Table">
             <xs:complexType>
               <xs:sequence>
+                <xs:element name="BRANCH_NAME" type="xs:string" minOccurs="0" />
                 <xs:element name="INVOICE" type="xs:string" minOccurs="0" />
                 <xs:element name="TOTAL" type="xs:double" minOccurs="0" />
                 <xs:element name="JATUHTEMPO" type="xs:dateTime" minOccurs="0" />

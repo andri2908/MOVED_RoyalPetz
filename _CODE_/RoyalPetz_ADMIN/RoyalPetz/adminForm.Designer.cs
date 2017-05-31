@@ -1057,7 +1057,7 @@
             this.MENU_laporanHutangLewatJatuhTempo.ForeColor = System.Drawing.Color.FloralWhite;
             this.MENU_laporanHutangLewatJatuhTempo.Name = "MENU_laporanHutangLewatJatuhTempo";
             this.MENU_laporanHutangLewatJatuhTempo.Size = new System.Drawing.Size(276, 22);
-            this.MENU_laporanHutangLewatJatuhTempo.Text = "Hutang Lewat Jatuh Tempo";
+            this.MENU_laporanHutangLewatJatuhTempo.Text = "Hutang Yang Jatuh Tempo";
             this.MENU_laporanHutangLewatJatuhTempo.Click += new System.EventHandler(this.hutangLewatJatuhTempoToolStripMenuItem_Click);
             // 
             // MENU_laporanPembayaranHutang

@@ -313,7 +313,7 @@ namespace AlphaSoft
                     case globalConstants.REPORT_PURCHASE_RETURN:
                         result = int.TryParse(SupplierNameCombobox.SelectedValue.ToString(), out supplier_id);
                         supplier = "AND RH.SUPPLIER_ID";
-                        supplier = " = " + supplier_id + " "; ;
+                        supplier = " = " + supplier_id + " "; 
                         break;
                     case globalConstants.REPORT_SALES_RETURN:
                         result = int.TryParse(CustomercomboBox.SelectedValue.ToString(), out cust_id);
@@ -434,7 +434,7 @@ namespace AlphaSoft
                         sqlCommandx = "SELECT MP.PRODUCT_NAME, MP.PRODUCT_STOCK_QTY, MU.UNIT_NAME, MC.CATEGORY_NAME " +
                                         "FROM MASTER_PRODUCT MP, PRODUCT_CATEGORY PC, MASTER_CATEGORY MC, MASTER_UNIT MU " +
                                         "WHERE MP.PRODUCT_IS_SERVICE = 0 AND MP.PRODUCT_ACTIVE = 1 AND MP.UNIT_ID = MU.UNIT_ID " +
-                                        "AND MP.PRODUCT_ID = PC.PRODUCT_ID AND PC.CATEGORY_ID = MC.CATEGORY_ID" + tags;
+                                        "AND MP.PRODUCT_ID = PC.PRODUCT_ID AND PC.CATEGORY_ID = MC.CATEGORY_ID " + tags;
                         DS.writeXML(sqlCommandx, globalConstants.StockXML);
                         ReportStockForm displayedForm6 = new ReportStockForm();
                         displayedForm6.ShowDialog(this);
@@ -443,7 +443,7 @@ namespace AlphaSoft
                     sqlCommandx = "SELECT MP.PRODUCT_NAME, PE.PRODUCT_AMOUNT, PE.PRODUCT_EXPIRY_DATE, MU.UNIT_NAME, MC.CATEGORY_NAME " +
                                         "FROM MASTER_PRODUCT MP, PRODUCT_CATEGORY PC, MASTER_CATEGORY MC, MASTER_UNIT MU, PRODUCT_EXPIRY PE " +
                                         "WHERE PE.PRODUCT_ID = MP.PRODUCT_ID AND MP.PRODUCT_IS_SERVICE = 0 AND MP.PRODUCT_ACTIVE = 1 AND MP.UNIT_ID = MU.UNIT_ID " +
-                                        "AND MP.PRODUCT_ID = PC.PRODUCT_ID AND PC.CATEGORY_ID = MC.CATEGORY_ID" + tags;
+                                        "AND MP.PRODUCT_ID = PC.PRODUCT_ID AND PC.CATEGORY_ID = MC.CATEGORY_ID " + tags;
                     DS.writeXML(sqlCommandx, globalConstants.StockExpiryXML);
                     ReportStockForm displayedForm6Expiry = new ReportStockForm(globalConstants.REPORT_STOCK_EXPIRY);
                     displayedForm6Expiry.ShowDialog(this);
