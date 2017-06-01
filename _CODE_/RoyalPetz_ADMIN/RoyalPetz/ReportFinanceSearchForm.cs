@@ -72,12 +72,12 @@ namespace AlphaSoft
             switch (originModuleID)
             {
                 case globalConstants.REPORT_FINANCE_IN:
-                    sqlCommandx = "SELECT DJ.JOURNAL_DATETIME AS 'TGL', MA.ACCOUNT_NAME AS 'AKUN', DJ.JOURNAL_NOMINAL AS 'JML', DJ.JOURNAL_DESCRIPTION AS 'DESKRIPSI' " +
+                    sqlCommandx = "SELECT '' AS BRANCH_NAME, DJ.JOURNAL_DATETIME AS 'TGL', MA.ACCOUNT_NAME AS 'AKUN', DJ.JOURNAL_NOMINAL AS 'JML', DJ.JOURNAL_DESCRIPTION AS 'DESKRIPSI' " +
                                     "FROM DAILY_JOURNAL DJ, MASTER_ACCOUNT MA " +
                                     "WHERE DJ.ACCOUNT_ID = MA.ACCOUNT_ID AND MA.ACCOUNT_TYPE_ID = 1 AND DJ.BRANCH_ID = 0 " +
                                     "AND DATE_FORMAT(DJ.JOURNAL_DATETIME, '%Y%m%d') >= '" + dateFrom + "' AND DATE_FORMAT(DJ.JOURNAL_DATETIME, '%Y%m%d') <= '" + dateTo + "'";
                     DS.writeXML(sqlCommandx, globalConstants.FinanceInXML);
-                    ReportCashierLogForm displayedForm1 = new ReportCashierLogForm();
+                    ReportFinanceInForm displayedForm1 = new ReportFinanceInForm();
                     displayedForm1.ShowDialog(this);
                     break;
                 case globalConstants.REPORT_FINANCE_OUT:
