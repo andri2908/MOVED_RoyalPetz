@@ -93,13 +93,14 @@ namespace AlphaSoft
 
             if (globalFeatureList.EXPIRY_MODULE == 1)
             {
-                sqlCommand = "SELECT MP.PRODUCT_ID, MP.PRODUCT_NAME, PE.PRODUCT_AMOUNT, MP.PRODUCT_LIMIT_STOCK, PE.PRODUCT_EXPIRY_DATE FROM MASTER_PRODUCT MP, PRODUCT_EXPIRY PE WHERE PE.PRODUCT_ID = MP.PRODUCT_ID AND PE.ID = " + selectedLotID;
+                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID, MP.PRODUCT_NAME, PE.PRODUCT_AMOUNT, MP.PRODUCT_LIMIT_STOCK, PE.PRODUCT_EXPIRY_DATE FROM MASTER_PRODUCT MP, PRODUCT_EXPIRY PE WHERE PE.PRODUCT_ID = MP.PRODUCT_ID AND PE.ID = " + selectedLotID;
                 using (rdr = DS.getData(sqlCommand))
                 {
                     if (rdr.HasRows)
                     {
                         rdr.Read();
 
+                        selectedProductID = rdr.GetInt32("ID");
                         kodeProductTextBox.Text = rdr.GetString("PRODUCT_ID");
                         namaProductTextBox.Text = rdr.GetString("PRODUCT_NAME");
                         jumlahAwalMaskedTextBox.Text = rdr.GetString("PRODUCT_AMOUNT");
@@ -163,13 +164,16 @@ namespace AlphaSoft
             bool result = false;
             string sqlCommand = "";
             double newStockQty = 0;
+            double oldStockQty = 0;
+            double diffQty = 0;
             string adjustmentDate;
             string descriptionParam;
             string productExpiryDate;
 
             MySqlException internalEX = null;
 
-            newStockQty = Convert.ToDouble(jumlahBaruMaskedTextBox.Text);
+            oldStockQty = Convert.ToDouble(jumlahAwalMaskedTextBox.Text);
+            newStockQty = Convert.ToDouble(gUtil.allTrim(jumlahBaruMaskedTextBox.Text));
             adjustmentDate = String.Format(culture, "{0:dd-MM-yyyy}", DateTime.Now);
 
             if (descriptionTextBox.Text.Length <= 0)
@@ -183,8 +187,19 @@ namespace AlphaSoft
             {
                 DS.mySqlConnect();
 
-                // UPDATE MASTER PRODUCT WITH THE NEW QTY
-                sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = " + newStockQty + " WHERE ID = " + selectedProductID;
+                if (globalFeatureList.EXPIRY_MODULE == 1)
+                {
+                    diffQty = Math.Abs(oldStockQty - newStockQty);
+                    if (oldStockQty > newStockQty)
+                        sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + diffQty + " WHERE ID = " + selectedProductID;
+                    else
+                        sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY + " + diffQty + " WHERE ID = " + selectedProductID;
+                }
+                else
+                { 
+                    // UPDATE MASTER PRODUCT WITH THE NEW QTY
+                    sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = " + newStockQty + " WHERE ID = " + selectedProductID;
+                }
 
                 gUtil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "UPDATE STOCK QTY [" + selectedProductID + "]");
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))

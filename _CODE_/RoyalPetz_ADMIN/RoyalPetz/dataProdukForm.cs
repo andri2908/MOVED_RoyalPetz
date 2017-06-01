@@ -556,7 +556,7 @@ namespace AlphaSoft
 
         private void dataProdukForm_Activated(object sender, EventArgs e)
         {
-            if (!namaProdukTextBox.Text.Equals(""))
+            if (!namaProdukTextBox.Text.Equals("") || !kodeProductTextBox.Text.Equals(""))
             {
                 loadProdukData();
             }
