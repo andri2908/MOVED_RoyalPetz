@@ -1519,7 +1519,7 @@ namespace AlphaSoft
                     }
 
                     //gutil.showSuccess(gutil.INS);
-                    MessageBox.Show("Saving data to table success! /n No Invoice [" + selectedsalesinvoice + "]", "POS Success Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Saving data to table success! \n No Invoice [" + selectedsalesinvoice + "]", "POS Success Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     clearUpScreen();
                 }
