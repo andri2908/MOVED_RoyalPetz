@@ -39,6 +39,7 @@ namespace AlphaSoft
         private int originModuleID = 0;
         private bool navKeyRegistered = false;
         private bool delKeyRegistered = false;
+        private bool disableF5 = false;
 
         private Data_Access DS = new Data_Access();
 
@@ -169,8 +170,9 @@ namespace AlphaSoft
                     }
                     break;
 
-                case Keys.F5: // NOT USED
-                    if (originModuleID != globalConstants.COPY_NOTA)
+                case Keys.F5:
+                    //if (originModuleID != globalConstants.COPY_NOTA)
+                    if (!disableF5)
                         if (DialogResult.Yes == MessageBox.Show("HAPUS DATA DATA DI LAYAR ?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                             clearUpScreen();
                     break;
@@ -351,8 +353,8 @@ namespace AlphaSoft
             ghk_F4 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F4, this);
             ghk_F4.Register();
 
-            //ghk_F5 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F5, this);
-            //ghk_F5.Register();
+            ghk_F5 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F5, this);
+            ghk_F5.Register();
 
             ghk_F7 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F7, this);
             ghk_F7.Register();
@@ -433,7 +435,7 @@ namespace AlphaSoft
             ghk_F2.Unregister();
             ghk_F3.Unregister();
             ghk_F4.Unregister();
-            //ghk_F5.Unregister();
+            ghk_F5.Unregister();
             ghk_F7.Unregister();
             ghk_F8.Unregister();
             ghk_F9.Unregister();
@@ -510,6 +512,19 @@ namespace AlphaSoft
             totalLabel.Text = globalTotalValue.ToString("C0", culture);
             gutil.ResetAllControls(this);
 
+            cashierDataGridView.ReadOnly = false;
+            cashierDataGridView.AllowUserToAddRows = true;
+
+            customerComboBox.Enabled = true;
+            cashRadioButton.Enabled = true;
+            creditRadioButton.Enabled = true;
+            tempoMaskedTextBox.ReadOnly = false;
+            paymentComboBox.Enabled = true;
+            printoutCheckBox.Enabled = true;
+
+            discJualMaskedTextBox.ReadOnly = false;
+            bayarTextBox.ReadOnly = false;
+
             totalPenjualanTextBox.Text = globalTotalValue.ToString("C0", culture);
             totalAfterDiscTextBox.Text = globalTotalValue.ToString("C0", culture);
             uangKembaliTextBox.Text = "0";
@@ -525,6 +540,12 @@ namespace AlphaSoft
 
             cashRadioButton.Checked = true;
             creditRadioButton.Checked = false;
+
+            reprintButton.Visible = false;
+            errorLabel.Text = "";
+
+            originModuleID = 0;
+            loadNoFaktur();
         }
 
         public void setCustomerID(int ID)
@@ -1497,7 +1518,8 @@ namespace AlphaSoft
                         PrintReceipt();
                     }
 
-                    gutil.showSuccess(gutil.INS);
+                    //gutil.showSuccess(gutil.INS);
+                    MessageBox.Show("Saving data to table success! /n No Invoice [" + selectedsalesinvoice + "]", "POS Success Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     clearUpScreen();
                 }
@@ -2202,7 +2224,11 @@ namespace AlphaSoft
                 printoutCheckBox.Enabled = false;
 
                 discJualMaskedTextBox.ReadOnly = true;
-                bayarTextBox.ReadOnly = true;     
+                bayarTextBox.ReadOnly = true;
+
+                copyNotaButton.Visible = false;
+                disableF5 = true;
+                reprintButton.Visible = true;
             }
 
             //add double buffer
@@ -3560,6 +3586,49 @@ namespace AlphaSoft
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dataSalesInvoice displayForm = new dataSalesInvoice(this);
+            displayForm.ShowDialog(this);
+        }
+
+        public void reloadInvoice(string invoiceNo)
+        {
+            if (invoiceNo.Length > 0)
+            {
+                originModuleID = globalConstants.COPY_NOTA;
+                errorLabel.Text = "COPY NOTA";
+                selectedsalesinvoice = invoiceNo;
+
+                cashierDataGridView.Rows.Clear();
+                cashierDataGridView.AllowUserToAddRows = false;
+                loadInvoiceData();
+                cashierDataGridView.AllowUserToAddRows = true;
+
+                reprintButton.Visible = true;
+
+                cashierDataGridView.ReadOnly = true;
+                cashierDataGridView.AllowUserToAddRows = false;
+
+                customerComboBox.Enabled = false;
+                cashRadioButton.Enabled = false;
+                creditRadioButton.Enabled = false;
+                tempoMaskedTextBox.ReadOnly = true;
+                paymentComboBox.Enabled = false;
+                printoutCheckBox.Enabled = false;
+
+                discJualMaskedTextBox.ReadOnly = true;
+                bayarTextBox.ReadOnly = true;
+            }
+        }
+
+        private void reprintButton_Click(object sender, EventArgs e)
+        {
+            if (selectedsalesinvoice != "")
+                if (DialogResult.Yes == MessageBox.Show("REPRINT INVOICE ?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    reprintInvoice();
         }
     }
 }

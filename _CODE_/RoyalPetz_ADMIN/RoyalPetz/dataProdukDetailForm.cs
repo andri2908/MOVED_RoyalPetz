@@ -718,14 +718,18 @@ namespace AlphaSoft
             if (produkQty.Equals(""))
                 produkQty = "0";
 
+            int lotID = 0;
+            double deltaQty = 0;
+            double newProdukQty = 0;
+
             if (globalFeatureList.EXPIRY_MODULE == 1)
             {
-                double newProdukQty = Convert.ToDouble(produkQty);
-                double deltaQty = newProdukQty - selectedProductOriginalQty;
+                //double newProdukQty = Convert.ToDouble(produkQty);
+                //double deltaQty = newProdukQty - selectedProductOriginalQty;
 
-                selectedProductOriginalTotalQty = selectedProductOriginalTotalQty + deltaQty;
+                //selectedProductOriginalTotalQty = selectedProductOriginalTotalQty + deltaQty;
 
-                produkQty = selectedProductOriginalTotalQty.ToString();
+                //produkQty = selectedProductOriginalTotalQty.ToString();
             }
 
             string limitStock = limitStokTextBox.Text;
@@ -771,9 +775,39 @@ namespace AlphaSoft
             {
                 DS.mySqlConnect();
 
+                if (globalFeatureList.EXPIRY_MODULE == 1 && productExpired == 1)
+                {
+                    // INSERT TO PRODUCT_EXPIRY
+                    DateTime productExpiryDateValue = expDatePicker.Value;
+                    string productExpiryDate = String.Format(culture, "{0:dd-MM-yyyy}", productExpiryDateValue);
+                   
+                    string productID = kodeProdukTextBox.Text;
+                    expiryModuleUtil expUtil = new expiryModuleUtil();
+
+                    // CHECK WHETHER THE PRODUCT WITH SAME EXPIRY DATE EXIST
+                    lotID = expUtil.getLotIDBasedOnExpiryDate(productExpiryDateValue, productID);
+
+                    if (lotID == 0) // NEW EXPIRY DATE
+                        //sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT, PR_INVOICE) VALUES ( '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", '" + PRInvoice + "')";
+                        sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT) VALUES ( '" + productID + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + produkQty + ")";
+                    else
+                    {
+                        newProdukQty = Convert.ToDouble(produkQty);
+                         //selectedProductOriginalTotalQty = selectedProductOriginalTotalQty + deltaQty;
+
+                        //produkQty = selectedProductOriginalTotalQty.ToString();
+                        sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = " + newProdukQty + " WHERE ID = " + lotID;
+                    }
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "INSERT TO PRODUCT EXPIRY [" + productID + "]");
+                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        throw internalEX;
+                }
+
                 switch (originModuleID)
                 {
                     case globalConstants.EDIT_PRODUK:
+                        if (globalFeatureList.EXPIRY_MODULE == 0)
+                        { 
                             // UPDATE MASTER_PRODUK TABLE
                             sqlCommand = "UPDATE MASTER_PRODUCT SET " +
                                                 "PRODUCT_BARCODE = '" + produkBarcode + "', " +
@@ -793,10 +827,42 @@ namespace AlphaSoft
                                                 "PRODUCT_IS_SERVICE = " + produkSvc + ", " +
                                                 "PRODUCT_EXPIRABLE = " + productExpired + " " +
                                                 "WHERE PRODUCT_ID = '" + productID + "'";
+                        }
+                        else
+                        {
+                            sqlCommand = "UPDATE MASTER_PRODUCT SET " +
+                                                "PRODUCT_BARCODE = '" + produkBarcode + "', " +
+                                                "PRODUCT_NAME =  '" + produkName + "', " +
+                                                "PRODUCT_DESCRIPTION =  '" + produkDesc + "', " +
+                                                "PRODUCT_BASE_PRICE = " + produkHargaPokok + ", " +
+                                                "PRODUCT_RETAIL_PRICE = " + produkHargaEcer + ", " +
+                                                "PRODUCT_BULK_PRICE =  " + produkHargaPartai + ", " +
+                                                "PRODUCT_WHOLESALE_PRICE = " + produkHargaGrosir + ", " +
+                                                "PRODUCT_PHOTO_1 = '" + produkPhoto + "', " +
+                                                "UNIT_ID = " + selectedUnitID + ", ";
 
-                            gUtil.saveSystemDebugLog(globalConstants.MENU_TAMBAH_PRODUK, "UPDATE CURRENT PRODUCT DATA [" + productID + "]");
-                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                                throw internalEX;
+                            if (lotID == 0)
+                            {
+                                sqlCommand = sqlCommand + "PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY + " + produkQty + ", ";
+                            }
+                            else
+                            {
+                                deltaQty = newProdukQty - selectedProductOriginalQty;
+                                sqlCommand = sqlCommand + "PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY + " + deltaQty + ", ";
+                            }
+
+                            sqlCommand = sqlCommand + "PRODUCT_LIMIT_STOCK = " + limitStock + ", " +
+                                                "PRODUCT_SHELVES = '" + produkShelves + "', " +
+                                                "PRODUCT_ACTIVE = " + produkStatus + ", " +
+                                                "PRODUCT_BRAND = '" + produkBrand + "', " +
+                                                "PRODUCT_IS_SERVICE = " + produkSvc + ", " +
+                                                "PRODUCT_EXPIRABLE = " + productExpired + " " +
+                                                "WHERE PRODUCT_ID = '" + productID + "'";
+                        }
+
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_TAMBAH_PRODUK, "UPDATE CURRENT PRODUCT DATA [" + productID + "]");
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
 
                             // UPDATE PRODUCT_CATEGORY TABLE
                             gUtil.saveSystemDebugLog(globalConstants.MENU_TAMBAH_PRODUK, "UPDATE PRODUCT CATEGORY FOR [" + productID + "]");
@@ -848,29 +914,6 @@ namespace AlphaSoft
                                 throw internalEX;
                         }
                         break;
-                }
-
-                if (globalFeatureList.EXPIRY_MODULE == 1 && productExpired == 1)
-                {
-                    // INSERT TO PRODUCT_EXPIRY
-                    DateTime productExpiryDateValue = expDatePicker.Value;
-                    string productExpiryDate = String.Format(culture, "{0:dd-MM-yyyy}", productExpiryDateValue);
-                    int lotID = 0;
-                    string productID = kodeProdukTextBox.Text;
-                    expiryModuleUtil expUtil = new expiryModuleUtil();
-
-                    // CHECK WHETHER THE PRODUCT WITH SAME EXPIRY DATE EXIST
-                    lotID = expUtil.getLotIDBasedOnExpiryDate(productExpiryDateValue, productID);
-
-                    if (lotID == 0)
-                        //sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT, PR_INVOICE) VALUES ( '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", '" + PRInvoice + "')";
-                        sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT) VALUES ( '" + productID + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + produkQty + ")";
-                    else
-                        sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = " + produkQty + " WHERE ID = " + lotID;
-
-                    gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "INSERT TO PRODUCT EXPIRY [" + productID + "]");
-                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                        throw internalEX;
                 }
 
                 if (!selectedPhoto.Equals("PRODUCT_PHOTO/" + produkPhoto) && !selectedPhoto.Equals(""))// && result == true)

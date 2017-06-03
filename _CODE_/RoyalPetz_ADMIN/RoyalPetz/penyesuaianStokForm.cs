@@ -28,6 +28,7 @@ namespace AlphaSoft
 
         private Hotkeys.GlobalHotkey ghk_UP;
         private Hotkeys.GlobalHotkey ghk_DOWN;
+        private DateTime originalProductExpiryDate;
 
         public penyesuaianStokForm()
         {
@@ -106,6 +107,7 @@ namespace AlphaSoft
                         jumlahAwalMaskedTextBox.Text = rdr.GetString("PRODUCT_AMOUNT");
                         selectedProductLimitStock = rdr.GetDouble("PRODUCT_LIMIT_STOCK");
                         expDatePicker.Value = rdr.GetDateTime("PRODUCT_EXPIRY_DATE");
+                        originalProductExpiryDate = expDatePicker.Value;
                     }
                 }
             }
@@ -169,6 +171,7 @@ namespace AlphaSoft
             string adjustmentDate;
             string descriptionParam;
             string productExpiryDate;
+            int lotID = 0;
 
             MySqlException internalEX = null;
 
@@ -189,11 +192,41 @@ namespace AlphaSoft
 
                 if (globalFeatureList.EXPIRY_MODULE == 1)
                 {
-                    diffQty = Math.Abs(oldStockQty - newStockQty);
-                    if (oldStockQty > newStockQty)
-                        sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + diffQty + " WHERE ID = " + selectedProductID;
+                    // INSERT TO PRODUCT_EXPIRY
+                    //DateTime productExpiryDateValue = Convert.ToDateTime(detailGridView.Rows[i].Cells["expiryDateValue"].Value.ToString());
+                    productExpiryDate = String.Format(culture, "{0:dd-MM-yyyy}", expDatePicker.Value);
+                    string productID = kodeProductTextBox.Text;
+                    expiryModuleUtil expUtil = new expiryModuleUtil();
+                    double adjustmentQty = Convert.ToDouble(jumlahBaruMaskedTextBox.Text);
+
+                    // CHECK WHETHER THE PRODUCT WITH SAME EXPIRY DATE EXIST
+                    lotID = expUtil.getLotIDBasedOnExpiryDate(originalProductExpiryDate, productID);
+
+                    if (lotID == 0)
+                    {
+                        //sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT, PR_INVOICE) VALUES ( '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", '" + PRInvoice + "')";
+                        sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT) VALUES ( '" + kodeProductTextBox.Text + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + adjustmentQty + ")";
+                    }
                     else
-                        sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY + " + diffQty + " WHERE ID = " + selectedProductID;
+                        sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = " + adjustmentQty + ",  PRODUCT_EXPIRY_DATE = STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y') WHERE ID = " + lotID;
+
+                    gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "INSERT TO PRODUCT EXPIRY [" + productID + "]");
+                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        throw internalEX;
+                }
+
+                if (globalFeatureList.EXPIRY_MODULE == 1)
+                {
+                    if (lotID > 0)
+                    { 
+                        diffQty = Math.Abs(oldStockQty - newStockQty);
+                        if (oldStockQty > newStockQty)
+                            sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + diffQty + " WHERE ID = " + selectedProductID;
+                        else
+                            sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY + " + diffQty + " WHERE ID = " + selectedProductID;
+                    }
+                    else
+                        sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY + " + newStockQty + " WHERE ID = " + selectedProductID;
                 }
                 else
                 { 
@@ -223,31 +256,7 @@ namespace AlphaSoft
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
 
-                if (globalFeatureList.EXPIRY_MODULE == 1)
-                {
-                    // INSERT TO PRODUCT_EXPIRY
-                    //DateTime productExpiryDateValue = Convert.ToDateTime(detailGridView.Rows[i].Cells["expiryDateValue"].Value.ToString());
-                    productExpiryDate = String.Format(culture, "{0:dd-MM-yyyy}", expDatePicker.Value);
-                    int lotID = 0;
-                    string productID = kodeProductTextBox.Text;
-                    expiryModuleUtil expUtil = new expiryModuleUtil();
-                    double adjustmentQty = Convert.ToDouble(jumlahBaruMaskedTextBox.Text);
-
-                    // CHECK WHETHER THE PRODUCT WITH SAME EXPIRY DATE EXIST
-                    lotID = expUtil.getLotIDBasedOnExpiryDate(expDatePicker.Value, productID);
-
-                    if (lotID == 0)
-                    {
-                       //sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT, PR_INVOICE) VALUES ( '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", '" + PRInvoice + "')";
-                       sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT) VALUES ( '" + kodeProductTextBox.Text + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + adjustmentQty + ")";
-                    }
-                    else
-                        sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = " + adjustmentQty + " WHERE ID = " + lotID;
-
-                    gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "INSERT TO PRODUCT EXPIRY [" + productID + "]");
-                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                        throw internalEX;
-                }
+                
 
                 DS.commit();
                 result = true;

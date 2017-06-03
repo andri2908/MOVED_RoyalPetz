@@ -1670,7 +1670,10 @@
     <EmbeddedResource Include="SupplierHistoryForm.resx">
       <DependentUpon>SupplierHistoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabSchemeProvider.resx" />
+    <EmbeddedResource Include="TabSchemeProvider.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TabSchemeProvider.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="XMLGeneratorForm.resx">
       <DependentUpon>XMLGeneratorForm.cs</DependentUpon>
     </EmbeddedResource>

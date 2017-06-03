@@ -44,10 +44,10 @@
             this.productBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tglExpired = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tglExpiredValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productRealQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tglExpiredValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.detailImportDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -124,10 +124,10 @@
             this.productBarcode,
             this.productName,
             this.tglExpired,
-            this.tglExpiredValue,
             this.productQty,
             this.productRealQty,
-            this.description});
+            this.description,
+            this.tglExpiredValue});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -195,12 +195,6 @@
             this.tglExpired.HeaderText = "TGL EXP";
             this.tglExpired.Name = "tglExpired";
             // 
-            // tglExpiredValue
-            // 
-            this.tglExpiredValue.HeaderText = "tglExpiredValue";
-            this.tglExpiredValue.Name = "tglExpiredValue";
-            this.tglExpiredValue.Visible = false;
-            // 
             // productQty
             // 
             this.productQty.HeaderText = "JUMLAH";
@@ -218,6 +212,12 @@
             this.description.HeaderText = "DESCRIPTION";
             this.description.Name = "description";
             this.description.Width = 200;
+            // 
+            // tglExpiredValue
+            // 
+            this.tglExpiredValue.HeaderText = "tglExpiredValue";
+            this.tglExpiredValue.Name = "tglExpiredValue";
+            this.tglExpiredValue.Visible = false;
             // 
             // importDataCSVForm
             // 
@@ -262,9 +262,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn productBarcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn productName;
         private System.Windows.Forms.DataGridViewTextBoxColumn tglExpired;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tglExpiredValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn productQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn productRealQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tglExpiredValue;
     }
 }

@@ -163,7 +163,7 @@ namespace AlphaSoft
                             pos++;
                     }
                     sValue = fields.ToArray();
-                    if (!sValue[3].Equals(sValue[4]))
+                    if (!sValue[4].Equals(sValue[5]))
                         detailImportDataGrid.Rows.Add(sValue);
                 }
             }
@@ -198,6 +198,7 @@ namespace AlphaSoft
             int i = 0;
             string productExpDate = "";
             MySqlException internalEX = null;
+            string productExpiryDate;
 
             DS.beginTransaction();
 
@@ -213,23 +214,31 @@ namespace AlphaSoft
                     productQty = detailImportDataGrid.Rows[i].Cells["productRealQty"].Value.ToString();
                     productID = MySqlHelper.EscapeString(detailImportDataGrid.Rows[i].Cells["productID"].Value.ToString());
                     productOldQty = detailImportDataGrid.Rows[i].Cells["productQty"].Value.ToString();
-                    productDescription =MySqlHelper.EscapeString(detailImportDataGrid.Rows[i].Cells["description"].Value.ToString());
+
+                    if (null != detailImportDataGrid.Rows[i].Cells["description"].Value)
+                        productDescription = MySqlHelper.EscapeString(detailImportDataGrid.Rows[i].Cells["description"].Value.ToString());
+                    else
+                        productDescription = "";
 
                     if (!productOldQty.Equals(productQty))
                     { 
-                        sqlCommand = "UPDATE MASTER_PRODUCT SET " +
-                                            "PRODUCT_STOCK_QTY = " + productQty + " " +
-                                            "WHERE PRODUCT_ID = '" + productID + "'";
+                        if (globalFeatureList.EXPIRY_MODULE == 0)
+                        { 
+                            sqlCommand = "UPDATE MASTER_PRODUCT SET " +
+                                                "PRODUCT_STOCK_QTY = " + productQty + " " +
+                                                "WHERE PRODUCT_ID = '" + productID + "'";
 
-                        gutil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "UPDATE STOCK QTY [" + productID + "]");
-                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                            throw internalEX;
-
-                        if (globalFeatureList.EXPIRY_MODULE == 1)
+                            gutil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "UPDATE STOCK QTY [" + productID + "]");
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+                        }
+                        else if (globalFeatureList.EXPIRY_MODULE == 1)
                         {
                             // INSERT TO PRODUCT_EXPIRY
                             //DateTime productExpiryDateValue = Convert.ToDateTime(detailGridView.Rows[i].Cells["expiryDateValue"].Value.ToString());
                             productExpDate = detailImportDataGrid.Rows[i].Cells["tglExpired"].Value.ToString();
+                            productExpiryDate = String.Format(culture, "{0:dd-MM-yyyy}", Convert.ToDateTime(productExpDate));
+
                             int lotID = 0;
                             expiryModuleUtil expUtil = new expiryModuleUtil();
                             double adjustmentQty = Convert.ToDouble(productQty);
@@ -240,7 +249,7 @@ namespace AlphaSoft
                             if (lotID == 0)
                             {
                                 //sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT, PR_INVOICE) VALUES ( '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", '" + PRInvoice + "')";
-                                sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT) VALUES ( '" + productID + "', STR_TO_DATE('" + productExpDate + "', '%d-%m-%Y'), " + adjustmentQty + ")";
+                                sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT) VALUES ( '" + productID + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + adjustmentQty + ")";
                             }
                             else
                                 sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = " + adjustmentQty + " WHERE ID = " + lotID;
@@ -252,7 +261,7 @@ namespace AlphaSoft
                             // INSERT INTO PRODUCT ADJUSTMENT WITH EXP DATE INFORMATION
                             sqlCommand = "INSERT INTO PRODUCT_ADJUSTMENT (PRODUCT_ID, PRODUCT_ADJUSTMENT_DATE, PRODUCT_OLD_STOCK_QTY, PRODUCT_NEW_STOCK_QTY, PRODUCT_ADJUSTMENT_DESCRIPTION, PRODUCT_EXPIRY_DATE) " +
                                                 "VALUES " +
-                                                "('" + productID + "', STR_TO_DATE('" + adjusmentDate + "', '%d-%m-%Y'), " + productOldQty + ", " + productQty + ", '" + productDescription + "', STR_TO_DATE('" + productExpDate + "', '%d-%m-%Y'))";
+                                                "('" + productID + "', STR_TO_DATE('" + adjusmentDate + "', '%d-%m-%Y'), " + productOldQty + ", " + productQty + ", '" + productDescription + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'))";
 
                             gutil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "INSERT INTO PRODUCT ADJUSTMENT [" + productID + ", " + productOldQty + ", " + productQty + "]");
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
@@ -301,7 +310,51 @@ namespace AlphaSoft
 
             return result;
         }
-        
+
+        private void updateMasterProductQty()
+        {
+            string sqlCommand = "";
+            double totalProductQty = 0;
+            string productIDValue = "";
+            MySqlDataReader rdr;
+            MySqlException internalEX = null;
+
+            DS.beginTransaction();
+            
+            try
+            {
+                DS.mySqlConnect();
+
+                sqlCommand = "SELECT PRODUCT_ID, SUM(PRODUCT_AMOUNT) AS TOTAL FROM PRODUCT_EXPIRY GROUP BY PRODUCT_ID";
+
+                using (rdr = DS.getData(sqlCommand))
+                {
+                    if (rdr.HasRows)
+                    {
+                        while (rdr.Read())
+                        {
+                            totalProductQty = rdr.GetDouble("TOTAL");
+                            productIDValue = rdr.GetString("PRODUCT_ID");
+
+                            sqlCommand = "UPDATE MASTER_PRODUCT SET " +
+                                                    "PRODUCT_STOCK_QTY = " + totalProductQty + " " +
+                                                    "WHERE PRODUCT_ID = '" + productIDValue + "'";
+
+                            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                throw internalEX;
+                        }
+                    }
+                }
+                rdr.Close();
+
+                DS.commit();
+            }
+            catch (Exception e)
+            {
+                gutil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "EXCEPTION THROWN [" + e.Message + "]");
+            }
+        }
+
         private void importButton_Click(object sender, EventArgs e)
         {
             if (DialogResult.Yes == MessageBox.Show("IMPORT DATA ?", "WARNING", MessageBoxButtons.YesNo,MessageBoxIcon.Warning))
@@ -309,6 +362,11 @@ namespace AlphaSoft
                 gutil.saveSystemDebugLog(globalConstants.MENU_PENYESUAIAN_STOK, "TRY TO IMPORT DATA FROM CSV FILE"); 
                 if (saveDataTransaction())
                 {
+                    if (globalFeatureList.EXPIRY_MODULE == 1)
+                    {
+                        updateMasterProductQty();
+                    }
+
                     gutil.saveUserChangeLog(globalConstants.MENU_PENYESUAIAN_STOK, globalConstants.CHANGE_LOG_UPDATE, "IMPORT DATA CSV [" + importFileNameTextBox.Text + "]");
                     gutil.showSuccess(gutil.UPD);
                     searchKategoriButton.Enabled = false;

@@ -437,7 +437,7 @@ namespace AlphaSoft
 
             if (originModuleID == globalConstants.RETUR_PENJUALAN)
             {
-                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' " +
+                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' " +
                                     "FROM MASTER_PRODUCT MP, SALES_DETAIL SD " +
                                     "WHERE SD.SALES_INVOICE = '" + returJualSearchParam + "' AND SD.PRODUCT_ID = MP.PRODUCT_ID AND MP.PRODUCT_IS_SERVICE = 0 " + showactive +
                                     "AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" +
@@ -445,7 +445,7 @@ namespace AlphaSoft
             }
             else if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
             {
-                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' " +
+                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' " +
                                     "FROM MASTER_PRODUCT MP, SALES_DETAIL SD, SALES_HEADER SH " +
                                     "WHERE SH.SALES_INVOICE = SD.SALES_INVOICE AND SD.PRODUCT_ID = MP.PRODUCT_ID AND SH.CUSTOMER_ID = " + Convert.ToInt32(returJualSearchParam) + " AND MP.PRODUCT_IS_SERVICE = 0 " + showactive +
                                     "AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" +
@@ -453,15 +453,15 @@ namespace AlphaSoft
             }
             else if (originModuleID == globalConstants.RETUR_PEMBELIAN)
             {
-                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_IS_SERVICE = 0 " + showactive + "AND (MP.PRODUCT_STOCK_QTY - MP.PRODUCT_LIMIT_STOCK > 0) ORDER BY MP.PRODUCT_NAME ASC";
+                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_IS_SERVICE = 0 " + showactive + " ORDER BY MP.PRODUCT_NAME ASC";//"AND (MP.PRODUCT_STOCK_QTY - MP.PRODUCT_LIMIT_STOCK > 0) ORDER BY MP.PRODUCT_NAME ASC";
             }
             else if (originModuleID == globalConstants.PENERIMAAN_BARANG || originModuleID == globalConstants.BROWSE_STOK_PECAH_BARANG)
             {
-                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
+                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
             }
             else if ((originModuleID == globalConstants.CASHIER_MODULE) || (originModuleID == globalConstants.NEW_PURCHASE_ORDER) || (originModuleID == globalConstants.NEW_REQUEST_ORDER))
             {
-                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_STOCK_QTY > 0 AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
+                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive; //MP.PRODUCT_STOCK_QTY > 0 AND 
             }
             else
             {
@@ -502,6 +502,17 @@ namespace AlphaSoft
                     // dataProdukGridView.Columns["DESKRIPSI PRODUK"].Width = 300;                    
                     //dataProdukGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
                 }
+            }
+
+            highlightZeroQtyRow();
+        }
+
+        private void highlightZeroQtyRow()
+        {
+            for (int i =0;i<dataProdukGridView.Rows.Count;i++)
+            {
+                if (null != dataProdukGridView.Rows[i].Cells["QTY"].Value && Convert.ToInt32(dataProdukGridView.Rows[i].Cells["QTY"].Value) <= 0)
+                    dataProdukGridView.Rows[i].DefaultCellStyle.BackColor = Color.LightCoral;
             }
         }
 
@@ -639,6 +650,21 @@ namespace AlphaSoft
         {
             if (navKeyRegistered)
                 unregisterGlobalHotkey();
+        }
+
+        private void dataProdukGridView_ColumnSortModeChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            
+        }
+
+        private void dataProdukGridView_ColumnDisplayIndexChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+       
+        }
+
+        private void dataProdukGridView_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            highlightZeroQtyRow();
         }
     }
 }

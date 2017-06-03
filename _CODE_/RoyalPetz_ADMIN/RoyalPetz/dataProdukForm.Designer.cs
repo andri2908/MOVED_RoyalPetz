@@ -73,6 +73,9 @@
             this.dataProdukGridView.RowHeadersVisible = false;
             this.dataProdukGridView.Size = new System.Drawing.Size(872, 457);
             this.dataProdukGridView.TabIndex = 0;
+            this.dataProdukGridView.ColumnDisplayIndexChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataProdukGridView_ColumnDisplayIndexChanged);
+            this.dataProdukGridView.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataProdukGridView_ColumnHeaderMouseClick);
+            this.dataProdukGridView.ColumnSortModeChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataProdukGridView_ColumnSortModeChanged);
             this.dataProdukGridView.DoubleClick += new System.EventHandler(this.tagProdukDataGridView_DoubleClick);
             this.dataProdukGridView.Enter += new System.EventHandler(this.dataProdukGridView_Enter);
             this.dataProdukGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataProdukGridView_KeyDown);

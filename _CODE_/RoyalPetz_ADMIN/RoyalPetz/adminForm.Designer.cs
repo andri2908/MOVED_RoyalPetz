@@ -769,7 +769,7 @@
             this.MENU_modulKasir.BackColor = System.Drawing.Color.SteelBlue;
             this.MENU_modulKasir.ForeColor = System.Drawing.Color.FloralWhite;
             this.MENU_modulKasir.Name = "MENU_modulKasir";
-            this.MENU_modulKasir.Size = new System.Drawing.Size(174, 22);
+            this.MENU_modulKasir.Size = new System.Drawing.Size(223, 22);
             this.MENU_modulKasir.Text = "Modul Kasir";
             this.MENU_modulKasir.Click += new System.EventHandler(this.toolStripMenuItem18_Click);
             // 
@@ -778,7 +778,7 @@
             this.MENU_setNoFaktur.BackColor = System.Drawing.Color.SteelBlue;
             this.MENU_setNoFaktur.ForeColor = System.Drawing.Color.FloralWhite;
             this.MENU_setNoFaktur.Name = "MENU_setNoFaktur";
-            this.MENU_setNoFaktur.Size = new System.Drawing.Size(174, 22);
+            this.MENU_setNoFaktur.Size = new System.Drawing.Size(223, 22);
             this.MENU_setNoFaktur.Text = "Set No Faktur";
             this.MENU_setNoFaktur.Click += new System.EventHandler(this.toolStripMenuItem19_Click);
             // 
@@ -796,7 +796,7 @@
             this.MENU_revisiNota.BackColor = System.Drawing.Color.SteelBlue;
             this.MENU_revisiNota.ForeColor = System.Drawing.Color.FloralWhite;
             this.MENU_revisiNota.Name = "MENU_revisiNota";
-            this.MENU_revisiNota.Size = new System.Drawing.Size(174, 22);
+            this.MENU_revisiNota.Size = new System.Drawing.Size(223, 22);
             this.MENU_revisiNota.Text = "Revisi Nota";
             this.MENU_revisiNota.Click += new System.EventHandler(this.toolStripMenuItem4_Click_2);
             // 

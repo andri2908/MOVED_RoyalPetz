@@ -29,6 +29,8 @@ namespace AlphaSoft
         private Hotkeys.GlobalHotkey ghk_DOWN;
         private bool navKeyRegistered = false;
 
+        private cashierForm originForm = null;
+
         public dataSalesInvoice()
         {
             InitializeComponent();
@@ -39,6 +41,13 @@ namespace AlphaSoft
         {
             InitializeComponent();
             originModuleID = moduleID;
+        }
+
+        public dataSalesInvoice(cashierForm parentForm)
+        {
+            InitializeComponent();
+            originModuleID = globalConstants.COPY_NOTA;
+            originForm = parentForm;
         }
 
         private void captureAll(Keys key)
@@ -219,8 +228,16 @@ namespace AlphaSoft
             DataGridViewRow selectedRow = dataPenerimaanBarang.Rows[rowSelectedIndex];
             noInvoice = selectedRow.Cells["NO INVOICE"].Value.ToString();
 
-            cashierForm cashierFormDisplay = new cashierForm(noInvoice, originModuleID);
-            cashierFormDisplay.ShowDialog(this);
+            if (originForm == null)
+            {
+                cashierForm cashierFormDisplay = new cashierForm(noInvoice, originModuleID);
+                cashierFormDisplay.ShowDialog(this);
+            }
+            else
+            { 
+                originForm.reloadInvoice(noInvoice);
+                this.Close();
+            }
 
             if (originModuleID == globalConstants.REVISI_NOTA)
             {
@@ -239,7 +256,6 @@ namespace AlphaSoft
                 }
                 catch (Exception ex)
                 { }
-
             }
         }
 

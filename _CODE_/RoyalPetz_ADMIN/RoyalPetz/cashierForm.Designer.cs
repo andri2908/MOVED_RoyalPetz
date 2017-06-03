@@ -40,6 +40,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.noFakturLabel = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.reprintButton = new System.Windows.Forms.Button();
+            this.copyNotaButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.ChangePrinterButton = new System.Windows.Forms.Button();
@@ -158,6 +160,8 @@
             this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel5.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel5.Controls.Add(this.reprintButton);
+            this.panel5.Controls.Add(this.copyNotaButton);
             this.panel5.Controls.Add(this.label2);
             this.panel5.Controls.Add(this.comboBox1);
             this.panel5.Controls.Add(this.ChangePrinterButton);
@@ -179,6 +183,29 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(982, 162);
             this.panel5.TabIndex = 9;
+            // 
+            // reprintButton
+            // 
+            this.reprintButton.Image = ((System.Drawing.Image)(resources.GetObject("reprintButton.Image")));
+            this.reprintButton.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.reprintButton.Location = new System.Drawing.Point(532, 58);
+            this.reprintButton.Name = "reprintButton";
+            this.reprintButton.Size = new System.Drawing.Size(47, 44);
+            this.reprintButton.TabIndex = 41;
+            this.reprintButton.UseVisualStyleBackColor = true;
+            this.reprintButton.Visible = false;
+            this.reprintButton.Click += new System.EventHandler(this.reprintButton_Click);
+            // 
+            // copyNotaButton
+            // 
+            this.copyNotaButton.Image = ((System.Drawing.Image)(resources.GetObject("copyNotaButton.Image")));
+            this.copyNotaButton.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.copyNotaButton.Location = new System.Drawing.Point(532, 10);
+            this.copyNotaButton.Name = "copyNotaButton";
+            this.copyNotaButton.Size = new System.Drawing.Size(47, 42);
+            this.copyNotaButton.TabIndex = 40;
+            this.copyNotaButton.UseVisualStyleBackColor = true;
+            this.copyNotaButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
             // 
@@ -822,6 +849,8 @@
         private System.Windows.Forms.DataGridView cashierDataGridView;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button copyNotaButton;
+        private System.Windows.Forms.Button reprintButton;
     }
 }
 
