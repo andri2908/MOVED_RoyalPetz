@@ -21,34 +21,34 @@
   <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
     <Barcodes xmlns="http://tempuri.org/Barcodes.xsd">
       <Barcodes diffgr:id="Barcodes1" msdata:rowOrder="0" diffgr:hasChanges="inserted">
-        <ProductID>ALPO-P8</ProductID>
-        <ProductName>ALPO PUPPY 8 KG</ProductName>
-        <RetailPrice>Rp.233845,-</RetailPrice>
-        <Barcode>*ALPO-P8*</Barcode>
+        <ProductID>SD-PO1</ProductID>
+        <ProductName>SD PUPPY ORIGINAL 1 KG</ProductName>
+        <RetailPrice>Rp.34000,-</RetailPrice>
+        <Barcode>*SD-PO1*</Barcode>
       </Barcodes>
       <Barcodes diffgr:id="Barcodes2" msdata:rowOrder="1" diffgr:hasChanges="inserted">
-        <ProductID>ALPO-P8</ProductID>
-        <ProductName>ALPO PUPPY 8 KG</ProductName>
-        <RetailPrice>Rp.233845,-</RetailPrice>
-        <Barcode>*ALPO-P8*</Barcode>
+        <ProductID>SD-PO1</ProductID>
+        <ProductName>SD PUPPY ORIGINAL 1 KG</ProductName>
+        <RetailPrice>Rp.34000,-</RetailPrice>
+        <Barcode>*SD-PO1*</Barcode>
       </Barcodes>
       <Barcodes diffgr:id="Barcodes3" msdata:rowOrder="2" diffgr:hasChanges="inserted">
-        <ProductID>ALPO-P8</ProductID>
-        <ProductName>ALPO PUPPY 8 KG</ProductName>
-        <RetailPrice>Rp.233845,-</RetailPrice>
-        <Barcode>*ALPO-P8*</Barcode>
+        <ProductID>SD-PO1</ProductID>
+        <ProductName>SD PUPPY ORIGINAL 1 KG</ProductName>
+        <RetailPrice>Rp.34000,-</RetailPrice>
+        <Barcode>*SD-PO1*</Barcode>
       </Barcodes>
       <Barcodes diffgr:id="Barcodes4" msdata:rowOrder="3" diffgr:hasChanges="inserted">
-        <ProductID>ALPO-P8</ProductID>
-        <ProductName>ALPO PUPPY 8 KG</ProductName>
-        <RetailPrice>Rp.233845,-</RetailPrice>
-        <Barcode>*ALPO-P8*</Barcode>
+        <ProductID>SD-PO1</ProductID>
+        <ProductName>SD PUPPY ORIGINAL 1 KG</ProductName>
+        <RetailPrice>Rp.34000,-</RetailPrice>
+        <Barcode>*SD-PO1*</Barcode>
       </Barcodes>
       <Barcodes diffgr:id="Barcodes5" msdata:rowOrder="4" diffgr:hasChanges="inserted">
-        <ProductID>ALPO-P8</ProductID>
-        <ProductName>ALPO PUPPY 8 KG</ProductName>
-        <RetailPrice>Rp.233845,-</RetailPrice>
-        <Barcode>*ALPO-P8*</Barcode>
+        <ProductID>SD-PO1</ProductID>
+        <ProductName>SD PUPPY ORIGINAL 1 KG</ProductName>
+        <RetailPrice>Rp.34000,-</RetailPrice>
+        <Barcode>*SD-PO1*</Barcode>
       </Barcodes>
       <Barcodes diffgr:id="Barcodes6" msdata:rowOrder="5" diffgr:hasChanges="inserted">
         <ProductID />

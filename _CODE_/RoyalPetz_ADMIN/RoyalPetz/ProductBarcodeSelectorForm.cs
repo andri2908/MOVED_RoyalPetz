@@ -457,6 +457,7 @@ namespace AlphaSoft
                 selectedProductName = "";
                 selectedProductBC = "";
                 selectedProductPrice = "";
+
                 if (ProductBCGridView.Rows[a].Cells["productID"].Value != null)
                     selectedProductID = ProductBCGridView.Rows[a].Cells["productID"].Value.ToString();
                 if (ProductBCGridView.Rows[a].Cells["productName"].Value != null)

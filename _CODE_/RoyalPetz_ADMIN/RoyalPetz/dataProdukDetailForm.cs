@@ -25,6 +25,7 @@ namespace AlphaSoft
         private int originModuleID = 0;
         private int selectedInternalProductID = 0;
         private int selectedProductExpiryID = 0;
+        private string selectedKodeProduk = "";
         private double selectedProductOriginalQty = 0;
         private double selectedProductOriginalTotalQty = 0;
 
@@ -50,7 +51,14 @@ namespace AlphaSoft
 
         private Hotkeys.GlobalHotkey ghk_UP;
         private Hotkeys.GlobalHotkey ghk_DOWN;
+        private Hotkeys.GlobalHotkey ghk_DEL;
+
+        private bool navKeyRegistered = false;
+        private bool delKeyRegistered = false;
+
         private CultureInfo culture = new CultureInfo("id-ID");
+
+        DateTimePicker oDateTimePicker = new DateTimePicker();
 
         public dataProdukDetailForm()
         {
@@ -82,6 +90,10 @@ namespace AlphaSoft
                 case Keys.Down:
                     SendKeys.Send("{TAB}");
                     break;
+                case Keys.Delete:
+                    if (DialogResult.Yes == MessageBox.Show("HAPUS BARIS YG DIPILIH?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+                        deleteCurrentRow();
+                    break;
             }
         }
 
@@ -106,12 +118,71 @@ namespace AlphaSoft
 
             ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
             ghk_DOWN.Register();
+
+            navKeyRegistered = true;
         }
 
         private void unregisterGlobalHotkey()
         {
+            if (!navKeyRegistered)
+                return;
+
             ghk_UP.Unregister();
             ghk_DOWN.Unregister();
+
+            navKeyRegistered = false;
+        }
+
+        private void registerDelKey()
+        {
+            return;
+
+            ghk_DEL = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Delete, this);
+            ghk_DEL.Register();
+
+            delKeyRegistered = true;
+        }
+
+        private void unregisterDelKey()
+        {
+            return;
+
+            ghk_DEL.Unregister();
+
+            delKeyRegistered = false;
+        }
+
+        public void deleteCurrentRow()
+        {
+            if (expDataGridView.Rows.Count > 1)
+            {
+                int rowSelectedIndex = expDataGridView.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = expDataGridView.Rows[rowSelectedIndex];
+                expDataGridView.CurrentCell = selectedRow.Cells["qty"];
+                string lotIDValue = "";
+
+                if (null != selectedRow && rowSelectedIndex != expDataGridView.Rows.Count - 1)
+                {
+                    isLoading = true;
+                    if (selectedRow.Index >= 0)
+                    {
+                        if (null != expDataGridView.Rows[rowSelectedIndex].Cells["lotID"].Value)
+                            lotIDValue = expDataGridView.Rows[rowSelectedIndex].Cells["lotID"].Value.ToString();
+                        else
+                            lotIDValue = "0";
+
+                        expDataGridView.Rows.Remove(expDataGridView.Rows[rowSelectedIndex]);
+                        expDataGridView.AllowUserToAddRows = true;
+
+                        if (lotIDValue != "0")
+                            expDataGridViewHidden.Rows.Add(lotIDValue);
+
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_TAMBAH_PRODUK, "deleteCurrentRow [" + rowSelectedIndex + "]");
+                        calculateTotalQty();
+                    }
+                    isLoading = false;
+                }
+            }
         }
 
         public void setSelectedUnitID(int unitID)
@@ -152,15 +223,16 @@ namespace AlphaSoft
 
             originModuleID = moduleID;
 
-            if (globalFeatureList.EXPIRY_MODULE == 1)
-            {
-                selectedProductExpiryID = productID;
-                selectedProductID = DS.getDataSingleValue("SELECT PRODUCT_ID FROM PRODUCT_EXPIRY WHERE ID = "+productID).ToString();
-                selectedInternalProductID = Convert.ToInt32(DS.getDataSingleValue("SELECT ID FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + selectedProductID + "'"));
-            }
-            else
+            //if (globalFeatureList.EXPIRY_MODULE == 1)
+            //{
+            //    selectedProductExpiryID = productID;
+            //    selectedProductID = DS.getDataSingleValue("SELECT PRODUCT_ID FROM PRODUCT_EXPIRY WHERE ID = " + productID).ToString();
+            //    selectedInternalProductID = Convert.ToInt32(DS.getDataSingleValue("SELECT ID FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + selectedProductID + "'"));
+            //}
+            //else
             { 
                 selectedInternalProductID = productID;
+                selectedKodeProduk = DS.getDataSingleValue("SELECT PRODUCT_ID FROM MASTER_PRODUCT WHERE ID = '" + selectedInternalProductID + "'").ToString();
             }
         }
 
@@ -168,7 +240,7 @@ namespace AlphaSoft
         {
             string tempString = "";
 
-            if (isLoading)
+            if (isLoading || stokAwalTextBox.ReadOnly == true || stokAwalTextBox.Enabled == false)
                 return;
             
             isLoading = true;
@@ -414,14 +486,14 @@ namespace AlphaSoft
 
             DS.mySqlConnect();
 
-            if (globalFeatureList.EXPIRY_MODULE == 1)
-            {
-                if (selectedProductExpiryID > 0)
-                {
-                    productExpiryAmount = Convert.ToDouble(DS.getDataSingleValue("SELECT PRODUCT_AMOUNT FROM PRODUCT_EXPIRY WHERE ID = " + selectedProductExpiryID));
-                    expDatePicker.Value = Convert.ToDateTime(DS.getDataSingleValue("SELECT PRODUCT_EXPIRY_DATE FROM PRODUCT_EXPIRY WHERE ID = " + selectedProductExpiryID));
-                }
-            }
+            //if (globalFeatureList.EXPIRY_MODULE == 1)
+            //{
+            //    if (selectedProductExpiryID > 0)
+            //    {
+            //        productExpiryAmount = Convert.ToDouble(DS.getDataSingleValue("SELECT PRODUCT_AMOUNT FROM PRODUCT_EXPIRY WHERE ID = " + selectedProductExpiryID));
+            //        expDatePicker.Value = Convert.ToDateTime(DS.getDataSingleValue("SELECT PRODUCT_EXPIRY_DATE FROM PRODUCT_EXPIRY WHERE ID = " + selectedProductExpiryID));
+            //    }
+            //}
             
             // LOAD PRODUCT DATA
             using (rdr = DS.getData("SELECT * FROM MASTER_PRODUCT WHERE ID =  " + selectedInternalProductID))
@@ -447,25 +519,23 @@ namespace AlphaSoft
 
                         if (globalFeatureList.EXPIRY_MODULE == 1)
                         {
-                            stokAwalTextBox.Text = productExpiryAmount.ToString();
-                            selectedProductOriginalQty = productExpiryAmount;
-                            selectedProductOriginalTotalQty = rdr.GetDouble("PRODUCT_STOCK_QTY");
-
                             if (rdr.GetString("PRODUCT_EXPIRABLE").Equals("1"))
-                            { 
+                            {
                                 expiredCheckBox.Checked = true;
-                                expDatePicker.Enabled = true;
+                                stokAwalTextBox.Enabled = false;
+                                expDataGridView.ReadOnly = false;
+                                expDataGridView.Enabled = true;
                             }
                             else
-                            { 
+                            {
                                 expiredCheckBox.Checked = false;
-                                expDatePicker.Enabled = false;
+                                stokAwalTextBox.Enabled = true;
+                                expDataGridView.ReadOnly = true;
+                                expDataGridView.Enabled = false;
                             }
                         }
-                        else
-                        {
-                            stokAwalTextBox.Text = rdr.GetString("PRODUCT_STOCK_QTY");
-                        }
+
+                        stokAwalTextBox.Text = rdr.GetString("PRODUCT_STOCK_QTY");
                         limitStokTextBox.Text = rdr.GetString("PRODUCT_LIMIT_STOCK");
 
                         productShelves = rdr.GetString("PRODUCT_SHELVES");
@@ -509,6 +579,41 @@ namespace AlphaSoft
                             }
                         }
                     }
+                }
+            }
+        }
+
+        private void loadProdukExpData()
+        {
+            MySqlDataReader rdr;
+            DataTable dt = new DataTable();
+            bool checkBoxValue = false;
+            DS.mySqlConnect();
+
+            string sqlCommand = "";
+
+            if (showInactiveExpiryCheckBox.Checked)
+                sqlCommand = "SELECT * FROM PRODUCT_EXPIRY WHERE PRODUCT_ID =  '" + selectedKodeProduk + "' AND IS_DELETED = 0";
+            else
+                sqlCommand = "SELECT * FROM PRODUCT_EXPIRY WHERE PRODUCT_ID =  '" + selectedKodeProduk + "' AND IS_DELETED = 0 AND EXPIRY_ACTIVE = 1";
+
+            using (rdr = DS.getData(sqlCommand))
+            {
+                if (rdr.HasRows)
+                {
+                    while (rdr.Read())
+                    {
+                        expDataGridView.AllowUserToAddRows = true;
+                        if (rdr.GetInt32("EXPIRY_ACTIVE") == 1)
+                            checkBoxValue = true;
+                        else
+                            checkBoxValue = false;
+
+                        string expDateValue = String.Format(culture, "{0:" + globalUtilities.CUSTOM_DATE_FORMAT + "}", rdr.GetDateTime("PRODUCT_EXPIRY_DATE"));
+                        expDataGridView.Rows.Add(rdr.GetString("ID"), checkBoxValue, rdr.GetString("PRODUCT_AMOUNT"), expDateValue, rdr.GetString("PRODUCT_EXPIRY_DATE"));
+                    }
+
+                    expDataGridView.CurrentCell = expDataGridView.Rows[expDataGridView.Rows.Count - 1].Cells["qty"];
                 }
             }
         }
@@ -624,6 +729,9 @@ namespace AlphaSoft
 
         private bool dataValidated()
         {
+            int i = 0;
+            bool dataExist = true;
+
             if (namaProdukTextBox.Text.Equals(""))
             {
                 errorLabel.Text = "NAMA PRODUK TIDAK BOLEH KOSONG";
@@ -679,6 +787,31 @@ namespace AlphaSoft
                 return false;
             }
 
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+            {
+                for (i = 0; i < expDataGridView.Rows.Count-1 && dataExist; i++)
+                {
+                    if (null != expDataGridView.Rows[i].Cells["expiryDateValue"].Value && 
+                        expDataGridView.Rows[i].Cells["expiryDateValue"].Value.ToString().Length > 0)
+                        dataExist = true;
+                    else
+                        dataExist = false;
+
+                    if (dataExist)
+                    {
+                        double tempQtyValue = 0;
+                        if (!double.TryParse(expDataGridView.Rows[i].Cells["qty"].Value.ToString(), out tempQtyValue))
+                            dataExist = false;
+                    }
+                }
+
+                if (!dataExist)
+                {
+                    errorLabel.Text = "INPUT PADA BARIS [" + i + "] SALAH";
+                    return false;
+                }
+            }
+
             return true;
         }
 
@@ -717,20 +850,6 @@ namespace AlphaSoft
             string produkQty = stokAwalTextBox.Text;
             if (produkQty.Equals(""))
                 produkQty = "0";
-
-            int lotID = 0;
-            double deltaQty = 0;
-            double newProdukQty = 0;
-
-            if (globalFeatureList.EXPIRY_MODULE == 1)
-            {
-                //double newProdukQty = Convert.ToDouble(produkQty);
-                //double deltaQty = newProdukQty - selectedProductOriginalQty;
-
-                //selectedProductOriginalTotalQty = selectedProductOriginalTotalQty + deltaQty;
-
-                //produkQty = selectedProductOriginalTotalQty.ToString();
-            }
 
             string limitStock = limitStokTextBox.Text;
             if (limitStock.Equals(""))
@@ -777,30 +896,79 @@ namespace AlphaSoft
 
                 if (globalFeatureList.EXPIRY_MODULE == 1 && productExpired == 1)
                 {
-                    // INSERT TO PRODUCT_EXPIRY
-                    DateTime productExpiryDateValue = expDatePicker.Value;
-                    string productExpiryDate = String.Format(culture, "{0:dd-MM-yyyy}", productExpiryDateValue);
-                   
-                    string productID = kodeProdukTextBox.Text;
-                    expiryModuleUtil expUtil = new expiryModuleUtil();
-
-                    // CHECK WHETHER THE PRODUCT WITH SAME EXPIRY DATE EXIST
-                    lotID = expUtil.getLotIDBasedOnExpiryDate(productExpiryDateValue, productID);
-
-                    if (lotID == 0) // NEW EXPIRY DATE
-                        //sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT, PR_INVOICE) VALUES ( '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", '" + PRInvoice + "')";
-                        sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT) VALUES ( '" + productID + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + produkQty + ")";
-                    else
+                    int lotIDValue;
+                    
+                    // INSERT OR UPDATE PRODUCT EXPIRY
+                    for (int i = 0;i<expDataGridView.Rows.Count-1;i++)
                     {
-                        newProdukQty = Convert.ToDouble(produkQty);
-                         //selectedProductOriginalTotalQty = selectedProductOriginalTotalQty + deltaQty;
+                        lotIDValue = Convert.ToInt32(expDataGridView.Rows[i].Cells["lotID"].Value);
+                        DateTime productExpiryDateValue = Convert.ToDateTime(expDataGridView.Rows[i].Cells["expiryDateValue"].Value.ToString());
+                        string productExpiryDate = String.Format(culture, "{0:dd-MM-yyyy}", productExpiryDateValue);
+                        double lotProductQty = Convert.ToDouble(expDataGridView.Rows[i].Cells["qty"].Value);
+                        int expiryActive = 1;
 
-                        //produkQty = selectedProductOriginalTotalQty.ToString();
-                        sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = " + newProdukQty + " WHERE ID = " + lotID;
+                        if (Convert.ToBoolean(expDataGridView.Rows[i].Cells["status"].Value) == false)
+                            expiryActive = 0;
+                        else
+                            expiryActive = 1;
+
+                        if (lotIDValue == 0) // NEW EXPIRY DATE
+                        {
+                            sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT, EXPIRY_ACTIVE) VALUES ( '" + productID + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + lotProductQty + ", " + expiryActive + ")";
+                            gUtil.saveSystemDebugLog(globalConstants.MENU_TAMBAH_PRODUK, "INSERT TO PRODUCT EXPIRY [" + productExpiryDate + "]");
+                        }
+                        else
+                        {
+                            sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_EXPIRY_DATE = STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), PRODUCT_AMOUNT = " + lotProductQty + ", EXPIRY_ACTIVE = " + expiryActive + " WHERE ID = " + lotIDValue;
+                            gUtil.saveSystemDebugLog(globalConstants.MENU_TAMBAH_PRODUK, "UPDATE PRODUCT EXPIRY [" + lotIDValue + "]");
+                        }
+
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
                     }
-                    gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "INSERT TO PRODUCT EXPIRY [" + productID + "]");
-                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                        throw internalEX;
+
+                    // DELETE PRODUCT EXPIRY
+                    for (int i = 0; i < expDataGridViewHidden.Rows.Count-1; i++)
+                    {
+                        lotIDValue = Convert.ToInt32(expDataGridViewHidden.Rows[i].Cells["lotID"].Value);
+                        sqlCommand = "UPDATE PRODUCT_EXPIRY SET IS_DELETED = 1 WHERE ID = " + lotIDValue;
+
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_TAMBAH_PRODUK, "DELETE PRODUCT EXPIRY [" + lotIDValue + "]");
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
+                    }
+
+                    if (produkStatus == 0)
+                    {
+                        // SET ALL PRODUCT EXPIRY TO INACTIVE
+                        sqlCommand = "UPDATE PRODUCT_EXPIRY SET EXPIRY_ACTIVE = 0 WHERE PRODUCT_ID = '" + productID + "'";
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
+                    }
+                    //// INSERT TO PRODUCT_EXPIRY
+                    //DateTime productExpiryDateValue = expDatePicker.Value;
+                    //string productExpiryDate = String.Format(culture, "{0:dd-MM-yyyy}", productExpiryDateValue);
+
+                    //string productID = kodeProdukTextBox.Text;
+                    //expiryModuleUtil expUtil = new expiryModuleUtil();
+
+                    //// CHECK WHETHER THE PRODUCT WITH SAME EXPIRY DATE EXIST
+                    //lotID = expUtil.getLotIDBasedOnExpiryDate(productExpiryDateValue, productID);
+
+                    //if (lotID == 0) // NEW EXPIRY DATE
+                    //    //sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT, PR_INVOICE) VALUES ( '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", '" + PRInvoice + "')";
+                    //    sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT) VALUES ( '" + productID + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + produkQty + ")";
+                    //else
+                    //{
+                    //    newProdukQty = Convert.ToDouble(produkQty);
+                    //     //selectedProductOriginalTotalQty = selectedProductOriginalTotalQty + deltaQty;
+
+                    //    //produkQty = selectedProductOriginalTotalQty.ToString();
+                    //    sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = " + newProdukQty + " WHERE ID = " + lotID;
+                    //}
+                    //gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "INSERT TO PRODUCT EXPIRY [" + productID + "]");
+                    //if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                    //    throw internalEX;
                 }
 
                 switch (originModuleID)
@@ -841,16 +1009,16 @@ namespace AlphaSoft
                                                 "PRODUCT_PHOTO_1 = '" + produkPhoto + "', " +
                                                 "UNIT_ID = " + selectedUnitID + ", ";
 
-                            if (lotID == 0)
-                            {
-                                sqlCommand = sqlCommand + "PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY + " + produkQty + ", ";
-                            }
-                            else
-                            {
-                                deltaQty = newProdukQty - selectedProductOriginalQty;
-                                sqlCommand = sqlCommand + "PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY + " + deltaQty + ", ";
-                            }
-
+                            //if (lotID == 0)
+                            //{
+                            //    sqlCommand = sqlCommand + "PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY + " + produkQty + ", ";
+                            //}
+                            //else
+                            //{
+                            //    deltaQty = newProdukQty - selectedProductOriginalQty;
+                            //    sqlCommand = sqlCommand + "PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY + " + deltaQty + ", ";
+                            //}
+                            sqlCommand = sqlCommand + "PRODUCT_STOCK_QTY = " + produkQty + ", ";
                             sqlCommand = sqlCommand + "PRODUCT_LIMIT_STOCK = " + limitStock + ", " +
                                                 "PRODUCT_SHELVES = '" + produkShelves + "', " +
                                                 "PRODUCT_ACTIVE = " + produkStatus + ", " +
@@ -1109,6 +1277,8 @@ namespace AlphaSoft
 
         private void resetbutton_Click(object sender, EventArgs e)
         {
+            isLoading = true;
+
             gUtil.ResetAllControls(this);
 
             stokAwalTextBox.Text = "0";
@@ -1127,6 +1297,8 @@ namespace AlphaSoft
             originModuleID = globalConstants.NEW_PRODUK;
             options = gUtil.INS;
             kodeProdukTextBox.Enabled = true;
+
+            isLoading = false;
         }
 
         private void barcodeTextBox_TextChanged(object sender, EventArgs e)
@@ -1184,22 +1356,34 @@ namespace AlphaSoft
 
             errorLabel.Text = "";
 
-            if (globalFeatureList.EXPIRY_MODULE == 1)
-            {
-                expLabel.Visible = true;
-                expDatePicker.Visible = true;
-            }
-
+            expDataGridView.EditingControlShowing += expDataGridView_EditingControlShowing;
+            //if (globalFeatureList.EXPIRY_MODULE == 1)
+            //{
+            //    expLabel.Visible = true;
+            //    expDatePicker.Visible = true;
+            //}
             isLoading = true;
-            loadProdukData();
 
-            loadUnitIDInformation();
+            expDataGridView.ReadOnly = true;
+            expDataGridView.Enabled = false;
 
-            loadProductCategoryData();
+            oDateTimePicker.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            addExpDataGridColumn();
 
-            loadKategoriIDInformation();
+            if (originModuleID == globalConstants.EDIT_PRODUK)
+            { 
+                loadProdukData();
 
-            LoadLastSupplier();
+                loadProdukExpData();
+
+                loadUnitIDInformation();
+
+                loadProductCategoryData();
+
+                loadKategoriIDInformation();
+
+                LoadLastSupplier();
+            }
 
             switch (originModuleID)
             {
@@ -1243,10 +1427,12 @@ namespace AlphaSoft
             arrButton[1] = resetbutton;
             gUtil.reArrangeButtonPosition(arrButton, arrButton[0].Top, this.Width);
 
-            expDatePicker.Format = DateTimePickerFormat.Custom;
-            expDatePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+            //expDatePicker.Format = DateTimePickerFormat.Custom;
+            //expDatePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
 
             gUtil.reArrangeTabOrder(this);
+
+            namaProdukTextBox.Select();
         }
 
         private void namaProdukTextBox_TextChanged(object sender, EventArgs e)
@@ -1298,14 +1484,14 @@ namespace AlphaSoft
                 // PRODUCT IS SERVICE
                 stokAwalTextBox.Enabled = false;
                 limitStokTextBox.Enabled = false;
-                expDatePicker.Enabled = false;
+                //expDatePicker.Enabled = false;
                 expiredCheckBox.Enabled = false;
             }
             else
             {
                 stokAwalTextBox.Enabled = true;
                 limitStokTextBox.Enabled = true;
-                expDatePicker.Enabled = true;
+                //expDatePicker.Enabled = true;
                 expiredCheckBox.Enabled = true;
             }
         }
@@ -1359,10 +1545,314 @@ namespace AlphaSoft
 
         private void expiredCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (expiredCheckBox.Checked == true)
-                expDatePicker.Enabled = true;
+            if (isLoading)
+                return;
+
+            if (expiredCheckBox.Checked)
+            {
+                stokAwalTextBox.Enabled = false;
+                expDataGridView.ReadOnly = false;
+                expDataGridView.Enabled = true;
+
+                isLoading = true;
+                expDataGridView.Rows.Clear();
+                //expDataGridView.AllowUserToAddRows = true;
+
+                if (expDataGridView.Rows.Count > 0)
+                { 
+                    expDataGridView.Rows[0].Cells["lotID"].Value = 0;
+                    expDataGridView.Rows[0].Cells["status"].Value = true;
+                }
+                loadProdukExpData();
+                calculateTotalQty();
+
+                showInactiveExpiryCheckBox.Enabled = true;
+
+                isLoading = false;
+
+            }
             else
-                expDatePicker.Enabled = false;
+            {
+                if (DialogResult.Yes == MessageBox.Show("SEMUA DATA EXP DATE AKAN DIHAPUS, LANJUTKAN?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+                {
+                    expDataGridView.Rows.Clear();
+                    stokAwalTextBox.Enabled = true;
+                    expDataGridView.ReadOnly = true;
+                    expDataGridView.Enabled = false;
+                    showInactiveExpiryCheckBox.Checked= false;
+                    showInactiveExpiryCheckBox.Enabled = false;
+                }
+                else
+                    expiredCheckBox.Checked = true;
+            }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void noRakBarisTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addExpDataGridColumn()
+        {
+            DataGridViewTextBoxColumn lotID_textBox = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn qty_textBox = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn expiryDate_textBox = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn expiryDateValue_textBox = new DataGridViewTextBoxColumn();
+            DataGridViewCheckBoxColumn status_checkBox = new DataGridViewCheckBoxColumn();
+
+            lotID_textBox.Name = "lotID";
+            lotID_textBox.HeaderText = "LOT ID";
+            lotID_textBox.Visible = false;
+            expDataGridView.Columns.Add(lotID_textBox);
+
+            status_checkBox.Name = "status";
+            status_checkBox.HeaderText = "AKTIF";
+            expDataGridView.Columns.Add(status_checkBox);
+
+            qty_textBox.Name = "qty";
+            qty_textBox.HeaderText = "QTY";
+            qty_textBox.DefaultCellStyle.BackColor = Color.LightBlue;
+            expDataGridView.Columns.Add(qty_textBox);
+
+            expiryDate_textBox.Name = "expiryDate";
+            expiryDate_textBox.HeaderText = "KADALUARSA";
+            expiryDate_textBox.ReadOnly = true;
+            expDataGridView.Columns.Add(expiryDate_textBox);
+
+            expiryDateValue_textBox.Name = "expiryDateValue";
+            expiryDateValue_textBox.HeaderText = "KADALUARSA";
+            expiryDateValue_textBox.ReadOnly = true;
+            expiryDateValue_textBox.Visible = false;
+            expDataGridView.Columns.Add(expiryDateValue_textBox);
+        }
+
+        private void expDataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            expDataGridView.SuspendLayout();
+
+            if (navKeyRegistered)
+            {
+                unregisterGlobalHotkey();
+            }
+
+            if (!delKeyRegistered)
+                registerDelKey();
+        }
+
+        private void expDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            expDataGridView.ResumeLayout();
+        }
+
+        private void expDataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = expDataGridView[e.ColumnIndex, e.RowIndex];
+            string columnName = "";
+
+            if (expDataGridView.Rows.Count <= 0)
+                return;
+
+            columnName = cell.OwningColumn.Name;
+            if (columnName == "expiryDate")
+            {
+                addDateTimePickerToDataGrid(e.ColumnIndex, e.RowIndex);
+            }
+        }
+
+        private void expDataGridView_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = expDataGridView[e.ColumnIndex, e.RowIndex];
+            string columnName = "";
+
+            if (expDataGridView.Rows.Count <= 0)
+                return;
+
+            columnName = cell.OwningColumn.Name;
+
+            if (globalFeatureList.EXPIRY_MODULE == 1)
+            {
+                if (columnName == "expiryDate")
+                {
+                    oDateTimePicker.Visible = false;
+                }
+            }
+        }
+
+        private void addDateTimePickerToDataGrid(int columnIndex, int rowIndex)
+        {
+            expDataGridView.Controls.Add(oDateTimePicker);
+            oDateTimePicker.Visible = false;
+            oDateTimePicker.Format = DateTimePickerFormat.Custom;
+            oDateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+            oDateTimePicker.TextChanged += new EventHandler(oDateTimePicker_OnTextChanged);
+            if (null != expDataGridView.Rows[rowIndex].Cells["expiryDateValue"].Value)
+                oDateTimePicker.Value = Convert.ToDateTime(expDataGridView.Rows[rowIndex].Cells["expiryDateValue"].Value);
+
+            oDateTimePicker.Visible = true;
+
+            Rectangle oRectangle = expDataGridView.GetCellDisplayRectangle(columnIndex, rowIndex, true);
+            oDateTimePicker.Size = new Size(oRectangle.Width, oRectangle.Height);
+            oDateTimePicker.Location = new Point(oRectangle.X, oRectangle.Y);
+            oDateTimePicker.CloseUp += new EventHandler(oDateTimePicker_CloseUp);
+        }
+
+        private void oDateTimePicker_OnTextChanged(object sender, EventArgs e)
+        {
+            int rowIndex = expDataGridView.CurrentCell.RowIndex;
+
+            expDataGridView.CurrentCell.Value = oDateTimePicker.Text.ToString();
+            expDataGridView.Rows[rowIndex].Cells["expiryDateValue"].Value = oDateTimePicker.Value.ToString();
+        }
+
+        private void oDateTimePicker_CloseUp(object sender, EventArgs e)
+        {
+            oDateTimePicker.Visible = false;
+        }
+
+        private void expDataGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+
+        }
+
+        private void calculateTotalQty()
+        {
+            double totalQty = 0;
+            double expQty = 0;
+
+            for (int i = 0; i<expDataGridView.Rows.Count; i++)
+            {
+                expQty = 0;
+                if (null != expDataGridView.Rows[i].Cells["expiryDateValue"].Value && true == Convert.ToBoolean(expDataGridView.Rows[i].Cells["status"].Value))
+                {
+                    try
+                    {
+                        double.TryParse(expDataGridView.Rows[i].Cells["qty"].Value.ToString(), out expQty);
+                    }
+                    catch (Exception e) { }
+
+                    totalQty = totalQty + expQty;
+                }
+            }
+
+            stokAwalTextBox.Text = totalQty.ToString();
+        }
+
+        private void expDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = expDataGridView[e.ColumnIndex, e.RowIndex];
+            int rowSelectedIndex = 0;
+            string cellValue = "";
+            string columnName = "";
+
+            if (isLoading)
+                return;
+
+            columnName = cell.OwningColumn.Name;
+            gUtil.saveSystemDebugLog(globalConstants.MENU_TAMBAH_PRODUK, "DETAIL PRODUK : detailGridView_CellValueChanged [" + columnName + "]");
+
+            rowSelectedIndex = e.RowIndex;
+            DataGridViewRow selectedRow = expDataGridView.Rows[rowSelectedIndex];
+
+            if (null != selectedRow.Cells[columnName].Value)
+                cellValue = selectedRow.Cells[columnName].Value.ToString();
+            else
+                cellValue = "";
+
+            if (columnName == "qty")
+            {
+                if (cellValue.Length <= 0)
+                {
+                    // IF TEXTBOX IS EMPTY, DEFAULT THE VALUE TO 0 AND EXIT THE CHECKING
+                    isLoading = true;
+                    // reset subTotal Value and recalculate total
+                    selectedRow.Cells[columnName].Value = "0";
+                    isLoading = false;
+                    return;
+                }
+
+                if (!gUtil.matchRegEx(cellValue, globalUtilities.REGEX_NUMBER_WITH_2_DECIMAL)
+                        && (cellValue.Length > 0))
+                {
+                    int rowIndex = rowSelectedIndex + 1;
+                    errorLabel.Text = "INPUT QTY PADA BARIS [" + rowIndex  + "] SALAH";
+                }
+            }
+
+            calculateTotalQty();
+        }
+
+        private void expDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            if (isLoading)
+                return;
+
+            if (expDataGridView.Rows.Count - 2 > 0)
+            {
+                expDataGridView.Rows[expDataGridView.Rows.Count - 2].Cells["lotID"].Value = 0;
+                expDataGridView.Rows[expDataGridView.Rows.Count - 2].Cells["status"].Value = true;
+            }
+        }
+
+        private void expDataGridView_Leave(object sender, EventArgs e)
+        {
+            if (delKeyRegistered)
+                unregisterDelKey();
+        }
+
+        private void expDataGridView_Enter(object sender, EventArgs e)
+        {
+            if (!delKeyRegistered)
+                registerDelKey();
+        }
+
+        private void expDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (DialogResult.Yes == MessageBox.Show("HAPUS BARIS YG DIPILIH?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+                    deleteCurrentRow();
+            }
+        }
+
+        private void expDataGridView_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            // +=
+            if ((expDataGridView.CurrentCell.OwningColumn.Name == "qty")
+                && e.Control is TextBox)
+            {
+                TextBox qtyTextBox = e.Control as TextBox;
+                qtyTextBox.PreviewKeyDown -= qty_previewKeyDown;
+                qtyTextBox.PreviewKeyDown += qty_previewKeyDown;
+            }
+        }
+
+        private void qty_previewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (DialogResult.Yes == MessageBox.Show("HAPUS BARIS YG DIPILIH?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+                    deleteCurrentRow();
+            }
+        }
+
+        private void showInactiveExpiryCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            isLoading = true;
+            expDataGridView.Rows.Clear();
+
+            if (expDataGridView.Rows.Count > 0)
+            {
+                expDataGridView.Rows[0].Cells["lotID"].Value = 0;
+                expDataGridView.Rows[0].Cells["status"].Value = true;
+            }
+            loadProdukExpData();
+            calculateTotalQty();
+            isLoading = false;
         }
     }
 }

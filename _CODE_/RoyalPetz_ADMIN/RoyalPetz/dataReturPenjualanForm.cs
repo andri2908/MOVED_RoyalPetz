@@ -1144,6 +1144,18 @@ namespace AlphaSoft
                 }
             }
 
+            for (i = 0; i < detailReturDataGridView.Rows.Count - 1; i++)
+            {
+                if (null == detailReturDataGridView.Rows[i].Cells["productID"].Value ||
+                    (!gutil.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString())))
+                {
+                    // detailGridView.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+                    errorLabel.Text = "KODE PRODUK DI BARIS " + (i + 1) + " TIDAK VALID";
+                    return false;
+                }
+            }
+
+
             //for (i = 0; i < detailReturDataGridView.Rows.Count && dataExist; i++)
             //{
             //    if (null != detailReturDataGridView.Rows[i].Cells["productID"].Value)

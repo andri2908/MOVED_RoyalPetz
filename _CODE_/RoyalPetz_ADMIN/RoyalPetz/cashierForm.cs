@@ -65,6 +65,7 @@ namespace AlphaSoft
         private Hotkeys.GlobalHotkey ghk_F11;
         private Hotkeys.GlobalHotkey ghk_F12;
         private Hotkeys.GlobalHotkey ghk_DEL;
+        private Hotkeys.GlobalHotkey ghk_ESC;
 
         private Hotkeys.GlobalHotkey ghk_CTRL_DEL;
         private Hotkeys.GlobalHotkey ghk_CTRL_Enter;
@@ -271,6 +272,10 @@ namespace AlphaSoft
                     SendKeys.Send("{TAB}");
                     break;
 
+                case Keys.Escape:
+                    if (DialogResult.Yes == MessageBox.Show("TUTUP FORM ?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                        this.Close();
+                    break;
             }
         }
 
@@ -374,6 +379,9 @@ namespace AlphaSoft
             ghk_Substract = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Subtract, this);
             ghk_Substract.Register();
 
+            ghk_ESC = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Escape, this);
+            ghk_ESC.Register();
+
             //ghk_DEL = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Delete, this);
             //ghk_DEL.Register();
 
@@ -382,7 +390,6 @@ namespace AlphaSoft
 
             ghk_CTRL_Enter = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.Enter, this);
             ghk_CTRL_Enter.Register();
-
 
 
             //ghk_F10 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F10, this);
@@ -447,7 +454,7 @@ namespace AlphaSoft
 
             //ghk_CTRL_DEL.Unregister();
             ghk_CTRL_Enter.Unregister();
-
+            ghk_ESC.Unregister();
 
             //ghk_F10.Unregister();
             ////ghk_F12.Unregister();
@@ -854,9 +861,52 @@ namespace AlphaSoft
             //cashierDataGridView.CurrentCell = cashierDataGridView.Rows[rowSelectedIndex].Cells["qty"];
         }
 
+        private bool qtyisEnough(ref string productName)
+        {
+            string productIDValue = "";
+            double productQtyValue = 0;
+            List<string> productID = new List<string>();
+            List<double> productQty = new List<double>();
+            bool dataValid = true;
+
+            for (int i = 0;i<cashierDataGridView.Rows.Count - 1;i++)
+            {
+                if (null != cashierDataGridView.Rows[i].Cells["productID"].Value &&
+                   (gutil.isProductIDExist(cashierDataGridView.Rows[i].Cells["productID"].Value.ToString())))
+                {
+                    productIDValue = cashierDataGridView.Rows[i].Cells["productID"].Value.ToString();
+                    productQtyValue = Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value);
+                    if (!productID.Contains(productIDValue))
+                    {
+                        productID.Add(productIDValue);
+                        productQty.Add(productQtyValue);
+                    }
+                    else
+                    {
+                        int listIndex = productID.IndexOf(productIDValue);
+                        productQty[listIndex] = productQty[listIndex] + productQtyValue;
+                    }
+                }
+            }
+
+            for (int j =0;j<productID.Count && dataValid;j++)
+            {
+                if (!stockIsEnough(productID[j], productQty[j]))
+                { 
+                    dataValid = false;
+                    productName = DS.getDataSingleValue("SELECT PRODUCT_NAME FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID[j] + "'").ToString();
+                }
+            }
+
+            return dataValid;
+        }
+
         private bool productIDValid(string productID)
         {
             bool result = false;
+
+            if (productID.Length <= 0)
+                return false;
 
             if (isLoading)
                 result = true;
@@ -880,38 +930,30 @@ namespace AlphaSoft
                 return false;
             }
 
-            for (int i = 0; i < cashierDataGridView.Rows.Count; i++ )
+            for (int i = 0; i < cashierDataGridView.Rows.Count-1; i++ )
             {
+                if (null == cashierDataGridView.Rows[i].Cells["productID"].Value||
+                    (!gutil.isProductIDExist(cashierDataGridView.Rows[i].Cells["productID"].Value.ToString())))
+                {
+                    cashierDataGridView.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+                    errorLabel.Text = "KODE PRODUK DI BARIS " + (i + 1) + " TIDAK VALID";
+                    return false;
+                }
+
                 if (
                     ((null == cashierDataGridView.Rows[i].Cells["qty"].Value) || 
                     (0 == Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value))
-                    ) && null != cashierDataGridView.Rows[i].Cells["productID"].Value)
+                    ))
                 {
                     errorLabel.Text = "JUMLAH PRODUK DI BARIS " + (i + 1) + " = 0";
                     return false;
                 }
 
-                if (
-                    (
-                    (null == cashierDataGridView.Rows[i].Cells["jumlah"].Value)
-                    //|| (0 >= Convert.ToDouble(cashierDataGridView.Rows[i].Cells["jumlah"].Value))
-                    ) && null != cashierDataGridView.Rows[i].Cells["productID"].Value)
+                if ((null == cashierDataGridView.Rows[i].Cells["jumlah"].Value)
+                     && null != cashierDataGridView.Rows[i].Cells["productID"].Value)
                 {
                     errorLabel.Text = "PEMBELIAN DI BARIS " + (i+1) + " TIDAK VALID";
                     return false;
-                }
-
-                if (null == cashierDataGridView.Rows[i].Cells["productID"].Value)
-                {
-                    cashierDataGridView.Rows[i].DefaultCellStyle.BackColor = Color.Red;
-                    //errorLabel.Text = "KODE PRODUK DI BARIS " + (i + 1) + " TIDAK VALID";
-                    //return false;
-                }
-                else if (!productIDValid(cashierDataGridView.Rows[i].Cells["productID"].Value.ToString()))
-                {
-                    cashierDataGridView.Rows[i].DefaultCellStyle.BackColor = Color.Red;
-                    //errorLabel.Text = "KODE PRODUK DI BARIS " + (i + 1) + " TIDAK VALID";
-                    //return false;
                 }
             }
 
@@ -945,6 +987,13 @@ namespace AlphaSoft
                     errorLabel.Text = "LAMA TEMPO TIDAK BOLEH NOL";
                     return false;
                 }
+            }
+
+            string productFullName = "";
+            if (!qtyisEnough(ref productFullName))
+            {
+                errorLabel.Text = "QTY UNTUK [" + productFullName + "] TIDAK CUKUP";
+                return false;
             }
 
             errorLabel.Text = "";
@@ -2788,17 +2837,17 @@ namespace AlphaSoft
 
             if (originModuleID != globalConstants.DUMMY_TRANSACTION_TAX)  // NORMAL TRANSACTION
             {
-                sqlCommand = "SELECT S.SALES_INVOICE AS 'INVOICE', C.CUSTOMER_FULL_NAME AS 'CUSTOMER',DATE_FORMAT(S.SALES_DATE, '%d-%M-%Y') AS 'DATE',S.SALES_TOTAL AS 'TOTAL', IF(C.CUSTOMER_GROUP=1,'RETAIL',IF(C.CUSTOMER_GROUP=2,'GROSIR','PARTAI')) AS 'GROUP' FROM SALES_HEADER S,MASTER_CUSTOMER C WHERE S.CUSTOMER_ID = C.CUSTOMER_ID AND S.SALES_INVOICE = '" + selectedsalesinvoice + "'" +
+                sqlCommand = "SELECT S.SALES_INVOICE AS 'INVOICE', C.CUSTOMER_FULL_NAME AS 'CUSTOMER',DATE_FORMAT(S.SALES_DATE, '%d-%M-%Y %H:%i') AS 'DATE',S.SALES_TOTAL AS 'TOTAL', IF(C.CUSTOMER_GROUP=1,'RETAIL',IF(C.CUSTOMER_GROUP=2,'GROSIR','PARTAI')) AS 'GROUP' FROM SALES_HEADER S,MASTER_CUSTOMER C WHERE S.CUSTOMER_ID = C.CUSTOMER_ID AND S.SALES_INVOICE = '" + selectedsalesinvoice + "'" +
                     " UNION " +
-                    "SELECT S.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', DATE_FORMAT(S.SALES_DATE, '%d-%M-%Y') AS 'DATE', S.SALES_TOTAL AS 'TOTAL', 'RETAIL' AS 'GROUP' FROM SALES_HEADER S WHERE S.CUSTOMER_ID = 0 AND S.SALES_INVOICE = '" + selectedsalesinvoice + "'" +
+                    "SELECT S.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', DATE_FORMAT(S.SALES_DATE, '%d-%M-%Y %H:%i') AS 'DATE', S.SALES_TOTAL AS 'TOTAL', 'RETAIL' AS 'GROUP' FROM SALES_HEADER S WHERE S.CUSTOMER_ID = 0 AND S.SALES_INVOICE = '" + selectedsalesinvoice + "'" +
                     "ORDER BY DATE ASC";
             }
             else
             {
                 // GET DUMMY TAX DATA
-                sqlCommand = "SELECT S.SALES_INVOICE AS 'INVOICE', C.CUSTOMER_FULL_NAME AS 'CUSTOMER',DATE_FORMAT(S.SALES_DATE, '%d-%M-%Y') AS 'DATE',S.SALES_TOTAL AS 'TOTAL', IF(C.CUSTOMER_GROUP=1,'RETAIL',IF(C.CUSTOMER_GROUP=2,'GROSIR','PARTAI')) AS 'GROUP' FROM SALES_HEADER_TAX S,MASTER_CUSTOMER C WHERE S.CUSTOMER_ID = C.CUSTOMER_ID AND S.SALES_INVOICE = '" + selectedsalesinvoiceTax + "'" +
+                sqlCommand = "SELECT S.SALES_INVOICE AS 'INVOICE', C.CUSTOMER_FULL_NAME AS 'CUSTOMER',DATE_FORMAT(S.SALES_DATE, '%d-%M-%Y %H:%i') AS 'DATE',S.SALES_TOTAL AS 'TOTAL', IF(C.CUSTOMER_GROUP=1,'RETAIL',IF(C.CUSTOMER_GROUP=2,'GROSIR','PARTAI')) AS 'GROUP' FROM SALES_HEADER_TAX S,MASTER_CUSTOMER C WHERE S.CUSTOMER_ID = C.CUSTOMER_ID AND S.SALES_INVOICE = '" + selectedsalesinvoiceTax + "'" +
                                         " UNION " +
-                                        "SELECT S.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', DATE_FORMAT(S.SALES_DATE, '%d-%M-%Y') AS 'DATE', S.SALES_TOTAL AS 'TOTAL', 'RETAIL' AS 'GROUP' FROM SALES_HEADER_TAX S WHERE S.CUSTOMER_ID = 0 AND S.SALES_INVOICE = '" + selectedsalesinvoiceTax + "'" +
+                                        "SELECT S.SALES_INVOICE AS 'INVOICE', 'P-UMUM' AS 'CUSTOMER', DATE_FORMAT(S.SALES_DATE, '%d-%M-%Y %H:%i') AS 'DATE', S.SALES_TOTAL AS 'TOTAL', 'RETAIL' AS 'GROUP' FROM SALES_HEADER_TAX S WHERE S.CUSTOMER_ID = 0 AND S.SALES_INVOICE = '" + selectedsalesinvoiceTax + "'" +
                                         "ORDER BY DATE ASC";
             }
             using (rdr = DS.getData(sqlCommand))
@@ -3629,6 +3678,16 @@ namespace AlphaSoft
             if (selectedsalesinvoice != "")
                 if (DialogResult.Yes == MessageBox.Show("REPRINT INVOICE ?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     reprintInvoice();
+        }
+
+        private void cashierDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void totalLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

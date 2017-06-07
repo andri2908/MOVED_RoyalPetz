@@ -1400,6 +1400,16 @@ namespace AlphaSoft
                 }
             }
 
+            for (i = 0; i < detailRequestOrderDataGridView.Rows.Count-1; i++)
+            {
+                if (null == detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value ||
+                    (!gUtil.isProductIDExist(detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString())))
+                {
+                    // detailGridView.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+                    errorLabel.Text = "KODE PRODUK DI BARIS " + (i + 1) + " TIDAK VALID";
+                    return false;
+                }
+            }
             //for (i = 0; i < detailRequestOrderDataGridView.Rows.Count && dataExist; i++)
             //{
             //    if (null != detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value)

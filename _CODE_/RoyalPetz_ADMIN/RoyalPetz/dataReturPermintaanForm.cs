@@ -842,19 +842,31 @@ namespace AlphaSoft
                     return false;
                 }
             }
-                //for (i = 0; i < detailReturDataGridView.Rows.Count && dataExist; i++)
-                //{
-                //    if (null != detailReturDataGridView.Rows[i].Cells["productID"].Value)
-                //        dataExist = gUtil.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString());
-                //    else
-                //        dataExist = false;
-                //}
-                //if (!dataExist)
-                //{
-                //    i = i + 1;
-                //    errorLabel.Text = "PRODUCT ID PADA BARIS [" + i + "] INVALID";
-                //    return false;
-                //}
+
+            for (i = 0; i < detailReturDataGridView.Rows.Count - 1; i++)
+            {
+                if (null == detailReturDataGridView.Rows[i].Cells["productID"].Value ||
+                    (!gUtil.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString())))
+                {
+                    // detailGridView.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+                    errorLabel.Text = "KODE PRODUK DI BARIS " + (i + 1) + " TIDAK VALID";
+                    return false;
+                }
+            }
+
+            //for (i = 0; i < detailReturDataGridView.Rows.Count && dataExist; i++)
+            //{
+            //    if (null != detailReturDataGridView.Rows[i].Cells["productID"].Value)
+            //        dataExist = gUtil.isProductIDExist(detailReturDataGridView.Rows[i].Cells["productID"].Value.ToString());
+            //    else
+            //        dataExist = false;
+            //}
+            //if (!dataExist)
+            //{
+            //    i = i + 1;
+            //    errorLabel.Text = "PRODUCT ID PADA BARIS [" + i + "] INVALID";
+            //    return false;
+            //}
 
                 return true;
         }

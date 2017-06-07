@@ -1538,10 +1538,14 @@ namespace AlphaSoft
 
         private void uSBToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process p = new Process();
-            p.StartInfo.FileName = "USBLib.exe";
-            p.StartInfo.Arguments = "runAdmin";
-            p.Start();
+            try
+            {
+                Process p = new Process();
+                p.StartInfo.FileName = "USBLib.exe";
+                p.StartInfo.Arguments = "runAdmin";
+                p.Start();
+            }
+            catch (Exception ex) { }
         }
 
         private void stokProdukToolStripMenuItem_Click(object sender, EventArgs e)

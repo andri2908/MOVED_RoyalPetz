@@ -13,11 +13,13 @@ using MySql.Data.MySqlClient;
 using Hotkeys;
 using System.Drawing.Printing;
 using System.Reflection;
+using System.Globalization;
 
 namespace AlphaSoft
 {
     public partial class dataProdukForm : Form
     {
+        private CultureInfo culture = new CultureInfo("id-ID");
         private int originModuleID = 0;
         private int selectedProductID = 0;
         private string selectedkodeProduct = "";
@@ -45,6 +47,7 @@ namespace AlphaSoft
 
         private Hotkeys.GlobalHotkey ghk_UP;
         private Hotkeys.GlobalHotkey ghk_DOWN;
+        private Hotkeys.GlobalHotkey ghk_ESC;
         private bool navKeyRegistered = false;
 
         public dataProdukForm()
@@ -309,6 +312,10 @@ namespace AlphaSoft
                 case Keys.Down:
                     SendKeys.Send("{TAB}");
                     break;
+
+                case Keys.Escape:
+                    this.Close();
+                    break;
             }
         }
 
@@ -334,6 +341,9 @@ namespace AlphaSoft
             ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
             ghk_DOWN.Register();
 
+            ghk_ESC = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Escape, this);
+            ghk_ESC.Register();
+
             navKeyRegistered = true;
         }
 
@@ -341,6 +351,7 @@ namespace AlphaSoft
         {
             ghk_UP.Unregister();
             ghk_DOWN.Unregister();
+            ghk_ESC.Unregister();
 
             navKeyRegistered = false;
         }
@@ -471,7 +482,7 @@ namespace AlphaSoft
 
             if (originModuleID == globalConstants.RETUR_PENJUALAN)
             {
-                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' " +
+                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', MP.PRODUCT_RETAIL_PRICE AS 'HARGA ECER', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' " +
                                     "FROM MASTER_PRODUCT MP, SALES_DETAIL SD " +
                                     "WHERE SD.SALES_INVOICE = '" + returJualSearchParam + "' AND SD.PRODUCT_ID = MP.PRODUCT_ID AND MP.PRODUCT_IS_SERVICE = 0 " + showactive +
                                     "AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" +
@@ -479,7 +490,7 @@ namespace AlphaSoft
             }
             else if (originModuleID == globalConstants.RETUR_PENJUALAN_STOCK_ADJUSTMENT)
             {
-                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' " +
+                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', MP.PRODUCT_RETAIL_PRICE AS 'HARGA ECER', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' " +
                                     "FROM MASTER_PRODUCT MP, SALES_DETAIL SD, SALES_HEADER SH " +
                                     "WHERE SH.SALES_INVOICE = SD.SALES_INVOICE AND SD.PRODUCT_ID = MP.PRODUCT_ID AND SH.CUSTOMER_ID = " + Convert.ToInt32(returJualSearchParam) + " AND MP.PRODUCT_IS_SERVICE = 0 " + showactive +
                                     "AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" +
@@ -487,29 +498,32 @@ namespace AlphaSoft
             }
             else if (originModuleID == globalConstants.RETUR_PEMBELIAN)
             {
-                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_IS_SERVICE = 0 " + showactive + " ORDER BY MP.PRODUCT_NAME ASC";//"AND (MP.PRODUCT_STOCK_QTY - MP.PRODUCT_LIMIT_STOCK > 0) ORDER BY MP.PRODUCT_NAME ASC";
+                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', MP.PRODUCT_RETAIL_PRICE AS 'HARGA ECER' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_IS_SERVICE = 0 " + showactive + " ORDER BY MP.PRODUCT_NAME ASC";//"AND (MP.PRODUCT_STOCK_QTY - MP.PRODUCT_LIMIT_STOCK > 0) ORDER BY MP.PRODUCT_NAME ASC";
             }
             else if (originModuleID == globalConstants.PENERIMAAN_BARANG || originModuleID == globalConstants.BROWSE_STOK_PECAH_BARANG)
             {
-                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
+                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', MP.PRODUCT_RETAIL_PRICE AS 'HARGA ECER', MP.PRODUCT_DESCRIPTION AS 'DESKRIPSI PRODUK' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
             }
             else if ((originModuleID == globalConstants.CASHIER_MODULE) || (originModuleID == globalConstants.NEW_PURCHASE_ORDER) || (originModuleID == globalConstants.NEW_REQUEST_ORDER))
             {
-                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive; //MP.PRODUCT_STOCK_QTY > 0 AND 
+                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', MP.PRODUCT_RETAIL_PRICE AS 'HARGA ECER' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%' " + showactive; //MP.PRODUCT_STOCK_QTY > 0 AND 
             }
-            else
+            else if (originModuleID == globalConstants.STOK_PECAH_BARANG)
             {
                 if (globalFeatureList.EXPIRY_MODULE == 1)
                 {
-                    sqlCommand = "SELECT PE.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', PE.PRODUCT_AMOUNT AS 'QTY', DATE_FORMAT(PE.PRODUCT_EXPIRY_DATE, '%d-%M-%Y') AS 'TGL KADALUARSA' FROM MASTER_PRODUCT MP, PRODUCT_EXPIRY PE WHERE MP.PRODUCT_EXPIRABLE = 1 AND PE.PRODUCT_ID = MP.PRODUCT_ID " + showactive + "AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'";
-                    sqlCommand2 = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', '' AS 'TGL KADALUARSA' FROM MASTER_PRODUCT MP WHERE PRODUCT_EXPIRABLE = 0 AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
+                    sqlCommand = "SELECT PE.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', PE.PRODUCT_AMOUNT AS 'QTY', DATE_FORMAT(PE.PRODUCT_EXPIRY_DATE, '%d-%M-%Y') AS 'TGL KADALUARSA', MP.PRODUCT_RETAIL_PRICE AS 'HARGA ECER' FROM MASTER_PRODUCT MP, PRODUCT_EXPIRY PE WHERE MP.PRODUCT_EXPIRABLE = 1 AND PE.PRODUCT_ID = MP.PRODUCT_ID " + showactive + "AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%' AND PE.EXPIRY_ACTIVE = 1 AND PE.IS_DELETED = 0";
+                    sqlCommand2 = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', '' AS 'TGL KADALUARSA', MP.PRODUCT_RETAIL_PRICE AS 'HARGA ECER' FROM MASTER_PRODUCT MP WHERE PRODUCT_EXPIRABLE = 0 AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%' " + showactive;
                     displayExpiredDate = true;
 
                     sqlCommand = sqlCommand + " UNION " + sqlCommand2;
                 }
                 else
-                    sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
+                    sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', MP.PRODUCT_RETAIL_PRICE AS 'HARGA ECER' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%' " + showactive;
             }
+            else
+                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', MP.PRODUCT_RETAIL_PRICE AS 'HARGA ECER' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" + showactive;
+
 
             if (originModuleID == globalConstants.STOK_PECAH_BARANG)
             {
@@ -533,6 +547,9 @@ namespace AlphaSoft
                     {
                         dataProdukGridView.Columns["TGL KADALUARSA"].Width = 180;
                     }
+
+                    dataProdukGridView.Columns["HARGA ECER"].DefaultCellStyle.FormatProvider = culture;
+                    dataProdukGridView.Columns["HARGA ECER"].DefaultCellStyle.Format = "C2";
                     // dataProdukGridView.Columns["DESKRIPSI PRODUK"].Width = 300;                    
                     //dataProdukGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
                 }

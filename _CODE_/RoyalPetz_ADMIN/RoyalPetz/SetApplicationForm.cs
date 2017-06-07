@@ -580,7 +580,7 @@ namespace AlphaSoft
                 {
                     //gutil.showSuccess(options);
                     success2 = true;
-                    gutil.ResetAllControls(this);                    
+                    //gutil.ResetAllControls(this);                    
                 }
             } else
             {
@@ -589,7 +589,7 @@ namespace AlphaSoft
                 {
                     //gutil.showSuccess(options);
                     success2 = true;
-                    gutil.ResetAllControls(this);
+                    //gutil.ResetAllControls(this);
                 }
             }
             if (success1 && success2)

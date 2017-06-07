@@ -1212,6 +1212,21 @@ namespace AlphaSoft
             return result;
         }
 
+        private bool productIDValid(string productID)
+        {
+            bool result = false;
+
+            if (productID.Length <= 0)
+                return false;
+
+            if (isLoading)
+                result = true;
+            else if (0 < Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'")))
+                result = true;
+
+            return result;
+        }
+
         private bool dataValidated()
         {
             bool dataExist = true;
@@ -1231,7 +1246,7 @@ namespace AlphaSoft
 
             if (globalFeatureList.EXPIRY_MODULE == 1)
             { 
-                for (i = 0; i < detailGridView.Rows.Count && dataExist; i++)
+                for (i = 0; i < detailGridView.Rows.Count-1 && dataExist; i++)
                 {
                     if (null != detailGridView.Rows[i].Cells["productID"].Value)
                     { 
@@ -1248,6 +1263,17 @@ namespace AlphaSoft
                 if (!dataExist)
                 {
                     errorLabel.Text = "TANGGAL KADALUARSA PADA BARIS [" + i + "] INVALID";
+                    return false;
+                }
+            }
+
+            for (i = 0;i<detailGridView.Rows.Count-1 && dataExist;i++)
+            {
+                if (null == detailGridView.Rows[i].Cells["productID"].Value || 
+                    (!gUtil.isProductIDExist(detailGridView.Rows[i].Cells["productID"].Value.ToString())))
+                {
+                   // detailGridView.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+                    errorLabel.Text = "KODE PRODUK DI BARIS " + (i + 1) + " TIDAK VALID";
                     return false;
                 }
             }
@@ -1408,7 +1434,7 @@ namespace AlphaSoft
                 // SAVE DETAIL TABLE
                 for (int i = 0; i < detailGridView.Rows.Count-1; i++)
                 {
-                    if (null != detailGridView.Rows[i].Cells["productID"].Value)
+                    if (null != detailGridView.Rows[i].Cells["productID"].Value && detailGridView.Rows[i].Cells["productID"].Value.ToString().Length > 0)
                     {
                         newHPP = Convert.ToDouble(detailGridView.Rows[i].Cells["hpp"].Value);
                         if (originModuleId != 0)

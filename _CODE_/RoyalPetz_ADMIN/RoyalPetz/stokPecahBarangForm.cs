@@ -20,6 +20,10 @@ namespace AlphaSoft
     {
         private int newSelectedInternalProductID = 0;
         private int selectedInternalProductID = 0;
+        private bool productExpirable = false;
+        private bool newProductExpirable = false;
+        private string selectedProductID = "";
+
         private int selectedLotID = 0;
         private int selectedUnitID = 0;
         private DateTime originalExpiryDate;
@@ -51,10 +55,15 @@ namespace AlphaSoft
         {
             string selectedProductID;
             InitializeComponent();
+            selectedLotID = productID;
 
-            if (globalFeatureList.EXPIRY_MODULE == 1)
+            if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM PRODUCT_EXPIRY WHERE ID = " + selectedLotID)) > 0 ) // EXIST IN PRODUCT EXPIRY
             {
-                selectedLotID = productID;
+                productExpirable = true;
+            }
+
+            if (globalFeatureList.EXPIRY_MODULE == 1 && productExpirable)
+            {
                 selectedProductID = DS.getDataSingleValue("SELECT IFNULL(PRODUCT_ID, '') FROM PRODUCT_EXPIRY WHERE ID = " + selectedLotID).ToString();
 
                 if (selectedProductID != "")
@@ -116,7 +125,21 @@ namespace AlphaSoft
         {
             newSelectedInternalProductID = productID;
 
+            selectedProductID = DS.getDataSingleValue("SELECT PRODUCT_ID FROM MASTER_PRODUCT WHERE ID = " + newSelectedInternalProductID).ToString();
+
             loadProductName();
+
+            if (1 == Convert.ToInt32(DS.getDataSingleValue("SELECT PRODUCT_EXPIRABLE FROM MASTER_PRODUCT WHERE ID = " + newSelectedInternalProductID)))
+            {
+                newProductExpirable = true;
+                expDatePicker.Visible = true;
+                expLabel.Visible = true;
+            }
+            else
+            {
+                expDatePicker.Visible = false;
+                expLabel.Visible = false;
+            }
         }
 
         private void newProduk_Click(object sender, EventArgs e)
@@ -171,7 +194,7 @@ namespace AlphaSoft
             string sqlCommand = "";
             DS.mySqlConnect();
 
-            if (globalFeatureList.EXPIRY_MODULE == 1)
+            if (globalFeatureList.EXPIRY_MODULE == 1 && productExpirable)
             {
                 sqlCommand = "SELECT MP.UNIT_ID, MP.PRODUCT_ID, MP.PRODUCT_NAME, MP.PRODUCT_BASE_PRICE, MP.PRODUCT_RETAIL_PRICE, MP.PRODUCT_BULK_PRICE, MP.PRODUCT_WHOLESALE_PRICE, PE.PRODUCT_AMOUNT, PE.PRODUCT_EXPIRY_DATE " +
                                        "FROM MASTER_PRODUCT MP, PRODUCT_EXPIRY PE WHERE PE.PRODUCT_ID = MP.PRODUCT_ID AND PE.ID =  " + selectedLotID;
@@ -195,7 +218,7 @@ namespace AlphaSoft
                         hargaPartaiTextBox.Text = rdr.GetString("PRODUCT_BULK_PRICE");
                         hargaGrosirTextBox.Text = rdr.GetString("PRODUCT_WHOLESALE_PRICE");
 
-                        if (globalFeatureList.EXPIRY_MODULE == 1)
+                        if (globalFeatureList.EXPIRY_MODULE == 1 && productExpirable)
                         {
                             stockTextBox.Text = rdr.GetString("PRODUCT_AMOUNT");
                             currentStockQty = rdr.GetDouble("PRODUCT_AMOUNT");
@@ -265,12 +288,23 @@ namespace AlphaSoft
 
         private void stokPecahBarangForm_Load(object sender, EventArgs e)
         {
+            loadProductInformation();
+
+            loadUnitInformation();
+
+            loadCategoryInformation();
+
             gUtil.reArrangeTabOrder(this);
 
             if (globalFeatureList.EXPIRY_MODULE == 1)
             {
                 expLabel.Visible = true;
                 expDatePicker.Visible = true;
+
+                expDatePicker.Format = DateTimePickerFormat.Custom;
+                expDatePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+
+                expDatePicker.Value = DateTime.Now;
             }
         }
 
@@ -416,33 +450,40 @@ namespace AlphaSoft
                 if (globalFeatureList.EXPIRY_MODULE == 1)
                 {
                     expiryModuleUtil expUtil = new expiryModuleUtil();
-                    // REDUCE CURRENT STOCK QTY FOR THE EXACT EXPIRY DATE
-                    sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = PRODUCT_AMOUNT - " + gUtil.validateDecimalNumericInput(Convert.ToDouble(numberOfProductTextBox.Text)) + " WHERE ID = " + selectedLotID;
-                    gUtil.saveSystemDebugLog(globalConstants.MENU_PECAH_SATUAN_PRODUK, "REDUCE QTY [" + productIDTextBox.Text + "] AMT [" + gUtil.validateDecimalNumericInput(Convert.ToDouble(numberOfProductTextBox.Text)) + "]");
 
-                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                        throw internalEX;
+                    if (productExpirable)
+                    { 
+                        // REDUCE CURRENT STOCK QTY FOR THE EXACT EXPIRY DATE
+                        sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = PRODUCT_AMOUNT - " + gUtil.validateDecimalNumericInput(Convert.ToDouble(numberOfProductTextBox.Text)) + " WHERE ID = " + selectedLotID;
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PECAH_SATUAN_PRODUK, "REDUCE QTY [" + productIDTextBox.Text + "] AMT [" + gUtil.validateDecimalNumericInput(Convert.ToDouble(numberOfProductTextBox.Text)) + "]");
 
-                    // INCREASE NEW STOCK QTY FOR THE EXACT EXPIRY DATE
-                    string productExpiryDate = String.Format(culture, "{0:dd-MM-yyyy}", expDatePicker.Value);
-                    string productID = newProductIDTextBox.Text;
-                    double adjustmentQty = actualResult;
-                    int lotID = 0;
-
-                    // CHECK WHETHER THE PRODUCT WITH SAME EXPIRY DATE EXIST
-                    lotID = expUtil.getLotIDBasedOnExpiryDate(expDatePicker.Value, productID);
-
-                    if (lotID == 0)
-                    {
-                        //sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT, PR_INVOICE) VALUES ( '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", '" + PRInvoice + "')";
-                        sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT) VALUES ( '" + newProductIDTextBox.Text + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + adjustmentQty + ")";
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
                     }
-                    else
-                        sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = PRODUCT_AMOUNT + " + adjustmentQty + " WHERE ID = " + lotID;
 
-                    gUtil.saveSystemDebugLog(globalConstants.MENU_PECAH_SATUAN_PRODUK, "INSERT TO PRODUCT EXPIRY [" + productID + "]");
-                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                        throw internalEX;
+                    if (newProductExpirable)
+                    {
+                        // INCREASE NEW STOCK QTY FOR THE EXACT EXPIRY DATE
+                        string productExpiryDate = String.Format(culture, "{0:dd-MM-yyyy}", expDatePicker.Value);
+                        string productID = selectedProductID;// newProductIDTextBox.Text;
+                        double adjustmentQty = actualResult;
+                        int lotID = 0;
+
+                        // CHECK WHETHER THE PRODUCT WITH SAME EXPIRY DATE EXIST
+                        lotID = expUtil.getLotIDBasedOnExpiryDate(expDatePicker.Value, productID);
+
+                        if (lotID == 0)
+                        {
+                            //sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT, PR_INVOICE) VALUES ( '" + detailGridView.Rows[i].Cells["productID"].Value.ToString() + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + Convert.ToDouble(detailGridView.Rows[i].Cells["qtyReceived"].Value) + ", '" + PRInvoice + "')";
+                            sqlCommand = "INSERT INTO PRODUCT_EXPIRY (PRODUCT_ID, PRODUCT_EXPIRY_DATE, PRODUCT_AMOUNT) VALUES ( '" + productID + "', STR_TO_DATE('" + productExpiryDate + "', '%d-%m-%Y'), " + adjustmentQty + ")";
+                        }
+                        else
+                            sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = PRODUCT_AMOUNT + " + adjustmentQty + " WHERE ID = " + lotID;
+
+                        gUtil.saveSystemDebugLog(globalConstants.MENU_PECAH_SATUAN_PRODUK, "INSERT TO PRODUCT EXPIRY [" + productID + "]");
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
+                    }
                 }
 
                 if (actualResult < calculatedResult)
@@ -515,6 +556,7 @@ namespace AlphaSoft
                 gUtil.showSuccess(gUtil.UPD);
                 stockTextBox.Text = currentStockQty.ToString();
 
+                this.Close();
             }
         }
 
@@ -564,11 +606,6 @@ namespace AlphaSoft
 
             errorLabel.Text = "";
 
-            loadProductInformation();
-
-            loadUnitInformation();
-
-            loadCategoryInformation();
 
             registerGlobalHotkey();
         }

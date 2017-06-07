@@ -21,6 +21,7 @@ namespace AlphaSoft
         private int selectedProductID = 0;
         private int selectedLotID = 0;
         private double selectedProductLimitStock = 0;
+        private bool productExpirable = false;
 
         private globalUtilities gUtil = new globalUtilities();
         private Data_Access DS = new Data_Access();
@@ -40,9 +41,12 @@ namespace AlphaSoft
             InitializeComponent();
 
             if (globalFeatureList.EXPIRY_MODULE == 1)
+            { 
                 selectedLotID = productID;
-            else
-                selectedProductID = productID;
+            }
+            //else
+
+            selectedProductID = productID;
         }
 
         private void captureAll(Keys key)
@@ -99,6 +103,7 @@ namespace AlphaSoft
                 {
                     if (rdr.HasRows)
                     {
+                        productExpirable = true;
                         rdr.Read();
 
                         selectedProductID = rdr.GetInt32("ID");
@@ -111,8 +116,11 @@ namespace AlphaSoft
                     }
                 }
             }
-            else
+
+            //else
+            if (!productExpirable)
             {
+                expDatePicker.Visible = false;
                 sqlCommand = "SELECT * FROM MASTER_PRODUCT WHERE ID = " + selectedProductID;
                 using (rdr = DS.getData(sqlCommand))
                 {
@@ -190,7 +198,7 @@ namespace AlphaSoft
             {
                 DS.mySqlConnect();
 
-                if (globalFeatureList.EXPIRY_MODULE == 1)
+                if (globalFeatureList.EXPIRY_MODULE == 1 && productExpirable)
                 {
                     // INSERT TO PRODUCT_EXPIRY
                     //DateTime productExpiryDateValue = Convert.ToDateTime(detailGridView.Rows[i].Cells["expiryDateValue"].Value.ToString());
@@ -215,7 +223,7 @@ namespace AlphaSoft
                         throw internalEX;
                 }
 
-                if (globalFeatureList.EXPIRY_MODULE == 1)
+                if (globalFeatureList.EXPIRY_MODULE == 1 && productExpirable)
                 {
                     if (lotID > 0)
                     { 
@@ -238,7 +246,7 @@ namespace AlphaSoft
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     throw internalEX;
 
-                if (globalFeatureList.EXPIRY_MODULE == 1)
+                if (globalFeatureList.EXPIRY_MODULE == 1 && productExpirable)
                 {
                     productExpiryDate = String.Format(culture, "{0:dd-MM-yyyy}", expDatePicker.Value);
                     // INSERT INTO PRODUCT ADJUSTMENT TABLE
@@ -325,11 +333,14 @@ namespace AlphaSoft
 
             if (globalFeatureList.EXPIRY_MODULE == 1)
             {
-                expLabel.Visible = true;
-                expDatePicker.Visible = true;
+                if (productExpirable)
+                { 
+                    expLabel.Visible = true;
+                    expDatePicker.Visible = true;
 
-                expDatePicker.Format = DateTimePickerFormat.Custom;
-                expDatePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+                    expDatePicker.Format = DateTimePickerFormat.Custom;
+                    expDatePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+                }
             }
         }
 

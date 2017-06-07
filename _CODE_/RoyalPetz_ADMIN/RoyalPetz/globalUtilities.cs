@@ -216,12 +216,21 @@ namespace AlphaSoft
                     ListBox listBox = (ListBox)control;
                     listBox.ClearSelected();
                 }
+
+                if (control is DataGridView)
+                {
+                    DataGridView DGView = (DataGridView)control;
+                    DGView.Rows.Clear();
+                }
+
             }
         }
 
         public void ResetAllControls(Control form)
         {
             String typectrl = "";
+
+            TabControl tabControlHandler;
             ClearControls(form); //if controls are not nested
             for (int i = 0; i <= form.Controls.Count - 1; i++) //if controls are nested
             {
@@ -229,11 +238,19 @@ namespace AlphaSoft
                 typectrl = "" + form.Controls[i].GetType();
                 Control ctrl = form.Controls[i];
                 //MessageBox.Show(typectrl);
-                if ((typectrl.Equals("System.Windows.Forms.Panel")) || (typectrl.Equals("System.Windows.Forms.TableLayoutPanel")))
+                if ((typectrl.Equals("System.Windows.Forms.Panel")) || (typectrl.Equals("System.Windows.Forms.TableLayoutPanel")) || 
+                    (typectrl.Equals("System.Windows.Forms.TabControl")) || (typectrl.Equals("System.Windows.Forms.GroupBox")))
                 {
                     //MessageBox.Show("" + ctrl.Controls.Count);
                     //ClearControls(ctrl);
-                    ResetAllControls(ctrl);
+                    if (typectrl.Equals("System.Windows.Forms.TabControl"))
+                    {
+                        tabControlHandler = (TabControl)ctrl;
+                        for (int j = 0; j < tabControlHandler.TabPages.Count; j++)
+                            ResetAllControls(tabControlHandler.TabPages[j]);
+                    }
+                    else
+                        ResetAllControls(ctrl);
                 }
                 else
                     ClearControls(ctrl);
@@ -297,7 +314,8 @@ namespace AlphaSoft
 
                 typectrl = "" + form.Controls[i].GetType();
                 //MessageBox.Show(typectrl);
-                if ((typectrl.Equals("System.Windows.Forms.Panel")) || (typectrl.Equals("System.Windows.Forms.TableLayoutPanel")))
+                if ((typectrl.Equals("System.Windows.Forms.Panel")) || (typectrl.Equals("System.Windows.Forms.TableLayoutPanel")) ||
+                    (typectrl.Equals("System.Windows.Forms.TabControl")) || (typectrl.Equals("System.Windows.Forms.GroupBox")))
                 {
                     Control ctrl = form.Controls[i];
                     //MessageBox.Show("" + ctrl.Controls.Count);
@@ -553,6 +571,9 @@ namespace AlphaSoft
         {
             bool result = false;
             int numRows = 0;
+
+            if (productID.Length <= 0)
+                return false;
 
             numRows = Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "' AND PRODUCT_ACTIVE = 1"));
 

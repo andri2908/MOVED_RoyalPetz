@@ -963,6 +963,16 @@ namespace AlphaSoft
                 return false;
             }
 
+            for (i = 0; i < detailPODataGridView.Rows.Count - 1; i++)
+            {
+                if (null == detailPODataGridView.Rows[i].Cells["productID"].Value ||
+                    (!gUtil.isProductIDExist(detailPODataGridView.Rows[i].Cells["productID"].Value.ToString())))
+                {
+                    // detailGridView.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+                    errorLabel.Text = "KODE PRODUK DI BARIS " + (i + 1) + " TIDAK VALID";
+                    return false;
+                }
+            }
             //for (i = 0; i < detailPODataGridView.Rows.Count && dataExist; i++)
             //{
             //    if (null != detailPODataGridView.Rows[i].Cells["productID"].Value)

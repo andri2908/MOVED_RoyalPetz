@@ -31,6 +31,7 @@ namespace AlphaSoft
 
         private Hotkeys.GlobalHotkey ghk_UP;
         private Hotkeys.GlobalHotkey ghk_DOWN;
+        private Hotkeys.GlobalHotkey ghk_ESC;
         private bool navKeyRegistered = false;
 
         public dataMutasiBarangForm()
@@ -67,6 +68,9 @@ namespace AlphaSoft
                 case Keys.Down:
                     SendKeys.Send("{TAB}");
                     break;
+                case Keys.Escape:
+                    this.Close();
+                    break;
             }
         }
 
@@ -92,6 +96,9 @@ namespace AlphaSoft
             ghk_DOWN = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Down, this);
             ghk_DOWN.Register();
 
+            ghk_ESC = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.Escape, this);
+            ghk_ESC.Register();
+
             navKeyRegistered = true;
         }
 
@@ -99,6 +106,7 @@ namespace AlphaSoft
         {
             ghk_UP.Unregister();
             ghk_DOWN.Unregister();
+            ghk_ESC.Unregister();
 
             navKeyRegistered = false;
         }
