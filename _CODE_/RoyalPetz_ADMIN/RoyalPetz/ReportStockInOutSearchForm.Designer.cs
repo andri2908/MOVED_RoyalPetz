@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.TagsComboBox = new System.Windows.Forms.ComboBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.ErrorLabel2 = new System.Windows.Forms.Label();
@@ -44,8 +43,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.datetoPicker = new System.Windows.Forms.DateTimePicker();
             this.datefromPicker = new System.Windows.Forms.DateTimePicker();
-            this.CustomercomboBox = new System.Windows.Forms.ComboBox();
             this.SupplierNameCombobox = new System.Windows.Forms.ComboBox();
+            this.TagsComboBox = new System.Windows.Forms.ComboBox();
+            this.CustomercomboBox = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -76,17 +76,6 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Kriteria Pencarian Data Mutasi dan Retur";
-            // 
-            // TagsComboBox
-            // 
-            this.TagsComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.TagsComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.TagsComboBox.FormattingEnabled = true;
-            this.TagsComboBox.Location = new System.Drawing.Point(204, 60);
-            this.TagsComboBox.Name = "TagsComboBox";
-            this.TagsComboBox.Size = new System.Drawing.Size(376, 26);
-            this.TagsComboBox.TabIndex = 14;
-            this.TagsComboBox.Visible = false;
             // 
             // checkBox2
             // 
@@ -158,7 +147,7 @@
             this.ProductcomboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.ProductcomboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.ProductcomboBox.FormattingEnabled = true;
-            this.ProductcomboBox.Location = new System.Drawing.Point(204, 60);
+            this.ProductcomboBox.Location = new System.Drawing.Point(204, 59);
             this.ProductcomboBox.Name = "ProductcomboBox";
             this.ProductcomboBox.Size = new System.Drawing.Size(376, 26);
             this.ProductcomboBox.TabIndex = 6;
@@ -227,18 +216,6 @@
             this.datefromPicker.Size = new System.Drawing.Size(200, 27);
             this.datefromPicker.TabIndex = 0;
             // 
-            // CustomercomboBox
-            // 
-            this.CustomercomboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.CustomercomboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.CustomercomboBox.FormattingEnabled = true;
-            this.CustomercomboBox.Location = new System.Drawing.Point(204, 91);
-            this.CustomercomboBox.Name = "CustomercomboBox";
-            this.CustomercomboBox.Size = new System.Drawing.Size(376, 26);
-            this.CustomercomboBox.TabIndex = 13;
-            this.CustomercomboBox.Text = "Customer";
-            this.CustomercomboBox.Visible = false;
-            // 
             // SupplierNameCombobox
             // 
             this.SupplierNameCombobox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
@@ -250,6 +227,29 @@
             this.SupplierNameCombobox.TabIndex = 1;
             this.SupplierNameCombobox.Text = "Supplier";
             this.SupplierNameCombobox.Visible = false;
+            // 
+            // TagsComboBox
+            // 
+            this.TagsComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.TagsComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.TagsComboBox.FormattingEnabled = true;
+            this.TagsComboBox.Location = new System.Drawing.Point(204, 59);
+            this.TagsComboBox.Name = "TagsComboBox";
+            this.TagsComboBox.Size = new System.Drawing.Size(376, 26);
+            this.TagsComboBox.TabIndex = 14;
+            this.TagsComboBox.Visible = false;
+            // 
+            // CustomercomboBox
+            // 
+            this.CustomercomboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.CustomercomboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.CustomercomboBox.FormattingEnabled = true;
+            this.CustomercomboBox.Location = new System.Drawing.Point(204, 91);
+            this.CustomercomboBox.Name = "CustomercomboBox";
+            this.CustomercomboBox.Size = new System.Drawing.Size(376, 26);
+            this.CustomercomboBox.TabIndex = 13;
+            this.CustomercomboBox.Text = "Customer";
+            this.CustomercomboBox.Visible = false;
             // 
             // panel1
             // 

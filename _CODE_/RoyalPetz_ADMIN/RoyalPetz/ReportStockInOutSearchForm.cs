@@ -188,7 +188,6 @@ namespace AlphaSoft
                     TagsComboBox.Visible = false;
                     nonactivecheckbox2.Visible = false;
                     ErrorLabel2.Visible = true;
-
                 }
             }
         }
@@ -276,7 +275,7 @@ namespace AlphaSoft
                     CustomercomboBox.Visible = false;
                     ProductcomboBox.Visible = false;
                     checkBox2.Visible = true;
-                    ProductcomboBox.Visible = true;
+                    ProductcomboBox.Visible = false;
                     nonactivecheckbox2.Visible = true;
                     LabelOptions2.Text = "Kategori";
                     groupBox1.Text = "Kriteria Pencarian Stock Berdasar Kategori";
