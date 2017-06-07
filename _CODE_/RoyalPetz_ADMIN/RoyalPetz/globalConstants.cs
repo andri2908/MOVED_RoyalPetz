@@ -51,6 +51,7 @@ namespace AlphaSoft
         public const int BROWSE_MUTASI_PENERIMAAN = 118;
         public const int REPRINT_PURCHASE_ORDER = 119;
         public const int DUMMY_TRANSACTION_TAX = 120;
+        public const int PRODUCT_BC = 121;
 
         public const int NEW_GROUP_USER = 201;
         public const int EDIT_GROUP_USER = 202;
@@ -266,6 +267,8 @@ namespace AlphaSoft
         public const string RequestReturnXML = "RequestReturn.xml";
         public const string StockExpiryXML = "StockExpiry.xml";
         public const string StockAgingXML = "StockAging.xml";
+        public const string StockValueXML = "StockValue.xml";
+        public const string ProductBarcodeXML = "ProductBarcode.xml";
 
         public const string DebtUnpaidXML = "DebtUnpaid.xml";
         public const string DebtPaidXML = "DebtPaid.xml";

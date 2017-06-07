@@ -1571,5 +1571,24 @@ namespace AlphaSoft
             copyNotaForm.WindowState = FormWindowState.Normal;
 
         }
+
+        private void stokGlobalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DS.mySqlConnect();
+            string sqlCommandx = "";
+            sqlCommandx = "SELECT MP.PRODUCT_NAME, MP.PRODUCT_STOCK_QTY, MU.UNIT_NAME, MP.PRODUCT_BASE_PRICE " +
+                                "FROM MASTER_PRODUCT MP, MASTER_UNIT MU " +
+                                "WHERE MP.PRODUCT_IS_SERVICE = 0 AND MP.PRODUCT_ACTIVE = 1 AND MP.UNIT_ID = MU.UNIT_ID " +
+                                "AND MP.PRODUCT_STOCK_QTY > 0";
+            DS.writeXML(sqlCommandx, globalConstants.StockValueXML);
+            ReportStockValueForm displayedForm = new ReportStockValueForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void productBarcodePrintTemplateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProductBarcodeSelectorForm displayedForm = new ProductBarcodeSelectorForm();
+            displayedForm.ShowDialog(this);
+        }
     }
 }

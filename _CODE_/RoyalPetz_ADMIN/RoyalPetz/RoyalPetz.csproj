@@ -81,6 +81,17 @@
     <Compile Include="barcodeForm.Designer.cs">
       <DependentUpon>barcodeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Barcodes.cs">
+      <DependentUpon>Barcodes.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Barcodes.designer.cs">
+      <DependentUpon>Barcodes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Barcodes1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Barcodes.xsd</DependentUpon>
+    </Compile>
     <Compile Include="cashierForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -453,6 +464,24 @@
     </Compile>
     <Compile Include="PrintBarcodeForm.designer.cs">
       <DependentUpon>PrintBarcodeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductBarcodePrintTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductBarcodePrintTemplate.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProductBarcodePrintTemplateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductBarcodePrintTemplateForm.Designer.cs">
+      <DependentUpon>ProductBarcodePrintTemplateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductBarcodeSelectorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductBarcodeSelectorForm.Designer.cs">
+      <DependentUpon>ProductBarcodeSelectorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -924,6 +953,18 @@
     <Compile Include="ReportStockInOutSearchForm.Designer.cs">
       <DependentUpon>ReportStockInOutSearchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportStockValue.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportStockValue.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportStockValueForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportStockValueForm.designer.cs">
+      <DependentUpon>ReportStockValueForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportSupplier.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1297,6 +1338,16 @@
     <EmbeddedResource Include="PrintBarcodeForm.resx">
       <DependentUpon>PrintBarcodeForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProductBarcodePrintTemplate.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ProductBarcodePrintTemplate.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductBarcodePrintTemplateForm.resx">
+      <DependentUpon>ProductBarcodePrintTemplateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductBarcodeSelectorForm.resx">
+      <DependentUpon>ProductBarcodeSelectorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -1577,6 +1628,13 @@
     <EmbeddedResource Include="ReportStockInOutSearchForm.resx">
       <DependentUpon>ReportStockInOutSearchForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportStockValue.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportStockValue.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportStockValueForm.resx">
+      <DependentUpon>ReportStockValueForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportSupplier.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportSupplier.cs</LastGenOutput>
@@ -1679,6 +1737,17 @@
     </EmbeddedResource>
     <None Include="app.manifest">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Barcodes.xsc">
+      <DependentUpon>Barcodes.xsd</DependentUpon>
+    </None>
+    <None Include="Barcodes.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Barcodes1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Barcodes.xss">
+      <DependentUpon>Barcodes.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
