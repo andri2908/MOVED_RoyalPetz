@@ -146,4 +146,3 @@ E:\My Works\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz\obj\Debug\AlphaSof
 E:\My Works\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz\obj\Debug\RoyalPetz.csproj.GenerateResource.Cache
 E:\My Works\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz\obj\Debug\RoyalPetz_ADMIN.exe
 E:\My Works\GitHub\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz\obj\Debug\RoyalPetz_ADMIN.pdb
-D:\Project\RoyalPetz\_CODE_\RoyalPetz_ADMIN\RoyalPetz\bin\Debug\RoyalPetz_ADMIN.exe.config

@@ -901,7 +901,11 @@ namespace AlphaSoft
                     // INSERT OR UPDATE PRODUCT EXPIRY
                     for (int i = 0;i<expDataGridView.Rows.Count-1;i++)
                     {
-                        lotIDValue = Convert.ToInt32(expDataGridView.Rows[i].Cells["lotID"].Value);
+                        if (null != expDataGridView.Rows[i].Cells["lotID"].Value)
+                            lotIDValue = Convert.ToInt32(expDataGridView.Rows[i].Cells["lotID"].Value);
+                        else
+                            lotIDValue = 0;
+
                         DateTime productExpiryDateValue = Convert.ToDateTime(expDataGridView.Rows[i].Cells["expiryDateValue"].Value.ToString());
                         string productExpiryDate = String.Format(culture, "{0:dd-MM-yyyy}", productExpiryDateValue);
                         double lotProductQty = Convert.ToDouble(expDataGridView.Rows[i].Cells["qty"].Value);
@@ -1685,11 +1689,16 @@ namespace AlphaSoft
 
         private void addDateTimePickerToDataGrid(int columnIndex, int rowIndex)
         {
+            oDateTimePicker.TextChanged -= oDateTimePicker_OnTextChanged;
+            string expDateValue = String.Format(culture, "{0:" + globalUtilities.CUSTOM_DATE_FORMAT + "}", DateTime.Now);
+            oDateTimePicker.Text = expDateValue;
+
             expDataGridView.Controls.Add(oDateTimePicker);
             oDateTimePicker.Visible = false;
             oDateTimePicker.Format = DateTimePickerFormat.Custom;
             oDateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
             oDateTimePicker.TextChanged += new EventHandler(oDateTimePicker_OnTextChanged);
+
             if (null != expDataGridView.Rows[rowIndex].Cells["expiryDateValue"].Value)
                 oDateTimePicker.Value = Convert.ToDateTime(expDataGridView.Rows[rowIndex].Cells["expiryDateValue"].Value);
 

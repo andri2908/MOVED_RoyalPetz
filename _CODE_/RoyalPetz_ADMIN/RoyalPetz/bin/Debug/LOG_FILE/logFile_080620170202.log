@@ -1,0 +1,31 @@
+[] [6/8/2017 02:01] [] USER = ADMIN IS ACTIVE
+[ADMIN] [6/8/2017 02:01] [] USER ID = 1 LOGIN SUCCESSFULLY
+[ADMIN] [6/8/2017 02:01] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [6/8/2017 02:01] [] DISPLAY ADMIN FORM
+[ADMIN] [6/8/2017 02:01] [] adminForm Load
+[ADMIN] [6/8/2017 02:01] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [6/8/2017 02:01] [TAMBAH / UPDATE PRODUK] DETAIL PRODUK : detailGridView_CellValueChanged [expiryDate]
+[ADMIN] [6/8/2017 02:01] [TAMBAH / UPDATE PRODUK] DETAIL PRODUK : detailGridView_CellValueChanged [expiryDateValue]
+[ADMIN] [6/8/2017 02:01] [TAMBAH / UPDATE PRODUK] DETAIL PRODUK : detailGridView_CellValueChanged [expiryDate]
+[ADMIN] [6/8/2017 02:01] [TAMBAH / UPDATE PRODUK] DETAIL PRODUK : detailGridView_CellValueChanged [expiryDateValue]
+[ADMIN] [6/8/2017 02:01] [TAMBAH / UPDATE PRODUK] DETAIL PRODUK : detailGridView_CellValueChanged [expiryDate]
+[ADMIN] [6/8/2017 02:01] [TAMBAH / UPDATE PRODUK] DETAIL PRODUK : detailGridView_CellValueChanged [expiryDateValue]
+[ADMIN] [6/8/2017 02:01] [TAMBAH / UPDATE PRODUK] DETAIL PRODUK : detailGridView_CellValueChanged [expiryDate]
+[ADMIN] [6/8/2017 02:01] [TAMBAH / UPDATE PRODUK] DETAIL PRODUK : detailGridView_CellValueChanged [expiryDateValue]
+[ADMIN] [6/8/2017 02:01] [] USER ID = 1LOGOUT
+[] [6/8/2017 02:02] [] USER = ADMIN IS ACTIVE
+[ADMIN] [6/8/2017 02:02] [] USER ID = 1 LOGIN SUCCESSFULLY
+[ADMIN] [6/8/2017 02:02] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [6/8/2017 02:02] [] DISPLAY ADMIN FORM
+[ADMIN] [6/8/2017 02:02] [] adminForm Load
+[ADMIN] [6/8/2017 02:02] [] ACTIVATE USER ACCESS RIGHT
+[ADMIN] [6/8/2017 02:02] [TAMBAH / UPDATE PRODUK] DETAIL PRODUK : detailGridView_CellValueChanged [expiryDate]
+[ADMIN] [6/8/2017 02:02] [TAMBAH / UPDATE PRODUK] DETAIL PRODUK : detailGridView_CellValueChanged [expiryDateValue]
+[ADMIN] [6/8/2017 02:02] [TAMBAH / UPDATE PRODUK] DETAIL PRODUK : detailGridView_CellValueChanged [expiryDate]
+[ADMIN] [6/8/2017 02:02] [TAMBAH / UPDATE PRODUK] DETAIL PRODUK : detailGridView_CellValueChanged [expiryDateValue]
+[ADMIN] [6/8/2017 02:02] [TAMBAH / UPDATE PRODUK] DETAIL PRODUK : detailGridView_CellValueChanged [lotID]
+[ADMIN] [6/8/2017 02:02] [TAMBAH / UPDATE PRODUK] DETAIL PRODUK : detailGridView_CellValueChanged [status]
+[ADMIN] [6/8/2017 02:02] [TAMBAH / UPDATE PRODUK] DETAIL PRODUK : detailGridView_CellValueChanged [qty]
+[ADMIN] [6/8/2017 02:02] [TAMBAH / UPDATE PRODUK] DETAIL PRODUK : detailGridView_CellValueChanged [expiryDate]
+[ADMIN] [6/8/2017 02:02] [TAMBAH / UPDATE PRODUK] DETAIL PRODUK : detailGridView_CellValueChanged [expiryDateValue]
+[ADMIN] [6/8/2017 02:02] [] USER ID = 1LOGOUT
