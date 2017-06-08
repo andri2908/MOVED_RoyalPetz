@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Alpha Soft")]
 [assembly: AssemblyProduct("AlphaSoft")]
-[assembly: AssemblyCopyright("Copyright Alphasoft©  2016")]
+[assembly: AssemblyCopyright("Copyright Alphasoft©  2017")]
 [assembly: AssemblyTrademark("AHS,AEP")]
 [assembly: AssemblyCulture("")]
 
@@ -34,6 +34,6 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("2.0.9.2")]
+[assembly: AssemblyFileVersion("2.0.9.3")]
 [assembly: NeutralResourcesLanguage("id-ID")]
 
