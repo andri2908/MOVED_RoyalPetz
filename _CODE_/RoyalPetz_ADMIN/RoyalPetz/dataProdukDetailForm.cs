@@ -185,6 +185,43 @@ namespace AlphaSoft
             }
         }
 
+        private void deleteAllRow()
+        {
+            if (expDataGridView.Rows.Count > 1)
+            {
+                for (int i =0;i<expDataGridView.Rows.Count-1;i++)
+                {
+                    int rowSelectedIndex = i;// expDataGridView.SelectedCells[0].RowIndex;
+                    DataGridViewRow selectedRow = expDataGridView.Rows[rowSelectedIndex];
+                    expDataGridView.CurrentCell = selectedRow.Cells["qty"];
+                    string lotIDValue = "";
+
+                    if (null != selectedRow && rowSelectedIndex != expDataGridView.Rows.Count-1)
+                    {
+                        isLoading = true;
+                        if (selectedRow.Index >= 0)
+                        {
+                            if (null != expDataGridView.Rows[rowSelectedIndex].Cells["lotID"].Value)
+                                lotIDValue = expDataGridView.Rows[rowSelectedIndex].Cells["lotID"].Value.ToString();
+                            else
+                                lotIDValue = "0";
+
+                            expDataGridView.Rows.Remove(expDataGridView.Rows[rowSelectedIndex]);
+                            expDataGridView.AllowUserToAddRows = true;
+
+                            if (lotIDValue != "0")
+                                expDataGridViewHidden.Rows.Add(lotIDValue);
+
+                            gUtil.saveSystemDebugLog(globalConstants.MENU_TAMBAH_PRODUK, "deleteCurrentRow [" + rowSelectedIndex + "]");
+                            calculateTotalQty();
+                        }
+                        isLoading = false;
+                    }
+                }
+
+            }
+        }
+
         public void setSelectedUnitID(int unitID)
         {
             selectedUnitID = unitID;
@@ -613,6 +650,7 @@ namespace AlphaSoft
                         expDataGridView.Rows.Add(rdr.GetString("ID"), checkBoxValue, rdr.GetString("PRODUCT_AMOUNT"), expDateValue, rdr.GetString("PRODUCT_EXPIRY_DATE"));
                     }
 
+                    expDataGridView.AllowUserToAddRows = true;
                     expDataGridView.CurrentCell = expDataGridView.Rows[expDataGridView.Rows.Count - 1].Cells["qty"];
                 }
             }
@@ -973,6 +1011,14 @@ namespace AlphaSoft
                     //gUtil.saveSystemDebugLog(globalConstants.MENU_PENERIMAAN_BARANG, "INSERT TO PRODUCT EXPIRY [" + productID + "]");
                     //if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                     //    throw internalEX;
+                }
+                else if (globalFeatureList.EXPIRY_MODULE == 1 && productExpired == 0)
+                {
+                    // SET FLAG IS_DELETED TO 1
+                    // SET ALL PRODUCT EXPIRY TO INACTIVE
+                    sqlCommand = "UPDATE PRODUCT_EXPIRY SET IS_DELETED = 1 WHERE PRODUCT_ID = '" + productID + "'";
+                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                        throw internalEX;
                 }
 
                 switch (originModuleID)
@@ -1549,6 +1595,11 @@ namespace AlphaSoft
 
         private void expiredCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            double currentQty = 0;
+            double expQty = 0;
+
+            currentQty = Convert.ToDouble(stokAwalTextBox.Text);
+
             if (isLoading)
                 return;
 
@@ -1569,6 +1620,56 @@ namespace AlphaSoft
                 }
                 loadProdukExpData();
                 calculateTotalQty();
+
+                expQty = Convert.ToDouble(stokAwalTextBox.Text);
+                
+                if (currentQty != expQty && expQty > 0)
+                {
+                    if (DialogResult.No == MessageBox.Show("LOAD DATA YG LAMA?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+                    {
+                        // CLEAR DATA GRID
+                        deleteAllRow();
+
+                        try
+                        {
+                            expDataGridViewHidden.Rows.Add(expDataGridView.Rows[0].Cells["lotID"].Value);
+                        }
+                        catch(Exception eX)
+                        {
+                            gUtil.saveSystemDebugLog(globalConstants.MENU_TAMBAH_PRODUK, "FAILED TO MOVE LOTID TO HIDDEN GRID [" + eX.Message + "]");
+                        }
+
+                        // ADD NEW ROW BASED ON CURRENT STOCK QTY DATA
+                        string expDateValue = String.Format(culture, "{0:" + globalUtilities.CUSTOM_DATE_FORMAT + "}", DateTime.Now);
+                        //expDataGridView.Rows.Add(rdr.GetString("ID"), checkBoxValue, rdr.GetString("PRODUCT_AMOUNT"), expDateValue, rdr.GetString("PRODUCT_EXPIRY_DATE"));
+
+                        expDataGridView.Rows[0].Cells["lotID"].Value = 0;
+                        expDataGridView.Rows[0].Cells["status"].Value = true;
+                        expDataGridView.Rows[0].Cells["qty"].Value = currentQty;
+                        expDataGridView.Rows[0].Cells["expiryDate"].Value = expDateValue;
+                        expDataGridView.Rows[0].Cells["expiryDateValue"].Value = DateTime.Now;
+
+                        stokAwalTextBox.Text = currentQty.ToString();
+                    }
+                }
+                else if (expQty == 0)
+                {
+                    // ADD NEW ROW BASED ON CURRENT STOCK QTY DATA
+                    string expDateValue = String.Format(culture, "{0:" + globalUtilities.CUSTOM_DATE_FORMAT + "}", DateTime.Now);
+                    //expDataGridView.Rows.Add(rdr.GetString("ID"), checkBoxValue, rdr.GetString("PRODUCT_AMOUNT"), expDateValue, rdr.GetString("PRODUCT_EXPIRY_DATE"));
+
+                    expDataGridView.Rows.Add();
+                    expDataGridView.AllowUserToAddRows = true;
+
+                    expDataGridView.Rows[0].Cells["lotID"].Value = 0;
+                    expDataGridView.Rows[0].Cells["status"].Value = true;
+                    expDataGridView.Rows[0].Cells["qty"].Value = currentQty;
+                    expDataGridView.Rows[0].Cells["expiryDate"].Value = expDateValue;
+                    expDataGridView.Rows[0].Cells["expiryDateValue"].Value = DateTime.Now;
+
+                    calculateTotalQty();
+                }
+
 
                 showInactiveExpiryCheckBox.Enabled = true;
 
@@ -1862,6 +1963,14 @@ namespace AlphaSoft
             loadProdukExpData();
             calculateTotalQty();
             isLoading = false;
+        }
+
+        private void expDataGridView_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (expDataGridView.IsCurrentCellDirty)
+            {
+                expDataGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
         }
     }
 }

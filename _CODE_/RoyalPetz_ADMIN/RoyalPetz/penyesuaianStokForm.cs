@@ -36,17 +36,21 @@ namespace AlphaSoft
             InitializeComponent();
         }
 
-        public penyesuaianStokForm(int productID)
+        public penyesuaianStokForm(int productID, string kodeProduct)
         {
             InitializeComponent();
 
-            if (globalFeatureList.EXPIRY_MODULE == 1)
+            if (1 == Convert.ToInt32(DS.getDataSingleValue("SELECT PRODUCT_EXPIRABLE FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + kodeProduct + "'")))
+                productExpirable = true;
+            else
+                productExpirable = false;
+
+            if (globalFeatureList.EXPIRY_MODULE == 1 && productExpirable)
             { 
                 selectedLotID = productID;
             }
-            //else
-
-            selectedProductID = productID;
+            else
+                selectedProductID = productID;
         }
 
         private void captureAll(Keys key)
@@ -96,14 +100,14 @@ namespace AlphaSoft
             MySqlDataReader rdr;
             string sqlCommand;
 
-            if (globalFeatureList.EXPIRY_MODULE == 1)
+            if (globalFeatureList.EXPIRY_MODULE == 1 && productExpirable)
             {
                 sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID, MP.PRODUCT_NAME, PE.PRODUCT_AMOUNT, MP.PRODUCT_LIMIT_STOCK, PE.PRODUCT_EXPIRY_DATE FROM MASTER_PRODUCT MP, PRODUCT_EXPIRY PE WHERE PE.PRODUCT_ID = MP.PRODUCT_ID AND PE.ID = " + selectedLotID;
                 using (rdr = DS.getData(sqlCommand))
                 {
                     if (rdr.HasRows)
                     {
-                        productExpirable = true;
+                        //productExpirable = true;
                         rdr.Read();
 
                         selectedProductID = rdr.GetInt32("ID");
@@ -116,9 +120,7 @@ namespace AlphaSoft
                     }
                 }
             }
-
-            //else
-            if (!productExpirable)
+            else
             {
                 expDatePicker.Visible = false;
                 sqlCommand = "SELECT * FROM MASTER_PRODUCT WHERE ID = " + selectedProductID;

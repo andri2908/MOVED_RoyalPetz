@@ -77,6 +77,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.expDatePicker = new System.Windows.Forms.DateTimePicker();
             this.expLabel = new System.Windows.Forms.Label();
+            this.expBigLabel = new System.Windows.Forms.Label();
+            this.expBigDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -549,6 +551,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.expBigDateTimePicker);
+            this.groupBox1.Controls.Add(this.expBigLabel);
             this.groupBox1.Controls.Add(this.expDatePicker);
             this.groupBox1.Controls.Add(this.expLabel);
             this.groupBox1.Controls.Add(this.label14);
@@ -619,6 +623,29 @@
             this.expLabel.TabIndex = 51;
             this.expLabel.Text = "EXPIRED : ";
             this.expLabel.Visible = false;
+            // 
+            // expBigLabel
+            // 
+            this.expBigLabel.AutoSize = true;
+            this.expBigLabel.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.expBigLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.expBigLabel.Location = new System.Drawing.Point(611, 145);
+            this.expBigLabel.Name = "expBigLabel";
+            this.expBigLabel.Size = new System.Drawing.Size(104, 18);
+            this.expBigLabel.TabIndex = 75;
+            this.expBigLabel.Text = "EXPIRED : ";
+            this.expBigLabel.Visible = false;
+            // 
+            // expBigDateTimePicker
+            // 
+            this.expBigDateTimePicker.Enabled = false;
+            this.expBigDateTimePicker.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.expBigDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.expBigDateTimePicker.Location = new System.Drawing.Point(721, 136);
+            this.expBigDateTimePicker.Name = "expBigDateTimePicker";
+            this.expBigDateTimePicker.Size = new System.Drawing.Size(144, 27);
+            this.expBigDateTimePicker.TabIndex = 76;
+            this.expBigDateTimePicker.Visible = false;
             // 
             // stokPecahBarangForm
             // 
@@ -697,5 +724,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DateTimePicker expDatePicker;
         private System.Windows.Forms.Label expLabel;
+        private System.Windows.Forms.DateTimePicker expBigDateTimePicker;
+        private System.Windows.Forms.Label expBigLabel;
     }
 }

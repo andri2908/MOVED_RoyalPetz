@@ -34,6 +34,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.masterProductTab = new System.Windows.Forms.TabPage();
+            this.showInactiveExpiryCheckBox = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.expDataGridView = new System.Windows.Forms.DataGridView();
             this.expiredCheckBox = new System.Windows.Forms.CheckBox();
@@ -87,7 +88,6 @@
             this.saveButton = new System.Windows.Forms.Button();
             this.expDataGridViewHidden = new System.Windows.Forms.DataGridView();
             this.lotID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.showInactiveExpiryCheckBox = new System.Windows.Forms.CheckBox();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.masterProductTab.SuspendLayout();
@@ -162,6 +162,19 @@
             this.masterProductTab.Text = "DATA PRODUK";
             this.masterProductTab.UseVisualStyleBackColor = true;
             // 
+            // showInactiveExpiryCheckBox
+            // 
+            this.showInactiveExpiryCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.showInactiveExpiryCheckBox.AutoSize = true;
+            this.showInactiveExpiryCheckBox.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showInactiveExpiryCheckBox.Location = new System.Drawing.Point(861, 554);
+            this.showInactiveExpiryCheckBox.Name = "showInactiveExpiryCheckBox";
+            this.showInactiveExpiryCheckBox.Size = new System.Drawing.Size(223, 22);
+            this.showInactiveExpiryCheckBox.TabIndex = 107;
+            this.showInactiveExpiryCheckBox.Text = "Tampilkan Expiry Non Aktif";
+            this.showInactiveExpiryCheckBox.UseVisualStyleBackColor = true;
+            this.showInactiveExpiryCheckBox.CheckedChanged += new System.EventHandler(this.showInactiveExpiryCheckBox_CheckedChanged);
+            // 
             // label11
             // 
             this.label11.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -190,6 +203,7 @@
             this.expDataGridView.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.expDataGridView_CellLeave);
             this.expDataGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.expDataGridView_CellValidating);
             this.expDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.expDataGridView_CellValueChanged);
+            this.expDataGridView.CurrentCellDirtyStateChanged += new System.EventHandler(this.expDataGridView_CurrentCellDirtyStateChanged);
             this.expDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.expDataGridView_RowsAdded);
             this.expDataGridView.Enter += new System.EventHandler(this.expDataGridView_Enter);
             this.expDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.expDataGridView_KeyDown);
@@ -816,7 +830,7 @@
             this.expDataGridViewHidden.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.expDataGridViewHidden.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.lotID});
-            this.expDataGridViewHidden.Location = new System.Drawing.Point(1352, 103);
+            this.expDataGridViewHidden.Location = new System.Drawing.Point(1186, 103);
             this.expDataGridViewHidden.Name = "expDataGridViewHidden";
             this.expDataGridViewHidden.RowHeadersVisible = false;
             this.expDataGridViewHidden.Size = new System.Drawing.Size(200, 292);
@@ -829,25 +843,12 @@
             this.lotID.Name = "lotID";
             this.lotID.Width = 70;
             // 
-            // showInactiveExpiryCheckBox
-            // 
-            this.showInactiveExpiryCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.showInactiveExpiryCheckBox.AutoSize = true;
-            this.showInactiveExpiryCheckBox.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showInactiveExpiryCheckBox.Location = new System.Drawing.Point(861, 554);
-            this.showInactiveExpiryCheckBox.Name = "showInactiveExpiryCheckBox";
-            this.showInactiveExpiryCheckBox.Size = new System.Drawing.Size(223, 22);
-            this.showInactiveExpiryCheckBox.TabIndex = 107;
-            this.showInactiveExpiryCheckBox.Text = "Tampilkan Expiry Non Aktif";
-            this.showInactiveExpiryCheckBox.UseVisualStyleBackColor = true;
-            this.showInactiveExpiryCheckBox.CheckedChanged += new System.EventHandler(this.showInactiveExpiryCheckBox_CheckedChanged);
-            // 
             // dataProdukDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(1102, 690);
+            this.ClientSize = new System.Drawing.Size(1105, 690);
             this.Controls.Add(this.expDataGridViewHidden);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel2);

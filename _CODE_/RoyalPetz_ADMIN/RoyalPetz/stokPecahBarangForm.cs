@@ -51,32 +51,50 @@ namespace AlphaSoft
             InitializeComponent();
         }
 
-        public stokPecahBarangForm(int productID)
+        public stokPecahBarangForm(int productID, string kodeProduk)
         {
-            string selectedProductID;
+            //string selectedProductID;
             InitializeComponent();
             selectedLotID = productID;
 
-            if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM PRODUCT_EXPIRY WHERE ID = " + selectedLotID)) > 0 ) // EXIST IN PRODUCT EXPIRY
-            {
+            if (1 == Convert.ToInt32(DS.getDataSingleValue("SELECT PRODUCT_EXPIRABLE FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + kodeProduk + "'")))
                 productExpirable = true;
-            }
+            else
+                productExpirable = false;
 
             if (globalFeatureList.EXPIRY_MODULE == 1 && productExpirable)
             {
-                selectedProductID = DS.getDataSingleValue("SELECT IFNULL(PRODUCT_ID, '') FROM PRODUCT_EXPIRY WHERE ID = " + selectedLotID).ToString();
-
-                if (selectedProductID != "")
-                {
-                    selectedInternalProductID = Convert.ToInt32(DS.getDataSingleValue("SELECT ID FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + selectedProductID + "'"));
-                }
-                else
-                    selectedInternalProductID = 0;
+                selectedLotID = productID;
             }
             else
-            {
                 selectedInternalProductID = productID;
+
+            if (productExpirable == true)
+            {
+                expBigDateTimePicker.Visible = true;
+                expBigLabel.Visible = true;
             }
+
+            //if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM PRODUCT_EXPIRY WHERE ID = " + selectedLotID)) > 0 ) // EXIST IN PRODUCT EXPIRY
+            //{
+            //    productExpirable = true;
+            //}
+
+            //if (globalFeatureList.EXPIRY_MODULE == 1 && productExpirable)
+            //{
+            //    selectedProductID = DS.getDataSingleValue("SELECT IFNULL(PRODUCT_ID, '') FROM PRODUCT_EXPIRY WHERE ID = " + selectedLotID).ToString();
+
+            //    if (selectedProductID != "")
+            //    {
+            //        selectedInternalProductID = Convert.ToInt32(DS.getDataSingleValue("SELECT ID FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + selectedProductID + "'"));
+            //    }
+            //    else
+            //        selectedInternalProductID = 0;
+            //}
+            //else
+            //{
+            //    selectedInternalProductID = productID;
+            //}
         }
 
         private void captureAll(Keys key)
@@ -224,6 +242,7 @@ namespace AlphaSoft
                             currentStockQty = rdr.GetDouble("PRODUCT_AMOUNT");
                             expDatePicker.Value = rdr.GetDateTime("PRODUCT_EXPIRY_DATE");
                             originalExpiryDate = rdr.GetDateTime("PRODUCT_EXPIRY_DATE");
+                            expBigDateTimePicker.Value = originalExpiryDate;
                         }
                         else
                         {
@@ -303,6 +322,9 @@ namespace AlphaSoft
 
                 expDatePicker.Format = DateTimePickerFormat.Custom;
                 expDatePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
+
+                expBigDateTimePicker.Format = DateTimePickerFormat.Custom;
+                expBigDateTimePicker.CustomFormat = globalUtilities.CUSTOM_DATE_FORMAT;
 
                 expDatePicker.Value = DateTime.Now;
             }
@@ -396,6 +418,19 @@ namespace AlphaSoft
 
         private bool dataValidated()
         {
+            if (newSelectedInternalProductID == 0)
+            {
+                errorLabel.Text = "PRODUK BARU BELUM DIPILIH";
+                return false;
+            }
+
+            if (gUtil.allTrim(actualQtyTextBox.Text).Length <= 0 || Convert.ToDouble(gUtil.allTrim(actualQtyTextBox.Text)) == 0)
+            {
+                errorLabel.Text = "JUMLAH FISIK TIDAK BOLEH KOSONG";
+                return false;
+            }
+
+
             if (numberOfProductTextBox.Text.Length<=0)
             {
                 errorLabel.Text = "JUMLAH BARANG YG MAU DIPECAH TIDAK BOLEH NOL";
@@ -406,6 +441,19 @@ namespace AlphaSoft
             {
                 errorLabel.Text = "JUMLAH STOK TIDAK CUKUP";
                 return false;
+            }
+
+            if (productExpirable != newProductExpirable)
+            {
+                string promptMessage;
+
+                if (productExpirable)
+                    promptMessage = "STATUS BARANG KADALUARSA, DIPECAH MENJADI TIDAK KADALUARSA, LANJUTKAN?";
+                else
+                    promptMessage = "STATUS BARANG TIDAK KADALUARSA, DIPECAH MENJADI KADALUARSA, LANJUTKAN?";
+
+                if (DialogResult.No == MessageBox.Show(promptMessage, "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+                    return false;
             }
 
             return true;

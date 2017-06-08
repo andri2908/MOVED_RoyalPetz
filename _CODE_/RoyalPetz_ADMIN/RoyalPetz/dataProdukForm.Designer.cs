@@ -71,6 +71,7 @@
             this.dataProdukGridView.Name = "dataProdukGridView";
             this.dataProdukGridView.ReadOnly = true;
             this.dataProdukGridView.RowHeadersVisible = false;
+            this.dataProdukGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataProdukGridView.Size = new System.Drawing.Size(872, 457);
             this.dataProdukGridView.TabIndex = 0;
             this.dataProdukGridView.ColumnDisplayIndexChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataProdukGridView_ColumnDisplayIndexChanged);

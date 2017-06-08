@@ -362,7 +362,7 @@ namespace AlphaSoft
             {
                 case globalConstants.STOK_PECAH_BARANG:
                     if (null == displayStokPecahBarangForm || displayStokPecahBarangForm.IsDisposed)
-                        displayStokPecahBarangForm = new stokPecahBarangForm(selectedProductID);
+                        displayStokPecahBarangForm = new stokPecahBarangForm(selectedProductID, selectedkodeProduct);
 
                     displayStokPecahBarangForm.Show();
                     displayStokPecahBarangForm.WindowState = FormWindowState.Normal;
@@ -370,7 +370,7 @@ namespace AlphaSoft
 
                 case globalConstants.PENYESUAIAN_STOK:
                     if (null == displayPenyesuaianStokForm || displayPenyesuaianStokForm.IsDisposed)
-                        displayPenyesuaianStokForm = new penyesuaianStokForm(selectedProductID);
+                        displayPenyesuaianStokForm = new penyesuaianStokForm(selectedProductID, selectedkodeProduct);
 
                     displayPenyesuaianStokForm.Show();
                     displayPenyesuaianStokForm.WindowState = FormWindowState.Normal;
@@ -508,7 +508,7 @@ namespace AlphaSoft
             {
                 sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', MP.PRODUCT_RETAIL_PRICE AS 'HARGA ECER' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%' " + showactive; //MP.PRODUCT_STOCK_QTY > 0 AND 
             }
-            else if (originModuleID == globalConstants.STOK_PECAH_BARANG)
+            else if (originModuleID == globalConstants.STOK_PECAH_BARANG || originModuleID == globalConstants.PENYESUAIAN_STOK)
             {
                 if (globalFeatureList.EXPIRY_MODULE == 1)
                 {
