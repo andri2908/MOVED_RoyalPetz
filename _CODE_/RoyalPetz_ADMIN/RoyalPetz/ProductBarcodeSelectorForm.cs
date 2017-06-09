@@ -28,6 +28,9 @@ namespace AlphaSoft
         private Hotkeys.GlobalHotkey ghk_F11;
         private Hotkeys.GlobalHotkey ghk_DEL;
 
+        private int numberLabel = 4;
+        private int numberProduct = 12;
+
         dataProdukForm browseProdukForm = null;
 
         public ProductBarcodeSelectorForm()
@@ -105,7 +108,7 @@ namespace AlphaSoft
         {
             int newRowIndex = 0;
 
-            for (int a = 0; a < 9; a = a + 1)
+            for (int a = 0; a < numberProduct; a = a + 1)
             {
                 ProductBCGridView.Rows.Add();
             }
@@ -444,8 +447,6 @@ namespace AlphaSoft
             DataTable dataTable = barcodeDetails._Barcodes;
 
             int blank_labels = 0;
-            int numberLabel = 5;
-            int numberProduct = 9;
             string selectedProductID = "";
             string selectedProductName = "";
             string selectedProductBC = "";
