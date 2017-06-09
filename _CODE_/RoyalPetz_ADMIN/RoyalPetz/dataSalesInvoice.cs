@@ -247,24 +247,24 @@ namespace AlphaSoft
                 this.Close();
             }
 
-            if (originModuleID == globalConstants.REVISI_NOTA)
-            {
-                string sqlCommand = "";
-                MySqlException internalEX = null;
+            //if (originModuleID == globalConstants.REVISI_NOTA)
+            //{
+            //    string sqlCommand = "";
+            //    MySqlException internalEX = null;
 
-                DS.beginTransaction();
-                try
-                {
-                    sqlCommand = "UPDATE SALES_HEADER SET IN_EDIT_MODE = 0 WHERE SALES_INVOICE = '" + noInvoice + "'";
+            //    DS.beginTransaction();
+            //    try
+            //    {
+            //        sqlCommand = "UPDATE SALES_HEADER SET IN_EDIT_MODE = 0 WHERE SALES_INVOICE = '" + noInvoice + "'";
 
-                    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                        throw internalEX;
+            //        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+            //            throw internalEX;
 
-                    DS.commit();
-                }
-                catch (Exception ex)
-                { }
-            }
+            //        DS.commit();
+            //    }
+            //    catch (Exception ex)
+            //    { }
+            //}
         }
 
         private void dataPenerimaanBarang_KeyDown(object sender, KeyEventArgs e)

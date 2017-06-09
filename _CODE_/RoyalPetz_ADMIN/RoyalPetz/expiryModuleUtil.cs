@@ -21,7 +21,7 @@ namespace AlphaSoft
             string sqlCommand = "";
 
             sqlCommand = "SELECT IFNULL(PE.ID, 0) FROM PRODUCT_EXPIRY PE, MASTER_PRODUCT MP " +
-                                   "WHERE PE.PRODUCT_ID = MP.PRODUCT_ID AND PE.PRODUCT_ID = '" + productID + "' AND MP.PRODUCT_ACTIVE = 1 AND MP.PRODUCT_IS_SERVICE = 0 " +
+                                   "WHERE PE.EXPIRY_ACTIVE = 1 AND PE.IS_DELETED = 0 AND PE.PRODUCT_ID = MP.PRODUCT_ID AND PE.PRODUCT_ID = '" + productID + "' AND MP.PRODUCT_ACTIVE = 1 AND MP.PRODUCT_IS_SERVICE = 0 " +
                                    "AND PE.PRODUCT_EXPIRY_DATE = (SELECT MIN(PRODUCT_EXPIRY_DATE) FROM PRODUCT_EXPIRY WHERE PRODUCT_ID = '" + productID + "' AND PRODUCT_AMOUNT > 0)";
             lotID = Convert.ToInt32(DS.executeNonQueryCommand(sqlCommand));
 
@@ -37,7 +37,7 @@ namespace AlphaSoft
             string sqlCommand = "";
 
             sqlCommand = "SELECT PE.ID, PE.PRODUCT_AMOUNT FROM PRODUCT_EXPIRY PE, MASTER_PRODUCT MP " +
-                                   "WHERE PE.PRODUCT_AMOUNT > 0 AND PE.PRODUCT_ID = MP.PRODUCT_ID AND PE.PRODUCT_ID = '" + productID + "' AND MP.PRODUCT_ACTIVE = 1 AND MP.PRODUCT_IS_SERVICE = 0 " +
+                                   "WHERE PE.EXPIRY_ACTIVE = 1 AND PE.IS_DELETED = 0 AND PE.PRODUCT_AMOUNT > 0 AND PE.PRODUCT_ID = MP.PRODUCT_ID AND PE.PRODUCT_ID = '" + productID + "' AND MP.PRODUCT_ACTIVE = 1 AND MP.PRODUCT_IS_SERVICE = 0 " +
                                    "ORDER BY PE.PRODUCT_EXPIRY_DATE ASC";
 
             amtRequested = numRequested;

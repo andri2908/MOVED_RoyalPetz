@@ -752,6 +752,7 @@
             this.cashierDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.cashierDataGridView_CellFormatting);
             this.cashierDataGridView.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.cashierDataGridView_CellValidated);
             this.cashierDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.cashierDataGridView_CellValueChanged);
+            this.cashierDataGridView.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.cashierDataGridView_ColumnHeaderMouseClick);
             this.cashierDataGridView.CurrentCellDirtyStateChanged += new System.EventHandler(this.cashierDataGridView_CurrentCellDirtyStateChanged);
             this.cashierDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.cashierDataGridView_RowsAdded);
             this.cashierDataGridView.Enter += new System.EventHandler(this.cashierDataGridView_Enter);

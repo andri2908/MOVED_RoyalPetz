@@ -865,8 +865,10 @@ namespace AlphaSoft
         {
             string productIDValue = "";
             double productQtyValue = 0;
+            double productOriginalQtyValue = 0;
             List<string> productID = new List<string>();
             List<double> productQty = new List<double>();
+            List<double> productOriginalQty = new List<double>();
             bool dataValid = true;
 
             for (int i = 0;i<cashierDataGridView.Rows.Count - 1;i++)
@@ -876,22 +878,28 @@ namespace AlphaSoft
                 {
                     productIDValue = cashierDataGridView.Rows[i].Cells["productID"].Value.ToString();
                     productQtyValue = Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value);
+
+                    if (originModuleID == globalConstants.REVISI_NOTA)
+                        productOriginalQtyValue = Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qtyAsal"].Value);
+
                     if (!productID.Contains(productIDValue))
                     {
                         productID.Add(productIDValue);
                         productQty.Add(productQtyValue);
+                        productOriginalQty.Add(productOriginalQtyValue);
                     }
                     else
                     {
                         int listIndex = productID.IndexOf(productIDValue);
                         productQty[listIndex] = productQty[listIndex] + productQtyValue;
+                        productOriginalQty[listIndex] = productOriginalQty[listIndex] + productOriginalQtyValue;
                     }
                 }
             }
 
             for (int j =0;j<productID.Count && dataValid;j++)
             {
-                if (!stockIsEnough(productID[j], productQty[j]))
+                if (!stockIsEnough(productID[j], productQty[j], productOriginalQty[j]))
                 { 
                     dataValid = false;
                     productName = DS.getDataSingleValue("SELECT PRODUCT_NAME FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID[j] + "'").ToString();
@@ -1000,6 +1008,22 @@ namespace AlphaSoft
             return true;
         }
 
+        private bool lotIDisValid(int lotID)
+        {
+            bool result = true;
+            string sqlCommand = "";
+            int isActive = 0, isDeleted = 0;
+
+            isActive = Convert.ToInt32("SELECT EXPIRY_ACTIVE FROM PRODUCT_EXPIRY WHERE ID = " + lotID);
+            isDeleted = Convert.ToInt32("SELECT IS_DELETED FROM PRODUCT_EXPIRY WHERE ID = " + lotID);
+
+            if (isActive == 1 && isDeleted == 0)
+                result = true;
+
+            return result;
+           
+        }
+
         private bool saveDataTransaction()
         {
             bool result = false;
@@ -1038,6 +1062,9 @@ namespace AlphaSoft
             int prevLotID;
             bool manualRollBack = false;
             bool revertValue = false;
+
+            List<int> isActiveList = new List<int>();
+            List<int> isDeletedList = new List<int>();
 
             //SODateTime = String.Format(culture, "{0:dd-MM-yyyy HH:mm}", DateTime.Now);
             SODateTime = gutil.getCustomStringFormatDate(DateTime.Now);
@@ -1126,11 +1153,15 @@ namespace AlphaSoft
 
             if (originModuleID == globalConstants.REVISI_NOTA)
             {
+                int isDeletedValue = 0, isActiveValue = 0;
+                isDeletedList.Clear();
+                isActiveList.Clear();
+
                 DS.beginTransaction();
                 try
                 {
                     // RETURN ALL PREVIOUS PRODUCT INTO EACH OWN PRODUCT EXPIRY AMOUNT
-                    sqlCommand = "SELECT * FROM SALES_DETAIL_EXPIRY WHERE SALES_INVOICE = '" + selectedsalesinvoice + "'";
+                    sqlCommand = "SELECT SD.*, PE.EXPIRY_ACTIVE, PE.IS_DELETED FROM SALES_DETAIL_EXPIRY SD, PRODUCT_EXPIRY PE WHERE SD.LOT_ID = PE.ID AND SD.SALES_INVOICE = '" + selectedsalesinvoice + "' ORDER BY SD.PRODUCT_ID ASC";
 
                     rdr = DS.getData(sqlCommand);
                     if (rdr.HasRows)
@@ -1140,8 +1171,16 @@ namespace AlphaSoft
                             prevProductID = rdr.GetString("PRODUCT_ID");
                             prevProductAmount = rdr.GetDouble("PRODUCT_AMOUNT");
                             prevLotID = rdr.GetInt32("LOT_ID");
+                            isDeletedValue = rdr.GetInt32("IS_DELETED");
+                            isActiveValue = rdr.GetInt32("EXPIRY_ACTIVE");
+                            //isDeletedValue = Convert.ToInt32(DS.getDataSingleValue("SELECT IS_DELETED FROM PRODUCT_EXPIRY WHERE ID = " + prevLotID));
+                            //isActiveValue = Convert.ToInt32(DS.getDataSingleValue("SELECT EXPIRY_ACTIVE FROM PRODUCT_EXPIRY WHERE ID = " + prevLotID));
 
-                            sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = PRODUCT_AMOUNT + " + prevProductAmount + " WHERE PRODUCT_ID = '" + prevProductID + "' AND ID = " + prevLotID;
+                            isDeletedList.Add(isDeletedValue);
+                            isActiveList.Add(isActiveValue);
+
+                            // FORCE THE PRODUCT EXPIRY TO ACTIVE AGAIN
+                            sqlCommand = "UPDATE PRODUCT_EXPIRY SET EXPIRY_ACTIVE = 1, IS_DELETED = 0, PRODUCT_AMOUNT = PRODUCT_AMOUNT + " + prevProductAmount + " WHERE PRODUCT_ID = '" + prevProductID + "' AND ID = " + prevLotID;
 
                             gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "RETURN SALES DETAIL EXPIRY AMOUNT [" + selectedsalesinvoice + "]");
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
@@ -1470,8 +1509,9 @@ namespace AlphaSoft
                 DS.beginTransaction();
                 try
                 {
+                    int listIndexPos = 0;
                     // RETURN ALL PREVIOUS PRODUCT INTO EACH OWN PRODUCT EXPIRY AMOUNT
-                    sqlCommand = "SELECT * FROM SALES_DETAIL_EXPIRY WHERE SALES_INVOICE = '" + selectedsalesinvoice + "'";
+                    sqlCommand = "SELECT * FROM SALES_DETAIL_EXPIRY WHERE SALES_INVOICE = '" + selectedsalesinvoice + "' ORDER BY PRODUCT_ID ASC";
 
                     rdr = DS.getData(sqlCommand);
                     if (rdr.HasRows)
@@ -1482,11 +1522,13 @@ namespace AlphaSoft
                             prevProductAmount = rdr.GetDouble("PRODUCT_AMOUNT");
                             prevLotID = rdr.GetInt32("LOT_ID");
 
-                            sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = PRODUCT_AMOUNT - " + prevProductAmount + " WHERE PRODUCT_ID = '" + prevProductID + "' AND ID = " + prevLotID;
+                            sqlCommand = "UPDATE PRODUCT_EXPIRY SET EXPIRY_ACTIVE = " +isActiveList[listIndexPos]+ ", IS_DELETED = " +isDeletedList[listIndexPos]+ ", PRODUCT_AMOUNT = PRODUCT_AMOUNT - " + prevProductAmount + " WHERE PRODUCT_ID = '" + prevProductID + "' AND ID = " + prevLotID;
 
                             gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "RETURN SALES DETAIL EXPIRY AMOUNT [" + selectedsalesinvoice + "]");
                             if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                 throw internalEX;
+
+                            listIndexPos++;
                         }
                     }
                     rdr.Close();
@@ -1745,7 +1787,7 @@ namespace AlphaSoft
             }
         }
 
-        private bool stockIsEnough(string productID, double qtyRequested)
+        private bool stockIsEnough(string productID, double qtyRequested, double originalQty = 0)
         {
             bool result = false;
             string productName = "";
@@ -1761,9 +1803,12 @@ namespace AlphaSoft
                 { 
                     double stockQty = 0;
                     double limitQty = 0;
-
+                    
                     stockQty = Convert.ToDouble(DS.getDataSingleValue("SELECT PRODUCT_STOCK_QTY FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
                     limitQty = Convert.ToDouble(DS.getDataSingleValue("SELECT PRODUCT_LIMIT_STOCK FROM MASTER_PRODUCT WHERE PRODUCT_ID = '" + productID + "'"));
+
+                    if (originModuleID == globalConstants.REVISI_NOTA)
+                        stockQty = stockQty + originalQty;
 
                     if (stockQty >= qtyRequested)
                         result = true;
@@ -2098,7 +2143,7 @@ namespace AlphaSoft
             //salesQty.Clear();
             isLoading = true;
 
-            salesEditStatus = Convert.ToInt32(DS.getDataSingleValue("SELECT IN_EDIT_MODE FROM SALES_HEADER WHERE SALES_INVOICE = '" + selectedsalesinvoice + "'"));
+            //salesEditStatus = Convert.ToInt32(DS.getDataSingleValue("SELECT IN_EDIT_MODE FROM SALES_HEADER WHERE SALES_INVOICE = '" + selectedsalesinvoice + "'"));
 
             if (salesEditStatus == 0)
             {
@@ -2196,11 +2241,13 @@ namespace AlphaSoft
                         cashierDataGridView.Rows[rowPos].Cells["discRP"].Value = rdr.GetString("PRODUCT_DISC_RP");
                         cashierDataGridView.Rows[rowPos].Cells["hpp"].Value = rdr.GetString("HPP");
 
-                        //if (originModuleID == globalConstants.REVISI_NOTA)
-                        //{
+                        if (originModuleID == globalConstants.REVISI_NOTA)
+                        {
+                            cashierDataGridView.Rows[rowPos].Cells["qtyAsal"].Value = rdr.GetString("QTY");
+                        }
+
                         //    cashierDataGridView.Rows[rowPos].Cells["ID"].Value = rdr.GetString("ID");
                         //    cashierDataGridView.Rows[rowPos].Cells["changed"].Value = 0;
-                        //}
 
                         salesQty[rowPos] = rdr.GetString("QTY");
                         productPriceList[rowPos] = rdr.GetString("HARGA_PRODUK");
@@ -2330,6 +2377,7 @@ namespace AlphaSoft
 
             DataGridViewTextBoxColumn lineIDColumn = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn changedColumn = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn originalStockQtyColumn = new DataGridViewTextBoxColumn();
 
             isLoading = true;
 
@@ -2365,6 +2413,15 @@ namespace AlphaSoft
 
             cashierDataGridView.Columns.Add(productPriceColumn);
 
+            if (originModuleID == globalConstants.REVISI_NOTA)
+            {
+                originalStockQtyColumn.HeaderText = "QTY ASAL";
+                originalStockQtyColumn.Name = "qtyAsal";
+                originalStockQtyColumn.Width = 80;
+                originalStockQtyColumn.ReadOnly = true;
+                cashierDataGridView.Columns.Add(originalStockQtyColumn);
+            }
+
             stockQtyColumn.HeaderText = "QTY";
             stockQtyColumn.Name = "qty";
             stockQtyColumn.Width = 80;
@@ -2399,19 +2456,17 @@ namespace AlphaSoft
             productHPPColumn.Visible = false;
             cashierDataGridView.Columns.Add(productHPPColumn);
 
-            //if (originModuleID == globalConstants.REVISI_NOTA)
-            //{
-            //    lineIDColumn.HeaderText = "ID";
-            //    lineIDColumn.Name = "id";
-            //    lineIDColumn.Width = 200;
-            //    lineIDColumn.Visible = false;
-            //    cashierDataGridView.Columns.Add(lineIDColumn);
+                //    lineIDColumn.HeaderText = "ID";
+                //    lineIDColumn.Name = "id";
+                //    lineIDColumn.Width = 200;
+                //    lineIDColumn.Visible = false;
+                //    cashierDataGridView.Columns.Add(lineIDColumn);
 
-            //    changedColumn.HeaderText = "changed";
-            //    changedColumn.Name = "changed";
-            //    changedColumn.Width = 20;
-            //    changedColumn.Visible = true;
-            //    cashierDataGridView.Columns.Add(changedColumn);
+                //    changedColumn.HeaderText = "changed";
+                //    changedColumn.Name = "changed";
+                //    changedColumn.Width = 20;
+                //    changedColumn.Visible = true;
+                //    cashierDataGridView.Columns.Add(changedColumn);
             //}
 
             isLoading = false;
@@ -3522,10 +3577,16 @@ namespace AlphaSoft
                 {
                     gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "CASHIER FORM : cashierDataGridView_CellValueChanged, dataGridViewTextBoxEditingControl.Text pass REGEX Checking");
 
+                    bool stockIsEnoughResult = false;
                     switch (columnName)
                     {
                         case "qty":
-                            if (stockIsEnough(productID, Convert.ToDouble(cellValue)))
+                            if (originModuleID == globalConstants.REVISI_NOTA)
+                                stockIsEnoughResult = stockIsEnough(productID, Convert.ToDouble(cellValue), Convert.ToDouble(selectedRow.Cells["qtyAsal"].Value));
+                            else
+                                stockIsEnoughResult = stockIsEnough(productID, Convert.ToDouble(cellValue));
+
+                            if (stockIsEnoughResult)
                                 salesQty[rowSelectedIndex] = cellValue;
                             else
                                 selectedRow.Cells["qty"].Value = salesQty[rowSelectedIndex];
@@ -3680,12 +3741,7 @@ namespace AlphaSoft
                     reprintInvoice();
         }
 
-        private void cashierDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void totalLabel_Click(object sender, EventArgs e)
+        private void cashierDataGridView_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
 
         }

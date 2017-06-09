@@ -188,7 +188,7 @@ namespace AlphaSoft
 
                 int branch_id = 0;// Int32.Parse(branchCombobox.SelectedValue.ToString());
 
-                if ((branchCombobox.SelectedValue.ToString().Length > 0) && (Int32.TryParse(gutil.allTrim(branchCombobox.SelectedValue.ToString()), out branch_id)))
+                if ((branchCombobox.Text.Length > 0) && (branchCombobox.SelectedValue.ToString().Length > 0) && (Int32.TryParse(gutil.allTrim(branchCombobox.SelectedValue.ToString()), out branch_id)))
                 {
                 }
                 else
@@ -325,6 +325,7 @@ namespace AlphaSoft
                 return false;
             }
 
+         
             //if (0 == getBranchID())
             //{
             //    errorLabel.Text = "BRANCH ID BELUM DI SET";
