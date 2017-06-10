@@ -196,7 +196,7 @@ namespace AlphaSoft
                     expDataGridView.CurrentCell = selectedRow.Cells["qty"];
                     string lotIDValue = "";
 
-                    if (null != selectedRow && rowSelectedIndex != expDataGridView.Rows.Count-1)
+                    if (null != selectedRow)// && rowSelectedIndex != expDataGridView.Rows.Count-1)
                     {
                         isLoading = true;
                         if (selectedRow.Index >= 0)
@@ -206,19 +206,16 @@ namespace AlphaSoft
                             else
                                 lotIDValue = "0";
 
-                            expDataGridView.Rows.Remove(expDataGridView.Rows[rowSelectedIndex]);
-                            expDataGridView.AllowUserToAddRows = true;
-
                             if (lotIDValue != "0")
                                 expDataGridViewHidden.Rows.Add(lotIDValue);
 
                             gUtil.saveSystemDebugLog(globalConstants.MENU_TAMBAH_PRODUK, "deleteCurrentRow [" + rowSelectedIndex + "]");
-                            calculateTotalQty();
                         }
                         isLoading = false;
                     }
                 }
 
+                expDataGridView.Rows.Clear();
             }
         }
 
@@ -642,7 +639,10 @@ namespace AlphaSoft
                     {
                         expDataGridView.AllowUserToAddRows = true;
                         if (rdr.GetInt32("EXPIRY_ACTIVE") == 1)
+                        { 
                             checkBoxValue = true;
+                            stokAwalTextBox.Enabled = false;
+                        }
                         else
                             checkBoxValue = false;
 
@@ -1630,15 +1630,7 @@ namespace AlphaSoft
                         // CLEAR DATA GRID
                         deleteAllRow();
 
-                        try
-                        {
-                            expDataGridViewHidden.Rows.Add(expDataGridView.Rows[0].Cells["lotID"].Value);
-                        }
-                        catch(Exception eX)
-                        {
-                            gUtil.saveSystemDebugLog(globalConstants.MENU_TAMBAH_PRODUK, "FAILED TO MOVE LOTID TO HIDDEN GRID [" + eX.Message + "]");
-                        }
-
+                        expDataGridView.Rows.Add();
                         // ADD NEW ROW BASED ON CURRENT STOCK QTY DATA
                         string expDateValue = String.Format(culture, "{0:" + globalUtilities.CUSTOM_DATE_FORMAT + "}", DateTime.Now);
                         //expDataGridView.Rows.Add(rdr.GetString("ID"), checkBoxValue, rdr.GetString("PRODUCT_AMOUNT"), expDateValue, rdr.GetString("PRODUCT_EXPIRY_DATE"));
@@ -1659,7 +1651,7 @@ namespace AlphaSoft
                     //expDataGridView.Rows.Add(rdr.GetString("ID"), checkBoxValue, rdr.GetString("PRODUCT_AMOUNT"), expDateValue, rdr.GetString("PRODUCT_EXPIRY_DATE"));
 
                     expDataGridView.Rows.Add();
-                    expDataGridView.AllowUserToAddRows = true;
+                    //expDataGridView.AllowUserToAddRows = true;
 
                     expDataGridView.Rows[0].Cells["lotID"].Value = 0;
                     expDataGridView.Rows[0].Cells["status"].Value = true;
