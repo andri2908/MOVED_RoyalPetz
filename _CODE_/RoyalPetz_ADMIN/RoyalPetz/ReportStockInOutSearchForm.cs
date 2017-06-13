@@ -42,11 +42,11 @@ namespace AlphaSoft
             string SQLcommand = "";
             if (nonactivecheckbox1.Checked)
             {
-                SQLcommand = "SELECT SUPPLIER_ID AS 'ID', SUPPLIER_FULL_NAME AS 'NAME' FROM MASTER_SUPPLIER";
+                SQLcommand = "SELECT SUPPLIER_ID AS 'ID', SUPPLIER_FULL_NAME AS 'NAME' FROM MASTER_SUPPLIER ORDER BY NAME ASC";
             }
             else
             {
-                SQLcommand = "SELECT SUPPLIER_ID AS 'ID', SUPPLIER_FULL_NAME AS 'NAME' FROM MASTER_SUPPLIER WHERE SUPPLIER_ACTIVE = 1";
+                SQLcommand = "SELECT SUPPLIER_ID AS 'ID', SUPPLIER_FULL_NAME AS 'NAME' FROM MASTER_SUPPLIER WHERE SUPPLIER_ACTIVE = 1 ORDER BY NAME ASC";
             }
 
             using (rdr = DS.getData(SQLcommand))
@@ -82,11 +82,11 @@ namespace AlphaSoft
             string SQLcommand = "";
             if (nonactivecheckbox1.Checked)
             {
-                SQLcommand = "SELECT CUSTOMER_ID AS 'ID', CUSTOMER_FULL_NAME AS 'NAME' FROM MASTER_CUSTOMER";
+                SQLcommand = "SELECT CUSTOMER_ID AS 'ID', CUSTOMER_FULL_NAME AS 'NAME' FROM MASTER_CUSTOMER ORDER BY NAME ASC";
             }
             else
             {
-                SQLcommand = "SELECT CUSTOMER_ID AS 'ID', CUSTOMER_FULL_NAME AS 'NAME' FROM MASTER_CUSTOMER WHERE CUSTOMER_ACTIVE = 1";
+                SQLcommand = "SELECT CUSTOMER_ID AS 'ID', CUSTOMER_FULL_NAME AS 'NAME' FROM MASTER_CUSTOMER WHERE CUSTOMER_ACTIVE = 1 ORDER BY NAME ASC";
             }
 
             using (rdr = DS.getData(SQLcommand))
@@ -116,11 +116,11 @@ namespace AlphaSoft
             string SQLcommand = "";
             if (nonactivecheckbox2.Checked)
             {
-                SQLcommand = "SELECT PRODUCT_ID AS 'ID', PRODUCT_NAME AS 'NAME' FROM MASTER_PRODUCT";
+                SQLcommand = "SELECT PRODUCT_ID AS 'ID', PRODUCT_NAME AS 'NAME' FROM MASTER_PRODUCT ORDER BY NAME ASC";
             }
             else
             {
-                SQLcommand = "SELECT PRODUCT_ID AS 'ID', PRODUCT_NAME AS 'NAME' FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1";
+                SQLcommand = "SELECT PRODUCT_ID AS 'ID', PRODUCT_NAME AS 'NAME' FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 ORDER BY NAME ASC";
             }
 
             using (rdr = DS.getData(SQLcommand))
@@ -157,11 +157,11 @@ namespace AlphaSoft
             string SQLcommand = "";
             if (nonactivecheckbox2.Checked)
             {
-                SQLcommand = "SELECT CATEGORY_ID AS 'ID', CATEGORY_NAME AS 'NAME' FROM MASTER_CATEGORY";
+                SQLcommand = "SELECT CATEGORY_ID AS 'ID', CATEGORY_NAME AS 'NAME' FROM MASTER_CATEGORY ORDER BY NAME ASC";
             }
             else
             {
-                SQLcommand = "SELECT CATEGORY_ID AS 'ID', CATEGORY_NAME AS 'NAME' FROM MASTER_CATEGORY WHERE CATEGORY_ACTIVE = 1";
+                SQLcommand = "SELECT CATEGORY_ID AS 'ID', CATEGORY_NAME AS 'NAME' FROM MASTER_CATEGORY WHERE CATEGORY_ACTIVE = 1 ORDER BY NAME ASC";
             }
 
             using (rdr = DS.getData(SQLcommand))

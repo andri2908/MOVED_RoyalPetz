@@ -761,6 +761,18 @@
     <Compile Include="ReportProductForm.Designer.cs">
       <DependentUpon>ReportProductForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportProductInformation.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportProductInformation.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportProductInformationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportProductInformationForm.Designer.cs">
+      <DependentUpon>ReportProductInformationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportProductMutation.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1516,6 +1528,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportProductForm.resx">
       <DependentUpon>ReportProductForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportProductInformation.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportProductInformation.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportProductInformationForm.resx">
+      <DependentUpon>ReportProductInformationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportProductMutation.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

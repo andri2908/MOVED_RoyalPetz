@@ -1594,5 +1594,18 @@ namespace AlphaSoft
             ProductBarcodeSelectorForm displayedForm = new ProductBarcodeSelectorForm();
             displayedForm.ShowDialog(this);
         }
+
+        private void informasiProdukToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DS.mySqlConnect();
+            string sqlCommandx = "";
+            sqlCommandx = "SELECT MP.PRODUCT_ID AS 'ID', MP.PRODUCT_NAME AS 'NAME', MP.PRODUCT_RETAIL_PRICE AS 'RETAIL', MP.PRODUCT_BULK_PRICE AS 'GROSIR', MP.PRODUCT_WHOLESALE_PRICE AS 'PARTAI'" +
+                                "FROM MASTER_PRODUCT MP " +
+                                "WHERE MP.PRODUCT_IS_SERVICE = 0 AND MP.PRODUCT_ACTIVE = 1 " +
+                                "ORDER BY NAME ASC";
+            DS.writeXML(sqlCommandx, globalConstants.ProductInformationXML);
+            ReportProductInformationForm displayedForm = new ReportProductInformationForm();
+            displayedForm.ShowDialog(this);
+        }
     }
 }

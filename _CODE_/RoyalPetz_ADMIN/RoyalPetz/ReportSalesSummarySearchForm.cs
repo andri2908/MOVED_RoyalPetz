@@ -47,10 +47,10 @@ namespace AlphaSoft
             string SQLcommand = "";
             if (nonactivecheckbox.Checked)
             {
-                SQLcommand = "SELECT CUSTOMER_ID AS 'ID', CUSTOMER_FULL_NAME AS 'NAME' FROM MASTER_CUSTOMER";
+                SQLcommand = "SELECT CUSTOMER_ID AS 'ID', CUSTOMER_FULL_NAME AS 'NAME' FROM MASTER_CUSTOMER ORDER BY NAME ASC";
             } else
             {
-                SQLcommand = "SELECT CUSTOMER_ID AS 'ID', CUSTOMER_FULL_NAME AS 'NAME' FROM MASTER_CUSTOMER WHERE CUSTOMER_ACTIVE = 1"; 
+                SQLcommand = "SELECT CUSTOMER_ID AS 'ID', CUSTOMER_FULL_NAME AS 'NAME' FROM MASTER_CUSTOMER WHERE CUSTOMER_ACTIVE = 1 ORDER BY NAME ASC"; 
             }
 
             using (rdr = DS.getData(SQLcommand))
@@ -91,11 +91,11 @@ namespace AlphaSoft
             string SQLcommand = "";
             if (nonactivecheckbox.Checked)
             {
-                SQLcommand = "SELECT PRODUCT_ID AS 'ID', PRODUCT_NAME AS 'NAME' FROM MASTER_PRODUCT";
+                SQLcommand = "SELECT PRODUCT_ID AS 'ID', PRODUCT_NAME AS 'NAME' FROM MASTER_PRODUCT ORDER BY NAME ASC";
             }
             else
             {
-                SQLcommand = "SELECT PRODUCT_ID AS 'ID', PRODUCT_NAME AS 'NAME' FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1";
+                SQLcommand = "SELECT PRODUCT_ID AS 'ID', PRODUCT_NAME AS 'NAME' FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 ORDER BY NAME ASC";
             }
 
             using (rdr = DS.getData(SQLcommand))

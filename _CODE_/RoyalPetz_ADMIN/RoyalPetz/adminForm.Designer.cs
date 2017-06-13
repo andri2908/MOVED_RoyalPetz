@@ -59,6 +59,7 @@
             this.MENU_pengaturanKategoriProduk = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_pecahSatuanProduk = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_pengaturanNomorRak = new System.Windows.Forms.ToolStripMenuItem();
+            this.productBarcodePrintTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_kategori = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_tambahKategori = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_satuan = new System.Windows.Forms.ToolStripMenuItem();
@@ -139,10 +140,11 @@
             this.Separator_7 = new System.Windows.Forms.ToolStripSeparator();
             this.MENU_laporanDeviasiStok = new System.Windows.Forms.ToolStripMenuItem();
             this.stokProdukToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stokGlobalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MENU_laporanStokDibawahLimit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.MENU_laporanStokDibawahLimit = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_laporanReturBarang = new System.Windows.Forms.ToolStripMenuItem();
             this.pembelianToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.penjualanToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -150,6 +152,12 @@
             this.Separator_9 = new System.Windows.Forms.ToolStripSeparator();
             this.MENU_laporanMutasiBarang = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_laporanPembayaranMutasi = new System.Windows.Forms.ToolStripMenuItem();
+            this.DUMMY_TaxModule = new System.Windows.Forms.ToolStripMenuItem();
+            this.DUMMY_Jual = new System.Windows.Forms.ToolStripMenuItem();
+            this.DUMMY_LapJual = new System.Windows.Forms.ToolStripMenuItem();
+            this.DUMMY_LapJualDetailed = new System.Windows.Forms.ToolStripMenuItem();
+            this.DUMMY_LapJualSummary = new System.Windows.Forms.ToolStripMenuItem();
+            this.DUMMY_LapJualbyProduct = new System.Windows.Forms.ToolStripMenuItem();
             this.MENU_DevTools = new System.Windows.Forms.ToolStripMenuItem();
             this.laporanTabelMasterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.masterAkunToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -162,12 +170,6 @@
             this.masterSatuanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.masterUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generatorXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.DUMMY_TaxModule = new System.Windows.Forms.ToolStripMenuItem();
-            this.DUMMY_Jual = new System.Windows.Forms.ToolStripMenuItem();
-            this.DUMMY_LapJual = new System.Windows.Forms.ToolStripMenuItem();
-            this.DUMMY_LapJualDetailed = new System.Windows.Forms.ToolStripMenuItem();
-            this.DUMMY_LapJualSummary = new System.Windows.Forms.ToolStripMenuItem();
-            this.DUMMY_LapJualbyProduct = new System.Windows.Forms.ToolStripMenuItem();
             this.informasiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.developerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem26 = new System.Windows.Forms.ToolStripMenuItem();
@@ -187,8 +189,7 @@
             this.SHORTCUT_returBeli = new System.Windows.Forms.ToolStripButton();
             this.SHORTCUT_returJual = new System.Windows.Forms.ToolStripButton();
             this.timerMessage = new System.Windows.Forms.Timer(this.components);
-            this.stokGlobalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.productBarcodePrintTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.informasiProdukToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MAINMENU_Strip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.MAINMENU_ShortCut.SuspendLayout();
@@ -445,7 +446,7 @@
             this.MENU_tambahProduk.BackColor = System.Drawing.Color.SteelBlue;
             this.MENU_tambahProduk.ForeColor = System.Drawing.Color.FloralWhite;
             this.MENU_tambahProduk.Name = "MENU_tambahProduk";
-            this.MENU_tambahProduk.Size = new System.Drawing.Size(279, 22);
+            this.MENU_tambahProduk.Size = new System.Drawing.Size(306, 22);
             this.MENU_tambahProduk.Text = "Tambah / Hapus Produk";
             this.MENU_tambahProduk.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
@@ -454,7 +455,7 @@
             this.MENU_pengaturanHarga.BackColor = System.Drawing.Color.SteelBlue;
             this.MENU_pengaturanHarga.ForeColor = System.Drawing.Color.FloralWhite;
             this.MENU_pengaturanHarga.Name = "MENU_pengaturanHarga";
-            this.MENU_pengaturanHarga.Size = new System.Drawing.Size(279, 22);
+            this.MENU_pengaturanHarga.Size = new System.Drawing.Size(306, 22);
             this.MENU_pengaturanHarga.Text = "Pengaturan Harga";
             this.MENU_pengaturanHarga.Click += new System.EventHandler(this.toolStripMenuItem10_Click);
             // 
@@ -463,7 +464,7 @@
             this.MENU_pengaturanLimitStok.BackColor = System.Drawing.Color.SteelBlue;
             this.MENU_pengaturanLimitStok.ForeColor = System.Drawing.Color.FloralWhite;
             this.MENU_pengaturanLimitStok.Name = "MENU_pengaturanLimitStok";
-            this.MENU_pengaturanLimitStok.Size = new System.Drawing.Size(279, 22);
+            this.MENU_pengaturanLimitStok.Size = new System.Drawing.Size(306, 22);
             this.MENU_pengaturanLimitStok.Text = "Pengaturan Limit Stok";
             this.MENU_pengaturanLimitStok.Click += new System.EventHandler(this.toolStripMenuItem51_Click);
             // 
@@ -472,7 +473,7 @@
             this.MENU_pengaturanKategoriProduk.BackColor = System.Drawing.Color.SteelBlue;
             this.MENU_pengaturanKategoriProduk.ForeColor = System.Drawing.Color.FloralWhite;
             this.MENU_pengaturanKategoriProduk.Name = "MENU_pengaturanKategoriProduk";
-            this.MENU_pengaturanKategoriProduk.Size = new System.Drawing.Size(279, 22);
+            this.MENU_pengaturanKategoriProduk.Size = new System.Drawing.Size(306, 22);
             this.MENU_pengaturanKategoriProduk.Text = "Pengaturan Kategori Produk";
             this.MENU_pengaturanKategoriProduk.Click += new System.EventHandler(this.toolStripMenuItem52_Click);
             // 
@@ -481,7 +482,7 @@
             this.MENU_pecahSatuanProduk.BackColor = System.Drawing.Color.SteelBlue;
             this.MENU_pecahSatuanProduk.ForeColor = System.Drawing.Color.FloralWhite;
             this.MENU_pecahSatuanProduk.Name = "MENU_pecahSatuanProduk";
-            this.MENU_pecahSatuanProduk.Size = new System.Drawing.Size(279, 22);
+            this.MENU_pecahSatuanProduk.Size = new System.Drawing.Size(306, 22);
             this.MENU_pecahSatuanProduk.Text = "Pecah Satuan Produk";
             this.MENU_pecahSatuanProduk.Click += new System.EventHandler(this.toolStripMenuItem53_Click);
             // 
@@ -490,9 +491,18 @@
             this.MENU_pengaturanNomorRak.BackColor = System.Drawing.Color.SteelBlue;
             this.MENU_pengaturanNomorRak.ForeColor = System.Drawing.Color.FloralWhite;
             this.MENU_pengaturanNomorRak.Name = "MENU_pengaturanNomorRak";
-            this.MENU_pengaturanNomorRak.Size = new System.Drawing.Size(279, 22);
+            this.MENU_pengaturanNomorRak.Size = new System.Drawing.Size(306, 22);
             this.MENU_pengaturanNomorRak.Text = "Pengaturan Nomor Rak";
             this.MENU_pengaturanNomorRak.Click += new System.EventHandler(this.toolStripMenuItem54_Click);
+            // 
+            // productBarcodePrintTemplateToolStripMenuItem
+            // 
+            this.productBarcodePrintTemplateToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.productBarcodePrintTemplateToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.productBarcodePrintTemplateToolStripMenuItem.Name = "productBarcodePrintTemplateToolStripMenuItem";
+            this.productBarcodePrintTemplateToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
+            this.productBarcodePrintTemplateToolStripMenuItem.Text = "Product Barcode Print Template";
+            this.productBarcodePrintTemplateToolStripMenuItem.Click += new System.EventHandler(this.productBarcodePrintTemplateToolStripMenuItem_Click);
             // 
             // MENU_kategori
             // 
@@ -984,6 +994,7 @@
             this.MENU_laporanPiutangLewatJatuhTempo,
             this.MENU_laporanPembayaranPiutang,
             this.Separator_7,
+            this.informasiProdukToolStripMenuItem,
             this.MENU_laporanDeviasiStok,
             this.stokProdukToolStripMenuItem,
             this.stokGlobalToolStripMenuItem,
@@ -1301,6 +1312,24 @@
             this.stokProdukToolStripMenuItem.Text = "Stok Produk";
             this.stokProdukToolStripMenuItem.Click += new System.EventHandler(this.stokProdukToolStripMenuItem_Click);
             // 
+            // stokGlobalToolStripMenuItem
+            // 
+            this.stokGlobalToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.stokGlobalToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.stokGlobalToolStripMenuItem.Name = "stokGlobalToolStripMenuItem";
+            this.stokGlobalToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
+            this.stokGlobalToolStripMenuItem.Text = "Stok Global";
+            this.stokGlobalToolStripMenuItem.Click += new System.EventHandler(this.stokGlobalToolStripMenuItem_Click);
+            // 
+            // MENU_laporanStokDibawahLimit
+            // 
+            this.MENU_laporanStokDibawahLimit.BackColor = System.Drawing.Color.SteelBlue;
+            this.MENU_laporanStokDibawahLimit.ForeColor = System.Drawing.Color.FloralWhite;
+            this.MENU_laporanStokDibawahLimit.Name = "MENU_laporanStokDibawahLimit";
+            this.MENU_laporanStokDibawahLimit.Size = new System.Drawing.Size(276, 22);
+            this.MENU_laporanStokDibawahLimit.Text = "Stok Dibawah Limit";
+            this.MENU_laporanStokDibawahLimit.Click += new System.EventHandler(this.stokDibawahLimitToolStripMenuItem_Click);
+            // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.BackColor = System.Drawing.Color.SteelBlue;
@@ -1329,15 +1358,6 @@
             this.toolStripMenuItem3.Size = new System.Drawing.Size(233, 22);
             this.toolStripMenuItem3.Text = "Laporan Aging Stok";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click_2);
-            // 
-            // MENU_laporanStokDibawahLimit
-            // 
-            this.MENU_laporanStokDibawahLimit.BackColor = System.Drawing.Color.SteelBlue;
-            this.MENU_laporanStokDibawahLimit.ForeColor = System.Drawing.Color.FloralWhite;
-            this.MENU_laporanStokDibawahLimit.Name = "MENU_laporanStokDibawahLimit";
-            this.MENU_laporanStokDibawahLimit.Size = new System.Drawing.Size(276, 22);
-            this.MENU_laporanStokDibawahLimit.Text = "Stok Dibawah Limit";
-            this.MENU_laporanStokDibawahLimit.Click += new System.EventHandler(this.stokDibawahLimitToolStripMenuItem_Click);
             // 
             // MENU_laporanReturBarang
             // 
@@ -1401,6 +1421,69 @@
             this.MENU_laporanPembayaranMutasi.Size = new System.Drawing.Size(276, 22);
             this.MENU_laporanPembayaranMutasi.Text = "Pembayaran Mutasi";
             this.MENU_laporanPembayaranMutasi.Click += new System.EventHandler(this.pembayaranMutasiToolStripMenuItem_Click);
+            // 
+            // DUMMY_TaxModule
+            // 
+            this.DUMMY_TaxModule.BackColor = System.Drawing.Color.SteelBlue;
+            this.DUMMY_TaxModule.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DUMMY_Jual,
+            this.DUMMY_LapJual});
+            this.DUMMY_TaxModule.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DUMMY_TaxModule.ForeColor = System.Drawing.Color.FloralWhite;
+            this.DUMMY_TaxModule.Name = "DUMMY_TaxModule";
+            this.DUMMY_TaxModule.Size = new System.Drawing.Size(92, 20);
+            this.DUMMY_TaxModule.Text = "Penjualan";
+            this.DUMMY_TaxModule.DropDownClosed += new System.EventHandler(this.toolStripMenuItem74_DropDownClosed);
+            this.DUMMY_TaxModule.DropDownOpened += new System.EventHandler(this.toolStripMenuItem74_DropDownOpened);
+            // 
+            // DUMMY_Jual
+            // 
+            this.DUMMY_Jual.BackColor = System.Drawing.Color.SteelBlue;
+            this.DUMMY_Jual.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DUMMY_Jual.ForeColor = System.Drawing.Color.FloralWhite;
+            this.DUMMY_Jual.Name = "DUMMY_Jual";
+            this.DUMMY_Jual.Size = new System.Drawing.Size(265, 22);
+            this.DUMMY_Jual.Text = "Transaksi";
+            this.DUMMY_Jual.Click += new System.EventHandler(this.toolStripMenuItem28_Click);
+            // 
+            // DUMMY_LapJual
+            // 
+            this.DUMMY_LapJual.BackColor = System.Drawing.Color.SteelBlue;
+            this.DUMMY_LapJual.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DUMMY_LapJualDetailed,
+            this.DUMMY_LapJualSummary,
+            this.DUMMY_LapJualbyProduct});
+            this.DUMMY_LapJual.ForeColor = System.Drawing.Color.FloralWhite;
+            this.DUMMY_LapJual.Name = "DUMMY_LapJual";
+            this.DUMMY_LapJual.Size = new System.Drawing.Size(265, 22);
+            this.DUMMY_LapJual.Text = "Laporan Penjualan Produk";
+            // 
+            // DUMMY_LapJualDetailed
+            // 
+            this.DUMMY_LapJualDetailed.BackColor = System.Drawing.Color.SteelBlue;
+            this.DUMMY_LapJualDetailed.ForeColor = System.Drawing.Color.FloralWhite;
+            this.DUMMY_LapJualDetailed.Name = "DUMMY_LapJualDetailed";
+            this.DUMMY_LapJualDetailed.Size = new System.Drawing.Size(213, 22);
+            this.DUMMY_LapJualDetailed.Text = "Detailed";
+            this.DUMMY_LapJualDetailed.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
+            // 
+            // DUMMY_LapJualSummary
+            // 
+            this.DUMMY_LapJualSummary.BackColor = System.Drawing.Color.SteelBlue;
+            this.DUMMY_LapJualSummary.ForeColor = System.Drawing.Color.FloralWhite;
+            this.DUMMY_LapJualSummary.Name = "DUMMY_LapJualSummary";
+            this.DUMMY_LapJualSummary.Size = new System.Drawing.Size(213, 22);
+            this.DUMMY_LapJualSummary.Text = "Summary ";
+            this.DUMMY_LapJualSummary.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
+            // 
+            // DUMMY_LapJualbyProduct
+            // 
+            this.DUMMY_LapJualbyProduct.BackColor = System.Drawing.Color.SteelBlue;
+            this.DUMMY_LapJualbyProduct.ForeColor = System.Drawing.Color.FloralWhite;
+            this.DUMMY_LapJualbyProduct.Name = "DUMMY_LapJualbyProduct";
+            this.DUMMY_LapJualbyProduct.Size = new System.Drawing.Size(213, 22);
+            this.DUMMY_LapJualbyProduct.Text = "Per Produk-Barang";
+            this.DUMMY_LapJualbyProduct.Click += new System.EventHandler(this.toolStripMenuItem8_Click);
             // 
             // MENU_DevTools
             // 
@@ -1524,69 +1607,6 @@
             this.generatorXMLToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.generatorXMLToolStripMenuItem.Text = "Generator XML";
             this.generatorXMLToolStripMenuItem.Click += new System.EventHandler(this.generatorXMLToolStripMenuItem_Click);
-            // 
-            // DUMMY_TaxModule
-            // 
-            this.DUMMY_TaxModule.BackColor = System.Drawing.Color.SteelBlue;
-            this.DUMMY_TaxModule.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.DUMMY_Jual,
-            this.DUMMY_LapJual});
-            this.DUMMY_TaxModule.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DUMMY_TaxModule.ForeColor = System.Drawing.Color.FloralWhite;
-            this.DUMMY_TaxModule.Name = "DUMMY_TaxModule";
-            this.DUMMY_TaxModule.Size = new System.Drawing.Size(92, 20);
-            this.DUMMY_TaxModule.Text = "Penjualan";
-            this.DUMMY_TaxModule.DropDownClosed += new System.EventHandler(this.toolStripMenuItem74_DropDownClosed);
-            this.DUMMY_TaxModule.DropDownOpened += new System.EventHandler(this.toolStripMenuItem74_DropDownOpened);
-            // 
-            // DUMMY_Jual
-            // 
-            this.DUMMY_Jual.BackColor = System.Drawing.Color.SteelBlue;
-            this.DUMMY_Jual.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DUMMY_Jual.ForeColor = System.Drawing.Color.FloralWhite;
-            this.DUMMY_Jual.Name = "DUMMY_Jual";
-            this.DUMMY_Jual.Size = new System.Drawing.Size(265, 22);
-            this.DUMMY_Jual.Text = "Transaksi";
-            this.DUMMY_Jual.Click += new System.EventHandler(this.toolStripMenuItem28_Click);
-            // 
-            // DUMMY_LapJual
-            // 
-            this.DUMMY_LapJual.BackColor = System.Drawing.Color.SteelBlue;
-            this.DUMMY_LapJual.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.DUMMY_LapJualDetailed,
-            this.DUMMY_LapJualSummary,
-            this.DUMMY_LapJualbyProduct});
-            this.DUMMY_LapJual.ForeColor = System.Drawing.Color.FloralWhite;
-            this.DUMMY_LapJual.Name = "DUMMY_LapJual";
-            this.DUMMY_LapJual.Size = new System.Drawing.Size(265, 22);
-            this.DUMMY_LapJual.Text = "Laporan Penjualan Produk";
-            // 
-            // DUMMY_LapJualDetailed
-            // 
-            this.DUMMY_LapJualDetailed.BackColor = System.Drawing.Color.SteelBlue;
-            this.DUMMY_LapJualDetailed.ForeColor = System.Drawing.Color.FloralWhite;
-            this.DUMMY_LapJualDetailed.Name = "DUMMY_LapJualDetailed";
-            this.DUMMY_LapJualDetailed.Size = new System.Drawing.Size(213, 22);
-            this.DUMMY_LapJualDetailed.Text = "Detailed";
-            this.DUMMY_LapJualDetailed.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
-            // 
-            // DUMMY_LapJualSummary
-            // 
-            this.DUMMY_LapJualSummary.BackColor = System.Drawing.Color.SteelBlue;
-            this.DUMMY_LapJualSummary.ForeColor = System.Drawing.Color.FloralWhite;
-            this.DUMMY_LapJualSummary.Name = "DUMMY_LapJualSummary";
-            this.DUMMY_LapJualSummary.Size = new System.Drawing.Size(213, 22);
-            this.DUMMY_LapJualSummary.Text = "Summary ";
-            this.DUMMY_LapJualSummary.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
-            // 
-            // DUMMY_LapJualbyProduct
-            // 
-            this.DUMMY_LapJualbyProduct.BackColor = System.Drawing.Color.SteelBlue;
-            this.DUMMY_LapJualbyProduct.ForeColor = System.Drawing.Color.FloralWhite;
-            this.DUMMY_LapJualbyProduct.Name = "DUMMY_LapJualbyProduct";
-            this.DUMMY_LapJualbyProduct.Size = new System.Drawing.Size(213, 22);
-            this.DUMMY_LapJualbyProduct.Text = "Per Produk-Barang";
-            this.DUMMY_LapJualbyProduct.Click += new System.EventHandler(this.toolStripMenuItem8_Click);
             // 
             // informasiToolStripMenuItem
             // 
@@ -1779,23 +1799,14 @@
             this.timerMessage.Interval = 360000;
             this.timerMessage.Tick += new System.EventHandler(this.timerMessage_Tick);
             // 
-            // stokGlobalToolStripMenuItem
+            // informasiProdukToolStripMenuItem
             // 
-            this.stokGlobalToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
-            this.stokGlobalToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
-            this.stokGlobalToolStripMenuItem.Name = "stokGlobalToolStripMenuItem";
-            this.stokGlobalToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
-            this.stokGlobalToolStripMenuItem.Text = "Stok Global";
-            this.stokGlobalToolStripMenuItem.Click += new System.EventHandler(this.stokGlobalToolStripMenuItem_Click);
-            // 
-            // productBarcodePrintTemplateToolStripMenuItem
-            // 
-            this.productBarcodePrintTemplateToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
-            this.productBarcodePrintTemplateToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
-            this.productBarcodePrintTemplateToolStripMenuItem.Name = "productBarcodePrintTemplateToolStripMenuItem";
-            this.productBarcodePrintTemplateToolStripMenuItem.Size = new System.Drawing.Size(306, 22);
-            this.productBarcodePrintTemplateToolStripMenuItem.Text = "Product Barcode Print Template";
-            this.productBarcodePrintTemplateToolStripMenuItem.Click += new System.EventHandler(this.productBarcodePrintTemplateToolStripMenuItem_Click);
+            this.informasiProdukToolStripMenuItem.BackColor = System.Drawing.Color.SteelBlue;
+            this.informasiProdukToolStripMenuItem.ForeColor = System.Drawing.Color.FloralWhite;
+            this.informasiProdukToolStripMenuItem.Name = "informasiProdukToolStripMenuItem";
+            this.informasiProdukToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
+            this.informasiProdukToolStripMenuItem.Text = "Informasi Produk";
+            this.informasiProdukToolStripMenuItem.Click += new System.EventHandler(this.informasiProdukToolStripMenuItem_Click);
             // 
             // adminForm
             // 
@@ -1994,6 +2005,7 @@
         private System.Windows.Forms.ToolStripMenuItem MENU_revisiNota;
         private System.Windows.Forms.ToolStripMenuItem stokGlobalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem productBarcodePrintTemplateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem informasiProdukToolStripMenuItem;
         //private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
     }
 }
