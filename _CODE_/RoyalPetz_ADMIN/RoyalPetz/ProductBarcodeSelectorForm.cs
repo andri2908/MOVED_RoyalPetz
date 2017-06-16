@@ -28,6 +28,7 @@ namespace AlphaSoft
         private Hotkeys.GlobalHotkey ghk_F11;
         private Hotkeys.GlobalHotkey ghk_DEL;
 
+        private CultureInfo culture = new CultureInfo("id-ID");
         private int numberLabel = 4;
         private int numberProduct = 12;
 
@@ -188,9 +189,9 @@ namespace AlphaSoft
                 selectedRow.Cells["productName"].Value = selectedProductName;
                 selectedRow.Cells["productBarcode"].Value = selectedProductBC;
 
-                retailprice = getProductPriceValue(selectedProductID, 0, true);
-                selectedRow.Cells["productPrice"].Value = retailprice;
-
+                retailprice = getProductPriceValue(selectedProductID, 0, false);
+                //selectedRow.Cells["productPrice"].Value = retailprice;
+                selectedRow.Cells["productPrice"].Value = retailprice.ToString("C0", culture);
                 //ProductBCGridView.Rows[rowSelectedIndex].Cells["productId"].Value = selectedProductID;
                 //ProductBCGridView.Rows[rowSelectedIndex].Cells["productName"].Value = selectedProductName;
                 //ProductBCGridView.Rows[rowSelectedIndex].Cells["productBarcode"].Value = selectedProductBC;
@@ -466,7 +467,12 @@ namespace AlphaSoft
                 if (ProductBCGridView.Rows[a].Cells["productBarcode"].Value != null)
                     selectedProductBC = "*" + ProductBCGridView.Rows[a].Cells["productBarcode"].Value.ToString() + "*";
                 if (ProductBCGridView.Rows[a].Cells["productPrice"].Value != null)
-                    selectedProductPrice = "Rp." + ProductBCGridView.Rows[a].Cells["productPrice"].Value.ToString() + ",-";
+                {
+                    //selectedProductPrice = "Rp." + ProductBCGridView.Rows[a].Cells["productPrice"].Value.ToString() + ",-";
+                    //double tmp = Convert.ToDouble(ProductBCGridView.Rows[a].Cells["productPrice"].Value.ToString());                 
+                    //selectedProductPrice = tmp.ToString("C0", culture);
+                    selectedProductPrice = ProductBCGridView.Rows[a].Cells["productPrice"].Value.ToString();
+                }
 
                 for (int i = 0; i < numberLabel; i++)
                 {

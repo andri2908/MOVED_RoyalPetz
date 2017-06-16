@@ -402,8 +402,6 @@ namespace AlphaSoft
             ////ghk_F12 = new Hotkeys.GlobalHotkey(Constants.NOMOD, Keys.F12, this);
             ////ghk_F12.Register();
 
-
-
             //ghk_CTRL_C = new Hotkeys.GlobalHotkey(Constants.CTRL, Keys.C, this);
             //ghk_CTRL_C.Register();
 
