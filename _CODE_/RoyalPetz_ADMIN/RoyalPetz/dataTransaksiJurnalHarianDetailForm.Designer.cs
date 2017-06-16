@@ -199,7 +199,7 @@
             this.TransaksiAccountGridView.Location = new System.Drawing.Point(1, 317);
             this.TransaksiAccountGridView.Name = "TransaksiAccountGridView";
             this.TransaksiAccountGridView.RowHeadersVisible = false;
-            this.TransaksiAccountGridView.Size = new System.Drawing.Size(719, 357);
+            this.TransaksiAccountGridView.Size = new System.Drawing.Size(1035, 357);
             this.TransaksiAccountGridView.TabIndex = 42;
             this.TransaksiAccountGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.TransaksiAccountGridView_CellDoubleClick);
             this.TransaksiAccountGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.TransaksiAccountGridView_CellFormatting);
@@ -418,8 +418,7 @@
             // 
             this.journal_id.HeaderText = "KODE JOURNAL";
             this.journal_id.Name = "journal_id";
-            this.journal_id.Visible = false;
-            this.journal_id.Width = 141;
+            this.journal_id.Width = 146;
             // 
             // Tanggal
             // 
@@ -433,7 +432,7 @@
             this.Kode_akun.HeaderText = "KODE AKUN";
             this.Kode_akun.Name = "Kode_akun";
             this.Kode_akun.Visible = false;
-            this.Kode_akun.Width = 131;
+            this.Kode_akun.Width = 120;
             // 
             // Nama_Akun
             // 
@@ -448,7 +447,7 @@
             this.branch_id.HeaderText = "KODE CABANG";
             this.branch_id.Name = "branch_id";
             this.branch_id.Visible = false;
-            this.branch_id.Width = 153;
+            this.branch_id.Width = 140;
             // 
             // branch_name
             // 
@@ -460,8 +459,7 @@
             // 
             this.PaymentMethodID.HeaderText = "KODE BAYAR";
             this.PaymentMethodID.Name = "PaymentMethodID";
-            this.PaymentMethodID.Visible = false;
-            this.PaymentMethodID.Width = 138;
+            this.PaymentMethodID.Width = 126;
             // 
             // PaymentMethod
             // 
@@ -494,7 +492,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(720, 727);
+            this.ClientSize = new System.Drawing.Size(1122, 727);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.commitButton);
             this.Controls.Add(this.TanggalTransaksi);

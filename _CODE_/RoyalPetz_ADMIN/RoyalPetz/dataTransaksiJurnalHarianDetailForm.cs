@@ -184,7 +184,11 @@ namespace AlphaSoft
                 DateTime selectedDate = TanggalTransaksi.Value;
                 String pembayaran = carabayarcombobox.GetItemText(carabayarcombobox.SelectedItem);
                 String cabang = branchCombobox.GetItemText(branchCombobox.SelectedItem);
-                int pm_id = Int32.Parse(carabayarcombobox.SelectedValue.ToString());
+
+                int pm_id = 0;// Int32.Parse(carabayarcombobox.SelectedValue.ToString());
+
+                if (null != carabayarcombobox.SelectedValue)
+                    pm_id = Int32.Parse(carabayarcombobox.SelectedValue.ToString());
 
                 int branch_id = 0;// Int32.Parse(branchCombobox.SelectedValue.ToString());
 
@@ -223,31 +227,13 @@ namespace AlphaSoft
                 TglTrans = String.Format(culture, "{0:dd-MM-yyyy}", selectedDate);
                 jamTrans = gutil.getCustomStringFormatTime(DateTime.Now);//String.Format(culture, "{0:HH:mm}", DateTime.Now);
 
-                TglTrans = TglTrans + " " + jamTrans;
-                //must add function to update content
-                //bool newdata = true;
-                //for (int rows = 0; rows < transaksiaccountgridview.rows.count; rows++)
-                //{
-                //    int tmp = int32.parse(transaksiaccountgridview.rows[rows].cells[8].value.tostring());
-                //    if (tmp == selecteddjid)
-                //    {
-                //        //newdata = false;
-                //        //update content datagridview
-                //        transaksiaccountgridview.rows[rows].cells[7].value = deskripsiakun;
-                //        transaksiaccountgridview.rows[rows].cells[6].value = credit;
-                //        transaksiaccountgridview.rows[rows].cells[5].value = debet;
-                //        transaksiaccountgridview.rows[rows].cells[4].value = pembayaran;
-                //        transaksiaccountgridview.rows[rows].cells[3].value = pm_id;
-                //        transaksiaccountgridview.rows[rows].cells[2].value = nmakun;
-                //        transaksiaccountgridview.rows[rows].cells[1].value = selectedaccountid;
-                //        transaksiaccountgridview.rows[rows].cells[0].value = tgltrans;
-                //    }
-                //}
+                TglTrans = TglTrans + " " + jamTrans;               
 
                 if (upd_mode == false)
                 {
                     TransaksiAccountGridView.Rows.Add(selectedDJID, TglTrans, selectedAccountID, nmakun, branch_id, cabang, pm_id, pembayaran, debet, credit, deskripsiakun);
-                } else
+                }
+                else
                 {
                     TransaksiAccountGridView.Rows[selectedrowindex].Cells[10].Value = deskripsiakun;
                     TransaksiAccountGridView.Rows[selectedrowindex].Cells[9].Value = credit;
@@ -272,6 +258,11 @@ namespace AlphaSoft
             selectedAccountID = AccountID;
             //kodeAkunTextbox.Text = selectedAccountID.ToString();
             loadDeskripsi(selectedAccountID);
+
+            selectedDJID = 0;
+            selectedrowindex = -1;
+            upd_mode = false;
+            saveButton.Text = "TAMBAH";
         }
 
         private void loadDeskripsi(int accountID)
@@ -382,55 +373,48 @@ namespace AlphaSoft
 
             //branch_id = getBranchID();
 
-            for (int rows = 0; rows < TransaksiAccountGridView.Rows.Count; rows++)
+            DS.beginTransaction();
+
+            try
             {
-                //TglTrans = String.Format(culture, "{0:dd-MM-yyyy}", TransaksiAccountGridView.Rows[rows].Cells[1].Value.ToString());
-                //timeTrans = gutil.getCustomStringFormatTime(DateTime.Now);
+                DS.mySqlConnect();
 
-                //TglTrans = TglTrans + " " + timeTrans;
-
-                TglTrans = TransaksiAccountGridView.Rows[rows].Cells[1].Value.ToString();
-                Account_ID = Int32.Parse(TransaksiAccountGridView.Rows[rows].Cells[2].Value.ToString());
-                pm_id = Int32.Parse(TransaksiAccountGridView.Rows[rows].Cells[6].Value.ToString());
-                Double debet, credit;
-                if (Double.TryParse(TransaksiAccountGridView.Rows[rows].Cells[8].Value.ToString(), out debet))
+                for (int rows = 0; rows < TransaksiAccountGridView.Rows.Count; rows++)
                 {
-                }
-                if (Double.TryParse(TransaksiAccountGridView.Rows[rows].Cells[9].Value.ToString(), out credit))
-                {
-                }
-                if (debet == 0)
-                {
-                    //credit
-                    NominalAkun = credit;
-                }
-                else
-                {
-                    NominalAkun = debet;
-                }
-                deskripsiakun = TransaksiAccountGridView.Rows[rows].Cells[10].Value.ToString();
-                user_id = selectedUserID;
+                    TglTrans = TransaksiAccountGridView.Rows[rows].Cells[1].Value.ToString();
+                    Account_ID = Int32.Parse(TransaksiAccountGridView.Rows[rows].Cells[2].Value.ToString());
+                    pm_id = Int32.Parse(TransaksiAccountGridView.Rows[rows].Cells[6].Value.ToString()) + 1;
 
-                selectedDJID = 0;
-                selectedDJID = Int32.Parse(TransaksiAccountGridView.Rows[rows].Cells[0].Value.ToString());
+                    Double debet, credit;
+                    if (Double.TryParse(TransaksiAccountGridView.Rows[rows].Cells[8].Value.ToString(), out debet))
+                    {
+                    }
+                    if (Double.TryParse(TransaksiAccountGridView.Rows[rows].Cells[9].Value.ToString(), out credit))
+                    {
+                    }
 
-                originModuleID = globalConstants.NEW_DJ;
+                    if (debet == 0)
+                    {
+                        //credit
+                        NominalAkun = credit;
+                    }
+                    else
+                    {
+                        NominalAkun = debet;
+                    }
 
-                if (selectedDJID > 0)
-                {
-                    originModuleID = globalConstants.EDIT_DJ;
-                }
+                    deskripsiakun = TransaksiAccountGridView.Rows[rows].Cells[10].Value.ToString();
+                    user_id = selectedUserID;
 
-                //for (int col = 0; col < TransaksiAccountGridView.Rows[rows].Cells.Count; col++)
-                //{
-                // string value = TransaksiAccountGridView.Rows[rows].Cells[col].Value.ToString();
-                //}
+                    selectedDJID = 0;
+                    selectedDJID = Int32.Parse(TransaksiAccountGridView.Rows[rows].Cells[0].Value.ToString());
 
-                DS.beginTransaction();
+                    originModuleID = globalConstants.NEW_DJ;
 
-                try
-                {
-                    DS.mySqlConnect();
+                    if (selectedDJID > 0)
+                    {
+                        originModuleID = globalConstants.EDIT_DJ;
+                    }
 
                     switch (originModuleID)
                     {
@@ -438,8 +422,9 @@ namespace AlphaSoft
                             sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, BRANCH_ID, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
                                                 "VALUES (" + Account_ID + ", STR_TO_DATE('" + TglTrans + "', '%d-%m-%Y %H:%i')" + ", '" + NominalAkun + "', '" + branch_id + "', '" + deskripsiakun + "', '" + user_id + "', " + pm_id + ")";
                             options = gutil.INS;
-                            gutil.saveSystemDebugLog(globalConstants.MENU_TRANSAKSI_HARIAN, "INSERT NEW DATA TO DAILY JOURNAL TABLE ["+ Account_ID +", " + NominalAkun + "]");
+                            gutil.saveSystemDebugLog(globalConstants.MENU_TRANSAKSI_HARIAN, "INSERT NEW DATA TO DAILY JOURNAL TABLE [" + Account_ID + ", " + NominalAkun + "]");
                             break;
+
                         case globalConstants.EDIT_DJ:
                             sqlCommand = "UPDATE DAILY_JOURNAL SET " +
                                                 "ACCOUNT_ID = " + Account_ID + ", " +
@@ -458,36 +443,35 @@ namespace AlphaSoft
                     if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                         throw internalEX;
 
-                    DS.commit();
-                    result = true;
-                }
-                catch (Exception e)
-                {
-                    gutil.saveSystemDebugLog(globalConstants.MENU_TRANSAKSI_HARIAN, "EXCEPTION THROWN [" + e.Message + "]");
-                    try
-                    {
-                        DS.rollBack();
-                    }
-                    catch (MySqlException ex)
-                    {
-                        if (DS.getMyTransConnection() != null)
-                        {
-                            gutil.showDBOPError(ex, "ROLLBACK");
-                        }
-                    }
-
-                    gutil.showDBOPError(e, "INSERT");
-                    result = false;
-                }
-                finally
-                {
-                    DS.mySqlClose();
                 }
 
+                DS.commit();
+                result = true;
+            }
+            catch (Exception e)
+            {
+                gutil.saveSystemDebugLog(globalConstants.MENU_TRANSAKSI_HARIAN, "EXCEPTION THROWN [" + e.Message + "]");
+                try
+                {
+                    DS.rollBack();
+                }
+                catch (MySqlException ex)
+                {
+                    if (DS.getMyTransConnection() != null)
+                    {
+                        gutil.showDBOPError(ex, "ROLLBACK");
+                    }
+                }
+
+                gutil.showDBOPError(e, "INSERT");
+                result = false;
+            }
+            finally
+            {
+                DS.mySqlClose();
             }
 
             return result;
-
         }
 
         private bool checkDataTransaksi(String datetimetrans)
@@ -568,6 +552,12 @@ namespace AlphaSoft
                             loadDeskripsi(selectedAccountID);
                             nmakun = NamaAkunTextbox.Text;
                             pm_id = rdr.GetInt32("PM_ID");
+
+                            // TO HANDLE DISCREPANCY ON PAYMENT METHOD
+                            // TEMPORARY FIX, BECAUSE A LOT OF DATA HAS ALREADY GONE IN
+                            if (pm_id > 0)
+                                pm_id = pm_id - 1;
+
                             carabayarcombobox.SelectedValue = pm_id;
                             carabayarcombobox.Text = carabayarcombobox.GetItemText(carabayarcombobox.SelectedItem);
                             deskripsiakun = rdr.GetString("JOURNAL_DESCRIPTION");
@@ -615,9 +605,14 @@ namespace AlphaSoft
             }
             else
             {
-                //modeinsert
+                //modeinsert 
                 //originModuleID = globalConstants.NEW_DJ;
             }
+
+            selectedDJID = 0;
+            upd_mode = false;
+            saveButton.Text = "TAMBAH";
+            selectedrowindex = -1;
         }
 
         private void TanggalTransaksi_ValueChanged(object sender, EventArgs e)

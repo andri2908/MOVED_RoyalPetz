@@ -1247,11 +1247,11 @@ namespace AlphaSoft
 
                     // UPDATE HEADER TABLE
                     sqlCommand = "UPDATE SALES_HEADER SET CUSTOMER_ID = " + selectedPelangganID + ", " +
-                                                                                        "SALES_DATE = STR_TO_DATE('" + SODateTime + "', '%d-%m-%Y %H:%i'), " +
+//                                                                                        "SALES_DATE = STR_TO_DATE('" + SODateTime + "', '%d-%m-%Y %H:%i'), " +
                                                                                         "SALES_TOTAL = " + gutil.validateDecimalNumericInput(globalTotalValue) + ", " +
                                                                                         "SALES_DISCOUNT_FINAL = " + gutil.validateDecimalNumericInput(Convert.ToDouble(salesDiscountFinal)) + ", " +
-                                                                                        "SALES_TOP = " + salesTop + ", " +
-                                                                                        "SALES_TOP_DATE = STR_TO_DATE('" + SODueDateTime + "', '%d-%m-%Y'), " +
+//                                                                                        "SALES_TOP = " + salesTop + ", " +
+//                                                                                        "SALES_TOP_DATE = STR_TO_DATE('" + SODueDateTime + "', '%d-%m-%Y'), " +
                                                                                         "SALES_PAID = " + salesPaid + ", " +
                                                                                         "SALES_PAYMENT = " + gutil.validateDecimalNumericInput(bayarAmount) + ", " +
                                                                                         "SALES_PAYMENT_CHANGE = " + gutil.validateDecimalNumericInput(sisaBayar) + ", " +
@@ -1458,12 +1458,21 @@ namespace AlphaSoft
                     {
                         double revisionCashAmountDifference = 0;
 
-                        revisionCashAmountDifference = Math.Abs(globalTotalValue - previousSOCashAmount);
+                        revisionCashAmountDifference = (globalTotalValue - previousSOCashAmount);
 
-                        // PAYMENT IN CASH THEREFORE ADDING THE AMOUNT OF CASH IN THE CASH REGISTER
-                        // ADD A NEW ENTRY ON THE DAILY JOURNAL TO KEEP TRACK THE ADDITIONAL CASH AMOUNT 
-                        sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
-                                                       "VALUES (11, STR_TO_DATE('" + SODateTime + "', '%d-%m-%Y %H:%i')" + ", " + gutil.validateDecimalNumericInput(revisionCashAmountDifference) + ", 'SELISIH REVISI " + salesInvoice + "', '" + gutil.getUserID() + "', 1)";
+                        if (revisionCashAmountDifference < 0)
+                        {
+                            // PAYMENT IN CASH THEREFORE ADDING THE AMOUNT OF CASH IN THE CASH REGISTER
+                            // ADD A NEW ENTRY ON THE DAILY JOURNAL TO KEEP TRACK THE ADDITIONAL CASH AMOUNT 
+                            sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
+                                                           "VALUES (11, STR_TO_DATE('" + SODateTime + "', '%d-%m-%Y %H:%i')" + ", " + gutil.validateDecimalNumericInput(revisionCashAmountDifference) + ", 'SELISIH REVISI " + salesInvoice + "', '" + gutil.getUserID() + "', 1)";
+                        }
+                        else
+                        {
+                            sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
+                                                           "VALUES (1, STR_TO_DATE('" + SODateTime + "', '%d-%m-%Y %H:%i')" + ", " + gutil.validateDecimalNumericInput(revisionCashAmountDifference) + ", 'SELISIH REVISI " + salesInvoice + "', '" + gutil.getUserID() + "', 1)";
+
+                        }
 
                         gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "INSERT TO DAILY JOURNAL TABLE [" + gutil.validateDecimalNumericInput(revisionCashAmountDifference) + "]");
 
@@ -2323,6 +2332,14 @@ namespace AlphaSoft
                 copyNotaButton.Visible = false;
                 disableF5 = true;
                 reprintButton.Visible = true;
+            }
+            else if (originModuleID == globalConstants.REVISI_NOTA)
+            {
+                cashRadioButton.Enabled = false;
+                creditRadioButton.Enabled = false;
+                tempoMaskedTextBox.ReadOnly = true;
+                tempoMaskedTextBox.Enabled = false;
+                paymentComboBox.Enabled = false;
             }
 
             //add double buffer
