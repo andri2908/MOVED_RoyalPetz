@@ -22,6 +22,7 @@ namespace AlphaSoft
         private int selectedInternalProductID = 0;
         private bool productExpirable = false;
         private bool newProductExpirable = false;
+        private string selectedpreviousProductID = "";
         private string selectedProductID = "";
 
         private int selectedLotID = 0;
@@ -64,7 +65,8 @@ namespace AlphaSoft
 
             if (globalFeatureList.EXPIRY_MODULE == 1 && productExpirable)
             {
-                selectedLotID = productID;
+                selectedLotID = productID; //product_expiry
+                selectedpreviousProductID = kodeProduk;
             }
             else
                 selectedInternalProductID = productID;
@@ -483,7 +485,8 @@ namespace AlphaSoft
                 DS.mySqlConnect();
 
                 //REDUCE CURRENT STOCK QTY
-                sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + gUtil.validateDecimalNumericInput(Convert.ToDouble(numberOfProductTextBox.Text)) + " WHERE ID = " + selectedInternalProductID;
+                //sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + gUtil.validateDecimalNumericInput(Convert.ToDouble(numberOfProductTextBox.Text)) + " WHERE ID = " + selectedInternalProductID;
+                sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + gUtil.validateDecimalNumericInput(Convert.ToDouble(numberOfProductTextBox.Text)) + " WHERE PRODUCT_ID = '" + selectedpreviousProductID + "'";
                 gUtil.saveSystemDebugLog(globalConstants.MENU_PECAH_SATUAN_PRODUK, "REDUCE QTY [" + productIDTextBox.Text + "] AMT [" + gUtil.validateDecimalNumericInput(Convert.ToDouble(numberOfProductTextBox.Text)) + "]");
 
                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
