@@ -1467,11 +1467,10 @@ namespace AlphaSoft
                             sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
                                                            "VALUES (11, STR_TO_DATE('" + SODateTime + "', '%d-%m-%Y %H:%i')" + ", " + gutil.validateDecimalNumericInput(revisionCashAmountDifference) + ", 'SELISIH REVISI " + salesInvoice + "', '" + gutil.getUserID() + "', 1)";
                         }
-                        else
+                        else if (revisionCashAmountDifference > 0)
                         {
                             sqlCommand = "INSERT INTO DAILY_JOURNAL (ACCOUNT_ID, JOURNAL_DATETIME, JOURNAL_NOMINAL, JOURNAL_DESCRIPTION, USER_ID, PM_ID) " +
                                                            "VALUES (1, STR_TO_DATE('" + SODateTime + "', '%d-%m-%Y %H:%i')" + ", " + gutil.validateDecimalNumericInput(revisionCashAmountDifference) + ", 'SELISIH REVISI " + salesInvoice + "', '" + gutil.getUserID() + "', 1)";
-
                         }
 
                         gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "INSERT TO DAILY JOURNAL TABLE [" + gutil.validateDecimalNumericInput(revisionCashAmountDifference) + "]");
