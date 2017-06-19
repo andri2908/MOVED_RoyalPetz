@@ -965,6 +965,18 @@
     <Compile Include="ReportStockInOutSearchForm.Designer.cs">
       <DependentUpon>ReportStockInOutSearchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportStockPecahBarang.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportStockPecahBarang.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportStockPecahBarangForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportStockPecahBarangForm.Designer.cs">
+      <DependentUpon>ReportStockPecahBarangForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportStockValue.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1646,6 +1658,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportStockInOutSearchForm.resx">
       <DependentUpon>ReportStockInOutSearchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportStockPecahBarang.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportStockPecahBarang.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportStockPecahBarangForm.resx">
+      <DependentUpon>ReportStockPecahBarangForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportStockValue.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

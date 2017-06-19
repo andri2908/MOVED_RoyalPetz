@@ -1,0 +1,3 @@
+- semua stok pecah barang masuk ke tabel product loss
+- bikin report baru, untuk menampilkan data pecah barang, filter by tanggal dan product, ambil data dari product loss
+- tambah user access management untuk semua laporan keuangan

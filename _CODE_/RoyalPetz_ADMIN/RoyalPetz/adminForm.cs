@@ -1114,7 +1114,15 @@ namespace AlphaSoft
                 setAccessibility(globalConstants.MENU_LAPORAN_OMZET_PENJUALAN, MENU_laporanOmzetPenjualan);
                 setAccessibility(globalConstants.MENU_LAPORAN_TOP_SALE, MENU_laporanTopSale);
                 setAccessibility(globalConstants.MENU_LAPORAN_PENJUALAN_KASIR, MENU_laporanPenjualanKasir);
-                setAccessibility(globalConstants.MENU_LAPORAN_KEUANGAN, MENU_laporanKeuangan);
+
+                if(setAccessibility(globalConstants.MENU_LAPORAN_KEUANGAN, MENU_laporanKeuangan))
+                {
+                    setAccessibility(globalConstants.MENU_LAPORAN_PENGELUARAN_KAS, MENU_laporanPengeluaranKas);
+                    setAccessibility(globalConstants.MENU_LAPORAN_PEMASUKAN_KAS_NON_SALES, MENU_laporanPemasukanKasNonSales);
+                    setAccessibility(globalConstants.MENU_LAPORAN_LABA_RUGI_HARIAN, MENU_labaRugiHarian);
+                    setAccessibility(globalConstants.MENU_LAPORAN_LABA_RUGI_BULANAN, MENU_labaRugiBulanan);
+                }
+
                 setAccessibility(globalConstants.MENU_LAPORAN_PIUTANG_AKAN_JATUH_TEMPO, MENU_laporanPiutangAkanJatuhTempo);
                 setAccessibility(globalConstants.MENU_LAPORAN_PIUTANG_LEWAT_JATUH_TEMPO, MENU_laporanPiutangLewatJatuhTempo);
                 setAccessibility(globalConstants.MENU_LAPORAN_PEMBAYARAN_PIUTANG, MENU_laporanPembayaranPiutang);
@@ -1605,6 +1613,17 @@ namespace AlphaSoft
                                 "ORDER BY NAME ASC";
             DS.writeXML(sqlCommandx, globalConstants.ProductInformationXML);
             ReportProductInformationForm displayedForm = new ReportProductInformationForm();
+            displayedForm.ShowDialog(this);
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MENU_LaporanStokPecahBarang_Click(object sender, EventArgs e)
+        {
+            ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm(globalConstants.REPORT_STOCK_PECAH_BARANG);
             displayedForm.ShowDialog(this);
         }
     }

@@ -105,6 +105,7 @@ namespace AlphaSoft
             }
             CustomercomboBox.SelectedIndex = CustomercomboBox.FindStringExact("P-UMUM");
         }
+
         private void loadProduct()
         {
             ProductcomboBox.DataSource = null;
@@ -114,13 +115,28 @@ namespace AlphaSoft
             DS.mySqlConnect();
 
             string SQLcommand = "";
-            if (nonactivecheckbox2.Checked)
+
+            if (originModuleID == globalConstants.REPORT_STOCK_PECAH_BARANG) // read internal id, instead of kode product
             {
-                SQLcommand = "SELECT PRODUCT_ID AS 'ID', PRODUCT_NAME AS 'NAME' FROM MASTER_PRODUCT ORDER BY NAME ASC";
+                if (nonactivecheckbox2.Checked)
+                {
+                    SQLcommand = "SELECT ID AS 'ID', PRODUCT_NAME AS 'NAME' FROM MASTER_PRODUCT ORDER BY NAME ASC";
+                }
+                else
+                {
+                    SQLcommand = "SELECT ID AS 'ID', PRODUCT_NAME AS 'NAME' FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 ORDER BY NAME ASC";
+                }
             }
             else
-            {
-                SQLcommand = "SELECT PRODUCT_ID AS 'ID', PRODUCT_NAME AS 'NAME' FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 ORDER BY NAME ASC";
+            { 
+                if (nonactivecheckbox2.Checked)
+                {
+                    SQLcommand = "SELECT PRODUCT_ID AS 'ID', PRODUCT_NAME AS 'NAME' FROM MASTER_PRODUCT ORDER BY NAME ASC";
+                }
+                else
+                {
+                    SQLcommand = "SELECT PRODUCT_ID AS 'ID', PRODUCT_NAME AS 'NAME' FROM MASTER_PRODUCT WHERE PRODUCT_ACTIVE = 1 ORDER BY NAME ASC";
+                }
             }
 
             using (rdr = DS.getData(SQLcommand))
@@ -285,6 +301,23 @@ namespace AlphaSoft
                     datefromPicker.Visible = false;
                     loadTags();
                     break;
+                case globalConstants.REPORT_STOCK_PECAH_BARANG:
+                    checkBox1.Visible = false;
+                    nonactivecheckbox1.Visible = false;
+                    LabelOptions1.Visible = false;
+                    SupplierNameCombobox.Visible = false;
+                    CustomercomboBox.Visible = false;
+                    ProductcomboBox.Visible = true;
+                    checkBox2.Visible = true;
+                    nonactivecheckbox2.Visible = true;
+                    LabelOptions2.Text = "Produk";
+                    groupBox1.Text = "Kriteria Pencarian Stock Pecah Barang";
+                    label1.Visible = true;
+                    label2.Visible = true;
+                    datetoPicker.Visible = true;
+                    datefromPicker.Visible = true;
+                    loadProduct();
+                    break;
             }
          
         }
@@ -305,6 +338,7 @@ namespace AlphaSoft
             string customer = " ";
             string produk = " ";
             string tags = " ";
+
             if (checkBox1.Checked == false)
             {
                 switch (originModuleID)
@@ -324,6 +358,7 @@ namespace AlphaSoft
                         break;
                 }
             }
+
             if (checkBox2.Checked == false)
             {
                 switch (originModuleID)
@@ -336,6 +371,10 @@ namespace AlphaSoft
                             tags = "AND PC.CATEGORY_ID";
                             tags += " = " + tags_id + " ";
                         }
+                        break;
+                    case globalConstants.REPORT_STOCK_PECAH_BARANG:
+                        produk = "AND MP.ID";
+                        produk = produk + " = '" + ProductcomboBox.SelectedValue + "' ";
                         break;
                     default :
                         produk = "AND PA.PRODUCT_ID";
@@ -361,6 +400,7 @@ namespace AlphaSoft
                         break;
                 }
             }
+
             switch (originModuleID)
             {
                 case globalConstants.REPORT_PURCHASE_RETURN:
@@ -446,6 +486,17 @@ namespace AlphaSoft
                     DS.writeXML(sqlCommandx, globalConstants.StockExpiryXML);
                     ReportStockForm displayedForm6Expiry = new ReportStockForm(globalConstants.REPORT_STOCK_EXPIRY);
                     displayedForm6Expiry.ShowDialog(this);
+                    break;
+                case globalConstants.REPORT_STOCK_PECAH_BARANG:
+                    sqlCommandx = "SELECT PL.PL_DATETIME AS 'TGL', MP.PRODUCT_NAME AS 'PRODUK ASAL', PL.PRODUCT_QTY AS 'QTY ASAL', MP2.PRODUCT_NAME AS 'PRODUK BARU', " +
+                                            "PL.NEW_PRODUCT_QTY - PL.TOTAL_LOSS AS 'QTY BARU' " +
+                                            "FROM PRODUCT_LOSS PL LEFT OUTER JOIN MASTER_PRODUCT MP ON(PL.PRODUCT_ID = MP.ID) " +
+                                            "LEFT OUTER JOIN MASTER_PRODUCT MP2 ON (PL.NEW_PRODUCT_ID = MP2.ID) " +
+                                            "WHERE PL.PRODUCT_ID <> 0 AND PL.NEW_PRODUCT_ID <> 0 " +
+                                            "AND DATE_FORMAT(PL.PL_DATETIME, '%Y%m%d') >= '" + dateFrom + "' AND DATE_FORMAT(PL.PL_DATETIME, '%Y%m%d') <= '" + dateTo + "' " + produk;
+                    DS.writeXML(sqlCommandx, globalConstants.stockPecahBarangXML);
+                    ReportStockPecahBarangForm displayedForm6PecahBarang = new ReportStockPecahBarangForm();
+                    displayedForm6PecahBarang.ShowDialog(this);
                     break;
             }
         }
