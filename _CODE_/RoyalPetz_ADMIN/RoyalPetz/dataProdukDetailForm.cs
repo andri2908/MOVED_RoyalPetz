@@ -885,6 +885,8 @@ namespace AlphaSoft
             else
                 produkBrand = MySqlHelper.EscapeString(produkBrand);
 
+            // recalculate the qty again
+            calculateTotalQty();
             string produkQty = stokAwalTextBox.Text;
             if (produkQty.Equals(""))
                 produkQty = "0";

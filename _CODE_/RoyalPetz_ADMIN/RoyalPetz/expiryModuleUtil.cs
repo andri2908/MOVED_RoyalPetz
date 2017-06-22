@@ -63,7 +63,7 @@ namespace AlphaSoft
 
             string compareDate = String.Format(culture, "{0:yyyyMMdd}", expiryDate);
 
-            sqlCommand = "SELECT IFNULL(ID, 0) FROM PRODUCT_EXPIRY WHERE PRODUCT_ID = '" + productID + "' AND DATE_FORMAT(PRODUCT_EXPIRY_DATE, '%Y%m%d') = " + compareDate;
+            sqlCommand = "SELECT IFNULL(ID, 0) FROM PRODUCT_EXPIRY WHERE EXPIRY_ACTIVE = 1 AND IS_DELETED = 0 AND PRODUCT_ID = '" + productID + "' AND DATE_FORMAT(PRODUCT_EXPIRY_DATE, '%Y%m%d') = " + compareDate;
             lotID = Convert.ToInt32(DS.getDataSingleValue(sqlCommand));
 
             return lotID;
@@ -76,7 +76,7 @@ namespace AlphaSoft
 
             string compareDate = String.Format(culture, "{0:yyyyMMdd}", expiryDate);
 
-            sqlCommand = "SELECT EXISTS(SELECT 1 FROM PRODUCT_EXPIRY WHERE PRODUCT_ID = '" + productID + "' AND DATE_FORMAT(PRODUCT_EXPIRY_DATE, '%Y%m%d') = " + compareDate +")";
+            sqlCommand = "SELECT EXISTS(SELECT 1 FROM PRODUCT_EXPIRY WHERE EXPIRY_ACTIVE = 1 AND IS_DELETED = 0 AND PRODUCT_ID = '" + productID + "' AND DATE_FORMAT(PRODUCT_EXPIRY_DATE, '%Y%m%d') = " + compareDate +")";
             result = Convert.ToBoolean(DS.getDataSingleValue(sqlCommand));
 
             return result;
