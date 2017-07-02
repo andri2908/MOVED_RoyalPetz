@@ -1626,5 +1626,28 @@ namespace AlphaSoft
             ReportStockInOutSearchForm displayedForm = new ReportStockInOutSearchForm(globalConstants.REPORT_STOCK_PECAH_BARANG);
             displayedForm.ShowDialog(this);
         }
+
+        private void MAINMENU_pembelian_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MAINMENU_Laporan_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MENU_laporanPelanggan_Click(object sender, EventArgs e)
+        {
+            string sqlCommandx = "";
+            sqlCommandx = "SELECT CUSTOMER_FULL_NAME AS 'NAMA CUSTOMER', CUSTOMER_ADDRESS1 AS 'ALAMAT 1', CUSTOMER_ADDRESS2 AS 'ALAMAT 2', " +
+                                    "CUSTOMER_ADDRESS_CITY AS 'KOTA', CUSTOMER_PHONE AS 'TELEPON', CUSTOMER_FAX AS 'FAX', CUSTOMER_EMAIL AS 'EMAIL', " +
+                                    "IF(CUSTOMER_GROUP = 1, 'ECER', IF(CUSTOMER_GROUP = 2, 'GROSIR', 'PARTAI')) AS 'GROUP' FROM MASTER_CUSTOMER " +
+                                    "WHERE CUSTOMER_ACTIVE = 1 ORDER BY CUSTOMER_FULL_NAME ASC"; 
+            DS.writeXML(sqlCommandx, globalConstants.CustomerXML);
+
+            ReportCustomerForm displayedform = new ReportCustomerForm();
+            displayedform.ShowDialog(this);
+        }
     }
 }

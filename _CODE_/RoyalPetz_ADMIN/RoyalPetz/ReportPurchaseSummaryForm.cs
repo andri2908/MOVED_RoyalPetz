@@ -66,6 +66,7 @@ namespace AlphaSoft
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }        }
+            }
+        }
     }
 }

@@ -67,6 +67,10 @@
             // 
             this.dataPelangganDataGridView.AllowUserToAddRows = false;
             this.dataPelangganDataGridView.AllowUserToDeleteRows = false;
+            this.dataPelangganDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataPelangganDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataPelangganDataGridView.BackgroundColor = System.Drawing.Color.FloralWhite;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -90,7 +94,7 @@
             this.dataPelangganDataGridView.Name = "dataPelangganDataGridView";
             this.dataPelangganDataGridView.ReadOnly = true;
             this.dataPelangganDataGridView.RowHeadersVisible = false;
-            this.dataPelangganDataGridView.Size = new System.Drawing.Size(602, 406);
+            this.dataPelangganDataGridView.Size = new System.Drawing.Size(884, 618);
             this.dataPelangganDataGridView.TabIndex = 8;
             this.dataPelangganDataGridView.DoubleClick += new System.EventHandler(this.dataPelangganDataGridView_DoubleClick);
             this.dataPelangganDataGridView.Enter += new System.EventHandler(this.dataPelangganDataGridView_Enter);
@@ -136,6 +140,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.AllButton);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.unknownCustomerButton);
@@ -144,7 +150,7 @@
             this.groupBox1.Controls.Add(this.newButton);
             this.groupBox1.Font = new System.Drawing.Font("Verdana", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.FloralWhite;
-            this.groupBox1.Location = new System.Drawing.Point(57, 12);
+            this.groupBox1.Location = new System.Drawing.Point(198, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(488, 124);
             this.groupBox1.TabIndex = 36;
@@ -168,11 +174,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(602, 549);
+            this.ClientSize = new System.Drawing.Size(884, 761);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataPelangganDataGridView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
             this.Name = "dataPelangganForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
