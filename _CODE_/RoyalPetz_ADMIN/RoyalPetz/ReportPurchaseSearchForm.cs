@@ -157,7 +157,7 @@ namespace AlphaSoft
                     displayedForm3.ShowDialog(this);
                     break;
             }
-            }
+        }
 
         private void ReportPurchaseSearchForm_Load(object sender, EventArgs e)
         {

@@ -156,7 +156,7 @@ namespace AlphaSoft
             if (options == 1)
             {
                 sqlCommand = "SELECT CUSTOMER_ID, CUSTOMER_FULL_NAME AS 'NAMA PELANGGAN', DATE_FORMAT(CUSTOMER_JOINED_DATE,'%d-%M-%Y') AS 'TANGGAL BERGABUNG', IF(CUSTOMER_GROUP = 1,'ECER', IF(CUSTOMER_GROUP = 2,'GROSIR', 'PARTAI')) AS 'GROUP CUSTOMER', " +
-                    "CUSTOMER_ADDRESS1 AS 'ALAMAT 1', CUSTOMER_ADDRESS2 AS 'ALAMAT 2', CUSTOMER_ADDRESS_CITY AS 'KOTA' " +
+                    "CUSTOMER_PHONE AS 'TELEPON', CUSTOMER_ADDRESS1 AS 'ALAMAT 1', CUSTOMER_ADDRESS2 AS 'ALAMAT 2', CUSTOMER_ADDRESS_CITY AS 'KOTA' " +
                     "FROM MASTER_CUSTOMER";
             }
             else
@@ -166,7 +166,7 @@ namespace AlphaSoft
                 if (pelanggangnonactiveoption.Checked == true)
                 {
                     sqlCommand = "SELECT CUSTOMER_ID, CUSTOMER_FULL_NAME AS 'NAMA PELANGGAN', DATE_FORMAT(CUSTOMER_JOINED_DATE,'%d-%M-%Y') AS 'TANGGAL BERGABUNG', IF(CUSTOMER_GROUP = 1,'ECER', IF(CUSTOMER_GROUP = 2,'GROSIR', 'PARTAI')) AS 'GROUP CUSTOMER', " +
-                        "CUSTOMER_ADDRESS1 AS 'ALAMAT 1', CUSTOMER_ADDRESS2 AS 'ALAMAT 2', CUSTOMER_ADDRESS_CITY AS 'KOTA' " +
+                        "CUSTOMER_PHONE AS 'TELEPON', CUSTOMER_ADDRESS1 AS 'ALAMAT 1', CUSTOMER_ADDRESS2 AS 'ALAMAT 2', CUSTOMER_ADDRESS_CITY AS 'KOTA' " +
                         "FROM MASTER_CUSTOMER WHERE CUSTOMER_FULL_NAME LIKE '%" + namaPelangganParam + "%'";
                 }
                 else {

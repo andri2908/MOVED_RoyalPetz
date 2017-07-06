@@ -611,6 +611,12 @@
     <Compile Include="ReportCustomerForm.Designer.cs">
       <DependentUpon>ReportCustomerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportCustomerSearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportCustomerSearchForm.Designer.cs">
+      <DependentUpon>ReportCustomerSearchForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportDebtDue.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1453,6 +1459,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportCustomerForm.resx">
       <DependentUpon>ReportCustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportCustomerSearchForm.resx">
+      <DependentUpon>ReportCustomerSearchForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportDebtDue.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
