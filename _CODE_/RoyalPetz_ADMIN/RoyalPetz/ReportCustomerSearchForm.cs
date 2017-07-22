@@ -51,6 +51,8 @@ namespace AlphaSoft
                 else
                 {
                     ErrorLabel.Visible = true;
+                    customerComboBox.Visible = false;
+                    nonactivecheckbox.Visible = false;
                 }
             }
         }
