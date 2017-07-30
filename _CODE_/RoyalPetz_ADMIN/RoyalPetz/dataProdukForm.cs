@@ -496,9 +496,18 @@ namespace AlphaSoft
                                     "AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%'" +
                                     " GROUP BY MP.PRODUCT_ID";
             }
-            else if (originModuleID == globalConstants.RETUR_PEMBELIAN)
+            else if (originModuleID == globalConstants.RETUR_PEMBELIAN_KE_SUPPLIER || originModuleID == globalConstants.RETUR_PEMBELIAN_KE_PUSAT)
             {
-                sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', MP.PRODUCT_RETAIL_PRICE AS 'HARGA ECER' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_IS_SERVICE = 0 " + showactive + " ORDER BY MP.PRODUCT_NAME ASC";//"AND (MP.PRODUCT_STOCK_QTY - MP.PRODUCT_LIMIT_STOCK > 0) ORDER BY MP.PRODUCT_NAME ASC";
+                if (globalFeatureList.EXPIRY_MODULE == 1)
+                {
+                    sqlCommand = "SELECT PE.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', PE.PRODUCT_AMOUNT AS 'QTY', DATE_FORMAT(PE.PRODUCT_EXPIRY_DATE, '%d-%M-%Y') AS 'TGL KADALUARSA', MP.PRODUCT_RETAIL_PRICE AS 'HARGA ECER' FROM MASTER_PRODUCT MP, PRODUCT_EXPIRY PE WHERE MP.PRODUCT_EXPIRABLE = 1 AND PE.PRODUCT_ID = MP.PRODUCT_ID " + showactive + "AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%' AND PE.EXPIRY_ACTIVE = 1 AND PE.IS_DELETED = 0";
+                    sqlCommand2 = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', '' AS 'TGL KADALUARSA', MP.PRODUCT_RETAIL_PRICE AS 'HARGA ECER' FROM MASTER_PRODUCT MP WHERE PRODUCT_EXPIRABLE = 0 AND MP.PRODUCT_ID LIKE '%" + kodeProductParam + "%' AND MP.PRODUCT_NAME LIKE '%" + namaProductParam + "%' " + showactive;
+                    displayExpiredDate = true;
+
+                    sqlCommand = sqlCommand + " UNION " + sqlCommand2;
+                }
+                else
+                    sqlCommand = "SELECT MP.ID, MP.PRODUCT_ID AS 'PRODUK ID', MP.PRODUCT_NAME AS 'NAMA PRODUK', MP.PRODUCT_STOCK_QTY AS 'QTY', MP.PRODUCT_RETAIL_PRICE AS 'HARGA ECER' FROM MASTER_PRODUCT MP WHERE MP.PRODUCT_IS_SERVICE = 0 " + showactive + " ORDER BY MP.PRODUCT_NAME ASC";//"AND (MP.PRODUCT_STOCK_QTY - MP.PRODUCT_LIMIT_STOCK > 0) ORDER BY MP.PRODUCT_NAME ASC";
             }
             else if (originModuleID == globalConstants.PENERIMAAN_BARANG || originModuleID == globalConstants.BROWSE_STOK_PECAH_BARANG)
             {
