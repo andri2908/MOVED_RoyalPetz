@@ -1253,7 +1253,7 @@ namespace AlphaSoft
                                 if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                                     throw internalEX;
 
-                                // REDUCE GLOBAL STOCK
+                                //// REDUCE GLOBAL STOCK
                                 sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + qtyApproved + " WHERE PRODUCT_ID = '" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + "'";
 
                                 gUtil.saveSystemDebugLog(globalConstants.MENU_MUTASI_BARANG, "REDUCE MASTER PRODUCT [" + detailRequestOrderDataGridView.Rows[i].Cells["productID"].Value.ToString() + ", " + qtyApproved + "]");

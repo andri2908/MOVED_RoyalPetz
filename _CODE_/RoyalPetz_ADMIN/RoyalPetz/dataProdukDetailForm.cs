@@ -1785,8 +1785,9 @@ namespace AlphaSoft
         private void addDateTimePickerToDataGrid(int columnIndex, int rowIndex)
         {
             oDateTimePicker.TextChanged -= oDateTimePicker_OnTextChanged;
-            string expDateValue = String.Format(culture, "{0:" + globalUtilities.CUSTOM_DATE_FORMAT + "}", DateTime.Now);
-            oDateTimePicker.Text = expDateValue;
+            //string expDateValue = String.Format(culture, "{0:" + globalUtilities.CUSTOM_DATE_FORMAT + "}", DateTime.Now);
+            oDateTimePicker.Value = DateTime.Now;
+            //oDateTimePicker.Text = expDateValue;
 
             expDataGridView.Controls.Add(oDateTimePicker);
             oDateTimePicker.Visible = false;

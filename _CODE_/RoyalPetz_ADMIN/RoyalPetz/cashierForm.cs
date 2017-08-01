@@ -1336,69 +1336,69 @@ namespace AlphaSoft
                         }
 
                         if (originModuleID == 0 || originModuleID == globalConstants.REVISI_NOTA)  // NORMAL TRANSACTION
-                        { 
-                            if (!gutil.productIsService(cashierDataGridView.Rows[i].Cells["productID"].Value.ToString()))
-                            { 
-                                // REDUCE STOCK QTY AT MASTER PRODUCT
-                                sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value) +
-                                                    " WHERE PRODUCT_ID = '" + cashierDataGridView.Rows[i].Cells["productID"].Value.ToString() + "'";
+                        {
+                            //if (!gutil.productIsService(cashierDataGridView.Rows[i].Cells["productID"].Value.ToString()))
+                            //{
+                            //    // REDUCE STOCK QTY AT MASTER PRODUCT
+                            //    sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value) +
+                            //                        " WHERE PRODUCT_ID = '" + cashierDataGridView.Rows[i].Cells["productID"].Value.ToString() + "'";
 
-                                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "REDUCE STOCK AT MASTER PRODUCT [" + cashierDataGridView.Rows[i].Cells["productID"].Value.ToString() + "]");
-                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                                    throw internalEX;
+                            //    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "REDUCE STOCK AT MASTER PRODUCT [" + cashierDataGridView.Rows[i].Cells["productID"].Value.ToString() + "]");
+                            //    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            //        throw internalEX;
 
-                                // REDUCE FROM PRODUCT EXPIRY
-                                if (globalFeatureList.EXPIRY_MODULE == 1)
-                                {
-                                    // GET THE NEAREST PRODUCT LOT THAT'S GOING TO EXPIRE
-                                    expiryModuleUtil expiryUtil = new expiryModuleUtil();
-                                    int[] listOfLotID;
-                                    double currentLotAmount = 0;
-                                    string expiryProductID = cashierDataGridView.Rows[i].Cells["productID"].Value.ToString();
-                                    double expiryProductAmt = Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value);
-                                    double reducedProductAmount = 0;
-                                    listOfLotID = expiryUtil.getListOfLotProductID(expiryProductID, expiryProductAmt);
+                            //    // REDUCE FROM PRODUCT EXPIRY
+                            //    if (globalFeatureList.EXPIRY_MODULE == 1)
+                            //    {
+                            //        // GET THE NEAREST PRODUCT LOT THAT'S GOING TO EXPIRE
+                            //        expiryModuleUtil expiryUtil = new expiryModuleUtil();
+                            //        int[] listOfLotID;
+                            //        double currentLotAmount = 0;
+                            //        string expiryProductID = cashierDataGridView.Rows[i].Cells["productID"].Value.ToString();
+                            //        double expiryProductAmt = Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value);
+                            //        double reducedProductAmount = 0;
+                            //        listOfLotID = expiryUtil.getListOfLotProductID(expiryProductID, expiryProductAmt);
 
-                                    // UPDATE THE PRODUCT AMOUNT
-                                    for (int j =0; j<listOfLotID.Count();j++)
-                                    {
-                                        // get current LOT amount 
-                                        sqlCommand = "SELECT PRODUCT_AMOUNT FROM PRODUCT_EXPIRY WHERE ID = " + listOfLotID[j];
-                                        currentLotAmount = Convert.ToInt32(DS.getDataSingleValue(sqlCommand));
+                            //        // UPDATE THE PRODUCT AMOUNT
+                            //        for (int j = 0; j < listOfLotID.Count(); j++)
+                            //        {
+                            //            // get current LOT amount 
+                            //            sqlCommand = "SELECT PRODUCT_AMOUNT FROM PRODUCT_EXPIRY WHERE ID = " + listOfLotID[j];
+                            //            currentLotAmount = Convert.ToInt32(DS.getDataSingleValue(sqlCommand));
 
-                                        if (currentLotAmount <= expiryProductAmt)
-                                        {
-                                            expiryProductAmt = expiryProductAmt - currentLotAmount;
-                                            reducedProductAmount = currentLotAmount;
-                                            currentLotAmount = 0;
-                                        }
-                                        else
-                                        {
-                                            reducedProductAmount = expiryProductAmt;
-                                            currentLotAmount = currentLotAmount - expiryProductAmt;
-                                        }
+                            //            if (currentLotAmount <= expiryProductAmt)
+                            //            {
+                            //                expiryProductAmt = expiryProductAmt - currentLotAmount;
+                            //                reducedProductAmount = currentLotAmount;
+                            //                currentLotAmount = 0;
+                            //            }
+                            //            else
+                            //            {
+                            //                reducedProductAmount = expiryProductAmt;
+                            //                currentLotAmount = currentLotAmount - expiryProductAmt;
+                            //            }
 
-                                        sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = " + currentLotAmount + " WHERE ID = " + listOfLotID[j];
+                            //            sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = " + currentLotAmount + " WHERE ID = " + listOfLotID[j];
 
-                                        gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "REDUCE STOCK AT PRODUCT_EXPIRY LOT [" + listOfLotID[j] + "]");
-                                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                                            throw internalEX;
+                            //            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "REDUCE STOCK AT PRODUCT_EXPIRY LOT [" + listOfLotID[j] + "]");
+                            //            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            //                throw internalEX;
 
-                                        // INSERT INTO SALES DETAIL EXPIRY
-                                        sqlCommand = "INSERT INTO SALES_DETAIL_EXPIRY (SALES_INVOICE, PRODUCT_ID, LOT_ID, PRODUCT_AMOUNT) VALUES " +
-                                                               "('" + salesInvoice + "', '" + expiryProductID + "', " + listOfLotID[j] + ", " + reducedProductAmount + ")";
+                            //            // INSERT INTO SALES DETAIL EXPIRY
+                            //            sqlCommand = "INSERT INTO SALES_DETAIL_EXPIRY (SALES_INVOICE, PRODUCT_ID, LOT_ID, PRODUCT_AMOUNT) VALUES " +
+                            //                                   "('" + salesInvoice + "', '" + expiryProductID + "', " + listOfLotID[j] + ", " + reducedProductAmount + ")";
 
-                                        gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "SAVE PRODUCT LOT INFORMATION FOR EACH ITEM AND AMOUNT");
-                                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
-                                            throw internalEX;
-                                    }
-                                }
-                            }
+                            //            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "SAVE PRODUCT LOT INFORMATION FOR EACH ITEM AND AMOUNT");
+                            //            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            //                throw internalEX;
+                            //        }
+                            //    }
+                            //}
 
                             // SAVE OR UPDATE TO CUSTOMER_PRODUCT_DISC
                             if (selectedPelangganID != 0)
                             {
-                                if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM CUSTOMER_PRODUCT_DISC WHERE CUSTOMER_ID = " + selectedPelangganID + " AND PRODUCT_ID = '" + cashierDataGridView.Rows[i].Cells["productID"].Value.ToString() + "'"))>0)
+                                if (Convert.ToInt32(DS.getDataSingleValue("SELECT COUNT(1) FROM CUSTOMER_PRODUCT_DISC WHERE CUSTOMER_ID = " + selectedPelangganID + " AND PRODUCT_ID = '" + cashierDataGridView.Rows[i].Cells["productID"].Value.ToString() + "'")) > 0)
                                 {
                                     // UPDATE VALUE
                                     sqlCommand = "UPDATE CUSTOMER_PRODUCT_DISC SET DISC_1 = " + gutil.validateDecimalNumericInput(disc1) + ", DISC_2 = " + gutil.validateDecimalNumericInput(disc2) + ", DISC_RP = " + gutil.validateDecimalNumericInput(discRP) + " WHERE CUSTOMER_ID = " + selectedPelangganID + " AND PRODUCT_ID = '" + productID + "'";
@@ -1478,6 +1478,157 @@ namespace AlphaSoft
                         if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
                             throw internalEX;
                     }
+                }
+
+                // REDUCE PRODUCT QTY TABLE
+                if (originModuleID == 0 || originModuleID == globalConstants.REVISI_NOTA)  // NORMAL TRANSACTION
+                {
+                    string productIDValue = "";
+                    double productQtyValue = 0;
+                    List<string> listProductID = new List<string>();
+                    List<double> listProductQty = new List<double>();
+
+                    for (int i = 0; i < cashierDataGridView.Rows.Count - 1; i++)
+                    {
+                        if (
+                            null != cashierDataGridView.Rows[i].Cells["productID"].Value &&
+                           (gutil.isProductIDExist(cashierDataGridView.Rows[i].Cells["productID"].Value.ToString())) &&
+                           (!gutil.productIsService(cashierDataGridView.Rows[i].Cells["productID"].Value.ToString())) &&
+                           gutil.productExpirable(cashierDataGridView.Rows[i].Cells["productID"].Value.ToString())
+                           )
+                        {
+                            productIDValue = cashierDataGridView.Rows[i].Cells["productID"].Value.ToString();
+                            productQtyValue = Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value);
+
+                            if (!listProductID.Contains(productIDValue))
+                            {
+                                listProductID.Add(productIDValue);
+                                listProductQty.Add(productQtyValue);
+                            }
+                            else
+                            {
+                                int listIndex = listProductID.IndexOf(productIDValue);
+                                listProductQty[listIndex] = listProductQty[listIndex] + productQtyValue;
+                            }
+                        }
+                    }
+
+                    for (int indexOfList = 0; indexOfList < listProductID.Count; indexOfList++)
+                    {
+                        // REDUCE STOCK AT MASTER PRODUCT
+                        sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + listProductQty[indexOfList] +
+                                            " WHERE PRODUCT_ID = '" + listProductID[indexOfList] + "'";
+
+                        gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "REDUCE STOCK AT MASTER PRODUCT [" + listProductID[indexOfList] + "]");
+                        if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                            throw internalEX;
+
+                        // REDUCE FROM PRODUCT EXPIRY
+                        if (globalFeatureList.EXPIRY_MODULE == 1)
+                        {
+                            // GET THE NEAREST PRODUCT LOT THAT'S GOING TO EXPIRE
+                            expiryModuleUtil expiryUtil = new expiryModuleUtil();
+                            int[] listOfLotID;
+                            double currentLotAmount = 0;
+                            string expiryProductID = listProductID[indexOfList];
+                            double expiryProductAmt = listProductQty[indexOfList];
+                            double reducedProductAmount = 0;
+                            listOfLotID = expiryUtil.getListOfLotProductID(expiryProductID, expiryProductAmt);
+
+                            // UPDATE THE PRODUCT AMOUNT
+                            for (int j = 0; j < listOfLotID.Count(); j++)
+                            {
+                                // get current LOT amount 
+                                sqlCommand = "SELECT PRODUCT_AMOUNT FROM PRODUCT_EXPIRY WHERE ID = " + listOfLotID[j];
+                                currentLotAmount = Convert.ToInt32(DS.getDataSingleValue(sqlCommand));
+
+                                if (currentLotAmount <= expiryProductAmt)
+                                {
+                                    expiryProductAmt = expiryProductAmt - currentLotAmount;
+                                    reducedProductAmount = currentLotAmount;
+                                    currentLotAmount = 0;
+                                }
+                                else
+                                {
+                                    reducedProductAmount = expiryProductAmt;
+                                    currentLotAmount = currentLotAmount - expiryProductAmt;
+                                }
+
+                                sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = " + currentLotAmount + " WHERE ID = " + listOfLotID[j];
+
+                                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "REDUCE STOCK AT PRODUCT_EXPIRY LOT [" + listOfLotID[j] + "]");
+                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                    throw internalEX;
+
+                                // INSERT INTO SALES DETAIL EXPIRY
+                                sqlCommand = "INSERT INTO SALES_DETAIL_EXPIRY (SALES_INVOICE, PRODUCT_ID, LOT_ID, PRODUCT_AMOUNT) VALUES " +
+                                                       "('" + salesInvoice + "', '" + expiryProductID + "', " + listOfLotID[j] + ", " + reducedProductAmount + ")";
+
+                                gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "SAVE PRODUCT LOT INFORMATION FOR EACH ITEM AND AMOUNT");
+                                if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                                    throw internalEX;
+                            }
+                        }
+                    }
+                
+
+                    //if (!gutil.productIsService(cashierDataGridView.Rows[i].Cells["productID"].Value.ToString()))
+                    //{
+                    //    // REDUCE STOCK QTY AT MASTER PRODUCT
+                    //    sqlCommand = "UPDATE MASTER_PRODUCT SET PRODUCT_STOCK_QTY = PRODUCT_STOCK_QTY - " + Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value) +
+                    //                        " WHERE PRODUCT_ID = '" + cashierDataGridView.Rows[i].Cells["productID"].Value.ToString() + "'";
+
+                    //    gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "REDUCE STOCK AT MASTER PRODUCT [" + cashierDataGridView.Rows[i].Cells["productID"].Value.ToString() + "]");
+                    //    if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                    //        throw internalEX;
+
+                    //    // REDUCE FROM PRODUCT EXPIRY
+                    //    if (globalFeatureList.EXPIRY_MODULE == 1)
+                    //    {
+                    //        // GET THE NEAREST PRODUCT LOT THAT'S GOING TO EXPIRE
+                    //        expiryModuleUtil expiryUtil = new expiryModuleUtil();
+                    //        int[] listOfLotID;
+                    //        double currentLotAmount = 0;
+                    //        string expiryProductID = cashierDataGridView.Rows[i].Cells["productID"].Value.ToString();
+                    //        double expiryProductAmt = Convert.ToDouble(cashierDataGridView.Rows[i].Cells["qty"].Value);
+                    //        double reducedProductAmount = 0;
+                    //        listOfLotID = expiryUtil.getListOfLotProductID(expiryProductID, expiryProductAmt);
+
+                    //        // UPDATE THE PRODUCT AMOUNT
+                    //        for (int j = 0; j < listOfLotID.Count(); j++)
+                    //        {
+                    //            // get current LOT amount 
+                    //            sqlCommand = "SELECT PRODUCT_AMOUNT FROM PRODUCT_EXPIRY WHERE ID = " + listOfLotID[j];
+                    //            currentLotAmount = Convert.ToInt32(DS.getDataSingleValue(sqlCommand));
+
+                    //            if (currentLotAmount <= expiryProductAmt)
+                    //            {
+                    //                expiryProductAmt = expiryProductAmt - currentLotAmount;
+                    //                reducedProductAmount = currentLotAmount;
+                    //                currentLotAmount = 0;
+                    //            }
+                    //            else
+                    //            {
+                    //                reducedProductAmount = expiryProductAmt;
+                    //                currentLotAmount = currentLotAmount - expiryProductAmt;
+                    //            }
+
+                    //            sqlCommand = "UPDATE PRODUCT_EXPIRY SET PRODUCT_AMOUNT = " + currentLotAmount + " WHERE ID = " + listOfLotID[j];
+
+                    //            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "REDUCE STOCK AT PRODUCT_EXPIRY LOT [" + listOfLotID[j] + "]");
+                    //            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                    //                throw internalEX;
+
+                    //            // INSERT INTO SALES DETAIL EXPIRY
+                    //            sqlCommand = "INSERT INTO SALES_DETAIL_EXPIRY (SALES_INVOICE, PRODUCT_ID, LOT_ID, PRODUCT_AMOUNT) VALUES " +
+                    //                                   "('" + salesInvoice + "', '" + expiryProductID + "', " + listOfLotID[j] + ", " + reducedProductAmount + ")";
+
+                    //            gutil.saveSystemDebugLog(globalConstants.MENU_PENJUALAN, "SAVE PRODUCT LOT INFORMATION FOR EACH ITEM AND AMOUNT");
+                    //            if (!DS.executeNonQueryCommand(sqlCommand, ref internalEX))
+                    //                throw internalEX;
+                    //        }
+                    //    }
+                    //}
                 }
 
                 DS.commit();
