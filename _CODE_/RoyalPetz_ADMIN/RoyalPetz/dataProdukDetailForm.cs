@@ -886,7 +886,10 @@ namespace AlphaSoft
                 produkBrand = MySqlHelper.EscapeString(produkBrand);
 
             // recalculate the qty again
-            calculateTotalQty();
+            if (expiredCheckBox.Checked)
+            {
+                calculateTotalQty();
+            }
             string produkQty = stokAwalTextBox.Text;
             if (produkQty.Equals(""))
                 produkQty = "0";
@@ -1459,6 +1462,7 @@ namespace AlphaSoft
                 {
                     gUtil.setReadOnlyAllControls(this);
                 }
+                kodeProdukTextBox.Select();
             }
             else if (originModuleID == globalConstants.EDIT_PRODUK)
             {
@@ -1473,6 +1477,7 @@ namespace AlphaSoft
                     //                    expDatePicker.Visible = false;
                     //expDatePicker.Enabled = false;
                 }
+                namaProdukTextBox.Select();
             }
 
             arrButton[0] = saveButton;
@@ -1484,7 +1489,6 @@ namespace AlphaSoft
 
             gUtil.reArrangeTabOrder(this);
 
-            namaProdukTextBox.Select();
         }
 
         private void namaProdukTextBox_TextChanged(object sender, EventArgs e)

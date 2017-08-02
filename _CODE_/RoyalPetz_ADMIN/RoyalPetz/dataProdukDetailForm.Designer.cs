@@ -130,10 +130,10 @@
             // 
             this.tabControl1.Controls.Add(this.masterProductTab);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(2, 30);
+            this.tabControl1.Location = new System.Drawing.Point(2, 38);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1101, 659);
+            this.tabControl1.Size = new System.Drawing.Size(1101, 656);
             this.tabControl1.TabIndex = 11;
             // 
             // masterProductTab
@@ -157,7 +157,7 @@
             this.masterProductTab.Location = new System.Drawing.Point(4, 29);
             this.masterProductTab.Name = "masterProductTab";
             this.masterProductTab.Padding = new System.Windows.Forms.Padding(3);
-            this.masterProductTab.Size = new System.Drawing.Size(1093, 626);
+            this.masterProductTab.Size = new System.Drawing.Size(1093, 623);
             this.masterProductTab.TabIndex = 0;
             this.masterProductTab.Text = "DATA PRODUK";
             this.masterProductTab.UseVisualStyleBackColor = true;
@@ -167,7 +167,7 @@
             this.showInactiveExpiryCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.showInactiveExpiryCheckBox.AutoSize = true;
             this.showInactiveExpiryCheckBox.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showInactiveExpiryCheckBox.Location = new System.Drawing.Point(861, 554);
+            this.showInactiveExpiryCheckBox.Location = new System.Drawing.Point(861, 552);
             this.showInactiveExpiryCheckBox.Name = "showInactiveExpiryCheckBox";
             this.showInactiveExpiryCheckBox.Size = new System.Drawing.Size(223, 22);
             this.showInactiveExpiryCheckBox.TabIndex = 107;
@@ -181,7 +181,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label11.Location = new System.Drawing.Point(765, 23);
+            this.label11.Location = new System.Drawing.Point(765, 21);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(215, 18);
             this.label11.TabIndex = 106;
@@ -214,7 +214,7 @@
             this.expiredCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.expiredCheckBox.AutoSize = true;
             this.expiredCheckBox.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.expiredCheckBox.Location = new System.Drawing.Point(495, 304);
+            this.expiredCheckBox.Location = new System.Drawing.Point(495, 302);
             this.expiredCheckBox.Name = "expiredCheckBox";
             this.expiredCheckBox.Size = new System.Drawing.Size(165, 22);
             this.expiredCheckBox.TabIndex = 98;
@@ -227,7 +227,7 @@
             this.nonAktifCheckbox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.nonAktifCheckbox.AutoSize = true;
             this.nonAktifCheckbox.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nonAktifCheckbox.Location = new System.Drawing.Point(6, 551);
+            this.nonAktifCheckbox.Location = new System.Drawing.Point(6, 549);
             this.nonAktifCheckbox.Name = "nonAktifCheckbox";
             this.nonAktifCheckbox.Size = new System.Drawing.Size(152, 22);
             this.nonAktifCheckbox.TabIndex = 92;
@@ -239,7 +239,7 @@
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Location = new System.Drawing.Point(679, 368);
+            this.button1.Location = new System.Drawing.Point(679, 366);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(26, 26);
             this.button1.TabIndex = 86;
@@ -252,7 +252,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label15.Location = new System.Drawing.Point(490, 344);
+            this.label15.Location = new System.Drawing.Point(490, 342);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(158, 18);
             this.label15.TabIndex = 93;
@@ -499,7 +499,7 @@
             // 
             this.noRakKolomTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.noRakKolomTextBox.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noRakKolomTextBox.Location = new System.Drawing.Point(659, 263);
+            this.noRakKolomTextBox.Location = new System.Drawing.Point(659, 261);
             this.noRakKolomTextBox.Mask = "00";
             this.noRakKolomTextBox.Name = "noRakKolomTextBox";
             this.noRakKolomTextBox.Size = new System.Drawing.Size(33, 26);
@@ -780,7 +780,7 @@
             this.noRakBarisTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.noRakBarisTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.noRakBarisTextBox.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.noRakBarisTextBox.Location = new System.Drawing.Point(619, 263);
+            this.noRakBarisTextBox.Location = new System.Drawing.Point(619, 261);
             this.noRakBarisTextBox.MaxLength = 2;
             this.noRakBarisTextBox.Name = "noRakBarisTextBox";
             this.noRakBarisTextBox.Size = new System.Drawing.Size(34, 26);
@@ -791,7 +791,7 @@
             // 
             this.resetbutton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.resetbutton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetbutton.Location = new System.Drawing.Point(605, 570);
+            this.resetbutton.Location = new System.Drawing.Point(605, 568);
             this.resetbutton.Name = "resetbutton";
             this.resetbutton.Size = new System.Drawing.Size(95, 37);
             this.resetbutton.TabIndex = 83;
@@ -805,7 +805,7 @@
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label19.Location = new System.Drawing.Point(505, 266);
+            this.label19.Location = new System.Drawing.Point(505, 264);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(118, 18);
             this.label19.TabIndex = 85;
@@ -815,7 +815,7 @@
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.Location = new System.Drawing.Point(392, 570);
+            this.saveButton.Location = new System.Drawing.Point(392, 568);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(206, 37);
             this.saveButton.TabIndex = 82;
