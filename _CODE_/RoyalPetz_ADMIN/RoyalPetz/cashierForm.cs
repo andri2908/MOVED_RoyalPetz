@@ -1493,8 +1493,8 @@ namespace AlphaSoft
                         if (
                             null != cashierDataGridView.Rows[i].Cells["productID"].Value &&
                            (gutil.isProductIDExist(cashierDataGridView.Rows[i].Cells["productID"].Value.ToString())) &&
-                           (!gutil.productIsService(cashierDataGridView.Rows[i].Cells["productID"].Value.ToString())) &&
-                           gutil.productExpirable(cashierDataGridView.Rows[i].Cells["productID"].Value.ToString())
+                           (!gutil.productIsService(cashierDataGridView.Rows[i].Cells["productID"].Value.ToString())) 
+                           //&& gutil.productExpirable(cashierDataGridView.Rows[i].Cells["productID"].Value.ToString())
                            )
                         {
                             productIDValue = cashierDataGridView.Rows[i].Cells["productID"].Value.ToString();
