@@ -64,8 +64,12 @@ namespace AlphaSoft
         private void CariButton_Click(object sender, EventArgs e)
         {
             string dateFrom, dateTo;
+            string monthSelected = "";
+
             dateFrom = String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(datefromPicker.Value));
             dateTo = String.Format(culture, "{0:yyyyMMdd}", Convert.ToDateTime(datetoPicker.Value));
+            monthSelected = String.Format(culture, "{0:yyyyMM}", Convert.ToDateTime(MonthPicker.Value));
+
             DS.mySqlConnect();
             string sqlCommandx = "";
 
@@ -80,6 +84,7 @@ namespace AlphaSoft
                     ReportFinanceInForm displayedForm1 = new ReportFinanceInForm();
                     displayedForm1.ShowDialog(this);
                     break;
+
                 case globalConstants.REPORT_FINANCE_OUT:
                     sqlCommandx = "SELECT DJ.JOURNAL_DATETIME AS 'TGL', MA.ACCOUNT_NAME AS 'AKUN', DJ.JOURNAL_NOMINAL AS 'JML', DJ.JOURNAL_DESCRIPTION AS 'DESKRIPSI' " +
                                     "FROM DAILY_JOURNAL DJ, MASTER_ACCOUNT MA " +
@@ -89,6 +94,7 @@ namespace AlphaSoft
                     ReportFinanceOutForm displayedForm2 = new ReportFinanceOutForm();
                     displayedForm2.ShowDialog(this);
                     break;
+
                 case globalConstants.REPORT_MARGIN:
                     sqlCommandx = "SELECT DATE(SH.SALES_DATE) AS 'TGL', SUM((SD.SALES_SUBTOTAL-(SD.PRODUCT_QTY*SD.PRODUCT_PRICE))) AS 'MARGIN' " +
                                     "FROM SALES_HEADER SH, SALES_DETAIL SD " +
@@ -99,6 +105,7 @@ namespace AlphaSoft
                     ReportMarginForm displayedForm3 = new ReportMarginForm();
                     displayedForm3.ShowDialog(this);
                     break;
+
                 case globalConstants.REPORT_MONTHLY_BALANCE:
                     int days = DateTime.DaysInMonth(Int32.Parse(MonthPicker.Value.ToString("yyyy")), Int32.Parse(MonthPicker.Value.ToString("MM")));
                     string monthname = MonthPicker.Value.ToString("MMMM");
@@ -143,27 +150,80 @@ namespace AlphaSoft
                         DS.mySqlClose();
                     }
 
-                    sqlCommandx = "SELECT tab1.TGL,tab1.DEBET,IF(tab2.KREDIT IS NULL,0,tab2.KREDIT) AS 'KREDIT' from " +
-                                    "(SELECT tab1.TGL, IF(tab1.DEBET IS NULL, 0, tab1.DEBET) + IF(tab2.debet IS NULL, 0, tab2.DEBET) as 'DEBET' FROM " +
-                                    "(SELECT TAB1.TGL, TAB2.DEBET from(SELECT TGL from daysmonth) tab1 left outer join(SELECT DATE_FORMAT(DJ.JOURNAL_DATETIME, '%d') AS 'TGL', " +
-                                    "DJ.JOURNAL_NOMINAL AS 'DEBET' FROM DAILY_JOURNAL DJ, MASTER_ACCOUNT MA " +
-                                    "WHERE DJ.ACCOUNT_ID = MA.ACCOUNT_ID AND MA.ACCOUNT_TYPE_ID = 1 AND DJ.BRANCH_ID = 0 " +
-                                    "AND DATE_FORMAT(DJ.JOURNAL_DATETIME, '%Y%m%d') >= '" + dateFrom + "' AND DATE_FORMAT(DJ.JOURNAL_DATETIME, '%Y%m%d') <= '" + dateTo + "') tab2 " +
-                                    "on tab1.TGL = tab2.TGL) tab1 " +
-                                    "left outer join " +
-                                    "(SELECT DATE_FORMAT(SH.SALES_DATE, '%d') AS 'TGL', IF(SUM((SD.SALES_SUBTOTAL - (SD.PRODUCT_QTY * SD.PRODUCT_PRICE))) IS NULL, 0, SUM((SD.SALES_SUBTOTAL - (SD.PRODUCT_QTY * SD.PRODUCT_PRICE)))) AS 'DEBET' " +
-                                    "FROM SALES_HEADER SH, SALES_DETAIL SD " +
-                                    "WHERE SH.SALES_PAID = 1 AND SH.SALES_INVOICE = SD.SALES_INVOICE " +
-                                    "AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d') >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d') <= '" + dateTo + "' " +
-                                    "GROUP BY DATE(SH.SALES_DATE)) tab2 " +
-                                    "on tab1.TGL = tab2.TGL) tab1 " +
-                                    "left outer join " +
-                                    "(SELECT DATE_FORMAT(DJ.JOURNAL_DATETIME, '%d') AS 'TGL', IF(SUM(DJ.JOURNAL_NOMINAL) IS NULL, 0, -SUM(DJ.JOURNAL_NOMINAL)) AS 'KREDIT' " +
-                                    "FROM DAILY_JOURNAL DJ, MASTER_ACCOUNT MA " +
-                                    "WHERE DJ.ACCOUNT_ID = MA.ACCOUNT_ID AND MA.ACCOUNT_TYPE_ID = 2 AND DJ.BRANCH_ID = 0 " +
-                                    "AND DATE_FORMAT(DJ.JOURNAL_DATETIME, '%Y%m%d') >= '" + dateFrom + "' AND DATE_FORMAT(DJ.JOURNAL_DATETIME, '%Y%m%d') <= '" + dateTo + "' " +
-                                    "GROUP BY DATE(DJ.JOURNAL_DATETIME)) tab2 " +
-                                    "on tab1.TGL = tab2.TGL";
+                    string queryDate = "";
+                    string queryDebetDJ = "";
+                    string queryDebetSO = "";
+                    string queryCreditDJ = "";
+
+                    string whereDJ = "";
+                    string whereDebetSO = "";
+
+                    //if (globalFeatureList.COMPILED_AS_SYNCHRONIZATION_SERVER == 1)
+                    //{
+                    //    if (selectedBranchID > 0)
+                    //    {
+                    //        whereDJ = "AND DJ.BRANCH_ID = " + selectedBranchID + " AND MA.BRANCH_ID = " + selectedBranchID + " ";
+                    //        whereDebetSO = "AND SH.BRANCH_ID = " + selectedBranchID + " AND SD.BRANCH_ID = " + selectedBranchID + " ";
+                    //    }
+                    //    else
+                    //    {
+                    //        whereDJ = "AND DJ.BRANCH_ID = MA.BRANCH_ID ";
+                    //        whereDebetSO = "AND SD.BRANCH_ID = SH.BRANCH_ID ";
+                    //    }
+                    //}
+
+                    queryDate = "SELECT TGL FROM DAYSMONTH";
+
+                    queryDebetDJ = "SELECT DATE_FORMAT(DJ.JOURNAL_DATETIME, '%d') AS 'TGL', SUM(DJ.JOURNAL_NOMINAL) AS 'DEBET' " +
+                                            "FROM DAILY_JOURNAL DJ, MASTER_ACCOUNT MA " +
+                                            "WHERE DJ.ACCOUNT_ID = MA.ACCOUNT_ID AND MA.ACCOUNT_TYPE_ID = 1 AND DATE_FORMAT(DJ.JOURNAL_DATETIME, '%Y%M') = '" + monthSelected + "' " +
+                                            whereDJ +
+                                            "GROUP BY DATE_FORMAT(DJ.JOURNAL_DATETIME, '%d')";
+
+                    queryDebetSO = "SELECT DATE_FORMAT(SH.SALES_DATE, '%d') AS 'TGL', " +
+                                             "IFNULL(SUM((SD.SALES_SUBTOTAL-(SD.PRODUCT_QTY * SD.PRODUCT_PRICE))), 0) AS 'DEBET' " +
+                                             "FROM SALES_HEADER SH, SALES_DETAIL SD " +
+                                             "WHERE SH.SALES_PAID = 1 AND SH.SALES_INVOICE = SD.SALES_INVOICE " +
+                                             "AND DATE_FORMAT(SH.SALES_DATE, '%Y%m') = '" + monthSelected + "' " +
+                                             whereDebetSO +
+                                             "GROUP BY DATE_FORMAT(SH.SALES_DATE, '%d')";
+
+                    queryCreditDJ = "SELECT DATE_FORMAT(DJ.JOURNAL_DATETIME, '%d') AS 'TGL', " +
+                                            "IF(SUM(DJ.JOURNAL_NOMINAL) IS NULL, 0, - SUM(DJ.JOURNAL_NOMINAL)) AS 'KREDIT' " +
+                                            "FROM DAILY_JOURNAL DJ, MASTER_ACCOUNT MA " +
+                                            "WHERE DJ.ACCOUNT_ID = MA.ACCOUNT_ID AND MA.ACCOUNT_TYPE_ID = 2 " +
+                                            "AND DATE_FORMAT(DJ.JOURNAL_DATETIME, '%Y%m') = '" + monthSelected + "' " +
+                                            whereDJ +
+                                            "GROUP BY DATE_FORMAT(DJ.JOURNAL_DATETIME, '%d')";
+
+                    sqlCommandx = "SELECT TABDAYS.TGL, (IFNULL(TABDJ.DEBET, 0) + IFNULL(TABSO.DEBET, 0)) AS DEBET, IFNULL(TABCRED.KREDIT, 0) AS KREDIT " +
+                                             "FROM (" + queryDate + ") TABDAYS LEFT OUTER JOIN (" + queryDebetDJ + ") TABDJ " +
+                                             "ON (TABDAYS.TGL = TABDJ.TGL) LEFT OUTER JOIN (" + queryDebetSO + ") TABSO " +
+                                             "ON (TABDAYS.TGL = TABSO.TGL) LEFT OUTER JOIN (" + queryCreditDJ + ") TABCRED " +
+                                             "ON (TABDAYS.TGL = TABCRED.TGL)";
+
+                    //sqlCommandx = "SELECT tab1.TGL,tab1.DEBET,IF(tab2.KREDIT IS NULL,0,tab2.KREDIT) AS 'KREDIT' from " +
+                    //                "(SELECT tab1.TGL, IF(tab1.DEBET IS NULL, 0, tab1.DEBET) + IF(tab2.debet IS NULL, 0, tab2.DEBET) as 'DEBET' FROM " +
+                    //                "(SELECT TAB1.TGL, TAB2.DEBET from(SELECT TGL from daysmonth) tab1 left outer join(SELECT DATE_FORMAT(DJ.JOURNAL_DATETIME, '%d') AS 'TGL', " +
+                    //                "DJ.JOURNAL_NOMINAL AS 'DEBET' FROM DAILY_JOURNAL DJ, MASTER_ACCOUNT MA " +
+                    //                "WHERE DJ.ACCOUNT_ID = MA.ACCOUNT_ID AND MA.ACCOUNT_TYPE_ID = 1 AND DJ.BRANCH_ID = 0 " +
+                    //                "AND DATE_FORMAT(DJ.JOURNAL_DATETIME, '%Y%m%d') >= '" + dateFrom + "' AND DATE_FORMAT(DJ.JOURNAL_DATETIME, '%Y%m%d') <= '" + dateTo + "') tab2 " +
+                    //                "on tab1.TGL = tab2.TGL) tab1 " +
+                    //                "left outer join " +
+                    //                "(SELECT DATE_FORMAT(SH.SALES_DATE, '%d') AS 'TGL', IF(SUM((SD.SALES_SUBTOTAL - (SD.PRODUCT_QTY * SD.PRODUCT_PRICE))) IS NULL, 0, SUM((SD.SALES_SUBTOTAL - (SD.PRODUCT_QTY * SD.PRODUCT_PRICE)))) AS 'DEBET' " +
+                    //                "FROM SALES_HEADER SH, SALES_DETAIL SD " +
+                    //                "WHERE SH.SALES_PAID = 1 AND SH.SALES_INVOICE = SD.SALES_INVOICE " +
+                    //                "AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d') >= '" + dateFrom + "' AND DATE_FORMAT(SH.SALES_DATE, '%Y%m%d') <= '" + dateTo + "' " +
+                    //                "GROUP BY DATE(SH.SALES_DATE)) tab2 " +
+                    //                "on tab1.TGL = tab2.TGL) tab1 " +
+                    //                "left outer join " +
+                    //                "(SELECT DATE_FORMAT(DJ.JOURNAL_DATETIME, '%d') AS 'TGL', IF(SUM(DJ.JOURNAL_NOMINAL) IS NULL, 0, -SUM(DJ.JOURNAL_NOMINAL)) AS 'KREDIT' " +
+                    //                "FROM DAILY_JOURNAL DJ, MASTER_ACCOUNT MA " +
+                    //                "WHERE DJ.ACCOUNT_ID = MA.ACCOUNT_ID AND MA.ACCOUNT_TYPE_ID = 2 AND DJ.BRANCH_ID = 0 " +
+                    //                "AND DATE_FORMAT(DJ.JOURNAL_DATETIME, '%Y%m%d') >= '" + dateFrom + "' AND DATE_FORMAT(DJ.JOURNAL_DATETIME, '%Y%m%d') <= '" + dateTo + "' " +
+                    //                "GROUP BY DATE(DJ.JOURNAL_DATETIME)) tab2 " +
+                    //                "on tab1.TGL = tab2.TGL";
+
                     DS.writeXML(sqlCommandx, globalConstants.MonthlyBalanceXML);
                     ReportMonthlyBalanceForm displayedForm4 = new ReportMonthlyBalanceForm(monthname);
                     displayedForm4.ShowDialog(this);
